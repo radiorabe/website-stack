@@ -1,11 +1,19 @@
-# bene-app
+# RaBe Webseite
 
-bene mobile app
+Frontend: Nextjs with react-native-web
 
-# create android launch_screen
+Backend: Strapi
 
-uplad 2000px x 3000px to:
+# Docker
 
-https://appicon.co/#image-sets
+Postgres DB:
 
-rename to launch_screen.png
+    docker-compose up -d strapiDB
+
+Strapi:
+
+    docker-compose up -d strapi
+
+Next:
+
+    docker-compose up -d next

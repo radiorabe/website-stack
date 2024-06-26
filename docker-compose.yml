@@ -1,11 +1,28 @@
 version: '3'
 services:
+
+  next:
+    container_name: rabe-next
+    build:
+      dockerfile: Dockerfile
+      context: ./next
+    restart: unless-stopped
+    env_file: .env
+    # volumes:
+    #   - ./strapi/config:/opt/app/config
+    #   - ./strapi/src:/opt/app/src
+    #   - ./strapi/package.json:/opt/package.json
+    #   - ./strapi/yarn.lock:/opt/yarn.lock
+    #   - ./.env:/opt/app/.env
+    #   - ./strapi/public/uploads:/opt/app/public/uploads
+    ports:
+      - '${NEXT_PORT}:3000'
+
   strapi:
     container_name: rabe-strapi
     build:
       dockerfile: Dockerfile
       context: ./strapi
-    image: strapi:latest
     restart: unless-stopped
     env_file: .env
     volumes:
@@ -37,7 +54,7 @@ services:
       #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
 
     ports:
-      - '${DATABASE_PORT}:${DATABASE_PORT}'
+      - '${DATABASE_PORT}:5432'
     networks:
       - strapi
       
