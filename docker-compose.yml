@@ -4,17 +4,9 @@ services:
   next:
     container_name: rabe-next
     build:
-      dockerfile: Dockerfile
+      dockerfile: ${DOCKERFILENAME:-./Dockerfile.prod}
       context: ./next
     restart: unless-stopped
-    env_file: .env
-    # volumes:
-    #   - ./strapi/config:/opt/app/config
-    #   - ./strapi/src:/opt/app/src
-    #   - ./strapi/package.json:/opt/package.json
-    #   - ./strapi/yarn.lock:/opt/yarn.lock
-    #   - ./.env:/opt/app/.env
-    #   - ./strapi/public/uploads:/opt/app/public/uploads
     ports:
       - '${NEXT_PORT}:3000'
 
@@ -34,8 +26,8 @@ services:
       - ./strapi/public/uploads:/opt/app/public/uploads
     ports:
       - '${STRAPI_PORT}:1337'
-    networks:
-      - strapi
+    # networks:
+    #   - rabeNetwork
     depends_on:
       - strapiDB
       
@@ -50,13 +42,12 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
-      - strapi-data:/var/lib/postgresql/data/ #using a volume
+      - rabe-data:/var/lib/postgresql/data/ #using a volume
       #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
-
-    ports:
-      - '${DATABASE_PORT}:5432'
-    networks:
-      - strapi
+    # ports:
+    #   - '${DATABASE_PORT}:5432'
+    # networks:
+    #   - rabeNetwork
       
   # strapiAdminer:
   #   container_name: strapiAdminer
@@ -72,9 +63,9 @@ services:
   #     - strapiDB
 
 volumes:
-  strapi-data:
+  rabe-data:
 
-networks:
-  strapi:
-    name: Strapi
-    driver: bridge
+# networks:
+#   rabeNetwork:
+#     name: rabeNetwork
+#     driver: bridge
