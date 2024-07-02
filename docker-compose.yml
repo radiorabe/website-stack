@@ -10,6 +10,19 @@ services:
     ports:
       - '${NEXT_PORT}:3000'
 
+  directus:
+    container_name: rabe-directus
+    image: directus/directus:latest
+    # build:
+    #   context: ./directus
+    ports:
+      - ${STRAPI_PORT}:8055
+    volumes:
+      - ./directus/database:/directus/database
+      - ./directus/uploads:/directus/uploads
+      - ./directus/extensions:/directus/extensions
+    env_file: .env
+
   strapi:
     container_name: rabe-strapi
     build:
