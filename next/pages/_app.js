@@ -1,5 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
+import localFont from "next/font/local";
+import { bold, regular } from "../Themes/Fonts";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -7,7 +9,9 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Component {...pageProps} />
+      <main className={regular.className}>
+        <Component {...pageProps} />
+      </main>{" "}
     </>
   );
 }
