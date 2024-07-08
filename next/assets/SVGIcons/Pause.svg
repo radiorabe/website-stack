@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: currentcolor;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path id="Differenzmenge_3" data-name="Differenzmenge 3" class="cls-1" d="M249.89,500C111.8,499.92-.08,387.93,0,249.86.06,149.49,60.14,58.89,152.59,19.77c127.21-53.73,273.9,5.82,327.64,133,53.74,127.19-5.82,273.85-133.03,327.58-30.78,13.03-63.88,19.71-97.3,19.64ZM277.95,134.98v239.1h66.4v-239.1h-66.4ZM158.39,134.98v239.1h66.4v-239.1h-66.4Z"/>
+</svg>

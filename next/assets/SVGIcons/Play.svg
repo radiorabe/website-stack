@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: currentcolor;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Gruppe_1924" data-name="Gruppe 1924">
+    <g id="Gruppe_84" data-name="Gruppe 84">
+      <path id="Differenzmenge_2" data-name="Differenzmenge 2" class="cls-1" d="M249.91,500C111.83,499.95-.05,387.98,0,249.91.04,149.54,60.12,58.92,152.56,19.79c127.19-53.76,273.88,5.76,327.64,132.95,53.76,127.18-5.76,273.86-132.95,327.62-30.8,13.03-63.91,19.71-97.34,19.64ZM184.7,141.41v217.33l184.74-108.66-184.74-108.66Z"/>
+    </g>
+  </g>
+</svg>

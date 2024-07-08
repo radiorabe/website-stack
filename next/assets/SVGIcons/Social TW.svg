@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: currentcolor;
+        fill-rule: evenodd;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Gruppe_1875" data-name="Gruppe 1875">
+    <path id="Pfad_350" data-name="Pfad 350" class="cls-1" d="M212.07,365.93l37.54-37.54h68.89l43.87-43.87v-137.8h-206.72v181.7h56.41v37.52ZM293.46,196.85h25.04v75.15h-25.04v-75.15ZM224.57,196.85h25.04v75.15h-24.96l-.09-75.15Z"/>
+    <path id="Pfad_351" data-name="Pfad 351" class="cls-1" d="M250,0C111.93,0,0,111.93,0,250s111.93,250,250,250,250-111.93,250-250C499.94,111.95,388.05.06,250,0M384.48,296.2l-73.37,73.35h-55.02l-36.65,36.7h-36.7v-36.7h-67.22v-195.65l18.24-48.98h250.72v171.28Z"/>
+  </g>
+</svg>
