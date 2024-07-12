@@ -3,9 +3,12 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "syncDataModel": "node bin/syncDataModel.js"
   },
   "dependencies": {
+    "cross-fetch": "^4.0.0",
+    "dotenv": "^16.4.5",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
