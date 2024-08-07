@@ -2,17 +2,17 @@
 
 Frontend: Nextjs with react-native-web
 
-Backend: Strapi
+Backend: Directus
 
 # Docker
 
 Postgres DB:
 
-    docker-compose up -d strapiDB
+    docker-compose up -d DB
 
-Strapi:
+Directus:
 
-    docker-compose up -d strapi
+    docker-compose up -d directus
 
 Next:
 
