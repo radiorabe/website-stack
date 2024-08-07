@@ -10,6 +10,7 @@
     "cross-fetch": "^4.0.0",
     "dotenv": "^16.4.5",
     "next": "latest",
+    "prompt-sync": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-media": "^1.10.0",

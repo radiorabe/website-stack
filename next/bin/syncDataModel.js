@@ -1,6 +1,36 @@
 require("dotenv").config({ path: "../.env" });
 const fetch = require("cross-fetch");
 
+const fs = require("fs");
+const path = require("path");
+
+const prompt = require("prompt-sync")({ sigint: true });
+
+function writeSnapshot(data) {
+  console.log("Start writeSnapshot...");
+
+  const outJsonFile = path.join("./bin/", `snapshot.json`);
+
+  fs.writeFile(outJsonFile, JSON.stringify(data), (err3) => {
+    if (err3) {
+      console.log("write error", err3);
+    }
+    console.log("write success");
+  });
+}
+
+async function readSnapshot(data) {
+  console.log("Start readSnapshot...");
+
+  const jsonFile = path.join("./bin/", `snapshot.json`);
+  try {
+    const data = await fs.readFile(jsonFile);
+    return JSON.parse(Buffer.from(data));
+  } catch (e) {
+    console.log("error2", e);
+  }
+}
+
 const DEV_DIRECTUS_URL = process.env.PUBLIC_URL;
 const DEV_ACCESS_TOKEN = process.env.DEV_ACCESS_TOKEN;
 
@@ -9,14 +39,23 @@ const PROD_ACCESS_TOKEN = process.env.PROD_ACCESS_TOKEN;
 
 async function main() {
   const snapshot = await getSnapshot();
-  //   console.log("snapshot");
-  console.log(snapshot);
+  // console.log("snapshot");
+  writeSnapshot(snapshot);
+
+  // const newData = await readSnapshot();
 
   const diff = await getDiff(snapshot);
-  //   console.log("diff");
-  console.log(diff);
-
-  await applyDiff(diff);
+  if (diff) {
+    const apply = prompt("Wonna apply diff to Production? y/n");
+    if (apply.toLowerCase() === "y") {
+      await applyDiff(diff);
+      console.log("Applied to production 🎉🚀");
+    } else {
+      console.log("Not applied to production");
+    }
+  } else {
+    console.log("Probably something wrong with your Acces token.");
+  }
 }
 
 main();
