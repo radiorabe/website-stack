@@ -10,6 +10,8 @@ import Hoverable from "./Hoverable";
 import { usePathname } from "next/navigation";
 import LinkComponent from "./LinkComponent";
 import { useRouter } from "next/navigation";
+import Playbutton from "./Playbutton";
+import Pausebutton from "./Pausebutton";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: 1920,
     justifyContent: "space-between",
-    paddingHorizontal: Metrics.baseMargin,
+    // paddingHorizontal: Metrics.baseMargin,
   },
   navItemsContainer: {
     flexDirection: "row",
@@ -138,6 +140,18 @@ function Navigation(props) {
               </View>
             )}
           </Hoverable>
+          <View
+            style={{
+              width: 200,
+              height: Metrics.navBarHeight,
+              backgroundColor: Colors.darkGreen,
+              justifyContent: "center",
+              paddingHorizontal: Metrics.baseMargin,
+              marginLeft: Metrics.baseMargin,
+            }}
+          >
+            <Playbutton color={Colors.lightGreen} scale={0.6}></Playbutton>
+          </View>
         </View>
       </View>
     </View>
