@@ -7,6 +7,8 @@ import NavRabe from "../assets/SVGIcons/Nav Rabe.svg";
 import Image from "next/image";
 import { withMedia } from "../hocs/withMedia";
 import Hoverable from "./Hoverable";
+import { usePathname } from "next/navigation";
+import LinkComponent from "./LinkComponent";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,12 +32,16 @@ const styles = StyleSheet.create({
   rabeLogo: {
     ...Fonts.style.logo,
     fontSize: 18,
-    color: Colors.darkGreen,
     letterSpacing: 8,
+    textDecoration: "none",
   },
 });
 
 function Navigation(props) {
+  const pathname = usePathname();
+
+  console.log("pathname:", pathname);
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -74,9 +80,29 @@ function Navigation(props) {
                 height: Metrics.navBarHeight,
               }}
             >
-              <Text style={[styles.rabeLogo, hover && { color: Colors.green }]}>
+              {/* <Link
+                style={{
+                  ...Fonts.style.logo,
+                  fontSize: 18,
+                  letterSpacing: 8,
+                  textDecoration: "none",
+                  color: hover ? Colors.green : Colors.darkGreen,
+                }}
+                href="/sendungen"
+              >
                 Sendungen
-              </Text>
+              </Link> */}
+              <LinkComponent
+                href={`/sendungen`}
+                // onPress={openJobDetails}
+                // style={styles.rabeLogo}
+              >
+                <Text
+                  style={[styles.rabeLogo, hover && { color: Colors.green }]}
+                >
+                  Sendungen
+                </Text>
+              </LinkComponent>
             </View>
           )}
         </Hoverable>
