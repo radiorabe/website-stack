@@ -1,3 +1,4 @@
+"use client";
 import { StyleSheet, Text, View } from "react-native-web";
 import Fonts from "../themes/Fonts";
 import Metrics from "../themes/Metrics";
