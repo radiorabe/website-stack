@@ -9,6 +9,7 @@ import { withMedia } from "../hocs/withMedia";
 import Hoverable from "./Hoverable";
 import { usePathname } from "next/navigation";
 import LinkComponent from "./LinkComponent";
+import { useRouter } from "next/navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +22,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     maxWidth: 1920,
+    justifyContent: "space-between",
+    paddingHorizontal: Metrics.baseMargin,
+  },
+  navItemsContainer: {
+    flexDirection: "row",
   },
   link: {
     color: "blue",
@@ -30,15 +36,21 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   rabeLogo: {
-    ...Fonts.style.logo,
+    ...Fonts.style.navigation,
     fontSize: 18,
-    letterSpacing: 8,
-    textDecoration: "none",
+    color: Colors.darkGreen,
+  },
+  navItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: Metrics.navBarHeight,
+    paddingHorizontal: Metrics.baseMargin,
   },
 });
 
 function Navigation(props) {
   const pathname = usePathname();
+  const router = useRouter();
 
   console.log("pathname:", pathname);
 
@@ -47,70 +59,86 @@ function Navigation(props) {
       <View style={styles.innerContainer}>
         <Hoverable>
           {(hover) => (
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                height: Metrics.navBarHeight,
-              }}
-            >
-              <Image
-                src="/svgs/Nav Rabe.svg"
-                width={80}
-                height={80}
-                style={{
-                  transform: "translateX(0) translateY(-10px)",
-                  paddingRight: Metrics.doubleBaseMargin,
-                  paddingLeft: Metrics.baseMargin,
-                }}
-                alt="Picture of the author"
-              />
-              <Text style={[styles.rabeLogo, hover && { color: Colors.green }]}>
-                RADIO BERN
-              </Text>
-            </View>
-          )}
-        </Hoverable>
-        <Hoverable>
-          {(hover) => (
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                height: Metrics.navBarHeight,
-              }}
-            >
-              {/* <Link
-                style={{
-                  ...Fonts.style.logo,
-                  fontSize: 18,
-                  letterSpacing: 8,
-                  textDecoration: "none",
-                  color: hover ? Colors.green : Colors.darkGreen,
-                }}
-                href="/sendungen"
-              >
-                Sendungen
-              </Link> */}
+            <View>
               <LinkComponent
-                href={`/sendungen`}
-                // onPress={openJobDetails}
-                // style={styles.rabeLogo}
+                href={`/`}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  height: Metrics.navBarHeight,
+                }}
               >
+                <Image
+                  src="/svgs/Nav Rabe.svg"
+                  width={80}
+                  height={80}
+                  style={{
+                    transform: "translateX(0) translateY(-10px)",
+                    paddingRight: Metrics.doubleBaseMargin,
+                    paddingLeft: Metrics.baseMargin,
+                  }}
+                  alt="Picture of the author"
+                />
                 <Text
                   style={[styles.rabeLogo, hover && { color: Colors.green }]}
                 >
-                  Sendungen
+                  RADIO BERN
                 </Text>
               </LinkComponent>
             </View>
           )}
         </Hoverable>
-        {/* <NavRabe></NavRabe> */}
+        <View style={styles.navItemsContainer}>
+          <Hoverable>
+            {(hover) => (
+              <View style={styles.navItem}>
+                <LinkComponent href={`/sendungen`}>
+                  <Text
+                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
+                  >
+                    Sendungen
+                  </Text>
+                </LinkComponent>
+              </View>
+            )}
+          </Hoverable>
 
-        {/* <Text style={styles.rabeLogo}>RADIO BERN</Text>
-      <Text style={styles.rabeLogo}>RADIO BERN</Text>
-      <Text style={styles.rabeLogo}>RADIO BERN</Text> */}
+          <Hoverable>
+            {(hover) => (
+              <View style={styles.navItem}>
+                <LinkComponent href={`/ueber-rabe`}>
+                  <Text
+                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
+                  >
+                    Über RaBe
+                  </Text>
+                </LinkComponent>
+              </View>
+            )}
+          </Hoverable>
+
+          <Hoverable>
+            {(hover) => (
+              <View style={styles.navItem}>
+                <LinkComponent
+                  href={`/mitglied-werden`}
+                  style={{
+                    borderWidth: 1,
+                    borderColor: hover ? Colors.green : Colors.darkGreen,
+                    padding: Metrics.halfBaseMargin,
+                    borderRadius: 10,
+                  }}
+                >
+                  <Text
+                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
+                  >
+                    Mitglied werden
+                  </Text>
+                </LinkComponent>
+              </View>
+            )}
+          </Hoverable>
+        </View>
       </View>
     </View>
   );

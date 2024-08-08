@@ -60,12 +60,12 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 18,
     letterSpacing: 0,
   },
-  logo: {
+  navigation: {
     fontFamily: type.bold,
     fontSize: size.text,
     fontWeight: "100",
     // lineHeight: 14,
-    letterSpacing: 8,
+    // letterSpacing: 8,
   },
 };
 
