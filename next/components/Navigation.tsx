@@ -14,6 +14,7 @@ import Playbutton from "./Playbutton";
 import Pausebutton from "./Pausebutton";
 import React, { useState, useEffect } from "react";
 import { useAudioPlayerContext } from "../context/audio-player-context";
+import Loader from "react-spinners/BounceLoader";
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +65,7 @@ function Navigation(props) {
   // const [urlQueue, setUrlQueue] = useState([]);
   // const [buffers, setBuffers] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
   // const [audioPlaying, setAudioPlaying] = useState(null);
 
   // /* Connect Web Socket Fn */
@@ -140,6 +142,16 @@ function Navigation(props) {
   //   }
   // }, [urlQueue, isPlaying]);
   const { audioRef } = useAudioPlayerContext();
+
+  const onWaiting = () => {
+    setIsWaiting(true);
+    console.log("onWaiting");
+  };
+  const onPlaying = () => {
+    setIsWaiting(false);
+
+    console.log("onPlaying");
+  };
 
   useEffect(() => {
     if (isPlaying) {
@@ -244,18 +256,33 @@ function Navigation(props) {
           >
             <TouchableHighlight onPress={() => setIsPlaying(!isPlaying)}>
               <View>
-                <audio src={currentTrack.src} ref={audioRef} />
+                <audio
+                  src={currentTrack.src}
+                  ref={audioRef}
+                  onWaiting={onWaiting}
+                  onPlaying={onPlaying}
+                />
 
-                {isPlaying ? (
+                {!isWaiting && isPlaying && (
                   <Pausebutton
                     color={Colors.lightGreen}
                     scale={0.6}
                   ></Pausebutton>
-                ) : (
+                )}
+                {!isWaiting && !isPlaying && (
                   <Playbutton
                     color={Colors.lightGreen}
                     scale={0.6}
                   ></Playbutton>
+                )}
+                {isWaiting && (
+                  <View style={{ width: 38, height: 38 }}>
+                    <Loader
+                      color={Colors.lightGreen}
+                      size={38}
+                      loading={isWaiting}
+                    ></Loader>
+                  </View>
                 )}
               </View>
             </TouchableHighlight>
