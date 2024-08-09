@@ -1,8 +1,8 @@
 "use client";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native-web";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native-web";
 import Fonts from "../themes/Fonts";
-import Metrics from "../themes/Metrics";
-import Colors from "../themes/Colors";
+import Metrics from "../lib/Metrics";
+import Colors from "../lib/Colors";
 import NavRabe from "../assets/SVGIcons/Nav Rabe.svg";
 import Image from "next/image";
 import { withMedia } from "../hocs/withMedia";
@@ -176,7 +176,7 @@ function Navigation(props) {
               marginLeft: Metrics.baseMargin,
             }}
           >
-            <TouchableHighlight onPress={() => setIsPlaying(!isPlaying)}>
+            <TouchableOpacity onPress={() => setIsPlaying(!isPlaying)}>
               <View>
                 <audio
                   src={currentTrack.src}
@@ -207,7 +207,7 @@ function Navigation(props) {
                   </View>
                 )}
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

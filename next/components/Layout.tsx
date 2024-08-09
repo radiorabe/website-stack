@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 import { withMedia, IMedia } from "../hocs/withMedia";
 // import "babel-polyfill"; // This is necessarey for async await syntax
 import { hasWindow } from "../lib/hasWindow";
-import Metrics from "../themes/Metrics";
+import Metrics from "../lib/Metrics";
 
 export interface Props extends IMedia {
   showDownladPDF?: boolean;
