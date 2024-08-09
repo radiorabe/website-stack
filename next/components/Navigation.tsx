@@ -60,87 +60,9 @@ function Navigation(props) {
 
   console.log("pathname:", pathname);
 
-  // /* States */
-  // const [socket, setSocket] = useState(null);
-  // const [urlQueue, setUrlQueue] = useState([]);
-  // const [buffers, setBuffers] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
-  // const [audioPlaying, setAudioPlaying] = useState(null);
 
-  // /* Connect Web Socket Fn */
-  // async function handleConnectWebSocket() {
-  //   const serverUrl = "Your socket server url starting with ws or wss";
-  //   const newSocket = new WebSocket(serverUrl);
-
-  //   newSocket.onopen = () => {
-  //     console.log("Connected to socket");
-  //   };
-  //   newSocket.onclose = () => {
-  //     console.log("Disconnected");
-  //   };
-
-  //   setSocket(newSocket);
-  // }
-
-  // /* Handling Web Socket Media Event */
-  // useEffect(() => {
-  //   async function handleMessage(event) {
-  //     const message = JSON.parse(event.data);
-  //     if (message?.event === "media") {
-  //       const mediaPayload = message.media.payload;
-  //       setBuffers((prevBuffers) => [...prevBuffers, mediaPayload?.data]);
-  //     }
-  //   }
-  //   if (socket) {
-  //     socket.onmessage = handleMessage;
-  //   }
-
-  //   return () => {
-  //     if (socket) {
-  //       socket.onmessage = null;
-  //     }
-  //   };
-  // }, [socket]);
-
-  // /* Process Buffer Array And Add Url To UrlQueue */
-  // useEffect(() => {
-  //   if (buffers.length > 0) {
-  //     const audioData = new Uint8Array(buffers.flat());
-  //     const blob = new Blob([audioData], { type: "audio/mpeg" });
-  //     const url = window.URL.createObjectURL(blob);
-  //     setUrlQueue((prevUrlQueue) => [...prevUrlQueue, url]);
-  //     setBuffers([]);
-  //   }
-  // }, [buffers]);
-
-  // /* Play Audio Through UrlQueue */
-  // useEffect(() => {
-  //   const playNAudio = async () => {
-  //     const nextUrl = urlQueue[0];
-  //     try {
-  //       if (urlQueue.length) {
-  //         const audio = new Audio();
-  //         setAudioPlaying(audio);
-
-  //         audio.src = nextUrl;
-  //         audio.autoplay = true;
-  //         audio.preload = "auto";
-  //         setIsPlaying(true);
-  //         audio.onended = () => {
-  //           setIsPlaying(false);
-  //           setUrlQueue((prevQ) => prevQ.slice(1));
-  //         };
-  //         // setAudioElem(audio);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error playing Mp3 audio:", error);
-  //     }
-  //   };
-  //   if (!isPlaying && urlQueue.length > 0) {
-  //     playNAudio();
-  //   }
-  // }, [urlQueue, isPlaying]);
   const { audioRef } = useAudioPlayerContext();
 
   const onWaiting = () => {
