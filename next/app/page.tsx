@@ -1,7 +1,8 @@
 "use client";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native-web";
 import Navigation from "../components/Navigation";
 import Fonts from "../lib/Fonts";
+import { Media } from "../media";
 // import Layout from "../components/Layout";
 
 const styles = StyleSheet.create({
@@ -42,6 +43,18 @@ export default function App(props) {
         <Text style={styles.link} accessibilityRole="link" href={`/alternate`}>
           A universal link
         </Text>
+        <Media at="xs">
+          <Text>extra small</Text>
+        </Media>
+        <Media at="sm">
+          <Text>small</Text>
+        </Media>
+        <Media at="md">
+          <Text>meduim</Text>
+        </Media>
+        <Media at="lg">
+          <Text>large</Text>
+        </Media>
 
         <View style={styles.textContainer}>
           <Text accessibilityRole="header" aria-level="2" style={styles.text}>

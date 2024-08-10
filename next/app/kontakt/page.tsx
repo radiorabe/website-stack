@@ -1,5 +1,5 @@
 "use client";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native-web";
 import Fonts from "../../lib/Fonts";
 // import Layout from "../components/Layout";
 

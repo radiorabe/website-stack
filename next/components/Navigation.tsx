@@ -4,7 +4,6 @@ import Fonts from "../lib/Fonts";
 import Metrics from "../lib/Metrics";
 import Colors from "../lib/Colors";
 import Image from "next/image";
-import { withMedia } from "../hocs/withMedia";
 import Hoverable from "./Hoverable";
 import { usePathname } from "next/navigation";
 import LinkComponent from "./LinkComponent";
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function Navigation(props) {
+function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const { currentTrack } = useAudioPlayerContext();
@@ -214,4 +213,4 @@ function Navigation(props) {
   );
 }
 
-export default withMedia(Navigation);
+export default Navigation;

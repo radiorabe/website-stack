@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { View, Dimensions, TextInput } from "react-native";
+import { View, Dimensions, TextInput } from "react-native-web";
 import Navigation from "./Navigation";
 // import Footer from './Footer';
 // import "../../Lib/main.css";
-import { withMedia, IMedia } from "../hocs/withMedia";
 // import "babel-polyfill"; // This is necessarey for async await syntax
 import { hasWindow } from "../lib/hasWindow";
 import Metrics from "../lib/Metrics";
 
-export interface Props extends IMedia {
+export interface Props {
   showDownladPDF?: boolean;
   hideBuyButton?: boolean;
   t(key: any): string;
@@ -23,9 +22,7 @@ export interface State {
 }
 
 const Layout: React.FC<Props> = (props) => {
-  const { media } = props;
-  // const { sidebarOpen } = this.state;
-  const [showSidebar, setShowSidebar] = useState(false);
+  // const [showSidebar, setShowSidebar] = useState(false);
 
   return (
     <View style={{ width: "100%" }}>
@@ -64,5 +61,4 @@ const Layout: React.FC<Props> = (props) => {
     </View>
   );
 };
-
-export default withMedia(Layout);
+export default Layout;

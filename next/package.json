@@ -8,13 +8,13 @@
     "api": "swagger-typescript-api --responses --extract-request-body --extract-request-params --extract-response-body --extract-response-error -p http://localhost:1337/server/specs/oas -o ./lib --modular"
   },
   "dependencies": {
+    "@artsy/fresnel": "^7.1.4",
     "cross-fetch": "^4.0.0",
     "dotenv": "^16.4.5",
     "next": "14.2.5",
     "prompt-sync": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-media": "^1.10.0",
     "react-native-web": "^0.18.9",
     "react-spinners": "^0.14.1"
   },

@@ -1,4 +1,4 @@
-import { TextStyle } from "react-native";
+import { TextStyle } from "react-native-web";
 import Metrics from "./Metrics";
 
 const widthFactor = Math.min(Metrics.screenWidth / 320, 1);

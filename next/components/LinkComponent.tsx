@@ -1,7 +1,7 @@
 // LinkComponent.js
 
 import React from "react";
-import { View, Platform, TouchableOpacity } from "react-native";
+import { View, Platform, TouchableOpacity } from "react-native-web";
 let Link = null;
 if (Platform.OS === "web") {
   Link = require("next/link").default;
