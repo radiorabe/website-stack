@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "../components/Navigation";
-import { regular } from "../themes/Fonts";
+import { regular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Radio Bern - Das Berner Kulturradio",
@@ -22,6 +23,9 @@ export default function RootLayout({
             <Navigation />
           </div>
           {children}
+          <div>
+            <Footer />
+          </div>
         </body>
       </AudioPlayerProvider>
     </html>

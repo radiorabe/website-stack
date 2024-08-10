@@ -1,7 +1,7 @@
 "use client";
 import { StyleSheet, Text, View } from "react-native";
 import Navigation from "../components/Navigation";
-import Fonts from "../themes/Fonts";
+import Fonts from "../lib/Fonts";
 // import Layout from "../components/Layout";
 
 const styles = StyleSheet.create({

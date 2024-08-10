@@ -29,7 +29,7 @@ export default function App(props) {
     <View>
       <View style={styles.container}>
         <Text accessibilityRole="header" style={styles.text}>
-          über rabe
+          Kontakt
         </Text>
       </View>
     </View>
