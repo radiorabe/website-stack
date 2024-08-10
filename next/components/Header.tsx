@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function Navigation() {
+function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { currentTrack } = useAudioPlayerContext();
@@ -213,4 +213,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default Header;

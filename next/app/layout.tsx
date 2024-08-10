@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
 import { regular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
 import Footer from "../components/Footer";
@@ -22,7 +22,7 @@ export default function RootLayout({
       <AudioPlayerProvider>
         <body className={regular.className}>
           <div>
-            <Navigation />
+            <Header />
           </div>
           {children}
           <div>
