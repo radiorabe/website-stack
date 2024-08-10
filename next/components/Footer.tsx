@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native-web";
+import { View, StyleSheet, Text } from "react-native";
 // import Fonts from "../lib/Fonts";
 // import Metrics from "../lib/Metrics";
 // import Colors from "../lib/Colors";
@@ -55,16 +55,6 @@ async function Footer(props) {
   console.log("links", links);
 
   return (
-    // <View
-    //   style={{
-    //     height: 250,
-    //     alignItems: "center",
-    //     backgroundColor: Colors.darkGreen,
-    //     width: "100%",
-    //   }}
-    // >
-    //   hallo
-    // </View>
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <View
@@ -78,7 +68,7 @@ async function Footer(props) {
         >
           <FooterRabe color={Colors.black} scale={1}></FooterRabe>
         </View>
-        {/* <Hoverable>
+        <Hoverable>
           {(hover) => (
             <View
               style={{
@@ -94,7 +84,7 @@ async function Footer(props) {
               <Text>bla</Text>
             </View>
           )}
-        </Hoverable> */}
+        </Hoverable>
       </View>
     </View>
   );

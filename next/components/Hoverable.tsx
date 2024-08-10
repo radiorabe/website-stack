@@ -1,3 +1,4 @@
+"use client";
 import React, { useCallback, ReactNode } from "react";
 
 import { isHoverEnabled } from "../lib/HoverState";

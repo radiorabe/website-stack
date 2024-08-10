@@ -1,5 +1,5 @@
 "use client";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native-web";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Fonts from "../lib/Fonts";
 import Metrics from "../lib/Metrics";
 import Colors from "../lib/Colors";
