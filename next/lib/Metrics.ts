@@ -1,10 +1,3 @@
-import { Dimensions } from "react-native-web";
-
-const { width, height } = Dimensions.get("window");
-
-const widthFactor = Math.min(width / 375, 1);
-
-const x = Math.floor(10 * widthFactor);
 const gridSpacing = 24;
 // const baseMargin = Math.floor(10 * widthFactor);
 const baseMargin = 12;
@@ -18,8 +11,8 @@ const metrics = {
   tripleBaseMargin: baseMargin * 3,
   quadBaseMargin: baseMargin * 4,
   gridSpacing,
-  screenWidth: width,
-  screenHeight: height,
+  // screenWidth: width,
+  // screenHeight: height,
 };
 
 export default metrics;

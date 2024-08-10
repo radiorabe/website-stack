@@ -1,0 +1,369 @@
+diff --git a/node_modules/react-native-web/dist/exports/AccessibilityInfo/index.js b/node_modules/react-native-web/dist/exports/AccessibilityInfo/index.js
+index d37fc17..7974604 100644
+--- a/node_modules/react-native-web/dist/exports/AccessibilityInfo/index.js
++++ b/node_modules/react-native-web/dist/exports/AccessibilityInfo/index.js
+@@ -6,6 +6,7 @@
+  *
+  * 
+  */
++'use client';
+ import canUseDOM from '../../modules/canUseDom';
+ 
+ function isScreenReaderEnabled() {
+diff --git a/node_modules/react-native-web/dist/exports/ActivityIndicator/index.js b/node_modules/react-native-web/dist/exports/ActivityIndicator/index.js
+index f6e48e7..2f12dc7 100644
+--- a/node_modules/react-native-web/dist/exports/ActivityIndicator/index.js
++++ b/node_modules/react-native-web/dist/exports/ActivityIndicator/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["animating", "color", "hidesWhenStopped", "size", "style"];
+diff --git a/node_modules/react-native-web/dist/exports/Animated/index.js b/node_modules/react-native-web/dist/exports/Animated/index.js
+index 8a31993..f513836 100644
+--- a/node_modules/react-native-web/dist/exports/Animated/index.js
++++ b/node_modules/react-native-web/dist/exports/Animated/index.js
+@@ -6,5 +6,6 @@
+  *
+  * 
+  */
++'use client';
+ import Animated from '../../vendor/react-native/Animated/Animated';
+ export default Animated;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/AppRegistry/index.js b/node_modules/react-native-web/dist/exports/AppRegistry/index.js
+index 8b4e5af..6dd61cf 100644
+--- a/node_modules/react-native-web/dist/exports/AppRegistry/index.js
++++ b/node_modules/react-native-web/dist/exports/AppRegistry/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ 
+ /**
+diff --git a/node_modules/react-native-web/dist/exports/AppState/index.js b/node_modules/react-native-web/dist/exports/AppState/index.js
+index 8d951a9..dede45d 100644
+--- a/node_modules/react-native-web/dist/exports/AppState/index.js
++++ b/node_modules/react-native-web/dist/exports/AppState/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ import invariant from 'fbjs/lib/invariant';
+ import EventEmitter from '../../vendor/react-native/emitter/_EventEmitter';
+ import canUseDOM from '../../modules/canUseDom'; // Android 4.4 browser
+diff --git a/node_modules/react-native-web/dist/exports/Appearance/index.js b/node_modules/react-native-web/dist/exports/Appearance/index.js
+index c3f33ab..125d94d 100644
+--- a/node_modules/react-native-web/dist/exports/Appearance/index.js
++++ b/node_modules/react-native-web/dist/exports/Appearance/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ import canUseDOM from '../../modules/canUseDom';
+ 
+ function getQuery() {
+diff --git a/node_modules/react-native-web/dist/exports/CheckBox/index.js b/node_modules/react-native-web/dist/exports/CheckBox/index.js
+index b3b56ca..c319c4b 100644
+--- a/node_modules/react-native-web/dist/exports/CheckBox/index.js
++++ b/node_modules/react-native-web/dist/exports/CheckBox/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/Clipboard/index.js b/node_modules/react-native-web/dist/exports/Clipboard/index.js
+index 6efcdfa..5ff2db1 100644
+--- a/node_modules/react-native-web/dist/exports/Clipboard/index.js
++++ b/node_modules/react-native-web/dist/exports/Clipboard/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ var clipboardAvailable;
+ export default class Clipboard {
+   static isAvailable() {
+diff --git a/node_modules/react-native-web/dist/exports/Dimensions/index.js b/node_modules/react-native-web/dist/exports/Dimensions/index.js
+index ab76037..fc513b7 100644
+--- a/node_modules/react-native-web/dist/exports/Dimensions/index.js
++++ b/node_modules/react-native-web/dist/exports/Dimensions/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ import invariant from 'fbjs/lib/invariant';
+ import canUseDOM from '../../modules/canUseDom';
+ var dimensions = {
+diff --git a/node_modules/react-native-web/dist/exports/FlatList/index.js b/node_modules/react-native-web/dist/exports/FlatList/index.js
+index 0cd7e5c..2fb1492 100644
+--- a/node_modules/react-native-web/dist/exports/FlatList/index.js
++++ b/node_modules/react-native-web/dist/exports/FlatList/index.js
+@@ -7,5 +7,6 @@
+  *
+  * 
+  */
++'use client';
+ import FlatList from '../../vendor/react-native/FlatList';
+ export default FlatList;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/Image/index.js b/node_modules/react-native-web/dist/exports/Image/index.js
+index 93c5f22..30451fc 100644
+--- a/node_modules/react-native-web/dist/exports/Image/index.js
++++ b/node_modules/react-native-web/dist/exports/Image/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/KeyboardAvoidingView/index.js b/node_modules/react-native-web/dist/exports/KeyboardAvoidingView/index.js
+index 84a5d90..46f2bbb 100644
+--- a/node_modules/react-native-web/dist/exports/KeyboardAvoidingView/index.js
++++ b/node_modules/react-native-web/dist/exports/KeyboardAvoidingView/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["behavior", "contentContainerStyle", "keyboardVerticalOffset"];
+diff --git a/node_modules/react-native-web/dist/exports/Modal/index.js b/node_modules/react-native-web/dist/exports/Modal/index.js
+index 550d23c..b4153d6 100644
+--- a/node_modules/react-native-web/dist/exports/Modal/index.js
++++ b/node_modules/react-native-web/dist/exports/Modal/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["animationType", "children", "onDismiss", "onRequestClose", "onShow", "transparent", "visible"];
+diff --git a/node_modules/react-native-web/dist/exports/Picker/index.js b/node_modules/react-native-web/dist/exports/Picker/index.js
+index f2fe200..f6a5b90 100644
+--- a/node_modules/react-native-web/dist/exports/Picker/index.js
++++ b/node_modules/react-native-web/dist/exports/Picker/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["children", "enabled", "onValueChange", "selectedValue", "style", "testID", "itemStyle", "mode", "prompt"];
+diff --git a/node_modules/react-native-web/dist/exports/Pressable/index.js b/node_modules/react-native-web/dist/exports/Pressable/index.js
+index 6212f1c..736c2c8 100644
+--- a/node_modules/react-native-web/dist/exports/Pressable/index.js
++++ b/node_modules/react-native-web/dist/exports/Pressable/index.js
+@@ -6,7 +6,7 @@
+  *
+  * 
+  */
+-'use strict';
++'use client';
+ 
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/ProgressBar/index.js b/node_modules/react-native-web/dist/exports/ProgressBar/index.js
+index 07757e7..86d5605 100644
+--- a/node_modules/react-native-web/dist/exports/ProgressBar/index.js
++++ b/node_modules/react-native-web/dist/exports/ProgressBar/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["color", "indeterminate", "progress", "trackColor", "style"];
+diff --git a/node_modules/react-native-web/dist/exports/ScrollView/index.js b/node_modules/react-native-web/dist/exports/ScrollView/index.js
+index df325bb..6c56131 100644
+--- a/node_modules/react-native-web/dist/exports/ScrollView/index.js
++++ b/node_modules/react-native-web/dist/exports/ScrollView/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/SectionList/index.js b/node_modules/react-native-web/dist/exports/SectionList/index.js
+index 0c5157c..6b470f0 100644
+--- a/node_modules/react-native-web/dist/exports/SectionList/index.js
++++ b/node_modules/react-native-web/dist/exports/SectionList/index.js
+@@ -6,5 +6,6 @@
+  *
+  * 
+  */
++'use client';
+ import SectionList from '../../vendor/react-native/SectionList';
+ export default SectionList;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/Text/TextAncestorContext.js b/node_modules/react-native-web/dist/exports/Text/TextAncestorContext.js
+index f2caf0b..bdb8536 100644
+--- a/node_modules/react-native-web/dist/exports/Text/TextAncestorContext.js
++++ b/node_modules/react-native-web/dist/exports/Text/TextAncestorContext.js
+@@ -6,6 +6,7 @@
+  *
+  * 
+  */
++'use client';
+ import { createContext } from 'react';
+ var TextAncestorContext = /*#__PURE__*/createContext(false);
+ export default TextAncestorContext;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/Text/index.js b/node_modules/react-native-web/dist/exports/Text/index.js
+index 2f99718..49a1d73 100644
+--- a/node_modules/react-native-web/dist/exports/Text/index.js
++++ b/node_modules/react-native-web/dist/exports/Text/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["hrefAttrs", "numberOfLines", "onClick", "onLayout", "onPress", "onMoveShouldSetResponder", "onMoveShouldSetResponderCapture", "onResponderEnd", "onResponderGrant", "onResponderMove", "onResponderReject", "onResponderRelease", "onResponderStart", "onResponderTerminate", "onResponderTerminationRequest", "onScrollShouldSetResponder", "onScrollShouldSetResponderCapture", "onSelectionChangeShouldSetResponder", "onSelectionChangeShouldSetResponderCapture", "onStartShouldSetResponder", "onStartShouldSetResponderCapture", "selectable"];
+diff --git a/node_modules/react-native-web/dist/exports/TextInput/index.js b/node_modules/react-native-web/dist/exports/TextInput/index.js
+index f57d4bd..5046d36 100644
+--- a/node_modules/react-native-web/dist/exports/TextInput/index.js
++++ b/node_modules/react-native-web/dist/exports/TextInput/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ import * as React from 'react';
+ import createElement from '../createElement';
+ import * as forwardedProps from '../../modules/forwardedProps';
+diff --git a/node_modules/react-native-web/dist/exports/TouchableHighlight/index.js b/node_modules/react-native-web/dist/exports/TouchableHighlight/index.js
+index d40d223..7389fc6 100644
+--- a/node_modules/react-native-web/dist/exports/TouchableHighlight/index.js
++++ b/node_modules/react-native-web/dist/exports/TouchableHighlight/index.js
+@@ -7,7 +7,7 @@
+  * 
+  * @format
+  */
+-'use strict';
++'use client';
+ 
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/TouchableOpacity/index.js b/node_modules/react-native-web/dist/exports/TouchableOpacity/index.js
+index 7000a93..6155fee 100644
+--- a/node_modules/react-native-web/dist/exports/TouchableOpacity/index.js
++++ b/node_modules/react-native-web/dist/exports/TouchableOpacity/index.js
+@@ -7,7 +7,7 @@
+  * 
+  * @format
+  */
+-'use strict';
++'use client';
+ 
+ import _extends from "@babel/runtime/helpers/extends";
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+diff --git a/node_modules/react-native-web/dist/exports/TouchableWithoutFeedback/index.js b/node_modules/react-native-web/dist/exports/TouchableWithoutFeedback/index.js
+index b320fe8..d7e7ab2 100644
+--- a/node_modules/react-native-web/dist/exports/TouchableWithoutFeedback/index.js
++++ b/node_modules/react-native-web/dist/exports/TouchableWithoutFeedback/index.js
+@@ -7,7 +7,7 @@
+  * 
+  * @format
+  */
+-'use strict';
++'use client';
+ 
+ import * as React from 'react';
+ import { useMemo, useRef } from 'react';
+diff --git a/node_modules/react-native-web/dist/exports/View/index.js b/node_modules/react-native-web/dist/exports/View/index.js
+index 6c03d8e..1d000a9 100644
+--- a/node_modules/react-native-web/dist/exports/View/index.js
++++ b/node_modules/react-native-web/dist/exports/View/index.js
+@@ -1,3 +1,4 @@
++'use client';
+ import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
+ var _excluded = ["hrefAttrs", "onLayout", "onMoveShouldSetResponder", "onMoveShouldSetResponderCapture", "onResponderEnd", "onResponderGrant", "onResponderMove", "onResponderReject", "onResponderRelease", "onResponderStart", "onResponderTerminate", "onResponderTerminationRequest", "onScrollShouldSetResponder", "onScrollShouldSetResponderCapture", "onSelectionChangeShouldSetResponder", "onSelectionChangeShouldSetResponderCapture", "onStartShouldSetResponder", "onStartShouldSetResponderCapture"];
+ 
+diff --git a/node_modules/react-native-web/dist/exports/VirtualizedList/index.js b/node_modules/react-native-web/dist/exports/VirtualizedList/index.js
+index 17f0bc9..9d829d8 100644
+--- a/node_modules/react-native-web/dist/exports/VirtualizedList/index.js
++++ b/node_modules/react-native-web/dist/exports/VirtualizedList/index.js
+@@ -6,5 +6,6 @@
+  *
+  * 
+  */
++'use client';
+ import VirtualizedList from '../../vendor/react-native/VirtualizedList';
+ export default VirtualizedList;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/createElement/index.js b/node_modules/react-native-web/dist/exports/createElement/index.js
+index b44ca85..ce7aff0 100644
+--- a/node_modules/react-native-web/dist/exports/createElement/index.js
++++ b/node_modules/react-native-web/dist/exports/createElement/index.js
+@@ -6,6 +6,7 @@
+  *
+  * 
+  */
++'use client';
+ import AccessibilityUtil from '../../modules/AccessibilityUtil';
+ import createDOMProps from '../../modules/createDOMProps';
+ import React from 'react';
+diff --git a/node_modules/react-native-web/dist/exports/render/index.js b/node_modules/react-native-web/dist/exports/render/index.js
+index 85f6fad..9378f42 100644
+--- a/node_modules/react-native-web/dist/exports/render/index.js
++++ b/node_modules/react-native-web/dist/exports/render/index.js
+@@ -6,6 +6,7 @@
+  *
+  * 
+  */
++'use client';
+ import { hydrate as domHydrate, render as domRender } from 'react-dom';
+ import { createSheet } from '../StyleSheet/dom';
+ export function hydrate(element, root, callback) {
+diff --git a/node_modules/react-native-web/dist/exports/useColorScheme/index.js b/node_modules/react-native-web/dist/exports/useColorScheme/index.js
+index d47c39c..9194440 100644
+--- a/node_modules/react-native-web/dist/exports/useColorScheme/index.js
++++ b/node_modules/react-native-web/dist/exports/useColorScheme/index.js
+@@ -7,6 +7,7 @@
+  *
+  * 
+  */
++'use client';
+ import * as React from 'react';
+ import Appearance from '../Appearance';
+ export default function useColorScheme() {
+diff --git a/node_modules/react-native-web/dist/exports/useLocaleContext/index.js b/node_modules/react-native-web/dist/exports/useLocaleContext/index.js
+index 16d17de..0ed4a4a 100644
+--- a/node_modules/react-native-web/dist/exports/useLocaleContext/index.js
++++ b/node_modules/react-native-web/dist/exports/useLocaleContext/index.js
+@@ -6,5 +6,6 @@
+  *
+  * 
+  */
++'use client';
+ import { useLocaleContext } from '../../modules/useLocale';
+ export default useLocaleContext;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/exports/useWindowDimensions/index.js b/node_modules/react-native-web/dist/exports/useWindowDimensions/index.js
+index 571dc93..ef74759 100644
+--- a/node_modules/react-native-web/dist/exports/useWindowDimensions/index.js
++++ b/node_modules/react-native-web/dist/exports/useWindowDimensions/index.js
+@@ -7,7 +7,7 @@
+  * @format
+  * 
+  */
+-'use strict';
++'use client';
+ 
+ import Dimensions from '../Dimensions';
+ import { useEffect, useState } from 'react';
+diff --git a/node_modules/react-native-web/dist/modules/UnimplementedView/index.js b/node_modules/react-native-web/dist/modules/UnimplementedView/index.js
+index 2fbdb0c..07ec154 100644
+--- a/node_modules/react-native-web/dist/modules/UnimplementedView/index.js
++++ b/node_modules/react-native-web/dist/modules/UnimplementedView/index.js
+@@ -8,6 +8,7 @@
+  */
+ import View from '../../exports/View';
+ import React from 'react';
++
+ /**
+  * Common implementation for a simple stubbed view.
+  */
+diff --git a/node_modules/react-native-web/dist/modules/useLocale/index.js b/node_modules/react-native-web/dist/modules/useLocale/index.js
+index e8fd8ca..ae627a4 100644
+--- a/node_modules/react-native-web/dist/modules/useLocale/index.js
++++ b/node_modules/react-native-web/dist/modules/useLocale/index.js
+@@ -6,6 +6,7 @@
+  *
+  * 
+  */
++'use client';
+ import React, { createContext, useContext } from 'react';
+ import { isLocaleRTL } from './isLocaleRTL';
+ var defaultLocale = {
