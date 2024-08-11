@@ -1,5 +1,11 @@
 "use client";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import Fonts from "../lib/Fonts";
 import Metrics from "../lib/Metrics";
 import Colors from "../lib/Colors";
@@ -10,9 +16,14 @@ import LinkComponent from "./LinkComponent";
 import { useRouter } from "next/navigation";
 import Playbutton from "../assets/svg/Playbutton";
 import Pausebutton from "../assets/svg/Pausebutton";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import { useAudioPlayerContext } from "../context/audio-player-context";
 import Loader from "react-spinners/BounceLoader";
+export type PressableState = Readonly<{
+  pressed: boolean;
+  hovered?: boolean;
+  focused?: boolean;
+}>;
 
 const styles = StyleSheet.create({
   container: {
@@ -174,38 +185,54 @@ function Header() {
               marginLeft: Metrics.baseMargin,
             }}
           >
-            <TouchableOpacity onPress={() => setIsPlaying(!isPlaying)}>
-              <View>
-                <audio
-                  src={currentTrack.src}
-                  ref={audioRef}
-                  onWaiting={onWaiting}
-                  onPlaying={onPlaying}
-                />
+            {/* <TouchableOpacity onPress={() => setIsPlaying(!isPlaying)}> */}
+            <View>
+              <audio
+                src={currentTrack.src}
+                ref={audioRef}
+                onWaiting={onWaiting}
+                onPlaying={onPlaying}
+              />
 
-                {!isWaiting && isPlaying && (
-                  <Pausebutton
-                    color={Colors.lightGreen}
-                    scale={0.6}
-                  ></Pausebutton>
-                )}
-                {!isWaiting && !isPlaying && (
-                  <Playbutton
-                    color={Colors.lightGreen}
-                    scale={0.6}
-                  ></Playbutton>
-                )}
-                {isWaiting && (
-                  <View style={{ width: 38, height: 38 }}>
-                    <Loader
-                      color={Colors.lightGreen}
-                      size={38}
-                      loading={isWaiting}
-                    ></Loader>
-                  </View>
-                )}
-              </View>
-            </TouchableOpacity>
+              {!isWaiting && isPlaying && (
+                <Pressable style={{}} onPress={() => setIsPlaying(false)}>
+                  {({ pressed, hovered }: PressableState): ReactElement => {
+                    let newColor = pressed
+                      ? Colors.darkGreen
+                      : hovered
+                        ? Colors.green
+                        : Colors.lightGreen;
+                    return (
+                      <Pausebutton color={newColor} scale={0.6}></Pausebutton>
+                    );
+                  }}
+                </Pressable>
+              )}
+              {!isWaiting && !isPlaying && (
+                <Pressable style={{}} onPress={() => setIsPlaying(true)}>
+                  {({ pressed, hovered }: PressableState): ReactElement => {
+                    let newColor = pressed
+                      ? Colors.darkGreen
+                      : hovered
+                        ? Colors.green
+                        : Colors.lightGreen;
+                    return (
+                      <Playbutton color={newColor} scale={0.6}></Playbutton>
+                    );
+                  }}
+                </Pressable>
+              )}
+              {isWaiting && (
+                <View style={{ width: 38, height: 38 }}>
+                  <Loader
+                    color={Colors.green}
+                    size={38}
+                    loading={isWaiting}
+                  ></Loader>
+                </View>
+              )}
+            </View>
+            {/* </TouchableOpacity> */}
           </View>
         </View>
       </View>
