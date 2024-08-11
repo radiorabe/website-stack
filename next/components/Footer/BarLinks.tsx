@@ -1,17 +1,28 @@
 "use client";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
 import Metrics from "../../lib/Metrics";
 import HoverText from "../HoverText";
 import HoverUrl from "../HoverUrl";
 import LinkComponent from "../LinkComponent";
+import StyleSheet from "react-native-media-query";
 
 export type PressableState = Readonly<{
   pressed: boolean;
   hovered?: boolean;
   focused?: boolean;
 }>;
+
+const { ids, styles } = StyleSheet.create({
+  hoverText: {
+    ...Fonts.style.footer,
+    color: Colors.lightGreen,
+    ":hover": {
+      color: Colors.green,
+    },
+  },
+});
 
 export interface HoverableProps {}
 
@@ -30,20 +41,14 @@ export default ({}: HoverableProps) => {
           flexDirection: "row",
         }}
       >
-        <HoverText
-          style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-          hoverStyle={{ color: Colors.green }}
-        >
+        <Text style={styles.hoverText} dataSet={{ media: ids.hoverText }}>
           {"Logo Download"}
-        </HoverText>
+        </Text>
         <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
         <LinkComponent href={`/kontakt`}>
-          <HoverText
-            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-            hoverStyle={{ color: Colors.green }}
-          >
+          <Text style={styles.hoverText} dataSet={{ media: ids.hoverText }}>
             {"Kontakt"}
-          </HoverText>
+          </Text>
         </LinkComponent>
 
         <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>

@@ -1,16 +1,11 @@
 "use client";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { Text, View, TouchableOpacity, Pressable } from "react-native";
+import StyleSheet from "react-native-media-query";
+
 import Fonts from "../lib/Fonts";
 import Metrics from "../lib/Metrics";
 import Colors from "../lib/Colors";
 import Image from "next/image";
-import Hoverable from "./Hoverable";
 import { usePathname } from "next/navigation";
 import LinkComponent from "./LinkComponent";
 import { useRouter } from "next/navigation";
@@ -20,12 +15,12 @@ import React, { useState, useEffect, ReactElement } from "react";
 import { useAudioPlayerContext } from "../context/audio-player-context";
 import Loader from "react-spinners/BounceLoader";
 export type PressableState = Readonly<{
-  pressed: boolean;
+  pressed?: boolean;
   hovered?: boolean;
   focused?: boolean;
 }>;
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   container: {
     height: Metrics.navBarHeight,
     alignItems: "center",
@@ -45,6 +40,7 @@ const styles = StyleSheet.create({
   link: {
     color: "blue",
   },
+
   textContainer: {
     alignItems: "center",
     marginTop: 16,
@@ -53,13 +49,42 @@ const styles = StyleSheet.create({
     ...Fonts.style.navigation,
     fontSize: 18,
     color: Colors.darkGreen,
+    ":hover": {
+      color: Colors.green,
+    },
+  },
+  rabeLogoBorder: {
+    ...Fonts.style.navigation,
+    fontSize: 18,
+    color: Colors.darkGreen,
+    borderWidth: 1,
+    borderColor: Colors.darkGreen,
+    padding: Metrics.halfBaseMargin,
+    borderRadius: 10,
+    ":hover": {
+      color: Colors.green,
+      borderColor: Colors.green,
+    },
   },
   navItem: {
     flexDirection: "row",
     alignItems: "center",
     height: Metrics.navBarHeight,
     paddingHorizontal: Metrics.baseMargin,
+    color: Colors.darkGreen,
+    ":hover": {
+      color: Colors.green,
+    },
   },
+  // navItemBorder: {
+  //   borderWidth: 1,
+  //   borderColor: Colors.darkGreen,
+  //   padding: Metrics.halfBaseMargin,
+  //   borderRadius: 10,
+  //   ":hover": {
+  //     borderColor: Colors.green,
+  //   },
+  // },
 });
 
 function Header() {
@@ -94,87 +119,57 @@ function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Hoverable>
-          {(hover) => (
-            <View>
-              <LinkComponent
-                href={`/`}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  height: Metrics.navBarHeight,
-                }}
-              >
-                <Image
-                  src="/svgs/Nav Rabe.svg"
-                  width={80}
-                  height={80}
-                  style={{
-                    transform: "translateX(0) translateY(-10px)",
-                    paddingRight: Metrics.doubleBaseMargin,
-                    paddingLeft: Metrics.baseMargin,
-                  }}
-                  alt="Picture of the author"
-                />
-                <Text
-                  style={[styles.rabeLogo, hover && { color: Colors.green }]}
-                >
-                  RADIO BERN
-                </Text>
-              </LinkComponent>
-            </View>
-          )}
-        </Hoverable>
+        <View>
+          <LinkComponent
+            href={`/`}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              height: Metrics.navBarHeight,
+            }}
+          >
+            <Image
+              src="/svgs/Nav Rabe.svg"
+              width={80}
+              height={80}
+              style={{
+                transform: "translateX(0) translateY(-10px)",
+                paddingRight: Metrics.doubleBaseMargin,
+                paddingLeft: Metrics.baseMargin,
+              }}
+              alt="Picture of the author"
+            />
+            <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
+              RADIO BERN
+            </Text>
+          </LinkComponent>
+        </View>
+
         <View style={styles.navItemsContainer}>
-          <Hoverable>
-            {(hover) => (
-              <View style={styles.navItem}>
-                <LinkComponent href={`/sendungen`}>
-                  <Text
-                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
-                  >
-                    Sendungen
-                  </Text>
-                </LinkComponent>
-              </View>
-            )}
-          </Hoverable>
-
-          <Hoverable>
-            {(hover) => (
-              <View style={styles.navItem}>
-                <LinkComponent href={`/ueber-rabe`}>
-                  <Text
-                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
-                  >
-                    Über RaBe
-                  </Text>
-                </LinkComponent>
-              </View>
-            )}
-          </Hoverable>
-
-          <Hoverable>
-            {(hover) => (
-              <View style={styles.navItem}>
-                <LinkComponent
-                  href={`/mitglied-werden`}
-                  style={{
-                    borderWidth: 1,
-                    borderColor: hover ? Colors.green : Colors.darkGreen,
-                    padding: Metrics.halfBaseMargin,
-                    borderRadius: 10,
-                  }}
-                >
-                  <Text
-                    style={[styles.rabeLogo, hover && { color: Colors.green }]}
-                  >
-                    Mitglied werden
-                  </Text>
-                </LinkComponent>
-              </View>
-            )}
-          </Hoverable>
+          <View style={styles.navItem}>
+            <LinkComponent href={`/sendungen`}>
+              <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
+                Sendungen
+              </Text>
+            </LinkComponent>
+          </View>
+          <View style={styles.navItem}>
+            <LinkComponent href={`/ueber-rabe`}>
+              <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
+                Über RaBe
+              </Text>
+            </LinkComponent>
+          </View>
+          <View style={styles.navItem}>
+            <LinkComponent href={`/mitglied-werden`}>
+              <Text
+                style={styles.rabeLogoBorder}
+                dataSet={{ media: ids.rabeLogoBorder }}
+              >
+                Mitglied werden
+              </Text>
+            </LinkComponent>
+          </View>
           <View
             style={{
               width: 200,

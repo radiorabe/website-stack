@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import StyleSheet from "react-native-media-query";
 
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
@@ -7,7 +8,7 @@ import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
 import FooterRabe from "./FooterRabe";
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: Colors.darkGreen,
@@ -18,6 +19,13 @@ const styles = StyleSheet.create({
     maxWidth: 1920,
     minHeight: 250,
     justifyContent: "space-around",
+  },
+
+  hoverText: {
+    color: Colors.lightGreen,
+    ":hover": {
+      color: Colors.green,
+    },
   },
 });
 

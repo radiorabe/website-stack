@@ -12,7 +12,9 @@ const LinkComponent = (props) => {
     // it will be used for web
     return (
       <Link href={props.href} style={{ textDecoration: "none" }}>
-        <View style={props.style}>{props.children}</View>
+        <View style={props.style} dataSet={props.dataSet}>
+          {props.children}
+        </View>
       </Link>
     );
   } else {
