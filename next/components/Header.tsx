@@ -14,6 +14,7 @@ import Pausebutton from "../assets/svg/Pausebutton";
 import React, { useState, useEffect, ReactElement } from "react";
 import { useAudioPlayerContext } from "../context/audio-player-context";
 import Loader from "react-spinners/BounceLoader";
+import NavRabe from "./NavRabe";
 export type PressableState = Readonly<{
   pressed?: boolean;
   hovered?: boolean;
@@ -119,31 +120,38 @@ function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <View>
-          <LinkComponent
-            href={`/`}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              height: Metrics.navBarHeight,
-            }}
-          >
-            <Image
-              src="/svgs/Nav Rabe.svg"
-              width={80}
-              height={80}
-              style={{
-                transform: "translateX(0) translateY(-10px)",
-                paddingRight: Metrics.doubleBaseMargin,
-                paddingLeft: Metrics.baseMargin,
-              }}
-              alt="Picture of the author"
-            />
-            <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
-              RADIO BERN
-            </Text>
-          </LinkComponent>
-        </View>
+        {/* <View> */}
+        <Pressable style={{}} onPress={() => setIsPlaying(false)}>
+          {({ pressed, hovered }: PressableState): ReactElement => {
+            return (
+              <LinkComponent
+                href={`/`}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  height: Metrics.navBarHeight,
+                }}
+              >
+                <NavRabe
+                  style={{
+                    paddingTop: 25,
+                    paddingRight: Metrics.doubleBaseMargin,
+                    paddingLeft: Metrics.doubleBaseMargin,
+                  }}
+                  color={hovered ? Colors.green : Colors.darkGreen}
+                  scale={1}
+                ></NavRabe>
+                <Text
+                  style={[styles.rabeLogo, hovered && { color: Colors.green }]}
+                  dataSet={{ media: ids.rabeLogo }}
+                >
+                  RADIO BERN
+                </Text>
+              </LinkComponent>
+            );
+          }}
+        </Pressable>
+        {/* </View> */}
 
         <View style={styles.navItemsContainer}>
           <View style={styles.navItem}>
