@@ -1,11 +1,12 @@
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import React, { useState, useEffect, ReactElement } from "react";
-import FooterRabe from "../../assets/svg/FooterRabe";
 import { Api } from "../../lib/api";
+import { ItemsFooter } from "../../lib/api/data-contracts";
 import Colors from "../../lib/Colors";
 import Metrics from "../../lib/Metrics";
-import HoverText from "../HoverText";
+import BarIcons from "./BarIcons";
+import BarLinks from "./BarLinks";
+import FooterRabe from "./FooterRabe";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +16,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   innerContainer: {
-    flexDirection: "row",
     width: "100%",
     maxWidth: 1920,
     justifyContent: "space-between",
@@ -37,17 +37,22 @@ async function getData() {
 }
 
 async function Footer(props) {
-  // const response = await Api.readItemsFooter(
-  //   { fields: ["links.*.*"] }
-  //   // { cache: "no-store" }
-  // );
-  // console.log("response", response);
-
-  // let links = [];
-  // if (response.status === 200) {
-  //   links = response.data.data.links;
-  // }
-  // console.log("links", links);
+  const response = await Api.readItemsFooter(
+    { fields: ["links.*.*"] }
+    // { cache: "no-store" }
+  );
+  console.log("response", response);
+  let links = [];
+  if (response.status === 200) {
+    let data = response.data.data;
+    if (Array.isArray(data)) {
+      console.error("Response is Array");
+    } else {
+      let footerItem: ItemsFooter = data;
+      links = footerItem.links;
+    }
+  }
+  console.log("links", links);
 
   return (
     <View style={styles.container}>
@@ -63,20 +68,11 @@ async function Footer(props) {
         >
           <FooterRabe color={Colors.black} scale={1}></FooterRabe>
         </View>
-
-        <HoverText style={{ color: "black" }} hoverStyle={{ color: "pink" }}>
-          blabab
-        </HoverText>
-
-        <View
-          style={{
-            backgroundColor: "green",
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          <Text>blablab</Text>
-        </View>
+        <View style={{ height: Metrics.quadBaseMargin }}></View>
+        <BarIcons></BarIcons>
+        <View style={{ height: Metrics.quadBaseMargin }}></View>
+        <BarLinks></BarLinks>
+        <View style={{ height: Metrics.quadBaseMargin }}></View>
       </View>
     </View>
   );

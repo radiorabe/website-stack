@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactElement } from "react";
-import { Text, Pressable, TextStyle } from "react-native";
+import { Text, Pressable, TextStyle, Linking } from "react-native";
 
 export type PressableState = Readonly<{
   pressed: boolean;
@@ -13,6 +13,7 @@ export interface HoverableProps {
   hoverStyle?: TextStyle;
   pressStyle?: TextStyle;
   focusStyle?: TextStyle;
+  url: string;
   children?: any;
 }
 
@@ -21,10 +22,17 @@ const HoverText = ({
   hoverStyle,
   pressStyle,
   focusStyle,
+  url,
   children,
 }: HoverableProps) => {
   return (
-    <Pressable style={{}}>
+    //   <TouchableWithoutFeedback
+    //   onPress={() => {
+    //     if (hasWindow) Linking.openURL("https://www.aarefabrik.ch");
+    //   }}
+    // >
+    //             </TouchableWithoutFeedback>
+    <Pressable style={{}} onPress={() => Linking.openURL(url)}>
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
           <Text

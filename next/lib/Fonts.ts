@@ -1,7 +1,7 @@
 import { TextStyle } from "react-native";
 import Metrics from "./Metrics";
 
-const widthFactor = Math.min(Metrics.screenWidth / 320, 1);
+const widthFactor = 1;
 
 import localFont from "next/font/local";
 
@@ -64,8 +64,11 @@ export const style: Record<string, TextStyle> = {
     fontFamily: type.bold,
     fontSize: size.text,
     fontWeight: "100",
-    // lineHeight: 14,
-    // letterSpacing: 8,
+  },
+  footer: {
+    fontFamily: type.bold,
+    fontSize: size.textSmall,
+    fontWeight: "100",
   },
 };
 
