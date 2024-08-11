@@ -4,7 +4,6 @@ import Header from "../components/Header";
 import { regular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
 import Footer from "../components/Footer";
-import RootHead from "../components/RootHead";
 
 export const metadata: Metadata = {
   title: "Radio Bern - Das Berner Kulturradio",
@@ -18,7 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <RootHead />
       <AudioPlayerProvider>
         <body className={regular.className}>
           <div>

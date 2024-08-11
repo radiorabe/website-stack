@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function App(props) {
+export default function SendungenPage(props) {
   return (
     <View>
       <View style={styles.container}>

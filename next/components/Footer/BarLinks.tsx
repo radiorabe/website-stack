@@ -22,61 +22,74 @@ export default ({}: HoverableProps) => {
         justifyContent: "center",
         flexDirection: "row",
         width: "100%",
+        flexWrap: "wrap",
       }}
     >
-      <HoverText
-        style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-        hoverStyle={{ color: Colors.green }}
+      <View
+        style={{
+          flexDirection: "row",
+        }}
       >
-        {"Logo Download"}
-      </HoverText>
-      <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-      <LinkComponent href={`/kontakt`}>
         <HoverText
           style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
           hoverStyle={{ color: Colors.green }}
         >
-          {"Kontakt"}
+          {"Logo Download"}
         </HoverText>
-      </LinkComponent>
+        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
+        <LinkComponent href={`/kontakt`}>
+          <HoverText
+            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
+            hoverStyle={{ color: Colors.green }}
+          >
+            {"Kontakt"}
+          </HoverText>
+        </LinkComponent>
 
-      <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-      <LinkComponent href={`/agb`}>
+        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
+        <LinkComponent href={`/agb`}>
+          <HoverText
+            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
+            hoverStyle={{ color: Colors.green }}
+          >
+            {"AGB und Datenschutz"}
+          </HoverText>
+        </LinkComponent>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          // paddingBottom: Metrics.tripleBaseMargin,
+        }}
+      >
+        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
+        <LinkComponent href={`/impressum`}>
+          <HoverText
+            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
+            hoverStyle={{ color: Colors.green }}
+          >
+            {"Impressum"}
+          </HoverText>
+        </LinkComponent>
+
+        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
+
         <HoverText
           style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
           hoverStyle={{ color: Colors.green }}
         >
-          {"AGB und Datenschutz"}
+          {"Login"}
         </HoverText>
-      </LinkComponent>
+        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
 
-      <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-      <LinkComponent href={`/impressum`}>
-        <HoverText
+        <HoverUrl
           style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
           hoverStyle={{ color: Colors.green }}
+          url={"https://www.aarefabrik.ch"}
         >
-          {"Impressum"}
-        </HoverText>
-      </LinkComponent>
-
-      <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-
-      <HoverText
-        style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-        hoverStyle={{ color: Colors.green }}
-      >
-        {"Login"}
-      </HoverText>
-      <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-
-      <HoverUrl
-        style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-        hoverStyle={{ color: Colors.green }}
-        url={"https://www.aarefabrik.ch"}
-      >
-        {"aarefabrik.ch"}
-      </HoverUrl>
+          {"aarefabrik.ch"}
+        </HoverUrl>
+      </View>
     </View>
   );
 };

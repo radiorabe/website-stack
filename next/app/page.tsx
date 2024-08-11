@@ -1,15 +1,32 @@
 "use client";
-import { StyleSheet, Text, View } from "react-native";
-import Navigation from "../components/Header";
+import { Text, View } from "react-native";
+import StyleSheet from "react-native-media-query";
+
 import Fonts from "../lib/Fonts";
-import { Media } from "../lib/media";
 // import Layout from "../components/Layout";
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,
     justifyContent: "center",
+    "@media (max-width: 1600px) and (min-width: 800px)": {
+      backgroundColor: "red",
+    },
+    "@media (max-width: 800px)": {
+      backgroundColor: "blue",
+    },
+  },
+  onlyBig: {
+    "@media (max-width: 1600px) and (min-width: 800px)": {
+      visibility: "hidden",
+    },
+    "@media (max-width: 800px)": {
+      visibility: "visible",
+    },
+    ":hover": {
+      backgroundColor: "green",
+    },
   },
   link: {
     color: "blue",
@@ -29,7 +46,7 @@ const styles = StyleSheet.create({
 export default function App(props) {
   return (
     <View>
-      <View style={styles.container}>
+      <View style={styles.container} dataSet={{ media: ids.container }}>
         <Text accessibilityRole="header" style={styles.text}>
           RaBe ist über DAB+, UKW/FM, Webradio, Smartphone-Apps und
           Kabelfrequenzen empfangbar. DAB+ deckt verschiedene Regionen ab, UKW
@@ -43,18 +60,14 @@ export default function App(props) {
         <Text style={styles.link} accessibilityRole="link" href={`/alternate`}>
           A universal link
         </Text>
-        <Media at="xs">
-          <Text>extra small</Text>
-        </Media>
-        <Media at="sm">
-          <Text>small</Text>
-        </Media>
-        <Media at="md">
-          <Text>meduim</Text>
-        </Media>
-        <Media at="lg">
-          <Text>large</Text>
-        </Media>
+
+        <Text
+          style={styles.onlyBig}
+          dataSet={{ media: ids.onlyBig }}
+          accessibilityRole="link"
+        >
+          only big
+        </Text>
 
         <View style={styles.textContainer}>
           <Text accessibilityRole="header" aria-level="2" style={styles.text}>
