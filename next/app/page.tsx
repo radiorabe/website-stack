@@ -2,7 +2,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import Navigation from "../components/Header";
 import Fonts from "../lib/Fonts";
-import { Media } from "../media";
+import { Media } from "../lib/media";
 // import Layout from "../components/Layout";
 
 const styles = StyleSheet.create({

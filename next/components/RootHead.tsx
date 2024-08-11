@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { mediaStyles } from "../media";
+import { mediaStyles } from "../lib/media";
 
 function RootHead() {
   return (
