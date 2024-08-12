@@ -10,20 +10,16 @@
  */
 
 import {
-  ReadItemsFooterData,
-  ReadItemsFooterParams,
-  ReadItemsFooterTextLinksData,
-  ReadItemsFooterTextLinksParams,
   ReadItemsHomeData,
   ReadItemsHomeParams,
+  ReadItemsImpressumData,
+  ReadItemsImpressumParams,
   ReadItemsTextLinksData,
   ReadItemsTextLinksParams,
-  ReadSingleItemsFooterData,
-  ReadSingleItemsFooterParams,
-  ReadSingleItemsFooterTextLinksData,
-  ReadSingleItemsFooterTextLinksParams,
   ReadSingleItemsHomeData,
   ReadSingleItemsHomeParams,
+  ReadSingleItemsImpressumData,
+  ReadSingleItemsImpressumParams,
   ReadSingleItemsTextLinksData,
   ReadSingleItemsTextLinksParams,
 } from "./data-contracts";
@@ -31,14 +27,14 @@ import { HttpClient, RequestParams } from "./http-client";
 
 export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
- * @description List the Footer items.
+ * @description List the Impressum items.
  *
- * @tags Items, ItemsFooter
- * @name ReadItemsFooter
+ * @tags Items, ItemsImpressum
+ * @name ReadItemsImpressum
  * @summary List Items
- * @request GET:/items/Footer
+ * @request GET:/items/Impressum
  * @secure
- * @response `200` `ReadItemsFooterData` Successful request
+ * @response `200` `ReadItemsImpressumData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -49,9 +45,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readItemsFooter = (query: ReadItemsFooterParams, params: RequestParams = {}) =>
+  readItemsImpressum = (query: ReadItemsImpressumParams, params: RequestParams = {}) =>
     this.request<
-      ReadItemsFooterData,
+      ReadItemsImpressumData,
       {
         error?: {
           /** @format int64 */
@@ -60,7 +56,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/Footer`,
+      path: `/items/Impressum`,
       method: "GET",
       query: query,
       secure: true,
@@ -68,13 +64,13 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description Retrieve a single Footer item by unique identifier.
+ * @description Retrieve a single Impressum item by unique identifier.
  *
- * @tags Items, ItemsFooter
- * @name ReadSingleItemsFooter
+ * @tags Items, ItemsImpressum
+ * @name ReadSingleItemsImpressum
  * @summary Retrieve an Item
- * @request GET:/items/Footer/{id}
- * @response `200` `ReadSingleItemsFooterData` Successful request
+ * @request GET:/items/Impressum/{id}
+ * @response `200` `ReadSingleItemsImpressumData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -94,9 +90,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readSingleItemsFooter = ({ id, ...query }: ReadSingleItemsFooterParams, params: RequestParams = {}) =>
+  readSingleItemsImpressum = ({ id, ...query }: ReadSingleItemsImpressumParams, params: RequestParams = {}) =>
     this.request<
-      ReadSingleItemsFooterData,
+      ReadSingleItemsImpressumData,
       {
         error?: {
           /** @format int64 */
@@ -105,7 +101,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/Footer/${id}`,
+      path: `/items/Impressum/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -268,90 +264,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/textLinks/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the Footer_textLinks items.
- *
- * @tags Items, ItemsFooterTextLinks
- * @name ReadItemsFooterTextLinks
- * @summary List Items
- * @request GET:/items/Footer_textLinks
- * @secure
- * @response `200` `ReadItemsFooterTextLinksData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsFooterTextLinks = (query: ReadItemsFooterTextLinksParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsFooterTextLinksData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Footer_textLinks`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single Footer_textLinks item by unique identifier.
- *
- * @tags Items, ItemsFooterTextLinks
- * @name ReadSingleItemsFooterTextLinks
- * @summary Retrieve an Item
- * @request GET:/items/Footer_textLinks/{id}
- * @response `200` `ReadSingleItemsFooterTextLinksData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsFooterTextLinks = (
-    { id, ...query }: ReadSingleItemsFooterTextLinksParams,
-    params: RequestParams = {},
-  ) =>
-    this.request<
-      ReadSingleItemsFooterTextLinksData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Footer_textLinks/${id}`,
       method: "GET",
       query: query,
       format: "json",

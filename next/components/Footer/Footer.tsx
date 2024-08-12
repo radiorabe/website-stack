@@ -43,23 +43,6 @@ async function getData() {
 }
 
 async function Footer(props) {
-  // const response = await Api.readItemsFooter(
-  //   { fields: ["links.*.*"] }
-  //   // { cache: "no-store" }
-  // );
-  // console.log("response", response);
-  // let links = [];
-  // if (response.status === 200) {
-  //   let data = response.data.data;
-  //   if (Array.isArray(data)) {
-  //     console.error("Response is Array");
-  //   } else {
-  //     let footerItem: ItemsFooter = data;
-  //     links = footerItem.links;
-  //   }
-  // }
-  // console.log("links", links);
-
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>

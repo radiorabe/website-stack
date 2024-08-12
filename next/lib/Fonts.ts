@@ -6,14 +6,18 @@ const widthFactor = 1;
 import localFont from "next/font/local";
 
 // import { GTUltraBold } from "../assets/Fonts/GTUltra-Bold";
-export const bold = localFont({ src: "../assets/Fonts/GTUltra-Bold.otf" });
-export const regular = localFont({
+export const FontBold = localFont({
+  src: "../assets/Fonts/GTUltra-Bold.otf",
+  variable: "--font-bold",
+});
+export const FontRegular = localFont({
   src: "../assets/Fonts/GTUltraFine-Regular.otf",
+  variable: "--font-regular",
 });
 
 const type = {
-  regular: regular.style.fontFamily,
-  bold: bold.style.fontFamily,
+  regular: FontRegular.style.fontFamily,
+  bold: FontBold.style.fontFamily,
 };
 
 const size: Record<string, number> = {

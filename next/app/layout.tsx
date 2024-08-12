@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
-import { regular } from "../lib/Fonts";
+import { FontBold, FontRegular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
 import Footer from "../components/Footer";
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AudioPlayerProvider>
-        <body className={regular.className}>
+        <body className={`${FontRegular.variable} ${FontBold.variable}`}>
           <div>
             <Header />
           </div>
