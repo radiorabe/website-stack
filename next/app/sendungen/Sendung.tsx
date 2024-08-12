@@ -13,7 +13,7 @@ const { ids, styles } = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "50%",
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     marginBottom: Metrics.doubleBaseMargin,
     // "@media (max-width: 1600px) and (min-width: 800px)": {
     //   backgroundColor: "red",
