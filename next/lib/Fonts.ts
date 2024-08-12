@@ -21,9 +21,9 @@ const type = {
 };
 
 const size: Record<string, number> = {
-  h1: Math.floor(58 * widthFactor),
-  h2: Math.floor(22 * widthFactor),
-  h3: Math.floor(29 * widthFactor),
+  h1: Math.floor(47 * widthFactor),
+  h2: Math.floor(29 * widthFactor),
+  h3: Math.floor(22 * widthFactor),
   h4: Math.floor(18 * widthFactor),
   text: Math.floor(18 * widthFactor),
   textSmall: Math.floor(12 * widthFactor),
@@ -35,14 +35,14 @@ export const style: Record<string, TextStyle> = {
   h1: {
     fontFamily: type.bold,
     fontSize: size.h1,
-    lineHeight: 1.2,
-    letterSpacing: 0,
+    // lineHeight: 1.2,
+    // letterSpacing: 0,
   },
   h2: {
     fontFamily: type.bold,
     fontSize: size.h2,
-    lineHeight: 1.4,
-    letterSpacing: 0,
+    // lineHeight: 1.4,
+    // letterSpacing: 0,
   },
 
   text: {

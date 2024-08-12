@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: process.env.IMAGES_PROTOCOL,
+        hostname: process.env.IMAGES_HOSTNAME,
+        port: process.env.IMAGES_PORT,
+        pathname: "/assets/**",
+      },
+    ],
+  },
   experimental: {
     turbo: {
       resolveAlias: {

@@ -93,7 +93,7 @@ function Header() {
   const router = useRouter();
   const { currentTrack } = useAudioPlayerContext();
 
-  console.log("pathname:", pathname);
+  // console.log("pathname:", pathname);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -102,12 +102,12 @@ function Header() {
 
   const onWaiting = () => {
     setIsWaiting(true);
-    console.log("onWaiting");
+    // console.log("onWaiting");
   };
   const onPlaying = () => {
     setIsWaiting(false);
 
-    console.log("onPlaying");
+    // console.log("onPlaying");
   };
 
   useEffect(() => {

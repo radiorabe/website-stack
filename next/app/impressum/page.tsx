@@ -37,10 +37,13 @@ export const metadata: Metadata = {
 
 export default async function ImpressumPage(props) {
   const response = await Api.readItemsImpressum(
-    {}
-    // { cache: "no-store" }
+    {},
+    {
+      next: { tags: ["collection"] },
+      //  cache: "no-store"
+    }
   );
-  console.log("response", response);
+  // console.log("response", response);
   let item: ItemsImpressum = response.data.data;
   const markup = { __html: purify.sanitize(item.impressum) };
 
