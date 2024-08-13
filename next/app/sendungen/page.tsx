@@ -45,18 +45,18 @@ async function getSendungsInfo() {
 
 async function getSendungen() {
   try {
-    const sendungenResponse = await Api.readItemsSendungen(
+    const sendungenResponse = await Api.readItemsPrograms(
       {
         filter: JSON.stringify({
           status: {
             _eq: "published",
           },
         }),
-        fields: ["image", "description", "name"],
+        fields: ["image", "description", "name", "slug"],
       },
       {
-        next: { tags: ["collection"] },
-        // cache: "no-store",
+        // next: { tags: ["collection"] },
+        cache: "no-store",
       }
     );
     // console.log("response", sendungenResponse);
@@ -101,6 +101,7 @@ export default async function SendungenPage(props) {
                 key={"keySendung-" + props.index}
                 name={item.name}
                 image={item.image}
+                slug={item.slug}
               ></Sendung>
             );
           })}

@@ -1,8 +1,9 @@
 "use client";
+import LinkComponent from "@/components/LinkComponent";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import Image from "next/image";
-import { Text, View } from "react-native";
+import { Text, Touchable, TouchableOpacity, View } from "react-native";
 import StyleSheet from "react-native-media-query";
 
 const { ids, styles } = StyleSheet.create({
@@ -30,19 +31,19 @@ const { ids, styles } = StyleSheet.create({
 
 export default async function Sendung(props) {
   return (
-    <View
-      key={"keySendung-" + props.index}
+    <LinkComponent
       style={styles.imageContainer}
       dataSet={{ media: ids.imageContainer }}
+      href={"/sendungen/" + props.slug}
     >
       <Image
-        src={`${process.env.PUBLIC_URL}/assets/${props.image}?width=166&height=166&fit=cover`}
+        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=166&height=166&fit=cover`}
         width={166}
         height={166}
         style={styles.image}
         alt={props.name}
       />
       <Text style={styles.title}>{props.name}</Text>
-    </View>
+    </LinkComponent>
   );
 }

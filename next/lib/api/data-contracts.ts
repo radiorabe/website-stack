@@ -44,6 +44,99 @@ export interface XMetadata {
   filter_count?: number;
 }
 
+export interface Files {
+  /**
+   * Unique identifier for the file.
+   * @example "8cbb43fe-4cdf-4991-8352-c461779cec02"
+   */
+  id?: string;
+  /**
+   * Where the file is stored. Either `local` for the local filesystem or the name of the storage adapter (for example `s3`).
+   * @example "local"
+   */
+  storage?: string;
+  /**
+   * Name of the file on disk. By default, Directus uses a random hash for the filename.
+   * @example "a88c3b72-ac58-5436-a4ec-b2858531333a.jpg"
+   */
+  filename_disk?: string;
+  /**
+   * How you want to the file to be named when it's being downloaded.
+   * @example "avatar.jpg"
+   */
+  filename_download?: string;
+  /**
+   * Title for the file. Is extracted from the filename on upload, but can be edited by the user.
+   * @example "User Avatar"
+   */
+  title?: string;
+  /**
+   * MIME type of the file.
+   * @example "image/jpeg"
+   */
+  type?: string;
+  /**
+   * Virtual folder where this file resides in.
+   * @example null
+   */
+  folder?: string | null;
+  /**
+   * Who uploaded the file.
+   * @example "63716273-0f29-4648-8a2a-2af2948f6f78"
+   */
+  uploaded_by?: string;
+  /**
+   * When the file was uploaded.
+   * @format date-time
+   * @example "2019-12-03T00:10:15+00:00"
+   */
+  uploaded_on?: string;
+  /** @format uuid */
+  modified_by?: string | null;
+  /** @format timestamp */
+  modified_on?: string;
+  /**
+   * Character set of the file.
+   * @example "binary"
+   */
+  charset?: string | null;
+  /**
+   * Size of the file in bytes.
+   * @example 137862
+   */
+  filesize?: number;
+  /**
+   * Width of the file in pixels. Only applies to images.
+   * @example 800
+   */
+  width?: number | null;
+  /**
+   * Height of the file in pixels. Only applies to images.
+   * @example 838
+   */
+  height?: number | null;
+  /**
+   * Duration of the file in seconds. Only applies to audio and video.
+   * @example 0
+   */
+  duration?: number | null;
+  /**
+   * Where the file was embedded from.
+   * @example null
+   */
+  embed?: string | null;
+  /** Description for the file. */
+  description?: string | null;
+  /** Where the file was created. Is automatically populated based on Exif data for images. */
+  location?: string | null;
+  /** Tags for the file. Is automatically populated based on Exif data for images. */
+  tags?: string[] | null;
+  /** IPTC, Exif, and ICC metadata extracted from file */
+  metadata?: object | null;
+  focal_point_x?: number | null;
+  focal_point_y?: number | null;
+}
+
 export interface ItemsImpressum {
   id?: number;
   /** @format uuid */
@@ -69,6 +162,13 @@ export interface ItemsTextLinks {
   id?: number;
   visibleText?: string | null;
   url?: string | null;
+}
+
+export interface ItemsProgramsDirectusUsers {
+  id?: number;
+  programs_slug?: string | ItemsPrograms | null;
+  /** @format uuid */
+  directus_users_id?: string | null;
 }
 
 export interface ItemsSendungenInfo {
@@ -99,8 +199,26 @@ export interface ItemsSendungen {
   date_updated?: string | null;
   name?: string | null;
   description?: string | null;
+  image?: string | Files | null;
+}
+
+export interface ItemsPrograms {
+  /** Dies wird gebraucht für die URL der Sendung: www.rabe.ch/sendungen/slug Am besten der Name der Sendung eintragen. */
+  slug?: string;
+  status?: string;
+  sort?: number | null;
   /** @format uuid */
-  image?: string | null;
+  user_created?: string | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  /** @format uuid */
+  user_updated?: string | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  name?: string | null;
+  description?: string | null;
+  image?: string | Files | null;
+  team?: (number | ItemsProgramsDirectusUsers)[] | null;
 }
 
 export interface GetAssetParams {
@@ -241,6 +359,44 @@ export interface ServerInfoData {
  */
 export type PingData = string;
 
+export interface GetFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+  /** What metadata to return in the response. */
+  meta?: string;
+}
+
+export interface GetFilesData {
+  data?: Files[];
+  meta?: XMetadata;
+}
+
+export interface GetFileParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /**
+   * Unique identifier for the object.
+   * @example "8cbb43fe-4cdf-4991-8352-c461779cec02"
+   */
+  id: string;
+}
+
+export interface GetFileData {
+  data?: Files;
+}
+
 export interface ReadItemsImpressumParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -352,6 +508,43 @@ export interface ReadSingleItemsTextLinksData {
   data?: ItemsTextLinks;
 }
 
+export interface ReadItemsProgramsDirectusUsersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsProgramsDirectusUsersData {
+  data?: ItemsProgramsDirectusUsers[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsProgramsDirectusUsersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsProgramsDirectusUsersData {
+  data?: ItemsProgramsDirectusUsers;
+}
+
 export interface ReadItemsSendungenInfoParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -424,4 +617,41 @@ export interface ReadSingleItemsSendungenParams {
 
 export interface ReadSingleItemsSendungenData {
   data?: ItemsSendungen;
+}
+
+export interface ReadItemsProgramsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsProgramsData {
+  data?: ItemsPrograms[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsProgramsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsProgramsData {
+  data?: ItemsPrograms;
 }

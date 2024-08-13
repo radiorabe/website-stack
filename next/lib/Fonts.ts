@@ -52,6 +52,13 @@ export const style: Record<string, TextStyle> = {
     letterSpacing: 0,
   },
 
+  textLink: {
+    fontFamily: type.bold,
+    fontSize: size.medium,
+    lineHeight: 20,
+    letterSpacing: 0,
+  },
+
   textSmall: {
     fontFamily: type.regular,
     fontSize: size.small,
