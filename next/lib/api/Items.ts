@@ -10,281 +10,34 @@
  */
 
 import {
-  ReadItemsHomeData,
-  ReadItemsHomeParams,
-  ReadItemsImpressumData,
-  ReadItemsImpressumParams,
+  ReadItemsPageImpressumData,
+  ReadItemsPageImpressumParams,
+  ReadItemsPageProgramsData,
+  ReadItemsPageProgramsParams,
+  ReadItemsPostsData,
+  ReadItemsPostsDirectusUsers1Data,
+  ReadItemsPostsDirectusUsers1Params,
+  ReadItemsPostsParams,
   ReadItemsProgramsData,
   ReadItemsProgramsDirectusUsersData,
   ReadItemsProgramsDirectusUsersParams,
   ReadItemsProgramsParams,
-  ReadItemsSendungenData,
-  ReadItemsSendungenInfoData,
-  ReadItemsSendungenInfoParams,
-  ReadItemsSendungenParams,
-  ReadItemsTextLinksData,
-  ReadItemsTextLinksParams,
-  ReadSingleItemsHomeData,
-  ReadSingleItemsHomeParams,
-  ReadSingleItemsImpressumData,
-  ReadSingleItemsImpressumParams,
+  ReadSingleItemsPageImpressumData,
+  ReadSingleItemsPageImpressumParams,
+  ReadSingleItemsPageProgramsData,
+  ReadSingleItemsPageProgramsParams,
+  ReadSingleItemsPostsData,
+  ReadSingleItemsPostsDirectusUsers1Data,
+  ReadSingleItemsPostsDirectusUsers1Params,
+  ReadSingleItemsPostsParams,
   ReadSingleItemsProgramsData,
   ReadSingleItemsProgramsDirectusUsersData,
   ReadSingleItemsProgramsDirectusUsersParams,
   ReadSingleItemsProgramsParams,
-  ReadSingleItemsSendungenData,
-  ReadSingleItemsSendungenInfoData,
-  ReadSingleItemsSendungenInfoParams,
-  ReadSingleItemsSendungenParams,
-  ReadSingleItemsTextLinksData,
-  ReadSingleItemsTextLinksParams,
 } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
 export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
-  /**
- * @description List the Impressum items.
- *
- * @tags Items, ItemsImpressum
- * @name ReadItemsImpressum
- * @summary List Items
- * @request GET:/items/Impressum
- * @secure
- * @response `200` `ReadItemsImpressumData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsImpressum = (query: ReadItemsImpressumParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsImpressumData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Impressum`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single Impressum item by unique identifier.
- *
- * @tags Items, ItemsImpressum
- * @name ReadSingleItemsImpressum
- * @summary Retrieve an Item
- * @request GET:/items/Impressum/{id}
- * @response `200` `ReadSingleItemsImpressumData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsImpressum = ({ id, ...query }: ReadSingleItemsImpressumParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsImpressumData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Impressum/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the Home items.
- *
- * @tags Items, ItemsHome
- * @name ReadItemsHome
- * @summary List Items
- * @request GET:/items/Home
- * @secure
- * @response `200` `ReadItemsHomeData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsHome = (query: ReadItemsHomeParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsHomeData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Home`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single Home item by unique identifier.
- *
- * @tags Items, ItemsHome
- * @name ReadSingleItemsHome
- * @summary Retrieve an Item
- * @request GET:/items/Home/{id}
- * @response `200` `ReadSingleItemsHomeData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsHome = ({ id, ...query }: ReadSingleItemsHomeParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsHomeData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Home/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the textLinks items.
- *
- * @tags Items, ItemsTextLinks
- * @name ReadItemsTextLinks
- * @summary List Items
- * @request GET:/items/textLinks
- * @secure
- * @response `200` `ReadItemsTextLinksData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsTextLinks = (query: ReadItemsTextLinksParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsTextLinksData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/textLinks`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single textLinks item by unique identifier.
- *
- * @tags Items, ItemsTextLinks
- * @name ReadSingleItemsTextLinks
- * @summary Retrieve an Item
- * @request GET:/items/textLinks/{id}
- * @response `200` `ReadSingleItemsTextLinksData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsTextLinks = ({ id, ...query }: ReadSingleItemsTextLinksParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsTextLinksData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/textLinks/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
   /**
  * @description List the programs_directus_users items.
  *
@@ -370,168 +123,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the SendungenInfo items.
- *
- * @tags Items, ItemsSendungenInfo
- * @name ReadItemsSendungenInfo
- * @summary List Items
- * @request GET:/items/SendungenInfo
- * @secure
- * @response `200` `ReadItemsSendungenInfoData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsSendungenInfo = (query: ReadItemsSendungenInfoParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsSendungenInfoData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/SendungenInfo`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single SendungenInfo item by unique identifier.
- *
- * @tags Items, ItemsSendungenInfo
- * @name ReadSingleItemsSendungenInfo
- * @summary Retrieve an Item
- * @request GET:/items/SendungenInfo/{id}
- * @response `200` `ReadSingleItemsSendungenInfoData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsSendungenInfo = ({ id, ...query }: ReadSingleItemsSendungenInfoParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsSendungenInfoData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/SendungenInfo/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the Sendungen items.
- *
- * @tags Items, ItemsSendungen
- * @name ReadItemsSendungen
- * @summary List Items
- * @request GET:/items/Sendungen
- * @secure
- * @response `200` `ReadItemsSendungenData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsSendungen = (query: ReadItemsSendungenParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsSendungenData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Sendungen`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single Sendungen item by unique identifier.
- *
- * @tags Items, ItemsSendungen
- * @name ReadSingleItemsSendungen
- * @summary Retrieve an Item
- * @request GET:/items/Sendungen/{id}
- * @response `200` `ReadSingleItemsSendungenData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsSendungen = ({ id, ...query }: ReadSingleItemsSendungenParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsSendungenData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/Sendungen/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
  * @description List the programs items.
  *
  * @tags Items, ItemsPrograms
@@ -607,6 +198,333 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/programs/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the posts_directus_users_1 items.
+ *
+ * @tags Items, ItemsPostsDirectusUsers1
+ * @name ReadItemsPostsDirectusUsers1
+ * @summary List Items
+ * @request GET:/items/posts_directus_users_1
+ * @secure
+ * @response `200` `ReadItemsPostsDirectusUsers1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPostsDirectusUsers1 = (query: ReadItemsPostsDirectusUsers1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostsDirectusUsers1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts_directus_users_1`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single posts_directus_users_1 item by unique identifier.
+ *
+ * @tags Items, ItemsPostsDirectusUsers1
+ * @name ReadSingleItemsPostsDirectusUsers1
+ * @summary Retrieve an Item
+ * @request GET:/items/posts_directus_users_1/{id}
+ * @response `200` `ReadSingleItemsPostsDirectusUsers1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPostsDirectusUsers1 = (
+    { id, ...query }: ReadSingleItemsPostsDirectusUsers1Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPostsDirectusUsers1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts_directus_users_1/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the posts items.
+ *
+ * @tags Items, ItemsPosts
+ * @name ReadItemsPosts
+ * @summary List Items
+ * @request GET:/items/posts
+ * @secure
+ * @response `200` `ReadItemsPostsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPosts = (query: ReadItemsPostsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single posts item by unique identifier.
+ *
+ * @tags Items, ItemsPosts
+ * @name ReadSingleItemsPosts
+ * @summary Retrieve an Item
+ * @request GET:/items/posts/{id}
+ * @response `200` `ReadSingleItemsPostsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPosts = ({ id, ...query }: ReadSingleItemsPostsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPostsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_programs items.
+ *
+ * @tags Items, ItemsPagePrograms
+ * @name ReadItemsPagePrograms
+ * @summary List Items
+ * @request GET:/items/page_programs
+ * @secure
+ * @response `200` `ReadItemsPageProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPagePrograms = (query: ReadItemsPageProgramsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_programs`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_programs item by unique identifier.
+ *
+ * @tags Items, ItemsPagePrograms
+ * @name ReadSingleItemsPagePrograms
+ * @summary Retrieve an Item
+ * @request GET:/items/page_programs/{id}
+ * @response `200` `ReadSingleItemsPageProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPagePrograms = ({ id, ...query }: ReadSingleItemsPageProgramsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_programs/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_impressum items.
+ *
+ * @tags Items, ItemsPageImpressum
+ * @name ReadItemsPageImpressum
+ * @summary List Items
+ * @request GET:/items/page_impressum
+ * @secure
+ * @response `200` `ReadItemsPageImpressumData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageImpressum = (query: ReadItemsPageImpressumParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageImpressumData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_impressum`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_impressum item by unique identifier.
+ *
+ * @tags Items, ItemsPageImpressum
+ * @name ReadSingleItemsPageImpressum
+ * @summary Retrieve an Item
+ * @request GET:/items/page_impressum/{id}
+ * @response `200` `ReadSingleItemsPageImpressumData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageImpressum = ({ id, ...query }: ReadSingleItemsPageImpressumParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageImpressumData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_impressum/${id}`,
       method: "GET",
       query: query,
       format: "json",

@@ -2,7 +2,7 @@ import Fonts, { style } from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Api } from "@/lib/api";
 import { Text, View } from "react-native";
-import { ItemsSendungenInfo } from "../../lib/api/data-contracts";
+import { ItemsPagePrograms } from "../../lib/api/data-contracts";
 import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import Sendung from "./Sendung";
@@ -28,17 +28,21 @@ const { ids, styles } = StyleSheet.create({
 
 async function getSendungsInfo() {
   try {
-    const infoResponse = await Api.readItemsSendungenInfo(
+    const infoResponse = await Api.readItemsPagePrograms(
       {},
       {
-        next: { tags: ["collection"] },
-        //  cache: "no-store"
+        // next: { tags: ["collection"] },
+        cache: "no-store",
       }
     );
     // console.log("response", infoResponse);
-    let sendungsInfo: ItemsSendungenInfo = infoResponse.data.data;
-    return sendungsInfo;
+    let item: ItemsPagePrograms = infoResponse.data.data;
+
+    // console.log("sendungenInfo", item);
+
+    return item;
   } catch (error) {
+    console.error("error", error.error);
     notFound();
   }
 }
@@ -52,7 +56,6 @@ async function getSendungen() {
             _eq: "published",
           },
         }),
-        fields: ["image", "description", "name", "slug"],
       },
       {
         // next: { tags: ["collection"] },
@@ -64,7 +67,7 @@ async function getSendungen() {
     // console.log("sendungen", sendungen);
     return sendungen;
   } catch (error) {
-    console.log(error);
+    console.error("error", error.error);
     notFound();
   }
 }

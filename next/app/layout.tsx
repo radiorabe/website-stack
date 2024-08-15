@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { FontBold, FontRegular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
 import Footer from "../components/Footer";
+require("moment/locale/de.js");
 
 export const metadata: Metadata = {
   title: "Radio Bern - Das Berner Kulturradio",

@@ -11,8 +11,6 @@ const metrics = {
   tripleBaseMargin: baseMargin * 3,
   quadBaseMargin: baseMargin * 4,
   gridSpacing,
-  // screenWidth: width,
-  // screenHeight: height,
 };
 
 export default metrics;

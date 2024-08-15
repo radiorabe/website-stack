@@ -34,7 +34,7 @@ export default async function Sendung(props) {
     <LinkComponent
       style={styles.imageContainer}
       dataSet={{ media: ids.imageContainer }}
-      href={"/sendungen/" + props.slug}
+      href={"/" + props.slug}
     >
       <Image
         src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=166&height=166&fit=cover`}

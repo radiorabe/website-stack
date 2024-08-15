@@ -1,5 +1,9 @@
 import { Api } from "@/lib/api";
-import { ItemsPrograms, ItemsSendungen } from "@/lib/api/data-contracts";
+import {
+  ItemsPosts,
+  ItemsPrograms,
+  ItemsSendungen,
+} from "@/lib/api/data-contracts";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
@@ -9,6 +13,8 @@ import { View, Text } from "react-native";
 import Colors from "@/lib/Colors";
 import HoverUrl from "@/components/HoverUrl";
 import IconShare from "./IconShare";
+import LinkComponent from "@/components/LinkComponent";
+import Link from "next/link";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -41,7 +47,19 @@ async function getSendung(slug) {
   try {
     const itemResponse = await Api.readSingleItemsPrograms(
       // { id: slug, fields: ["*", "team.*", "team.*.directus_users_id.*"] },
-      { id: slug, fields: ["*", "team.directus_users_id.*"] },
+      {
+        id: slug,
+        fields: [
+          "*",
+          "team.directus_users_id.avatar",
+          "team.directus_users_id.last_name",
+          "team.directus_users_id.first_name",
+          "team.directus_users_id.email",
+          // "posts.*",
+          // "posts.program.name",
+        ],
+        // sort:"date_created.deep[articles][_sort]=-articles_id.date_created"
+      },
       // { id: slug, fields: ["*,team.directus_users_id.*"] },
       {
         // next: { tags: ["collection"] },
@@ -50,17 +68,54 @@ async function getSendung(slug) {
     );
     // console.log("response", itemResponse);
     let item: ItemsPrograms = itemResponse.data.data;
-    console.log("item", item);
-    console.log("team", item.team);
+    // console.log("item", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
 
     return item;
   } catch (error) {
+    console.error("error", error.error);
+
+    notFound();
+  }
+}
+
+async function getPosts(slug) {
+  try {
+    const itemResponse = await Api.readItemsPosts(
+      {
+        fields: ["*"],
+        filter: JSON.stringify({
+          program: {
+            _eq: slug,
+          },
+        }),
+        sort: "-date",
+        limit: 3,
+      },
+      {
+        // next: { tags: ["collection"] },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPosts = itemResponse.data.data;
+    console.log("posts", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
+
+    return item;
+  } catch (error) {
+    console.error("error", error.error);
+
     notFound();
   }
 }
 
 export default async function DynamicPage({ params }) {
   const sendung = await getSendung(params.slug);
+  const posts = await getPosts(params.slug);
+  console.log("posts", posts);
   return (
     <View>
       <View style={styles.container}>
@@ -133,6 +188,7 @@ export default async function DynamicPage({ params }) {
                     >
                       {user.email}
                     </HoverUrl>
+
                     {/* <Text style={{}}>{user.email}</Text> */}
                   </View>
                 </View>
@@ -184,6 +240,48 @@ export default async function DynamicPage({ params }) {
             >
               {"Teilen"}
             </Text>
+          </View>
+          <View
+            style={{
+              height: Metrics.tripleBaseMargin,
+            }}
+          ></View>
+          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            {posts.map((item, index) => {
+              return (
+                <Link
+                  href={`${item.date}/${item.slug}`}
+                  key={"team-" + index}
+                  style={{
+                    maxWidth: 360,
+                    width: "30%",
+                    height: 450,
+                    marginRight: Metrics.doubleBaseMargin,
+                    backgroundColor: "yellow",
+                    marginBottom: Metrics.doubleBaseMargin,
+                  }}
+                >
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.image}?width=360&height=240&fit=cover`}
+                    width={360}
+                    height={240}
+                    style={styles.avatar}
+                    layout="responsive"
+                    alt={sendung.name}
+                  />
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      paddingLeft: Metrics.doubleBaseMargin,
+                    }}
+                  >
+                    <Text style={{ ...Fonts.style.text }}>{item.title}</Text>
+
+                    {/* <Text style={{}}>{user.email}</Text> */}
+                  </View>
+                </Link>
+              );
+            })}
           </View>
         </View>
       </View>
