@@ -1,5 +1,4 @@
 import { defineHook } from "@directus/extensions-sdk";
-import { InvalidPayloadError } from "@directus/errors";
 import { FailedValidationError } from "@directus/validation";
 
 const audioTypes = [
@@ -19,11 +18,11 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
 
   // filter("items.create", async (input, { collection }) => {
   const filterHandler = async (payload) => {
-    console.log("payload", payload);
+    // console.log("payload", payload);
 
     if (payload.audio) {
       const file = await filesService.readOne(payload.audio);
-      console.log("file", file);
+      // console.log("file", file);
 
       if (!audioTypes.includes(file.type)) {
         if (file.folder === "830d2c33-95c3-4b2e-b677-a0b1e1cfee5a") {
@@ -33,14 +32,8 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
           field: "audio",
           type: "eq",
           valid: audioTypes,
-          // invalid?: number | string | (number | string)[];
           substring: "one of these types: [" + audioTypes.join(", ") + "]",
         });
-        // throw new InvalidPayloadError({
-        //   reason:
-        //     "This file is not a supported audio file type. Please use one of these: " +
-        //     audioTypes.join(", "),
-        // });
       }
     }
   };
