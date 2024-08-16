@@ -16,6 +16,7 @@ import IconShare from "../IconShare";
 import LinkComponent from "@/components/LinkComponent";
 import HoverText from "@/components/HoverText";
 import moment from "moment";
+import RenderTipTap from "@/components/RenderTipTap";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -40,13 +41,6 @@ const { ids, styles } = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 6,
   },
-  imageOverlayContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-  },
   title: {
     ...Fonts.style.h1,
     color: "white",
@@ -65,6 +59,7 @@ async function getPost(slug) {
         fields: [
           "*",
           "program.name",
+          "program.slug",
           "authors.directus_users_id.first_name",
           "authors.directus_users_id.last_name",
         ],
@@ -130,6 +125,13 @@ export default async function DynamicPage({ params }) {
     }
     authorsLink += ` ${item.directus_users_id.first_name} ${item.directus_users_id.last_name}`;
   });
+  const content = post.text.content;
+  console.log("content", JSON.stringify(content));
+  // console.log("text", content.text.content[0].content);
+
+  // let item: ItemsPageImpressum = response.data.data;
+  // const html = { __html: purify.sanitize(item.html) };
+
   return (
     <View>
       <View style={styles.container}>
@@ -142,7 +144,7 @@ export default async function DynamicPage({ params }) {
             }}
           >
             <HoverText
-              href={"/beiträge"}
+              href={"/" + post.program.slug}
               style={[styles.sendungsInfo, styles.border]}
               hoverStyle={{
                 color: Colors.green,
@@ -185,9 +187,32 @@ export default async function DynamicPage({ params }) {
               layout="responsive"
               alt={post.title}
             />
-            <Text style={[styles.sendungsInfo]}>{post.imageTitle}</Text>
-            <Text style={[styles.sendungsInfo]}>{post.imageText}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingHorizontal: Metrics.tripleBaseMargin,
+                paddingVertical: Metrics.doubleBaseMargin,
+              }}
+            >
+              <Text
+                style={{
+                  ...Fonts.style.textSmall,
+                  fontFamily: Fonts.type.bold,
+                }}
+              >
+                {"Foto: " + post.imageTitle}
+              </Text>
+              <Text style={{ ...Fonts.style.textSmall }}> </Text>
+              <Text style={{ ...Fonts.style.textSmall }}>{post.imageText}</Text>
+            </View>
           </View>
+
+          <View>
+            {/* <div className={`${FontRegular.variable} ${FontBold.variable}`}>
+              <div className={markdown} dangerouslySetInnerHTML={html}></div>
+            </div> */}
+          </View>
+          <RenderTipTap content={post.text}></RenderTipTap>
 
           <View
             style={{ width: "75%", paddingVertical: Metrics.tripleBaseMargin }}

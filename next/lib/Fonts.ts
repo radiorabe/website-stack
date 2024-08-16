@@ -44,6 +44,23 @@ export const style: Record<string, TextStyle> = {
     // lineHeight: 1.4,
     // letterSpacing: 0,
   },
+  h3: {
+    fontFamily: type.bold,
+    fontSize: size.h3,
+    // lineHeight: 1.4,
+    // letterSpacing: 0,
+  },
+  h4: {
+    fontFamily: type.bold,
+    fontSize: size.h4,
+    // lineHeight: 1.4,
+    // letterSpacing: 0,
+  },
+  quote: {
+    fontFamily: type.bold,
+    fontSize: size.h2,
+    lineHeight: 35,
+  },
 
   text: {
     fontFamily: type.regular,
@@ -51,8 +68,21 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 20,
     letterSpacing: 0,
   },
+  TTtext: {
+    fontFamily: type.regular,
+    fontSize: size.medium,
+    lineHeight: 1.4,
+    // letterSpacing: 0,
+  },
 
   textLink: {
+    fontFamily: type.bold,
+    fontSize: size.medium,
+    lineHeight: 20,
+    letterSpacing: 0,
+  },
+
+  TTtextLink: {
     fontFamily: type.bold,
     fontSize: size.medium,
     lineHeight: 20,
@@ -65,6 +95,14 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 14,
     letterSpacing: size.letterSpacing,
   },
+
+  TTtextSmall: {
+    fontFamily: type.regular,
+    fontSize: size.small,
+    lineHeight: 1.4,
+    letterSpacing: size.letterSpacing,
+  },
+
   button: {
     fontFamily: type.regular,
     fontSize: size.small,

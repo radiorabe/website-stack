@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+// import "normalize.css/normalize.css";
 import Header from "../components/Header";
 import { FontBold, FontRegular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";

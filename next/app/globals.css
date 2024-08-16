@@ -1,3 +1,10 @@
+/* @import-normalize; */
+ h4 > span, h3 > span, h2 > span, h1 > span { 
+  font-family: inherit !important; 
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: inherit !important;
+} /*  Fix for tiptap renderer of child nodes */
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
