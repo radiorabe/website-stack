@@ -26,6 +26,9 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
       console.log("file", file);
 
       if (!audioTypes.includes(file.type)) {
+        if (file.folder === "830d2c33-95c3-4b2e-b677-a0b1e1cfee5a") {
+          await filesService.deleteOne(payload.audio);
+        }
         throw new FailedValidationError({
           field: "audio",
           type: "eq",
