@@ -15,6 +15,9 @@ import HoverUrl from "@/components/HoverUrl";
 import IconShare from "../../assets/svg/IconShare";
 import LinkComponent from "@/components/LinkComponent";
 import Link from "next/link";
+import HoverText from "@/components/HoverText";
+import PostPreview from "@/components/PostPreview";
+import ButtonFull from "@/components/ButtonFull";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -246,40 +249,23 @@ export default async function DynamicPage({ params }) {
               height: Metrics.tripleBaseMargin,
             }}
           ></View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text
+              style={[
+                { ...Fonts.style.h2, marginBottom: Metrics.doubleBaseMargin },
+              ]}
+            >
+              {"Das könnte dir auch gefallen"}
+            </Text>
+
+            <ButtonFull href={"/beiträge"} label={"Alle Beiträge"} />
+          </View>
           <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
             {posts.map((item, index) => {
               return (
-                <Link
-                  href={`${item.date}/${item.slug}`}
-                  key={"team-" + index}
-                  style={{
-                    maxWidth: 360,
-                    width: "30%",
-                    height: 450,
-                    marginRight: Metrics.doubleBaseMargin,
-                    backgroundColor: "yellow",
-                    marginBottom: Metrics.doubleBaseMargin,
-                  }}
-                >
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.image}?width=360&height=240&fit=cover`}
-                    width={360}
-                    height={240}
-                    style={styles.avatar}
-                    layout="responsive"
-                    alt={sendung.name}
-                  />
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      paddingLeft: Metrics.doubleBaseMargin,
-                    }}
-                  >
-                    <Text style={{ ...Fonts.style.text }}>{item.title}</Text>
-
-                    {/* <Text style={{}}>{user.email}</Text> */}
-                  </View>
-                </Link>
+                <PostPreview key={"post" + index} data={item}></PostPreview>
               );
             })}
           </View>

@@ -1,22 +1,11 @@
 "use client";
-import IconShare from "@/assets/svg/IconShare";
 import Pausebutton from "@/assets/svg/Pausebutton";
 import Playbutton from "@/assets/svg/Playbutton";
 import { useAudioPlayerContext } from "@/context/audio-player-context";
 import Colors from "@/lib/Colors";
-import Fonts from "@/lib/Fonts";
-import metrics from "@/lib/Metrics";
-import Link from "next/link";
-import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import React, {
-  ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { Text, Pressable, TextStyle, View, Linking } from "react-native";
+import { ReactElement } from "react";
+import { Pressable, View } from "react-native";
 import Loader from "react-spinners/BounceLoader";
 
 export type PressableState = Readonly<{
@@ -27,7 +16,7 @@ export type PressableState = Readonly<{
 
 export interface HoverableProps {}
 
-const AudioFilePlayer = ({}: HoverableProps) => {
+const AudioRabePlayer = ({}: HoverableProps) => {
   let track = {
     title: "Rabe Stream",
     src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
@@ -165,4 +154,4 @@ const AudioFilePlayer = ({}: HoverableProps) => {
   );
 };
 
-export default AudioFilePlayer;
+export default AudioRabePlayer;

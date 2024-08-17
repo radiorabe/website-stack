@@ -13,30 +13,35 @@ export type PressableState = Readonly<{
 }>;
 
 export interface HoverableProps {
-  url: string;
+  url?: string;
+  href?: string;
   label: string;
   icon?: any;
 }
 
-const Button = ({ url, label, icon }: HoverableProps) => {
-  return (
-    <Pressable style={{}} onPress={() => Linking.openURL(url)}>
+const ButtonFull = ({ url, label, icon, href }: HoverableProps) => {
+  const button = (
+    <Pressable
+      style={{}}
+      onPress={() => {
+        if (!href && url) Linking.openURL(url);
+      }}
+    >
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
           <View
             style={[
               {
-                borderColor: Colors.black,
                 borderRadius: 9,
-                borderWidth: 1,
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
                 paddingVertical: 3,
                 paddingHorizontal: 6,
+                backgroundColor: Colors.darkGreen,
               },
               hovered && {
-                borderColor: Colors.green,
+                backgroundColor: Colors.green,
               },
             ]}
           >
@@ -46,10 +51,7 @@ const Button = ({ url, label, icon }: HoverableProps) => {
                 {
                   ...Fonts.style.textLink,
                   flexShrink: 1,
-                },
-                hovered && {
-                  color: Colors.green,
-                  borderColor: Colors.green,
+                  color: Colors.white,
                 },
                 icon && { paddingLeft: 6 },
               ]}
@@ -61,6 +63,16 @@ const Button = ({ url, label, icon }: HoverableProps) => {
       }}
     </Pressable>
   );
+
+  if (href) {
+    return (
+      <Link href={href} style={{ textDecoration: "none" }}>
+        {button}
+      </Link>
+    );
+  }
+
+  return button;
 };
 
-export default Button;
+export default ButtonFull;
