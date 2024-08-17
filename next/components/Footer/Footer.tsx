@@ -16,7 +16,7 @@ const { ids, styles } = StyleSheet.create({
   },
   innerContainer: {
     width: "100%",
-    maxWidth: 1920,
+    maxWidth: 1280,
     minHeight: 250,
     justifyContent: "space-around",
   },

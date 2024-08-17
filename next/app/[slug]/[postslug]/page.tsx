@@ -24,7 +24,7 @@ import AudioFilePlayer from "@/components/AudioFilePlayer";
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1920,
+    maxWidth: 1280,
     width: "100%",
     alignItems: "center",
     alignSelf: "center",

@@ -45,7 +45,7 @@ const PostPreview = ({ data }: HoverableProps) => {
         maxWidth: 360,
         width: "30%",
         maxHeight: 450,
-        marginRight: Metrics.doubleBaseMargin,
+        // marginRight: Metrics.doubleBaseMargin,
         marginBottom: Metrics.doubleBaseMargin,
         paddingBottom: 10,
         textDecoration: "none",

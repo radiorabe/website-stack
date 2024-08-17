@@ -32,7 +32,7 @@ const { ids, styles } = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
     width: "100%",
-    maxWidth: 1920,
+    maxWidth: 1280,
     justifyContent: "space-between",
     // paddingHorizontal: Metrics.baseMargin,
   },

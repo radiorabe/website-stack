@@ -9,7 +9,7 @@ import Sendung from "./Sendung";
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1920,
+    maxWidth: 1280,
     alignItems: "center",
     alignSelf: "center",
     paddingVertical: Metrics.tripleBaseMargin,

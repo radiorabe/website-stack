@@ -21,7 +21,7 @@ import ButtonFull from "@/components/ButtonFull";
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1920,
+    maxWidth: 1280,
     alignItems: "center",
     alignSelf: "center",
   },
@@ -118,14 +118,13 @@ async function getPosts(slug) {
 export default async function DynamicPage({ params }) {
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
-  console.log("posts", posts);
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${sendung.image}?width=1920&height=600&fit=cover`}
-            width={1920}
+            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${sendung.image}?width=1280&height=600&fit=cover`}
+            width={1280}
             height={600}
             style={styles.image}
             layout="responsive"
@@ -260,9 +259,15 @@ export default async function DynamicPage({ params }) {
               {"Das könnte dir auch gefallen"}
             </Text>
 
-            <ButtonFull href={"/beiträge"} label={"Alle Beiträge"} />
+            <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
           </View>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
             {posts.map((item, index) => {
               return (
                 <PostPreview key={"post" + index} data={item}></PostPreview>
