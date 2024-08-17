@@ -75,9 +75,7 @@ async function getPost(slug) {
       }
     );
     let item: ItemsPosts = itemResponse.data.data;
-    console.log("item", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
+    // console.log("post", item);
 
     return item;
   } catch (error) {
@@ -107,10 +105,7 @@ async function getRelatedPosts(slug) {
     );
     // console.log("response", itemResponse);
     let item: ItemsPosts = itemResponse.data.data;
-    console.log("posts", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
-
+    // console.log("posts", item);
     return item;
   } catch (error) {
     console.error("error", error.error);
