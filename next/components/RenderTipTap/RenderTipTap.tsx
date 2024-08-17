@@ -86,17 +86,38 @@ const Heading = (props: {
   level: 1 | 2 | 3 | 4;
   children: React.ReactNode;
 }) => {
-  console.log("HEADING", props.children[0]);
-  console.log("HEADINGLEVEL", props.level);
   switch (props.level.toString()) {
     case "1":
-      return <h1>{props.children}</h1>;
+      return (
+        <h1
+          style={{
+            ...Fonts.style.h1,
+          }}
+        >
+          {props.children}
+        </h1>
+      );
     case "2":
-      return <h2>{props.children}</h2>;
+      return (
+        <h2
+          style={{
+            ...Fonts.style.h2,
+          }}
+        >
+          {props.children}
+        </h2>
+      );
     case "3":
-      return <h3>{props.children}</h3>;
+      return (
+        <h3
+          style={{
+            ...Fonts.style.h3,
+          }}
+        >
+          {props.children}
+        </h3>
+      );
     case "4":
-      console.log("switch 4");
       return (
         <h4
           style={{

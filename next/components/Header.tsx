@@ -91,37 +91,85 @@ const { ids, styles } = StyleSheet.create({
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const { currentTrack } = useAudioPlayerContext();
 
-  // console.log("pathname:", pathname);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isWaiting, setIsWaiting] = useState(false);
-
-  const { audioRef } = useAudioPlayerContext();
+  let track = {
+    title: "Rabe Stream",
+    src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
+    // src: "http://localhost:1337/assets/5d4ac6ec-fbb7-4b71-aa5c-7c61e4fa9618",
+    author: "Trinix ft Rushawn",
+  };
+  const {
+    currentTrack,
+    setCurrentTrack,
+    playerState,
+    setPlayerState,
+    setDuration,
+    duration,
+    setTimeProgress,
+    progressBarRef,
+    audioRef,
+  } = useAudioPlayerContext();
+  // console.log("playerState header", playerState);
 
   const onWaiting = () => {
-    setIsWaiting(true);
-    // console.log("onWaiting");
+    console.log("onWaiting");
+    setPlayerState("waiting");
   };
   const onPlaying = () => {
-    setIsWaiting(false);
-
-    // console.log("onPlaying");
+    console.log("onPlaying");
+    setPlayerState("playing");
   };
 
-  useEffect(() => {
-    if (isPlaying) {
-      audioRef.current?.play();
-    } else {
-      audioRef.current?.pause();
+  const onPause = () => {
+    console.log("onPlaying");
+    setPlayerState("paused");
+  };
+  const onCanplay = () => {
+    console.log("onCanplay");
+    audioRef.current?.play();
+    setPlayerState("canplay");
+  };
+
+  const onLoadStart = () => {
+    console.log("onLoadStart");
+    setPlayerState("loading");
+  };
+
+  const onLoad = () => {
+    console.log("onLoad");
+  };
+
+  const onAbort = () => {
+    console.log("onAbort");
+    setPlayerState("aborted");
+  };
+
+  const onTimeUpdate = () => {
+    console.log("onTimeUpdate");
+    setTimeProgress(audioRef.current.currentTime);
+  };
+
+  const onLoadedMetadata = () => {
+    console.log(audioRef.current?.duration);
+    const seconds = audioRef.current?.duration;
+    if (seconds !== undefined) {
+      setDuration(seconds);
+      if (progressBarRef.current) {
+        progressBarRef.current.max = seconds.toString();
+      }
     }
-  }, [isPlaying, audioRef]);
+  };
+
+  let thisTrackLoading =
+    track.src === currentTrack.src && playerState === "loading";
+  let thisTrackPlaying =
+    track.src === currentTrack.src && playerState === "playing";
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         {/* <View> */}
-        <Pressable style={{}} onPress={() => setIsPlaying(false)}>
+        <Pressable style={{}}>
           {({ pressed, hovered }: PressableState): ReactElement => {
             return (
               <LinkComponent
@@ -188,17 +236,31 @@ function Header() {
               marginLeft: Metrics.baseMargin,
             }}
           >
-            {/* <TouchableOpacity onPress={() => setIsPlaying(!isPlaying)}> */}
             <View>
               <audio
-                src={currentTrack.src}
+                // key={currentTrack.src}
+                // src={currentTrack.src}
                 ref={audioRef}
                 onWaiting={onWaiting}
                 onPlaying={onPlaying}
-              />
+                onPause={onPause}
+                onAbort={onAbort}
+                onCanPlay={onCanplay}
+                onLoad={onLoad}
+                onLoadStart={onLoadStart}
+                onLoadedMetadata={onLoadedMetadata}
+                onTimeUpdate={onTimeUpdate}
+              >
+                <source src={currentTrack.src} type="audio/mpeg" />
+              </audio>
 
-              {!isWaiting && isPlaying && (
-                <Pressable style={{}} onPress={() => setIsPlaying(false)}>
+              {thisTrackPlaying && (
+                <Pressable
+                  style={{}}
+                  onPress={() => {
+                    audioRef.current?.pause();
+                  }}
+                >
                   {({ pressed, hovered }: PressableState): ReactElement => {
                     let newColor = pressed
                       ? Colors.darkGreen
@@ -211,8 +273,15 @@ function Header() {
                   }}
                 </Pressable>
               )}
-              {!isWaiting && !isPlaying && (
-                <Pressable style={{}} onPress={() => setIsPlaying(true)}>
+              {!thisTrackPlaying && !thisTrackLoading && (
+                <Pressable
+                  style={{}}
+                  onPress={() => {
+                    setCurrentTrack(track);
+                    // audioRef.current?.pause();
+                    audioRef.current?.load();
+                  }}
+                >
                   {({ pressed, hovered }: PressableState): ReactElement => {
                     let newColor = pressed
                       ? Colors.darkGreen
@@ -225,12 +294,12 @@ function Header() {
                   }}
                 </Pressable>
               )}
-              {isWaiting && (
+              {thisTrackLoading && (
                 <View style={{ width: 38, height: 38 }}>
                   <Loader
                     color={Colors.green}
                     size={38}
-                    loading={isWaiting}
+                    loading={true}
                   ></Loader>
                 </View>
               )}

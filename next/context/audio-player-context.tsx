@@ -16,10 +16,25 @@ export interface Track {
   author: string;
   thumbnail?: string;
 }
+
+type Radiostate =
+  | "playing"
+  | "waiting"
+  | "paused"
+  | "aborted"
+  | "canplay"
+  | "loading";
 interface AudioPlayerContextType {
   currentTrack: Track;
+  setPlayerState: Dispatch<SetStateAction<Radiostate>>;
+  playerState: Radiostate;
+  setDuration: Dispatch<SetStateAction<number>>;
+  duration: number;
+  setTimeProgress: Dispatch<SetStateAction<number>>;
+  timeProgress: number;
   setCurrentTrack: Dispatch<SetStateAction<Track>>;
   audioRef: MutableRefObject<HTMLAudioElement>;
+  progressBarRef: MutableRefObject<HTMLInputElement>;
 }
 const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(
   undefined
@@ -27,7 +42,7 @@ const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(
 
 export const tracks = [
   {
-    title: "Trinix ft Rushawn – Its a beautiful day",
+    title: "Rabe Stream",
     src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
     author: "Trinix ft Rushawn",
     //   thumbnail: trinix,
@@ -36,12 +51,37 @@ export const tracks = [
 
 export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
   const [currentTrack, setCurrentTrack] = useState<Track>(tracks[0]);
+  const [playerState, setPlayerState] = useState("paused");
+  const [duration, setDuration] = useState<number>(0);
+  const [timeProgress, setTimeProgress] = useState<number>(0);
+
   const audioRef = useRef<HTMLAudioElement>(null);
+  const progressBarRef = useRef<HTMLInputElement>(null);
+
+  // if (audioRef.current !== null) {
+  //   // console.log("audioRef.current");
+
+  //   audioRef.current.addEventListener("", () => {
+  //     console.log("onplaying");
+  //     setIsWaiting(false);
+  //   });
+  //   audioRef.current.addEventListener("onWaiting", () => {
+  //     console.log("onWaiting");
+  //     setIsWaiting(true);
+  //   });
+  // }
 
   const contextValue = {
     currentTrack,
     setCurrentTrack,
+    playerState,
+    setPlayerState,
+    duration,
+    setDuration,
+    timeProgress,
+    setTimeProgress,
     audioRef,
+    progressBarRef,
   };
   return (
     <AudioPlayerContext.Provider value={contextValue}>

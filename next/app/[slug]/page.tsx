@@ -12,7 +12,7 @@ import Metrics from "@/lib/Metrics";
 import { View, Text } from "react-native";
 import Colors from "@/lib/Colors";
 import HoverUrl from "@/components/HoverUrl";
-import IconShare from "./IconShare";
+import IconShare from "../../assets/svg/IconShare";
 import LinkComponent from "@/components/LinkComponent";
 import Link from "next/link";
 
@@ -196,7 +196,7 @@ export default async function DynamicPage({ params }) {
             })}
           </View>
           <View style={{ height: Metrics.tripleBaseMargin }}></View>
-          <Text
+          {/* <Text
             style={{
               ...Fonts.style.h2,
               paddingBottom: Metrics.doubleBaseMargin,
@@ -217,7 +217,7 @@ export default async function DynamicPage({ params }) {
             style={{
               height: Metrics.tripleBaseMargin,
             }}
-          ></View>
+          ></View> */}
           <View
             style={{
               borderBlockColor: Colors.black,

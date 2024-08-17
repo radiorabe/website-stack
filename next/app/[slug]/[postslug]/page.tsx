@@ -9,14 +9,18 @@ import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import Colors from "@/lib/Colors";
 import HoverUrl from "@/components/HoverUrl";
-import IconShare from "../IconShare";
+import IconShare from "../../../assets/svg/IconShare";
 import LinkComponent from "@/components/LinkComponent";
 import HoverText from "@/components/HoverText";
 import moment from "moment";
 import RenderTipTap from "@/components/RenderTipTap";
+import { ReactElement } from "react";
+import Button from "@/components/Button";
+import IconDownload from "@/assets/svg/IconDownload";
+import AudioFilePlayer from "@/components/AudioFilePlayer";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -60,6 +64,7 @@ async function getPost(slug) {
           "*",
           "program.name",
           "program.slug",
+          // "audio.*",
           "authors.directus_users_id.first_name",
           "authors.directus_users_id.last_name",
         ],
@@ -125,12 +130,6 @@ export default async function DynamicPage({ params }) {
     }
     authorsLink += ` ${item.directus_users_id.first_name} ${item.directus_users_id.last_name}`;
   });
-  const content = post.text.content;
-  console.log("content", JSON.stringify(content));
-  // console.log("text", content.text.content[0].content);
-
-  // let item: ItemsPageImpressum = response.data.data;
-  // const html = { __html: purify.sanitize(item.html) };
 
   return (
     <View>
@@ -178,68 +177,70 @@ export default async function DynamicPage({ params }) {
           >
             {post.title}
           </Text>
-          <View style={styles.imageContainer}>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.image}?width=1440&height=960&fit=cover`}
-              width={1440}
-              height={960}
-              style={styles.image}
-              layout="responsive"
-              alt={post.title}
-            />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingHorizontal: Metrics.tripleBaseMargin,
-                paddingVertical: Metrics.doubleBaseMargin,
-              }}
-            >
-              <Text
-                style={{
-                  ...Fonts.style.textSmall,
-                  fontFamily: Fonts.type.bold,
-                }}
-              >
-                {"Foto: " + post.imageTitle}
-              </Text>
-              <Text style={{ ...Fonts.style.textSmall }}> </Text>
-              <Text style={{ ...Fonts.style.textSmall }}>{post.imageText}</Text>
+          {post.image && (
+            <View style={styles.imageContainer}>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.image}?width=1440&height=960&fit=cover`}
+                width={1440}
+                height={960}
+                style={styles.image}
+                layout="responsive"
+                alt={post.title}
+              />
+              {post.imageTitle && (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    paddingHorizontal: Metrics.tripleBaseMargin,
+                    paddingVertical: Metrics.doubleBaseMargin,
+                  }}
+                >
+                  <Text
+                    style={{
+                      ...Fonts.style.textSmall,
+                      fontFamily: Fonts.type.bold,
+                    }}
+                  >
+                    {"Foto: " + post.imageTitle}
+                  </Text>
+                  <Text style={{ ...Fonts.style.textSmall }}> </Text>
+                  {post.imageText && (
+                    <Text style={{ ...Fonts.style.textSmall }}>
+                      {post.imageText}
+                    </Text>
+                  )}
+                </View>
+              )}
             </View>
+          )}
+
+          {post.text && <RenderTipTap content={post.text}></RenderTipTap>}
+          {post.audio && (
+            <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
+              <AudioFilePlayer
+                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3`}
+              ></AudioFilePlayer>
+            </View>
+          )}
+          <View style={{ flexDirection: "row" }}>
+            {post.audio && (
+              <>
+                <Button
+                  url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3?download`}
+                  icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
+                  label={"Herunterladen"}
+                ></Button>
+                <View style={{ width: Metrics.baseMargin }}></View>
+              </>
+            )}
+            <Button
+              url={"alksjdfkl"}
+              icon={<IconShare color={Colors.darkGreen}></IconShare>}
+              label={"Teilen"}
+            ></Button>
           </View>
 
           <View>
-            {/* <div className={`${FontRegular.variable} ${FontBold.variable}`}>
-              <div className={markdown} dangerouslySetInnerHTML={html}></div>
-            </div> */}
-          </View>
-          <RenderTipTap content={post.text}></RenderTipTap>
-
-          <View
-            style={{ width: "75%", paddingVertical: Metrics.tripleBaseMargin }}
-          >
-            <View
-              style={{
-                borderBlockColor: Colors.black,
-                borderRadius: 9,
-                borderWidth: 1,
-                alignSelf: "flex-start",
-                flexDirection: "row",
-                alignItems: "center",
-                paddingVertical: 3,
-                paddingHorizontal: 6,
-              }}
-            >
-              <IconShare color={Colors.darkGreen}></IconShare>
-              <Text
-                style={{
-                  ...Fonts.style.textLink,
-                  flexShrink: 1,
-                  paddingLeft: 6,
-                }}
-              >
-                {"Teilen"}
-              </Text>
-            </View>
             <View
               style={{
                 height: Metrics.tripleBaseMargin,
