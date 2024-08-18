@@ -70,4 +70,4 @@ yarn-error.log
 
 #dierctus
 directus/uploads
-# directus/extensions/.registry
+directus/extensions/directus-extension-audio-file-validation/package-lock.json
