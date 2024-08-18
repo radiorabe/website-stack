@@ -55,7 +55,7 @@ async function getTeamData() {
       }
     );
     let item: ItemsPageTeam = itemResponse.data.data;
-    console.log("ItemsPageTeam", item);
+    // console.log("ItemsPageTeam", item);
 
     return item;
   } catch (error) {

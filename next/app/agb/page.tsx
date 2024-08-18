@@ -1,7 +1,11 @@
-"use client";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Fonts from "../../lib/Fonts";
-// import Layout from "../components/Layout";
+import { Api } from "../../lib/api";
+import { ItemsPageAgb } from "../../lib/api/data-contracts";
+import RenderTipTap from "@/components/RenderTipTap";
+import Metrics from "@/lib/Metrics";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,13 +28,50 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AGBPage(props) {
+export const metadata: Metadata = {
+  title: "AGB und datenschutz",
+};
+
+async function getPageData() {
+  try {
+    const itemResponse = await Api.readItemsPageAgb(
+      {
+        fields: ["*"],
+        // limit: 3,
+      },
+      {
+        // next: { tags: ["collection"] },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPageAgb = itemResponse.data.data;
+    // console.log("ItemsPageAgb", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
+
+    return item;
+  } catch (error) {
+    console.error("error", error.error);
+
+    notFound();
+  }
+}
+
+export default async function AGBPage(props) {
+  const data = await getPageData();
+
   return (
     <View>
-      <View style={styles.container}>
-        <Text accessibilityRole="header" style={styles.text}>
-          AGB
-        </Text>
+      <View
+        style={{
+          maxWidth: 1280,
+          width: "100%",
+          alignSelf: "center",
+          padding: Metrics.tripleBaseMargin,
+        }}
+      >
+        {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
       </View>
     </View>
   );
