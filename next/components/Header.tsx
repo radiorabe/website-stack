@@ -1,21 +1,18 @@
 "use client";
-import { Text, View, TouchableOpacity, Pressable } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import StyleSheet from "react-native-media-query";
 
+import { useClickOutside } from "@/lib/useClickOutside";
+import { usePathname, useRouter } from "next/navigation";
+import { ReactElement, useRef, useState } from "react";
+import IconArrowDown from "../assets/svg/IconArrowDown";
+import IconArrowUp from "../assets/svg/IconArrowUp";
+import Colors from "../lib/Colors";
 import Fonts from "../lib/Fonts";
 import Metrics from "../lib/Metrics";
-import Colors from "../lib/Colors";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import LinkComponent from "./LinkComponent";
-import { useRouter } from "next/navigation";
-import Playbutton from "../assets/svg/Playbutton";
-import Pausebutton from "../assets/svg/Pausebutton";
-import React, { useState, useEffect, ReactElement } from "react";
-import { useAudioPlayerContext } from "../context/audio-player-context";
-import Loader from "react-spinners/BounceLoader";
-import NavRabe from "./NavRabe";
 import AudioRabePlayer from "./AudioRabePlayer";
+import LinkComponent from "./LinkComponent";
+import NavRabe from "./NavRabe";
 export type PressableState = Readonly<{
   pressed?: boolean;
   hovered?: boolean;
@@ -28,6 +25,8 @@ const { ids, styles } = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.lightGreen,
     width: "100%",
+    position: "fixed",
+    zIndex: 999,
   },
   innerContainer: {
     flexDirection: "row",
@@ -93,6 +92,13 @@ function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
+  let [showDropdown, setShowDropdown] = useState(false);
+  const dropDownRef = useRef("dropdown");
+  const menuRef = useRef("menu");
+  useClickOutside([dropDownRef, menuRef], () => {
+    setShowDropdown(false);
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -137,13 +143,130 @@ function Header() {
               </Text>
             </LinkComponent>
           </View>
-          <View style={styles.navItem}>
-            <LinkComponent href={`/ueber-rabe`}>
-              <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
-                Über RaBe
-              </Text>
-            </LinkComponent>
+          <View>
+            <Pressable
+              ref={menuRef}
+              // style={{ backgroundColor: "yellow" }}
+              onPress={() => setShowDropdown(!showDropdown)}
+            >
+              {({
+                pressed,
+                hovered,
+                focused,
+              }: PressableState): ReactElement => {
+                return (
+                  <View style={[styles.navItem]}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text
+                        style={[
+                          styles.rabeLogo,
+                          { paddingRight: 4 },
+                          hovered && { color: Colors.green },
+                        ]}
+                        dataSet={{ media: ids.rabeLogo }}
+                      >
+                        Über RaBe
+                      </Text>
+                      <View
+                        style={[
+                          showDropdown && { transform: "rotate(180deg)" },
+                        ]}
+                      >
+                        <IconArrowDown
+                          color={hovered ? Colors.green : Colors.darkGreen}
+                        ></IconArrowDown>
+                      </View>
+                    </View>
+                  </View>
+                );
+              }}
+            </Pressable>
+            {showDropdown && (
+              <View
+                ref={dropDownRef}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: Metrics.navBarHeight + Metrics.baseMargin,
+                  backgroundColor: Colors.lightGreen,
+                  padding: Metrics.baseMargin,
+                  borderRadius: 9,
+                }}
+              >
+                <LinkComponent
+                  href={`/programm`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Programm
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/mitmachen`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Mitmachen
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/kontakt`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Kontakt
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/geschichte`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Geschichte
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/team`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Team
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/empfangen`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.rabeLogo}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Empfangen
+                  </Text>
+                </LinkComponent>
+              </View>
+            )}
           </View>
+
+          {/* </View> */}
           <View style={styles.navItem}>
             <LinkComponent href={`/mitglied-werden`}>
               <Text

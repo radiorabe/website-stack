@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { FontBold, FontRegular } from "../lib/Fonts";
 import { AudioPlayerProvider } from "../context/audio-player-context";
 import Footer from "../components/Footer";
+import Metrics from "@/lib/Metrics";
 require("moment/locale/de.js");
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
           <div>
             <Header />
           </div>
-          {children}
+          <div style={{ paddingTop: Metrics.navBarHeight }}>{children}</div>
           <div>
             <Footer />
           </div>

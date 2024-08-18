@@ -26,29 +26,7 @@ const HoverText = ({
   children,
   href,
 }: HoverableProps) => {
-  if (href) {
-    return (
-      <Link href={href} style={{ textDecoration: "none" }}>
-        <Pressable>
-          {({ pressed, hovered, focused }: PressableState): ReactElement => {
-            return (
-              <Text
-                style={[
-                  style,
-                  hovered && hoverStyle,
-                  pressed && pressStyle,
-                  focused && focusStyle,
-                ]}
-              >
-                {children}
-              </Text>
-            );
-          }}
-        </Pressable>
-      </Link>
-    );
-  }
-  return (
+  const pressable = (
     <Pressable style={{}}>
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
@@ -66,6 +44,15 @@ const HoverText = ({
       }}
     </Pressable>
   );
+
+  if (href) {
+    return (
+      <Link href={href} style={{ textDecoration: "none" }}>
+        {pressable}
+      </Link>
+    );
+  }
+  return pressable;
 };
 
 export default HoverText;

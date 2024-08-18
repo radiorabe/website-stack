@@ -1,23 +1,17 @@
+import HoverUrl from "@/components/HoverUrl";
 import { Api } from "@/lib/api";
-import {
-  ItemsPosts,
-  ItemsPrograms,
-  ItemsSendungen,
-} from "@/lib/api/data-contracts";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import StyleSheet from "react-native-media-query";
+import { ItemsPosts, ItemsPrograms } from "@/lib/api/data-contracts";
+import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { View, Text } from "react-native";
-import Colors from "@/lib/Colors";
-import HoverUrl from "@/components/HoverUrl";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { Text, View } from "react-native";
+import StyleSheet from "react-native-media-query";
 import IconShare from "../../assets/svg/IconShare";
-import LinkComponent from "@/components/LinkComponent";
-import Link from "next/link";
-import HoverText from "@/components/HoverText";
-import PostPreview from "@/components/PostPreview";
+
 import ButtonFull from "@/components/ButtonFull";
+import PostPreview from "@/components/PostPreview";
 
 const { ids, styles } = StyleSheet.create({
   container: {

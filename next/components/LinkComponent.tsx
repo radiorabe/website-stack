@@ -11,7 +11,11 @@ const LinkComponent = (props) => {
   if (Platform.OS === "web") {
     // it will be used for web
     return (
-      <Link href={props.href} style={{ textDecoration: "none" }}>
+      <Link
+        href={props.href}
+        style={{ textDecoration: "none" }}
+        onClick={props.onPress}
+      >
         <View style={props.style} dataSet={props.dataSet}>
           {props.children}
         </View>

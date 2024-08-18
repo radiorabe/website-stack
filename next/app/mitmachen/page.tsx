@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
 });
 
 export const metadata: Metadata = {
-  title: "Geschichte",
+  title: "Mitmachen",
 };
 
-export default async function GeschichtePage(props) {
+export default async function MitmachenPage(props) {
   return (
     <View>
       <View>
-        <Text>{"Geschichte"}</Text>
+        <Text>{"Mitmachen"}</Text>
       </View>
     </View>
   );

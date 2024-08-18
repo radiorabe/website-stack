@@ -32,27 +32,14 @@ const styles = StyleSheet.create({
 });
 
 export const metadata: Metadata = {
-  title: "Impressum",
+  title: "Programm",
 };
 
-export default async function ImpressumPage(props) {
-  const response = await Api.readItemsPageImpressum(
-    {},
-    {
-      next: { tags: ["collection"] },
-      //  cache: "no-store"
-    }
-  );
-  // console.log("response", response);
-  let item: ItemsPageImpressum = response.data.data;
-  const html = { __html: purify.sanitize(item.html) };
-
+export default async function ProgrammPage(props) {
   return (
     <View>
       <View>
-        <div className={`${FontRegular.variable} ${FontBold.variable}`}>
-          <div className={markdown} dangerouslySetInnerHTML={html}></div>
-        </div>
+        <Text>{"Programm"}</Text>
       </View>
     </View>
   );
