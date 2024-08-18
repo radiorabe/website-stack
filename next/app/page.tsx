@@ -76,7 +76,7 @@ async function getPartyTips() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPartyTips = itemResponse.data.data;
-    console.log("partyTips", item);
+    // console.log("partyTips", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 

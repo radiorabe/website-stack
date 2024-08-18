@@ -46,7 +46,7 @@ async function getContactData() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPageContact = itemResponse.data.data;
-    console.log("PageContact", item);
+    // console.log("PageContact", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 

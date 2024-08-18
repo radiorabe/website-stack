@@ -11,7 +11,11 @@ export function useClickOutside(refs, onClickOutside) {
     function handleClickOutside(event) {
       let didClickInsideRefs = false;
       refs.forEach((element) => {
-        if (element.current && element.current.contains(event.target)) {
+        if (
+          element.current &&
+          element.current.contains &&
+          element.current.contains(event.target)
+        ) {
           didClickInsideRefs = true;
         }
       });
