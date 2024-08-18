@@ -12,6 +12,7 @@ import IconShare from "../../assets/svg/IconShare";
 
 import ButtonFull from "@/components/ButtonFull";
 import PostPreview from "@/components/PostPreview";
+import MemberInfo from "@/components/MemberInfo";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -150,45 +151,7 @@ export default async function DynamicPage({ params }) {
           <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
             {sendung.team.map((item, index) => {
               let user = item.directus_users_id;
-              return (
-                <View
-                  key={"team-" + index}
-                  style={{
-                    paddingBottom: Metrics.baseMargin,
-                    width: "50%",
-                    flexDirection: "row",
-                  }}
-                >
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`}
-                    width={90}
-                    height={90}
-                    style={styles.avatar}
-                    // layout="responsive"
-                    alt={sendung.name}
-                  />
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      paddingLeft: Metrics.doubleBaseMargin,
-                    }}
-                  >
-                    <Text style={{ ...Fonts.style.text }}>
-                      {`${user.first_name} ${user.last_name}`}
-                    </Text>
-
-                    <HoverUrl
-                      url={"mailto:" + user.email}
-                      style={{ ...Fonts.style.textLink, color: Colors.green }}
-                      hoverStyle={{ color: Colors.darkGreen }}
-                    >
-                      {user.email}
-                    </HoverUrl>
-
-                    {/* <Text style={{}}>{user.email}</Text> */}
-                  </View>
-                </View>
-              );
+              return <MemberInfo user={user}></MemberInfo>;
             })}
           </View>
           <View style={{ height: Metrics.tripleBaseMargin }}></View>

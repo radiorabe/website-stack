@@ -1,20 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
 import { Api } from "../../lib/api";
-import { ItemsPageImpressum } from "../../lib/api/data-contracts";
+import {
+  ItemsPageImpressum,
+  ItemsPageTeam,
+} from "../../lib/api/data-contracts";
 // import Layout from "../components/Layout";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
 import { Metadata } from "next";
-import { markdown } from "../../lib/markdown.module.css";
+import Metrics from "@/lib/Metrics";
+import Colors from "@/lib/Colors";
+import MemberInfo from "@/components/MemberInfo";
 
 const styles = StyleSheet.create({
   container: {
+    maxWidth: 1280,
+    width: "100%",
     alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
+    alignSelf: "center",
   },
   link: {
     color: "blue",
@@ -32,27 +34,100 @@ const styles = StyleSheet.create({
 });
 
 export const metadata: Metadata = {
-  title: "Impressum",
+  title: "Team",
 };
 
-export default async function ImpressumPage(props) {
-  const response = await Api.readItemsPageImpressum(
-    {},
-    {
-      next: { tags: ["collection"] },
-      //  cache: "no-store"
-    }
-  );
-  // console.log("response", response);
-  let item: ItemsPageImpressum = response.data.data;
-  const html = { __html: purify.sanitize(item.html) };
+async function getTeamData() {
+  try {
+    const itemResponse = await Api.readItemsPageTeam(
+      {
+        fields: [
+          "*",
+          "members_staff.directus_users_id.first_name",
+          "members_staff.directus_users_id.last_name",
+          "members_staff.directus_users_id.email",
+          "members_staff.directus_users_id.avatar",
+        ],
+      },
+      {
+        // next: { tags: ["collection"] },
+        cache: "no-store",
+      }
+    );
+    let item: ItemsPageTeam = itemResponse.data.data;
+    console.log("ItemsPageTeam", item);
 
+    return item;
+  } catch (error) {
+    console.error("error", error.error);
+
+    notFound();
+  }
+}
+
+export default async function TeaamPage(props) {
+  const data = await getTeamData();
   return (
     <View>
-      <View>
-        <div className={`${FontRegular.variable} ${FontBold.variable}`}>
-          <div className={markdown} dangerouslySetInnerHTML={html}></div>
-        </div>
+      <View style={styles.container}>
+        <View
+          style={{
+            width: "75%",
+            padding: Metrics.tripleBaseMargin,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              // backgroundColor: "green",
+            }}
+          >
+            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
+            <Text
+              style={[
+                { ...Fonts.style.h4 },
+                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
+              ]}
+            >
+              {"\u2192"}
+            </Text>
+            <Text style={{ ...Fonts.style.text }}>{"Team"}</Text>
+          </View>
+
+          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+            <Text style={{ ...Fonts.style.text }}>{data.text}</Text>
+          </View>
+
+          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+            <Text style={{ ...Fonts.style.h3 }}>{"RaBe Staff"}</Text>
+            <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+              {data.members_staff.map((item, index) => {
+                let user = item.directus_users_id;
+                return <MemberInfo user={user}></MemberInfo>;
+              })}
+            </View>
+          </View>
+
+          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+            <Text style={{ ...Fonts.style.h3 }}>{"Vorstandsmitglieder"}</Text>
+            <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+              {data.members_management.map((item, index) => {
+                let user = item.directus_users_id;
+                return <MemberInfo user={user}></MemberInfo>;
+              })}
+            </View>
+          </View>
+
+          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+            <Text style={{ ...Fonts.style.h3 }}>
+              {"Programmkommissionsmitglieder"}
+            </Text>
+            {data.members_program.map((item, index) => {
+              let user = item.directus_users_id;
+              return <MemberInfo user={user}></MemberInfo>;
+            })}
+          </View>
+        </View>
       </View>
     </View>
   );
