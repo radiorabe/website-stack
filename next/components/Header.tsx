@@ -54,6 +54,12 @@ const { ids, styles } = StyleSheet.create({
       color: Colors.green,
     },
   },
+  dropDownItem: {
+    ...Fonts.style.navigation,
+    fontSize: 18,
+    color: Colors.darkGreen,
+    paddingVertical: Metrics.halfBaseMargin,
+  },
   rabeLogoBorder: {
     ...Fonts.style.navigation,
     fontSize: 18,
@@ -201,7 +207,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Programm
@@ -212,7 +218,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Mitmachen
@@ -223,7 +229,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Kontakt
@@ -234,7 +240,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Geschichte
@@ -245,7 +251,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Team
@@ -256,7 +262,7 @@ function Header() {
                   onPress={() => setShowDropdown(!showDropdown)}
                 >
                   <Text
-                    style={styles.rabeLogo}
+                    style={styles.dropDownItem}
                     dataSet={{ media: ids.rabeLogo }}
                   >
                     Empfangen
