@@ -70,4 +70,4 @@ yarn-error.log
 
 #dierctus
 directus/uploads
-directus/extensions/.registry
+# directus/extensions/.registry
