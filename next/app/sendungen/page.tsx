@@ -101,7 +101,7 @@ export default async function SendungenPage(props) {
           {sendungen.map((item, index) => {
             return (
               <Sendung
-                key={"keySendung-" + props.index}
+                key={"sendung-" + index}
                 name={item.name}
                 image={item.image}
                 slug={item.slug}

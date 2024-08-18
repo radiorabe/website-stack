@@ -105,9 +105,7 @@ async function Footer(props) {
         </View>
 
         {/* <View style={{ height: Metrics.quadBaseMargin }}></View> */}
-        <BarIcons></BarIcons>
-        <BarIcons></BarIcons>
-        <BarIcons></BarIcons>
+
         <BarIcons></BarIcons>
 
         {/* <View style={{ height: Metrics.quadBaseMargin }}></View> */}

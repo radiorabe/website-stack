@@ -20,11 +20,11 @@ async function getPosts() {
     const itemResponse = await Api.readItemsPosts(
       {
         fields: ["*"],
-        // filter: JSON.stringify({
-        //   program: {
-        //     _eq: slug,
-        //   },
-        // }),
+        filter: JSON.stringify({
+          status: {
+            _eq: "published",
+          },
+        }),
         sort: "-date",
         // limit: 3,
       },
@@ -80,11 +80,16 @@ export default async function ImpressumPage(props) {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            justifyContent: "space-between",
           }}
         >
           {posts.map((item, index) => {
-            return <PostPreview key={"post" + index} data={item}></PostPreview>;
+            return (
+              <PostPreview
+                key={"post" + index}
+                data={item}
+                index={index}
+              ></PostPreview>
+            );
           })}
         </View>
       </View>

@@ -35,21 +35,23 @@ const { ids, styles } = StyleSheet.create({
 
 export interface HoverableProps {
   data: ItemsPosts;
+  index: number;
 }
 
-const PostPreview = ({ data }: HoverableProps) => {
+const PostPreview = ({ data, index }: HoverableProps) => {
   return (
     <Link
       href={`${data.date}/${data.slug}`}
       style={{
         maxWidth: 360,
         width: "30%",
-        maxHeight: 450,
-        // marginRight: Metrics.doubleBaseMargin,
+        marginLeft: index % 3 ? "5%" : 0,
         marginBottom: Metrics.doubleBaseMargin,
         paddingBottom: 10,
         textDecoration: "none",
         overflow: "hidden",
+        aspectRatio: 360 / 450,
+        // backgroundColor: "green",
       }}
     >
       <Image

@@ -265,12 +265,16 @@ export default async function DynamicPage({ params }) {
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
-              justifyContent: "space-between",
+              // justifyContent: "space-between",
             }}
           >
             {posts.map((item, index) => {
               return (
-                <PostPreview key={"post" + index} data={item}></PostPreview>
+                <PostPreview
+                  key={"post" + index}
+                  data={item}
+                  index={index}
+                ></PostPreview>
               );
             })}
           </View>
