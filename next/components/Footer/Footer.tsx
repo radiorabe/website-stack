@@ -7,6 +7,9 @@ import HoverUrl from "../HoverUrl";
 import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
 import FooterRabe from "./FooterRabe";
+import { Api } from "@/lib/api";
+import { ItemsPageContact } from "@/lib/api/data-contracts";
+import { notFound } from "next/navigation";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -29,20 +32,33 @@ const { ids, styles } = StyleSheet.create({
   },
 });
 
-async function getData() {
-  const res = await fetch("https://api.example.com/...");
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+async function getContactData() {
+  try {
+    const itemResponse = await Api.readItemsPageContact(
+      {
+        fields: ["*"],
+        // limit: 3,
+      },
+      {
+        // next: { tags: ["collection"] },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPageContact = itemResponse.data.data;
+    console.log("PageContact", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    return item;
+  } catch (error) {
+    console.error("error", error.error);
+
+    notFound();
   }
-
-  return res.json();
 }
-
 async function Footer(props) {
+  const contactData = await getContactData();
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -64,13 +80,13 @@ async function Footer(props) {
               textAlign: "center",
             }}
           >
-            <Text>{"Radio Bern: RaBe Randweg 21, 3013 Bern, "}</Text>
+            <Text>{`Radio Bern: RaBe ${contactData.street} ${contactData.street_number}, ${contactData.plz} ${contactData.city}, `}</Text>
             <HoverUrl
-              url={"mailto:info@rabe.ch"}
+              url={`mailto:${contactData.email}`}
               style={{ color: Colors.lightGreen }}
               hoverStyle={{ color: Colors.green }}
             >
-              {"info@rabe.ch"}
+              {contactData.email}
             </HoverUrl>
           </Text>
         </View>
@@ -86,20 +102,20 @@ async function Footer(props) {
           >
             <Text>{"Studio: "}</Text>
             <HoverUrl
-              url={"tel:+41 31 330 99 99"}
+              url={`tel:${contactData.studio_phone_number}`}
               style={{ color: Colors.lightGreen }}
               hoverStyle={{ color: Colors.green }}
             >
-              {"031 330 99 99"}
+              {contactData.studio_phone_number}
             </HoverUrl>
             <Text>{", "}</Text>
 
             <HoverUrl
-              url={"mailto:studio@rabe.ch"}
+              url={`mailto:${contactData.studio_email}`}
               style={{ color: Colors.lightGreen }}
               hoverStyle={{ color: Colors.green }}
             >
-              {"studio@rabe.ch"}
+              {contactData.studio_email}
             </HoverUrl>
           </Text>
         </View>
