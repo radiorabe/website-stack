@@ -2,32 +2,29 @@ import { StyleSheet, View, Text } from "react-native";
 import Fonts from "@/lib/Fonts";
 import { Api } from "@/lib/api";
 import { ItemsPartyTips, ItemsPosts } from "@/lib/api/data-contracts";
-// import Layout from "../components/Layout";
 import Button from "@/components/Button";
 import ButtonFull from "@/components/ButtonFull";
 import PostPreview from "@/components/PostPreview";
 import PartyTip from "@/assets/svg/IconPartyTip";
 import Metrics from "@/lib/Metrics";
-import DOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Colors from "@/lib/Colors";
 import moment from "moment";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
 
 async function getPosts() {
   try {
     const itemResponse = await Api.readItemsPosts(
       {
         fields: ["*"],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           status: {
             _eq: "published",
           },
         }),
-        sort: "-date",
+        sort: ["-date"],
         // limit: 3,
       },
       {
@@ -36,7 +33,7 @@ async function getPosts() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts = itemResponse.data.data;
+    let item: ItemsPosts[] = itemResponse.data.data;
     // console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
@@ -61,12 +58,14 @@ async function getPartyTips() {
           "address_line_1",
           "address_line_2",
         ],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           status: {
             _eq: "published",
           },
         }),
-        sort: "-date",
+        sort: ["-date"],
         // limit: 3,
       },
       {
@@ -75,7 +74,7 @@ async function getPartyTips() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPartyTips = itemResponse.data.data;
+    let item: ItemsPartyTips[] = itemResponse.data.data;
     // console.log("partyTips", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
@@ -89,10 +88,10 @@ async function getPartyTips() {
 }
 
 export const metadata: Metadata = {
-  title: "Impressum",
+  title: "RaBe - Home",
 };
 
-export default async function ImpressumPage(props) {
+export default async function HomePage(props) {
   const posts = await getPosts();
   const partyTips = await getPartyTips();
 

@@ -1,17 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
-import { Api } from "../../lib/api";
-import { ItemsPageImpressum } from "../../lib/api/data-contracts";
-// import Layout from "../components/Layout";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
-import { Metadata } from "next";
-import { markdown } from "../../lib/markdown.module.css";
-import { notFound } from "next/navigation";
 import RenderTipTap from "@/components/RenderTipTap";
 import Metrics from "@/lib/Metrics";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { StyleSheet, View } from "react-native";
+import Fonts from "../../lib/Fonts";
+import { Api } from "../../lib/api";
+import { ItemsPageImpressum } from "../../lib/api/data-contracts";
 
 const styles = StyleSheet.create({
   container: {
@@ -51,8 +45,8 @@ async function getImpressum() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPageImpressum = itemResponse.data.data;
-    console.log("ItemsPageImpressum", item);
+    let item: ItemsPageImpressum = itemResponse.data.data as ItemsPageImpressum;
+    // console.log("ItemsPageImpressum", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 

@@ -36,7 +36,7 @@ async function getSendungsInfo() {
       }
     );
     // console.log("response", infoResponse);
-    let item: ItemsPagePrograms = infoResponse.data.data;
+    let item: ItemsPagePrograms = infoResponse.data.data as ItemsPagePrograms;
 
     // console.log("sendungenInfo", item);
 
@@ -51,6 +51,8 @@ async function getSendungen() {
   try {
     const sendungenResponse = await Api.readItemsPrograms(
       {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           status: {
             _eq: "published",

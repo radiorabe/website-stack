@@ -1,31 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
-import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
-import { Api } from "../../lib/api";
-import { ItemsPageImpressum, ItemsPosts } from "../../lib/api/data-contracts";
-// import Layout from "../components/Layout";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
-import { Metadata } from "next";
-import { markdown } from "../../lib/markdown.module.css";
-import Metrics from "@/lib/Metrics";
-import ButtonFull from "@/components/ButtonFull";
-import { notFound } from "next/navigation";
-import PostPreview from "@/components/PostPreview";
 import Button from "@/components/Button";
+import ButtonFull from "@/components/ButtonFull";
+import PostPreview from "@/components/PostPreview";
+import Metrics from "@/lib/Metrics";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { StyleSheet, View } from "react-native";
+import Fonts from "../../lib/Fonts";
+import { Api } from "../../lib/api";
+import { ItemsPosts } from "../../lib/api/data-contracts";
 
 async function getPosts() {
   try {
     const itemResponse = await Api.readItemsPosts(
       {
         fields: ["*"],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           status: {
             _eq: "published",
           },
         }),
-        sort: "-date",
+        sort: ["-date"],
         // limit: 3,
       },
       {
@@ -34,7 +30,7 @@ async function getPosts() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts = itemResponse.data.data;
+    let item: ItemsPosts[] = itemResponse.data.data;
     console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
@@ -74,7 +70,7 @@ export default async function ImpressumPage(props) {
           }}
         >
           <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
-          <Button label={"suche"} />
+          <Button url={""} label={"suche"} />
         </View>
         <View
           style={{

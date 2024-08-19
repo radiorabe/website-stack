@@ -1,14 +1,14 @@
-version: '3'
+version: "3"
 services:
-
   next:
     container_name: rabe-next
     build:
       dockerfile: ${DOCKERFILENAME:-./Dockerfile.prod}
       context: ./next
+    env_file: .env
     restart: unless-stopped
     ports:
-      - '${NEXT_PORT}:3000'
+      - "${NEXT_PORT}:3000"
 
   directus:
     container_name: rabe-directus
@@ -40,11 +40,9 @@ services:
     #   - '${DATABASE_PORT}:5432'
     # networks:
     #   - rabeNetwork
-      
 
 volumes:
   rabe-data:
-
 # networks:
 #   rabeNetwork:
 #     name: rabeNetwork

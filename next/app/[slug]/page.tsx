@@ -1,6 +1,10 @@
-import HoverUrl from "@/components/HoverUrl";
 import { Api } from "@/lib/api";
-import { ItemsPosts, ItemsPrograms } from "@/lib/api/data-contracts";
+import {
+  ItemsPosts,
+  ItemsPrograms,
+  ItemsProgramsDirectusUsers,
+  Users,
+} from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
@@ -11,8 +15,8 @@ import StyleSheet from "react-native-media-query";
 import IconShare from "../../assets/svg/IconShare";
 
 import ButtonFull from "@/components/ButtonFull";
-import PostPreview from "@/components/PostPreview";
 import MemberInfo from "@/components/MemberInfo";
+import PostPreview from "@/components/PostPreview";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -83,12 +87,14 @@ async function getPosts(slug) {
     const itemResponse = await Api.readItemsPosts(
       {
         fields: ["*"],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           program: {
             _eq: slug,
           },
         }),
-        sort: "-date",
+        sort: ["-date"],
         limit: 3,
       },
       {
@@ -97,7 +103,7 @@ async function getPosts(slug) {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts = itemResponse.data.data;
+    let item: ItemsPosts[] = itemResponse.data.data;
     console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
@@ -149,8 +155,8 @@ export default async function DynamicPage({ params }) {
             {`Das ${sendung.name} Team`}
           </Text>
           <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-            {sendung.team.map((item, index) => {
-              let user = item.directus_users_id;
+            {sendung.team.map((item: ItemsProgramsDirectusUsers, index) => {
+              let user: Users = item.directus_users_id as Users;
               return <MemberInfo user={user}></MemberInfo>;
             })}
           </View>

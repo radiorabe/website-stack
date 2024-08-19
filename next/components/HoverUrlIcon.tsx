@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactElement } from "react";
-import { Text, Pressable, TextStyle, Linking } from "react-native";
+import { Linking, Pressable } from "react-native";
 
 export type PressableState = Readonly<{
   pressed: boolean;

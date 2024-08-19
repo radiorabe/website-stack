@@ -1,26 +1,24 @@
+import IconDownload from "@/assets/svg/IconDownload";
+import AudioFilePlayer from "@/components/AudioFilePlayer";
+import Button from "@/components/Button";
+import HoverText from "@/components/HoverText";
+import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
 import {
   ItemsPosts,
+  ItemsPostsDirectusUsers1,
   ItemsPrograms,
-  ItemsSendungen,
+  Users,
 } from "@/lib/api/data-contracts";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import StyleSheet from "react-native-media-query";
+import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { View, Text, Pressable } from "react-native";
-import Colors from "@/lib/Colors";
-import HoverUrl from "@/components/HoverUrl";
-import IconShare from "../../../assets/svg/IconShare";
-import LinkComponent from "@/components/LinkComponent";
-import HoverText from "@/components/HoverText";
 import moment from "moment";
-import RenderTipTap from "@/components/RenderTipTap";
-import { ReactElement } from "react";
-import Button from "@/components/Button";
-import IconDownload from "@/assets/svg/IconDownload";
-import AudioFilePlayer from "@/components/AudioFilePlayer";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { Text, View } from "react-native";
+import StyleSheet from "react-native-media-query";
+import IconShare from "../../../assets/svg/IconShare";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -90,12 +88,14 @@ async function getRelatedPosts(slug) {
     const itemResponse = await Api.readItemsPosts(
       {
         fields: ["*"],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         filter: JSON.stringify({
           program: {
             _eq: slug,
           },
         }),
-        sort: "-date",
+        sort: ["-date"],
         limit: 3,
       },
       {
@@ -104,7 +104,7 @@ async function getRelatedPosts(slug) {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts = itemResponse.data.data;
+    let item: ItemsPosts[] = itemResponse.data.data;
     // console.log("posts", item);
     return item;
   } catch (error) {
@@ -116,14 +116,16 @@ async function getRelatedPosts(slug) {
 
 export default async function DynamicPage({ params }) {
   const post = await getPost(params.postslug);
+  const program = post.program as ItemsPrograms;
   // const relatedPosts = await getPost(post);
 
   let authorsLink = "Von";
-  post.authors.forEach((item, index) => {
+  post.authors.forEach((item: ItemsPostsDirectusUsers1, index) => {
+    let user: Users = item.directus_users_id as Users;
     if (index) {
       authorsLink += " &";
     }
-    authorsLink += ` ${item.directus_users_id.first_name} ${item.directus_users_id.last_name}`;
+    authorsLink += ` ${user.first_name} ${user.last_name}`;
   });
 
   return (
@@ -138,26 +140,29 @@ export default async function DynamicPage({ params }) {
             }}
           >
             <HoverText
-              href={"/" + post.program.slug}
+              href={"/" + program.slug}
               style={[styles.sendungsInfo, styles.border]}
               hoverStyle={{
                 color: Colors.green,
                 borderColor: Colors.green,
               }}
             >
-              {post.program.name}
+              {program.name}
             </HoverText>
             <View style={{ width: Metrics.doubleBaseMargin }}></View>
             <Text style={{ ...Fonts.style.text }}>
               <Text> {"Von "}</Text>
-              {post.authors.map((item, index) => {
+              {post.authors.map((item: ItemsPostsDirectusUsers1, index) => {
+                let user: Users = item.directus_users_id as Users;
                 return (
                   <HoverText
                     key={"author" + index}
                     href={"/beiträge"}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? " &" : ""} ${item.directus_users_id.first_name} ${item.directus_users_id.last_name}`}</HoverText>
+                  >{`${index ? " &" : ""} ${user.first_name} ${
+                    user.last_name
+                  }`}</HoverText>
                 );
               })}
 

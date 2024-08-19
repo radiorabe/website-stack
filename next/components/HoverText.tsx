@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { Text, Pressable, TextStyle } from "react-native";
+import { Text, Pressable } from "react-native";
+import TextStyle from "react-native-media-query";
 
 export type PressableState = Readonly<{
   pressed: boolean;
