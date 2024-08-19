@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
-import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
-import { Api } from "../../lib/api";
+import Fonts from "@/lib/Fonts";
+import { Api } from "@/lib/api";
 import {
-  ItemsPageImpressum,
   ItemsPageTeam,
-} from "../../lib/api/data-contracts";
-// import Layout from "../components/Layout";
-import { Metadata } from "next";
-import Metrics from "@/lib/Metrics";
-import Colors from "@/lib/Colors";
+  ItemsPageTeamDirectusUsers,
+  Users,
+} from "@/lib/api/data-contracts";
 import MemberInfo from "@/components/MemberInfo";
+import Colors from "@/lib/Colors";
+import Metrics from "@/lib/Metrics";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +55,7 @@ async function getTeamData() {
         cache: "no-store",
       }
     );
-    let item: ItemsPageTeam = itemResponse.data.data;
+    let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
     // console.log("ItemsPageTeam", item);
 
     return item;
@@ -101,20 +102,24 @@ export default async function TeaamPage(props) {
           <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
             <Text style={{ ...Fonts.style.h3 }}>{"RaBe Staff"}</Text>
             <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-              {data.members_staff.map((item, index) => {
-                let user = item.directus_users_id;
-                return <MemberInfo user={user}></MemberInfo>;
-              })}
+              {data.members_staff.map(
+                (item: ItemsPageTeamDirectusUsers, index) => {
+                  let user: Users = item.directus_users_id as Users;
+                  return <MemberInfo user={user}></MemberInfo>;
+                }
+              )}
             </View>
           </View>
 
           <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
             <Text style={{ ...Fonts.style.h3 }}>{"Vorstandsmitglieder"}</Text>
             <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-              {data.members_management.map((item, index) => {
-                let user = item.directus_users_id;
-                return <MemberInfo user={user}></MemberInfo>;
-              })}
+              {data.members_management.map(
+                (item: ItemsPageTeamDirectusUsers, index) => {
+                  let user: Users = item.directus_users_id as Users;
+                  return <MemberInfo user={user}></MemberInfo>;
+                }
+              )}
             </View>
           </View>
 
@@ -122,10 +127,12 @@ export default async function TeaamPage(props) {
             <Text style={{ ...Fonts.style.h3 }}>
               {"Programmkommissionsmitglieder"}
             </Text>
-            {data.members_program.map((item, index) => {
-              let user = item.directus_users_id;
-              return <MemberInfo user={user}></MemberInfo>;
-            })}
+            {data.members_program.map(
+              (item: ItemsPageTeamDirectusUsers, index) => {
+                let user: Users = item.directus_users_id as Users;
+                return <MemberInfo user={user}></MemberInfo>;
+              }
+            )}
           </View>
         </View>
       </View>

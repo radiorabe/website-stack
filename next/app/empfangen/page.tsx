@@ -1,14 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
-import { Api } from "../../lib/api";
-import { ItemsPageImpressum } from "../../lib/api/data-contracts";
+import Fonts from "../../lib/Fonts";
 // import Layout from "../components/Layout";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
 import { Metadata } from "next";
-import { markdown } from "../../lib/markdown.module.css";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,27 +25,14 @@ const styles = StyleSheet.create({
 });
 
 export const metadata: Metadata = {
-  title: "Impressum",
+  title: "Empfangen",
 };
 
 export default async function ImpressumPage(props) {
-  const response = await Api.readItemsPageImpressum(
-    {},
-    {
-      next: { tags: ["collection"] },
-      //  cache: "no-store"
-    }
-  );
-  // console.log("response", response);
-  let item: ItemsPageImpressum = response.data.data;
-  const html = { __html: purify.sanitize(item.html) };
-
   return (
     <View>
       <View>
-        <div className={`${FontRegular.variable} ${FontBold.variable}`}>
-          <div className={markdown} dangerouslySetInnerHTML={html}></div>
-        </div>
+        <Text>{"Empfangen"}</Text>
       </View>
     </View>
   );

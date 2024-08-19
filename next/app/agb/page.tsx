@@ -45,7 +45,7 @@ async function getPageData() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPageAgb = itemResponse.data.data;
+    let item: ItemsPageAgb = itemResponse.data.data as ItemsPageAgb;
     // console.log("ItemsPageAgb", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);

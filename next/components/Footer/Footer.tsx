@@ -26,6 +26,8 @@ const { ids, styles } = StyleSheet.create({
 
   hoverText: {
     color: Colors.lightGreen,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     ":hover": {
       color: Colors.green,
     },
@@ -45,7 +47,7 @@ async function getContactData() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPageContact = itemResponse.data.data;
+    let item: ItemsPageContact = itemResponse.data.data as ItemsPageContact;
     // console.log("PageContact", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);

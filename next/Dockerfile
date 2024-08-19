@@ -12,4 +12,5 @@ EXPOSE 3000
 
 RUN npm run build
 
-CMD npm run dev
+#for DEV
+CMD npm run dev 

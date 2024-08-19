@@ -1,14 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import Fonts, { FontBold, FontRegular } from "../../lib/Fonts";
-import { Api } from "../../lib/api";
-import { ItemsPageImpressum } from "../../lib/api/data-contracts";
-// import Layout from "../components/Layout";
-import { JSDOM } from "jsdom";
-import DOMPurify from "dompurify";
-const window = new JSDOM("").window;
-const purify = DOMPurify(window);
+import Fonts from "../../lib/Fonts";
+
 import { Metadata } from "next";
-import { markdown } from "../../lib/markdown.module.css";
 
 const styles = StyleSheet.create({
   container: {

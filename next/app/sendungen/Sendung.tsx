@@ -3,7 +3,7 @@ import LinkComponent from "@/components/LinkComponent";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import Image from "next/image";
-import { Text, Touchable, TouchableOpacity, View } from "react-native";
+import { Text } from "react-native";
 import StyleSheet from "react-native-media-query";
 
 const { ids, styles } = StyleSheet.create({

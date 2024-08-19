@@ -18,6 +18,8 @@ const { ids, styles } = StyleSheet.create({
   hoverText: {
     ...Fonts.style.footer,
     color: Colors.lightGreen,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     ":hover": {
       color: Colors.green,
     },
