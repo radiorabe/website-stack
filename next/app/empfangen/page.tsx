@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
+import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 // import Layout from "../components/Layout";
 import { Metadata } from "next";

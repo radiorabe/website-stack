@@ -5,7 +5,8 @@ import { useAudioPlayerContext } from "@/context/audio-player-context";
 import Colors from "@/lib/Colors";
 import "rc-slider/assets/index.css";
 import { ReactElement } from "react";
-import { Pressable, View } from "react-native";
+import { View, Pressable } from "@/lib/server-react-native";
+
 import Loader from "react-spinners/BounceLoader";
 
 export type PressableState = Readonly<{

@@ -2,17 +2,12 @@
 
 import Metrics from "@/lib/Metrics";
 import React from "react";
-import { View, Platform, Text } from "react-native";
+import { View, Text } from "@/lib/server-react-native";
 import Image from "next/image";
 import HoverUrl from "./HoverUrl";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
 import StyleSheet from "react-native-media-query";
-
-let Link = null;
-if (Platform.OS === "web") {
-  Link = require("next/link").default;
-}
 
 const { ids, styles } = StyleSheet.create({
   avatar: { borderRadius: 9 },

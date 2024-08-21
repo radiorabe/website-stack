@@ -1,5 +1,4 @@
-import { TextStyle } from "react-native";
-import Metrics from "./Metrics";
+import { TextStyle } from "@/lib/server-react-native";
 
 const widthFactor = 1;
 

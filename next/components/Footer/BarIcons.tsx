@@ -1,6 +1,6 @@
 "use client";
 import { ReactElement } from "react";
-import { Linking, Pressable, View } from "react-native";
+import { Linking, Pressable, View } from "@/lib/server-react-native";
 import Colors from "../../lib/Colors";
 import Metrics from "../../lib/Metrics";
 import IconFace from "./IconFace";

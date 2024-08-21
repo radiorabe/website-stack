@@ -16,7 +16,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Text, Pressable, TextStyle, View, Linking } from "react-native";
+import { View, Text, Pressable } from "@/lib/server-react-native";
+
 import Loader from "react-spinners/BounceLoader";
 
 export type PressableState = Readonly<{

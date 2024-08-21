@@ -3,7 +3,7 @@ import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 import RenderTipTap from "./RenderTipTap";
 
 export interface HoverableProps {

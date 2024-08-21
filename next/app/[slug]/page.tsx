@@ -10,7 +10,7 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../assets/svg/IconShare";
 

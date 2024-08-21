@@ -1,5 +1,5 @@
 "use client";
-import { View, Text } from "react-native";
+import { View, Text } from "@/lib/server-react-native";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
 import Metrics from "../../lib/Metrics";

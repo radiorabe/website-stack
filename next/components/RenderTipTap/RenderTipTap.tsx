@@ -1,22 +1,20 @@
-import React, { Children, useMemo } from "react";
-import {
-  TipTapRender,
-  TipTapMarkHandlers,
-  TipTapNodeHandlers,
-  TipTapRenderHandlers,
-} from "@wokaylabs/tiptap-react-render";
 import { Api } from "@/lib/api";
-import { notFound } from "next/navigation";
 import {
   ItemsInfoBox,
   ItemsPostsEditorNodes,
   ItemsQuote,
 } from "@/lib/api/data-contracts";
-import { View, Text } from "react-native";
 import Fonts from "@/lib/Fonts";
-import Metrics from "@/lib/Metrics";
-import Quote from "./Quote";
+import {
+  TipTapMarkHandlers,
+  TipTapNodeHandlers,
+  TipTapRender,
+  TipTapRenderHandlers,
+} from "@wokaylabs/tiptap-react-render";
+import { notFound } from "next/navigation";
+import React from "react";
 import InfoBox from "./InfoBox";
+import Quote from "./Quote";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library

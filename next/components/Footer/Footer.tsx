@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
 import Colors from "../../lib/Colors";

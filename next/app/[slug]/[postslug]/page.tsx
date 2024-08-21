@@ -16,7 +16,7 @@ import Metrics from "@/lib/Metrics";
 import moment from "moment";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../assets/svg/IconShare";
 

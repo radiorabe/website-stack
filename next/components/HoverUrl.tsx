@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactElement } from "react";
-import { Text, Pressable, Linking } from "react-native";
+import { Text, Pressable, Linking } from "@/lib/server-react-native";
 import TextStyle from "react-native-media-query";
 
 export type PressableState = Readonly<{

@@ -2,7 +2,7 @@
 import { ItemsQuote } from "@/lib/api/data-contracts";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 
 export interface HoverableProps {
   data: ItemsQuote;

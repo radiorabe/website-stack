@@ -4,7 +4,7 @@ import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { Text, Pressable, TextStyle, View, Linking } from "react-native";
+import { Text, Pressable, View, Linking } from "@/lib/server-react-native";
 
 export type PressableState = Readonly<{
   pressed: boolean;

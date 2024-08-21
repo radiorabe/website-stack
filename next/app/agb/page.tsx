@@ -1,4 +1,5 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "@/lib/server-react-native";
+import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 import { Api } from "../../lib/api";
 import { ItemsPageAgb } from "../../lib/api/data-contracts";

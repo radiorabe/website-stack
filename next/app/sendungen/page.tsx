@@ -1,7 +1,7 @@
 import Fonts, { style } from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Api } from "@/lib/api";
-import { Text, View } from "react-native";
+import { Text, View } from "@/lib/server-react-native";
 import { ItemsPagePrograms } from "../../lib/api/data-contracts";
 import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";

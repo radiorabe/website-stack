@@ -1,16 +1,13 @@
 "use client";
-import IconShare from "@/assets/svg/IconShare";
+import { ItemsPosts } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import Link from "next/link";
-import React, { ReactElement } from "react";
-import { Text, Pressable, TextStyle, View, Linking } from "react-native";
-import Image from "next/image";
-import HoverText from "./HoverText";
-import { ItemsPosts } from "@/lib/api/data-contracts";
 import Metrics from "@/lib/Metrics";
-import StyleSheet from "react-native-media-query";
+import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
+import StyleSheet from "react-native-media-query";
 
 export type PressableState = Readonly<{
   pressed: boolean;

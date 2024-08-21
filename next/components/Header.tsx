@@ -1,5 +1,5 @@
 "use client";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
 import { useClickOutside } from "@/lib/useClickOutside";

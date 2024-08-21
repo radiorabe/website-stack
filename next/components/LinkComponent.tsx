@@ -1,46 +1,20 @@
 // LinkComponent.js
 
-import React from "react";
-import { View, Platform, TouchableOpacity } from "react-native";
-let Link = null;
-if (Platform.OS === "web") {
-  Link = require("next/link").default;
-}
+import { View } from "@/lib/server-react-native";
+import Link from "next/link";
 
 const LinkComponent = (props) => {
-  if (Platform.OS === "web") {
-    // it will be used for web
-    return (
-      <Link
-        href={props.href}
-        style={{ textDecoration: "none" }}
-        onClick={props.onPress}
-      >
-        <View style={props.style} dataSet={props.dataSet}>
-          {props.children}
-        </View>
-      </Link>
-    );
-  } else {
-    // it will be used for iOS, Android
-    return (
-      <TouchableOpacity style={props.style} onPress={props.onPress}>
+  return (
+    <Link
+      href={props.href}
+      style={{ textDecoration: "none" }}
+      onClick={props.onPress}
+    >
+      <View style={props.style} dataSet={props.dataSet}>
         {props.children}
-      </TouchableOpacity>
-    );
-  }
+      </View>
+    </Link>
+  );
 };
 
 export default LinkComponent;
-
-// use LinkComponent like below
-
-// const id = 265;
-// const openJobDetails = () => navigation.navigate("JobDetails", params);
-// <LinkComponent
-//      href={`/jobs/${id}`}
-//      onPress={openJobDetails}
-//      style={styles.container}
-//    >
-//  <Text>Open a job</Text>
-// </LinkComponent>
