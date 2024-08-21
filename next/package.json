@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "syncDataModel": "node bin/syncDataModel.js",
     "api": "swagger-typescript-api --responses --extract-request-body --extract-request-params --extract-response-body --extract-response-error -p http://localhost:1337/server/specs/oas -o ./lib/api --modular",
     "postinstall": "patch-package"
