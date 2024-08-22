@@ -31,8 +31,9 @@ async function getSendungsInfo() {
     const infoResponse = await Api.readItemsPagePrograms(
       {},
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", infoResponse);
@@ -60,8 +61,9 @@ async function getSendungen() {
         }),
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", sendungenResponse);

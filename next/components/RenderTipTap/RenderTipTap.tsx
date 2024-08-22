@@ -28,8 +28,9 @@ async function getInfoBox(id) {
         fields: ["*"],
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsInfoBox = itemResponse.data.data;
@@ -48,8 +49,9 @@ async function getQuote(id) {
         fields: ["*"],
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsQuote = itemResponse.data.data;
@@ -68,8 +70,9 @@ async function getNodes(id) {
         fields: ["*"],
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsPostsEditorNodes = itemResponse.data.data;

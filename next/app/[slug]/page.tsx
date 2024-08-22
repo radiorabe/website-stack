@@ -64,8 +64,9 @@ async function getSendung(slug) {
       },
       // { id: slug, fields: ["*,team.directus_users_id.*"] },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);
@@ -98,8 +99,9 @@ async function getPosts(slug) {
         limit: 3,
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);

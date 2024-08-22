@@ -68,8 +68,9 @@ async function getPost(slug) {
         ],
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsPosts = itemResponse.data.data;
@@ -99,8 +100,9 @@ async function getRelatedPosts(slug) {
         limit: 3,
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);

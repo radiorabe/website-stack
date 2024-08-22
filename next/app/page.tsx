@@ -29,8 +29,9 @@ async function getPosts() {
         // limit: 3,
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);
@@ -70,8 +71,9 @@ async function getPartyTips() {
         // limit: 3,
       },
       {
-        // next: { tags: ["collection"] },
-        cache: "no-store",
+        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);

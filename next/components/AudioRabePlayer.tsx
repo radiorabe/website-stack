@@ -21,7 +21,6 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   let track = {
     title: "Rabe Stream",
     src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
-    // src: "http://localhost:1337/assets/5d4ac6ec-fbb7-4b71-aa5c-7c61e4fa9618",
     author: "Trinix ft Rushawn",
   };
   const {

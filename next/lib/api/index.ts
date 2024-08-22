@@ -4,8 +4,7 @@ import { Items } from "./Items";
 import { Server } from "./Server";
 
 const Api = new Items({
-  // baseUrl: process.env.PUBLIC_URL,
-  baseUrl: "http://localhost:1337",
+  baseUrl: process.env.NEXT_PUBLIC_BE_URL,
 });
 
 export { Assets, ApiTypes, Api, Server };
