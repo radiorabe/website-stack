@@ -22,14 +22,16 @@ const LinkComponent = ({ user }) => {
         flexDirection: "row",
       }}
     >
-      <Image
-        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`}
-        width={90}
-        height={90}
-        style={styles.avatar}
-        // layout="responsive"
-        alt={`Foto von ${user.first_name} ${user.last_name}`}
-      />
+      {user.avatar && (
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`}
+          width={90}
+          height={90}
+          style={styles.avatar}
+          // layout="responsive"
+          alt={`Foto von ${user.first_name} ${user.last_name}`}
+        />
+      )}
       <View
         style={{
           justifyContent: "center",

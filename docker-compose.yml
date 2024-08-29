@@ -22,6 +22,7 @@ services:
       - ./directus/uploads:/directus/uploads
       - ./directus/extensions:/directus/extensions
     env_file: .env
+    restart: unless-stopped
 
   DB:
     container_name: rabe-DB

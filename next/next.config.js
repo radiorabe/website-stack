@@ -30,7 +30,7 @@ module.exports = {
       ],
     },
   },
-  output: "standalone",
+  // output: "standalone",
   eslint: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
