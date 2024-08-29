@@ -46,10 +46,9 @@ async function getTeamData() {
       {
         fields: [
           "*",
-          "members_staff.directus_users_id.first_name",
-          "members_staff.directus_users_id.last_name",
-          "members_staff.directus_users_id.email",
-          "members_staff.directus_users_id.avatar",
+          "members_staff.directus_users_id.*",
+          "members_management.directus_users_id.*",
+          "members_program.directus_users_id.*",
         ],
       },
       {
@@ -59,7 +58,7 @@ async function getTeamData() {
       }
     );
     let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
-    // console.log("ItemsPageTeam", item);
+    console.log("ItemsPageTeam", item);
 
     return item;
   } catch (error) {

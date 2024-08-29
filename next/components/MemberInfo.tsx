@@ -13,7 +13,10 @@ const { ids, styles } = StyleSheet.create({
   avatar: { borderRadius: 9 },
 });
 
-const LinkComponent = ({ user }) => {
+const MemberInfo = ({ user }) => {
+  let avatarSrc = user.avatar
+    ? `${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`
+    : "/images/anonym-profile.png";
   return (
     <View
       style={{
@@ -22,16 +25,15 @@ const LinkComponent = ({ user }) => {
         flexDirection: "row",
       }}
     >
-      {user.avatar && (
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`}
-          width={90}
-          height={90}
-          style={styles.avatar}
-          // layout="responsive"
-          alt={`Foto von ${user.first_name} ${user.last_name}`}
-        />
-      )}
+      <Image
+        src={avatarSrc}
+        width={90}
+        height={90}
+        style={styles.avatar}
+        // layout="responsive"
+        alt={`Foto von ${user.first_name} ${user.last_name}`}
+      />
+
       <View
         style={{
           justifyContent: "center",
@@ -56,4 +58,4 @@ const LinkComponent = ({ user }) => {
   );
 };
 
-export default LinkComponent;
+export default MemberInfo;
