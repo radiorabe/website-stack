@@ -113,6 +113,7 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.text,
     fontWeight: "100",
   },
+
   footer: {
     fontFamily: type.bold,
     fontSize: size.textSmall,

@@ -13,6 +13,22 @@ import Colors from "@/lib/Colors";
 import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import moment from "moment";
+import LinkComponent from "@/components/LinkComponent";
+import HoverText from "@/components/HoverText";
+
+export interface Show {
+  name: string;
+  description: string;
+  genre: string;
+  id: number;
+  instance_id: number;
+  record: number;
+  url: string;
+  image_path: string;
+  starts: string;
+  ends: string;
+}
 
 const { styles } = StyleSheet.create({
   container: {
@@ -40,27 +56,64 @@ export const metadata: Metadata = {
   title: "Programm",
 };
 
-async function getProgramData() {
-  try {
-    const itemResponse = await Api.readItemsPageTeam(
-      {
-        fields: [
-          "*",
-          "members_staff.directus_users_id.*",
-          "members_management.directus_users_id.*",
-          "members_program.directus_users_id.*",
-        ],
-      },
-      {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
-        cache:
-          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
-      }
-    );
-    let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
-    console.log("ItemsPageTeam", item);
+// async function getPageData() {
+//   try {
+//     const itemResponse = await Api.readItemsPageProgram(
+//       {
+//         fields: [
+//           "*",
+//           "members_staff.directus_users_id.*",
+//           "members_management.directus_users_id.*",
+//           "members_program.directus_users_id.*",
+//         ],
+//       },
+//       {
+//         next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+//         cache:
+//           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+//       }
+//     );
+//     let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
+//     console.log("ItemsPageTeam", item);
 
-    return item;
+//     return item;
+//   } catch (error) {
+//     console.error("error", error.error);
+
+//     notFound();
+//   }
+// }
+
+async function getLiveData() {
+  try {
+    return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
+      next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+      cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+    })
+      .then((response: any) => response.json())
+      .then((liveData: any) => {
+        // console.log("liveData", liveData);
+        // console.log("liveDataEnd");
+
+        let todayShows: Show[] = liveData.shows.previous.filter(
+          (item) => moment().startOf("day") < moment(item.ends)
+        );
+
+        let currentShow: Show = liveData.shows.current;
+        todayShows.push(currentShow);
+
+        let nextShowsToday = liveData.shows.next.filter(
+          (item) => moment().endOf("day") > moment(item.starts)
+        );
+        todayShows.push(...nextShowsToday);
+
+        return { todayShows, currentShow };
+      })
+      .catch((error) => {
+        console.log("error", error);
+
+        return { todayShows: [], currentShow: null };
+      });
   } catch (error) {
     console.error("error", error.error);
 
@@ -69,7 +122,7 @@ async function getProgramData() {
 }
 
 export default async function ProgramPage(props) {
-  const data = await getProgramData();
+  let { todayShows, currentShow } = await getLiveData();
   return (
     <View>
       <View style={styles.container}>
@@ -94,55 +147,72 @@ export default async function ProgramPage(props) {
             >
               {"\u2192"}
             </Text>
-            <Text style={{ ...Fonts.style.text }}>{"Team"}</Text>
+            <Text style={{ ...Fonts.style.text }}>{"Programm"}</Text>
           </View>
 
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.text }}>{data.text}</Text>
-          </View>
-
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.h3 }}>{"RaBe Staff"}</Text>
-            {data.members_staff && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-                {data.members_staff.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
-          </View>
-
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.h3 }}>{"Vorstandsmitglieder"}</Text>
-            {data.members_management && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-                {data.members_management.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
-          </View>
-
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.h3 }}>
-              {"Programmkommissionsmitglieder"}
+          <View
+            style={{
+              marginTop: Metrics.tripleBaseMargin,
+              padding: Metrics.doubleBaseMargin,
+              borderRadius: 9,
+              backgroundColor: Colors.lightGreen,
+            }}
+          >
+            <Text
+              style={{
+                ...Fonts.style.h2,
+                color: Colors.darkGreen,
+                paddingBottom: Metrics.baseMargin,
+              }}
+            >
+              {"Heutiges Programm"}
             </Text>
-            {data.members_program && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-                {data.members_program.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
+            <View
+              style={
+                {
+                  // flexDirection: "row",
+                }
+              }
+            >
+              {todayShows.map((show, index) => {
+                let isCurrentshow = show.starts === currentShow.starts;
+                return (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      paddingTop: Metrics.halfBaseMargin,
+                    }}
+                    key={"todayshows" + index}
+                  >
+                    <Text
+                      style={{
+                        ...Fonts.style.text,
+                        color: Colors.darkGreen,
+                        width: Metrics.baseMargin * 6,
+                        // paddingRight: Metrics.doubleBaseMargin,
+                      }}
+                    >
+                      {moment(show.starts).format("hh:mm")}
+                    </Text>
+                    <HoverText
+                      href={show.url}
+                      style={[
+                        {
+                          ...Fonts.style.navigation,
+                          fontSize: 18,
+                          color: isCurrentshow
+                            ? Colors.green
+                            : Colors.darkGreen,
+                        },
+                      ]}
+                      hoverStyle={{ color: Colors.green }}
+                    >
+                      {show.name}
+                    </HoverText>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         </View>
       </View>
