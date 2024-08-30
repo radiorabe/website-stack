@@ -5,7 +5,7 @@ import Fonts from "../../lib/Fonts";
 
 import { Metadata } from "next";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

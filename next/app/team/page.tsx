@@ -14,7 +14,7 @@ import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     maxWidth: 1280,
     width: "100%",

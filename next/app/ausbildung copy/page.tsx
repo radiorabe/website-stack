@@ -6,7 +6,7 @@ import { ItemsPageImpressum } from "../../lib/api/data-contracts";
 // import Layout from "../components/Layout";
 import { Metadata } from "next";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

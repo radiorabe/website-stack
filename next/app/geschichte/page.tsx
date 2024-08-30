@@ -3,7 +3,7 @@ import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

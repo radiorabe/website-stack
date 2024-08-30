@@ -8,7 +8,7 @@ import Fonts from "../../lib/Fonts";
 import { Api } from "../../lib/api";
 import { ItemsPageImpressum } from "../../lib/api/data-contracts";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

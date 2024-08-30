@@ -4,7 +4,7 @@ import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 // import Layout from "../components/Layout";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

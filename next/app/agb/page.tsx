@@ -8,7 +8,7 @@ import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,

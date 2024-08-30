@@ -95,7 +95,7 @@ export default async function ImpressumPage(props) {
   );
 }
 
-const styles = StyleSheet.create({
+const { styles } = StyleSheet.create({
   container: {
     alignItems: "center",
     flexGrow: 1,
