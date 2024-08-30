@@ -17,6 +17,7 @@ export interface HoverableProps {
   focusStyle?: TextStyle;
   href?: string;
   children?: any;
+  numberOfLines: number;
 }
 
 const HoverText = ({
@@ -26,6 +27,7 @@ const HoverText = ({
   focusStyle,
   children,
   href,
+  numberOfLines,
 }: HoverableProps) => {
   const pressable = (
     <Pressable style={{}}>
@@ -38,6 +40,8 @@ const HoverText = ({
               pressed && pressStyle,
               focused && focusStyle,
             ]}
+            numberOfLines={numberOfLines}
+            ellipsizeMode="tail"
           >
             {children}
           </Text>
@@ -48,7 +52,7 @@ const HoverText = ({
 
   if (href) {
     return (
-      <Link href={href} style={{ textDecoration: "none" }}>
+      <Link href={href} style={{ textDecoration: "none", maxWidth: `100%` }}>
         {pressable}
       </Link>
     );

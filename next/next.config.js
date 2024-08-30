@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: "/programm",
+        destination: "/programm/heute",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

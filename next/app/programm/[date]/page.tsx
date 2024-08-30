@@ -1,21 +1,18 @@
-import { Text, View } from "@/lib/server-react-native";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-import Fonts from "@/lib/Fonts";
-import { Api } from "@/lib/api";
-import {
-  ItemsPageTeam,
-  ItemsPageTeamDirectusUsers,
-  Users,
-} from "@/lib/api/data-contracts";
-import MemberInfo from "@/components/MemberInfo";
+import HoverText from "@/components/HoverText";
 import Colors from "@/lib/Colors";
+import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
+import moment from "moment";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import moment from "moment";
-import LinkComponent from "@/components/LinkComponent";
-import HoverText from "@/components/HoverText";
+import Calender from "./Calender";
+import Arrow from "./Arrow";
+import ButtonFull from "@/components/ButtonFull";
+import { ReactElement } from "react";
+import HoverUrlIcon from "@/components/HoverUrlIcon";
 
 export interface Show {
   name: string;
@@ -56,34 +53,6 @@ export const metadata: Metadata = {
   title: "Programm",
 };
 
-// async function getPageData() {
-//   try {
-//     const itemResponse = await Api.readItemsPageProgram(
-//       {
-//         fields: [
-//           "*",
-//           "members_staff.directus_users_id.*",
-//           "members_management.directus_users_id.*",
-//           "members_program.directus_users_id.*",
-//         ],
-//       },
-//       {
-//         next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
-//         cache:
-//           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
-//       }
-//     );
-//     let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
-//     console.log("ItemsPageTeam", item);
-
-//     return item;
-//   } catch (error) {
-//     console.error("error", error.error);
-
-//     notFound();
-//   }
-// }
-
 async function getLiveData() {
   try {
     return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
@@ -107,22 +76,36 @@ async function getLiveData() {
         );
         todayShows.push(...nextShowsToday);
 
-        return { todayShows, currentShow };
+        let shows = [
+          ...liveData.shows.previous,
+          currentShow,
+          ...liveData.shows.next,
+        ];
+
+        return { todayShows, currentShow, shows };
       })
       .catch((error) => {
         console.log("error", error);
 
-        return { todayShows: [], currentShow: null };
+        return { todayShows: [], currentShow: null, shows: [] };
       });
   } catch (error) {
     console.error("error", error.error);
-
-    notFound();
   }
 }
 
-export default async function ProgramPage(props) {
-  let { todayShows, currentShow } = await getLiveData();
+export default async function ProgramPage({ params }) {
+  let { todayShows, currentShow, shows } = await getLiveData();
+  var dateFormat = "DD-MM-YYYY"; // TODOOO WEEKNUMBER AND YEAR (less rendering for the server)
+  if (
+    params.date !== "heute" &&
+    !moment(params.date, dateFormat, true).isValid()
+  ) {
+    notFound();
+  }
+  let weekNumber =
+    params.date === "heute" ? moment().week() : moment(params.date).week();
+  console.log("weekNumber", weekNumber);
   return (
     <View>
       <View style={styles.container}>
@@ -214,6 +197,49 @@ export default async function ProgramPage(props) {
               })}
             </View>
           </View>
+        </View>
+        <View
+          style={{
+            width: "100%",
+          }}
+        >
+          <View
+            style={{
+              padding: Metrics.doubleBaseMargin,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                position: "absolute",
+                ...Fonts.style.h2,
+                paddingBottom: Metrics.baseMargin,
+              }}
+            >
+              {"Aktuelles Programm"}
+            </Text>
+            <View style={{ width: 40 }}></View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Arrow
+                color={Colors.darkGreen}
+                hoverColor={Colors.green}
+                url={""}
+                style={{ transform: "rotate(180deg)" }}
+              ></Arrow>
+              <Text style={{ ...Fonts.style.h4 }}>
+                {moment().format("MMMM YY")}
+              </Text>
+
+              <Arrow
+                color={Colors.darkGreen}
+                hoverColor={Colors.green}
+                url={""}
+              ></Arrow>
+            </View>
+            <ButtonFull href={"/beitraege"} label={"Heute"} />
+          </View>
+          <Calender shows={shows} week={0}></Calender>
         </View>
       </View>
     </View>
