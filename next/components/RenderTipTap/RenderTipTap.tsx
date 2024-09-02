@@ -28,7 +28,10 @@ async function getInfoBox(id) {
         fields: ["*"],
       },
       {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -49,7 +52,10 @@ async function getQuote(id) {
         fields: ["*"],
       },
       {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -70,7 +76,10 @@ async function getNodes(id) {
         fields: ["*"],
       },
       {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }

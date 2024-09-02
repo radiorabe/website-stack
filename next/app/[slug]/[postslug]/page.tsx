@@ -68,7 +68,10 @@ async function getPost(slug) {
         ],
       },
       {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -100,7 +103,10 @@ async function getRelatedPosts(slug) {
         limit: 3,
       },
       {
-        next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }

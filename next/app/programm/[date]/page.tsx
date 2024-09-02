@@ -56,7 +56,9 @@ export const metadata: Metadata = {
 async function getLiveData() {
   try {
     return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
-      next: { tags: process.env.NODE_ENV ? ["collection"] : undefined },
+      next: {
+        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined,
+      },
       cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
     })
       .then((response: any) => response.json())
