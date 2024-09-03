@@ -13,6 +13,7 @@ import Arrow from "./Arrow";
 import ButtonFull from "@/components/ButtonFull";
 import { ReactElement } from "react";
 import HoverUrlIcon from "@/components/HoverUrlIcon";
+import { logError } from "@/lib/loging";
 
 export interface Show {
   name: string;
@@ -59,7 +60,7 @@ async function getLiveData() {
       next: {
         revalidate: process.env.NODE_ENV === "production" ? 900 : undefined,
       },
-      cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
@@ -92,7 +93,7 @@ async function getLiveData() {
         return { todayShows: [], currentShow: null, shows: [] };
       });
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
   }
 }
 

@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import InfoBox from "./InfoBox";
 import Quote from "./Quote";
+import { logError } from "@/lib/loging";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library
@@ -39,7 +40,7 @@ async function getInfoBox(id) {
     let item: ItemsInfoBox = itemResponse.data.data;
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
     notFound();
   }
 }
@@ -63,7 +64,7 @@ async function getQuote(id) {
     let item: ItemsQuote = itemResponse.data.data;
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
     notFound();
   }
 }
@@ -87,7 +88,7 @@ async function getNodes(id) {
     let item: ItemsPostsEditorNodes = itemResponse.data.data;
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
     notFound();
   }
 }

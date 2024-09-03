@@ -12,6 +12,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Colors from "@/lib/Colors";
 import moment from "moment";
+import { logError } from "@/lib/loging";
 
 async function getPosts() {
   try {
@@ -45,7 +46,7 @@ async function getPosts() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
@@ -90,7 +91,7 @@ async function getPartyTips() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
