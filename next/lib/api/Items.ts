@@ -18,6 +18,16 @@ import {
   ReadItemsPageContactParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
+  ReadItemsPageProgramData,
+  ReadItemsPageProgramParams,
+  ReadItemsPageProgramPrograms1Data,
+  ReadItemsPageProgramPrograms1Params,
+  ReadItemsPageProgramPrograms2Data,
+  ReadItemsPageProgramPrograms2Params,
+  ReadItemsPageProgramPrograms3Data,
+  ReadItemsPageProgramPrograms3Params,
+  ReadItemsPageProgramProgramsData,
+  ReadItemsPageProgramProgramsParams,
   ReadItemsPageProgramsData,
   ReadItemsPageProgramsParams,
   ReadItemsPageTeamData,
@@ -50,6 +60,16 @@ import {
   ReadSingleItemsPageContactParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
+  ReadSingleItemsPageProgramData,
+  ReadSingleItemsPageProgramParams,
+  ReadSingleItemsPageProgramPrograms1Data,
+  ReadSingleItemsPageProgramPrograms1Params,
+  ReadSingleItemsPageProgramPrograms2Data,
+  ReadSingleItemsPageProgramPrograms2Params,
+  ReadSingleItemsPageProgramPrograms3Data,
+  ReadSingleItemsPageProgramPrograms3Params,
+  ReadSingleItemsPageProgramProgramsData,
+  ReadSingleItemsPageProgramProgramsParams,
   ReadSingleItemsPageProgramsData,
   ReadSingleItemsPageProgramsParams,
   ReadSingleItemsPageTeamData,
@@ -1060,6 +1080,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the page_program_programs_3 items.
+ *
+ * @tags Items, ItemsPageProgramPrograms3
+ * @name ReadItemsPageProgramPrograms3
+ * @summary List Items
+ * @request GET:/items/page_program_programs_3
+ * @secure
+ * @response `200` `ReadItemsPageProgramPrograms3Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageProgramPrograms3 = (query: ReadItemsPageProgramPrograms3Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramPrograms3Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_3`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_program_programs_3 item by unique identifier.
+ *
+ * @tags Items, ItemsPageProgramPrograms3
+ * @name ReadSingleItemsPageProgramPrograms3
+ * @summary Retrieve an Item
+ * @request GET:/items/page_program_programs_3/{id}
+ * @response `200` `ReadSingleItemsPageProgramPrograms3Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageProgramPrograms3 = (
+    { id, ...query }: ReadSingleItemsPageProgramPrograms3Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageProgramPrograms3Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_3/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the page_team_directus_users items.
  *
  * @tags Items, ItemsPageTeamDirectusUsers
@@ -1138,6 +1242,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_team_directus_users/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_program_programs items.
+ *
+ * @tags Items, ItemsPageProgramPrograms
+ * @name ReadItemsPageProgramPrograms
+ * @summary List Items
+ * @request GET:/items/page_program_programs
+ * @secure
+ * @response `200` `ReadItemsPageProgramProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageProgramPrograms = (query: ReadItemsPageProgramProgramsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_program_programs item by unique identifier.
+ *
+ * @tags Items, ItemsPageProgramPrograms
+ * @name ReadSingleItemsPageProgramPrograms
+ * @summary Retrieve an Item
+ * @request GET:/items/page_program_programs/{id}
+ * @response `200` `ReadSingleItemsPageProgramProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageProgramPrograms = (
+    { id, ...query }: ReadSingleItemsPageProgramProgramsParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageProgramProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -1312,6 +1500,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the page_program_programs_1 items.
+ *
+ * @tags Items, ItemsPageProgramPrograms1
+ * @name ReadItemsPageProgramPrograms1
+ * @summary List Items
+ * @request GET:/items/page_program_programs_1
+ * @secure
+ * @response `200` `ReadItemsPageProgramPrograms1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageProgramPrograms1 = (query: ReadItemsPageProgramPrograms1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramPrograms1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_1`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_program_programs_1 item by unique identifier.
+ *
+ * @tags Items, ItemsPageProgramPrograms1
+ * @name ReadSingleItemsPageProgramPrograms1
+ * @summary Retrieve an Item
+ * @request GET:/items/page_program_programs_1/{id}
+ * @response `200` `ReadSingleItemsPageProgramPrograms1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageProgramPrograms1 = (
+    { id, ...query }: ReadSingleItemsPageProgramPrograms1Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageProgramPrograms1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_1/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the party_tips items.
  *
  * @tags Items, ItemsPartyTips
@@ -1387,6 +1659,171 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/party_tips/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_program_programs_2 items.
+ *
+ * @tags Items, ItemsPageProgramPrograms2
+ * @name ReadItemsPageProgramPrograms2
+ * @summary List Items
+ * @request GET:/items/page_program_programs_2
+ * @secure
+ * @response `200` `ReadItemsPageProgramPrograms2Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageProgramPrograms2 = (query: ReadItemsPageProgramPrograms2Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramPrograms2Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_2`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_program_programs_2 item by unique identifier.
+ *
+ * @tags Items, ItemsPageProgramPrograms2
+ * @name ReadSingleItemsPageProgramPrograms2
+ * @summary Retrieve an Item
+ * @request GET:/items/page_program_programs_2/{id}
+ * @response `200` `ReadSingleItemsPageProgramPrograms2Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageProgramPrograms2 = (
+    { id, ...query }: ReadSingleItemsPageProgramPrograms2Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageProgramPrograms2Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program_programs_2/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_program items.
+ *
+ * @tags Items, ItemsPageProgram
+ * @name ReadItemsPageProgram
+ * @summary List Items
+ * @request GET:/items/page_program
+ * @secure
+ * @response `200` `ReadItemsPageProgramData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageProgram = (query: ReadItemsPageProgramParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageProgramData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_program item by unique identifier.
+ *
+ * @tags Items, ItemsPageProgram
+ * @name ReadSingleItemsPageProgram
+ * @summary Retrieve an Item
+ * @request GET:/items/page_program/{id}
+ * @response `200` `ReadSingleItemsPageProgramData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageProgram = ({ id, ...query }: ReadSingleItemsPageProgramParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageProgramData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_program/${id}`,
       method: "GET",
       query: query,
       format: "json",

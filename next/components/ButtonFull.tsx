@@ -23,12 +23,13 @@ export interface HoverableProps {
   href?: string;
   label: string;
   icon?: any;
+  style?: any;
 }
 
-const ButtonFull = ({ url, label, icon, href }: HoverableProps) => {
+const ButtonFull = ({ url, label, icon, href, style }: HoverableProps) => {
   const button = (
     <Pressable
-      style={{}}
+      style={style}
       onPress={() => {
         if (!href && url) Linking.openURL(url);
       }}

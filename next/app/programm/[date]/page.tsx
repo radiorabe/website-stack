@@ -14,6 +14,8 @@ import ButtonFull from "@/components/ButtonFull";
 import { ReactElement } from "react";
 import HoverUrlIcon from "@/components/HoverUrlIcon";
 import { logError } from "@/lib/loging";
+import { Api } from "@/lib/api";
+import { ItemsPageProgram } from "@/lib/api/data-contracts";
 
 export interface Show {
   name: string;
@@ -97,13 +99,44 @@ export async function getLiveData() {
   }
 }
 
+async function getPageData() {
+  try {
+    const infoResponse = await Api.readItemsPageProgram(
+      {
+        fields: [
+          "*",
+          "programs_group_1.programs_slug.*",
+          "programs_group_2.programs_slug.*",
+          "programs_group_3.programs_slug.*",
+        ],
+      },
+      {
+        // next: {
+        //   tags:
+        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        // },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", infoResponse);
+    let item: ItemsPageProgram = infoResponse.data.data as ItemsPageProgram;
+
+    console.log("program data: ", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+    notFound();
+  }
+}
+
 export default async function ProgramPage({ params }) {
   let { todayShows, currentShow, shows } = await getLiveData();
+  let data = await getPageData();
+  console.log("data", data);
   // params.date is of format 12-2024 Week 12 of year 2024
   let weeknumberString = params.date.split("-")[0];
-  console.log("weeknumberString", weeknumberString);
   let yearString = params.date.split("-")[1];
-  console.log("yearString", yearString);
   let currentYear = moment().year();
 
   if (
@@ -119,11 +152,8 @@ export default async function ProgramPage({ params }) {
 
   let weekNumber =
     params.date === "heute" ? moment().week() : parseInt(weeknumberString);
-  console.log("weekNumber", weekNumber);
   let year = params.date === "heute" ? moment().year() : parseInt(yearString);
-  console.log("year", year);
   let maxWeeksThisYear = moment(year + "-12-31").isoWeeksInYear();
-  console.log("maxWeeksThisYear", maxWeeksThisYear);
 
   let currentWeekNumber = moment().week();
 
@@ -321,6 +351,90 @@ export default async function ProgramPage({ params }) {
                 ></Arrow>
               </View>
             )}
+          </View>
+          <View
+            style={{
+              width: "70%",
+              alignSelf: "center",
+              alignItems: "center",
+              paddingTop: Metrics.tripleBaseMargin * 2,
+              paddingBottom: Metrics.tripleBaseMargin,
+            }}
+          >
+            <Text style={{ ...Fonts.style.h4 }}>
+              {data.programs_group_1_title}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                paddingTop: Metrics.halfBaseMargin,
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
+            >
+              {data.programs_group_1.map((program) => {
+                return (
+                  <ButtonFull
+                    style={{ padding: Metrics.halfBaseMargin }}
+                    href={program.programs_slug.slug}
+                    label={program.programs_slug.name}
+                  >
+                    {}
+                  </ButtonFull>
+                );
+              })}
+            </View>
+            <Text style={{ ...Fonts.style.h4 }}>
+              {data.programs_group_2_title}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                paddingTop: Metrics.halfBaseMargin,
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
+            >
+              {" "}
+              {data.programs_group_2.map((program) => {
+                return (
+                  <ButtonFull
+                    style={{ padding: Metrics.halfBaseMargin }}
+                    href={program.programs_slug.slug}
+                    label={program.programs_slug.name}
+                  >
+                    {}
+                  </ButtonFull>
+                );
+              })}
+            </View>
+            <Text style={{ ...Fonts.style.h4 }}>
+              {data.programs_group_3_title}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                paddingTop: Metrics.halfBaseMargin,
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
+            >
+              {" "}
+              {data.programs_group_3.map((program) => {
+                return (
+                  <ButtonFull
+                    style={{ padding: Metrics.halfBaseMargin }}
+                    href={program.programs_slug.slug}
+                    label={program.programs_slug.name}
+                  >
+                    {}
+                  </ButtonFull>
+                );
+              })}
+            </View>
           </View>
         </View>
       </View>
