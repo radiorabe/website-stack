@@ -6,6 +6,7 @@ import { ItemsPagePrograms } from "../../lib/api/data-contracts";
 import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import Sendung from "./Sendung";
+import { logError } from "@/lib/loging";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -46,7 +47,7 @@ async function getSendungsInfo() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
     notFound();
   }
 }
@@ -77,7 +78,7 @@ async function getSendungen() {
     // console.log("sendungen", sendungen);
     return sendungen;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
     notFound();
   }
 }

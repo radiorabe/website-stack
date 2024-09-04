@@ -7,6 +7,7 @@ import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 import { Api } from "../../lib/api";
 import { ItemsPageImpressum } from "../../lib/api/data-contracts";
+import { logError } from "@/lib/loging";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -57,7 +58,7 @@ async function getImpressum() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }

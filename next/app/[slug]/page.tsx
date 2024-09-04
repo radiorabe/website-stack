@@ -17,6 +17,7 @@ import IconShare from "../../assets/svg/IconShare";
 import ButtonFull from "@/components/ButtonFull";
 import MemberInfo from "@/components/MemberInfo";
 import PostPreview from "@/components/PostPreview";
+import { logError } from "@/lib/loging";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -64,7 +65,10 @@ async function getSendung(slug) {
       },
       // { id: slug, fields: ["*,team.directus_users_id.*"] },
       {
-        next: { tags: process.env.NODE_ENV === "production" ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -77,7 +81,7 @@ async function getSendung(slug) {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
@@ -99,7 +103,10 @@ async function getPosts(slug) {
         limit: 3,
       },
       {
-        next: { tags: process.env.NODE_ENV === "production" ? ["collection"] : undefined },
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -112,7 +119,7 @@ async function getPosts(slug) {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }

@@ -7,6 +7,7 @@ import RenderTipTap from "@/components/RenderTipTap";
 import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { logError } from "@/lib/loging";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -57,7 +58,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }

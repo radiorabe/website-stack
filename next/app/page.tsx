@@ -14,6 +14,7 @@ import Colors from "@/lib/Colors";
 import moment from "moment";
 import { getLiveData } from "./programm/[date]/page";
 import HoverText from "@/components/HoverText";
+import { logError } from "@/lib/loging";
 
 async function getPosts() {
   try {
@@ -47,7 +48,7 @@ async function getPosts() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
@@ -92,7 +93,7 @@ async function getPartyTips() {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }

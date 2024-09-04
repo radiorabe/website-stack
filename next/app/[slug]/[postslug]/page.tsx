@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../assets/svg/IconShare";
+import { logError } from "@/lib/loging";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -81,7 +82,7 @@ async function getPost(slug) {
 
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
@@ -116,7 +117,7 @@ async function getRelatedPosts(slug) {
     // console.log("posts", item);
     return item;
   } catch (error) {
-    console.error("error", error.error);
+    logError(error);
 
     notFound();
   }
