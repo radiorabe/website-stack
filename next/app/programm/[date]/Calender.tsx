@@ -44,17 +44,15 @@ const { styles } = StyleSheet.create({
 });
 
 export default function Calender({ shows, week }) {
-  let currentDay = moment().startOf("day");
-  let calenderDay = moment().startOf("week").add(1, "days").add(week, "weeks");
+  let monday = moment()
+    .startOf("year")
+    .add(week - 1, "weeks");
+  console.log("monday", monday);
 
-  // console.log("currentDay", currentDay);
-  // console.log("calenderDay", calenderDay);
   return (
     <View
       style={{
         flexDirection: "row",
-
-        // paddingHorizontal: Metrics.baseMargin,
       }}
     >
       {[
@@ -66,15 +64,12 @@ export default function Calender({ shows, week }) {
         "Samstag",
         "Sonntag",
       ].map((weekday, index) => {
-        let thisDay = moment(calenderDay).add(index, "days");
-        // console.log("thisDay", thisDay);
+        let thisDay = moment(monday).add(index, "days");
         let nextDay = moment(thisDay).add(1, "days");
-        // console.log("nextDay", nextDay);
         let dayShows = shows.filter(
           (item) =>
             thisDay < moment(item.starts) && nextDay > moment(item.starts)
         );
-        // console.log("dayShows", dayShows);
         return (
           <View
             key={"weekday" + index}
@@ -87,8 +82,9 @@ export default function Calender({ shows, week }) {
               style={{
                 width: `100%`,
                 backgroundColor: Colors.darkGreen,
-                paddingVertical: Metrics.baseMargin,
+                height: 94,
                 alignItems: "center",
+                justifyContent: "center",
                 marginBottom: Metrics.doubleBaseMargin,
               }}
             >

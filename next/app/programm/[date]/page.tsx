@@ -99,16 +99,52 @@ export async function getLiveData() {
 
 export default async function ProgramPage({ params }) {
   let { todayShows, currentShow, shows } = await getLiveData();
-  var dateFormat = "DD-MM-YYYY"; // TODOOO WEEKNUMBER AND YEAR (less rendering for the server)
+  // params.date is of format 12-2024 Week 12 of year 2024
+  let weeknumberString = params.date.split("-")[0];
+  console.log("weeknumberString", weeknumberString);
+  let yearString = params.date.split("-")[1];
+  console.log("yearString", yearString);
+  let currentYear = moment().year();
+
   if (
     params.date !== "heute" &&
-    !moment(params.date, dateFormat, true).isValid()
+    (parseInt(weeknumberString) < 0 ||
+      parseInt(weeknumberString) > 54 ||
+      parseInt(yearString) > currentYear + 1 ||
+      parseInt(yearString) < currentYear)
   ) {
+    console.log("not found", params.date);
     notFound();
   }
+
   let weekNumber =
-    params.date === "heute" ? moment().week() : moment(params.date).week();
+    params.date === "heute" ? moment().week() : parseInt(weeknumberString);
   console.log("weekNumber", weekNumber);
+  let year = params.date === "heute" ? moment().year() : parseInt(yearString);
+  console.log("year", year);
+  let maxWeeksThisYear = moment(year + "-12-31").isoWeeksInYear();
+  console.log("maxWeeksThisYear", maxWeeksThisYear);
+
+  let currentWeekNumber = moment().week();
+
+  let nextWeekNumber = weekNumber + (1 % maxWeeksThisYear);
+  let nextYearNumber = weekNumber < maxWeeksThisYear ? year : year + 1;
+
+  let prevWeekNumber =
+    weekNumber <= currentWeekNumber ? currentWeekNumber : weekNumber - 1;
+  let prevYearNumber = weekNumber === 1 ? year - 1 : year;
+
+  let nextMonthWeekNumber = weekNumber + 4;
+  let nextMonthYearNumber = year;
+
+  let prevMonthWeekNumber = weekNumber - 4;
+  let prevMonthYearNumber = year;
+
+  let hideNextMonthArrow = nextMonthWeekNumber > currentWeekNumber + 8; // not more than 8 weeks
+  let hidePrevMonthArrow = prevMonthWeekNumber < currentWeekNumber; // do not go back this week
+  let hideNextWeekArrow = nextWeekNumber > currentWeekNumber + 8;
+  let hidePrevWeekArrow = prevWeekNumber < currentWeekNumber;
+
   return (
     <View>
       <View style={styles.container}>
@@ -178,7 +214,7 @@ export default async function ProgramPage({ params }) {
                         // paddingRight: Metrics.doubleBaseMargin,
                       }}
                     >
-                      {moment(show.starts).format("hh:mm")}
+                      {moment(show.starts).format("HH:mm")}
                     </Text>
                     <HoverText
                       href={show.url}
@@ -224,25 +260,68 @@ export default async function ProgramPage({ params }) {
             </Text>
             <View style={{ width: 40 }}></View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Arrow
-                color={Colors.darkGreen}
-                hoverColor={Colors.green}
-                url={""}
-                style={{ transform: "rotate(180deg)" }}
-              ></Arrow>
+              {!hidePrevMonthArrow && (
+                <Arrow
+                  color={Colors.darkGreen}
+                  hoverColor={Colors.green}
+                  href={`/programm/${prevMonthWeekNumber}-${prevMonthYearNumber}`}
+                  style={{ transform: "rotate(180deg)" }}
+                ></Arrow>
+              )}
               <Text style={{ ...Fonts.style.h4 }}>
-                {moment().format("MMMM YY")}
+                {moment(year, "YYYY")
+                  .add(weekNumber, "weeks")
+                  .format("MMMM YY")}
               </Text>
 
-              <Arrow
-                color={Colors.darkGreen}
-                hoverColor={Colors.green}
-                url={""}
-              ></Arrow>
+              {!hideNextMonthArrow && (
+                <Arrow
+                  color={Colors.darkGreen}
+                  hoverColor={Colors.green}
+                  href={`/programm/${nextMonthWeekNumber}-${nextMonthYearNumber}`}
+                ></Arrow>
+              )}
             </View>
-            <ButtonFull href={"/beitraege"} label={"Heute"} />
+            <ButtonFull href={"/programm"} label={"Heute"} />
           </View>
-          <Calender shows={shows} week={0}></Calender>
+          <View>
+            <Calender shows={shows} week={weekNumber}></Calender>
+            {!hidePrevWeekArrow && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: 94,
+                  justifyContent: "center",
+                }}
+              >
+                <Arrow
+                  color={Colors.lightGreen}
+                  hoverColor={Colors.green}
+                  href={`/programm/${prevWeekNumber}-${prevYearNumber}`}
+                  style={{ transform: "rotate(180deg)" }}
+                ></Arrow>
+              </View>
+            )}
+            {!hideNextWeekArrow && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  height: 94,
+                  justifyContent: "center",
+                }}
+              >
+                <Arrow
+                  color={Colors.lightGreen}
+                  hoverColor={Colors.green}
+                  href={`/programm/${nextWeekNumber}-${nextYearNumber}`}
+                ></Arrow>
+              </View>
+            )}
+          </View>
         </View>
       </View>
     </View>

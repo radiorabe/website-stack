@@ -192,7 +192,7 @@ export default async function HomePage(props) {
                           // paddingRight: Metrics.doubleBaseMargin,
                         }}
                       >
-                        {moment(show.starts).format("hh:mm")}
+                        {moment(show.starts).format("HH:mm")}
                       </Text>
                       <HoverText
                         href={show.url}
