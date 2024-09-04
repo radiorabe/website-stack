@@ -12,6 +12,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Colors from "@/lib/Colors";
 import moment from "moment";
+import { getLiveData } from "./programm/[date]/page";
+import HoverText from "@/components/HoverText";
 
 async function getPosts() {
   try {
@@ -103,6 +105,7 @@ export const metadata: Metadata = {
 export default async function HomePage(props) {
   const posts = await getPosts();
   const partyTips = await getPartyTips();
+  let { todayShows, currentShow, shows } = await getLiveData();
 
   return (
     <View>
@@ -153,9 +156,63 @@ export default async function HomePage(props) {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text style={{ ...Fonts.style.h3, color: Colors.white }}>
-              {"Heutiges Programm"}
-            </Text>
+            <View style={{}}>
+              <Text
+                style={{
+                  ...Fonts.style.h3,
+                  color: Colors.lightGreen,
+                  paddingBottom: Metrics.doubleBaseMargin,
+                }}
+              >
+                {"Heutiges Programm"}
+              </Text>
+              <View
+                style={
+                  {
+                    // flexDirection: "row",
+                  }
+                }
+              >
+                {todayShows.map((show, index) => {
+                  let isCurrentshow = show.starts === currentShow.starts;
+                  return (
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        paddingTop: Metrics.halfBaseMargin,
+                      }}
+                      key={"todayshows" + index}
+                    >
+                      <Text
+                        style={{
+                          ...Fonts.style.text,
+                          color: Colors.lightGreen,
+                          width: Metrics.baseMargin * 6,
+                          // paddingRight: Metrics.doubleBaseMargin,
+                        }}
+                      >
+                        {moment(show.starts).format("hh:mm")}
+                      </Text>
+                      <HoverText
+                        href={show.url}
+                        style={[
+                          {
+                            ...Fonts.style.navigation,
+                            fontSize: 18,
+                            color: isCurrentshow
+                              ? Colors.green
+                              : Colors.lightGreen,
+                          },
+                        ]}
+                        hoverStyle={{ color: Colors.green }}
+                      >
+                        {show.name}
+                      </HoverText>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
             <Text style={{ ...Fonts.style.h3, color: Colors.white }}>
               {"Playlist"}
             </Text>

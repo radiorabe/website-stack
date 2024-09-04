@@ -17,7 +17,7 @@ export interface HoverableProps {
   focusStyle?: TextStyle;
   href?: string;
   children?: any;
-  numberOfLines: number;
+  numberOfLines?: number;
 }
 
 const HoverText = ({

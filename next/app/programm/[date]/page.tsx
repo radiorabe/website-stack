@@ -53,17 +53,17 @@ export const metadata: Metadata = {
   title: "Programm",
 };
 
-async function getLiveData() {
+export async function getLiveData() {
   try {
     return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
       next: {
-        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined,
+        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
       },
       cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
-        // console.log("liveData", liveData);
+        console.log("liveData", liveData);
         // console.log("liveDataEnd");
 
         let todayShows: Show[] = liveData.shows.previous.filter(
