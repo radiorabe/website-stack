@@ -69,9 +69,9 @@ async function getQuote(id) {
   }
 }
 
-async function getNodes(id) {
+async function getNodes(id, readNodes) {
   try {
-    const itemResponse = await Api.readSingleItemsPostsEditorNodes(
+    const itemResponse = await readNodes(
       {
         id: id,
         fields: ["*"],
@@ -190,21 +190,36 @@ const nodeHandlers: TipTapNodeHandlers = {
   blockquote: (props) => <blockquote>{props.children}</blockquote>,
   "relation-block": async (props) => {
     // console.log("relationBlock", props);
-    let node = await getNodes(props.node.attrs.id);
+    // console.log("junction", props.node.attrs.junction);
+
+    const ApiMapper = {
+      page_receive_nodes: Api.readSingleItemsPageReceiveNodes,
+      posts_editor_nodes: Api.readSingleItemsPostsEditorNodes,
+    };
+    if (ApiMapper[props.node.attrs.junction]) {
+      let node = await getNodes(
+        props.node.attrs.id,
+        ApiMapper[props.node.attrs.junction]
+      );
+      if (props.node.attrs.collection === "quote") {
+        let quote = await getQuote(node.item);
+        // console.log("quote", quote);
+
+        return <Quote data={quote}></Quote>;
+      }
+      if (props.node.attrs.collection === "info_box") {
+        // console.log("info_box");
+        let infoBoxData = await getInfoBox(node.item);
+        // console.log("infoBoxData", infoBoxData);
+        return <InfoBox data={infoBoxData}></InfoBox>;
+      }
+    } else {
+      console.error(
+        "Junction Node Mapping is missing new Apifunction for: ",
+        Api.readSingleItemsInfoBox
+      );
+    }
     // console.log("node", node);
-
-    if (props.node.attrs.collection === "quote") {
-      let quote = await getQuote(node.item);
-      // console.log("quote", quote);
-
-      return <Quote data={quote}></Quote>;
-    }
-    if (props.node.attrs.collection === "info_box") {
-      // console.log("info_box");
-      let infoBoxData = await getInfoBox(node.item);
-      // console.log("infoBoxData", infoBoxData);
-      return <InfoBox data={infoBoxData}></InfoBox>;
-    }
   },
 };
 

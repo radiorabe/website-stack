@@ -3,6 +3,12 @@ import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 // import Layout from "../components/Layout";
 import { Metadata } from "next";
+import RenderTipTap from "@/components/RenderTipTap";
+import { logError } from "@/lib/loging";
+import { notFound } from "next/navigation";
+import Metrics from "@/lib/Metrics";
+import { ItemsPageReceive } from "@/lib/api/data-contracts";
+import { Api } from "@/lib/api";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -29,11 +35,51 @@ export const metadata: Metadata = {
   title: "Empfangen",
 };
 
-export default async function ImpressumPage(props) {
+async function getPageData() {
+  try {
+    const itemResponse = await Api.readItemsPageReceive(
+      {
+        fields: ["*"],
+        // limit: 3,
+      },
+      {
+        //   next: {
+        //     tags:
+        //       process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        //   },
+        cache: "no-store",
+        //   cache:
+        //     process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPageReceive = itemResponse.data.data as ItemsPageReceive;
+    // console.log("ItemsPageImpressum", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
+
+    return item;
+  } catch (error) {
+    logError(error);
+
+    notFound();
+  }
+}
+
+export default async function ReceivePage(props) {
+  const data = await getPageData();
+
   return (
     <View>
-      <View>
-        <Text>{"Empfangen"}</Text>
+      <View
+        style={{
+          maxWidth: 1280,
+          width: "100%",
+          alignSelf: "center",
+          padding: Metrics.tripleBaseMargin,
+        }}
+      >
+        {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
       </View>
     </View>
   );

@@ -373,9 +373,10 @@ export default async function ProgramPage({ params }) {
                 paddingBottom: Metrics.doubleBaseMargin,
               }}
             >
-              {data.programs_group_1.map((program) => {
+              {data.programs_group_1.map((program, index) => {
                 return (
                   <ButtonFull
+                    key={"Group1-" + index}
                     style={{ padding: Metrics.halfBaseMargin }}
                     href={program.programs_slug.slug}
                     label={program.programs_slug.name}
@@ -397,10 +398,10 @@ export default async function ProgramPage({ params }) {
                 paddingBottom: Metrics.doubleBaseMargin,
               }}
             >
-              {" "}
-              {data.programs_group_2.map((program) => {
+              {data.programs_group_2.map((program, index) => {
                 return (
                   <ButtonFull
+                    key={"Group2-" + index}
                     style={{ padding: Metrics.halfBaseMargin }}
                     href={program.programs_slug.slug}
                     label={program.programs_slug.name}
@@ -422,10 +423,10 @@ export default async function ProgramPage({ params }) {
                 paddingBottom: Metrics.doubleBaseMargin,
               }}
             >
-              {" "}
-              {data.programs_group_3.map((program) => {
+              {data.programs_group_3.map((program, index) => {
                 return (
                   <ButtonFull
+                    key={"Group3-" + index}
                     style={{ padding: Metrics.halfBaseMargin }}
                     href={program.programs_slug.slug}
                     label={program.programs_slug.name}

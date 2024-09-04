@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   title: "Impressum",
 };
 
-async function getImpressum() {
+async function getPageData() {
   try {
     const itemResponse = await Api.readItemsPageImpressum(
       {
@@ -65,7 +65,7 @@ async function getImpressum() {
 }
 
 export default async function ImpressumPage(props) {
-  const data = await getImpressum();
+  const data = await getPageData();
 
   return (
     <View>
