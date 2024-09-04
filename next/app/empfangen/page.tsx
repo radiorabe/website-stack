@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import Metrics from "@/lib/Metrics";
 import { ItemsPageReceive } from "@/lib/api/data-contracts";
 import { Api } from "@/lib/api";
+import Colors from "@/lib/Colors";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -71,15 +72,32 @@ export default async function ReceivePage(props) {
 
   return (
     <View>
-      <View
-        style={{
-          maxWidth: 1280,
-          width: "100%",
-          alignSelf: "center",
-          padding: Metrics.tripleBaseMargin,
-        }}
-      >
-        {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
+      <View style={styles.container}>
+        <View
+          style={{
+            width: "75%",
+            padding: Metrics.tripleBaseMargin,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              // backgroundColor: "green",
+            }}
+          >
+            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
+            <Text
+              style={[
+                { ...Fonts.style.h4 },
+                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
+              ]}
+            >
+              {"\u2192"}
+            </Text>
+            <Text style={{ ...Fonts.style.text }}>{"Empfangen"}</Text>
+          </View>
+          {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
+        </View>
       </View>
     </View>
   );
