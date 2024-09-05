@@ -47,13 +47,13 @@ async function getPageData() {
         // limit: 3,
       },
       {
-        //   next: {
-        //     tags:
-        //       process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        //   },
-        cache: "no-store",
-        //   cache:
-        //     process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        // cache: "no-store",
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);
@@ -75,7 +75,14 @@ export default async function HistoryPage(props) {
   console.log("data", data.protocols);
   return (
     <View>
-      <View style={styles.container}>
+      <View
+        style={{
+          maxWidth: 1280,
+          width: "100%",
+          alignSelf: "center",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             width: "75%",

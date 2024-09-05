@@ -18,7 +18,7 @@ export interface HoverableProps {
   children?: any;
 }
 
-const HoverText = ({
+const HoverUrl = ({
   style,
   hoverStyle,
   pressStyle,
@@ -27,12 +27,6 @@ const HoverText = ({
   children,
 }: HoverableProps) => {
   return (
-    //   <TouchableWithoutFeedback
-    //   onPress={() => {
-    //     if (hasWindow) Linking.openURL("https://www.aarefabrik.ch");
-    //   }}
-    // >
-    //             </TouchableWithoutFeedback>
     <Pressable style={{}} onPress={() => Linking.openURL(url)}>
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
@@ -52,4 +46,4 @@ const HoverText = ({
   );
 };
 
-export default HoverText;
+export default HoverUrl;

@@ -72,7 +72,14 @@ export default async function ReceivePage(props) {
 
   return (
     <View>
-      <View style={styles.container}>
+      <View
+        style={{
+          maxWidth: 1280,
+          width: "100%",
+          alignSelf: "center",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             width: "75%",
