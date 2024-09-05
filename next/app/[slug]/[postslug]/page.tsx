@@ -223,7 +223,7 @@ export default async function DynamicPage({ params }) {
             </View>
           )}
 
-          {post.text && <RenderTipTap content={post.text}></RenderTipTap>}
+          {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
           {post.audio && (
             <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
               <AudioFilePlayer
