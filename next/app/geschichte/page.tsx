@@ -1,15 +1,16 @@
+import RenderTipTap from "@/components/RenderTipTap";
+import { Api } from "@/lib/api";
+import { ItemsPageHistory } from "@/lib/api/data-contracts";
+import Colors from "@/lib/Colors";
+import { logError } from "@/lib/loging";
+import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
-// import Layout from "../components/Layout";
-import { Metadata } from "next";
-import RenderTipTap from "@/components/RenderTipTap";
-import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
-import Metrics from "@/lib/Metrics";
-import { ItemsPageHistory, ItemsPageReceive } from "@/lib/api/data-contracts";
-import { Api } from "@/lib/api";
-import Colors from "@/lib/Colors";
+import DownloadBox from "./DownloadBox";
+import DownloadProtocol from "./DownloadProtocol";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -40,7 +41,7 @@ async function getPageData() {
   try {
     const itemResponse = await Api.readItemsPageHistory(
       {
-        fields: ["*"],
+        fields: ["*", "protocols.protocol_id.*"],
         // limit: 3,
       },
       {
@@ -69,7 +70,7 @@ async function getPageData() {
 
 export default async function HistoryPage(props) {
   const data = await getPageData();
-
+  console.log("data", data.protocols);
   return (
     <View>
       <View style={styles.container}>
@@ -97,6 +98,54 @@ export default async function HistoryPage(props) {
             <Text style={{ ...Fonts.style.text }}>{"Geschichte"}</Text>
           </View>
           {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <DownloadBox
+              label="Unser Leitbild"
+              url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.vision}?download`}
+            ></DownloadBox>
+            <DownloadBox
+              label="Statuten"
+              url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.statutes}?download`}
+            ></DownloadBox>
+          </View>
+          <View>
+            <View
+              style={{
+                marginTop: Metrics.tripleBaseMargin,
+                padding: Metrics.doubleBaseMargin,
+                borderRadius: 9,
+                backgroundColor: Colors.lightGreen,
+              }}
+            >
+              <Text
+                style={{
+                  ...Fonts.style.h4,
+                }}
+              >
+                {"Protokolle der Mitgliederversammlungen"}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                }}
+              >
+                {data.protocols &&
+                  data.protocols.map((item, index) => {
+                    return (
+                      <DownloadProtocol
+                        label={item.protocol_id.name}
+                        url={item.protocol_id.file}
+                      ></DownloadProtocol>
+                      // <View key={"protocol-" + index}>
+                      //   <Text>{item.protocol_id.name}</Text>
+                      // </View>
+                    );
+                  })}
+              </View>
+            </View>
+          </View>
         </View>
       </View>
     </View>
