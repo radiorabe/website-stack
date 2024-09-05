@@ -11,6 +11,8 @@ import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
 import DownloadBox from "./DownloadBox";
 import DownloadProtocol from "./DownloadProtocol";
+import Image from "next/image";
+import DownloadLogo from "./DownloadLogo";
 
 const { styles } = StyleSheet.create({
   container: {
@@ -41,7 +43,7 @@ async function getPageData() {
   try {
     const itemResponse = await Api.readItemsPageHistory(
       {
-        fields: ["*", "protocols.protocol_id.*"],
+        fields: ["*", "protocols.protocol_id.*", "logos.directus_files_id"],
         // limit: 3,
       },
       {
@@ -135,12 +137,51 @@ export default async function HistoryPage(props) {
                   data.protocols.map((item, index) => {
                     return (
                       <DownloadProtocol
+                        key={"protocol" + index}
                         label={item.protocol_id.name}
                         url={item.protocol_id.file}
                       ></DownloadProtocol>
-                      // <View key={"protocol-" + index}>
-                      //   <Text>{item.protocol_id.name}</Text>
-                      // </View>
+                    );
+                  })}
+              </View>
+            </View>
+            <View>
+              <Text
+                style={{
+                  ...Fonts.style.h2,
+                  paddingVertical: Metrics.tripleBaseMargin,
+                }}
+              >
+                {"Logo Downloads"}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                }}
+              >
+                {data.logos &&
+                  data.logos.map((item, index) => {
+                    return (
+                      <DownloadLogo
+                        key={"logo" + index}
+                        label={"logo" + index}
+                        url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}`}
+                        style={{
+                          marginLeft: index ? Metrics.doubleBaseMargin : 0,
+                        }}
+                      ></DownloadLogo>
+                      // <Image
+                      //   key={"logo" + index}
+                      //   src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}?width=120&height=120&fit=cover`}
+                      //   width={120}
+                      //   height={120}
+                      //   style={{
+                      //     marginLeft: index ? Metrics.doubleBaseMargin : 0,
+                      //     borderRadius: 9,
+                      //   }}
+                      //   layout="responsive"
+                      //   alt={"sendung.name"}
+                      // ></Image>
                     );
                   })}
               </View>
