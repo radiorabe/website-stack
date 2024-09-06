@@ -295,6 +295,7 @@ export default async function KontaktPage(props) {
                 </Text>
               </View>
               <View style={{ width: "50%" }}>
+                <Text style={{ ...Fonts.style.text }}>{"Stellvertreter:"}</Text>
                 <Text style={{ ...Fonts.style.text }}>
                   {data.ombuds_name_2}
                 </Text>
