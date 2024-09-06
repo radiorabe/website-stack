@@ -326,25 +326,41 @@ export default async function KontaktPage(props) {
             style={{
               ...Fonts.style.h2,
               color: Colors.lightGreen,
+              paddingBottom: Metrics.doubleBaseMargin,
             }}
           >
             {"Partnerorganisationen:"}
           </Text>
-          <View style={{ flexDirection: "row" }}>
-            {data.partner_logos.map((item, index) => {
-              return (
-                <View key={"partner" + index}>
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}?width=240&height=160&fit=cover`}
-                    width={240}
-                    height={160}
-                    layout="responsive"
-                    alt={"partner" + index}
-                  ></Image>
-                </View>
-              );
-            })}
-          </View>
+          {data.partner_logos && (
+            <View style={{ flexDirection: "row" }}>
+              {data.partner_logos.map((item, index) => {
+                return (
+                  <View
+                    key={"partner" + index}
+                    style={{
+                      flexGrow: 1,
+                      borderLeftColor: Colors.white,
+                      borderLeftWidth: index && 2,
+                    }}
+                  >
+                    <View
+                      style={{
+                        marginHorizontal: Metrics.baseMargin,
+                      }}
+                    >
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}?width=240&height=160&fit=cover`}
+                        width={240}
+                        height={160}
+                        layout="responsive"
+                        alt={"partner" + index}
+                      ></Image>
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          )}
         </View>
       </View>
     </View>
