@@ -2569,6 +2569,11 @@ globals@^11.1.0:
   resolved "https://registry.npmjs.org/globals/-/globals-11.12.0.tgz"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
+google-maps-react-markers@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/google-maps-react-markers/-/google-maps-react-markers-2.0.11.tgz#d2388a9290f00fe34394bd8bacc327a29a1c3466"
+  integrity sha512-OgtxdR0ZeqW71fh1Y8P3iyiJnrUEZ7DZgCvj/wHBx9KRsOYUTc61dLjmZAkQ+hQ0Ms8LcGuwHV6N8QwSJHYL5A==
+
 gopd@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/gopd/-/gopd-1.0.1.tgz"

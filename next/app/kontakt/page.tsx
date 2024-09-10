@@ -1,7 +1,6 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../lib/Fonts";
-// import Layout from "../components/Layout";
 import { Metadata } from "next";
 import RenderTipTap from "@/components/RenderTipTap";
 import { logError } from "@/lib/loging";
@@ -12,27 +11,7 @@ import { Api } from "@/lib/api";
 import Colors from "@/lib/Colors";
 import HoverUrl from "@/components/HoverUrl";
 import Image from "next/image";
-
-const { styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
-  },
-  link: {
-    color: "blue",
-  },
-  textContainer: {
-    alignItems: "center",
-    marginTop: 16,
-  },
-  text: {
-    ...Fonts.style.text,
-    alignItems: "center",
-    fontSize: 24,
-    marginBottom: 24,
-  },
-});
+import Map from "./Map";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -148,6 +127,26 @@ export default async function KontaktPage(props) {
                 {data.email}
               </HoverUrl>
             </View>
+          </View>
+          <View>
+            <Map
+              lat={
+                data.location &&
+                data.location.coordinates &&
+                data.location.coordinates[1]
+                  ? data.location.coordinates[1]
+                  : 46.9
+              }
+              lng={
+                data.location &&
+                data.location.coordinates &&
+                data.location.coordinates[0]
+                  ? data.location.coordinates[0]
+                  : 7.4
+              }
+              // lat={data.lat ? data.lat : 46.9}
+              // lng={data.lng ? data.lng : 7.4}
+            ></Map>
           </View>
           <View>
             <Text
@@ -367,3 +366,5 @@ export default async function KontaktPage(props) {
     </View>
   );
 }
+
+const { styles } = StyleSheet.create({});

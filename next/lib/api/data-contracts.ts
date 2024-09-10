@@ -339,6 +339,7 @@ export interface ItemsPageContact {
   ombuds_city_2?: string | null;
   ombuds_postfach?: string | null;
   ombuds_postfach_2?: string | null;
+  location?: object | null;
   contact_addresses?: (number | ItemsPageContactContactAddress)[] | null;
   partner_logos?: (number | ItemsPageContactFiles)[] | null;
 }
