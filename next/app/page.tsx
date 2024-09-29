@@ -2,7 +2,11 @@ import { View, Text } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "@/lib/Fonts";
 import { Api } from "@/lib/api";
-import { ItemsPartyTips, ItemsPosts } from "@/lib/api/data-contracts";
+import {
+  ItemsPartyLocation,
+  ItemsPartyTips,
+  ItemsPosts,
+} from "@/lib/api/data-contracts";
 import Button from "@/components/Button";
 import ButtonFull from "@/components/ButtonFull";
 import PostPreview from "@/components/PostPreview";
@@ -15,6 +19,7 @@ import moment from "moment";
 import { getLiveData } from "./programm/[date]/page";
 import HoverText from "@/components/HoverText";
 import { logError } from "@/lib/loging";
+import Image from "next/image";
 
 async function getPosts() {
   try {
@@ -65,6 +70,7 @@ async function getPartyTips() {
           "url",
           "address_line_1",
           "address_line_2",
+          "party_location.*",
         ],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -87,7 +93,7 @@ async function getPartyTips() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPartyTips[] = itemResponse.data.data;
-    // console.log("partyTips", item);
+
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -240,18 +246,26 @@ export default async function HomePage(props) {
               }}
             >
               {partyTips.map((item, index) => {
+                let partyLocation: ItemsPartyLocation = item.party_location;
                 return (
                   <View
                     key={"partyTips" + index}
                     style={{
                       width: "100%",
                       flexDirection: "row",
-                      justifyContent: "space-between",
+                      justifyContent: "flex-start",
                       alignItems: "center",
                     }}
                   >
-                    <PartyTip></PartyTip>
-                    <View>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
+                      width={70}
+                      height={70}
+                      style={{ paddingRight: Metrics.doubleBaseMargin }}
+                      // layout="responsive"
+                      alt={partyLocation.address_line_1}
+                    />
+                    <View style={{ width: "50%" }}>
                       <Text
                         style={{
                           ...Fonts.style.h3,
@@ -268,20 +282,20 @@ export default async function HomePage(props) {
                       </Text>
                     </View>
 
-                    <View>
+                    <View style={{ flexGrow: 1 }}>
                       <Text
                         style={{
                           ...Fonts.style.text,
                         }}
                       >
-                        {item.address_line_1}
+                        {partyLocation.address_line_1}
                       </Text>
                       <Text
                         style={{
                           ...Fonts.style.text,
                         }}
                       >
-                        {item.address_line_2}
+                        {partyLocation.address_line_2}
                       </Text>
                       <Text
                         style={{
@@ -295,7 +309,10 @@ export default async function HomePage(props) {
                       </Text>
                     </View>
                     <View>
-                      <Button url={item.url} label={"Website"}></Button>
+                      <Button
+                        url={partyLocation.url}
+                        label={"Website"}
+                      ></Button>
                     </View>
                   </View>
                 );
