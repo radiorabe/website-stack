@@ -16,11 +16,19 @@ export interface HoverableProps {
   url: string;
   label: string;
   icon?: any;
+  disabled?: boolean;
 }
 
-const Button = ({ url, label, icon }: HoverableProps) => {
+const Button = ({ url, label, icon, disabled }: HoverableProps) => {
   return (
-    <Pressable style={{}} onPress={() => Linking.openURL(url)}>
+    <Pressable
+      style={{}}
+      onPress={() => {
+        if (!disabled) {
+          Linking.openURL(url);
+        }
+      }}
+    >
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
           <View

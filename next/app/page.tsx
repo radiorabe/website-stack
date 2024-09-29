@@ -25,7 +25,7 @@ async function getPosts() {
   try {
     const itemResponse = await Api.readItemsPosts(
       {
-        fields: ["*"],
+        fields: ["*", "program.name"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
@@ -47,7 +47,7 @@ async function getPosts() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPosts[] = itemResponse.data.data;
-    // console.log("posts", item);
+    console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -246,7 +246,7 @@ export default async function HomePage(props) {
               }}
             >
               {partyTips.map((item, index) => {
-                let partyLocation: ItemsPartyLocation = item.party_location;
+                let partyLocation = item.party_location as ItemsPartyLocation;
                 return (
                   <View
                     key={"partyTips" + index}
@@ -261,7 +261,7 @@ export default async function HomePage(props) {
                       src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
                       width={70}
                       height={70}
-                      style={{ paddingRight: Metrics.doubleBaseMargin }}
+                      style={{ paddingRight: Metrics.tripleBaseMargin }}
                       // layout="responsive"
                       alt={partyLocation.address_line_1}
                     />
