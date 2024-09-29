@@ -31,6 +31,12 @@ async function readSnapshot(data) {
   }
 }
 
+// const PROD_DIRECTUS_URL = process.env.PUBLIC_URL;
+// const PROD_ACCESS_TOKEN = process.env.DEV_ACCESS_TOKEN;
+
+// const DEV_DIRECTUS_URL = process.env.PROD_URL;
+// const DEV_ACCESS_TOKEN = process.env.PROD_ACCESS_TOKEN;
+
 const DEV_DIRECTUS_URL = process.env.PUBLIC_URL;
 const DEV_ACCESS_TOKEN = process.env.DEV_ACCESS_TOKEN;
 
