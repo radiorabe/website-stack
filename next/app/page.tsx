@@ -257,14 +257,16 @@ export default async function HomePage(props) {
                       alignItems: "center",
                     }}
                   >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
-                      width={70}
-                      height={70}
-                      style={{ paddingRight: Metrics.tripleBaseMargin }}
-                      // layout="responsive"
-                      alt={partyLocation.address_line_1}
-                    />
+                    {partyLocation && partyLocation.logo && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
+                        width={70}
+                        height={70}
+                        style={{ paddingRight: Metrics.tripleBaseMargin }}
+                        // layout="responsive"
+                        alt={partyLocation.address_line_1}
+                      />
+                    )}
                     <View style={{ width: "50%" }}>
                       <Text
                         style={{
@@ -278,7 +280,7 @@ export default async function HomePage(props) {
                           ...Fonts.style.h3,
                         }}
                       >
-                        {item.title_2}
+                        {item.title_2 ? item.title_2 : ""}
                       </Text>
                     </View>
 
@@ -290,12 +292,15 @@ export default async function HomePage(props) {
                       >
                         {partyLocation.address_line_1}
                       </Text>
+
                       <Text
                         style={{
                           ...Fonts.style.text,
                         }}
                       >
-                        {partyLocation.address_line_2}
+                        {partyLocation.address_line_2
+                          ? partyLocation.address_line_2
+                          : ""}
                       </Text>
                       <Text
                         style={{
