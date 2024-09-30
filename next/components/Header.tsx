@@ -5,14 +5,18 @@ import StyleSheet from "react-native-media-query";
 import { useClickOutside } from "@/lib/useClickOutside";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactElement, useRef, useState } from "react";
-import IconArrowDown from "../assets/svg/IconArrowDown";
-import IconArrowUp from "../assets/svg/IconArrowUp";
-import Colors from "../lib/Colors";
-import Fonts from "../lib/Fonts";
-import Metrics from "../lib/Metrics";
+import IconArrowDown from "@/assets/svg/IconArrowDown";
+import IconArrowUp from "@/assets/svg/IconArrowUp";
+import Colors from "@/lib/Colors";
+import Fonts from "@/lib/Fonts";
+import Metrics from "@/lib/Metrics";
 import AudioRabePlayer from "./AudioRabePlayer";
 import LinkComponent from "./LinkComponent";
-import NavRabe from "./NavRabe";
+import NavRabe from "@/assets/svg/NavRabe";
+import Link from "next/link";
+import NavRabeLargeText from "@/assets/svg/NavRabeLargeText";
+import NavRabeMediumText from "@/assets/svg/NavRabeMediumText";
+import NavRabeSmallText from "@/assets/svg/NavRabeSmallText";
 export type PressableState = Readonly<{
   pressed?: boolean;
   hovered?: boolean;
@@ -21,7 +25,6 @@ export type PressableState = Readonly<{
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    height: Metrics.navBarHeight,
     alignItems: "center",
     backgroundColor: Colors.lightGreen,
     width: "100%",
@@ -33,7 +36,8 @@ const { ids, styles } = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
     width: "100%",
-    maxWidth: 1280,
+    aspectRatio: 100 / 5,
+    alignItems: "center",
     justifyContent: "space-between",
     // paddingHorizontal: Metrics.baseMargin,
   },
@@ -52,11 +56,6 @@ const { ids, styles } = StyleSheet.create({
     ...Fonts.style.navigation,
     fontSize: 18,
     color: Colors.darkGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-    },
   },
   dropDownItem: {
     ...Fonts.style.navigation,
@@ -117,36 +116,71 @@ function Header() {
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         {/* <View> */}
-        <Pressable style={{}}>
-          {({ pressed, hovered }: PressableState): ReactElement => {
-            return (
-              <LinkComponent
-                href={`/`}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  height: Metrics.navBarHeight,
-                }}
-              >
-                <NavRabe
-                  style={{
-                    paddingTop: 25,
-                    paddingRight: Metrics.doubleBaseMargin,
-                    paddingLeft: Metrics.doubleBaseMargin,
-                  }}
-                  color={hovered ? Colors.green : Colors.darkGreen}
-                  scale={1}
-                ></NavRabe>
-                <Text
-                  style={[styles.rabeLogo, hovered && { color: Colors.green }]}
-                  dataSet={{ media: ids.rabeLogo }}
-                >
-                  RADIO BERN
-                </Text>
-              </LinkComponent>
-            );
+        <Link
+          href={`/`}
+          style={{
+            height: "100%",
+            textDecoration: "none",
+            minWidth: "25%",
+            flexGrow: 1,
           }}
-        </Pressable>
+        >
+          <Pressable
+            style={{
+              height: "100%",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            {({ pressed, hovered }: PressableState): ReactElement => {
+              return (
+                <>
+                  <View
+                    style={{
+                      height: "100%",
+                      aspectRatio: 1.6,
+                      justifyContent: "flex-end",
+                      // backgroundColor: "green",
+                    }}
+                  >
+                    <NavRabe
+                      style={{
+                        width: "80%",
+                        height: "80%",
+                      }}
+                      color={hovered ? Colors.green : Colors.darkGreen}
+                    ></NavRabe>
+                  </View>
+
+                  <View
+                    style={{
+                      height: "100%",
+                      flexGrow: 1,
+                      justifyContent: "center",
+                      // backgroundColor: "blue",
+                    }}
+                  >
+                    {/* <NavRabeSmallText
+                      style={{
+                        width: "100%",
+                        height: 12,
+                      }}
+                      color={hovered ? Colors.green : Colors.darkGreen}
+                    ></NavRabeSmallText> */}
+                    <NavRabeMediumText
+                      style={{
+                        width: "100%",
+                        height: 14,
+                      }}
+                      color={hovered ? Colors.green : Colors.darkGreen}
+                    ></NavRabeMediumText>
+                  </View>
+                </>
+              );
+            }}
+          </Pressable>
+        </Link>
+
         {/* </View> */}
 
         <View style={styles.navItemsContainer}>
