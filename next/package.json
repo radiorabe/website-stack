@@ -25,6 +25,7 @@
     "react-native-media-query": "^2.0.1",
     "react-native-web": "^0.18.9",
     "react-spinners": "^0.14.1",
+    "react-xml-parser": "^1.1.8",
     "sharp": "^0.33.5"
   },
   "devDependencies": {

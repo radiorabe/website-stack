@@ -1,10 +1,11 @@
 "use client";
 import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
+import XMLParser from "react-xml-parser";
 
 import { useClickOutside } from "@/lib/useClickOutside";
 import { usePathname, useRouter } from "next/navigation";
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import IconArrowDown from "@/assets/svg/IconArrowDown";
 import IconArrowUp from "@/assets/svg/IconArrowUp";
 import Colors from "@/lib/Colors";
@@ -110,6 +111,16 @@ const { ids, styles } = StyleSheet.create({
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    fetch("https://songticker.rabe.ch/songticker/0.9.3/current.xml")
+      .then((res) => res.text())
+      .then((data) => {
+        var xml = new XMLParser().parseFromString(data);
+        console.log("xml", xml);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   let [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
