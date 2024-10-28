@@ -26,7 +26,8 @@
     "react-native-web": "^0.18.9",
     "react-spinners": "^0.14.1",
     "react-xml-parser": "^1.1.8",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "20.14.10",

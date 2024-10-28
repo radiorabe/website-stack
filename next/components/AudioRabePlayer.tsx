@@ -8,6 +8,11 @@ import { ReactElement } from "react";
 import { View, Pressable } from "@/lib/server-react-native";
 
 import Loader from "react-spinners/BounceLoader";
+import dynamic from "next/dynamic";
+
+const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
+  ssr: false,
+});
 
 export type PressableState = Readonly<{
   pressed: boolean;
@@ -150,6 +155,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
           <Loader color={Colors.green} size={38} loading={true}></Loader>
         </View>
       )}
+      <AudioRabePlayerLabel></AudioRabePlayerLabel>
     </View>
   );
 };
