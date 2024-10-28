@@ -30,6 +30,7 @@ const ImageBox = ({ imageId, width, height, title, text }: Props) => {
         style={styles.image}
         layout="responsive"
         alt={title}
+        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       {title && (
         <View

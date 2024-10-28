@@ -42,6 +42,7 @@ export default async function Sendung(props) {
         height={166}
         style={styles.image}
         alt={props.name}
+        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       <Text style={styles.title}>{props.name}</Text>
     </LinkComponent>

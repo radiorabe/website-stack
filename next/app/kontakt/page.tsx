@@ -354,6 +354,7 @@ export default async function KontaktPage(props) {
                         height={160}
                         layout="responsive"
                         alt={"partner" + index}
+                        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       ></Image>
                     </View>
                   </View>

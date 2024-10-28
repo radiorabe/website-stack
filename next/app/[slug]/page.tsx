@@ -59,7 +59,6 @@ async function getSendung(slug) {
           "team.directus_users_id.first_name",
           "team.directus_users_id.email",
           // "posts.*",
-          // "posts.program.name",
         ],
         // sort:"date_created.deep[articles][_sort]=-articles_id.date_created"
       },
@@ -91,7 +90,7 @@ async function getPosts(slug) {
   try {
     const itemResponse = await Api.readItemsPosts(
       {
-        fields: ["*"],
+        fields: ["*", "program.name"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
@@ -139,6 +138,7 @@ export default async function DynamicPage({ params }) {
             style={styles.image}
             layout="responsive"
             alt={sendung.name}
+            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
 
           <View style={styles.imageOverlayContainer}>
@@ -163,7 +163,13 @@ export default async function DynamicPage({ params }) {
           <Text style={{ ...Fonts.style.h2 }}>
             {`Das ${sendung.name} Team`}
           </Text>
-          <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+          <View
+            style={{
+              paddingTop: Metrics.doubleBaseMargin,
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
+          >
             {sendung.team.map((item: ItemsProgramsDirectusUsers, index) => {
               let user: Users = item.directus_users_id as Users;
               return <MemberInfo user={user}></MemberInfo>;
@@ -228,7 +234,7 @@ export default async function DynamicPage({ params }) {
                 { ...Fonts.style.h2, marginBottom: Metrics.doubleBaseMargin },
               ]}
             >
-              {"Das könnte dir auch gefallen"}
+              {"Letzte Beiträge von " + sendung.name}
             </Text>
 
             <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />

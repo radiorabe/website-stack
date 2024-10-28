@@ -195,6 +195,7 @@ export default async function DynamicPage({ params }) {
                 style={styles.image}
                 layout="responsive"
                 alt={post.title}
+                // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               {post.imageTitle && (
                 <View
@@ -276,6 +277,7 @@ export default async function DynamicPage({ params }) {
                     style={styles.avatar}
                     layout="responsive"
                     alt={sendung.name}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <View
                     style={{

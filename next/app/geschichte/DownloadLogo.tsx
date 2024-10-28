@@ -33,6 +33,7 @@ const InfoBox = ({ url, style, label }: Props) => {
               style={{ borderRadius: 9 }}
               layout="responsive"
               alt={label}
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             ></Image>
           </View>
         );

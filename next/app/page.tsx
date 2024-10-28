@@ -265,6 +265,7 @@ export default async function HomePage(props) {
                         style={{ paddingRight: Metrics.tripleBaseMargin }}
                         // layout="responsive"
                         alt={partyLocation.address_line_1}
+                        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                     <View style={{ width: "50%" }}>

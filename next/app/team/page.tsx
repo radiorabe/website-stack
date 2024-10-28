@@ -105,10 +105,23 @@ export default async function TeaamPage(props) {
             <Text style={{ ...Fonts.style.text }}>{data.text}</Text>
           </View>
 
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.h3 }}>{"RaBe Staff"}</Text>
+          <View>
+            <Text
+              style={{
+                ...Fonts.style.h3,
+                paddingTop: Metrics.tripleBaseMargin,
+              }}
+            >
+              {"RaBe Staff"}
+            </Text>
             {data.members_staff && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+              <View
+                style={{
+                  paddingTop: Metrics.baseMargin,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
                 {data.members_staff.map(
                   (item: ItemsPageTeamDirectusUsers, index) => {
                     let user: Users = item.directus_users_id as Users;
@@ -119,10 +132,23 @@ export default async function TeaamPage(props) {
             )}
           </View>
 
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.h3 }}>{"Vorstandsmitglieder"}</Text>
+          <View>
+            <Text
+              style={{
+                ...Fonts.style.h3,
+                paddingTop: Metrics.tripleBaseMargin,
+              }}
+            >
+              {"Vorstandsmitglieder"}
+            </Text>
             {data.members_management && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+              <View
+                style={{
+                  paddingTop: Metrics.baseMargin,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
                 {data.members_management.map(
                   (item: ItemsPageTeamDirectusUsers, index) => {
                     let user: Users = item.directus_users_id as Users;
@@ -133,12 +159,22 @@ export default async function TeaamPage(props) {
             )}
           </View>
 
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+          <View
+            style={{
+              paddingTop: Metrics.tripleBaseMargin,
+            }}
+          >
             <Text style={{ ...Fonts.style.h3 }}>
               {"Programmkommissionsmitglieder"}
             </Text>
             {data.members_program && (
-              <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+              <View
+                style={{
+                  paddingTop: Metrics.baseMargin,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
                 {data.members_program.map(
                   (item: ItemsPageTeamDirectusUsers, index) => {
                     let user: Users = item.directus_users_id as Users;

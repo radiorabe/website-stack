@@ -32,6 +32,7 @@ const MemberInfo = ({ user }) => {
         style={styles.avatar}
         // layout="responsive"
         alt={`Foto von ${user.first_name} ${user.last_name}`}
+        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
 
       <View

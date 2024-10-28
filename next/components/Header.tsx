@@ -56,6 +56,12 @@ const { ids, styles } = StyleSheet.create({
     ...Fonts.style.navigation,
     fontSize: 18,
     color: Colors.darkGreen,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ":hover": {
+      color: Colors.green,
+      borderColor: Colors.green,
+    },
   },
   dropDownItem: {
     ...Fonts.style.navigation,
