@@ -27,9 +27,9 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
   const [newDataFetched, setNewDataFetched] = useState(false);
   const [refetch, setRefetch] = useState(true);
 
-  console.log("show", show);
-  console.log("artist", artist);
-  console.log("title", title);
+  // console.log("show", show);
+  // console.log("artist", artist);
+  // console.log("title", title);
 
   useEffect(() => {
     setIsClient(true);
@@ -182,33 +182,3 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
 };
 
 export default AudioRabePlayerLabel;
-
-const getTrackLabel = (data) => {
-  let trackLabel = "";
-  try {
-    let songTickerData = new XMLParser().parseFromString(data);
-    let track = songTickerData.children.find((obj) => {
-      return obj.name === "track";
-    });
-    let show = songTickerData.children.find((obj) => {
-      return obj.name === "show";
-    });
-    if (track) {
-      let show = track.children.find((obj) => {
-        return obj.name === "show";
-      });
-      if (show) trackLabel += show.value;
-      let artist = track.children.find((obj) => {
-        return obj.name === "artist";
-      });
-      if (artist) trackLabel += " - " + artist.value;
-      let title = track.children.find((obj) => {
-        return obj.name === "title";
-      });
-      if (title) trackLabel += " - " + title.value;
-    }
-  } catch (e) {
-    console.log("error", e);
-  }
-  return trackLabel;
-};

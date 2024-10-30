@@ -123,7 +123,7 @@ function Header() {
       <View style={styles.innerContainer}>
         {/* <View> */}
         <Link
-          href={`/`}
+          href={"/"}
           style={{
             height: "100%",
             textDecoration: "none",

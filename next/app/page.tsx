@@ -105,6 +105,32 @@ async function getPartyTips() {
   }
 }
 
+export async function getPlaylistData(numbers) {
+  try {
+    return fetch(
+      `https://archiv.rabe.ch/api/tracks?sort=-started_at&page[size]=${numbers}`,
+      {
+        next: {
+          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+        },
+        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+      }
+    )
+      .then((response: any) => response.json())
+      .then((responseData: any) => {
+        // console.log("playlistData", responseData.data);
+        return responseData.data;
+      })
+      .catch((error) => {
+        console.log("error", error);
+
+        return [];
+      });
+  } catch (error) {
+    logError(error);
+  }
+}
+
 export const metadata: Metadata = {
   title: "RaBe - Home",
 };
@@ -113,7 +139,7 @@ export default async function HomePage(props) {
   const posts = await getPosts();
   const partyTips = await getPartyTips();
   let { todayShows, currentShow, shows } = await getLiveData();
-
+  const playlistData = await getPlaylistData(todayShows.length);
   return (
     <View>
       <View
@@ -163,7 +189,7 @@ export default async function HomePage(props) {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={{}}>
+            <View style={{ width: "50%" }}>
               <Text
                 style={{
                   ...Fonts.style.h3,
@@ -194,8 +220,7 @@ export default async function HomePage(props) {
                         style={{
                           ...Fonts.style.text,
                           color: Colors.lightGreen,
-                          width: Metrics.baseMargin * 6,
-                          // paddingRight: Metrics.doubleBaseMargin,
+                          minWidth: Metrics.baseMargin * 6,
                         }}
                       >
                         {moment(show.starts).format("HH:mm")}
@@ -220,9 +245,50 @@ export default async function HomePage(props) {
                 })}
               </View>
             </View>
-            <Text style={{ ...Fonts.style.h3, color: Colors.white }}>
-              {"Playlist"}
-            </Text>
+            <View style={{ width: "50%" }}>
+              <Text
+                style={{
+                  ...Fonts.style.h3,
+                  color: Colors.lightGreen,
+                  paddingBottom: Metrics.doubleBaseMargin,
+                }}
+              >
+                {"Playlist"}
+              </Text>
+              {playlistData.map((track, index) => {
+                return (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      paddingTop: Metrics.halfBaseMargin,
+                    }}
+                    key={"todayshows" + index}
+                  >
+                    <Text
+                      style={{
+                        ...Fonts.style.text,
+                        color: Colors.lightGreen,
+                        minWidth: Metrics.baseMargin * 6,
+                      }}
+                    >
+                      {moment(track.attributes.started_at).format("HH:mm")}
+                    </Text>
+                    <Text
+                      numberOfLines={1}
+                      style={[
+                        {
+                          ...Fonts.style.navigationText,
+                          fontSize: 18,
+                          color: Colors.lightGreen,
+                        },
+                      ]}
+                    >
+                      {track.attributes.artist + " - " + track.attributes.title}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
           </View>
         </View>
         <View
@@ -330,24 +396,3 @@ export default async function HomePage(props) {
     </View>
   );
 }
-
-// const {styles} = StyleSheet.create({
-//   container: {
-//     alignItems: "center",
-//     flexGrow: 1,
-//     justifyContent: "center",
-//   },
-//   link: {
-//     color: "blue",
-//   },
-//   textContainer: {
-//     alignItems: "center",
-//     marginTop: 16,
-//   },
-//   text: {
-//     ...Fonts.style.text,
-//     alignItems: "center",
-//     fontSize: 24,
-//     marginBottom: 24,
-//   },
-// });

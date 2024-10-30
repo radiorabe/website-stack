@@ -1,0 +1,1112 @@
+{
+  "data": [
+    {
+      "id": "625689",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Prize",
+        "artist": "Opio",
+        "started_at": "2024-10-30T09:35:15.000+01:00",
+        "finished_at": "2024-10-30T09:38:03.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625689" }
+    },
+    {
+      "id": "625688",
+      "type": "tracks",
+      "attributes": {
+        "title": "No Effort",
+        "artist": "Princess Nokia",
+        "started_at": "2024-10-30T09:32:29.000+01:00",
+        "finished_at": "2024-10-30T09:35:12.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625688" }
+    },
+    {
+      "id": "625687",
+      "type": "tracks",
+      "attributes": {
+        "title": "Last Song",
+        "artist": "Looptroop Rockers, Rantoboko",
+        "started_at": "2024-10-30T09:26:50.000+01:00",
+        "finished_at": "2024-10-30T09:32:28.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625687" }
+    },
+    {
+      "id": "625686",
+      "type": "tracks",
+      "attributes": {
+        "title": "Thought I Was Dead",
+        "artist": "Tyler, The Creator",
+        "started_at": "2024-10-30T09:23:24.000+01:00",
+        "finished_at": "2024-10-30T09:26:50.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625686" }
+    },
+    {
+      "id": "625685",
+      "type": "tracks",
+      "attributes": {
+        "title": "Drop Out",
+        "artist": "White Hills",
+        "started_at": "2024-10-30T09:12:53.000+01:00",
+        "finished_at": "2024-10-30T09:23:23.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625685" }
+    },
+    {
+      "id": "625684",
+      "type": "tracks",
+      "attributes": {
+        "title": "Love And Death",
+        "artist": "Ebo Taylor",
+        "started_at": "2024-10-30T09:06:01.000+01:00",
+        "finished_at": "2024-10-30T09:12:47.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625684" }
+    },
+    {
+      "id": "625683",
+      "type": "tracks",
+      "attributes": {
+        "title": "Ja Funmi",
+        "artist": "King Sunny AdŽ",
+        "started_at": "2024-10-30T08:58:54.000+01:00",
+        "finished_at": "2024-10-30T09:05:58.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625683" }
+    },
+    {
+      "id": "625682",
+      "type": "tracks",
+      "attributes": {
+        "title": "Into The Deep End",
+        "artist": "Kio Amachree",
+        "started_at": "2024-10-30T08:52:51.000+01:00",
+        "finished_at": "2024-10-30T08:58:47.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625682" }
+    },
+    {
+      "id": "625681",
+      "type": "tracks",
+      "attributes": {
+        "title": "Love Light In Flight",
+        "artist": "Stevie Wonder",
+        "started_at": "2024-10-30T08:46:38.000+01:00",
+        "finished_at": "2024-10-30T08:52:47.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625681" }
+    },
+    {
+      "id": "625680",
+      "type": "tracks",
+      "attributes": {
+        "title": "Naminote",
+        "artist": "Susumu Yokota",
+        "started_at": "2024-10-30T08:40:58.000+01:00",
+        "finished_at": "2024-10-30T08:46:35.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625680" }
+    },
+    {
+      "id": "625679",
+      "type": "tracks",
+      "attributes": {
+        "title": "Skippin' High",
+        "artist": "Mikio Masuda",
+        "started_at": "2024-10-30T08:34:08.000+01:00",
+        "finished_at": "2024-10-30T08:40:57.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625679" }
+    },
+    {
+      "id": "625678",
+      "type": "tracks",
+      "attributes": {
+        "title": "Eye",
+        "artist": "Smashing Pumpkins",
+        "started_at": "2024-10-30T08:29:16.000+01:00",
+        "finished_at": "2024-10-30T08:34:07.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625678" }
+    },
+    {
+      "id": "625677",
+      "type": "tracks",
+      "attributes": {
+        "title": "Tame Me Tiger",
+        "artist": "Bonny St. Claire",
+        "started_at": "2024-10-30T08:25:19.000+01:00",
+        "finished_at": "2024-10-30T08:28:04.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625677" }
+    },
+    {
+      "id": "625676",
+      "type": "tracks",
+      "attributes": {
+        "title": "Io e Te Finalmente Insieme",
+        "artist": "Alberto Bazzoli",
+        "started_at": "2024-10-30T08:19:21.000+01:00",
+        "finished_at": "2024-10-30T08:22:53.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625676" }
+    },
+    {
+      "id": "625675",
+      "type": "tracks",
+      "attributes": {
+        "title": "Little Krishna \u0026 The Girls",
+        "artist": "Chassol",
+        "started_at": "2024-10-30T08:09:07.000+01:00",
+        "finished_at": "2024-10-30T08:14:13.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625675" }
+    },
+    {
+      "id": "625674",
+      "type": "tracks",
+      "attributes": {
+        "title": "Out on the Weekend",
+        "artist": "Neil Young",
+        "started_at": "2024-10-30T08:04:31.000+01:00",
+        "finished_at": "2024-10-30T08:08:58.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625674" }
+    },
+    {
+      "id": "625673",
+      "type": "tracks",
+      "attributes": {
+        "title": "KILL DEM",
+        "artist": "Jamie xx",
+        "started_at": "2024-10-30T07:51:56.000+01:00",
+        "finished_at": "2024-10-30T07:55:16.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625673" }
+    },
+    {
+      "id": "625672",
+      "type": "tracks",
+      "attributes": {
+        "title": "Hard to Love",
+        "artist": "Bully",
+        "started_at": "2024-10-30T07:48:46.000+01:00",
+        "finished_at": "2024-10-30T07:50:56.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625672" }
+    },
+    {
+      "id": "625671",
+      "type": "tracks",
+      "attributes": {
+        "title": "I Can",
+        "artist": "1010benja",
+        "started_at": "2024-10-30T07:45:46.000+01:00",
+        "finished_at": "2024-10-30T07:48:06.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625671" }
+    },
+    {
+      "id": "625670",
+      "type": "tracks",
+      "attributes": {
+        "title": "Trapdoor",
+        "artist": "Los Bitchos",
+        "started_at": "2024-10-30T07:39:45.000+01:00",
+        "finished_at": "2024-10-30T07:41:25.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625670" }
+    },
+    {
+      "id": "625669",
+      "type": "tracks",
+      "attributes": {
+        "title": "ATM",
+        "artist": "Hembree",
+        "started_at": "2024-10-30T07:32:45.000+01:00",
+        "finished_at": "2024-10-30T07:35:05.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625669" }
+    },
+    {
+      "id": "625668",
+      "type": "tracks",
+      "attributes": {
+        "title": "Bucket",
+        "artist": "Ruby Waters",
+        "started_at": "2024-10-30T07:29:35.000+01:00",
+        "finished_at": "2024-10-30T07:32:04.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625668" }
+    },
+    {
+      "id": "625667",
+      "type": "tracks",
+      "attributes": {
+        "title": "Pieces",
+        "artist": "Summer Thieves",
+        "started_at": "2024-10-30T07:24:44.000+01:00",
+        "finished_at": "2024-10-30T07:28:44.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625667" }
+    },
+    {
+      "id": "625666",
+      "type": "tracks",
+      "attributes": {
+        "title": "Mahal",
+        "artist": "Glass Beams",
+        "started_at": "2024-10-30T07:22:24.000+01:00",
+        "finished_at": "2024-10-30T07:24:39.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625666" }
+    },
+    {
+      "id": "625665",
+      "type": "tracks",
+      "attributes": {
+        "title": "To Love Another - In A Box III Version",
+        "artist": "Asaf Avidan",
+        "started_at": "2024-10-30T07:19:34.000+01:00",
+        "finished_at": "2024-10-30T07:21:34.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625665" }
+    },
+    {
+      "id": "625664",
+      "type": "tracks",
+      "attributes": {
+        "title": "B.A.N.",
+        "artist": "Kennedy Ryon",
+        "started_at": "2024-10-30T07:14:04.000+01:00",
+        "finished_at": "2024-10-30T07:17:04.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625664" }
+    },
+    {
+      "id": "625663",
+      "type": "tracks",
+      "attributes": {
+        "title": "Love Thyself",
+        "artist": "The Dandy Warhols",
+        "started_at": "2024-10-30T07:11:34.000+01:00",
+        "finished_at": "2024-10-30T07:13:14.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625663" }
+    },
+    {
+      "id": "625662",
+      "type": "tracks",
+      "attributes": {
+        "title": "Heart on Fire",
+        "artist": "Little Simz",
+        "started_at": "2024-10-30T07:06:54.000+01:00",
+        "finished_at": "2024-10-30T07:10:44.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625662" }
+    },
+    {
+      "id": "625661",
+      "type": "tracks",
+      "attributes": {
+        "title": "Oh, Silly George",
+        "artist": "Skinny Pelembe",
+        "started_at": "2024-10-30T07:03:04.000+01:00",
+        "finished_at": "2024-10-30T07:06:37.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625661" }
+    },
+    {
+      "id": "625660",
+      "type": "tracks",
+      "attributes": {
+        "title": "Faithless",
+        "artist": "Ben Böhmer, Erin LeCount",
+        "started_at": "2024-10-30T07:00:00.000+01:00",
+        "finished_at": "2024-10-30T07:02:40.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625660" }
+    },
+    {
+      "id": "625659",
+      "type": "tracks",
+      "attributes": {
+        "title": "I Don't Feel",
+        "artist": "Saloon Dion",
+        "started_at": "2024-10-30T06:56:40.000+01:00",
+        "finished_at": "2024-10-30T06:59:10.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625659" }
+    },
+    {
+      "id": "625658",
+      "type": "tracks",
+      "attributes": {
+        "title": "Smooth Criminal",
+        "artist": "Alien Ant Farm",
+        "started_at": "2024-10-30T06:48:39.000+01:00",
+        "finished_at": "2024-10-30T06:51:59.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625658" }
+    },
+    {
+      "id": "625657",
+      "type": "tracks",
+      "attributes": {
+        "title": "bored",
+        "artist": "Sam Snitchy",
+        "started_at": "2024-10-30T06:37:29.000+01:00",
+        "finished_at": "2024-10-30T06:38:49.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625657" }
+    },
+    {
+      "id": "625656",
+      "type": "tracks",
+      "attributes": {
+        "title": "Understudies",
+        "artist": "The Hold Steady",
+        "started_at": "2024-10-30T06:31:48.000+01:00",
+        "finished_at": "2024-10-30T06:33:58.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625656" }
+    },
+    {
+      "id": "625655",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Luddite",
+        "artist": "Jamie T",
+        "started_at": "2024-10-30T06:28:08.000+01:00",
+        "finished_at": "2024-10-30T06:29:38.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625655" }
+    },
+    {
+      "id": "625654",
+      "type": "tracks",
+      "attributes": {
+        "title": "Love and Hate in a Different Time (Greg Wilson \u0026 Ché Wilson Remix)",
+        "artist": "Gabriels",
+        "started_at": "2024-10-30T06:24:18.000+01:00",
+        "finished_at": "2024-10-30T06:26:48.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625654" }
+    },
+    {
+      "id": "625653",
+      "type": "tracks",
+      "attributes": {
+        "title": "Madness",
+        "artist": "Muse",
+        "started_at": "2024-10-30T06:19:01.000+01:00",
+        "finished_at": "2024-10-30T06:23:38.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625653" }
+    },
+    {
+      "id": "625652",
+      "type": "tracks",
+      "attributes": {
+        "title": "Noche Oscura (Feat. The Edge)",
+        "artist": "Lol Tolhurst, Budgie, Jacknife Lee",
+        "started_at": "2024-10-30T06:15:28.000+01:00",
+        "finished_at": "2024-10-30T06:17:48.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625652" }
+    },
+    {
+      "id": "625651",
+      "type": "tracks",
+      "attributes": {
+        "title": "Nashwa",
+        "artist": "Khalil Epi, Imed Alibi",
+        "started_at": "2024-10-30T06:10:27.000+01:00",
+        "finished_at": "2024-10-30T06:13:27.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625651" }
+    },
+    {
+      "id": "625650",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Centre Cannot Hold",
+        "artist": "Primal Scream",
+        "started_at": "2024-10-30T06:04:07.000+01:00",
+        "finished_at": "2024-10-30T06:06:27.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625650" }
+    },
+    {
+      "id": "625649",
+      "type": "tracks",
+      "attributes": {
+        "title": "Te Slova",
+        "artist": "Kosaya Gora",
+        "started_at": "2024-10-30T06:00:37.000+01:00",
+        "finished_at": "2024-10-30T06:02:17.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625649" }
+    },
+    {
+      "id": "625648",
+      "type": "tracks",
+      "attributes": {
+        "title": "El Dorado",
+        "artist": "Gizmo Varillas",
+        "started_at": "2024-10-30T05:58:31.000+01:00",
+        "finished_at": "2024-10-30T05:59:57.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625648" }
+    },
+    {
+      "id": "625647",
+      "type": "tracks",
+      "attributes": {
+        "title": "Mamba",
+        "artist": "Emancipator, Lapa",
+        "started_at": "2024-10-30T05:54:27.000+01:00",
+        "finished_at": "2024-10-30T05:56:37.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625647" }
+    },
+    {
+      "id": "625646",
+      "type": "tracks",
+      "attributes": {
+        "title": "Emotion Sickness",
+        "artist": "Queens of the Stone Age",
+        "started_at": "2024-10-30T05:49:06.000+01:00",
+        "finished_at": "2024-10-30T05:53:36.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625646" }
+    },
+    {
+      "id": "625645",
+      "type": "tracks",
+      "attributes": {
+        "title": "Maniac",
+        "artist": "The Dead Krazukies",
+        "started_at": "2024-10-30T05:45:46.000+01:00",
+        "finished_at": "2024-10-30T05:48:16.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625645" }
+    },
+    {
+      "id": "625644",
+      "type": "tracks",
+      "attributes": {
+        "title": "To The Stars",
+        "artist": "Modestep",
+        "started_at": "2024-10-30T05:41:06.000+01:00",
+        "finished_at": "2024-10-30T05:44:36.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625644" }
+    },
+    {
+      "id": "625643",
+      "type": "tracks",
+      "attributes": {
+        "title": "Volume",
+        "artist": "Caribou",
+        "started_at": "2024-10-30T05:37:06.000+01:00",
+        "finished_at": "2024-10-30T05:40:56.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625643" }
+    },
+    {
+      "id": "625642",
+      "type": "tracks",
+      "attributes": {
+        "title": "Weak In Your Light (Daniel Avery Remix)",
+        "artist": "Nation of Language",
+        "started_at": "2024-10-30T05:29:25.000+01:00",
+        "finished_at": "2024-10-30T05:31:15.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625642" }
+    },
+    {
+      "id": "625641",
+      "type": "tracks",
+      "attributes": {
+        "title": "Trauma",
+        "artist": "BoyWithUke",
+        "started_at": "2024-10-30T05:26:45.000+01:00",
+        "finished_at": "2024-10-30T05:29:15.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625641" }
+    },
+    {
+      "id": "625640",
+      "type": "tracks",
+      "attributes": {
+        "title": "King of Kings",
+        "artist": "The Evens",
+        "started_at": "2024-10-30T05:24:45.000+01:00",
+        "finished_at": "2024-10-30T05:26:05.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625640" }
+    },
+    {
+      "id": "625639",
+      "type": "tracks",
+      "attributes": {
+        "title": "Sugar Babies",
+        "artist": "Spoon",
+        "started_at": "2024-10-30T05:19:25.000+01:00",
+        "finished_at": "2024-10-30T05:23:45.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625639" }
+    },
+    {
+      "id": "625638",
+      "type": "tracks",
+      "attributes": {
+        "title": "Don't Take Her From Me",
+        "artist": "NEL",
+        "started_at": "2024-10-30T05:12:05.000+01:00",
+        "finished_at": "2024-10-30T05:13:25.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625638" }
+    },
+    {
+      "id": "625637",
+      "type": "tracks",
+      "attributes": {
+        "title": "Backwards Directions",
+        "artist": "Abby Sage",
+        "started_at": "2024-10-30T05:09:34.000+01:00",
+        "finished_at": "2024-10-30T05:10:44.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625637" }
+    },
+    {
+      "id": "625636",
+      "type": "tracks",
+      "attributes": {
+        "title": "Blood Like Lemonade",
+        "artist": "Morcheeba",
+        "started_at": "2024-10-30T05:03:30.000+01:00",
+        "finished_at": "2024-10-30T05:07:40.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625636" }
+    },
+    {
+      "id": "625635",
+      "type": "tracks",
+      "attributes": {
+        "title": "Today",
+        "artist": "Smashing Pumpkins",
+        "started_at": "2024-10-30T04:53:40.000+01:00",
+        "finished_at": "2024-10-30T04:56:50.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625635" }
+    },
+    {
+      "id": "625634",
+      "type": "tracks",
+      "attributes": {
+        "title": "Tonto Rides the Gain",
+        "artist": "Jon Kennedy",
+        "started_at": "2024-10-30T04:50:30.000+01:00",
+        "finished_at": "2024-10-30T04:53:34.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625634" }
+    },
+    {
+      "id": "625633",
+      "type": "tracks",
+      "attributes": {
+        "title": "Dogs",
+        "artist": "Citizen",
+        "started_at": "2024-10-30T04:47:40.000+01:00",
+        "finished_at": "2024-10-30T04:49:30.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625633" }
+    },
+    {
+      "id": "625632",
+      "type": "tracks",
+      "attributes": {
+        "title": "Lovebomb",
+        "artist": "Yeah Yeah Yeahs",
+        "started_at": "2024-10-30T04:42:49.000+01:00",
+        "finished_at": "2024-10-30T04:43:59.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625632" }
+    },
+    {
+      "id": "625631",
+      "type": "tracks",
+      "attributes": {
+        "title": "WORTHLESS",
+        "artist": "d4vd",
+        "started_at": "2024-10-30T04:39:20.000+01:00",
+        "finished_at": "2024-10-30T04:41:59.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625631" }
+    },
+    {
+      "id": "625630",
+      "type": "tracks",
+      "attributes": {
+        "title": "Into Gold (Kitty Amor Remix)",
+        "artist": "London Grammar",
+        "started_at": "2024-10-30T04:35:39.000+01:00",
+        "finished_at": "2024-10-30T04:39:19.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625630" }
+    },
+    {
+      "id": "625629",
+      "type": "tracks",
+      "attributes": {
+        "title": "Microdosing",
+        "artist": "070 Shake",
+        "started_at": "2024-10-30T04:31:59.000+01:00",
+        "finished_at": "2024-10-30T04:35:29.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625629" }
+    },
+    {
+      "id": "625628",
+      "type": "tracks",
+      "attributes": {
+        "title": "la mi los",
+        "artist": "HATEPOP, DASHCAM*DEVI, SERETID",
+        "started_at": "2024-10-30T04:26:59.000+01:00",
+        "finished_at": "2024-10-30T04:28:39.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625628" }
+    },
+    {
+      "id": "625627",
+      "type": "tracks",
+      "attributes": {
+        "title": "Church Outfit",
+        "artist": "Poppy",
+        "started_at": "2024-10-30T04:24:39.000+01:00",
+        "finished_at": "2024-10-30T04:25:39.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625627" }
+    },
+    {
+      "id": "625626",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Debutant \u0026 The Dancehall",
+        "artist": "Midnight Lover's Club",
+        "started_at": "2024-10-30T04:20:48.000+01:00",
+        "finished_at": "2024-10-30T04:23:48.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625626" }
+    },
+    {
+      "id": "625625",
+      "type": "tracks",
+      "attributes": {
+        "title": "Never Ending Nightmare",
+        "artist": "Big Blood",
+        "started_at": "2024-10-30T04:17:18.000+01:00",
+        "finished_at": "2024-10-30T04:19:48.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625625" }
+    },
+    {
+      "id": "625624",
+      "type": "tracks",
+      "attributes": {
+        "title": "More Than A Love Song",
+        "artist": "Black Pumas",
+        "started_at": "2024-10-30T04:11:28.000+01:00",
+        "finished_at": "2024-10-30T04:16:11.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625624" }
+    },
+    {
+      "id": "625623",
+      "type": "tracks",
+      "attributes": {
+        "title": "Every Morning",
+        "artist": "J Mascis",
+        "started_at": "2024-10-30T04:07:38.000+01:00",
+        "finished_at": "2024-10-30T04:11:24.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625623" }
+    },
+    {
+      "id": "625622",
+      "type": "tracks",
+      "attributes": {
+        "title": "Darkness Song (In A Box III Version)",
+        "artist": "Asaf Avidan",
+        "started_at": "2024-10-30T04:00:37.000+01:00",
+        "finished_at": "2024-10-30T04:03:17.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625622" }
+    },
+    {
+      "id": "625621",
+      "type": "tracks",
+      "attributes": {
+        "title": "Car Chase",
+        "artist": "Public Image Limited",
+        "started_at": "2024-10-30T03:54:27.000+01:00",
+        "finished_at": "2024-10-30T03:56:47.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625621" }
+    },
+    {
+      "id": "625620",
+      "type": "tracks",
+      "attributes": {
+        "title": "Kein Bock",
+        "artist": "Deichkind",
+        "started_at": "2024-10-30T03:50:51.000+01:00",
+        "finished_at": "2024-10-30T03:52:57.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625620" }
+    },
+    {
+      "id": "625619",
+      "type": "tracks",
+      "attributes": {
+        "title": "Diving In",
+        "artist": "Scavenger Hunt",
+        "started_at": "2024-10-30T03:48:47.000+01:00",
+        "finished_at": "2024-10-30T03:50:27.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625619" }
+    },
+    {
+      "id": "625618",
+      "type": "tracks",
+      "attributes": {
+        "title": "Black Namibia",
+        "artist": "Black Poland",
+        "started_at": "2024-10-30T03:44:47.000+01:00",
+        "finished_at": "2024-10-30T03:47:06.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625618" }
+    },
+    {
+      "id": "625617",
+      "type": "tracks",
+      "attributes": {
+        "title": "RISE",
+        "artist": "Machinedrum, Rozet",
+        "started_at": "2024-10-30T03:42:17.000+01:00",
+        "finished_at": "2024-10-30T03:44:45.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625617" }
+    },
+    {
+      "id": "625616",
+      "type": "tracks",
+      "attributes": {
+        "title": "Loading",
+        "artist": "James Blake",
+        "started_at": "2024-10-30T03:37:36.000+01:00",
+        "finished_at": "2024-10-30T03:41:46.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625616" }
+    },
+    {
+      "id": "625615",
+      "type": "tracks",
+      "attributes": {
+        "title": "Violently",
+        "artist": "Archive",
+        "started_at": "2024-10-30T03:32:56.000+01:00",
+        "finished_at": "2024-10-30T03:34:26.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625615" }
+    },
+    {
+      "id": "625614",
+      "type": "tracks",
+      "attributes": {
+        "title": "' Cello Song",
+        "artist": "Fontaines D.C.",
+        "started_at": "2024-10-30T03:22:37.000+01:00",
+        "finished_at": "2024-10-30T03:27:36.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625614" }
+    },
+    {
+      "id": "625613",
+      "type": "tracks",
+      "attributes": {
+        "title": "We Got To Get Together To Be Free",
+        "artist": "BabyJake",
+        "started_at": "2024-10-30T03:17:15.000+01:00",
+        "finished_at": "2024-10-30T03:19:35.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625613" }
+    },
+    {
+      "id": "625612",
+      "type": "tracks",
+      "attributes": {
+        "title": "Crowded Rooms (Maximum Security Remix)",
+        "artist": "Baxter Dury",
+        "started_at": "2024-10-30T03:14:05.000+01:00",
+        "finished_at": "2024-10-30T03:14:45.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625612" }
+    },
+    {
+      "id": "625611",
+      "type": "tracks",
+      "attributes": {
+        "title": "Face Cleanser",
+        "artist": "Dumbo Tracks",
+        "started_at": "2024-10-30T03:07:25.000+01:00",
+        "finished_at": "2024-10-30T03:10:24.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625611" }
+    },
+    {
+      "id": "625610",
+      "type": "tracks",
+      "attributes": {
+        "title": "Home to Me",
+        "artist": "Sharon Van Etten",
+        "started_at": "2024-10-30T03:05:25.000+01:00",
+        "finished_at": "2024-10-30T03:06:15.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625610" }
+    },
+    {
+      "id": "625609",
+      "type": "tracks",
+      "attributes": {
+        "title": "Health Is Wealth",
+        "artist": "Bob Vylan",
+        "started_at": "2024-10-30T02:58:21.000+01:00",
+        "finished_at": "2024-10-30T02:59:01.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625609" }
+    },
+    {
+      "id": "625608",
+      "type": "tracks",
+      "attributes": {
+        "title": "Nothing Ever Changes",
+        "artist": "Ibex Clone",
+        "started_at": "2024-10-30T02:53:51.000+01:00",
+        "finished_at": "2024-10-30T02:56:11.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625608" }
+    },
+    {
+      "id": "625607",
+      "type": "tracks",
+      "attributes": {
+        "title": "honest",
+        "artist": "boler mani",
+        "started_at": "2024-10-30T02:50:10.000+01:00",
+        "finished_at": "2024-10-30T02:52:50.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625607" }
+    },
+    {
+      "id": "625606",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Sound Of Silence",
+        "artist": "Trinity FM",
+        "started_at": "2024-10-30T02:44:10.000+01:00",
+        "finished_at": "2024-10-30T02:46:20.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625606" }
+    },
+    {
+      "id": "625605",
+      "type": "tracks",
+      "attributes": {
+        "title": "Rootin' For Ya",
+        "artist": "Field Guide",
+        "started_at": "2024-10-30T02:38:00.000+01:00",
+        "finished_at": "2024-10-30T02:40:20.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625605" }
+    },
+    {
+      "id": "625604",
+      "type": "tracks",
+      "attributes": {
+        "title": "The Same Thing",
+        "artist": "Seamus Kelly",
+        "started_at": "2024-10-30T02:34:00.000+01:00",
+        "finished_at": "2024-10-30T02:37:10.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625604" }
+    },
+    {
+      "id": "625603",
+      "type": "tracks",
+      "attributes": {
+        "title": "First to Know",
+        "artist": "Declan Welsh and The Decadent West",
+        "started_at": "2024-10-30T02:29:59.000+01:00",
+        "finished_at": "2024-10-30T02:33:29.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625603" }
+    },
+    {
+      "id": "625602",
+      "type": "tracks",
+      "attributes": {
+        "title": "Romance",
+        "artist": "Fontaines D.C.",
+        "started_at": "2024-10-30T02:27:29.000+01:00",
+        "finished_at": "2024-10-30T02:29:39.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625602" }
+    },
+    {
+      "id": "625601",
+      "type": "tracks",
+      "attributes": {
+        "title": "Gray",
+        "artist": "The Fall",
+        "started_at": "2024-10-30T02:24:29.000+01:00",
+        "finished_at": "2024-10-30T02:25:39.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625601" }
+    },
+    {
+      "id": "625600",
+      "type": "tracks",
+      "attributes": {
+        "title": "Alfama",
+        "artist": "Poldoore",
+        "started_at": "2024-10-30T02:20:39.000+01:00",
+        "finished_at": "2024-10-30T02:23:59.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625600" }
+    },
+    {
+      "id": "625599",
+      "type": "tracks",
+      "attributes": {
+        "title": "Comin' Out Swingin'",
+        "artist": "Dillon, Diamond D, eLZhi",
+        "started_at": "2024-10-30T02:18:09.000+01:00",
+        "finished_at": "2024-10-30T02:19:49.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625599" }
+    },
+    {
+      "id": "625598",
+      "type": "tracks",
+      "attributes": {
+        "title": "Love Harder",
+        "artist": "Kae Tempest",
+        "started_at": "2024-10-30T02:15:29.000+01:00",
+        "finished_at": "2024-10-30T02:17:09.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625598" }
+    },
+    {
+      "id": "625597",
+      "type": "tracks",
+      "attributes": {
+        "title": "you're on your own",
+        "artist": "Ingrid Witt",
+        "started_at": "2024-10-30T02:12:29.000+01:00",
+        "finished_at": "2024-10-30T02:13:49.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625597" }
+    },
+    {
+      "id": "625596",
+      "type": "tracks",
+      "attributes": {
+        "title": "Aeternum",
+        "artist": "Portraits of Tracy",
+        "started_at": "2024-10-30T02:04:11.000+01:00",
+        "finished_at": "2024-10-30T02:09:08.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625596" }
+    },
+    {
+      "id": "625595",
+      "type": "tracks",
+      "attributes": {
+        "title": "Italian Horror",
+        "artist": "Kasabian",
+        "started_at": "2024-10-30T02:01:38.000+01:00",
+        "finished_at": "2024-10-30T02:04:08.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625595" }
+    },
+    {
+      "id": "625594",
+      "type": "tracks",
+      "attributes": {
+        "title": "Il Sole Sorge Sempre",
+        "artist": "Uncle Acid \u0026 The Deadbeats",
+        "started_at": "2024-10-30T01:56:28.000+01:00",
+        "finished_at": "2024-10-30T02:00:08.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625594" }
+    },
+    {
+      "id": "625593",
+      "type": "tracks",
+      "attributes": {
+        "title": "On Grounds (feat. Coby Sey)",
+        "artist": "Speakers Corner Quartet",
+        "started_at": "2024-10-30T01:54:18.000+01:00",
+        "finished_at": "2024-10-30T01:56:08.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625593" }
+    },
+    {
+      "id": "625592",
+      "type": "tracks",
+      "attributes": {
+        "title": "Ovule (Sega Bodega Remix) feat. Shygirl,Sega Bodega",
+        "artist": "Björk",
+        "started_at": "2024-10-30T01:45:27.000+01:00",
+        "finished_at": "2024-10-30T01:48:27.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625592" }
+    },
+    {
+      "id": "625591",
+      "type": "tracks",
+      "attributes": {
+        "title": "Jump Around",
+        "artist": "Elite DJs",
+        "started_at": "2024-10-30T01:41:27.000+01:00",
+        "finished_at": "2024-10-30T01:44:55.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625591" }
+    },
+    {
+      "id": "625590",
+      "type": "tracks",
+      "attributes": {
+        "title": "Liberty Bell",
+        "artist": "DARKSIDE",
+        "started_at": "2024-10-30T01:35:37.000+01:00",
+        "finished_at": "2024-10-30T01:40:47.000+01:00"
+      },
+      "links": { "self": "/api/tracks/625590" }
+    }
+  ],
+  "jsonapi": { "version": "1.0" },
+  "links": {
+    "self": "https://archiv.rabe.ch/api/tracks?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100\u0026sort=-started_at",
+    "first": "https://archiv.rabe.ch/api/tracks?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100\u0026sort=-started_at",
+    "prev": null,
+    "next": "https://archiv.rabe.ch/api/tracks?page%5Bnumber%5D=2\u0026page%5Bsize%5D=100\u0026sort=-started_at",
+    "last": "https://archiv.rabe.ch/api/tracks?page%5Bnumber%5D=6257\u0026page%5Bsize%5D=100\u0026sort=-started_at"
+  }
+}
