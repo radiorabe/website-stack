@@ -337,7 +337,7 @@ function Header() {
               height: Metrics.navBarHeight,
               backgroundColor: Colors.darkGreen,
               justifyContent: "center",
-              paddingHorizontal: Metrics.baseMargin,
+              paddingHorizontal: Metrics.doubleBaseMargin,
               marginLeft: Metrics.baseMargin,
             }}
           >

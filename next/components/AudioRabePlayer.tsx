@@ -9,6 +9,7 @@ import { View, Pressable } from "@/lib/server-react-native";
 
 import Loader from "react-spinners/BounceLoader";
 import dynamic from "next/dynamic";
+import Metrics from "@/lib/Metrics";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
@@ -96,7 +97,12 @@ const AudioRabePlayer = ({}: HoverableProps) => {
     track.src === currentTrack.src && playerState === "playing";
 
   return (
-    <View>
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+      }}
+    >
       <audio
         // key={currentTrack.src}
         // src={currentTrack.src}
@@ -155,7 +161,9 @@ const AudioRabePlayer = ({}: HoverableProps) => {
           <Loader color={Colors.green} size={38} loading={true}></Loader>
         </View>
       )}
-      <AudioRabePlayerLabel></AudioRabePlayerLabel>
+      <View style={{ flexGrow: 1, paddingLeft: Metrics.doubleBaseMargin }}>
+        <AudioRabePlayerLabel></AudioRabePlayerLabel>
+      </View>
     </View>
   );
 };
