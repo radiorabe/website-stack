@@ -36,29 +36,34 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.h1,
     // lineHeight: 1.2,
     // letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   h2: {
     fontFamily: type.bold,
     fontSize: size.h2,
     // lineHeight: 1.4,
     // letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   h3: {
     fontFamily: type.bold,
     fontSize: size.h3,
     // lineHeight: 1.4,
     // letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   h4: {
     fontFamily: type.bold,
     fontSize: size.h4,
     // lineHeight: 1.4,
     // letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   quote: {
     fontFamily: type.bold,
     fontSize: size.h2,
     lineHeight: 35,
+    fontFeatureSettings: '"tnum" on',
   },
 
   text: {
@@ -66,12 +71,14 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.medium,
     lineHeight: 20,
     letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   TTtext: {
     fontFamily: type.regular,
     fontSize: size.medium,
     lineHeight: 1.4,
     // letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
 
   textLink: {
@@ -79,6 +86,7 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.medium,
     lineHeight: 20,
     letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
 
   TTtextLink: {
@@ -86,6 +94,7 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.medium,
     lineHeight: 20,
     letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
 
   textSmall: {
@@ -93,6 +102,7 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.small,
     lineHeight: 14,
     letterSpacing: size.letterSpacing,
+    fontFeatureSettings: '"tnum" on',
   },
 
   TTtextSmall: {
@@ -100,6 +110,7 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.small,
     lineHeight: 1.4,
     letterSpacing: size.letterSpacing,
+    fontFeatureSettings: '"tnum" on',
   },
 
   button: {
@@ -107,22 +118,26 @@ export const style: Record<string, TextStyle> = {
     fontSize: size.small,
     lineHeight: 18,
     letterSpacing: 0,
+    fontFeatureSettings: '"tnum" on',
   },
   navigation: {
     fontFamily: type.bold,
     fontSize: size.text,
     fontWeight: "100",
+    fontFeatureSettings: '"tnum" on',
   },
   navigationText: {
     fontFamily: type.regular,
     fontSize: size.text,
     fontWeight: "100",
+    fontFeatureSettings: '"tnum" on',
   },
 
   footer: {
     fontFamily: type.bold,
     fontSize: size.textSmall,
     fontWeight: "100",
+    fontFeatureSettings: '"tnum" on',
   },
 };
 

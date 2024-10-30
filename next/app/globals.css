@@ -1,5 +1,11 @@
 :root{
   font-feature-settings: 'tnum';
+  font-feature-settings: "tnum" on;
+}
+
+html,
+body {
+  font-feature-settings: 'tnum';
 }
 
 /* @import-normalize; */

@@ -10,14 +10,13 @@ import { logError } from "@/lib/loging";
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1280,
+    width: "90vw",
     alignItems: "center",
     alignSelf: "center",
     paddingVertical: Metrics.tripleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin,
   },
   textContainer: {
-    width: "75%",
+    width: "74vw",
   },
   title: {
     ...Fonts.style.h2,
@@ -106,6 +105,7 @@ export default async function SendungenPage(props) {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
+            justifyContent: "space-between",
             width: "100%",
           }}
         >

@@ -1,15 +1,16 @@
 const gridSpacing = 24;
 // const baseMargin = Math.floor(10 * widthFactor);
-const baseMargin = 12;
+const baseMargin = "1.8vw";
 
 // Used via Metrics.baseMargin
 const metrics = {
-  navBarHeight: 65,
-  halfBaseMargin: baseMargin / 2,
+  navBarHeight: "5vw",
+  halfBaseMargin: "1vw",
   baseMargin,
-  doubleBaseMargin: baseMargin * 2,
-  tripleBaseMargin: baseMargin * 3,
-  quadBaseMargin: baseMargin * 4,
+  doubleBaseMargin: "3vw",
+  tripleBaseMargin: "5vw",
+  quadBaseMargin: "8vw",
+  octBaseMargin: "13vw",
   gridSpacing,
 };
 

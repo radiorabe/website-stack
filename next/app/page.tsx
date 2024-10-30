@@ -144,8 +144,7 @@ export default async function HomePage(props) {
     <View>
       <View
         style={{
-          maxWidth: 1280,
-          width: "100%",
+          width: "90%",
           alignSelf: "center",
           paddingVertical: Metrics.tripleBaseMargin,
         }}
@@ -154,7 +153,6 @@ export default async function HomePage(props) {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginHorizontal: Metrics.tripleBaseMargin,
             paddingBottom: Metrics.doubleBaseMargin,
           }}
         >
@@ -167,7 +165,6 @@ export default async function HomePage(props) {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            marginHorizontal: Metrics.tripleBaseMargin,
           }}
         >
           {posts.map((item, index) => {
@@ -180,10 +177,18 @@ export default async function HomePage(props) {
             );
           })}
         </View>
+      </View>
+      <View
+        style={{
+          width: "100%",
+          backgroundColor: Colors.darkGreen,
+        }}
+      >
         <View
           style={{
-            backgroundColor: Colors.darkGreen,
-            padding: Metrics.tripleBaseMargin,
+            width: "90%",
+            alignSelf: "center",
+            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <View
@@ -220,7 +225,7 @@ export default async function HomePage(props) {
                         style={{
                           ...Fonts.style.text,
                           color: Colors.lightGreen,
-                          minWidth: Metrics.baseMargin * 6,
+                          paddingRight: Metrics.doubleBaseMargin,
                         }}
                       >
                         {moment(show.starts).format("HH:mm")}
@@ -268,7 +273,7 @@ export default async function HomePage(props) {
                       style={{
                         ...Fonts.style.text,
                         color: Colors.lightGreen,
-                        minWidth: Metrics.baseMargin * 6,
+                        paddingRight: Metrics.doubleBaseMargin,
                       }}
                     >
                       {moment(track.attributes.started_at).format("HH:mm")}
@@ -291,9 +296,16 @@ export default async function HomePage(props) {
             </View>
           </View>
         </View>
+      </View>
+      <View
+        style={{
+          width: "90%",
+          alignSelf: "center",
+        }}
+      >
         <View
           style={{
-            padding: Metrics.tripleBaseMargin,
+            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <View>

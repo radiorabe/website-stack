@@ -32,6 +32,8 @@ const { ids, styles } = StyleSheet.create({
     // @ts-ignore
     position: "fixed",
     zIndex: 999,
+    borderBottomWidth: 1,
+    borderColor: Colors.lightGreen,
   },
   innerContainer: {
     flexDirection: "row",
@@ -43,6 +45,7 @@ const { ids, styles } = StyleSheet.create({
   },
   navItemsContainer: {
     flexDirection: "row",
+    height: "100%",
   },
   link: {
     color: "blue",
@@ -75,7 +78,7 @@ const { ids, styles } = StyleSheet.create({
     color: Colors.darkGreen,
     borderWidth: 1,
     borderColor: Colors.darkGreen,
-    padding: Metrics.halfBaseMargin,
+    padding: 7,
     borderRadius: 10,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -87,7 +90,7 @@ const { ids, styles } = StyleSheet.create({
   navItem: {
     flexDirection: "row",
     alignItems: "center",
-    height: Metrics.navBarHeight,
+    height: "100%",
     paddingHorizontal: Metrics.baseMargin,
     color: Colors.darkGreen,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -121,7 +124,7 @@ function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        {/* <View> */}
+        <View style={{ width: Metrics.tripleBaseMargin }}></View>
         <Link
           href={"/"}
           style={{
@@ -200,7 +203,7 @@ function Header() {
           <View>
             <Pressable
               ref={menuRef}
-              // style={{ backgroundColor: "yellow" }}
+              style={{ height: "100%" }}
               onPress={() => setShowDropdown(!showDropdown)}
             >
               {({
@@ -211,7 +214,11 @@ function Header() {
                 return (
                   <View style={[styles.navItem]}>
                     <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
+                      style={{
+                        flexDirection: "row",
+                        height: "100%",
+                        alignItems: "center",
+                      }}
                     >
                       <Text
                         style={[
@@ -320,7 +327,6 @@ function Header() {
             )}
           </View>
 
-          {/* </View> */}
           <View style={styles.navItem}>
             <LinkComponent href={`/mitglied-werden`}>
               <Text
@@ -331,19 +337,19 @@ function Header() {
               </Text>
             </LinkComponent>
           </View>
-          <View
-            style={{
-              width: 200,
-              height: Metrics.navBarHeight,
-              backgroundColor: Colors.darkGreen,
-              justifyContent: "center",
-              paddingHorizontal: Metrics.doubleBaseMargin,
-              marginLeft: Metrics.baseMargin,
-            }}
-          >
-            <AudioRabePlayer></AudioRabePlayer>
-            {/* </TouchableOpacity> */}
-          </View>
+        </View>
+
+        <View
+          style={{
+            minWidth: "25%",
+            height: "100%",
+            backgroundColor: Colors.darkGreen,
+            justifyContent: "center",
+            paddingHorizontal: Metrics.doubleBaseMargin,
+            marginLeft: Metrics.baseMargin,
+          }}
+        >
+          <AudioRabePlayer></AudioRabePlayer>
         </View>
       </View>
     </View>

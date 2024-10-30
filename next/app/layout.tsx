@@ -24,7 +24,8 @@ export default function RootLayout({
           <div>
             <Header />
           </div>
-          <div style={{ paddingTop: Metrics.navBarHeight }}>{children}</div>
+          <div style={{ width: "100%", aspectRatio: 100 / 5 }}></div>
+          <div>{children}</div>
           <div>
             <Footer />
           </div>
