@@ -59,6 +59,7 @@ const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
                   ...Fonts.style.textLink,
                   flexShrink: 1,
                   userSelect: "none",
+                  "-webkit-user-select": "none",
                 },
                 hovered && {
                   color: Colors.green,
