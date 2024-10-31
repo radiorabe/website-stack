@@ -180,8 +180,9 @@ export default async function ProgramPage({ params }) {
       <View style={styles.container}>
         <View
           style={{
-            width: "75%",
-            padding: Metrics.tripleBaseMargin,
+            width: "74vw",
+            alignSelf: "center",
+            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <View
@@ -240,8 +241,7 @@ export default async function ProgramPage({ params }) {
                       style={{
                         ...Fonts.style.text,
                         color: Colors.darkGreen,
-                        width: Metrics.baseMargin * 6,
-                        // paddingRight: Metrics.doubleBaseMargin,
+                        paddingRight: Metrics.doubleBaseMargin,
                       }}
                     >
                       {moment(show.starts).format("HH:mm")}
@@ -269,12 +269,13 @@ export default async function ProgramPage({ params }) {
         </View>
         <View
           style={{
-            width: "100%",
+            width: "90vw",
+            alignSelf: "center",
           }}
         >
           <View
             style={{
-              padding: Metrics.doubleBaseMargin,
+              paddingVertical: Metrics.doubleBaseMargin,
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -295,7 +296,10 @@ export default async function ProgramPage({ params }) {
                   color={Colors.darkGreen}
                   hoverColor={Colors.green}
                   href={`/programm/${prevMonthWeekNumber}-${prevMonthYearNumber}`}
-                  style={{ transform: "rotate(180deg)" }}
+                  style={{
+                    transform: "rotate(180deg)",
+                    paddingHorizontal: Metrics.baseMargin,
+                  }}
                 ></Arrow>
               )}
               <Text style={{ ...Fonts.style.h4 }}>
@@ -308,13 +312,28 @@ export default async function ProgramPage({ params }) {
                 <Arrow
                   color={Colors.darkGreen}
                   hoverColor={Colors.green}
+                  style={{ paddingHorizontal: Metrics.baseMargin }}
                   href={`/programm/${nextMonthWeekNumber}-${nextMonthYearNumber}`}
                 ></Arrow>
               )}
             </View>
             <ButtonFull href={"/programm"} label={"Heute"} />
           </View>
-          <View>
+        </View>
+      </View>
+      <View style={{ width: "100%" }}>
+        <View>
+          <View
+            style={{
+              width: "100%",
+              height: 94,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              backgroundColor: Colors.darkGreen,
+            }}
+          ></View>
+          <View style={{ width: "90vw", alignSelf: "center" }}>
             <Calender shows={shows} week={weekNumber}></Calender>
             {!hidePrevWeekArrow && (
               <View
@@ -330,7 +349,10 @@ export default async function ProgramPage({ params }) {
                   color={Colors.lightGreen}
                   hoverColor={Colors.green}
                   href={`/programm/${prevWeekNumber}-${prevYearNumber}`}
-                  style={{ transform: "rotate(180deg)" }}
+                  style={{
+                    transform: "rotate(180deg)",
+                    paddingLeft: Metrics.baseMargin,
+                  }}
                 ></Arrow>
               </View>
             )}
@@ -348,6 +370,7 @@ export default async function ProgramPage({ params }) {
                   color={Colors.lightGreen}
                   hoverColor={Colors.green}
                   href={`/programm/${nextWeekNumber}-${nextYearNumber}`}
+                  style={{ paddingLeft: Metrics.baseMargin }}
                 ></Arrow>
               </View>
             )}

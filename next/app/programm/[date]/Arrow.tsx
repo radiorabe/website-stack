@@ -12,7 +12,9 @@ const SvgComponent = ({ color, hoverColor, href, style }) => {
 
   return (
     <Pressable
-      style={{ paddingHorizontal: metrics.baseMargin, ...style }}
+      style={{
+        ...style,
+      }}
       onPress={() => router.push(href, { scroll: false })}
     >
       {({ pressed, hovered, focused }: PressableState): ReactElement => {

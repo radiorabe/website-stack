@@ -80,8 +80,7 @@ export default function Calender({ shows, week }) {
           >
             <View
               style={{
-                width: `100%`,
-                backgroundColor: Colors.darkGreen,
+                width: "100%",
                 height: 94,
                 alignItems: "center",
                 justifyContent: "center",

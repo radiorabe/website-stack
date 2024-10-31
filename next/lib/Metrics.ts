@@ -5,7 +5,8 @@ const baseMargin = "1.8vw";
 // Used via Metrics.baseMargin
 const metrics = {
   navBarHeight: "5vw",
-  halfBaseMargin: "1vw",
+  halfHalfBaseMargin: "0.45vw",
+  halfBaseMargin: "0.9vw",
   baseMargin,
   doubleBaseMargin: "3vw",
   tripleBaseMargin: "5vw",

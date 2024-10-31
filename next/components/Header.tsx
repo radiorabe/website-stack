@@ -70,7 +70,7 @@ const { ids, styles } = StyleSheet.create({
     ...Fonts.style.navigation,
     fontSize: 18,
     color: Colors.darkGreen,
-    paddingVertical: Metrics.halfBaseMargin,
+    paddingVertical: Metrics.halfHalfBaseMargin,
   },
   rabeLogoBorder: {
     ...Fonts.style.navigation,
@@ -99,15 +99,6 @@ const { ids, styles } = StyleSheet.create({
       color: Colors.green,
     },
   },
-  // navItemBorder: {
-  //   borderWidth: 1,
-  //   borderColor: Colors.darkGreen,
-  //   padding: Metrics.halfBaseMargin,
-  //   borderRadius: 10,
-  //   ":hover": {
-  //     borderColor: Colors.green,
-  //   },
-  // },
 });
 
 function Header() {
@@ -251,9 +242,10 @@ function Header() {
                   position: "absolute",
                   left: 0,
                   right: 0,
-                  top: Metrics.navBarHeight + Metrics.baseMargin,
+                  top: "6.8vw",
                   backgroundColor: Colors.lightGreen,
-                  padding: Metrics.baseMargin,
+                  paddingHorizontal: Metrics.baseMargin,
+                  paddingVertical: Metrics.halfBaseMargin,
                   borderRadius: 9,
                 }}
               >

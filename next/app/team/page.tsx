@@ -17,10 +17,9 @@ import { logError } from "@/lib/loging";
 
 const { styles } = StyleSheet.create({
   container: {
-    maxWidth: 1280,
-    width: "100%",
-    alignItems: "center",
+    width: "74vw",
     alignSelf: "center",
+    paddingVertical: Metrics.tripleBaseMargin,
   },
   link: {
     color: "blue",
@@ -79,111 +78,104 @@ export default async function TeaamPage(props) {
       <View style={styles.container}>
         <View
           style={{
-            width: "75%",
-            padding: Metrics.tripleBaseMargin,
+            flexDirection: "row",
+            // backgroundColor: "green",
           }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              // backgroundColor: "green",
-            }}
+          <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
+          <Text
+            style={[
+              { ...Fonts.style.h4 },
+              { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
+            ]}
           >
-            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
-            <Text
-              style={[
-                { ...Fonts.style.h4 },
-                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
-              ]}
-            >
-              {"\u2192"}
-            </Text>
-            <Text style={{ ...Fonts.style.text }}>{"Team"}</Text>
-          </View>
+            {"\u2192"}
+          </Text>
+          <Text style={{ ...Fonts.style.text }}>{"Team"}</Text>
+        </View>
 
-          <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
-            <Text style={{ ...Fonts.style.text }}>{data.text}</Text>
-          </View>
+        <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
+          <Text style={{ ...Fonts.style.text }}>{data.text}</Text>
+        </View>
 
-          <View>
-            <Text
-              style={{
-                ...Fonts.style.h3,
-                paddingTop: Metrics.tripleBaseMargin,
-              }}
-            >
-              {"RaBe Staff"}
-            </Text>
-            {data.members_staff && (
-              <View
-                style={{
-                  paddingTop: Metrics.baseMargin,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                }}
-              >
-                {data.members_staff.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
-          </View>
-
-          <View>
-            <Text
-              style={{
-                ...Fonts.style.h3,
-                paddingTop: Metrics.tripleBaseMargin,
-              }}
-            >
-              {"Vorstandsmitglieder"}
-            </Text>
-            {data.members_management && (
-              <View
-                style={{
-                  paddingTop: Metrics.baseMargin,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                }}
-              >
-                {data.members_management.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
-          </View>
-
-          <View
+        <View>
+          <Text
             style={{
+              ...Fonts.style.h3,
               paddingTop: Metrics.tripleBaseMargin,
             }}
           >
-            <Text style={{ ...Fonts.style.h3 }}>
-              {"Programmkommissionsmitglieder"}
-            </Text>
-            {data.members_program && (
-              <View
-                style={{
-                  paddingTop: Metrics.baseMargin,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                }}
-              >
-                {data.members_program.map(
-                  (item: ItemsPageTeamDirectusUsers, index) => {
-                    let user: Users = item.directus_users_id as Users;
-                    return <MemberInfo user={user}></MemberInfo>;
-                  }
-                )}
-              </View>
-            )}
-          </View>
+            {"RaBe Staff"}
+          </Text>
+          {data.members_staff && (
+            <View
+              style={{
+                paddingTop: Metrics.baseMargin,
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
+              {data.members_staff.map(
+                (item: ItemsPageTeamDirectusUsers, index) => {
+                  let user: Users = item.directus_users_id as Users;
+                  return <MemberInfo user={user}></MemberInfo>;
+                }
+              )}
+            </View>
+          )}
+        </View>
+
+        <View>
+          <Text
+            style={{
+              ...Fonts.style.h3,
+              paddingTop: Metrics.tripleBaseMargin,
+            }}
+          >
+            {"Vorstandsmitglieder"}
+          </Text>
+          {data.members_management && (
+            <View
+              style={{
+                paddingTop: Metrics.baseMargin,
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
+              {data.members_management.map(
+                (item: ItemsPageTeamDirectusUsers, index) => {
+                  let user: Users = item.directus_users_id as Users;
+                  return <MemberInfo user={user}></MemberInfo>;
+                }
+              )}
+            </View>
+          )}
+        </View>
+
+        <View
+          style={{
+            paddingTop: Metrics.tripleBaseMargin,
+          }}
+        >
+          <Text style={{ ...Fonts.style.h3 }}>
+            {"Programmkommissionsmitglieder"}
+          </Text>
+          {data.members_program && (
+            <View
+              style={{
+                paddingTop: Metrics.baseMargin,
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
+              {data.members_program.map(
+                (item: ItemsPageTeamDirectusUsers, index) => {
+                  let user: Users = item.directus_users_id as Users;
+                  return <MemberInfo user={user}></MemberInfo>;
+                }
+              )}
+            </View>
+          )}
         </View>
       </View>
     </View>
