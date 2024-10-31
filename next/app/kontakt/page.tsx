@@ -58,7 +58,6 @@ export default async function KontaktPage(props) {
     <View>
       <View
         style={{
-          maxWidth: 1280,
           width: "100%",
           alignSelf: "center",
           alignItems: "center",
@@ -66,8 +65,9 @@ export default async function KontaktPage(props) {
       >
         <View
           style={{
-            width: "75%",
-            padding: Metrics.tripleBaseMargin,
+            width: "74vw",
+            alignSelf: "center",
+            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <View
@@ -316,7 +316,7 @@ export default async function KontaktPage(props) {
         <View
           style={{
             backgroundColor: Colors.darkGreen,
-            width: "100%",
+            width: "90vw",
             padding: Metrics.doubleBaseMargin,
             marginBottom: Metrics.tripleBaseMargin,
             borderRadius: 9,
@@ -341,11 +341,14 @@ export default async function KontaktPage(props) {
                       flexGrow: 1,
                       borderLeftColor: Colors.white,
                       borderLeftWidth: index && 2,
+                      alignItems: "center",
                     }}
                   >
                     <View
                       style={{
                         marginHorizontal: Metrics.baseMargin,
+                        maxWidth: 200,
+                        width: "80%",
                       }}
                     >
                       <Image
