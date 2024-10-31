@@ -1,10 +1,8 @@
 "use client";
-import IconShare from "@/assets/svg/IconShare";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import Link from "next/link";
-import React, { ReactElement } from "react";
-import { Text, Pressable, View, Linking } from "@/lib/server-react-native";
+import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import { ReactElement } from "react";
 
 export type PressableState = Readonly<{
   pressed: boolean;
@@ -13,19 +11,25 @@ export type PressableState = Readonly<{
 }>;
 
 export interface HoverableProps {
-  url: string;
+  url?: string;
   label: string;
   icon?: any;
   disabled?: boolean;
+  onPress(): void;
 }
 
-const Button = ({ url, label, icon, disabled }: HoverableProps) => {
+const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
   return (
     <Pressable
       style={{}}
       onPress={() => {
         if (!disabled) {
-          Linking.openURL(url);
+          if (onPress) {
+            onPress();
+          }
+          if (url) {
+            Linking.openURL(url);
+          }
         }
       }}
     >
@@ -54,6 +58,7 @@ const Button = ({ url, label, icon, disabled }: HoverableProps) => {
                 {
                   ...Fonts.style.textLink,
                   flexShrink: 1,
+                  userSelect: "none",
                 },
                 hovered && {
                   color: Colors.green,

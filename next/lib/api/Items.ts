@@ -34,6 +34,10 @@ import {
   ReadItemsPageHistoryProtocolParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
+  ReadItemsPageMemberData,
+  ReadItemsPageMemberParams,
+  ReadItemsPageMemberStatementsData,
+  ReadItemsPageMemberStatementsParams,
   ReadItemsPageProgramData,
   ReadItemsPageProgramParams,
   ReadItemsPageProgramPrograms1Data,
@@ -76,6 +80,8 @@ import {
   ReadItemsProtocolParams,
   ReadItemsQuoteData,
   ReadItemsQuoteParams,
+  ReadItemsStatementsData,
+  ReadItemsStatementsParams,
   ReadSingleItemsContactAddressData,
   ReadSingleItemsContactAddressParams,
   ReadSingleItemsImageBoxData,
@@ -100,6 +106,10 @@ import {
   ReadSingleItemsPageHistoryProtocolParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
+  ReadSingleItemsPageMemberData,
+  ReadSingleItemsPageMemberParams,
+  ReadSingleItemsPageMemberStatementsData,
+  ReadSingleItemsPageMemberStatementsParams,
   ReadSingleItemsPageProgramData,
   ReadSingleItemsPageProgramParams,
   ReadSingleItemsPageProgramPrograms1Data,
@@ -142,6 +152,8 @@ import {
   ReadSingleItemsProtocolParams,
   ReadSingleItemsQuoteData,
   ReadSingleItemsQuoteParams,
+  ReadSingleItemsStatementsData,
+  ReadSingleItemsStatementsParams,
 } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
@@ -720,6 +732,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/party_location/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_member_statements items.
+ *
+ * @tags Items, ItemsPageMemberStatements
+ * @name ReadItemsPageMemberStatements
+ * @summary List Items
+ * @request GET:/items/page_member_statements
+ * @secure
+ * @response `200` `ReadItemsPageMemberStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageMemberStatements = (query: ReadItemsPageMemberStatementsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageMemberStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_member_statements`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_member_statements item by unique identifier.
+ *
+ * @tags Items, ItemsPageMemberStatements
+ * @name ReadSingleItemsPageMemberStatements
+ * @summary Retrieve an Item
+ * @request GET:/items/page_member_statements/{id}
+ * @response `200` `ReadSingleItemsPageMemberStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageMemberStatements = (
+    { id, ...query }: ReadSingleItemsPageMemberStatementsParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageMemberStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_member_statements/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -2619,6 +2715,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the page_member items.
+ *
+ * @tags Items, ItemsPageMember
+ * @name ReadItemsPageMember
+ * @summary List Items
+ * @request GET:/items/page_member
+ * @secure
+ * @response `200` `ReadItemsPageMemberData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageMember = (query: ReadItemsPageMemberParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageMemberData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_member`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_member item by unique identifier.
+ *
+ * @tags Items, ItemsPageMember
+ * @name ReadSingleItemsPageMember
+ * @summary Retrieve an Item
+ * @request GET:/items/page_member/{id}
+ * @response `200` `ReadSingleItemsPageMemberData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageMember = ({ id, ...query }: ReadSingleItemsPageMemberParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageMemberData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_member/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the contact_address items.
  *
  * @tags Items, ItemsContactAddress
@@ -2862,6 +3039,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_history_nodes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the statements items.
+ *
+ * @tags Items, ItemsStatements
+ * @name ReadItemsStatements
+ * @summary List Items
+ * @request GET:/items/statements
+ * @secure
+ * @response `200` `ReadItemsStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsStatements = (query: ReadItemsStatementsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/statements`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single statements item by unique identifier.
+ *
+ * @tags Items, ItemsStatements
+ * @name ReadSingleItemsStatements
+ * @summary Retrieve an Item
+ * @request GET:/items/statements/{id}
+ * @response `200` `ReadSingleItemsStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsStatements = ({ id, ...query }: ReadSingleItemsStatementsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/statements/${id}`,
       method: "GET",
       query: query,
       format: "json",
