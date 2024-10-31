@@ -77,16 +77,14 @@ export default async function HistoryPage(props) {
     <View>
       <View
         style={{
-          maxWidth: 1280,
           width: "100%",
-          alignSelf: "center",
-          alignItems: "center",
         }}
       >
         <View
           style={{
-            width: "75%",
-            padding: Metrics.tripleBaseMargin,
+            width: "74vw",
+            alignSelf: "center",
+            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <View

@@ -15,7 +15,7 @@ async function getPosts() {
   try {
     const itemResponse = await Api.readItemsPosts(
       {
-        fields: ["*"],
+        fields: ["*", "program.name"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
@@ -61,8 +61,7 @@ export default async function ImpressumPage(props) {
     <View>
       <View
         style={{
-          maxWidth: 1280,
-          width: "100%",
+          width: "90vw",
           alignSelf: "center",
           paddingVertical: Metrics.tripleBaseMargin,
         }}
@@ -71,7 +70,6 @@ export default async function ImpressumPage(props) {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-
             paddingBottom: Metrics.doubleBaseMargin,
           }}
         >

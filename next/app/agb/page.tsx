@@ -68,13 +68,12 @@ export default async function AGBPage(props) {
   const data = await getPageData();
 
   return (
-    <View>
+    <View style={{ width: "100%" }}>
       <View
         style={{
-          maxWidth: 1280,
-          width: "100%",
+          width: "90vw",
           alignSelf: "center",
-          padding: Metrics.tripleBaseMargin,
+          paddingVertical: Metrics.tripleBaseMargin,
         }}
       >
         {data.content && <RenderTipTap content={data.content}></RenderTipTap>}

@@ -43,7 +43,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
       href={`${data.date}/${data.slug}`}
       style={{
         width: "30%",
-        paddingLeft: index % 3 ? "5%" : 0,
+        paddingLeft: index % 3 ? "3%" : 0,
         marginBottom: Metrics.doubleBaseMargin,
         paddingBottom: 10,
         textDecoration: "none",
