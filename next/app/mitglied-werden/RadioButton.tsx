@@ -14,6 +14,7 @@ function RadioButton(props) {
       onMouseLeave={() => setHover(false)}
       style={{
         display: "flex",
+        cursor: "pointer",
         backgroundColor:
           hover || selected ? Colors.hoverGreen : Colors.darkGreen,
         borderRadius: 8,

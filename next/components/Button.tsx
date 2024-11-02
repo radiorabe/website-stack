@@ -16,9 +16,19 @@ export interface HoverableProps {
   icon?: any;
   disabled?: boolean;
   onPress(): void;
+  color?: any;
+  hoverColor?: any;
 }
 
-const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
+const Button = ({
+  url,
+  label,
+  icon,
+  disabled,
+  onPress,
+  color,
+  hoverColor,
+}: HoverableProps) => {
   return (
     <Pressable
       style={{}}
@@ -38,7 +48,7 @@ const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
           <View
             style={[
               {
-                borderColor: Colors.black,
+                borderColor: color ? color : Colors.black,
                 borderRadius: 9,
                 borderWidth: 1,
                 alignSelf: "flex-start",
@@ -48,7 +58,7 @@ const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
                 paddingHorizontal: 6,
               },
               hovered && {
-                borderColor: Colors.green,
+                borderColor: hoverColor ? hoverColor : Colors.green,
               },
             ]}
           >
@@ -62,11 +72,12 @@ const Button = ({ url, label, icon, disabled, onPress }: HoverableProps) => {
                   MozUserSelect: "none",
                   WebkitUserSelect: "none",
                   msUserSelect: "none",
+                  color: color ? color : Colors.black,
                   // "-webkit-user-select": "none",
                 },
                 hovered && {
-                  color: Colors.green,
-                  borderColor: Colors.green,
+                  color: hoverColor ? hoverColor : Colors.green,
+                  borderColor: hoverColor ? hoverColor : Colors.green,
                 },
                 icon && { paddingLeft: 6 },
               ]}

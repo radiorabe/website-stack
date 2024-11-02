@@ -51,6 +51,14 @@ export default function YearlyProduct(props) {
           </div>
         );
       })}
+      <div style={{ paddingTop: Metrics.baseMargin }}>
+        <Button
+          label={"Mitglied werden"}
+          color={Colors.white}
+          hoverColor={Colors.green}
+          onPress={() => console.log("blaksda")}
+        ></Button>
+      </div>
     </div>
   );
 }

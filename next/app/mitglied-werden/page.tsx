@@ -15,6 +15,8 @@ import Fonts from "@/lib/Fonts";
 import RadioButton from "./RadioButton";
 import { useState } from "react";
 import YearlyProduct from "./YearlyProducts";
+import Heart from "./Heart";
+import Button from "@/components/Button";
 
 async function getPageData() {
   try {
@@ -100,7 +102,13 @@ export default async function MitgliedPage(props) {
   const statements = await getStatements();
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -113,9 +121,62 @@ export default async function MitgliedPage(props) {
         }}
       >
         <Statement statements={statements}></Statement>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignSelf: "center",
+            width: "90vw",
+          }}
+        >
+          <div
+            style={{
+              width: "40vw",
+            }}
+          >
+            <YearlyProduct memberProducts={memberProducts}></YearlyProduct>
+          </div>
 
-        <YearlyProduct memberProducts={memberProducts}></YearlyProduct>
-
+          <div
+            style={{
+              width: "40vw",
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: Colors.darkGreen,
+              borderRadius: 9,
+              padding: Metrics.doubleBaseMargin,
+              marginTop: Metrics.tripleBaseMargin,
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.white,
+                ...Fonts.style.h2,
+                marginBottom: Metrics.halfBaseMargin,
+              }}
+            >
+              {"Sendung unterstützen"}
+            </Text>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                flexGrow: 1,
+              }}
+            >
+              <Heart color={Colors.green}></Heart>
+            </div>
+            <Button
+              label={"Sendung unterstützen"}
+              color={Colors.white}
+              hoverColor={Colors.green}
+              // onPress={onPressSupport}
+            ></Button>
+          </div>
+        </div>
         <div
           style={{
             width: "74vw",
