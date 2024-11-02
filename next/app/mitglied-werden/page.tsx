@@ -127,11 +127,12 @@ export default async function MitgliedPage(props) {
             justifyContent: "space-between",
             alignSelf: "center",
             width: "90vw",
+            marginTop: Metrics.tripleBaseMargin,
           }}
         >
           <div
             style={{
-              width: "40vw",
+              width: "43vw",
             }}
           >
             <YearlyProduct memberProducts={memberProducts}></YearlyProduct>
@@ -139,42 +140,48 @@ export default async function MitgliedPage(props) {
 
           <div
             style={{
-              width: "40vw",
+              width: "43vw",
               display: "flex",
-              flexDirection: "column",
-              backgroundColor: Colors.darkGreen,
-              borderRadius: 9,
-              padding: Metrics.doubleBaseMargin,
-              marginTop: Metrics.tripleBaseMargin,
             }}
           >
-            <Text
-              style={{
-                color: Colors.white,
-                ...Fonts.style.h2,
-                marginBottom: Metrics.halfBaseMargin,
-              }}
-            >
-              {"Sendung unterstützen"}
-            </Text>
             <div
               style={{
-                width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+                backgroundColor: Colors.darkGreen,
+                borderRadius: 9,
+                padding: Metrics.doubleBaseMargin,
                 flexGrow: 1,
               }}
             >
-              <Heart color={Colors.green}></Heart>
+              <Text
+                style={{
+                  color: Colors.white,
+                  ...Fonts.style.h2,
+                  marginBottom: Metrics.halfBaseMargin,
+                }}
+              >
+                {"Sendung unterstützen"}
+              </Text>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexGrow: 1,
+                }}
+              >
+                <Heart color={Colors.green}></Heart>
+              </div>
+              <Button
+                label={"Sendung unterstützen"}
+                color={Colors.white}
+                hoverColor={Colors.green}
+                // onPress={onPressSupport}
+              ></Button>
             </div>
-            <Button
-              label={"Sendung unterstützen"}
-              color={Colors.white}
-              hoverColor={Colors.green}
-              // onPress={onPressSupport}
-            ></Button>
           </div>
         </div>
         <div

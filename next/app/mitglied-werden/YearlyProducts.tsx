@@ -20,7 +20,6 @@ export default function YearlyProduct(props) {
         backgroundColor: Colors.darkGreen,
         borderRadius: 9,
         padding: Metrics.doubleBaseMargin,
-        marginTop: Metrics.tripleBaseMargin,
       }}
     >
       <Text
