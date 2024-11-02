@@ -68,14 +68,14 @@ export const style: Record<string, TextStyle> = {
 
   text: {
     fontFamily: type.regular,
-    fontSize: size.medium,
+    fontSize: size.text,
     lineHeight: 20,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
   },
   TTtext: {
     fontFamily: type.regular,
-    fontSize: size.medium,
+    fontSize: size.text,
     lineHeight: 1.4,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
@@ -83,7 +83,7 @@ export const style: Record<string, TextStyle> = {
 
   textLink: {
     fontFamily: type.bold,
-    fontSize: size.medium,
+    fontSize: size.text,
     lineHeight: 20,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
@@ -91,7 +91,7 @@ export const style: Record<string, TextStyle> = {
 
   TTtextLink: {
     fontFamily: type.bold,
-    fontSize: size.medium,
+    fontSize: size.text,
     lineHeight: 20,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',

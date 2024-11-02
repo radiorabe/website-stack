@@ -11,7 +11,7 @@ export default function Statement(props) {
   useEffect(() => {
     setRandomIndex(Math.floor(Math.random() * props.statements.length));
   }, []);
-  const randomStatment = props.statements[randomIndex].statements_id;
+  const randomStatment = props.statements[randomIndex];
 
   return (
     <div

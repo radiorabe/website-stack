@@ -1,16 +1,26 @@
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
-import { ItemsPageMember } from "@/lib/api/data-contracts";
+import {
+  ItemsMemberProduct,
+  ItemsPageMember,
+  ItemsStatements,
+} from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
 import { notFound } from "next/navigation";
 import Statement from "./Statement";
+import Colors from "@/lib/Colors";
+import { Text } from "@/lib/server-react-native";
+import Fonts from "@/lib/Fonts";
+import RadioButton from "./RadioButton";
+import { useState } from "react";
+import YearlyProduct from "./YearlyProducts";
 
 async function getPageData() {
   try {
     const infoResponse = await Api.readItemsPageMember(
       {
-        fields: ["*", "statements.statements_id.*"],
+        fields: ["*"],
       },
       {
         // next: {
@@ -32,8 +42,62 @@ async function getPageData() {
   }
 }
 
+async function getStatements() {
+  try {
+    const infoResponse = await Api.readItemsStatements(
+      {
+        fields: ["*"],
+      },
+      {
+        // next: {
+        //   tags:
+        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        // },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", infoResponse);
+    let item: ItemsStatements[] = infoResponse.data.data;
+
+    console.log("ItemsStatements: ", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+    notFound();
+  }
+}
+
+async function getMemberProducts() {
+  try {
+    const infoResponse = await Api.readItemsMemberProduct(
+      {
+        fields: ["*"],
+      },
+      {
+        // next: {
+        //   tags:
+        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        // },
+        cache: "no-store",
+      }
+    );
+    // console.log("response", infoResponse);
+    let item: ItemsMemberProduct[] = infoResponse.data.data;
+
+    console.log("member products: ", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+    notFound();
+  }
+}
+
 export default async function MitgliedPage(props) {
   const data = await getPageData();
+  const memberProducts = await getMemberProducts();
+  const statements = await getStatements();
 
   return (
     <div>
@@ -48,7 +112,9 @@ export default async function MitgliedPage(props) {
           paddingBottom: Metrics.tripleBaseMargin,
         }}
       >
-        <Statement statements={data.statements}></Statement>
+        <Statement statements={statements}></Statement>
+
+        <YearlyProduct memberProducts={memberProducts}></YearlyProduct>
 
         <div
           style={{

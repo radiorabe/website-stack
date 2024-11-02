@@ -16,6 +16,8 @@ import {
   ReadItemsImageBoxParams,
   ReadItemsInfoBoxData,
   ReadItemsInfoBoxParams,
+  ReadItemsMemberProductData,
+  ReadItemsMemberProductParams,
   ReadItemsPageAgbData,
   ReadItemsPageAgbParams,
   ReadItemsPageContactContactAddressData,
@@ -88,6 +90,8 @@ import {
   ReadSingleItemsImageBoxParams,
   ReadSingleItemsInfoBoxData,
   ReadSingleItemsInfoBoxParams,
+  ReadSingleItemsMemberProductData,
+  ReadSingleItemsMemberProductParams,
   ReadSingleItemsPageAgbData,
   ReadSingleItemsPageAgbParams,
   ReadSingleItemsPageContactContactAddressData,
@@ -816,6 +820,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_member_statements/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the member_product items.
+ *
+ * @tags Items, ItemsMemberProduct
+ * @name ReadItemsMemberProduct
+ * @summary List Items
+ * @request GET:/items/member_product
+ * @secure
+ * @response `200` `ReadItemsMemberProductData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsMemberProduct = (query: ReadItemsMemberProductParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsMemberProductData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/member_product`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single member_product item by unique identifier.
+ *
+ * @tags Items, ItemsMemberProduct
+ * @name ReadSingleItemsMemberProduct
+ * @summary Retrieve an Item
+ * @request GET:/items/member_product/{id}
+ * @response `200` `ReadSingleItemsMemberProductData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsMemberProduct = ({ id, ...query }: ReadSingleItemsMemberProductParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsMemberProductData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/member_product/${id}`,
       method: "GET",
       query: query,
       format: "json",
