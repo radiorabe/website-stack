@@ -2,6 +2,7 @@
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import Link from "next/link";
 import { ReactElement } from "react";
 
 export type PressableState = Readonly<{
@@ -15,9 +16,10 @@ export interface HoverableProps {
   label: string;
   icon?: any;
   disabled?: boolean;
-  onPress(): void;
+  onPress?(): void;
   color?: any;
   hoverColor?: any;
+  href?: string;
 }
 
 const Button = ({
@@ -28,8 +30,9 @@ const Button = ({
   onPress,
   color,
   hoverColor,
+  href,
 }: HoverableProps) => {
-  return (
+  const button = (
     <Pressable
       style={{}}
       onPress={() => {
@@ -89,6 +92,16 @@ const Button = ({
       }}
     </Pressable>
   );
+
+  if (href) {
+    return (
+      <Link href={href} style={{ textDecoration: "none" }}>
+        {button}
+      </Link>
+    );
+  }
+
+  return button;
 };
 
 export default Button;

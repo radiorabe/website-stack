@@ -55,7 +55,10 @@ export default function YearlyProduct(props) {
           label={"Mitglied werden"}
           color={Colors.white}
           hoverColor={Colors.green}
-          onPress={() => console.log("blaksda")}
+          href={{
+            pathname: "/mitglied-werden/bestellung",
+            query: { id: selectedProduct, type: "yearly" },
+          }}
         ></Button>
       </div>
     </div>

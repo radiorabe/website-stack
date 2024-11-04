@@ -57,6 +57,11 @@ export default async function ImpressumPage(props) {
   const posts = await getPosts();
   console.log("posts", posts);
 
+  //
+  // use this to save the state: // from https://medium.com/@roman_j/mastering-state-in-next-js-app-router-with-url-query-parameters-a-practical-guide-03939921d09c
+  // already started in useProductFilter.tsx
+  //
+
   return (
     <View>
       <View

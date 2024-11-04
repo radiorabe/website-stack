@@ -3,7 +3,7 @@ const gridSpacing = 24;
 const baseMargin = "1.8vw";
 
 // Used via Metrics.baseMargin
-const metrics = {
+const Metrics = {
   navBarHeight: "5vw",
   halfHalfBaseMargin: "0.45vw",
   halfBaseMargin: "0.9vw",
@@ -15,4 +15,4 @@ const metrics = {
   gridSpacing,
 };
 
-export default metrics;
+export default Metrics;

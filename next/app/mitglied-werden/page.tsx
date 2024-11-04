@@ -179,7 +179,7 @@ export default async function MitgliedPage(props) {
                 label={"Sendung unterstützen"}
                 color={Colors.white}
                 hoverColor={Colors.green}
-                // onPress={onPressSupport}
+                href="/mitglied-werden/bestellung"
               ></Button>
             </div>
           </div>
