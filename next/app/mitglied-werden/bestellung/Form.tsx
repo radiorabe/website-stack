@@ -15,13 +15,13 @@ export default function Statement(props) {
   const inputs = [
     {
       label: "Vorname*",
-      inputKey: "firstName",
+      inputKey: "first_name",
       required: true,
       type: "string",
     },
     {
       label: "Nachname*",
-      inputKey: "familyName",
+      inputKey: "family_name",
       required: true,
       type: "string",
     },
@@ -31,7 +31,7 @@ export default function Statement(props) {
     { label: "Ort*", inputKey: "city", required: true, type: "string" },
     {
       label: "Telefon",
-      inputKey: "phoneNumber",
+      inputKey: "phone_number",
       required: false,
       type: "string",
     },
@@ -49,6 +49,20 @@ export default function Statement(props) {
       }
       setErrors(newErrors);
     });
+
+    if (newErrors.length === 0) {
+      console.log("fetch");
+      fetch("http://localhost:3000/api/order", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          console.log("respons", response);
+          return response.json();
+        })
+        .then((data) => console.log("data", data))
+        .catch((e) => console.log("error", e));
+    }
   };
   return (
     <div
