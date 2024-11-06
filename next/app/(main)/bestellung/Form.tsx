@@ -26,18 +26,11 @@ export default function Statement({ id, type }) {
     if (e.data.error) {
       setSaferpayUrl(undefined);
       setOrderId(undefined);
-    } else if (e.data.type && e.data.id) {
+    } else if (e.data.id) {
       // iframe finished we can thank the user
-      router.push(`/bestellung/danke?type=${e.data.type}&id=${orderId}`);
+      router.push(`/bestellung/danke?id=${e.data.id}`);
     }
   }, []);
-
-  //   const handleUserKeyPress = useCallback(event => {
-  //     const { key, keyCode } = event;
-  //     if(keyCode === 32 || (keyCode >= 65 && keyCode <= 90)){
-  //         setUserText(prevUserText => `${prevUserText}${key}`);
-  //     }
-  // }, []);
 
   useEffect(() => {
     window.addEventListener("message", handleIframeMessage);

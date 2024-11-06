@@ -46,10 +46,12 @@ export async function GET(request) {
   const id = searchParams.get("id");
 
   let order = undefined;
+  let resStatus = 200;
+  let errorMessage = "";
 
   if (id && id !== "") {
     order = await getOrder(id);
-    console.log("order", order);
+    // console.log("order", order);
     if (order.token) {
       try {
         let requestData = {
@@ -76,7 +78,7 @@ export async function GET(request) {
           }
         );
         let data = await response.json();
-        console.log("Assert Response data: ", data);
+        // console.log("Assert Response data: ", data);
         if (data.Transaction) {
           if (
             data.Transaction.OrderId === id &&
@@ -114,10 +116,11 @@ export async function GET(request) {
                 }
               );
               data = await response.json();
-              console.log("Capture Response data: ", data);
+              // console.log("Capture Response data: ", data);
               if (data.Status !== "CAPTURED") {
-                console.log("captured");
-
+                // console.log("captured");
+                resStatus = 400;
+                errorMessage = "Error captured";
                 // send info mail if something went wrong
                 // await strapi.plugins["email"].services.email.send({
                 //   to: "order@gloschli.ch",
@@ -128,11 +131,8 @@ export async function GET(request) {
               }
             }
 
-            // order = await strapi.services.order.update(
-            //   { id },
-            //   { status: "paid" }
-            // );
-
+            order = await updateOrder(id, { status: "paid" });
+            console.log("updated paid: ", order);
             // strapi.services.order.sendInfoEmail({
             //   ...order,
             //   time,
@@ -143,16 +143,25 @@ export async function GET(request) {
             //   time,
             // });
           } else {
-            return "Error CHECK";
+            resStatus = 400;
+            errorMessage = "Error orderCheck";
           }
         }
-      } catch (error) {}
+      } catch (error) {
+        errorMessage = error;
+      }
     }
   } else {
-    // resMessage = "Missing id";
-    // resStatus = 400;
+    errorMessage = "Missing id";
+    resStatus = 400;
   }
 
   //   // Fetch users logic
-  return NextResponse.json(order ? order : { error: "no such order" });
+  return NextResponse.json(
+    {
+      order: order ? order : undefined,
+      error: errorMessage,
+    },
+    { status: resStatus }
+  );
 }

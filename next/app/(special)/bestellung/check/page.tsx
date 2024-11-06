@@ -1,30 +1,20 @@
 "use client";
 import { Api } from "@/lib/api";
-import { ItemsMemberProduct } from "@/lib/api/data-contracts";
+import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { notFound, useSearchParams } from "next/navigation";
+import useSWR from "swr";
 
-import Metrics from "@/lib/Metrics";
 import { useEffect } from "react";
 
-async function checkOrder(id) {
+async function checkOrder([slug, id]) {
   try {
-    fetch(`http://localhost:3000/api/order/check?id=${id}`, {
+    let response = await fetch(`http://localhost:3000${slug}?id=${id}`, {
       method: "GET",
-    })
-      .then((response) => {
-        console.log("ordercheck response", response);
-        return response.json();
-      })
-      .then((data) => {
-        console.log("orderCheck", data);
-        // return data;
-      })
-      .catch((e) => console.log("error", e));
-
-    // console.log("member product: ", item);
-
-    // return item;
+    });
+    let data = await response.json();
+    let order: ItemsOrders = data.order;
+    return order;
   } catch (error) {
     logError(error);
     notFound();
@@ -39,21 +29,35 @@ export default function CheckPage({ searchParams }) {
     return null;
   }
 
-  useEffect(() => {
-    const product = checkOrder(searchParams.id);
-    console.log("product", product);
-    // window.top.postMessage(
-    //   {
-    //     error: false,
-    //     message: "all good",
-    //     type: searchParams.type,
-    //     id: searchParams.id,
-    //   },
-    //   "*"
-    // );
-  }, []);
+  const { data, error, isLoading } = useSWR(
+    ["/api/order/check", searchParams.id],
+    checkOrder
+  );
+  console.log("datadddd", data);
 
-  console.log("type", searchParams.type);
+  useEffect(() => {
+    if (!isLoading && data) {
+      if (data.status === "paid") {
+        window.top.postMessage(
+          {
+            error: false,
+            message: "all good",
+            id: searchParams.id,
+          },
+          "*"
+        );
+      } else {
+        window.top.postMessage(
+          {
+            error: true,
+            message: "Not paid",
+            id: searchParams.id,
+          },
+          "*"
+        );
+      }
+    }
+  }, [data, isLoading]);
 
   return (
     <div

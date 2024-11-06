@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { View, Text } from "@/lib/server-react-native";
 import XMLParser from "react-xml-parser";
-import useSWR from "swr";
 import { useAnimate } from "framer-motion";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";

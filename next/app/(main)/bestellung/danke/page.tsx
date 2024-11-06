@@ -1,13 +1,13 @@
 import { Api } from "@/lib/api";
-import { ItemsMemberProduct } from "@/lib/api/data-contracts";
+import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { notFound, useSearchParams } from "next/navigation";
 
 import Metrics from "@/lib/Metrics";
 
-async function getMemberProduct(id) {
+async function getOrder(id) {
   try {
-    const infoResponse = await Api.readSingleItemsMemberProduct(
+    const infoResponse = await Api.readSingleItemsOrders(
       {
         id,
       },
@@ -15,9 +15,7 @@ async function getMemberProduct(id) {
         cache: "no-store",
       }
     );
-    let item: ItemsMemberProduct = infoResponse.data.data;
-
-    console.log("member product: ", item);
+    let item: ItemsOrders = infoResponse.data.data;
 
     return item;
   } catch (error) {
@@ -29,27 +27,15 @@ async function getMemberProduct(id) {
 export default async function DankePage({ searchParams }) {
   console.log("searchParams", searchParams);
 
-  const filters = {
-    type: searchParams.type || "",
-    id: searchParams.id || "",
-  };
+  console.log("id", searchParams.id);
 
-  console.log("type", filters.type);
-  console.log("id", filters.id);
-
-  if (
-    !searchParams.type ||
-    searchParams.type === "" ||
-    !searchParams.id ||
-    searchParams.id === ""
-  ) {
+  if (!searchParams.id || searchParams.id === "") {
     return null;
   }
 
-  const product = await getMemberProduct(searchParams.id);
+  const order = await getOrder(searchParams.id);
 
-  console.log("type", searchParams.type);
-  console.log("product", product);
+  console.log("order", order);
 
   return (
     <div
@@ -61,7 +47,7 @@ export default async function DankePage({ searchParams }) {
         paddingBottom: Metrics.tripleBaseMargin,
       }}
     >
-      <div>{"thank you for your order: " + JSON.stringify(product)}</div>
+      <div>{"thank you for your order: " + JSON.stringify(order)}</div>
     </div>
   );
 }
