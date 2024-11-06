@@ -10,6 +10,10 @@
  */
 
 import {
+  CreateItemsOrdersData,
+  CreateItemsOrdersParams,
+  CreateItemsOrdersPayload,
+  ItemsOrders,
   ReadItemsContactAddressData,
   ReadItemsContactAddressParams,
   ReadItemsImageBoxData,
@@ -18,6 +22,8 @@ import {
   ReadItemsInfoBoxParams,
   ReadItemsMemberProductData,
   ReadItemsMemberProductParams,
+  ReadItemsOrdersData,
+  ReadItemsOrdersParams,
   ReadItemsPageAgbData,
   ReadItemsPageAgbParams,
   ReadItemsPageContactContactAddressData,
@@ -92,6 +98,8 @@ import {
   ReadSingleItemsInfoBoxParams,
   ReadSingleItemsMemberProductData,
   ReadSingleItemsMemberProductParams,
+  ReadSingleItemsOrdersData,
+  ReadSingleItemsOrdersParams,
   ReadSingleItemsPageAgbData,
   ReadSingleItemsPageAgbParams,
   ReadSingleItemsPageContactContactAddressData,
@@ -158,8 +166,13 @@ import {
   ReadSingleItemsQuoteParams,
   ReadSingleItemsStatementsData,
   ReadSingleItemsStatementsParams,
+  UpdateItemsOrdersData,
+  UpdateItemsOrdersParams,
+  UpdateItemsOrdersPayload,
+  UpdateSingleItemsOrdersData,
+  UpdateSingleItemsOrdersParams,
 } from "./data-contracts";
-import { HttpClient, RequestParams } from "./http-client";
+import { ContentType, HttpClient, RequestParams } from "./http-client";
 
 export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
@@ -3207,6 +3220,193 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       path: `/items/statements/${id}`,
       method: "GET",
       query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Create a new orders item.
+ *
+ * @tags Items, ItemsOrders
+ * @name CreateItemsOrders
+ * @summary Create an Item
+ * @request POST:/items/orders
+ * @response `200` `CreateItemsOrdersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  createItemsOrders = (query: CreateItemsOrdersParams, data: CreateItemsOrdersPayload, params: RequestParams = {}) =>
+    this.request<
+      CreateItemsOrdersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/orders`,
+      method: "POST",
+      query: query,
+      body: data,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the orders items.
+ *
+ * @tags Items, ItemsOrders
+ * @name ReadItemsOrders
+ * @summary List Items
+ * @request GET:/items/orders
+ * @secure
+ * @response `200` `ReadItemsOrdersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsOrders = (query: ReadItemsOrdersParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsOrdersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/orders`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * @description Update multiple orders items at the same time.
+   *
+   * @tags Items, ItemsOrders
+   * @name UpdateItemsOrders
+   * @summary Update Multiple Items
+   * @request PATCH:/items/orders
+   * @response `200` `UpdateItemsOrdersData` Successful request
+   */
+  updateItemsOrders = (query: UpdateItemsOrdersParams, data: UpdateItemsOrdersPayload, params: RequestParams = {}) =>
+    this.request<UpdateItemsOrdersData, any>({
+      path: `/items/orders`,
+      method: "PATCH",
+      query: query,
+      body: data,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single orders item by unique identifier.
+ *
+ * @tags Items, ItemsOrders
+ * @name ReadSingleItemsOrders
+ * @summary Retrieve an Item
+ * @request GET:/items/orders/{id}
+ * @response `200` `ReadSingleItemsOrdersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsOrders = ({ id, ...query }: ReadSingleItemsOrdersParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsOrdersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/orders/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Update an existing orders item.
+ *
+ * @tags Items, ItemsOrders
+ * @name UpdateSingleItemsOrders
+ * @summary Update an Item
+ * @request PATCH:/items/orders/{id}
+ * @response `200` `UpdateSingleItemsOrdersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  updateSingleItemsOrders = (
+    { id, ...query }: UpdateSingleItemsOrdersParams,
+    data: ItemsOrders,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      UpdateSingleItemsOrdersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/orders/${id}`,
+      method: "PATCH",
+      query: query,
+      body: data,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });

@@ -1,0 +1,17 @@
+:root{
+  font-feature-settings: 'tnum';
+  font-feature-settings: "tnum" on;
+}
+
+html,
+body {
+  font-feature-settings: 'tnum';
+}
+
+/* @import-normalize; */
+ h4 > span, h3 > span, h2 > span, h1 > span { 
+  font-family: inherit !important; 
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: inherit !important;
+} /*  Fix for tiptap renderer of child nodes */

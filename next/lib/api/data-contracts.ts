@@ -590,6 +590,29 @@ export interface ItemsStatements {
   author?: string | null;
 }
 
+export interface ItemsOrders {
+  /** @format uuid */
+  id?: string;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  status?: string | null;
+  /** @format float */
+  price?: number | null;
+  name?: string | null;
+  token?: string | null;
+  first_name?: string | null;
+  family_name?: string | null;
+  email?: string | null;
+  address?: string | null;
+  plz?: string | null;
+  city?: string | null;
+  phone_number?: string | null;
+}
+
 export interface GetAssetParams {
   /** The key of the asset size configured in settings. */
   key?: string;
@@ -2182,4 +2205,88 @@ export interface ReadSingleItemsStatementsParams {
 
 export interface ReadSingleItemsStatementsData {
   data?: ItemsStatements;
+}
+
+export type CreateItemsOrdersPayload = ItemsOrders[] | ItemsOrders;
+
+export interface CreateItemsOrdersParams {
+  /** What metadata to return in the response. */
+  meta?: string;
+}
+
+export interface CreateItemsOrdersData {
+  data?: ItemsOrders[];
+}
+
+export interface ReadItemsOrdersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsOrdersData {
+  data?: ItemsOrders[];
+  meta?: XMetadata;
+}
+
+export type UpdateItemsOrdersPayload = ItemsOrders[] | ItemsOrders;
+
+export interface UpdateItemsOrdersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface UpdateItemsOrdersData {
+  data?: ItemsOrders[];
+}
+
+export interface ReadSingleItemsOrdersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsOrdersData {
+  data?: ItemsOrders;
+}
+
+export interface UpdateSingleItemsOrdersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface UpdateSingleItemsOrdersData {
+  data?: ItemsOrders;
 }
