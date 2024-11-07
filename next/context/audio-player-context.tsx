@@ -43,7 +43,7 @@ const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(
 export const tracks = [
   {
     title: "Rabe Stream",
-    src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
+    src: "https://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
     author: "Trinix ft Rushawn",
     //   thumbnail: trinix,
   },
