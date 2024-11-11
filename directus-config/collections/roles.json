@@ -16,7 +16,7 @@
   {
     "name": "nextjs",
     "icon": "supervised_user_circle",
-    "description": null,
+    "description": "Dies wird mit dem User NextJS gebraucht um orders zu erstellen und editieren",
     "parent": null,
     "_syncId": "996ea03c-3b92-41b1-933a-9e196a314f38"
   }
