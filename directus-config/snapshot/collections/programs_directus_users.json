@@ -9,7 +9,7 @@
     "collection": "programs_directus_users",
     "color": null,
     "display_template": null,
-    "group": "page_programs",
+    "group": "programs",
     "hidden": true,
     "icon": "import_export",
     "item_duplication_fields": null,

@@ -14,8 +14,7 @@
     "note": null,
     "options": {
       "headerColor": "#0433FF",
-      "headerIcon": "format_image_left",
-      "start": "closed"
+      "headerIcon": "format_image_left"
     },
     "readonly": false,
     "required": false,
