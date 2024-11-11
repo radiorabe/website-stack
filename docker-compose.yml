@@ -12,9 +12,10 @@ services:
 
   directus:
     container_name: rabe-directus
-    image: directus/directus:latest
-    # build:
-    #   context: ./directus
+    # image: directus/directus:10.12.1
+    image: directus/directus:11.2.1
+    # image: tractr/directus-sync:11.2.1
+
     ports:
       - ${BE_PORT}:8055
     volumes:
@@ -23,28 +24,3 @@ services:
       - ./directus/extensions:/directus/extensions
     env_file: .env
     restart: unless-stopped
-
-  DB:
-    container_name: rabe-DB
-    platform: linux/amd64 #for platform error on Apple M1 chips
-    restart: unless-stopped
-    env_file: .env
-    image: postgis/postgis:14-3.4-alpine
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_HOST}
-    volumes:
-      - rabe-data:/var/lib/postgresql/data/ #using a volume
-      #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
-    # ports:
-    #   - '${DATABASE_PORT}:5432'
-    # networks:
-    #   - rabeNetwork
-
-volumes:
-  rabe-data:
-# networks:
-#   rabeNetwork:
-#     name: rabeNetwork
-#     driver: bridge
