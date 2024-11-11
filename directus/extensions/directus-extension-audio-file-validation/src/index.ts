@@ -22,11 +22,11 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
 
     if (payload.audio) {
       const file = await filesService.readOne(payload.audio);
-      console.log("process.env.FOLDER_ID", process.env.FOLDER_ID);
+      console.log("process.env.AUDIO_FOLDER_ID", process.env.AUDIO_FOLDER_ID);
       console.log("file", file);
 
       if (!audioTypes.includes(file.type)) {
-        if (file.folder === process.env.FOLDER_ID) {
+        if (file.folder === process.env.AUDIO_FOLDER_ID) {
           await filesService.deleteOne(payload.audio);
         }
         throw new FailedValidationError({
