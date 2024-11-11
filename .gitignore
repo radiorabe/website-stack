@@ -68,3 +68,6 @@ yarn-error.log
 #dierctus
 directus/uploads
 directus/extensions/directus-extension-audio-file-validation/package-lock.json
+
+# override production docker-compose file
+docker-compose.override.yml
