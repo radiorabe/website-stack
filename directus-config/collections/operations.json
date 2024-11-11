@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Check File",
+    "key": "check_file",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "\n\nconst audioTypes = [\n    \"audio/wav\",\n    \"audio/webm\",\n    \"audio/aac\",\n    \"audio/ogg\",\n    \"audio/mpeg\"\n];\n\n\nfunction checkFile(file){\n    if(!audioTypes.includes(file.type)){\n        throw {\n            message: 'Invalid Audio Datei',\n            extensions: {\n                code: 400,\n                field: 'audio',\n                type: 'neq',\n            },\n        };\n\t}\n}\n\nmodule.exports = async function(data) {\n\t// Do something...\n    checkFile(data);\n\t//return {};\n}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "1910a9df-7c51-4798-bb1e-26e79dd38e22",
+    "_syncId": "bc95dfa7-5f33-41de-9712-7c212349c53d"
+  },
+  {
+    "name": "Read Data",
+    "key": "item_read_cbsrx",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "orders"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "dfe68737-a6b0-46a6-a298-b4c082ccce88"
+  },
+  {
+    "name": "Notification RaBe",
+    "key": "notification_ra_be_gvjel",
+    "type": "mail",
+    "position_x": 21,
+    "position_y": 16,
+    "options": {
+      "body": "Hallo {{$trigger.payload.first_name}} {{$trigger.payload.family_name}}\n\nDanke für deine Bestellung\n\nDein Rabe Team",
+      "subject": "Willkommen bei Rabe"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "8f09a111-39e9-46a9-b54f-c60b586b15df"
+  },
+  {
+    "name": "Read Data",
+    "key": "read_data",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "directus_files",
+      "key": [
+        "{{$trigger.payload.audio}}",
+        "{{$accountability.user}}"
+      ]
+    },
+    "resolve": "bc95dfa7-5f33-41de-9712-7c212349c53d",
+    "reject": null,
+    "flow": "1910a9df-7c51-4798-bb1e-26e79dd38e22",
+    "_syncId": "5932cc76-69c4-45a0-acc6-4c040ba74e8b"
+  },
+  {
+    "name": "Read Front End Url",
+    "key": "read_front_end_url",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "config",
+      "key": [
+        "1"
+      ]
+    },
+    "resolve": "ab45f02c-3855-4e83-a95b-0ea09b49c130",
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "c07607fa-4063-4aac-8611-ca0e15c75ca0"
+  },
+  {
+    "name": "Webhook / Request URL",
+    "key": "webhook_request_url_wmfhm",
+    "type": "request",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "ab45f02c-3855-4e83-a95b-0ea09b49c130"
+  }
+]

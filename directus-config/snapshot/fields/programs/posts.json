@@ -1,0 +1,27 @@
+{
+  "collection": "programs",
+  "field": "posts",
+  "type": "alias",
+  "meta": {
+    "collection": "programs",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "posts",
+    "group": null,
+    "hidden": false,
+    "interface": "list-o2m",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 12,
+    "special": [
+      "o2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collection": "posts_editor_nodes",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": null,
+    "collapse": "open",
+    "collection": "posts_editor_nodes",
+    "color": null,
+    "display_template": null,
+    "group": "posts",
+    "hidden": true,
+    "icon": null,
+    "item_duplication_fields": [
+      "collection",
+      "item:info_box.text",
+      "item:info_box.title",
+      "item:quote.author",
+      "item:quote.info",
+      "item:quote.text"
+    ],
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": null,
+    "translations": null,
+    "unarchive_value": null,
+    "versioning": false
+  },
+  "schema": {
+    "name": "posts_editor_nodes"
+  }
+}

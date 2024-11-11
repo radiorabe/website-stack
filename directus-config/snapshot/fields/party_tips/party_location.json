@@ -1,0 +1,45 @@
+{
+  "collection": "party_tips",
+  "field": "party_location",
+  "type": "integer",
+  "meta": {
+    "collection": "party_tips",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "party_location",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown-m2o",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": true,
+    "sort": 11,
+    "special": [
+      "m2o"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "party_location",
+    "table": "party_tips",
+    "data_type": "integer",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "party_location",
+    "foreign_key_column": "id"
+  }
+}

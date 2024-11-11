@@ -1,0 +1,27 @@
+{
+  "collection": "posts",
+  "field": "authors",
+  "type": "alias",
+  "meta": {
+    "collection": "posts",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "authors",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 10,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

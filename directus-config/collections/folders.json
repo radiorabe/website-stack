@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Sendungen",
+    "parent": null,
+    "_syncId": "05aac58f-b46e-4d87-8b09-256d7ff05d34"
+  },
+  {
+    "name": "Beiträge",
+    "parent": null,
+    "_syncId": "315b6715-636c-4149-b2d1-e2eac3e9327e"
+  },
+  {
+    "name": "Imagefiles",
+    "parent": "315b6715-636c-4149-b2d1-e2eac3e9327e",
+    "_syncId": "3d6ebe40-7d6e-4a54-ab90-26b7f40333c6"
+  },
+  {
+    "name": "Stock",
+    "parent": null,
+    "_syncId": "4f06af43-113c-4b82-811e-15c197b8cb63"
+  },
+  {
+    "name": "Audio",
+    "parent": null,
+    "_syncId": "8af4d169-31f2-441d-8eda-f2bb07625d31"
+  },
+  {
+    "name": "Imagefiles",
+    "parent": "05aac58f-b46e-4d87-8b09-256d7ff05d34",
+    "_syncId": "abf46e7e-8432-4762-80eb-e37417e38b33"
+  },
+  {
+    "name": "Avatar",
+    "parent": null,
+    "_syncId": "d92d72b2-a16e-4829-adda-ccef580432c1"
+  },
+  {
+    "name": "Audiofiles",
+    "parent": "315b6715-636c-4149-b2d1-e2eac3e9327e",
+    "_syncId": "eb204091-1fe5-4957-8c53-d6e6678f5a1e"
+  }
+]

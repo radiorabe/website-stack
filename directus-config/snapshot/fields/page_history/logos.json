@@ -1,0 +1,27 @@
+{
+  "collection": "page_history",
+  "field": "logos",
+  "type": "alias",
+  "meta": {
+    "collection": "page_history",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "logos",
+    "group": null,
+    "hidden": false,
+    "interface": "files",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 11,
+    "special": [
+      "files"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

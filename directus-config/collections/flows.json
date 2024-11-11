@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Audio Validation",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "inactive",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "filter",
+      "scope": [
+        "items.create",
+        "items.update"
+      ],
+      "collections": [
+        "posts"
+      ],
+      "return": "$last"
+    },
+    "operation": "5932cc76-69c4-45a0-acc6-4c040ba74e8b",
+    "_syncId": "1910a9df-7c51-4798-bb1e-26e79dd38e22"
+  },
+  {
+    "name": "Order Email Flow",
+    "icon": "bolt",
+    "color": null,
+    "description": "Flow to send email to user when order is paid",
+    "status": "active",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.update",
+        "items.create"
+      ],
+      "collections": [
+        "orders"
+      ]
+    },
+    "operation": "dfe68737-a6b0-46a6-a298-b4c082ccce88",
+    "_syncId": "5626945d-0f1c-4e72-a970-f4508c945ec9"
+  },
+  {
+    "name": "Rerender NextJS Collections",
+    "icon": "bolt",
+    "color": null,
+    "description": "Prerender all pages",
+    "status": "active",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create",
+        "items.update",
+        "items.delete"
+      ],
+      "collections": [
+        "info_box",
+        "page_agb",
+        "page_contact",
+        "page_impressum",
+        "page_programs",
+        "page_team",
+        "page_team_directus_users",
+        "page_team_directus_users_1",
+        "page_team_directus_users_2",
+        "party_tips",
+        "posts",
+        "posts_directus_users_1",
+        "programs",
+        "directus_collections",
+        "programs_directus_users",
+        "quote",
+        "directus_files",
+        "directus_users",
+        "page_history",
+        "image_box",
+        "page_history_protocol",
+        "page_history_nodes",
+        "page_history_files",
+        "page_contact_files",
+        "page_contact_contact_address",
+        "member_product",
+        "contact_address",
+        "page_member",
+        "page_member_statements",
+        "page_program",
+        "page_program_programs",
+        "page_program_programs_1",
+        "page_program_programs_2",
+        "page_program_programs_3",
+        "page_receive",
+        "page_receive_nodes",
+        "party_location",
+        "protocol",
+        "statements"
+      ]
+    },
+    "operation": "c07607fa-4063-4aac-8611-ca0e15c75ca0",
+    "_syncId": "7c576e31-95e5-47bc-9cf8-28b1b488458b"
+  }
+]

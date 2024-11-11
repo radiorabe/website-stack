@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Administrator",
+    "icon": "verified",
+    "description": "$t:admin_description",
+    "parent": null,
+    "_syncId": "_sync_default_admin_role"
+  },
+  {
+    "name": "nextjs",
+    "icon": "supervised_user_circle",
+    "description": null,
+    "parent": null,
+    "_syncId": "5c1d6ddc-dfb9-4f82-885f-cd6e317d3554"
+  },
+  {
+    "name": "sendungs-macher",
+    "icon": "supervised_user_circle",
+    "description": "Sendungsmacher können Ihre Sendung und neue Beiträge erstellen. ",
+    "parent": null,
+    "_syncId": "c487b790-1eaf-4162-96f6-c0f85125337e"
+  }
+]

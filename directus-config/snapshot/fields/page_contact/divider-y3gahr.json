@@ -1,0 +1,30 @@
+{
+  "collection": "page_contact",
+  "field": "divider-y3gahr",
+  "type": "alias",
+  "meta": {
+    "collection": "page_contact",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "divider-y3gahr",
+    "group": null,
+    "hidden": false,
+    "interface": "presentation-divider",
+    "note": null,
+    "options": {
+      "title": "Direkter Draht ins Studio"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 17,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

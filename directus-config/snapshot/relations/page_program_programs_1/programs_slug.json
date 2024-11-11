@@ -1,0 +1,25 @@
+{
+  "collection": "page_program_programs_1",
+  "field": "programs_slug",
+  "related_collection": "programs",
+  "meta": {
+    "junction_field": "page_program_id",
+    "many_collection": "page_program_programs_1",
+    "many_field": "programs_slug",
+    "one_allowed_collections": null,
+    "one_collection": "programs",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  },
+  "schema": {
+    "table": "page_program_programs_1",
+    "column": "programs_slug",
+    "foreign_key_table": "programs",
+    "foreign_key_column": "slug",
+    "constraint_name": "page_program_programs_1_programs_slug_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

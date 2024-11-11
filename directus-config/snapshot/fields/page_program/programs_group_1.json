@@ -1,0 +1,29 @@
+{
+  "collection": "page_program",
+  "field": "programs_group_1",
+  "type": "alias",
+  "meta": {
+    "collection": "page_program",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "programs_group_1",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": {
+      "enableCreate": false
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 7,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

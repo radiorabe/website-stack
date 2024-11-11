@@ -1,0 +1,25 @@
+{
+  "collection": "page_member_statements",
+  "field": "page_member_id",
+  "related_collection": "page_member",
+  "meta": {
+    "junction_field": "statements_id",
+    "many_collection": "page_member_statements",
+    "many_field": "page_member_id",
+    "one_allowed_collections": null,
+    "one_collection": "page_member",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  },
+  "schema": {
+    "table": "page_member_statements",
+    "column": "page_member_id",
+    "foreign_key_table": "page_member",
+    "foreign_key_column": "id",
+    "constraint_name": "page_member_statements_page_member_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

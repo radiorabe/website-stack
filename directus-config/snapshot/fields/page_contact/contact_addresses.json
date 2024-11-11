@@ -1,0 +1,27 @@
+{
+  "collection": "page_contact",
+  "field": "contact_addresses",
+  "type": "alias",
+  "meta": {
+    "collection": "page_contact",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "contact_addresses",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 20,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}
