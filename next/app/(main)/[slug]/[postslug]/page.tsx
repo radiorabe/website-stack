@@ -166,7 +166,7 @@ export default async function DynamicPage({ params }) {
                 return (
                   <HoverText
                     key={"author" + index}
-                    href={"/beiträge"}
+                    href={"/beitraege"}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
                   >{`${index ? " &" : ""} ${user.first_name} ${
