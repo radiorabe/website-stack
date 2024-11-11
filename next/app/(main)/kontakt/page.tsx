@@ -186,6 +186,7 @@ export default async function KontaktPage(props) {
             </View>
           </View>
           <View>
+          {data && data.contact_addresses &&  (
             <View
               style={{
                 flexDirection: "row",
@@ -193,10 +194,10 @@ export default async function KontaktPage(props) {
                 justifyContent: "space-between",
                 // backgroundColor: "yellow",
                 paddingBottom:
-                  Metrics.tripleBaseMargin - Metrics.doubleBaseMargin,
+                  Metrics.baseMargin,
               }}
             >
-              {data.contact_addresses.map((item, index) => {
+              { data.contact_addresses.map((item, index) => {
                 return (
                   <View
                     key={"contact" + index}
@@ -262,6 +263,8 @@ export default async function KontaktPage(props) {
                 );
               })}
             </View>
+          )
+        }
           </View>
           <View>
             <Text
@@ -331,7 +334,7 @@ export default async function KontaktPage(props) {
           >
             {"Partnerorganisationen:"}
           </Text>
-          {data.partner_logos && (
+          {data && data.partner_logos && (
             <View style={{ flexDirection: "row" }}>
               {data.partner_logos.map((item, index) => {
                 return (

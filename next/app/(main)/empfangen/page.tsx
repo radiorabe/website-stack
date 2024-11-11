@@ -44,13 +44,12 @@ async function getPageData() {
         // limit: 3,
       },
       {
-        //   next: {
-        //     tags:
-        //       process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        //   },
-        cache: "no-store",
-        //   cache:
-        //     process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+          next: {
+            tags:
+              process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+          },
+          cache:
+            process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);

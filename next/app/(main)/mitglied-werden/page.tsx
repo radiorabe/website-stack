@@ -135,7 +135,7 @@ export default async function MitgliedPage(props) {
               width: "43vw",
             }}
           >
-            <YearlyProduct memberProducts={memberProducts}></YearlyProduct>
+            <YearlyProduct memberProducts={memberProducts || []}></YearlyProduct>
           </div>
 
           <div

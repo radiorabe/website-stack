@@ -226,7 +226,7 @@ export default async function ProgramPage({ params }) {
                 }
               }
             >
-              {todayShows.map((show, index) => {
+              {todayShows && todayShows.map((show, index) => {
                 let isCurrentshow = show.starts === currentShow.starts;
                 return (
                   <View
@@ -374,6 +374,7 @@ export default async function ProgramPage({ params }) {
               </View>
             )}
           </View>
+          {data &&(
           <View
             style={{
               width: "70%",
@@ -459,6 +460,7 @@ export default async function ProgramPage({ params }) {
               })}
             </View>
           </View>
+        )}
         </View>
       </View>
     </View>

@@ -11,7 +11,7 @@ export default function Statement(props) {
   useEffect(() => {
     setRandomIndex(Math.floor(Math.random() * props.statements.length));
   }, []);
-  const randomStatment = props.statements[randomIndex];
+  const randomStatment = props.statements.length > 0 ? props.statements[randomIndex]: "No statments provided";
 
   return (
     <div
