@@ -63,15 +63,7 @@ async function getPartyTips() {
   try {
     const itemResponse = await Api.readItemsPartyTips(
       {
-        fields: [
-          "title_1",
-          "title_2",
-          "date",
-          "url",
-          "address_line_1",
-          "address_line_2",
-          "party_location.*",
-        ],
+        fields: ["title_1", "title_2", "date", "party_location.*"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
