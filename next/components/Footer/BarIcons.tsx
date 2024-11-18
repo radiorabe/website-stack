@@ -29,7 +29,7 @@ export default ({}: HoverableProps) => {
     >
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.facbook.com")}
+        onPress={() => Linking.openURL("https://www.facebook.com/RadioRaBe/")}
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
@@ -44,7 +44,7 @@ export default ({}: HoverableProps) => {
       <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.instagram.com")}
+        onPress={() => Linking.openURL("https://www.instagram.com/radiorabe")}
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
@@ -59,7 +59,7 @@ export default ({}: HoverableProps) => {
       <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.facbook.com")}
+        onPress={() => Linking.openURL("https://m.twitch.tv/radio_rabe/home")}
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
@@ -74,7 +74,11 @@ export default ({}: HoverableProps) => {
       <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.spotify.com")}
+        onPress={() =>
+          Linking.openURL(
+            "https://open.spotify.com/show/1YztxGTBY438i1Vua9fj89?si=feb7693d3a33445e"
+          )
+        }
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
@@ -90,7 +94,11 @@ export default ({}: HoverableProps) => {
 
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.facbook.com")}
+        onPress={() =>
+          Linking.openURL(
+            "https://podcasts.apple.com/ch/podcast/radio-rabe/id1653943288"
+          )
+        }
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
@@ -105,7 +113,11 @@ export default ({}: HoverableProps) => {
 
       <Pressable
         style={{}}
-        onPress={() => Linking.openURL("https://www.facbook.com")}
+        onPress={() =>
+          Linking.openURL(
+            "https://www.youtube.com/channel/UCVnWoMqLjaenGhJo5EvV_pA"
+          )
+        }
       >
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           let newColor = pressed
