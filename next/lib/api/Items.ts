@@ -16,6 +16,14 @@ import {
   ItemsOrders,
   ReadItemsContactAddressData,
   ReadItemsContactAddressParams,
+  ReadItemsEventsData,
+  ReadItemsEventsEventShowsData,
+  ReadItemsEventsEventShowsParams,
+  ReadItemsEventsFilesData,
+  ReadItemsEventsFilesParams,
+  ReadItemsEventShowsData,
+  ReadItemsEventShowsParams,
+  ReadItemsEventsParams,
   ReadItemsImageBoxData,
   ReadItemsImageBoxParams,
   ReadItemsInfoBoxData,
@@ -92,6 +100,14 @@ import {
   ReadItemsStatementsParams,
   ReadSingleItemsContactAddressData,
   ReadSingleItemsContactAddressParams,
+  ReadSingleItemsEventsData,
+  ReadSingleItemsEventsEventShowsData,
+  ReadSingleItemsEventsEventShowsParams,
+  ReadSingleItemsEventsFilesData,
+  ReadSingleItemsEventsFilesParams,
+  ReadSingleItemsEventShowsData,
+  ReadSingleItemsEventShowsParams,
+  ReadSingleItemsEventsParams,
   ReadSingleItemsImageBoxData,
   ReadSingleItemsImageBoxParams,
   ReadSingleItemsInfoBoxData,
@@ -3407,6 +3423,333 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       query: query,
       body: data,
       type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the events items.
+ *
+ * @tags Items, ItemsEvents
+ * @name ReadItemsEvents
+ * @summary List Items
+ * @request GET:/items/events
+ * @secure
+ * @response `200` `ReadItemsEventsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsEvents = (query: ReadItemsEventsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsEventsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single events item by unique identifier.
+ *
+ * @tags Items, ItemsEvents
+ * @name ReadSingleItemsEvents
+ * @summary Retrieve an Item
+ * @request GET:/items/events/{id}
+ * @response `200` `ReadSingleItemsEventsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsEvents = ({ id, ...query }: ReadSingleItemsEventsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsEventsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the events_files items.
+ *
+ * @tags Items, ItemsEventsFiles
+ * @name ReadItemsEventsFiles
+ * @summary List Items
+ * @request GET:/items/events_files
+ * @secure
+ * @response `200` `ReadItemsEventsFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsEventsFiles = (query: ReadItemsEventsFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsEventsFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events_files`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single events_files item by unique identifier.
+ *
+ * @tags Items, ItemsEventsFiles
+ * @name ReadSingleItemsEventsFiles
+ * @summary Retrieve an Item
+ * @request GET:/items/events_files/{id}
+ * @response `200` `ReadSingleItemsEventsFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsEventsFiles = ({ id, ...query }: ReadSingleItemsEventsFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsEventsFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events_files/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the events_event_shows items.
+ *
+ * @tags Items, ItemsEventsEventShows
+ * @name ReadItemsEventsEventShows
+ * @summary List Items
+ * @request GET:/items/events_event_shows
+ * @secure
+ * @response `200` `ReadItemsEventsEventShowsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsEventsEventShows = (query: ReadItemsEventsEventShowsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsEventsEventShowsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events_event_shows`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single events_event_shows item by unique identifier.
+ *
+ * @tags Items, ItemsEventsEventShows
+ * @name ReadSingleItemsEventsEventShows
+ * @summary Retrieve an Item
+ * @request GET:/items/events_event_shows/{id}
+ * @response `200` `ReadSingleItemsEventsEventShowsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsEventsEventShows = (
+    { id, ...query }: ReadSingleItemsEventsEventShowsParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsEventsEventShowsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/events_event_shows/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the event_shows items.
+ *
+ * @tags Items, ItemsEventShows
+ * @name ReadItemsEventShows
+ * @summary List Items
+ * @request GET:/items/event_shows
+ * @secure
+ * @response `200` `ReadItemsEventShowsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsEventShows = (query: ReadItemsEventShowsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsEventShowsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/event_shows`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single event_shows item by unique identifier.
+ *
+ * @tags Items, ItemsEventShows
+ * @name ReadSingleItemsEventShows
+ * @summary Retrieve an Item
+ * @request GET:/items/event_shows/{id}
+ * @response `200` `ReadSingleItemsEventShowsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsEventShows = ({ id, ...query }: ReadSingleItemsEventShowsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsEventShowsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/event_shows/${id}`,
+      method: "GET",
+      query: query,
       format: "json",
       ...params,
     });

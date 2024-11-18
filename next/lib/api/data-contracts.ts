@@ -9,47 +9,6 @@
  * ---------------------------------------------------------------
  */
 
-export interface Query {
-  /**
-   * Control what fields are being returned in the object.
-   * @example ["*","*.*"]
-   */
-  fields?: string[];
-  /** @example {"<field>":{"<operator>":"<value>"}} */
-  filter?: object;
-  /** Filter by items that contain the given search query in one of their fields. */
-  search?: string;
-  /**
-   * How to sort the returned items.
-   * @example ["-date_created"]
-   */
-  sort?: string[];
-  /** Set the maximum number of items that will be returned */
-  limit?: number;
-  /** How many items to skip when fetching data. */
-  offset?: number;
-  /** Cursor for use in pagination. Often used in combination with limit. */
-  page?: number;
-  /**
-   * Deep allows you to set any of the other query parameters on a nested relational dataset.
-   * @example {"related_articles":{"_limit":3}}
-   */
-  deep?: object;
-}
-
-export interface XMetadata {
-  /** Returns the total item count of the collection you're querying. */
-  total_count?: number;
-  /** Returns the item count of the collection you're querying, taking the current filter/search parameters into account. */
-  filter_count?: number;
-}
-
-export interface ItemsProtocol {
-  id?: number;
-  name?: string | null;
-  file?: string | Files | null;
-}
-
 export interface Files {
   /**
    * Unique identifier for the file.
@@ -85,18 +44,18 @@ export interface Files {
    * Virtual folder where this file resides in.
    * @example null
    */
-  folder?: string | null;
+  folder?: string | Folders | null;
   /**
    * Who uploaded the file.
    * @example "63716273-0f29-4648-8a2a-2af2948f6f78"
    */
   uploaded_by?: string | Users;
   /**
-   * When the file was uploaded.
+   * When the file was created.
    * @format date-time
    * @example "2019-12-03T00:10:15+00:00"
    */
-  uploaded_on?: string;
+  created_on?: string;
   modified_by?: string | Users | null;
   /** @format timestamp */
   modified_on?: string;
@@ -140,6 +99,75 @@ export interface Files {
   metadata?: object | null;
   focal_point_x?: number | null;
   focal_point_y?: number | null;
+  tus_id?: string | null;
+  tus_data?: any;
+  /**
+   * When the file was last uploaded/replaced.
+   * @format date-time
+   * @example "2019-12-03T00:10:15+00:00"
+   */
+  uploaded_on?: string;
+}
+
+export interface Folders {
+  /**
+   * Unique identifier for the folder.
+   * @example "0cf0e03d-4364-45df-b77b-ca61f61869d2"
+   */
+  id?: string;
+  /**
+   * Name of the folder.
+   * @example "New York"
+   */
+  name?: string;
+  /**
+   * Unique identifier of the parent folder. This allows for nested folders.
+   * @example null
+   */
+  parent?: string | Folders | null;
+}
+
+export interface Roles {
+  /**
+   * Unique identifier for the role.
+   * @example "2f24211d-d928-469a-aea3-3c8f53d4e426"
+   */
+  id?: string;
+  /**
+   * Name of the role.
+   * @example "Administrator"
+   */
+  name?: string;
+  /**
+   * The role's icon.
+   * @example "verified_user"
+   */
+  icon?: string;
+  /**
+   * Description of the role.
+   * @example "Admins have access to all managed data within the system by default"
+   */
+  description?: string | null;
+  /**
+   * Array of IP addresses that are allowed to connect to the API as a user of this role.
+   * @example []
+   */
+  ip_access?: string[];
+  /**
+   * Whether or not this role enforces the use of 2FA.
+   * @example false
+   */
+  enforce_tfa?: boolean;
+  /**
+   * Admin role. If true, skips all permission checks.
+   * @example false
+   */
+  admin_access?: boolean;
+  /**
+   * The users in the role are allowed to use the app.
+   * @example true
+   */
+  app_access?: boolean;
 }
 
 export interface Users {
@@ -164,6 +192,13 @@ export interface Users {
    * @example "admin@example.com"
    */
   email?: string;
+  /** Password of the user. */
+  password?: string;
+  /**
+   * The user's location.
+   * @example null
+   */
+  location?: string | null;
   /**
    * The user's title.
    * @example null
@@ -203,7 +238,7 @@ export interface Users {
    * Unique identifier of the role of this user.
    * @example "2f24211d-d928-469a-aea3-3c8f53d4e426"
    */
-  role?: string;
+  role?: string | Roles;
   /** Static token for the user. */
   token?: string | null;
   /**
@@ -228,6 +263,48 @@ export interface Users {
   theme_dark_overrides?: any;
   posts?: (number | ItemsPostsDirectusUsers1)[] | null;
   programs?: (number | ItemsProgramsDirectusUsers)[] | null;
+  policies?: string | null;
+}
+
+export interface Query {
+  /**
+   * Control what fields are being returned in the object.
+   * @example ["*","*.*"]
+   */
+  fields?: string[];
+  /** @example {"<field>":{"<operator>":"<value>"}} */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+  /**
+   * How to sort the returned items.
+   * @example ["-date_created"]
+   */
+  sort?: string[];
+  /** Set the maximum number of items that will be returned */
+  limit?: number;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** Cursor for use in pagination. Often used in combination with limit. */
+  page?: number;
+  /**
+   * Deep allows you to set any of the other query parameters on a nested relational dataset.
+   * @example {"related_articles":{"_limit":3}}
+   */
+  deep?: object;
+}
+
+export interface XMetadata {
+  /** Returns the total item count of the collection you're querying. */
+  total_count?: number;
+  /** Returns the item count of the collection you're querying, taking the current filter/search parameters into account. */
+  filter_count?: number;
+}
+
+export interface ItemsProtocol {
+  id?: number;
+  name?: string | null;
+  file?: string | Files | null;
 }
 
 export interface ItemsPageHistoryProtocol {
@@ -289,6 +366,7 @@ export interface ItemsMemberProduct {
   date_updated?: string | null;
   label?: string | null;
   price?: number | null;
+  name?: string | null;
 }
 
 export interface ItemsProgramsDirectusUsers {
@@ -332,6 +410,7 @@ export interface ItemsPosts {
   imageTitle?: string | null;
   imageText?: string | null;
   program?: string | ItemsPrograms | null;
+  /** Maximale Dateigrösse 100MB */
   audio?: string | Files | null;
   content?: any;
   authors?: (number | ItemsPostsDirectusUsers1)[] | null;
@@ -613,6 +692,61 @@ export interface ItemsOrders {
   phone_number?: string | null;
 }
 
+export interface ItemsEvents {
+  id?: number;
+  status?: string;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  title?: string | null;
+  slug?: string | null;
+  content?: any;
+  shows?: (number | ItemsEventsEventShows)[] | null;
+  logos?: (number | ItemsEventsFiles)[] | null;
+}
+
+export interface ItemsEventsFiles {
+  id?: number;
+  events_id?: number | ItemsEvents | null;
+  directus_files_id?: string | Files | null;
+}
+
+export interface ItemsEventsEventShows {
+  id?: number;
+  events_id?: number | ItemsEvents | null;
+  event_shows_id?: number | ItemsEventShows | null;
+}
+
+export interface ItemsEventShows {
+  id?: number;
+  sort?: number | null;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  name?: string | null;
+  /** @format date */
+  date?: string | null;
+  /** @format time */
+  opening_time?: string | null;
+  /** @format time */
+  starting_time?: string | null;
+  program?: string | null;
+  place?: string | null;
+  website?: string | null;
+  image?: string | Files | null;
+  imageTitle?: string | null;
+  imageText?: string | null;
+  content?: any;
+  button_label?: string | null;
+  button_url?: string | null;
+}
+
 export interface GetAssetParams {
   /** The key of the asset size configured in settings. */
   key?: string;
@@ -751,6 +885,65 @@ export interface ServerInfoData {
  */
 export type PingData = string;
 
+export interface HashGeneratePayload {
+  /** String to hash. */
+  string: string;
+}
+
+export interface HashGenerateData {
+  /** @example "$argon2i$v=19$m=4096,t=3,p=1$pOyIa/zmRAjCVLb2f7kOyg$DasoO6LzMM+6iKfzCDq6JbsYsZWLSm33p7i9NxL9mDc" */
+  data?: string;
+}
+
+export interface HashVerifyPayload {
+  /** String to hash. */
+  string: string;
+  /** Hash you want to verify against. */
+  hash: string;
+}
+
+export interface HashVerifyData {
+  /** @example true */
+  data?: boolean;
+}
+
+export interface SortPayload {
+  /** Primary key of item to move */
+  item?: number;
+  /** Primary key of item where to move the current item to */
+  to?: number;
+}
+
+export type SortData = any;
+
+export interface ImportPayload {
+  /** @format binary */
+  file?: File;
+}
+
+export type ImportData = any;
+
+export interface ExportPayload {
+  /** What file format to save the export to. One of csv, xml, json */
+  format: "csv" | "xml" | "json";
+  query: Query;
+  file: Files;
+}
+
+export type ExportData = any;
+
+export type ClearCacheData = any;
+
+export interface RandomParams {
+  /** Length of the random string. */
+  length?: number;
+}
+
+export interface RandomData {
+  /** @example "1>M3+4oh.S" */
+  data?: string;
+}
+
 export interface ReadItemsProtocolParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -786,44 +979,6 @@ export interface ReadSingleItemsProtocolParams {
 
 export interface ReadSingleItemsProtocolData {
   data?: ItemsProtocol;
-}
-
-export interface GetFilesParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** A limit on the number of objects that are returned. */
-  limit?: number;
-  /** How many items to skip when fetching data. */
-  offset?: number;
-  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-  sort?: string[];
-  /** Select items in collection by given conditions. */
-  filter?: object;
-  /** Filter by items that contain the given search query in one of their fields. */
-  search?: string;
-  /** What metadata to return in the response. */
-  meta?: string;
-}
-
-export interface GetFilesData {
-  data?: Files[];
-  meta?: XMetadata;
-}
-
-export interface GetFileParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** What metadata to return in the response. */
-  meta?: string;
-  /**
-   * Unique identifier for the object.
-   * @example "8cbb43fe-4cdf-4991-8352-c461779cec02"
-   */
-  id: string;
-}
-
-export interface GetFileData {
-  data?: Files;
 }
 
 export interface GetUsersParams {
@@ -1132,6 +1287,44 @@ export interface ReadSingleItemsPageMemberStatementsParams {
 
 export interface ReadSingleItemsPageMemberStatementsData {
   data?: ItemsPageMemberStatements;
+}
+
+export interface GetFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+  /** What metadata to return in the response. */
+  meta?: string;
+}
+
+export interface GetFilesData {
+  data?: Files[];
+  meta?: XMetadata;
+}
+
+export interface GetFileParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /**
+   * Unique identifier for the object.
+   * @example "8cbb43fe-4cdf-4991-8352-c461779cec02"
+   */
+  id: string;
+}
+
+export interface GetFileData {
+  data?: Files;
 }
 
 export interface ReadItemsMemberProductParams {
@@ -2289,4 +2482,152 @@ export interface UpdateSingleItemsOrdersParams {
 
 export interface UpdateSingleItemsOrdersData {
   data?: ItemsOrders;
+}
+
+export interface ReadItemsEventsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventsData {
+  data?: ItemsEvents[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventsData {
+  data?: ItemsEvents;
+}
+
+export interface ReadItemsEventsFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventsFilesData {
+  data?: ItemsEventsFiles[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventsFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventsFilesData {
+  data?: ItemsEventsFiles;
+}
+
+export interface ReadItemsEventsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventsEventShowsData {
+  data?: ItemsEventsEventShows[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventsEventShowsData {
+  data?: ItemsEventsEventShows;
+}
+
+export interface ReadItemsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventShowsData {
+  data?: ItemsEventShows[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventShowsData {
+  data?: ItemsEventShows;
 }
