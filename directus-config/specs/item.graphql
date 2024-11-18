@@ -2169,6 +2169,8 @@ type posts_aggregated_count {
   imageTitle: Int
   imageText: Int
   program: Int
+
+  """Maximale Dateigrösse 100MB"""
   audio: Int
   content: Int
   authors: Int

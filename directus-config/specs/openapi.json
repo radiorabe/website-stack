@@ -25756,6 +25756,7 @@
           },
           "audio": {
             "nullable": true,
+            "description": "Maximale Dateigrösse 100MB",
             "oneOf": [
               {
                 "type": "string",

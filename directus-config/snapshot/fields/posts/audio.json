@@ -11,9 +11,9 @@
     "group": null,
     "hidden": false,
     "interface": "file",
-    "note": null,
+    "note": "Maximale Dateigrösse 100MB",
     "options": {
-      "folder": "830d2c33-95c3-4b2e-b677-a0b1e1cfee5a"
+      "folder": "8af4d169-31f2-441d-8eda-f2bb07625d31"
     },
     "readonly": false,
     "required": false,
