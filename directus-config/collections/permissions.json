@@ -1201,5 +1201,41 @@
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
     "_syncId": "15daf078-6d89-4cb3-ab79-9e7b832305f0"
+  },
+  {
+    "collection": "orders",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "6f608e61-452b-4541-9238-29afda529b5a",
+    "_syncId": "36d96884-0889-4ab0-b1c7-85fac974dcde"
+  },
+  {
+    "collection": "orders",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "6f608e61-452b-4541-9238-29afda529b5a",
+    "_syncId": "ce814688-3dc5-4a33-9a2e-e1b5e550db21"
+  },
+  {
+    "collection": "orders",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "6f608e61-452b-4541-9238-29afda529b5a",
+    "_syncId": "03ec02ce-d798-496f-af0c-4ffbd184a500"
   }
 ]

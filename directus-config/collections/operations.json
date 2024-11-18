@@ -14,28 +14,37 @@
     "_syncId": "29141eda-3627-4d30-aee9-f8ebb2192f7b"
   },
   {
-    "name": "Read Data",
-    "key": "item_read_cbsrx",
-    "type": "item-read",
-    "position_x": 19,
+    "name": "Condition",
+    "key": "condition_nb0lc",
+    "type": "condition",
+    "position_x": 37,
     "position_y": 1,
     "options": {
-      "collection": "orders"
+      "filter": {
+        "read_order": {
+          "status": {
+            "_eq": "paid"
+          }
+        }
+      }
     },
-    "resolve": null,
+    "resolve": "3f49ec2e-50ea-48e1-8e84-a59ff8f0833e",
     "reject": null,
     "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
-    "_syncId": "8a1db783-bf0e-484f-8c02-37de11d92078"
+    "_syncId": "880f617a-8687-42c2-b6a2-d748a8b81141"
   },
   {
     "name": "Notification RaBe",
-    "key": "notification_ra_be_gvjel",
+    "key": "notification_rabe",
     "type": "mail",
-    "position_x": 21,
-    "position_y": 16,
+    "position_x": 55,
+    "position_y": 1,
     "options": {
-      "body": "Hallo {{$trigger.payload.first_name}} {{$trigger.payload.family_name}}\n\nDanke für deine Bestellung\n\nDein Rabe Team",
-      "subject": "Willkommen bei Rabe"
+      "body": "Hallo {{read_order.first_name}} {{read_order.family_name}}\n\nDanke für deine Bestellung\n\nDein Rabe Team",
+      "subject": "Willkommen bei Rabe",
+      "to": [
+        "{{read_order.email}}"
+      ]
     },
     "resolve": null,
     "reject": null,
@@ -76,6 +85,23 @@
     "reject": null,
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
     "_syncId": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d"
+  },
+  {
+    "name": "Read Order",
+    "key": "read_order",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "orders",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ]
+    },
+    "resolve": "880f617a-8687-42c2-b6a2-d748a8b81141",
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "8a1db783-bf0e-484f-8c02-37de11d92078"
   },
   {
     "name": "Webhook / Request URL",
