@@ -57,7 +57,7 @@ export default function YearlyProduct(props) {
           hoverColor={Colors.green}
           href={{
             pathname: "/bestellung",
-            query: { id: selectedProduct, type: "yearly" },
+            query: { id: selectedProduct },
           }}
         ></Button>
       </div>

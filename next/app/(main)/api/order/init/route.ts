@@ -93,13 +93,11 @@ export async function POST(request) {
 
   let order = {};
 
-  let type = formData.get("type");
   let id = formData.get("id");
-  console.log("stype", type);
   console.log("sid", id);
   let saferpay = undefined;
   let newOrder = undefined;
-  if (type && type !== "" && id && id !== "") {
+  if (id && id !== "") {
     formTypes.every((obj) => {
       if (
         obj.required &&
@@ -123,7 +121,7 @@ export async function POST(request) {
 
     newOrder = await createOrder({
       ...order,
-      name: type + " " + memberProduct.label,
+      name: memberProduct.name,
       price: memberProduct.price,
     });
     console.log("newOrder", newOrder);
@@ -143,7 +141,10 @@ export async function POST(request) {
             CurrencyCode: "CHF",
           },
           OrderId: newOrder.id,
-          Description: type + " " + memberProduct.label,
+          Description: memberProduct.name,
+          // Recurring: {
+          //   Initial: true
+          // }
         },
         // PaymentMethods,
         ReturnUrls: {
@@ -184,7 +185,8 @@ export async function POST(request) {
   return NextResponse.json(
     {
       message: resMessage,
-      saferpay_url: saferpay.RedirectUrl ? saferpay.RedirectUrl : undefined,
+      saferpay_url:
+        saferpay && saferpay.RedirectUrl ? saferpay.RedirectUrl : undefined,
       id: newOrder ? newOrder.id : undefined,
     },
     { status: resStatus }

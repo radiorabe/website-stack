@@ -78,7 +78,7 @@ export async function GET(request) {
           }
         );
         let data = await response.json();
-        // console.log("Assert Response data: ", data);
+        console.log("Assert Response data: ", data);
         if (data.Transaction) {
           if (
             data.Transaction.OrderId === id &&
@@ -116,7 +116,7 @@ export async function GET(request) {
                 }
               );
               data = await response.json();
-              // console.log("Capture Response data: ", data);
+              console.log("Capture Response data: ", data);
               if (data.Status !== "CAPTURED") {
                 // console.log("captured");
                 resStatus = 400;

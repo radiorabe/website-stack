@@ -29,28 +29,12 @@ async function getMemberProduct(id) {
 }
 
 export default async function BestellungPage({ searchParams }) {
-  console.log("searchParams", searchParams);
-
-  const filters = {
-    type: searchParams.type || "",
-    id: searchParams.id || "",
-  };
-
-  console.log("type", filters.type);
-  console.log("id", filters.id);
-
-  if (
-    !searchParams.type ||
-    searchParams.type === "" ||
-    !searchParams.id ||
-    searchParams.id === ""
-  ) {
+  if (!searchParams.id || searchParams.id === "") {
     return null;
   }
 
   const product = await getMemberProduct(searchParams.id);
 
-  console.log("type", searchParams.type);
   console.log("product", product);
 
   return (
@@ -63,6 +47,8 @@ export default async function BestellungPage({ searchParams }) {
         paddingBottom: Metrics.tripleBaseMargin,
       }}
     >
+      <div>{product.name}</div>
+
       <Form type={searchParams.type} id={searchParams.id}></Form>
     </div>
   );
