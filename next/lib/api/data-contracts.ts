@@ -704,6 +704,8 @@ export interface ItemsEvents {
   title?: string | null;
   slug?: string | null;
   content?: any;
+  title_info?: string | null;
+  title_image?: string | Files | null;
   shows?: (number | ItemsEventsEventShows)[] | null;
   logos?: (number | ItemsEventsFiles)[] | null;
 }

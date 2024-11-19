@@ -52,7 +52,7 @@ const HoverText = ({
 
   if (href) {
     return (
-      <Link href={href} style={{ textDecoration: "none", maxWidth: `100%` }}>
+      <Link href={href} style={{ textDecoration: "none" }}>
         {pressable}
       </Link>
     );

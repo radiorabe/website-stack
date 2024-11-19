@@ -92,7 +92,7 @@ export const style: Record<string, TextStyle> = {
   TTtextLink: {
     fontFamily: type.bold,
     fontSize: size.text,
-    lineHeight: 20,
+    lineHeight: 1.4,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
   },

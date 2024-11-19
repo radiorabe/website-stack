@@ -18,6 +18,8 @@ import InfoBox from "./InfoBox";
 import Quote from "./Quote";
 import { logError } from "@/lib/loging";
 import ImageBox from "../ImageBox";
+import Colors from "@/lib/Colors";
+import Link from "./Link";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library
@@ -181,17 +183,56 @@ const Heading = (props: {
   }
 };
 
-const markHandlers: TipTapMarkHandlers = {
-  link: (props) => (
-    <a href={props.node.attrs.href} target="_blank" rel="noreferrer">
-      {props.children}
-    </a>
-  ),
-  bold: (props) => <b>{props.children}</b>,
-  italic: (props) => <i>{props.children}</i>,
-  underline: (props) => <u>{props.children}</u>,
-  strike: (props) => <s>{props.children}</s>,
-  code: (props) => <code>{props.children}</code>,
+const markHandlers = (topProps) => {
+  return {
+    link: (props) => {
+      // console.log("linkj props", props.children.props.node.type);
+      // console.log("linkj topProps", topProps);
+
+      let label =
+        props.children.props.node.type === "text"
+          ? props.children.props.node.text
+          : props.children;
+      return (
+        <Link
+          label={label}
+          href={props.node.attrs.href}
+          hoverColor={
+            topProps && topProps.linkHoverColor
+              ? topProps.linkHoverColor
+              : Colors.green
+          }
+          color={
+            topProps && topProps.linkColor
+              ? topProps.linkColor
+              : Colors.darkGreen
+          }
+        ></Link>
+        // <a
+        //   href={props.node.attrs.href}
+        //   target="_blank"
+        //   rel="noreferrer"
+        //   textDecoration="none"
+        //   style={{
+        //     ...Fonts.style.text,
+        //     color:
+        //       topProps && topProps.linkColor
+        //         ? topProps.linkColor
+        //         : Colors.lightGreen,
+        //   }}
+        //   // onMouseEnter={() => setHover(true)}
+        //   // onMouseLeave={() => setHover(false)}
+        // >
+        //   {props.children}
+        // </a>
+      );
+    },
+    bold: (props) => <b>{props.children}</b>,
+    italic: (props) => <i>{props.children}</i>,
+    underline: (props) => <u>{props.children}</u>,
+    strike: (props) => <s>{props.children}</s>,
+    code: (props) => <code>{props.children}</code>,
+  };
 };
 
 const nodeHandlers: TipTapNodeHandlers = {
@@ -266,17 +307,19 @@ const nodeHandlers: TipTapNodeHandlers = {
   },
 };
 
-const handlers: TipTapRenderHandlers = {
-  ...markHandlers,
-  ...nodeHandlers,
+const handlers = (topProps) => {
+  return {
+    ...markHandlers(topProps),
+    ...nodeHandlers,
+  };
 };
 
-export const RenderTipTap = ({ content }) => {
+export const RenderTipTap = ({ content, topProps }) => {
   // const contentJson = useMemo(() => JSON.parse(content), [content]);
 
   return (
     <div className="renderer-container">
-      <TipTapRender node={content} handlers={handlers} />
+      <TipTapRender node={content} handlers={handlers(topProps)} />
     </div>
   );
 };
