@@ -26,7 +26,7 @@ export interface HoverableProps {}
 const AudioRabePlayer = ({}: HoverableProps) => {
   let track = {
     title: "Rabe Stream",
-    src: "http://stream.rabe.ch/livestream/rabe-hd.mp3.m3u",
+    src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
     author: "Trinix ft Rushawn",
   };
   const {
@@ -55,6 +55,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
     console.log("onPlaying");
     setPlayerState("paused");
   };
+
   const onCanplay = () => {
     console.log("onCanplay");
     audioRef.current?.play();
@@ -64,6 +65,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   const onLoadStart = () => {
     console.log("onLoadStart");
     setPlayerState("loading");
+    // audioRef.current?.play();
   };
 
   const onLoad = () => {
@@ -78,6 +80,29 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   const onTimeUpdate = () => {
     console.log("onTimeUpdate");
     setTimeProgress(audioRef.current.currentTime);
+  };
+
+  const onprogress = (p) => {
+    // console.log("onprogress", p);
+  };
+
+  const onLoadedData = (p) => {
+    console.log("onLoadedData", p);
+  };
+
+  const onCanPlayThrough = (p) => {
+    // console.log("onCanPlayThrough", p);
+  };
+
+  const onError = (event) => {
+    console.log("onError", event);
+  };
+
+  const onEmptied = (p) => {
+    console.log("onEmptied", p);
+  };
+  const onStalled = (p) => {
+    console.log("onStalled", p);
   };
 
   const onLoadedMetadata = () => {
@@ -116,6 +141,12 @@ const AudioRabePlayer = ({}: HoverableProps) => {
         onLoadStart={onLoadStart}
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
+        onProgress={onprogress}
+        onLoadedData={onLoadedData}
+        onCanPlayThrough={onCanPlayThrough}
+        onEmptied={onEmptied}
+        onStalled={onStalled}
+        onError={(e) => onError(e)}
       >
         <source src={currentTrack.src} type="audio/mpeg" />
       </audio>

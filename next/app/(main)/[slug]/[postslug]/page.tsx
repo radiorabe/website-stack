@@ -128,15 +128,6 @@ export default async function DynamicPage({ params }) {
   const program = post.program as ItemsPrograms;
   // const relatedPosts = await getPost(post);
 
-  let authorsLink = "Von";
-  post.authors.forEach((item: ItemsPostsDirectusUsers1, index) => {
-    let user: Users = item.directus_users_id as Users;
-    if (index) {
-      authorsLink += " &";
-    }
-    authorsLink += ` ${user.first_name} ${user.last_name}`;
-  });
-
   return (
     <View>
       <View style={styles.container}>
@@ -169,7 +160,7 @@ export default async function DynamicPage({ params }) {
                     href={"/beitraege"}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? " &" : ""} ${user.first_name} ${
+                  >{`${index ? "," : ""} ${user.first_name} ${
                     user.last_name
                   }`}</HoverText>
                 );
