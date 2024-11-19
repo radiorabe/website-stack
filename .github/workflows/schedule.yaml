@@ -1,0 +1,12 @@
+name: Scheduled tasks
+
+on:
+  schedule:
+    - cron:  '13 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  schedule-trivy:
+    uses: radiorabe/actions/.github/workflows/schedule-trivy.yaml@b37e51397726092d8462a2a9b676ea5a5e3a8deb # v0.44.1
+    with:
+      image-ref: 'ghcr.io/radiorabe/website-stack/next:latest'
