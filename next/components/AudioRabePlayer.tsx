@@ -43,42 +43,42 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   // console.log("playerState header", playerState);
 
   const onWaiting = () => {
-    console.log("onWaiting");
+    // console.log("onWaiting");
     setPlayerState("waiting");
   };
   const onPlaying = () => {
-    console.log("onPlaying");
+    // console.log("onPlaying");
     setPlayerState("playing");
   };
 
   const onPause = () => {
-    console.log("onPlaying");
+    // console.log("onPlaying");
     setPlayerState("paused");
   };
 
   const onCanplay = () => {
-    console.log("onCanplay");
+    // console.log("onCanplay");
     audioRef.current?.play();
     setPlayerState("canplay");
   };
 
   const onLoadStart = () => {
-    console.log("onLoadStart");
+    // console.log("onLoadStart");
     setPlayerState("loading");
     // audioRef.current?.play();
   };
 
   const onLoad = () => {
-    console.log("onLoad");
+    // console.log("onLoad");
   };
 
   const onAbort = () => {
-    console.log("onAbort");
+    // console.log("onAbort");
     setPlayerState("aborted");
   };
 
   const onTimeUpdate = () => {
-    console.log("onTimeUpdate");
+    // console.log("onTimeUpdate");
     setTimeProgress(audioRef.current.currentTime);
   };
 
@@ -87,7 +87,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   };
 
   const onLoadedData = (p) => {
-    console.log("onLoadedData", p);
+    // console.log("onLoadedData", p);
   };
 
   const onCanPlayThrough = (p) => {
@@ -95,18 +95,18 @@ const AudioRabePlayer = ({}: HoverableProps) => {
   };
 
   const onError = (event) => {
-    console.log("onError", event);
+    // console.log("onError", event);
   };
 
   const onEmptied = (p) => {
-    console.log("onEmptied", p);
+    // console.log("onEmptied", p);
   };
   const onStalled = (p) => {
-    console.log("onStalled", p);
+    // console.log("onStalled", p);
   };
 
   const onLoadedMetadata = () => {
-    console.log(audioRef.current?.duration);
+    // console.log(audioRef.current?.duration);
     const seconds = audioRef.current?.duration;
     if (seconds !== undefined) {
       setDuration(seconds);
