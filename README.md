@@ -18,7 +18,6 @@ Next:
 
     docker-compose up -d next
 
-
 # Maintenance Mode
     In the .env file set NEXT_PUBLIC_MAINTENANCE_MODE true
 
@@ -27,3 +26,8 @@ Next:
     redirect data.rabe.ch auf rabe.ch
 
     disable healthcheck for next instance
+
+# Build Process
+
+The CI/CD setup uses [Docker build-push Action](https://github.com/docker/build-push-action) to publish container images.
+The workflow is based on the [RaBe shared actions](https://radiorabe.github.io/actions/).
