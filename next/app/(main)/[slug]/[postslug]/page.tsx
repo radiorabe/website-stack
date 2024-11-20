@@ -57,10 +57,12 @@ const { ids, styles } = StyleSheet.create({
 
 async function getPost(params) {
   try {
-    // console.log("params", params);
-    const date = moment(params.slug);
+    console.log("params", params);
+    const date = moment(params.slug, "DD-MM-YYYY");
     const slug = params.postslug;
-    const nextDayDate = moment(params.slug).add(1, "d");
+    const nextDayDate = moment(params.slug, "DD-MM-YYYY").add(1, "d");
+    console.log("date", date);
+    console.log("nextDayDate", nextDayDate);
 
     const itemResponse = await Api.readItemsPost(
       {
@@ -92,7 +94,9 @@ async function getPost(params) {
     let items: ItemsPost[] = itemResponse.data.data;
     console.log("post", items);
     // console.log("post.audioFiles", items.audioFiles);
-
+    if (items.length === 0) {
+      notFound();
+    }
     return items[0];
   } catch (error) {
     logError(error);
