@@ -13,9 +13,9 @@ import { logError } from "@/lib/loging";
 
 async function getPosts() {
   try {
-    const itemResponse = await Api.readItemsPosts(
+    const itemResponse = await Api.readItemsPost(
       {
-        fields: ["*", "program.name"],
+        fields: ["*", "program.name", "imagebox.image"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({

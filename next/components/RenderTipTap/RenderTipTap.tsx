@@ -2,7 +2,7 @@ import { Api } from "@/lib/api";
 import {
   ItemsImageBox,
   ItemsInfoBox,
-  ItemsPostsEditorNodes,
+  ItemsPostEditorNodes,
   ItemsQuote,
 } from "@/lib/api/data-contracts";
 import Fonts from "@/lib/Fonts";
@@ -113,7 +113,7 @@ async function getNodes(id, readNodes) {
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    let item: ItemsPostsEditorNodes = itemResponse.data.data;
+    let item: ItemsPostEditorNodes = itemResponse.data.data;
     return item;
   } catch (error) {
     logError(error);
@@ -261,7 +261,7 @@ const nodeHandlers: TipTapNodeHandlers = {
 
     const ApiMapper = {
       page_receive_nodes: Api.readSingleItemsPageReceiveNodes,
-      posts_editor_nodes: Api.readSingleItemsPostsEditorNodes,
+      post_editor_nodes: Api.readSingleItemsPostEditorNodes,
       page_history_nodes: Api.readSingleItemsPageHistoryNodes,
     };
     if (ApiMapper[props.node.attrs.junction]) {

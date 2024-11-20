@@ -82,11 +82,21 @@ import {
   ReadItemsPartyLocationParams,
   ReadItemsPartyTipsData,
   ReadItemsPartyTipsParams,
+  ReadItemsPostData,
+  ReadItemsPostDirectusUsersData,
+  ReadItemsPostDirectusUsersParams,
+  ReadItemsPostEditorNodesData,
+  ReadItemsPostEditorNodesParams,
+  ReadItemsPostFilesData,
+  ReadItemsPostFilesParams,
+  ReadItemsPostParams,
   ReadItemsPostsData,
   ReadItemsPostsDirectusUsers1Data,
   ReadItemsPostsDirectusUsers1Params,
   ReadItemsPostsEditorNodesData,
   ReadItemsPostsEditorNodesParams,
+  ReadItemsPostsFiles1Data,
+  ReadItemsPostsFiles1Params,
   ReadItemsPostsParams,
   ReadItemsProgramsData,
   ReadItemsProgramsDirectusUsersData,
@@ -166,11 +176,21 @@ import {
   ReadSingleItemsPartyLocationParams,
   ReadSingleItemsPartyTipsData,
   ReadSingleItemsPartyTipsParams,
+  ReadSingleItemsPostData,
+  ReadSingleItemsPostDirectusUsersData,
+  ReadSingleItemsPostDirectusUsersParams,
+  ReadSingleItemsPostEditorNodesData,
+  ReadSingleItemsPostEditorNodesParams,
+  ReadSingleItemsPostFilesData,
+  ReadSingleItemsPostFilesParams,
+  ReadSingleItemsPostParams,
   ReadSingleItemsPostsData,
   ReadSingleItemsPostsDirectusUsers1Data,
   ReadSingleItemsPostsDirectusUsers1Params,
   ReadSingleItemsPostsEditorNodesData,
   ReadSingleItemsPostsEditorNodesParams,
+  ReadSingleItemsPostsFiles1Data,
+  ReadSingleItemsPostsFiles1Params,
   ReadSingleItemsPostsParams,
   ReadSingleItemsProgramsData,
   ReadSingleItemsProgramsDirectusUsersData,
@@ -3508,6 +3528,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the posts_files_1 items.
+ *
+ * @tags Items, ItemsPostsFiles1
+ * @name ReadItemsPostsFiles1
+ * @summary List Items
+ * @request GET:/items/posts_files_1
+ * @secure
+ * @response `200` `ReadItemsPostsFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPostsFiles1 = (query: ReadItemsPostsFiles1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostsFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts_files_1`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single posts_files_1 item by unique identifier.
+ *
+ * @tags Items, ItemsPostsFiles1
+ * @name ReadSingleItemsPostsFiles1
+ * @summary Retrieve an Item
+ * @request GET:/items/posts_files_1/{id}
+ * @response `200` `ReadSingleItemsPostsFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPostsFiles1 = ({ id, ...query }: ReadSingleItemsPostsFiles1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPostsFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/posts_files_1/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the events_files items.
  *
  * @tags Items, ItemsEventsFiles
@@ -3583,6 +3684,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/events_files/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the post_files items.
+ *
+ * @tags Items, ItemsPostFiles
+ * @name ReadItemsPostFiles
+ * @summary List Items
+ * @request GET:/items/post_files
+ * @secure
+ * @response `200` `ReadItemsPostFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPostFiles = (query: ReadItemsPostFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_files`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single post_files item by unique identifier.
+ *
+ * @tags Items, ItemsPostFiles
+ * @name ReadSingleItemsPostFiles
+ * @summary Retrieve an Item
+ * @request GET:/items/post_files/{id}
+ * @response `200` `ReadSingleItemsPostFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPostFiles = ({ id, ...query }: ReadSingleItemsPostFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPostFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_files/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -3673,6 +3855,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the post_directus_users items.
+ *
+ * @tags Items, ItemsPostDirectusUsers
+ * @name ReadItemsPostDirectusUsers
+ * @summary List Items
+ * @request GET:/items/post_directus_users
+ * @secure
+ * @response `200` `ReadItemsPostDirectusUsersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPostDirectusUsers = (query: ReadItemsPostDirectusUsersParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostDirectusUsersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_directus_users`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single post_directus_users item by unique identifier.
+ *
+ * @tags Items, ItemsPostDirectusUsers
+ * @name ReadSingleItemsPostDirectusUsers
+ * @summary Retrieve an Item
+ * @request GET:/items/post_directus_users/{id}
+ * @response `200` `ReadSingleItemsPostDirectusUsersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPostDirectusUsers = (
+    { id, ...query }: ReadSingleItemsPostDirectusUsersParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPostDirectusUsersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_directus_users/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the event_shows items.
  *
  * @tags Items, ItemsEventShows
@@ -3748,6 +4014,171 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/event_shows/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the post_editor_nodes items.
+ *
+ * @tags Items, ItemsPostEditorNodes
+ * @name ReadItemsPostEditorNodes
+ * @summary List Items
+ * @request GET:/items/post_editor_nodes
+ * @secure
+ * @response `200` `ReadItemsPostEditorNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPostEditorNodes = (query: ReadItemsPostEditorNodesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostEditorNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_editor_nodes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single post_editor_nodes item by unique identifier.
+ *
+ * @tags Items, ItemsPostEditorNodes
+ * @name ReadSingleItemsPostEditorNodes
+ * @summary Retrieve an Item
+ * @request GET:/items/post_editor_nodes/{id}
+ * @response `200` `ReadSingleItemsPostEditorNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPostEditorNodes = (
+    { id, ...query }: ReadSingleItemsPostEditorNodesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPostEditorNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post_editor_nodes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the post items.
+ *
+ * @tags Items, ItemsPost
+ * @name ReadItemsPost
+ * @summary List Items
+ * @request GET:/items/post
+ * @secure
+ * @response `200` `ReadItemsPostData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPost = (query: ReadItemsPostParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single post item by unique identifier.
+ *
+ * @tags Items, ItemsPost
+ * @name ReadSingleItemsPost
+ * @summary Retrieve an Item
+ * @request GET:/items/post/{id}
+ * @response `200` `ReadSingleItemsPostData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPost = ({ id, ...query }: ReadSingleItemsPostParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPostData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post/${id}`,
       method: "GET",
       query: query,
       format: "json",

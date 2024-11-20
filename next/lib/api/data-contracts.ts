@@ -415,6 +415,7 @@ export interface ItemsPosts {
   content?: any;
   authors?: (number | ItemsPostsDirectusUsers1)[] | null;
   editor_nodes?: (string | ItemsPostsEditorNodes)[] | null;
+  audioFiles?: (number | ItemsPostsFiles1)[] | null;
 }
 
 export interface ItemsPageContact {
@@ -710,9 +711,21 @@ export interface ItemsEvents {
   logos?: (number | ItemsEventsFiles)[] | null;
 }
 
+export interface ItemsPostsFiles1 {
+  id?: number;
+  posts_slug?: string | ItemsPosts | null;
+  directus_files_id?: string | Files | null;
+}
+
 export interface ItemsEventsFiles {
   id?: number;
   events_id?: number | ItemsEvents | null;
+  directus_files_id?: string | Files | null;
+}
+
+export interface ItemsPostFiles {
+  id?: number;
+  post_id?: number | ItemsPost | null;
   directus_files_id?: string | Files | null;
 }
 
@@ -720,6 +733,12 @@ export interface ItemsEventsEventShows {
   id?: number;
   events_id?: number | ItemsEvents | null;
   event_shows_id?: number | ItemsEventShows | null;
+}
+
+export interface ItemsPostDirectusUsers {
+  id?: number;
+  post_id?: number | ItemsPost | null;
+  directus_users_id?: string | Users | null;
 }
 
 export interface ItemsEventShows {
@@ -747,6 +766,36 @@ export interface ItemsEventShows {
   content?: any;
   button_label?: string | null;
   button_url?: string | null;
+}
+
+export interface ItemsPostEditorNodes {
+  /** @format uuid */
+  id?: string;
+  post_id?: number | ItemsPost | null;
+  item?: (string | ItemsQuote | ItemsInfoBox)[] | null;
+  collection?: string | null;
+}
+
+export interface ItemsPost {
+  id?: number;
+  status?: string;
+  sort?: number | null;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  /** @format date-time */
+  date?: string | null;
+  title?: string | null;
+  slug?: string | null;
+  program?: string | ItemsPrograms | null;
+  imagebox?: number | ItemsImageBox | null;
+  content?: any;
+  authors?: (number | ItemsPostDirectusUsers)[] | null;
+  audio_files?: (number | ItemsPostFiles)[] | null;
+  editor_nodes?: (string | ItemsPostEditorNodes)[] | null;
 }
 
 export interface GetAssetParams {
@@ -2523,6 +2572,43 @@ export interface ReadSingleItemsEventsData {
   data?: ItemsEvents;
 }
 
+export interface ReadItemsPostsFiles1Params {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPostsFiles1Data {
+  data?: ItemsPostsFiles1[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPostsFiles1Params {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPostsFiles1Data {
+  data?: ItemsPostsFiles1;
+}
+
 export interface ReadItemsEventsFilesParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -2558,6 +2644,43 @@ export interface ReadSingleItemsEventsFilesParams {
 
 export interface ReadSingleItemsEventsFilesData {
   data?: ItemsEventsFiles;
+}
+
+export interface ReadItemsPostFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPostFilesData {
+  data?: ItemsPostFiles[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPostFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPostFilesData {
+  data?: ItemsPostFiles;
 }
 
 export interface ReadItemsEventsEventShowsParams {
@@ -2597,6 +2720,43 @@ export interface ReadSingleItemsEventsEventShowsData {
   data?: ItemsEventsEventShows;
 }
 
+export interface ReadItemsPostDirectusUsersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPostDirectusUsersData {
+  data?: ItemsPostDirectusUsers[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPostDirectusUsersParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPostDirectusUsersData {
+  data?: ItemsPostDirectusUsers;
+}
+
 export interface ReadItemsEventShowsParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -2632,4 +2792,78 @@ export interface ReadSingleItemsEventShowsParams {
 
 export interface ReadSingleItemsEventShowsData {
   data?: ItemsEventShows;
+}
+
+export interface ReadItemsPostEditorNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPostEditorNodesData {
+  data?: ItemsPostEditorNodes[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPostEditorNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPostEditorNodesData {
+  data?: ItemsPostEditorNodes;
+}
+
+export interface ReadItemsPostParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPostData {
+  data?: ItemsPost[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPostParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPostData {
+  data?: ItemsPost;
 }

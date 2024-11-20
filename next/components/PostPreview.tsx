@@ -40,7 +40,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
   let program: ItemsPrograms = data.program;
   return (
     <Link
-      href={`${data.date}/${data.slug}`}
+      href={`${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
       style={{
         width: "30%",
         paddingLeft: index % 3 ? "5%" : 0,
@@ -65,7 +65,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
             }}
           ></View>
           <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.image}?width=360&height=240&fit=cover`}
+            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=240&fit=cover`}
             width={360}
             height={240}
             style={styles.avatar}

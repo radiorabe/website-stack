@@ -6,6 +6,7 @@ import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
 import {
   ItemsEvents,
+  ItemsEventShows,
   ItemsPosts,
   ItemsPostsDirectusUsers1,
   ItemsPrograms,
@@ -67,7 +68,12 @@ async function getEvent(slug) {
             _eq: slug,
           },
         }),
-        fields: ["*", "logos.directus_files_id"],
+        fields: [
+          "*",
+          "logos.directus_files_id",
+          "shows.event_shows_id.*",
+          "imagebox.*",
+        ],
       },
       {
         next: {
@@ -97,13 +103,14 @@ export default async function DynamicPage({ params }) {
       <View
         style={{
           width: "100%",
+          alignItems: "center",
         }}
       >
         <View
           style={{
             flexDirection: "column",
             backgroundColor: Colors.yellow,
-            // height: "75vh",
+            width: "100%",
             alignItems: "center",
             paddingTop: Metrics.tripleBaseMargin,
             paddingBottom: Metrics.tripleBaseMargin,
@@ -139,7 +146,7 @@ export default async function DynamicPage({ params }) {
           </Text>
         </View>
 
-        <View style={{ width: "74vw", alignSelf: "center" }}>
+        <View style={{ width: "74vw" }}>
           {event.content && (
             <RenderTipTap
               content={event.content}
@@ -150,6 +157,48 @@ export default async function DynamicPage({ params }) {
             ></RenderTipTap>
           )}
         </View>
+        <View
+          style={{
+            paddingTop: Metrics.tripleBaseMargin,
+            width: "74vw",
+          }}
+        >
+          {event.shows.map((sh, index) => {
+            let show = sh.event_shows_id as ItemsEventShows;
+            console.log("show", show);
+            return (
+              <View key={"show" + index}>
+                <Text
+                  style={{
+                    ...Fonts.style.h1,
+                    paddingBottom: Metrics.doubleBaseMargin,
+                  }}
+                >
+                  {show.name}
+                </Text>
+                <View style={{ flexDirection: "row" }}>
+                  <View>
+                    <Text>
+                      <Text
+                        style={{
+                          ...Fonts.style.textLink,
+                        }}
+                      >
+                        {"Datum: "}
+                      </Text>
+                      <Text style={{ ...Fonts.style.text }}>
+                        {moment(show.date).format("DD. MMMM YYYY")}
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <View></View>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+
         {/* <View style={styles.postContainer}> */}
         {/* <View
             style={{

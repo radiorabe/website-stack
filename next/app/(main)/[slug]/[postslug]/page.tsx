@@ -5,8 +5,8 @@ import HoverText from "@/components/HoverText";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
 import {
-  ItemsPosts,
-  ItemsPostsDirectusUsers1,
+  ItemsPost,
+  ItemsPostDirectusUsers,
   ItemsPrograms,
   Users,
 } from "@/lib/api/data-contracts";
@@ -20,6 +20,7 @@ import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../assets/svg/IconShare";
 import { logError } from "@/lib/loging";
+import AudioFiles from "./AudioFiles";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -54,19 +55,30 @@ const { ids, styles } = StyleSheet.create({
   image: { width: "100%", borderRadius: 9 },
 });
 
-async function getPost(slug) {
+async function getPost(params) {
   try {
-    const itemResponse = await Api.readSingleItemsPosts(
+    // console.log("params", params);
+    const date = moment(params.slug);
+    const slug = params.postslug;
+    const nextDayDate = moment(params.slug).add(1, "d");
+
+    const itemResponse = await Api.readItemsPost(
       {
-        id: slug,
         fields: [
           "*",
           "program.name",
           "program.slug",
-          // "audio.*",
           "authors.directus_users_id.first_name",
           "authors.directus_users_id.last_name",
+          "audio_files.directus_files_id.*",
+          "imagebox.*",
         ],
+        filter: JSON.stringify({
+          slug: {
+            _eq: slug,
+          },
+          date: { _gte: date, _lte: nextDayDate },
+        }),
       },
       {
         next: {
@@ -77,10 +89,11 @@ async function getPost(slug) {
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    let item: ItemsPosts = itemResponse.data.data;
-    // console.log("post", item);
+    let items: ItemsPost[] = itemResponse.data.data;
+    console.log("post", items);
+    // console.log("post.audioFiles", items.audioFiles);
 
-    return item;
+    return items[0];
   } catch (error) {
     logError(error);
 
@@ -90,7 +103,7 @@ async function getPost(slug) {
 
 async function getRelatedPosts(slug) {
   try {
-    const itemResponse = await Api.readItemsPosts(
+    const itemResponse = await Api.readItemsPost(
       {
         fields: ["*"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -113,7 +126,7 @@ async function getRelatedPosts(slug) {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts[] = itemResponse.data.data;
+    let item: ItemsPost[] = itemResponse.data.data;
     // console.log("posts", item);
     return item;
   } catch (error) {
@@ -124,10 +137,9 @@ async function getRelatedPosts(slug) {
 }
 
 export default async function DynamicPage({ params }) {
-  const post = await getPost(params.postslug);
+  const post = await getPost(params);
   const program = post.program as ItemsPrograms;
-  // const relatedPosts = await getPost(post);
-
+  console.log("post.imagebox", post.imagebox);
   return (
     <View>
       <View style={styles.container}>
@@ -152,7 +164,7 @@ export default async function DynamicPage({ params }) {
             <View style={{ width: Metrics.doubleBaseMargin }}></View>
             <Text style={{ ...Fonts.style.text }}>
               <Text> {"Von "}</Text>
-              {post.authors.map((item: ItemsPostsDirectusUsers1, index) => {
+              {post.authors.map((item: ItemsPostDirectusUsers, index) => {
                 let user: Users = item.directus_users_id as Users;
                 return (
                   <HoverText
@@ -177,10 +189,10 @@ export default async function DynamicPage({ params }) {
           >
             {post.title}
           </Text>
-          {post.image && (
+          {post.imagebox && (
             <View style={styles.imageContainer}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.image}?width=1440&height=960&fit=cover`}
+                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image}?width=1440&height=960&fit=cover`}
                 width={1440}
                 height={960}
                 style={styles.image}
@@ -188,7 +200,7 @@ export default async function DynamicPage({ params }) {
                 alt={post.title}
                 // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              {post.imageTitle && (
+              {post.imagebox.title && (
                 <View
                   style={{
                     flexDirection: "row",
@@ -202,12 +214,12 @@ export default async function DynamicPage({ params }) {
                       fontFamily: Fonts.type.bold,
                     }}
                   >
-                    {"Foto: " + post.imageTitle}
+                    {"Foto: " + post.imagebox.title}
                   </Text>
                   <Text style={{ ...Fonts.style.textSmall }}> </Text>
-                  {post.imageText && (
+                  {post.imagebox.text && (
                     <Text style={{ ...Fonts.style.textSmall }}>
-                      {post.imageText}
+                      {post.imagebox.text}
                     </Text>
                   )}
                 </View>
@@ -216,24 +228,31 @@ export default async function DynamicPage({ params }) {
           )}
 
           {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
-          {post.audio && (
-            <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
+
+          {post.audio_files && (
+            <View
+              style={{
+                paddingBottom: Metrics.tripleBaseMargin,
+              }}
+            >
               <AudioFilePlayer
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3`}
+                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio_files[0].directus_files_id.id}/rabe-audio.mp3`}
               ></AudioFilePlayer>
+              <View style={{ height: Metrics.doubleBaseMargin }}></View>
+              <AudioFiles audioFiles={post.audio_files}></AudioFiles>
             </View>
           )}
           <View style={{ flexDirection: "row" }}>
-            {post.audio && (
+            {/* {post.audioFiles && (
               <>
                 <Button
-                  url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3?download`}
+                  url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audioFiles[0].directus_files_id.id}/${post.audioFiles[0].directus_files_id.title}.mp3?download`}
                   icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
                   label={"Herunterladen"}
                 ></Button>
                 <View style={{ width: Metrics.baseMargin }}></View>
               </>
-            )}
+            )} */}
             <Button
               url={"alksjdfkl"}
               icon={<IconShare color={Colors.darkGreen}></IconShare>}
