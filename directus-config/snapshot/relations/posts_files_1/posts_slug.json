@@ -1,0 +1,25 @@
+{
+  "collection": "posts_files_1",
+  "field": "posts_slug",
+  "related_collection": "posts",
+  "meta": {
+    "junction_field": "directus_files_id",
+    "many_collection": "posts_files_1",
+    "many_field": "posts_slug",
+    "one_allowed_collections": null,
+    "one_collection": "posts",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "audioFiles",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "posts_files_1",
+    "column": "posts_slug",
+    "foreign_key_table": "posts",
+    "foreign_key_column": "slug",
+    "constraint_name": "posts_files_1_posts_slug_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

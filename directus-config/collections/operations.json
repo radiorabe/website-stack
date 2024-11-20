@@ -40,7 +40,7 @@
     "position_x": 55,
     "position_y": 1,
     "options": {
-      "body": "Hallo {{read_order.first_name}} {{read_order.family_name}}\n\nDanke für deine Bestellung\n\nDein Rabe Team",
+      "body": "Hallo {{read_order.first_name}} {{read_order.family_name}}\n\nDanke für deine Mitgliedschaft: {{read_order.name}}\n\nWir werden dich zeitnah informieren.\n\nDein Rabe Team",
       "subject": "Willkommen bei Rabe",
       "to": [
         "{{read_order.email}}"

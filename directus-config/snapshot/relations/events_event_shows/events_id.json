@@ -1,0 +1,25 @@
+{
+  "collection": "events_event_shows",
+  "field": "events_id",
+  "related_collection": "events",
+  "meta": {
+    "junction_field": "event_shows_id",
+    "many_collection": "events_event_shows",
+    "many_field": "events_id",
+    "one_allowed_collections": null,
+    "one_collection": "events",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "shows",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "events_event_shows",
+    "column": "events_id",
+    "foreign_key_table": "events",
+    "foreign_key_column": "id",
+    "constraint_name": "events_event_shows_events_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

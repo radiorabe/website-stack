@@ -18,7 +18,14 @@
     "singleton": true,
     "sort": 6,
     "sort_field": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "plural": "Page Mitglied",
+        "singular": "Page Mitglied",
+        "translation": "Page Mitglied"
+      }
+    ],
     "unarchive_value": null,
     "versioning": false
   },

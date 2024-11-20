@@ -442,6 +442,54 @@
     "_syncId": "b255fa3a-11a0-4bbf-8d87-0ce543d008ce"
   },
   {
+    "collection": "event_shows",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "71dbdaf8-e901-4390-83bd-fa6facce16ab"
+  },
+  {
+    "collection": "events_event_shows",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "fdec6c0b-de9b-43de-9dee-55d60fe3c9c8"
+  },
+  {
+    "collection": "events_files",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "cbbf6c84-4de6-4b47-b318-f4d3d55a50ec"
+  },
+  {
+    "collection": "events",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "af65d25b-601f-4173-ad50-e0593a103875"
+  },
+  {
     "collection": "image_box",
     "action": "read",
     "permissions": {},
@@ -790,6 +838,54 @@
     "_syncId": "0463a01e-2ec2-44ad-91fe-a6e6a657976d"
   },
   {
+    "collection": "post_directus_users",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "0c9507d6-f511-48e7-ba2d-d29dc0646edc"
+  },
+  {
+    "collection": "post_editor_nodes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "3417a3bd-47fc-42d5-9beb-32c9b7b88992"
+  },
+  {
+    "collection": "post_files",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "421ed103-3f66-4cd2-b258-536b608d4e1f"
+  },
+  {
+    "collection": "post",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "c8996b8c-7c02-4d76-9fc9-9a35c0ef22d7"
+  },
+  {
     "collection": "posts_directus_users_1",
     "action": "read",
     "permissions": {},
@@ -812,6 +908,18 @@
     ],
     "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
     "_syncId": "df5a6556-b783-4931-acd4-20c4905719a0"
+  },
+  {
+    "collection": "posts_files_1",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "3fa49b4d-dad7-4edc-a00f-52862e7c31b9"
   },
   {
     "collection": "posts",
@@ -886,6 +994,54 @@
     "_syncId": "30573e8d-62ba-4889-a65d-81e9cf45bd5c"
   },
   {
+    "collection": "image_box",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "f47473d9-33a7-4871-9d73-45ce24f1a61c"
+  },
+  {
+    "collection": "image_box",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "539e8306-6473-4f6d-8db8-494b68c143f6"
+  },
+  {
+    "collection": "image_box",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "2b74d331-1d0c-469e-899c-d0eff110f678"
+  },
+  {
+    "collection": "image_box",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "14ca2347-e457-4094-9cc5-a826d2c49c93"
+  },
+  {
     "collection": "info_box",
     "action": "create",
     "permissions": null,
@@ -934,7 +1090,7 @@
     "_syncId": "2e28e3cc-6dfd-49c1-a92d-e81f566fff34"
   },
   {
-    "collection": "posts_directus_users_1",
+    "collection": "post_directus_users",
     "action": "read",
     "permissions": null,
     "validation": null,
@@ -943,10 +1099,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "773ba521-e360-427e-9056-c282a78b9bca"
+    "_syncId": "104fdc25-1a41-4ea3-a697-d913ac827df5"
   },
   {
-    "collection": "posts_directus_users_1",
+    "collection": "post_directus_users",
     "action": "update",
     "permissions": null,
     "validation": null,
@@ -955,10 +1111,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "f32f2940-d5e4-4b01-b572-6d8269ad4f37"
+    "_syncId": "247beaa6-773f-4450-86a5-0e6e80fdbdc5"
   },
   {
-    "collection": "posts_editor_nodes",
+    "collection": "post_editor_nodes",
     "action": "create",
     "permissions": null,
     "validation": null,
@@ -967,10 +1123,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "fd19f3b0-5099-4956-8a82-734eb6a77676"
+    "_syncId": "f90c5b23-de18-4e66-a58c-3939565c85bf"
   },
   {
-    "collection": "posts_editor_nodes",
+    "collection": "post_editor_nodes",
     "action": "delete",
     "permissions": null,
     "validation": null,
@@ -979,10 +1135,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "efe3d529-be50-423e-b98c-ae8b0c90641f"
+    "_syncId": "ac0ad845-eea7-4c82-8513-b9f61494f17a"
   },
   {
-    "collection": "posts_editor_nodes",
+    "collection": "post_editor_nodes",
     "action": "read",
     "permissions": null,
     "validation": null,
@@ -991,10 +1147,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "e9d017f8-3e5b-4118-9f91-4458227246ad"
+    "_syncId": "57130333-2b21-4926-b0a2-895b56fe006c"
   },
   {
-    "collection": "posts_editor_nodes",
+    "collection": "post_editor_nodes",
     "action": "update",
     "permissions": null,
     "validation": null,
@@ -1003,10 +1159,10 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "b30e0148-f2e5-44e9-a5d0-931a7e8ccd8c"
+    "_syncId": "2ef30e56-2ac0-46f1-86cb-1d5bba7434d7"
   },
   {
-    "collection": "posts",
+    "collection": "post_files",
     "action": "create",
     "permissions": null,
     "validation": null,
@@ -1015,25 +1171,82 @@
       "*"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "0356bae3-cef4-42ac-aa24-77f074c57e19"
+    "_syncId": "1b2d0cf6-5bb7-4d9b-96e4-587687ef52f2"
   },
   {
-    "collection": "posts",
+    "collection": "post_files",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "dedcac91-6673-4b87-b56c-0230e35662e8"
+  },
+  {
+    "collection": "post_files",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "7e8836ec-e80e-4a15-9620-98b36e8a41db"
+  },
+  {
+    "collection": "post_files",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "9ab61cf9-6bf4-49a5-b3bb-5161fac203f4"
+  },
+  {
+    "collection": "post",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "6dc91ac0-283c-4371-9af5-46ee39d01a93"
+  },
+  {
+    "collection": "post",
     "action": "read",
     "permissions": {
       "_and": [
         {
           "_or": [
             {
-              "authors": {
-                "directus_users_id": {
-                  "_eq": "$CURRENT_USER"
+              "user_created": {
+                "_eq": "$CURRENT_USER"
+              }
+            },
+            {
+              "program": {
+                "team": {
+                  "directus_users_id": {
+                    "_eq": "$CURRENT_USER"
+                  }
                 }
               }
             },
             {
-              "user_created": {
-                "_eq": "$CURRENT_USER"
+              "authors": {
+                "directus_users_id": {
+                  "_eq": "$CURRENT_USER"
+                }
               }
             }
           ]
@@ -1043,13 +1256,28 @@
     "validation": null,
     "presets": null,
     "fields": [
-      "*"
+      "id",
+      "sort",
+      "user_created",
+      "date_updated",
+      "user_updated",
+      "date_created",
+      "status",
+      "date",
+      "title",
+      "program",
+      "editor_nodes",
+      "authors",
+      "audio_files",
+      "slug",
+      "imagebox",
+      "content"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "81718ea9-6224-42f7-9cf4-cb70109fbeaf"
+    "_syncId": "265994e9-0d2d-4571-b553-093f2299bffe"
   },
   {
-    "collection": "posts",
+    "collection": "post",
     "action": "update",
     "permissions": {
       "_and": [
@@ -1066,6 +1294,15 @@
                   "_eq": "$CURRENT_USER"
                 }
               }
+            },
+            {
+              "program": {
+                "team": {
+                  "directus_users_id": {
+                    "_eq": "$CURRENT_USER"
+                  }
+                }
+              }
             }
           ]
         }
@@ -1074,21 +1311,24 @@
     "validation": null,
     "presets": null,
     "fields": [
-      "status",
+      "id",
+      "date_created",
+      "sort",
+      "user_updated",
+      "user_created",
+      "date_updated",
       "date",
-      "title",
+      "status",
       "authors",
-      "imagebox",
-      "image",
-      "imageTitle",
-      "imageText",
-      "content",
-      "audio",
+      "program",
       "editor_nodes",
-      "program"
+      "title",
+      "audio_files",
+      "imagebox",
+      "content"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
-    "_syncId": "df87381c-8bea-494a-a714-19fe4c35708c"
+    "_syncId": "025f779c-1047-4000-86bc-c0932b68bad1"
   },
   {
     "collection": "programs_directus_users",

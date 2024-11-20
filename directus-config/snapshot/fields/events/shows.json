@@ -1,0 +1,27 @@
+{
+  "collection": "events",
+  "field": "shows",
+  "type": "alias",
+  "meta": {
+    "collection": "events",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "shows",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 12,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

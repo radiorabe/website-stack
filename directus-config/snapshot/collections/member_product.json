@@ -16,9 +16,16 @@
     "note": null,
     "preview_url": null,
     "singleton": false,
-    "sort": 1,
+    "sort": 2,
     "sort_field": "sort",
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "plural": "Mitgliedschaften",
+        "singular": "Mitgliedschaft",
+        "translation": "Mitgliedschaften"
+      }
+    ],
     "unarchive_value": "draft",
     "versioning": false
   },

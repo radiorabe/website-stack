@@ -16,9 +16,16 @@
     "note": null,
     "preview_url": null,
     "singleton": false,
-    "sort": 4,
+    "sort": 5,
     "sort_field": "sort",
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "plural": "Ausgehtips",
+        "singular": "Ausgehtip",
+        "translation": "Ausgehtips"
+      }
+    ],
     "unarchive_value": "draft",
     "versioning": false
   },

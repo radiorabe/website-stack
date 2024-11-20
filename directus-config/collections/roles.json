@@ -7,7 +7,7 @@
     "_syncId": "_sync_default_admin_role"
   },
   {
-    "name": "sendungs-macher",
+    "name": "Sendungsmachende",
     "icon": "supervised_user_circle",
     "description": "Sendungsmacher können Ihre Sendung und neue Beiträge erstellen. ",
     "parent": null,

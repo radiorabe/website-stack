@@ -18,7 +18,12 @@
     "singleton": true,
     "sort": 9,
     "sort_field": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Page Empfangen"
+      }
+    ],
     "unarchive_value": null,
     "versioning": false
   },

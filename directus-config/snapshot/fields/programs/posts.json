@@ -12,7 +12,9 @@
     "hidden": false,
     "interface": "list-o2m",
     "note": null,
-    "options": null,
+    "options": {
+      "sort": null
+    },
     "readonly": false,
     "required": false,
     "sort": 12,

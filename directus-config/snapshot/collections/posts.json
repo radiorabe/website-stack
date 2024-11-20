@@ -10,13 +10,13 @@
     "color": null,
     "display_template": null,
     "group": "Collections",
-    "hidden": false,
+    "hidden": true,
     "icon": null,
     "item_duplication_fields": null,
     "note": null,
     "preview_url": null,
     "singleton": false,
-    "sort": 5,
+    "sort": 6,
     "sort_field": "sort",
     "translations": [
       {
