@@ -243,42 +243,6 @@ export default async function DynamicPage({ params }) {
                 height: Metrics.tripleBaseMargin,
               }}
             ></View>
-            {/* <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            {posts.map((item, index) => {
-              return (
-                <View
-                  key={"team-" + index}
-                  style={{
-                    maxWidth: 360,
-                    width: "30%",
-                    height: 450,
-                    marginRight: Metrics.doubleBaseMargin,
-                    backgroundColor: "yellow",
-                    marginBottom: Metrics.doubleBaseMargin,
-                  }}
-                >
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.image}?width=360&height=240&fit=cover`}
-                    width={360}
-                    height={240}
-                    style={styles.avatar}
-                    layout="responsive"
-                    alt={sendung.name}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      paddingLeft: Metrics.doubleBaseMargin,
-                    }}
-                  >
-                    <Text style={{ ...Fonts.style.text }}>{item.title}</Text>
-
-                  </View>
-                </View>
-              );
-            })}
-          </View> */}
           </View>
         </View>
       </View>

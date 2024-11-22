@@ -12,7 +12,7 @@ import {
   ItemsPrograms,
   Users,
 } from "@/lib/api/data-contracts";
-import Colors from "@/lib/Colors";
+import Colors, { pSBC, shadeColor } from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import moment from "moment";
@@ -77,7 +77,6 @@ async function getEvent(slug) {
           "logos.directus_files_id",
           "shows.event_shows_id.*",
           "shows.event_shows_id.imagebox.*",
-          "imagebox.*",
         ],
       },
       {
@@ -118,7 +117,7 @@ export default async function DynamicPage({ params }) {
         <View
           style={{
             flexDirection: "column",
-            backgroundColor: Colors.yellow,
+            backgroundColor: event.color,
             width: "100%",
             alignItems: "center",
             paddingTop: Metrics.tripleBaseMargin,
@@ -160,8 +159,8 @@ export default async function DynamicPage({ params }) {
             <RenderTipTap
               content={event.content}
               topProps={{
-                linkColor: Colors.yellow,
-                linkHoverColor: Colors.lightYellow,
+                linkColor: event.color,
+                linkHoverColor: shadeColor(event.color, 30),
               }}
             ></RenderTipTap>
           )}
@@ -264,8 +263,8 @@ export default async function DynamicPage({ params }) {
                     <RenderTipTap
                       content={show.content}
                       topProps={{
-                        linkColor: Colors.yellow,
-                        linkHoverColor: Colors.lightYellow,
+                        linkColor: event.color,
+                        linkHoverColor: shadeColor(event.color, 30),
                       }}
                     ></RenderTipTap>
                   )}
@@ -280,8 +279,8 @@ export default async function DynamicPage({ params }) {
                     label={show.button_label ? show.button_label : "Tickets"}
                     href={show.button_url}
                     icon={<TicketIcon color={Colors.white}></TicketIcon>}
-                    backgroundColor={Colors.yellow}
-                    backgroundHoverColor={Colors.lightYellow}
+                    backgroundColor={event.color}
+                    backgroundHoverColor={shadeColor(event.color, 30)}
                     large
                   ></ButtonFull>
                 </View>
@@ -411,7 +410,7 @@ export default async function DynamicPage({ params }) {
 
         <View
           style={{
-            backgroundColor: Colors.yellow,
+            backgroundColor: event.color,
             width: "90vw",
             alignSelf: "center",
             padding: Metrics.doubleBaseMargin,

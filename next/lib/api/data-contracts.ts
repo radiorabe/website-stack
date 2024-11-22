@@ -389,8 +389,8 @@ export interface ItemsPrograms {
   name?: string | null;
   description?: string | null;
   image?: string | Files | null;
-  posts?: (string | ItemsPosts)[] | null;
   team?: (number | ItemsProgramsDirectusUsers)[] | null;
+  posts?: (number | ItemsPost)[] | null;
 }
 
 export interface ItemsPosts {
@@ -703,10 +703,17 @@ export interface ItemsEvents {
   /** @format timestamp */
   date_updated?: string | null;
   title?: string | null;
+  /** www.rabe.ch/events/slug */
   slug?: string | null;
   content?: any;
   title_info?: string | null;
   title_image?: string | Files | null;
+  color?: string | null;
+  promo_title?: string | null;
+  promo_text?: string | null;
+  promo_button_label?: string | null;
+  promo_button_url?: string | null;
+  promo_status?: string | null;
   shows?: (number | ItemsEventsEventShows)[] | null;
   logos?: (number | ItemsEventsFiles)[] | null;
 }
@@ -741,33 +748,6 @@ export interface ItemsPostDirectusUsers {
   directus_users_id?: string | Users | null;
 }
 
-export interface ItemsEventShows {
-  id?: number;
-  sort?: number | null;
-  user_created?: string | Users | null;
-  /** @format timestamp */
-  date_created?: string | null;
-  user_updated?: string | Users | null;
-  /** @format timestamp */
-  date_updated?: string | null;
-  name?: string | null;
-  /** @format date */
-  date?: string | null;
-  /** @format time */
-  opening_time?: string | null;
-  /** @format time */
-  starting_time?: string | null;
-  program?: string | null;
-  place?: string | null;
-  website?: string | null;
-  image?: string | Files | null;
-  imageTitle?: string | null;
-  imageText?: string | null;
-  content?: any;
-  button_label?: string | null;
-  button_url?: string | null;
-}
-
 export interface ItemsPostEditorNodes {
   /** @format uuid */
   id?: string;
@@ -787,15 +767,40 @@ export interface ItemsPost {
   /** @format timestamp */
   date_updated?: string | null;
   /** @format date-time */
-  date?: string | null;
-  title?: string | null;
-  slug?: string | null;
+  date?: string;
+  title?: string;
+  slug?: string;
   program?: string | ItemsPrograms | null;
   imagebox?: number | ItemsImageBox | null;
   content?: any;
   authors?: (number | ItemsPostDirectusUsers)[] | null;
   audio_files?: (number | ItemsPostFiles)[] | null;
   editor_nodes?: (string | ItemsPostEditorNodes)[] | null;
+}
+
+export interface ItemsEventShows {
+  id?: number;
+  sort?: number | null;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  name?: string | null;
+  /** @format date */
+  date?: string | null;
+  /** @format time */
+  opening_time?: string | null;
+  /** @format time */
+  starting_time?: string | null;
+  program?: string | null;
+  place?: string | null;
+  website?: string | null;
+  content?: any;
+  button_label?: string | null;
+  button_url?: string | null;
+  imagebox?: number | ItemsImageBox | null;
 }
 
 export interface GetAssetParams {
@@ -2757,43 +2762,6 @@ export interface ReadSingleItemsPostDirectusUsersData {
   data?: ItemsPostDirectusUsers;
 }
 
-export interface ReadItemsEventShowsParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** A limit on the number of objects that are returned. */
-  limit?: number;
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** How many items to skip when fetching data. */
-  offset?: number;
-  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-  sort?: string[];
-  /** Select items in collection by given conditions. */
-  filter?: object;
-  /** Filter by items that contain the given search query in one of their fields. */
-  search?: string;
-}
-
-export interface ReadItemsEventShowsData {
-  data?: ItemsEventShows[];
-  meta?: XMetadata;
-}
-
-export interface ReadSingleItemsEventShowsParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
-  version?: string;
-  /** Index of the item. */
-  id: number | string;
-}
-
-export interface ReadSingleItemsEventShowsData {
-  data?: ItemsEventShows;
-}
-
 export interface ReadItemsPostEditorNodesParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -2866,4 +2834,41 @@ export interface ReadSingleItemsPostParams {
 
 export interface ReadSingleItemsPostData {
   data?: ItemsPost;
+}
+
+export interface ReadItemsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventShowsData {
+  data?: ItemsEventShows[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventShowsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventShowsData {
+  data?: ItemsEventShows;
 }

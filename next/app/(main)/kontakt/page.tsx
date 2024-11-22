@@ -186,69 +186,67 @@ export default async function KontaktPage(props) {
             </View>
           </View>
           <View>
-          {data && data.contact_addresses &&  (
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-                // backgroundColor: "yellow",
-                paddingBottom:
-                  Metrics.baseMargin,
-              }}
-            >
-              { data.contact_addresses.map((item, index) => {
-                return (
-                  <View
-                    key={"contact" + index}
-                    style={{
-                      width: "50%",
-                      paddingLeft: index % 2 ? Metrics.doubleBaseMargin : 0,
-                      paddingBottom: Metrics.doubleBaseMargin,
-                    }}
-                  >
+            {data && data.contact_addresses && (
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  paddingBottom: Metrics.baseMargin,
+                }}
+              >
+                {data.contact_addresses.map((item, index) => {
+                  return (
                     <View
+                      key={"contact" + index}
                       style={{
-                        width: "100%",
-                        backgroundColor: Colors.darkGreen,
-                        borderRadius: 9,
-                        padding: Metrics.doubleBaseMargin,
+                        width: "50%",
+                        paddingLeft: index % 2 ? Metrics.doubleBaseMargin : 0,
+                        paddingBottom: Metrics.doubleBaseMargin,
                       }}
                     >
-                      <Text
+                      <View
                         style={{
-                          ...Fonts.style.h4,
-                          color: Colors.lightGreen,
-                          paddingBottom: Metrics.baseMargin,
+                          width: "100%",
+                          backgroundColor: Colors.darkGreen,
+                          borderRadius: 9,
+                          padding: Metrics.doubleBaseMargin,
                         }}
-                        numberOfLines={1}
                       >
-                        {item.contact_address_id.name}
-                      </Text>
+                        <Text
+                          style={{
+                            ...Fonts.style.h4,
+                            color: Colors.lightGreen,
+                            paddingBottom: Metrics.baseMargin,
+                          }}
+                          numberOfLines={1}
+                        >
+                          {item.contact_address_id.name}
+                        </Text>
 
-                      <HoverUrl
-                        url={`tel:${item.contact_address_id.phone_number}`}
-                        style={{
-                          ...Fonts.style.text,
-                          color: Colors.lightGreen,
-                        }}
-                        hoverStyle={{ color: Colors.green }}
-                      >
-                        {item.contact_address_id.phone_number}
-                      </HoverUrl>
+                        <HoverUrl
+                          url={`tel:${item.contact_address_id.phone_number}`}
+                          style={{
+                            ...Fonts.style.text,
+                            color: Colors.lightGreen,
+                          }}
+                          hoverStyle={{ color: Colors.green }}
+                        >
+                          {item.contact_address_id.phone_number}
+                        </HoverUrl>
 
-                      <HoverUrl
-                        url={`mailto:${item.contact_address_id.email}`}
-                        style={{
-                          ...Fonts.style.text,
-                          color: Colors.lightGreen,
-                        }}
-                        hoverStyle={{ color: Colors.green }}
-                      >
-                        {item.contact_address_id.email}
-                      </HoverUrl>
+                        <HoverUrl
+                          url={`mailto:${item.contact_address_id.email}`}
+                          style={{
+                            ...Fonts.style.text,
+                            color: Colors.lightGreen,
+                          }}
+                          hoverStyle={{ color: Colors.green }}
+                        >
+                          {item.contact_address_id.email}
+                        </HoverUrl>
 
-                      {/* <Text
+                        {/* <Text
                       style={{ ...Fonts.style.text, color: Colors.lightGreen }}
                     >
                       {item.contact_address_id.phone_number}
@@ -258,13 +256,12 @@ export default async function KontaktPage(props) {
                     >
                       {item.contact_address_id.email}
                     </Text> */}
+                      </View>
                     </View>
-                  </View>
-                );
-              })}
-            </View>
-          )
-        }
+                  );
+                })}
+              </View>
+            )}
           </View>
           <View>
             <Text
