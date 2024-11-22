@@ -16,6 +16,7 @@ import HoverUrlIcon from "@/components/HoverUrlIcon";
 import { logError } from "@/lib/loging";
 import { Api } from "@/lib/api";
 import { ItemsPageProgram } from "@/lib/api/data-contracts";
+import ProgramBox from "@/components/ProgrammBox";
 
 export interface Show {
   name: string;
@@ -210,61 +211,12 @@ export default async function ProgramPage({ params }) {
               backgroundColor: Colors.lightGreen,
             }}
           >
-            <Text
-              style={{
-                ...Fonts.style.h2,
-                color: Colors.darkGreen,
-                paddingBottom: Metrics.baseMargin,
-              }}
-            >
-              {"Heutiges Programm"}
-            </Text>
-            <View
-              style={
-                {
-                  // flexDirection: "row",
-                }
-              }
-            >
-              {todayShows &&
-                todayShows.map((show, index) => {
-                  let isCurrentshow = show.starts === currentShow.starts;
-                  return (
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        paddingTop: Metrics.halfBaseMargin,
-                      }}
-                      key={"todayshows" + index}
-                    >
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                          color: Colors.darkGreen,
-                          paddingRight: Metrics.doubleBaseMargin,
-                        }}
-                      >
-                        {moment(show.starts).format("HH:mm")}
-                      </Text>
-                      <HoverText
-                        href={show.url}
-                        style={[
-                          {
-                            ...Fonts.style.navigation,
-                            fontSize: 18,
-                            color: isCurrentshow
-                              ? Colors.green
-                              : Colors.darkGreen,
-                          },
-                        ]}
-                        hoverStyle={{ color: Colors.green }}
-                      >
-                        {show.name}
-                      </HoverText>
-                    </View>
-                  );
-                })}
-            </View>
+            <ProgramBox
+              textColor={Colors.darkGreen}
+              hoverColor={Colors.green}
+              backgroundColor={Colors.lightGreen}
+              biggerFont={true}
+            ></ProgramBox>
           </View>
         </View>
         <View

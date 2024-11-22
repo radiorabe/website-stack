@@ -20,6 +20,7 @@ import { getLiveData } from "./programm/[date]/page";
 import HoverText from "@/components/HoverText";
 import { logError } from "@/lib/loging";
 import Image from "next/image";
+import ProgramBox from "@/components/ProgrammBox";
 
 async function getPosts() {
   try {
@@ -34,7 +35,7 @@ async function getPosts() {
           },
         }),
         sort: ["-date"],
-        // limit: 3,
+        limit: 6,
       },
       {
         next: {
@@ -97,32 +98,6 @@ async function getPartyTips() {
   }
 }
 
-export async function getPlaylistData(numbers) {
-  try {
-    return fetch(
-      `https://archiv.rabe.ch/api/tracks?sort=-started_at&page[size]=${numbers}`,
-      {
-        next: {
-          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
-        },
-        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
-      }
-    )
-      .then((response: any) => response.json())
-      .then((responseData: any) => {
-        // console.log("playlistData", responseData.data);
-        return responseData.data;
-      })
-      .catch((error) => {
-        console.log("error", error);
-
-        return [];
-      });
-  } catch (error) {
-    logError(error);
-  }
-}
-
 export const metadata: Metadata = {
   title: "RaBe - Home",
 };
@@ -130,8 +105,6 @@ export const metadata: Metadata = {
 export default async function HomePage(props) {
   const posts = await getPosts();
   const partyTips = await getPartyTips();
-  let { todayShows, currentShow, shows } = await getLiveData();
-  const playlistData = await getPlaylistData(todayShows.length);
   return (
     <View>
       <View
@@ -178,115 +151,16 @@ export default async function HomePage(props) {
       >
         <View
           style={{
-            width: "90%",
+            width: "90vw",
             alignSelf: "center",
             paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <View style={{ width: "50%" }}>
-              <Text
-                style={{
-                  ...Fonts.style.h3,
-                  color: Colors.lightGreen,
-                  paddingBottom: Metrics.doubleBaseMargin,
-                }}
-              >
-                {"Heutiges Programm"}
-              </Text>
-              <View
-                style={
-                  {
-                    // flexDirection: "row",
-                  }
-                }
-              >
-                {todayShows.map((show, index) => {
-                  let isCurrentshow = show.starts === currentShow.starts;
-                  return (
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        paddingTop: Metrics.halfBaseMargin,
-                      }}
-                      key={"todayshows" + index}
-                    >
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                          color: Colors.lightGreen,
-                          paddingRight: Metrics.doubleBaseMargin,
-                        }}
-                      >
-                        {moment(show.starts).format("HH:mm")}
-                      </Text>
-                      <HoverText
-                        href={show.url}
-                        style={[
-                          {
-                            ...Fonts.style.navigation,
-                            fontSize: 18,
-                            color: isCurrentshow
-                              ? Colors.green
-                              : Colors.lightGreen,
-                          },
-                        ]}
-                        hoverStyle={{ color: Colors.green }}
-                      >
-                        {show.name}
-                      </HoverText>
-                    </View>
-                  );
-                })}
-              </View>
-            </View>
-            <View style={{ width: "50%" }}>
-              <Text
-                style={{
-                  ...Fonts.style.h3,
-                  color: Colors.lightGreen,
-                  paddingBottom: Metrics.doubleBaseMargin,
-                }}
-              >
-                {"Playlist"}
-              </Text>
-              {playlistData.map((track, index) => {
-                return (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      paddingTop: Metrics.halfBaseMargin,
-                    }}
-                    key={"todayshows" + index}
-                  >
-                    <Text
-                      style={{
-                        ...Fonts.style.text,
-                        color: Colors.lightGreen,
-                        paddingRight: Metrics.doubleBaseMargin,
-                      }}
-                    >
-                      {moment(track.attributes.started_at).format("HH:mm")}
-                    </Text>
-                    <Text
-                      numberOfLines={1}
-                      style={[
-                        {
-                          ...Fonts.style.navigationText,
-                          fontSize: 18,
-                          color: Colors.lightGreen,
-                        },
-                      ]}
-                    >
-                      {track.attributes.artist + " - " + track.attributes.title}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          </View>
+          <ProgramBox
+            textColor={Colors.lightGreen}
+            hoverColor={Colors.green}
+            backgroundColor={Colors.darkGreen}
+          ></ProgramBox>
         </View>
       </View>
       <View
