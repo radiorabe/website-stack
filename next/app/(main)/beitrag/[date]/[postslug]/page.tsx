@@ -22,7 +22,6 @@ import IconShare from "../../../../../assets/svg/IconShare";
 import { logError } from "@/lib/loging";
 import AudioFiles from "./AudioFiles";
 import ImageBox from "@/components/ImageBox";
-import { draftMode } from "next/headers";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -146,7 +145,6 @@ export default async function DynamicPage({ params }) {
   const post = await getPost(params);
   const program = post.program as ItemsPrograms;
   console.log("post.imagebox", post.imagebox);
-  const { isEnabled } = draftMode();
 
   return (
     <View>
@@ -169,7 +167,6 @@ export default async function DynamicPage({ params }) {
             >
               {program.name}
             </HoverText>
-            {isEnabled && <p>(Draft Mode)</p>}
 
             <View style={{ width: Metrics.doubleBaseMargin }}></View>
             <Text style={{ ...Fonts.style.text }}>
@@ -211,7 +208,7 @@ export default async function DynamicPage({ params }) {
 
           {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
 
-          {post.audio_files && post.audio_files.length && (
+          {post.audio_files && post.audio_files.length !== 0 && (
             <View
               style={{
                 paddingBottom: Metrics.tripleBaseMargin,
@@ -220,8 +217,11 @@ export default async function DynamicPage({ params }) {
               <AudioFilePlayer
                 src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio_files[0].directus_files_id.id}/rabe-audio.mp3`}
               ></AudioFilePlayer>
-              <View style={{ height: Metrics.doubleBaseMargin }}></View>
-              <AudioFiles audioFiles={post.audio_files}></AudioFiles>
+              {post.audio_files.length >= 2 && (
+                <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+                  <AudioFiles audioFiles={post.audio_files}></AudioFiles>
+                </View>
+              )}
             </View>
           )}
           <View style={{ flexDirection: "row" }}>

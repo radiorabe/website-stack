@@ -2,13 +2,14 @@ import { draftMode } from "next/headers";
 import { Api } from "@/lib/api";
 import moment from "moment";
 
+// Start Draft Mode
 export async function GET(request: Request) {
   console.log("api draft");
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get("secret");
   const id = searchParams.get("id");
 
-  if (secret !== "MY_SECRET_TOKEN") {
+  if (secret !== process.env.DRAFT_MODE_TOKEN) {
     return new Response("Invalid token", { status: 401 });
   }
 
@@ -18,20 +19,10 @@ export async function GET(request: Request) {
 
   const response = await Api.readSingleItemsPost({
     id: id,
-    fields: [
-      "*",
-      "program.name",
-      "program.slug",
-      "authors.directus_users_id.first_name",
-      "authors.directus_users_id.last_name",
-      "audio_files.directus_files_id.*",
-      "imagebox.*",
-    ],
+    fields: ["date", "slug"],
   });
   const post = response.data.data;
 
-  console.log("post", post);
-  d;
   if (!post) {
     return new Response("Invalid id", { status: 401 });
   }
@@ -44,4 +35,18 @@ export async function GET(request: Request) {
       Location: `/beitrag/${moment(post.date).format("DD-MM-YYYY")}/${post.slug}`,
     },
   });
+}
+
+// Stop Draft Mode
+export function POST(req: Request) {
+  if (req.headers.get("origin") !== new URL(req.url).origin) {
+    return new Response("Invalid origin", { status: 400 });
+  }
+  const referrer = req.headers.get("Referer");
+  if (!referrer) {
+    return new Response("Missing Referer", { status: 400 });
+  }
+  draftMode().disable();
+
+  return Response.redirect(referrer, 303);
 }
