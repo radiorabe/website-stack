@@ -18,10 +18,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
-import IconShare from "../../../../assets/svg/IconShare";
+import IconShare from "../../../../../assets/svg/IconShare";
 import { logError } from "@/lib/loging";
 import AudioFiles from "./AudioFiles";
 import ImageBox from "@/components/ImageBox";
+import { draftMode } from "next/headers";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -59,9 +60,9 @@ const { ids, styles } = StyleSheet.create({
 async function getPost(params) {
   try {
     console.log("params", params);
-    const date = moment(params.slug, "DD-MM-YYYY");
+    const date = moment(params.date, "DD-MM-YYYY");
     const slug = params.postslug;
-    const nextDayDate = moment(params.slug, "DD-MM-YYYY").add(1, "d");
+    const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d");
     console.log("date", date);
     console.log("nextDayDate", nextDayDate);
 
@@ -145,6 +146,8 @@ export default async function DynamicPage({ params }) {
   const post = await getPost(params);
   const program = post.program as ItemsPrograms;
   console.log("post.imagebox", post.imagebox);
+  const { isEnabled } = draftMode();
+
   return (
     <View>
       <View style={styles.container}>
@@ -166,6 +169,8 @@ export default async function DynamicPage({ params }) {
             >
               {program.name}
             </HoverText>
+            {isEnabled && <p>(Draft Mode)</p>}
+
             <View style={{ width: Metrics.doubleBaseMargin }}></View>
             <Text style={{ ...Fonts.style.text }}>
               <Text> {"Von "}</Text>

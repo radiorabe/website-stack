@@ -40,7 +40,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
   let program: ItemsPrograms = data.program;
   return (
     <Link
-      href={`${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
+      href={`/beitrag/${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
       style={{
         width: "30%",
         paddingLeft: index % 3 ? "5%" : 0,
