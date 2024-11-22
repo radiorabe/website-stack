@@ -24,9 +24,21 @@ export interface HoverableProps {
   label: string;
   icon?: any;
   style?: any;
+  large?: boolean;
+  backgroundColor?: any;
+  backgroundHoverColor?: any;
 }
 
-const ButtonFull = ({ url, label, icon, href, style }: HoverableProps) => {
+const ButtonFull = ({
+  url,
+  label,
+  icon,
+  href,
+  style,
+  large,
+  backgroundColor,
+  backgroundHoverColor,
+}: HoverableProps) => {
   const button = (
     <Pressable
       style={style}
@@ -43,12 +55,16 @@ const ButtonFull = ({ url, label, icon, href, style }: HoverableProps) => {
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
-                paddingVertical: 3,
-                paddingHorizontal: 6,
-                backgroundColor: Colors.darkGreen,
+                paddingVertical: large ? 9 : 3,
+                paddingHorizontal: large ? 12 : 6,
+                backgroundColor: backgroundColor
+                  ? backgroundColor
+                  : Colors.darkGreen,
               },
               hovered && {
-                backgroundColor: Colors.green,
+                backgroundColor: backgroundHoverColor
+                  ? backgroundHoverColor
+                  : Colors.green,
               },
             ]}
           >
@@ -60,6 +76,7 @@ const ButtonFull = ({ url, label, icon, href, style }: HoverableProps) => {
                   flexShrink: 1,
                   color: Colors.white,
                 },
+                large && { ...Fonts.style.h2 },
                 icon && { paddingLeft: 6 },
               ]}
             >

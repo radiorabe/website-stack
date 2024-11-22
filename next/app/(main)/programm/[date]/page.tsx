@@ -226,43 +226,44 @@ export default async function ProgramPage({ params }) {
                 }
               }
             >
-              {todayShows && todayShows.map((show, index) => {
-                let isCurrentshow = show.starts === currentShow.starts;
-                return (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      paddingTop: Metrics.halfBaseMargin,
-                    }}
-                    key={"todayshows" + index}
-                  >
-                    <Text
+              {todayShows &&
+                todayShows.map((show, index) => {
+                  let isCurrentshow = show.starts === currentShow.starts;
+                  return (
+                    <View
                       style={{
-                        ...Fonts.style.text,
-                        color: Colors.darkGreen,
-                        paddingRight: Metrics.doubleBaseMargin,
+                        flexDirection: "row",
+                        paddingTop: Metrics.halfBaseMargin,
                       }}
+                      key={"todayshows" + index}
                     >
-                      {moment(show.starts).format("HH:mm")}
-                    </Text>
-                    <HoverText
-                      href={show.url}
-                      style={[
-                        {
-                          ...Fonts.style.navigation,
-                          fontSize: 18,
-                          color: isCurrentshow
-                            ? Colors.green
-                            : Colors.darkGreen,
-                        },
-                      ]}
-                      hoverStyle={{ color: Colors.green }}
-                    >
-                      {show.name}
-                    </HoverText>
-                  </View>
-                );
-              })}
+                      <Text
+                        style={{
+                          ...Fonts.style.text,
+                          color: Colors.darkGreen,
+                          paddingRight: Metrics.doubleBaseMargin,
+                        }}
+                      >
+                        {moment(show.starts).format("HH:mm")}
+                      </Text>
+                      <HoverText
+                        href={show.url}
+                        style={[
+                          {
+                            ...Fonts.style.navigation,
+                            fontSize: 18,
+                            color: isCurrentshow
+                              ? Colors.green
+                              : Colors.darkGreen,
+                          },
+                        ]}
+                        hoverStyle={{ color: Colors.green }}
+                      >
+                        {show.name}
+                      </HoverText>
+                    </View>
+                  );
+                })}
             </View>
           </View>
         </View>
@@ -374,93 +375,90 @@ export default async function ProgramPage({ params }) {
               </View>
             )}
           </View>
-          {data &&(
-          <View
-            style={{
-              width: "70%",
-              alignSelf: "center",
-              alignItems: "center",
-              paddingTop: Metrics.tripleBaseMargin * 2,
-              paddingBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            <Text style={{ ...Fonts.style.h4 }}>
-              {data.programs_group_1_title}
-            </Text>
+          {data && (
             <View
               style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                paddingTop: Metrics.halfBaseMargin,
-                paddingBottom: Metrics.doubleBaseMargin,
+                width: "70%",
+                alignSelf: "center",
+                alignItems: "center",
+                paddingTop: Metrics.tripleBaseMargin * 2,
+                paddingBottom: Metrics.tripleBaseMargin,
               }}
             >
-              {data.programs_group_1.map((program, index) => {
-                return (
-                  <ButtonFull
-                    key={"Group1-" + index}
-                    style={{ padding: Metrics.halfBaseMargin }}
-                    href={program.programs_slug.slug}
-                    label={program.programs_slug.name}
-                  >
-                    {}
-                  </ButtonFull>
-                );
-              })}
+              <Text style={{ ...Fonts.style.h4 }}>
+                {data.programs_group_1_title}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  paddingTop: Metrics.halfBaseMargin,
+                  paddingBottom: Metrics.doubleBaseMargin,
+                }}
+              >
+                {data.programs_group_1.map((program, index) => {
+                  return (
+                    <ButtonFull
+                      key={"Group1-" + index}
+                      style={{ padding: Metrics.halfBaseMargin }}
+                      href={program.programs_slug.slug}
+                      label={program.programs_slug.name}
+                      large
+                    ></ButtonFull>
+                  );
+                })}
+              </View>
+              <Text style={{ ...Fonts.style.h4 }}>
+                {data.programs_group_2_title}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  paddingTop: Metrics.halfBaseMargin,
+                  paddingBottom: Metrics.doubleBaseMargin,
+                }}
+              >
+                {data.programs_group_2.map((program, index) => {
+                  return (
+                    <ButtonFull
+                      key={"Group2-" + index}
+                      style={{ padding: Metrics.halfBaseMargin }}
+                      href={program.programs_slug.slug}
+                      label={program.programs_slug.name}
+                      large
+                    ></ButtonFull>
+                  );
+                })}
+              </View>
+              <Text style={{ ...Fonts.style.h4 }}>
+                {data.programs_group_3_title}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  paddingTop: Metrics.halfBaseMargin,
+                  paddingBottom: Metrics.doubleBaseMargin,
+                }}
+              >
+                {data.programs_group_3.map((program, index) => {
+                  return (
+                    <ButtonFull
+                      key={"Group3-" + index}
+                      style={{ padding: Metrics.halfBaseMargin }}
+                      href={program.programs_slug.slug}
+                      label={program.programs_slug.name}
+                      large
+                    ></ButtonFull>
+                  );
+                })}
+              </View>
             </View>
-            <Text style={{ ...Fonts.style.h4 }}>
-              {data.programs_group_2_title}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                paddingTop: Metrics.halfBaseMargin,
-                paddingBottom: Metrics.doubleBaseMargin,
-              }}
-            >
-              {data.programs_group_2.map((program, index) => {
-                return (
-                  <ButtonFull
-                    key={"Group2-" + index}
-                    style={{ padding: Metrics.halfBaseMargin }}
-                    href={program.programs_slug.slug}
-                    label={program.programs_slug.name}
-                  >
-                    {}
-                  </ButtonFull>
-                );
-              })}
-            </View>
-            <Text style={{ ...Fonts.style.h4 }}>
-              {data.programs_group_3_title}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                paddingTop: Metrics.halfBaseMargin,
-                paddingBottom: Metrics.doubleBaseMargin,
-              }}
-            >
-              {data.programs_group_3.map((program, index) => {
-                return (
-                  <ButtonFull
-                    key={"Group3-" + index}
-                    style={{ padding: Metrics.halfBaseMargin }}
-                    href={program.programs_slug.slug}
-                    label={program.programs_slug.name}
-                  >
-                    {}
-                  </ButtonFull>
-                );
-              })}
-            </View>
-          </View>
-        )}
+          )}
         </View>
       </View>
     </View>

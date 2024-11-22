@@ -48,8 +48,9 @@ const ImageBox = ({ imageId, width, height, title, text }: Props) => {
           >
             {"Foto: " + title}
           </Text>
-          <Text style={{ ...Fonts.style.textSmall }}> </Text>
-          {text && <Text style={{ ...Fonts.style.textSmall }}>{text}</Text>}
+          {text && (
+            <Text style={{ ...Fonts.style.textSmall }}>{" " + text}</Text>
+          )}
         </View>
       )}
     </View>

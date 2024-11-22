@@ -23,6 +23,10 @@ import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../assets/svg/IconShare";
 import { logError } from "@/lib/loging";
 import DownloadLogo from "../../geschichte/DownloadLogo";
+import ShowInfoText from "./ShowInfoText";
+import ImageBox from "@/components/ImageBox";
+import ButtonFull from "@/components/ButtonFull";
+import TicketIcon from "./TicketIcon";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -72,6 +76,7 @@ async function getEvent(slug) {
           "*",
           "logos.directus_files_id",
           "shows.event_shows_id.*",
+          "shows.event_shows_id.imagebox.*",
           "imagebox.*",
         ],
       },
@@ -85,7 +90,11 @@ async function getEvent(slug) {
       }
     );
     let item: ItemsEvents[] = itemResponse.data.data;
-    console.log("event", item);
+    console.log("event", item.length);
+
+    if (!item || item.length === 0 || item[0].status !== "published") {
+      notFound();
+    }
 
     return item[0];
   } catch (error) {
@@ -146,7 +155,7 @@ export default async function DynamicPage({ params }) {
           </Text>
         </View>
 
-        <View style={{ width: "74vw" }}>
+        <View style={{ width: "74vw", paddingTop: Metrics.tripleBaseMargin }}>
           {event.content && (
             <RenderTipTap
               content={event.content}
@@ -167,7 +176,10 @@ export default async function DynamicPage({ params }) {
             let show = sh.event_shows_id as ItemsEventShows;
             console.log("show", show);
             return (
-              <View key={"show" + index}>
+              <View
+                key={"show" + index}
+                style={{ paddingBottom: Metrics.tripleBaseMargin }}
+              >
                 <Text
                   style={{
                     ...Fonts.style.h1,
@@ -176,23 +188,102 @@ export default async function DynamicPage({ params }) {
                 >
                   {show.name}
                 </Text>
-                <View style={{ flexDirection: "row" }}>
-                  <View>
-                    <Text>
-                      <Text
-                        style={{
-                          ...Fonts.style.textLink,
-                        }}
-                      >
-                        {"Datum: "}
-                      </Text>
-                      <Text style={{ ...Fonts.style.text }}>
-                        {moment(show.date).format("DD. MMMM YYYY")}
-                      </Text>
-                    </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: "100%",
+                    paddingBottom: Metrics.tripleBaseMargin,
+                  }}
+                >
+                  <View style={{ width: "50%" }}>
+                    {show.date && (
+                      <ShowInfoText
+                        label="Datum"
+                        text={moment(show.date).format("DD. MMMM YYYY")}
+                      ></ShowInfoText>
+                    )}
+                    {show.program && (
+                      <ShowInfoText
+                        label="Programm"
+                        text={show.program}
+                      ></ShowInfoText>
+                    )}
+                    {show.opening_time && (
+                      <ShowInfoText
+                        label="Türöffnung"
+                        text={
+                          show.opening_time.split(":")[0] +
+                          ":" +
+                          show.opening_time.split(":")[1] +
+                          " Uhr"
+                        }
+                      ></ShowInfoText>
+                    )}
                   </View>
 
-                  <View></View>
+                  <View style={{ width: "50%" }}>
+                    {show.starting_time && (
+                      <ShowInfoText
+                        label="Start"
+                        text={
+                          show.starting_time.split(":")[0] +
+                          ":" +
+                          show.starting_time.split(":")[1] +
+                          " Uhr"
+                        }
+                      ></ShowInfoText>
+                    )}
+                    {show.place && (
+                      <ShowInfoText
+                        label="Ort"
+                        text={show.place}
+                      ></ShowInfoText>
+                    )}
+                    {show.website && (
+                      <ShowInfoText
+                        label="Webseite"
+                        text={show.website}
+                        // text={moment(show.opening_time).format("HH:MM")}
+                      ></ShowInfoText>
+                    )}
+                  </View>
+                </View>
+                <View style={{}}>
+                  {show.imagebox && (
+                    <ImageBox
+                      imageId={show.imagebox.image}
+                      width={1440}
+                      height={960}
+                      title={show.imagebox.title}
+                      text={show.imagebox.text}
+                    ></ImageBox>
+                  )}
+                </View>
+                <View>
+                  {show.content && (
+                    <RenderTipTap
+                      content={show.content}
+                      topProps={{
+                        linkColor: Colors.yellow,
+                        linkHoverColor: Colors.lightYellow,
+                      }}
+                    ></RenderTipTap>
+                  )}
+                </View>
+                <View
+                  style={{
+                    alignItems: "center",
+                    paddingTop: Metrics.baseMargin,
+                  }}
+                >
+                  <ButtonFull
+                    label={show.button_label ? show.button_label : "Tickets"}
+                    href={show.button_url}
+                    icon={<TicketIcon color={Colors.white}></TicketIcon>}
+                    backgroundColor={Colors.yellow}
+                    backgroundHoverColor={Colors.lightYellow}
+                    large
+                  ></ButtonFull>
                 </View>
               </View>
             );

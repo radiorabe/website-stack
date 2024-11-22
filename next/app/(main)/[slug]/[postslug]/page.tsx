@@ -21,6 +21,7 @@ import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../assets/svg/IconShare";
 import { logError } from "@/lib/loging";
 import AudioFiles from "./AudioFiles";
+import ImageBox from "@/components/ImageBox";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -194,41 +195,13 @@ export default async function DynamicPage({ params }) {
             {post.title}
           </Text>
           {post.imagebox && (
-            <View style={styles.imageContainer}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image}?width=1440&height=960&fit=cover`}
-                width={1440}
-                height={960}
-                style={styles.image}
-                layout="responsive"
-                alt={post.title}
-                // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-              {post.imagebox.title && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    paddingHorizontal: Metrics.tripleBaseMargin,
-                    paddingVertical: Metrics.doubleBaseMargin,
-                  }}
-                >
-                  <Text
-                    style={{
-                      ...Fonts.style.textSmall,
-                      fontFamily: Fonts.type.bold,
-                    }}
-                  >
-                    {"Foto: " + post.imagebox.title}
-                  </Text>
-                  <Text style={{ ...Fonts.style.textSmall }}> </Text>
-                  {post.imagebox.text && (
-                    <Text style={{ ...Fonts.style.textSmall }}>
-                      {post.imagebox.text}
-                    </Text>
-                  )}
-                </View>
-              )}
-            </View>
+            <ImageBox
+              imageId={post.imagebox.image}
+              width={1440}
+              height={960}
+              title={post.imagebox.title}
+              text={post.imagebox.text}
+            ></ImageBox>
           )}
 
           {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
