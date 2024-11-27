@@ -16,7 +16,7 @@
       "enableCreate": false
     },
     "readonly": false,
-    "required": true,
+    "required": false,
     "sort": 11,
     "special": [
       "m2m"

@@ -11,6 +11,10 @@
       {
         "role": "_sync_default_admin_role",
         "sort": 1
+      },
+      {
+        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
+        "sort": 1
       }
     ],
     "_syncId": "_sync_default_admin_policy"
@@ -35,6 +39,10 @@
     "admin_access": false,
     "app_access": true,
     "roles": [
+      {
+        "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "sort": 1
+      },
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
         "sort": 7
@@ -95,9 +103,25 @@
     "_syncId": "5e318f47-7fbf-4347-9e8f-013bdda76d6c"
   },
   {
-    "name": "Can read/create/update Orders",
+    "name": "All Pages",
     "icon": "badge",
-    "description": "Can read/create/update Orders",
+    "description": "Can edit,update all pages.",
+    "ip_access": null,
+    "enforce_tfa": false,
+    "admin_access": false,
+    "app_access": false,
+    "roles": [
+      {
+        "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "sort": 3
+      }
+    ],
+    "_syncId": "660a85b6-4c7f-4c7e-b106-4f50630f239e"
+  },
+  {
+    "name": "Can read/update Orders",
+    "icon": "badge",
+    "description": "Can read/update Orders",
     "ip_access": null,
     "enforce_tfa": false,
     "admin_access": false,
@@ -108,10 +132,30 @@
         "sort": 1
       },
       {
+        "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "sort": 4
+      },
+      {
         "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
         "sort": null
       }
     ],
     "_syncId": "6f608e61-452b-4541-9238-29afda529b5a"
+  },
+  {
+    "name": "All Collections (But orders)",
+    "icon": "badge",
+    "description": "Can add,edit,update all collections. ",
+    "ip_access": null,
+    "enforce_tfa": false,
+    "admin_access": false,
+    "app_access": false,
+    "roles": [
+      {
+        "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "sort": 2
+      }
+    ],
+    "_syncId": "7999253a-0983-441a-b38d-a33b1be4a846"
   }
 ]

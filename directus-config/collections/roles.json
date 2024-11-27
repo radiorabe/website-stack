@@ -7,6 +7,20 @@
     "_syncId": "_sync_default_admin_role"
   },
   {
+    "name": "Staff",
+    "icon": "supervised_user_circle",
+    "description": "Staff haben Zugriff auf alle Kollektionen und Pages.",
+    "parent": null,
+    "_syncId": "123b3d68-bb70-4bb6-a2a4-878cafccb852"
+  },
+  {
+    "name": "Webteam",
+    "icon": "admin_panel_settings",
+    "description": "Webteam hat Fast Admin Rechte.",
+    "parent": null,
+    "_syncId": "15af77a5-1b5a-457f-a28b-8fba79152719"
+  },
+  {
     "name": "Sendungsmachende",
     "icon": "supervised_user_circle",
     "description": "Sendungsmacher können Ihre Sendung und neue Beiträge erstellen. ",
