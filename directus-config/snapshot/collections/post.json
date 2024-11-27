@@ -14,7 +14,7 @@
     "icon": null,
     "item_duplication_fields": null,
     "note": null,
-    "preview_url": null,
+    "preview_url": "http://localhost:3000/api/draft?secret=23ejJWW-333EO-901kZYlW&id={{id}}",
     "singleton": false,
     "sort": 7,
     "sort_field": "sort",

@@ -306,14 +306,14 @@ type Subscription {
   orders_mutated(event: EventEnum): orders_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
-  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
-  post_files_mutated(event: EventEnum): post_files_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   post_mutated(event: EventEnum): post_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
+  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
+  post_files_mutated(event: EventEnum): post_files_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1749,11 +1749,19 @@ type events {
   date_updated: Date
   date_updated_func: datetime_functions
   title: String
+
+  """www.rabe.ch/events/slug"""
   slug: String
   content: JSON
   content_func: count_functions
   title_info: String
   title_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  color: String
+  promo_title: String
+  promo_text: String
+  promo_button_label: String
+  promo_button_url: String
+  promo_status: String
   shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows]
   shows_func: count_functions
   logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
@@ -2334,6 +2342,7 @@ type post_files {
   id: ID!
   post_id(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): post
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: Int
 }
 
 type post_files_mutated {
@@ -2405,6 +2414,7 @@ type posts_files_1 {
   id: ID!
   posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: Int
 }
 
 type posts_files_1_mutated {
@@ -2918,6 +2928,7 @@ input create_post_files_input {
   id: ID
   post_id: create_post_input
   directus_files_id: create_directus_files_input
+  sort: Int
 }
 
 input create_post_input {
@@ -2956,6 +2967,7 @@ input create_posts_files_1_input {
   id: ID
   posts_slug: create_posts_input
   directus_files_id: create_directus_files_input
+  sort: Int
 }
 
 input create_posts_input {
@@ -3563,6 +3575,12 @@ input events_filter {
   content_func: count_function_filter_operators
   title_info: string_filter_operators
   title_image: directus_files_filter
+  color: string_filter_operators
+  promo_title: string_filter_operators
+  promo_text: string_filter_operators
+  promo_button_label: string_filter_operators
+  promo_button_url: string_filter_operators
+  promo_status: string_filter_operators
   shows: events_event_shows_filter
   shows_func: count_function_filter_operators
   logos: events_files_filter
@@ -3876,6 +3894,7 @@ input post_files_filter {
   id: number_filter_operators
   post_id: post_filter
   directus_files_id: directus_files_filter
+  sort: number_filter_operators
   _and: [post_files_filter]
   _or: [post_files_filter]
 }
@@ -3930,6 +3949,7 @@ input posts_files_1_filter {
   id: number_filter_operators
   posts_slug: posts_filter
   directus_files_id: directus_files_filter
+  sort: number_filter_operators
   _and: [posts_files_1_filter]
   _or: [posts_files_1_filter]
 }
@@ -4420,6 +4440,7 @@ input update_post_files_input {
   id: ID
   post_id: update_post_input
   directus_files_id: update_directus_files_input
+  sort: Int
 }
 
 input update_post_input {
@@ -4458,6 +4479,7 @@ input update_posts_files_1_input {
   id: ID
   posts_slug: update_posts_input
   directus_files_id: update_directus_files_input
+  sort: Int
 }
 
 input update_posts_input {

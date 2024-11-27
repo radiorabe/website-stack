@@ -1,23 +1,29 @@
 {
   "collection": "events",
-  "field": "shows",
+  "field": "promobox",
   "type": "alias",
   "meta": {
     "collection": "events",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "shows",
+    "field": "promobox",
     "group": null,
     "hidden": false,
-    "interface": "list-m2m",
-    "note": null,
-    "options": null,
+    "interface": "group-detail",
+    "note": "Wenn die Promobox aktiviert ist. Wird sie ganz oben auf der RaBe Startseite erscheinen. ",
+    "options": {
+      "headerColor": "#E35169",
+      "headerIcon": "campaign",
+      "start": "closed"
+    },
     "readonly": false,
     "required": false,
-    "sort": 13,
+    "sort": 15,
     "special": [
-      "m2m"
+      "alias",
+      "no-data",
+      "group"
     ],
     "translations": null,
     "validation": null,

@@ -1,21 +1,35 @@
 {
-  "collection": "event_shows",
-  "field": "place",
+  "collection": "events",
+  "field": "promo_status",
   "type": "string",
   "meta": {
-    "collection": "event_shows",
+    "collection": "events",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "place",
-    "group": null,
+    "field": "promo_status",
+    "group": "promobox",
     "hidden": false,
-    "interface": "input",
+    "interface": "select-dropdown",
     "note": null,
-    "options": null,
+    "options": {
+      "choices": [
+        {
+          "color": "#A2B5CD",
+          "text": "inactive",
+          "value": "inactive"
+        },
+        {
+          "color": "#2ECDA7",
+          "text": "active",
+          "value": "active"
+        }
+      ],
+      "links": null
+    },
     "readonly": false,
     "required": false,
-    "sort": 12,
+    "sort": 1,
     "special": null,
     "translations": null,
     "validation": null,
@@ -23,10 +37,10 @@
     "width": "half"
   },
   "schema": {
-    "name": "place",
-    "table": "event_shows",
+    "name": "promo_status",
+    "table": "events",
     "data_type": "character varying",
-    "default_value": null,
+    "default_value": "inactive",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

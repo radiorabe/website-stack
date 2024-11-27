@@ -1,27 +1,30 @@
 {
   "collection": "events",
-  "field": "shows",
+  "field": "notice-zen1j9",
   "type": "alias",
   "meta": {
     "collection": "events",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "shows",
-    "group": null,
+    "field": "notice-zen1j9",
+    "group": "promobox",
     "hidden": false,
-    "interface": "list-m2m",
+    "interface": "presentation-notice",
     "note": null,
-    "options": null,
+    "options": {
+      "text": "Wenn die Promobox aktiviert ist. Wird sie ganz oben auf der RaBe Startseite erscheinen. "
+    },
     "readonly": false,
     "required": false,
-    "sort": 13,
+    "sort": 2,
     "special": [
-      "m2m"
+      "alias",
+      "no-data"
     ],
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   }
 }

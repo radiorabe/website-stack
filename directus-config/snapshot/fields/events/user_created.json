@@ -17,7 +17,7 @@
     },
     "readonly": true,
     "required": false,
-    "sort": 3,
+    "sort": 2,
     "special": [
       "user-created"
     ],

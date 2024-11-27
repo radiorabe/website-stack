@@ -143,18 +143,10 @@ type Query {
   events_by_id(id: ID!, version: String): events
   events_aggregated(groupBy: [String], filter: events_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_aggregated!]!
   events_by_version(version: String!, id: ID!): version_events
-  posts_files_1(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_files_1!]!
-  posts_files_1_by_id(id: ID!, version: String): posts_files_1
-  posts_files_1_aggregated(groupBy: [String], filter: posts_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_files_1_aggregated!]!
-  posts_files_1_by_version(version: String!, id: ID!): version_posts_files_1
   events_files(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files!]!
   events_files_by_id(id: ID!, version: String): events_files
   events_files_aggregated(groupBy: [String], filter: events_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_files_aggregated!]!
   events_files_by_version(version: String!, id: ID!): version_events_files
-  post_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files!]!
-  post_files_by_id(id: ID!, version: String): post_files
-  post_files_aggregated(groupBy: [String], filter: post_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_files_aggregated!]!
-  post_files_by_version(version: String!, id: ID!): version_post_files
   events_event_shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows!]!
   events_event_shows_by_id(id: ID!, version: String): events_event_shows
   events_event_shows_aggregated(groupBy: [String], filter: events_event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_event_shows_aggregated!]!
@@ -175,6 +167,14 @@ type Query {
   event_shows_by_id(id: ID!, version: String): event_shows
   event_shows_aggregated(groupBy: [String], filter: event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_shows_aggregated!]!
   event_shows_by_version(version: String!, id: ID!): version_event_shows
+  posts_files_1(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_files_1!]!
+  posts_files_1_by_id(id: ID!, version: String): posts_files_1
+  posts_files_1_aggregated(groupBy: [String], filter: posts_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_files_1_aggregated!]!
+  posts_files_1_by_version(version: String!, id: ID!): version_posts_files_1
+  post_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files!]!
+  post_files_by_id(id: ID!, version: String): post_files
+  post_files_aggregated(groupBy: [String], filter: post_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_files_aggregated!]!
+  post_files_by_version(version: String!, id: ID!): version_post_files
 }
 
 type Mutation {
@@ -240,12 +240,8 @@ type Mutation {
   create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
   create_events_items(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_input!]): [events!]!
   create_events_item(data: create_events_input!): events
-  create_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_files_1_input!]): [posts_files_1!]!
-  create_posts_files_1_item(data: create_posts_files_1_input!): posts_files_1
   create_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_files_input!]): [events_files!]!
   create_events_files_item(data: create_events_files_input!): events_files
-  create_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_files_input!]): [post_files!]!
-  create_post_files_item(data: create_post_files_input!): post_files
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
   create_events_event_shows_item(data: create_events_event_shows_input!): events_event_shows
   create_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_directus_users_input!]): [post_directus_users!]!
@@ -256,6 +252,10 @@ type Mutation {
   create_post_item(data: create_post_input!): post
   create_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_event_shows_input!]): [event_shows!]!
   create_event_shows_item(data: create_event_shows_input!): event_shows
+  create_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_files_1_input!]): [posts_files_1!]!
+  create_posts_files_1_item(data: create_posts_files_1_input!): posts_files_1
+  create_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_files_input!]): [post_files!]!
+  create_post_files_item(data: create_post_files_input!): post_files
   update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
   update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
   update_protocol_item(id: ID!, data: update_protocol_input!): protocol
@@ -359,15 +359,9 @@ type Mutation {
   update_events_items(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_input!): [events!]!
   update_events_batch(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_input!]): [events!]!
   update_events_item(id: ID!, data: update_events_input!): events
-  update_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_files_1_input!): [posts_files_1!]!
-  update_posts_files_1_batch(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_files_1_input!]): [posts_files_1!]!
-  update_posts_files_1_item(id: ID!, data: update_posts_files_1_input!): posts_files_1
   update_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_files_input!): [events_files!]!
   update_events_files_batch(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_files_input!]): [events_files!]!
   update_events_files_item(id: ID!, data: update_events_files_input!): events_files
-  update_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_files_input!): [post_files!]!
-  update_post_files_batch(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_files_input!]): [post_files!]!
-  update_post_files_item(id: ID!, data: update_post_files_input!): post_files
   update_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_event_shows_input!): [events_event_shows!]!
   update_events_event_shows_batch(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_event_shows_input!]): [events_event_shows!]!
   update_events_event_shows_item(id: ID!, data: update_events_event_shows_input!): events_event_shows
@@ -383,6 +377,12 @@ type Mutation {
   update_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_event_shows_input!): [event_shows!]!
   update_event_shows_batch(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_event_shows_input!]): [event_shows!]!
   update_event_shows_item(id: ID!, data: update_event_shows_input!): event_shows
+  update_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_files_1_input!): [posts_files_1!]!
+  update_posts_files_1_batch(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_files_1_input!]): [posts_files_1!]!
+  update_posts_files_1_item(id: ID!, data: update_posts_files_1_input!): posts_files_1
+  update_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_files_input!): [post_files!]!
+  update_post_files_batch(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_files_input!]): [post_files!]!
+  update_post_files_item(id: ID!, data: update_post_files_input!): post_files
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -445,12 +445,8 @@ type Mutation {
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_events_items(ids: [ID]!): delete_many
   delete_events_item(id: ID!): delete_one
-  delete_posts_files_1_items(ids: [ID]!): delete_many
-  delete_posts_files_1_item(id: ID!): delete_one
   delete_events_files_items(ids: [ID]!): delete_many
   delete_events_files_item(id: ID!): delete_one
-  delete_post_files_items(ids: [ID]!): delete_many
-  delete_post_files_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
   delete_events_event_shows_item(id: ID!): delete_one
   delete_post_directus_users_items(ids: [ID]!): delete_many
@@ -461,6 +457,10 @@ type Mutation {
   delete_post_item(id: ID!): delete_one
   delete_event_shows_items(ids: [ID]!): delete_many
   delete_event_shows_item(id: ID!): delete_one
+  delete_posts_files_1_items(ids: [ID]!): delete_many
+  delete_posts_files_1_item(id: ID!): delete_one
+  delete_post_files_items(ids: [ID]!): delete_many
+  delete_post_files_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -526,14 +526,14 @@ type Subscription {
   orders_mutated(event: EventEnum): orders_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
-  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
-  post_files_mutated(event: EventEnum): post_files_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   post_mutated(event: EventEnum): post_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
+  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
+  post_files_mutated(event: EventEnum): post_files_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1314,11 +1314,19 @@ type events {
   date_updated: Date
   date_updated_func: datetime_functions
   title: String
+
+  """www.rabe.ch/events/slug"""
   slug: String
   content: JSON
   content_func: count_functions
   title_info: String
   title_image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  color: String
+  promo_title: String
+  promo_text: String
+  promo_button_label: String
+  promo_button_url: String
+  promo_status: String
   shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows]
   shows_func: count_functions
   logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
@@ -1346,10 +1354,18 @@ type events_aggregated_count {
   user_updated: Int
   date_updated: Int
   title: Int
+
+  """www.rabe.ch/events/slug"""
   slug: Int
   content: Int
   title_info: Int
   title_image: Int
+  color: Int
+  promo_title: Int
+  promo_text: Int
+  promo_button_label: Int
+  promo_button_url: Int
+  promo_status: Int
   shows: Int
   logos: Int
 }
@@ -2573,6 +2589,7 @@ type post_files {
   id: ID!
   post_id(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): post
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: Int
 }
 
 type post_files_aggregated {
@@ -2592,11 +2609,13 @@ type post_files_aggregated_count {
   id: Int
   post_id: Int
   directus_files_id: Int
+  sort: Int
 }
 
 type post_files_aggregated_fields {
   id: Float
   post_id: Float
+  sort: Float
 }
 
 type post_files_mutated {
@@ -2745,6 +2764,7 @@ type posts_files_1 {
   id: ID!
   posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: Int
 }
 
 type posts_files_1_aggregated {
@@ -2764,10 +2784,12 @@ type posts_files_1_aggregated_count {
   id: Int
   posts_slug: Int
   directus_files_id: Int
+  sort: Int
 }
 
 type posts_files_1_aggregated_fields {
   id: Float
+  sort: Float
 }
 
 type posts_files_1_mutated {
@@ -3061,10 +3083,18 @@ type version_events {
   user_updated: JSON
   date_updated: Date
   title: String
+
+  """www.rabe.ch/events/slug"""
   slug: String
   content: JSON
   title_info: String
   title_image: JSON
+  color: String
+  promo_title: String
+  promo_text: String
+  promo_button_label: String
+  promo_button_url: String
+  promo_status: String
   shows: JSON
   logos: JSON
 }
@@ -3420,6 +3450,7 @@ type version_post_files {
   id: ID
   post_id: JSON
   directus_files_id: JSON
+  sort: Int
 }
 
 """"""
@@ -3464,6 +3495,7 @@ type version_posts_files_1 {
   id: ID
   posts_slug: JSON
   directus_files_id: JSON
+  sort: Int
 }
 
 """"""
@@ -3723,10 +3755,18 @@ input create_events_input {
   user_updated: create_directus_users_input
   date_updated: Date
   title: String
+
+  """www.rabe.ch/events/slug"""
   slug: String
   content: JSON
   title_info: String
   title_image: create_directus_files_input
+  color: String
+  promo_title: String
+  promo_text: String
+  promo_button_label: String
+  promo_button_url: String
+  promo_status: String
   shows: [create_events_event_shows_input]
   logos: [create_events_files_input]
 }
@@ -3988,6 +4028,7 @@ input create_post_files_input {
   id: ID
   post_id: create_post_input
   directus_files_id: create_directus_files_input
+  sort: Int
 }
 
 input create_post_input {
@@ -4026,6 +4067,7 @@ input create_posts_files_1_input {
   id: ID
   posts_slug: create_posts_input
   directus_files_id: create_directus_files_input
+  sort: Int
 }
 
 input create_posts_input {
@@ -4479,6 +4521,12 @@ input events_filter {
   content_func: count_function_filter_operators
   title_info: string_filter_operators
   title_image: directus_files_filter
+  color: string_filter_operators
+  promo_title: string_filter_operators
+  promo_text: string_filter_operators
+  promo_button_label: string_filter_operators
+  promo_button_url: string_filter_operators
+  promo_status: string_filter_operators
   shows: events_event_shows_filter
   shows_func: count_function_filter_operators
   logos: events_files_filter
@@ -4867,6 +4915,7 @@ input post_files_filter {
   id: number_filter_operators
   post_id: post_filter
   directus_files_id: directus_files_filter
+  sort: number_filter_operators
   _and: [post_files_filter]
   _or: [post_files_filter]
 }
@@ -4921,6 +4970,7 @@ input posts_files_1_filter {
   id: number_filter_operators
   posts_slug: posts_filter
   directus_files_id: directus_files_filter
+  sort: number_filter_operators
   _and: [posts_files_1_filter]
   _or: [posts_files_1_filter]
 }
@@ -5218,10 +5268,18 @@ input update_events_input {
   user_updated: update_directus_users_input
   date_updated: Date
   title: String
+
+  """www.rabe.ch/events/slug"""
   slug: String
   content: JSON
   title_info: String
   title_image: update_directus_files_input
+  color: String
+  promo_title: String
+  promo_text: String
+  promo_button_label: String
+  promo_button_url: String
+  promo_status: String
   shows: [update_events_event_shows_input]
   logos: [update_events_files_input]
 }
@@ -5511,6 +5569,7 @@ input update_post_files_input {
   id: ID
   post_id: update_post_input
   directus_files_id: update_directus_files_input
+  sort: Int
 }
 
 input update_post_input {
@@ -5549,6 +5608,7 @@ input update_posts_files_1_input {
   id: ID
   posts_slug: update_posts_input
   directus_files_id: update_directus_files_input
+  sort: Int
 }
 
 input update_posts_input {

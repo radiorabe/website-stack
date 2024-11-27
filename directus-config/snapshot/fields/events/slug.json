@@ -11,18 +11,18 @@
     "group": null,
     "hidden": false,
     "interface": "input",
-    "note": null,
+    "note": "www.rabe.ch/events/slug",
     "options": {
       "slug": true
     },
     "readonly": false,
     "required": false,
-    "sort": 10,
+    "sort": 9,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
     "name": "slug",
