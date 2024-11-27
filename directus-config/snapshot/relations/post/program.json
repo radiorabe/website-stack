@@ -20,6 +20,6 @@
     "foreign_key_column": "slug",
     "constraint_name": "post_program_foreign",
     "on_update": "NO ACTION",
-    "on_delete": "SET NULL"
+    "on_delete": "NO ACTION"
   }
 }

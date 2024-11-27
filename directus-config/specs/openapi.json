@@ -31041,7 +31041,7 @@
             "type": "string"
           },
           "program": {
-            "nullable": true,
+            "nullable": false,
             "oneOf": [
               {
                 "type": "string"

@@ -2,7 +2,7 @@
   {
     "project_name": "RaBe",
     "project_color": "#00635F",
-    "public_note": null,
+    "public_note": "RaBe Website Data",
     "auth_login_attempts": 25,
     "auth_password_policy": null,
     "storage_asset_transform": "all",
@@ -12,7 +12,7 @@
     "basemaps": null,
     "mapbox_key": null,
     "module_bar": null,
-    "project_descriptor": null,
+    "project_descriptor": "Website Data",
     "default_language": "de-DE",
     "custom_aspect_ratios": null,
     "default_appearance": "auto",
