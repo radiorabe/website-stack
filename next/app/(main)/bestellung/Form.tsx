@@ -122,9 +122,9 @@ export default function Statement({ id, type }) {
           }}
         >
           <iframe
-            onLoad={(loadData) => {
-              console.log("loadData", loadData);
-            }}
+            // onLoad={(loadData) => {
+            //   console.log("loadData", loadData);
+            // }}
             style={{ border: 0 }}
             src={saferpayUrl}
             // sandbox=""

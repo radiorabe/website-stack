@@ -1,5 +1,6 @@
 import { Api } from "@/lib/api";
 import {
+  ItemsIframe,
   ItemsImageBox,
   ItemsInfoBox,
   ItemsPostEditorNodes,
@@ -12,7 +13,6 @@ import {
   TipTapRender,
   TipTapRenderHandlers,
 } from "@wokaylabs/tiptap-react-render";
-import { notFound } from "next/navigation";
 import React from "react";
 import InfoBox from "./InfoBox";
 import Quote from "./Quote";
@@ -20,6 +20,7 @@ import { logError } from "@/lib/loging";
 import ImageBox from "../ImageBox";
 import Colors from "@/lib/Colors";
 import Link from "./Link";
+import Iframe from "./Iframe";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library
@@ -45,7 +46,6 @@ async function getInfoBox(id) {
     return item;
   } catch (error) {
     logError(error);
-    notFound();
   }
 }
 
@@ -69,7 +69,6 @@ async function getImageBox(id) {
     return item;
   } catch (error) {
     logError(error);
-    notFound();
   }
 }
 
@@ -93,7 +92,29 @@ async function getQuote(id) {
     return item;
   } catch (error) {
     logError(error);
-    notFound();
+  }
+}
+
+async function getIframe(id) {
+  try {
+    const itemResponse = await Api.readSingleItemsIframe(
+      {
+        id: id,
+        fields: ["*"],
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    let item: ItemsIframe = itemResponse.data.data;
+    return item;
+  } catch (error) {
+    logError(error);
   }
 }
 
@@ -117,7 +138,6 @@ async function getNodes(id, readNodes) {
     return item;
   } catch (error) {
     logError(error);
-    notFound();
   }
 }
 
@@ -257,25 +277,30 @@ const nodeHandlers: TipTapNodeHandlers = {
   blockquote: (props) => <blockquote>{props.children}</blockquote>,
   "relation-block": async (props) => {
     // console.log("relationBlock", props);
-    console.log("junction", props.node.attrs.junction);
+    // console.log("junction", props.node.attrs.junction);
 
     const ApiMapper = {
       page_receive_nodes: Api.readSingleItemsPageReceiveNodes,
       post_editor_nodes: Api.readSingleItemsPostEditorNodes,
       page_history_nodes: Api.readSingleItemsPageHistoryNodes,
+      events_editor_nodes: Api.readSingleItemsEventsEditorNodes,
     };
     if (ApiMapper[props.node.attrs.junction]) {
       let node = await getNodes(
         props.node.attrs.id,
         ApiMapper[props.node.attrs.junction]
       );
-      console.log("collection", props.node.attrs.collection);
+      // console.log("collection", props.node.attrs.collection);
 
       if (props.node.attrs.collection === "quote") {
         let quote = await getQuote(node.item);
         // console.log("quote", quote);
 
         return <Quote data={quote}></Quote>;
+      }
+      if (props.node.attrs.collection === "iframe") {
+        let iframe = await getIframe(node.item);
+        return <Iframe data={iframe.code}></Iframe>;
       }
       if (props.node.attrs.collection === "info_box") {
         // console.log("info_box");
@@ -286,7 +311,7 @@ const nodeHandlers: TipTapNodeHandlers = {
       if (props.node.attrs.collection === "image_box") {
         // console.log("info_box");
         let imageBoxData = await getImageBox(node.item);
-        console.log("imageBoxData", imageBoxData);
+        // console.log("imageBoxData", imageBoxData);
         return (
           <ImageBox
             imageId={imageBoxData.image as string}
