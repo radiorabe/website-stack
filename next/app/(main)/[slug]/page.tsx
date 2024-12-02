@@ -18,15 +18,19 @@ import ButtonFull from "@/components/ButtonFull";
 import MemberInfo from "@/components/MemberInfo";
 import PostPreview from "@/components/PostPreview";
 import { logError } from "@/lib/loging";
+import Heart from "./Heart";
+import moment from "moment";
+import { Show } from "@/lib/Types";
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1280,
+    width: "100%",
     alignItems: "center",
     alignSelf: "center",
   },
   imageContainer: {
     width: "100%",
+    height: "75vH",
   },
   imageOverlayContainer: {
     position: "absolute",
@@ -86,6 +90,44 @@ async function getSendung(slug) {
   }
 }
 
+export async function getNextShowForProgram(slug) {
+  try {
+    return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
+      next: {
+        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+      },
+      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+    })
+      .then((response: any) => response.json())
+      .then((liveData: any) => {
+        console.log("liveData", liveData);
+        // console.log("liveDataEnd");
+        let nowPlaying = false;
+
+        let currentShow: Show = liveData.shows.current;
+        if (currentShow && currentShow.url && currentShow.url.includes(slug)) {
+          nowPlaying = true;
+        }
+
+        const nextShows = [];
+        for (const show of liveData.shows.next) {
+          if (show && show.url && show.url.includes(slug)) nextShows.push(show);
+          if (nextShows.length === 3) break;
+        }
+
+        return { nowPlaying, nextShows };
+      })
+      .catch((error) => {
+        console.log("error", error);
+
+        return { nowPlaying: false, nextShows: [] };
+      });
+  } catch (error) {
+    logError(error);
+    return { nowPlaying: false, nextShows: [] };
+  }
+}
+
 async function getPosts(slug) {
   try {
     const itemResponse = await Api.readItemsPost(
@@ -127,135 +169,165 @@ async function getPosts(slug) {
 export default async function DynamicPage({ params }) {
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
-  return (
-    <View>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${sendung.image}?width=1280&height=600&fit=cover`}
-            width={1280}
-            height={600}
-            style={styles.image}
-            layout="responsive"
-            alt={sendung.name}
-            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+  const { nowPlaying, nextShows } = await getNextShowForProgram("der-morgen");
+  let nextShowTitle = nowPlaying
+    ? "Jetzt Live"
+    : nextShows.length > 0
+      ? moment(nextShows[0].starts).calendar()
+      : "";
+  console.log("nextShows", nextShows);
 
-          <View style={styles.imageOverlayContainer}>
-            <View style={{}}>
-              <Text style={[styles.title]}>{sendung.name}</Text>
-              <View style={{ paddingBottom: Metrics.doubleBaseMargin }}>
-                <Text style={styles.sendungsInfo}>{"Sendung supporten"}</Text>
-              </View>
-              <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
-                <Text style={styles.sendungsInfo}>{"Nächste Sendung"}</Text>
-                <Text style={styles.sendungsInfo}>{"Heute um 20:00"}</Text>
-              </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${sendung.image}?width=1280&height=600&fit=cover`}
+          fill
+          objectFit="cover"
+          alt={sendung.name}
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0,
+            background: `linear-gradient(0deg, black, transparent)`,
+            opacity: 0.4,
+          }}
+        ></View>
+
+        <View style={styles.imageOverlayContainer}>
+          <View style={{}}>
+            <Text style={[styles.title]}>{sendung.name}</Text>
+            <View
+              style={{
+                paddingBottom: Metrics.doubleBaseMargin,
+                alignItems: "center",
+              }}
+            >
+              <ButtonFull
+                href={"/bestellung"}
+                label={"Sendung supporten"}
+                // large
+                icon={<Heart></Heart>}
+                textColor={Colors.black}
+                backgroundColor={Colors.white}
+              />
+            </View>
+            <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
+              <Text style={styles.sendungsInfo}>{"Nächste Sendung"}</Text>
+              <Text style={styles.sendungsInfo}>{nextShowTitle}</Text>
             </View>
           </View>
         </View>
+      </View>
 
-        <View
-          style={{ width: "75%", paddingVertical: Metrics.tripleBaseMargin }}
-        >
-          <Text style={{ ...Fonts.style.text }}>{sendung.description}</Text>
-          <View style={{ height: Metrics.tripleBaseMargin }}></View>
-          <Text style={{ ...Fonts.style.h2 }}>
-            {`Das ${sendung.name} Team`}
-          </Text>
-          <View
-            style={{
-              paddingTop: Metrics.doubleBaseMargin,
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-          >
-            {sendung.team.map((item: ItemsProgramsDirectusUsers, index) => {
-              let user: Users = item.directus_users_id as Users;
-              return <MemberInfo user={user}></MemberInfo>;
-            })}
-          </View>
-          <View style={{ height: Metrics.tripleBaseMargin }}></View>
-          {/* <Text
-            style={{
-              ...Fonts.style.h2,
-              paddingBottom: Metrics.doubleBaseMargin,
-            }}
-          >
-            {"Nächste Sendung"}
-          </Text>
-          <Text style={{ ...Fonts.style.text }}>
-            {"Sonntag, 31. März 2024, 20:00"}
-          </Text>
-          <Text style={{ ...Fonts.style.text }}>
-            {"Montag, 01. April 2024, 19:00"}
-          </Text>
-          <Text style={{ ...Fonts.style.text }}>
-            {"Montag, 22. April 2024, 20:00"}
-          </Text>
-          <View
-            style={{
-              height: Metrics.tripleBaseMargin,
-            }}
-          ></View> */}
-          <View
-            style={{
-              borderBlockColor: Colors.black,
-              borderRadius: 9,
-              borderWidth: 1,
-              alignSelf: "flex-start",
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: 3,
-              paddingHorizontal: 6,
-            }}
-          >
-            <IconShare color={Colors.darkGreen}></IconShare>
+      <View
+        style={{
+          width: "74vw",
+          paddingVertical: Metrics.tripleBaseMargin,
+        }}
+      >
+        <Text style={{ ...Fonts.style.text }}>{sendung.description}</Text>
+        <View style={{ height: Metrics.tripleBaseMargin }}></View>
+        {sendung.team && sendung.team.length > 0 && (
+          <View style={{ marginBottom: Metrics.tripleBaseMargin }}>
             <Text
+              style={{ ...Fonts.style.h2 }}
+            >{`Das ${sendung.name} Team`}</Text>
+            <View
               style={{
-                ...Fonts.style.textLink,
-                flexShrink: 1,
-                paddingLeft: 6,
+                paddingTop: Metrics.doubleBaseMargin,
+                flexDirection: "row",
+                flexWrap: "wrap",
               }}
             >
-              {"Teilen"}
-            </Text>
+              {sendung.team.map((item: ItemsProgramsDirectusUsers, index) => {
+                let user: Users = item.directus_users_id as Users;
+                return <MemberInfo user={user}></MemberInfo>;
+              })}
+            </View>
           </View>
-          <View
-            style={{
-              height: Metrics.tripleBaseMargin,
-            }}
-          ></View>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
+        )}
+        {nextShows.length > 0 && (
+          <View>
             <Text
-              style={[
-                { ...Fonts.style.h2, marginBottom: Metrics.doubleBaseMargin },
-              ]}
+              style={{
+                ...Fonts.style.h2,
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
             >
-              {"Letzte Beiträge von " + sendung.name}
+              {"Nächste Sendung"}
             </Text>
-
-            <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              // justifyContent: "space-between",
-            }}
-          >
-            {posts.map((item, index) => {
+            {nextShows.map((show, index) => {
               return (
-                <PostPreview
-                  key={"post" + index}
-                  data={item}
-                  index={index}
-                ></PostPreview>
+                <Text key={index + "sendung"} style={{ ...Fonts.style.text }}>
+                  {moment(show.starts).format("LLLL")}
+                </Text>
               );
             })}
+            <View
+              style={{
+                height: Metrics.tripleBaseMargin,
+              }}
+            ></View>
           </View>
+        )}
+        <View
+          style={{
+            borderBlockColor: Colors.black,
+            borderRadius: 9,
+            borderWidth: 1,
+            alignSelf: "flex-start",
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 3,
+            paddingHorizontal: 6,
+          }}
+        >
+          <IconShare color={Colors.darkGreen}></IconShare>
+          <Text
+            style={{
+              ...Fonts.style.textLink,
+              flexShrink: 1,
+              paddingLeft: 6,
+            }}
+          >
+            {"Teilen"}
+          </Text>
+        </View>
+      </View>
+      <View style={{ width: "90vw" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text
+            style={[
+              { ...Fonts.style.h2, marginBottom: Metrics.doubleBaseMargin },
+            ]}
+          >
+            {"Letzte Beiträge von " + sendung.name}
+          </Text>
+
+          <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            // justifyContent: "space-between",
+          }}
+        >
+          {posts.map((item, index) => {
+            return (
+              <PostPreview
+                key={"post" + index}
+                data={item}
+                index={index}
+              ></PostPreview>
+            );
+          })}
         </View>
       </View>
     </View>
