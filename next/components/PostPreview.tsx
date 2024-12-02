@@ -180,7 +180,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
       style={{
         width: "30%",
         paddingLeft: index % 3 ? "5%" : 0,
-        marginBottom: Metrics.doubleBaseMargin,
+        marginTop: index >= 3 ? "4vw" : 0,
       }}
     >
       <Link

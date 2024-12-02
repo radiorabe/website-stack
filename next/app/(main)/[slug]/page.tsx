@@ -318,7 +318,7 @@ export default async function DynamicPage({ params }) {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            // justifyContent: "space-between",
+            marginBottom: Metrics.tripleBaseMargin,
           }}
         >
           {posts.map((item, index) => {

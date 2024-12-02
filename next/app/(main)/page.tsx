@@ -290,6 +290,7 @@ export default async function HomePage(props) {
                       flexDirection: "row",
                       justifyContent: "flex-start",
                       alignItems: "center",
+                      paddingBottom: Metrics.baseMargin,
                     }}
                   >
                     {partyLocation && partyLocation.logo && (
