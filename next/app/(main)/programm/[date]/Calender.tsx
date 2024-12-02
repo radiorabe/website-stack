@@ -1,25 +1,11 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
+import HoverText from "@/components/HoverText";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import moment from "moment";
-import { useState } from "react";
-import HoverText from "@/components/HoverText";
-
-export interface Show {
-  name: string;
-  description: string;
-  genre: string;
-  id: number;
-  instance_id: number;
-  record: number;
-  url: string;
-  image_path: string;
-  starts: string;
-  ends: string;
-}
 
 const { styles } = StyleSheet.create({
   container: {

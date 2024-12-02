@@ -5,12 +5,6 @@ import { Text, View } from "@/lib/server-react-native";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
-
 export interface Props {
   imageId: string;
   title?: string;

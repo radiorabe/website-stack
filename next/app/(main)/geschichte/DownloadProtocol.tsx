@@ -1,7 +1,6 @@
 "use client";
 import IconDownload from "@/assets/svg/IconDownload";
-import { PressableState } from "@/components/AudioRabePlayer";
-import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
+import { PressableState } from "@/lib/Types";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";

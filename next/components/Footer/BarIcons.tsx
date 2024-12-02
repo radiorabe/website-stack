@@ -9,12 +9,7 @@ import IconInsta from "./IconInsta";
 import IconSpotify from "./IconSpotify";
 import IconStream from "./IconStream";
 import IconYoutube from "./IconYoutube";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { PressableState } from "@/lib/Types";
 
 export interface HoverableProps {}
 

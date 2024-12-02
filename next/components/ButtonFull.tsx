@@ -11,12 +11,7 @@ import {
   View,
   Linking,
 } from "@/lib/server-react-native";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { PressableState } from "@/lib/Types";
 
 export interface HoverableProps {
   url?: string;
@@ -27,6 +22,8 @@ export interface HoverableProps {
   large?: boolean;
   backgroundColor?: any;
   backgroundHoverColor?: any;
+  textColor?: any;
+  hoverTextColor?: any;
 }
 
 const ButtonFull = ({
@@ -38,6 +35,8 @@ const ButtonFull = ({
   large,
   backgroundColor,
   backgroundHoverColor,
+  textColor,
+  hoverTextColor,
 }: HoverableProps) => {
   const button = (
     <Pressable
@@ -74,10 +73,13 @@ const ButtonFull = ({
                 {
                   ...Fonts.style.textLink,
                   flexShrink: 1,
-                  color: Colors.white,
+                  color: textColor ? textColor : Colors.white,
                 },
                 large && { ...Fonts.style.h2 },
                 icon && { paddingLeft: 6 },
+                hovered && {
+                  color: hoverTextColor ? hoverTextColor : Colors.white,
+                },
               ]}
             >
               {label}

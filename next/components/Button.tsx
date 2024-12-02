@@ -2,14 +2,9 @@
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import { PressableState } from "@/lib/Types";
 import Link from "next/link";
 import { ReactElement } from "react";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
 
 export interface HoverableProps {
   url?: string;

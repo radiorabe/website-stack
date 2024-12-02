@@ -6,6 +6,7 @@ import * as React from "react";
 import { ReactElement, SVGProps } from "react";
 import { Linking, Pressable } from "react-native";
 import { useRouter } from "next/navigation";
+import { PressableState } from "@/lib/Types";
 
 const SvgComponent = ({ color, hoverColor, href, style }) => {
   const router = useRouter();

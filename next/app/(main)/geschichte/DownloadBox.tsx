@@ -1,5 +1,5 @@
 "use client";
-import { PressableState } from "@/components/AudioRabePlayer";
+import { PressableState } from "@/lib/Types";
 import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";

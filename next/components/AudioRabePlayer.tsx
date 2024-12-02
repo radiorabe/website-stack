@@ -10,16 +10,11 @@ import { View, Pressable } from "@/lib/server-react-native";
 import Loader from "react-spinners/BounceLoader";
 import dynamic from "next/dynamic";
 import Metrics from "@/lib/Metrics";
+import { PressableState } from "@/lib/Types";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
 });
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
 
 export interface HoverableProps {}
 

@@ -8,12 +8,6 @@ import HoverUrl from "../HoverUrl";
 import LinkComponent from "../LinkComponent";
 import StyleSheet from "react-native-media-query";
 
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
-
 const { ids, styles } = StyleSheet.create({
   hoverText: {
     ...Fonts.style.footer,

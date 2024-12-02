@@ -19,12 +19,7 @@ import React, {
 import { View, Text, Pressable } from "@/lib/server-react-native";
 
 import Loader from "react-spinners/BounceLoader";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { PressableState } from "@/lib/Types";
 
 export interface HoverableProps {
   src: string;

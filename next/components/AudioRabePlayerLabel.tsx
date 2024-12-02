@@ -7,12 +7,6 @@ import { useAnimate } from "framer-motion";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
 
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
-
 export interface HoverableProps {}
 
 const AudioRabePlayerLabel = ({}: HoverableProps) => {

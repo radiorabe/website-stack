@@ -2,26 +2,19 @@
 import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-import { useClickOutside } from "@/lib/useClickOutside";
-import { usePathname, useRouter } from "next/navigation";
-import { ReactElement, useEffect, useRef, useState } from "react";
 import IconArrowDown from "@/assets/svg/IconArrowDown";
-import IconArrowUp from "@/assets/svg/IconArrowUp";
+import NavRabe from "@/assets/svg/NavRabe";
+import NavRabeMediumText from "@/assets/svg/NavRabeMediumText";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
+import { useClickOutside } from "@/lib/useClickOutside";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { ReactElement, useRef, useState } from "react";
 import AudioRabePlayer from "./AudioRabePlayer";
 import LinkComponent from "./LinkComponent";
-import NavRabe from "@/assets/svg/NavRabe";
-import Link from "next/link";
-import NavRabeLargeText from "@/assets/svg/NavRabeLargeText";
-import NavRabeMediumText from "@/assets/svg/NavRabeMediumText";
-import NavRabeSmallText from "@/assets/svg/NavRabeSmallText";
-export type PressableState = Readonly<{
-  pressed?: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { PressableState } from "@/lib/Types";
 
 const { ids, styles } = StyleSheet.create({
   container: {

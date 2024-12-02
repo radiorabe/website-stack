@@ -1,12 +1,7 @@
 "use client";
 import React, { ReactElement } from "react";
 import { Linking, Pressable } from "@/lib/server-react-native";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { PressableState } from "@/lib/Types";
 
 export interface HoverableProps {
   color?: any;

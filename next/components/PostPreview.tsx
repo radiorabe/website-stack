@@ -10,12 +10,6 @@ import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
 
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
-
 const { ids, styles } = StyleSheet.create({
   border: {
     borderBlockColor: Colors.black,

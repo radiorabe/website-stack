@@ -1,13 +1,8 @@
 "use client";
-import IconDownload from "@/assets/svg/IconDownload";
-import { PressableState } from "@/components/AudioRabePlayer";
-import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
-import Colors from "@/lib/Colors";
-import Fonts from "@/lib/Fonts";
-import Metrics from "@/lib/Metrics";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
-import { ReactElement } from "react";
+import { PressableState } from "@/lib/Types";
+import { Linking, Pressable, View } from "@/lib/server-react-native";
 import Image from "next/image";
+import { ReactElement } from "react";
 
 export interface Props {
   label: string;

@@ -1,13 +1,9 @@
 "use client";
-import { PressableState } from "@/components/AudioRabePlayer";
-import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
+import Playbutton from "@/assets/svg/Playbutton";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
-import { ReactElement } from "react";
-import DownloadIcon from "./DownloadIcon";
-import Playbutton from "@/assets/svg/Playbutton";
+import { Text, View } from "@/lib/server-react-native";
 
 export interface Props {
   audioFiles: any[];

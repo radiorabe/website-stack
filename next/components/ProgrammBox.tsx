@@ -1,20 +1,9 @@
-"use client";
-import IconShare from "@/assets/svg/IconShare";
-import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import Link from "next/link";
-import React, { ReactElement } from "react";
-import {
-  Text,
-  Pressable,
-  TextStyle,
-  View,
-  Linking,
-} from "@/lib/server-react-native";
+import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
+import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
 import HoverText from "./HoverText";
-import { logError } from "@/lib/loging";
 
 export async function getLiveData() {
   try {

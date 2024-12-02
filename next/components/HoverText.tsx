@@ -1,20 +1,14 @@
 "use client";
+import { Pressable, Text } from "@/lib/server-react-native";
+import { PressableState } from "@/lib/Types";
 import Link from "next/link";
-import React, { ReactElement } from "react";
-import { Text, Pressable } from "@/lib/server-react-native";
-import TextStyle from "react-native-media-query";
-
-export type PressableState = Readonly<{
-  pressed: boolean;
-  hovered?: boolean;
-  focused?: boolean;
-}>;
+import { ReactElement } from "react";
 
 export interface HoverableProps {
-  style?: TextStyle;
-  hoverStyle?: TextStyle;
-  pressStyle?: TextStyle;
-  focusStyle?: TextStyle;
+  style?: any;
+  hoverStyle?: any;
+  pressStyle?: any;
+  focusStyle?: any;
   href?: string;
   children?: any;
   numberOfLines?: number;

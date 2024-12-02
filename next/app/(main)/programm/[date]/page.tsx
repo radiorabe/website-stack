@@ -1,35 +1,20 @@
-import { Pressable, Text, View } from "@/lib/server-react-native";
+import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-import HoverText from "@/components/HoverText";
+import ButtonFull from "@/components/ButtonFull";
+import ProgramBox from "@/components/ProgrammBox";
+import { Api } from "@/lib/api";
+import { ItemsPageProgram } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
+import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
 import moment from "moment";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Calender from "./Calender";
 import Arrow from "./Arrow";
-import ButtonFull from "@/components/ButtonFull";
-import { ReactElement } from "react";
-import HoverUrlIcon from "@/components/HoverUrlIcon";
-import { logError } from "@/lib/loging";
-import { Api } from "@/lib/api";
-import { ItemsPageProgram } from "@/lib/api/data-contracts";
-import ProgramBox from "@/components/ProgrammBox";
-
-export interface Show {
-  name: string;
-  description: string;
-  genre: string;
-  id: number;
-  instance_id: number;
-  record: number;
-  url: string;
-  image_path: string;
-  starts: string;
-  ends: string;
-}
+import Calender from "./Calender";
+import { Show } from "@/lib/Types";
 
 const { styles } = StyleSheet.create({
   container: {
