@@ -2473,6 +2473,17 @@ export interface ReadSingleItemsStatementsData {
   data?: ItemsStatements;
 }
 
+export type CreateItemsOrdersPayload = ItemsOrders[] | ItemsOrders;
+
+export interface CreateItemsOrdersParams {
+  /** What metadata to return in the response. */
+  meta?: string;
+}
+
+export interface CreateItemsOrdersData {
+  data?: ItemsOrders[];
+}
+
 export interface ReadItemsOrdersParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];

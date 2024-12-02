@@ -25,9 +25,9 @@ async function getOrder(id) {
 }
 
 export default async function DankePage({ searchParams }) {
-  console.log("searchParams", searchParams);
+  // console.log("searchParams", searchParams);
 
-  console.log("id", searchParams.id);
+  // console.log("id", searchParams.id);
 
   if (!searchParams.id || searchParams.id === "") {
     return null;
@@ -35,7 +35,7 @@ export default async function DankePage({ searchParams }) {
 
   const order = await getOrder(searchParams.id);
 
-  console.log("order", order);
+  // console.log("order", order);
 
   return (
     <div
@@ -43,11 +43,15 @@ export default async function DankePage({ searchParams }) {
         display: "flex",
         flexDirection: "column",
         width: "100%",
+        height: "60vh",
         paddingTop: Metrics.tripleBaseMargin,
         paddingBottom: Metrics.tripleBaseMargin,
+        alignItems: "center",
       }}
     >
-      <div>{"thank you for your order: " + JSON.stringify(order)}</div>
+      <div>{"Danke für deine Bestellung"}</div>
+      <div>{order.name}</div>
+      <div>{"Status: " + order.status}</div>
     </div>
   );
 }

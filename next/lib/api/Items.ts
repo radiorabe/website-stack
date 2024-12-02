@@ -10,6 +10,9 @@
  */
 
 import {
+  CreateItemsOrdersData,
+  CreateItemsOrdersParams,
+  CreateItemsOrdersPayload,
   ItemsOrders,
   ReadItemsContactAddressData,
   ReadItemsContactAddressParams,
@@ -3261,6 +3264,43 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       path: `/items/statements/${id}`,
       method: "GET",
       query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Create a new orders item.
+ *
+ * @tags Items, ItemsOrders
+ * @name CreateItemsOrders
+ * @summary Create an Item
+ * @request POST:/items/orders
+ * @response `200` `CreateItemsOrdersData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  createItemsOrders = (query: CreateItemsOrdersParams, data: CreateItemsOrdersPayload, params: RequestParams = {}) =>
+    this.request<
+      CreateItemsOrdersData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/orders`,
+      method: "POST",
+      query: query,
+      body: data,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });

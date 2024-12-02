@@ -211,7 +211,10 @@ export default async function DynamicPage({ params }) {
               }}
             >
               <ButtonFull
-                href={"/bestellung"}
+                href={{
+                  pathname: "/bestellung",
+                  query: { slug: sendung.slug },
+                }}
                 label={"Sendung supporten"}
                 // large
                 icon={<Heart></Heart>}

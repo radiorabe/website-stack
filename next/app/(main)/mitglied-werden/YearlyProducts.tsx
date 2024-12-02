@@ -10,7 +10,7 @@ import RadioButton from "./RadioButton";
 
 export default function YearlyProduct(props) {
   const { memberProducts } = props;
-  const [selectedProduct, setSelectedProduct] = useState();
+  const [selectedProduct, setSelectedProduct] = useState(memberProducts[0].id);
 
   return (
     <div
@@ -55,6 +55,7 @@ export default function YearlyProduct(props) {
           label={"Mitglied werden"}
           color={Colors.white}
           hoverColor={Colors.green}
+          disabled={selectedProduct === ""}
           href={{
             pathname: "/bestellung",
             query: { id: selectedProduct },

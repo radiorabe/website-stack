@@ -23,6 +23,7 @@ async function getMemberProduct(id) {
     let item: ItemsMemberProduct = infoResponse.data.data;
     return item;
   } catch (error) {
+    console.log("Get MemberProduct Error");
     logError(error);
   }
 }
@@ -36,6 +37,7 @@ async function createOrder(data) {
     let item: ItemsOrders = infoResponse.data.data as ItemsOrders;
     return item;
   } catch (error) {
+    console.log("Create Order Error");
     logError(error);
   }
 }
@@ -49,6 +51,7 @@ async function updateOrder(id, data) {
     let item: ItemsOrders = infoResponse.data.data;
     return item;
   } catch (error) {
+    console.log("Update Order Error");
     logError(error);
   }
 }
@@ -87,45 +90,64 @@ const formTypes = [
 
 export async function POST(request) {
   const formData = await request.formData();
-
-  let resStatus = 200;
-  let resMessage = "All good";
+  console.log("formData", formData);
 
   let order = {};
 
-  let id = formData.get("id");
-  console.log("sid", id);
   let saferpay = undefined;
   let newOrder = undefined;
+
+  // check form data
+  for (const obj of formTypes) {
+    let inputData = formData.get(obj.inputKey);
+    if (obj.required && (!inputData || inputData === "")) {
+      return NextResponse.json(
+        {
+          errorMessage: "Missing " + obj.inputKey,
+        },
+        { status: 400 }
+      );
+    }
+    order[obj.inputKey] = formData.get(obj.inputKey);
+  }
+
+  // console.log("sorder", order);
+
+  let orderName = "";
+  let orderPrice = 0;
+  let programSlug = formData.get("program");
+  let amount = formData.get("amount");
+  let id = formData.get("id");
+  // console.log("programSlug", programSlug);
+  // console.log("amount", amount);
+  // console.log("sid", id);
   if (id && id !== "") {
-    formTypes.every((obj) => {
-      if (
-        obj.required &&
-        (!formData.get(obj.inputKey) || formData.get(obj.inputKey) === "")
-      ) {
-        resMessage = "Missing " + obj.inputKey;
-        resStatus = 400;
-        return false; // exits the every loop
-      }
-      order[obj.inputKey] = formData.get(obj.inputKey);
-      return true;
-    });
-
-    console.log("sorder", order);
-    console.log(
-      "process.env.SAFERPAY_CUSTOMER_ID",
-      process.env.SAFERPAY_CUSTOMER_ID
-    );
     const memberProduct = await getMemberProduct(id);
-    console.log("smemberProduct", memberProduct);
+    orderName = memberProduct.name;
+    orderPrice = memberProduct.price;
+  } else if (programSlug && programSlug !== "" && amount && amount > 4) {
+    orderName = "Support Sendung: " + programSlug;
+    orderPrice = amount;
+  } else {
+    return NextResponse.json(
+      {
+        errorMessage: "Missing data",
+      },
+      { status: 400 }
+    );
+  }
 
-    newOrder = await createOrder({
-      ...order,
-      name: memberProduct.name,
-      price: memberProduct.price,
-    });
-    console.log("newOrder", newOrder);
+  console.log("orderName", orderName);
+  console.log("orderPrice", orderPrice);
 
+  newOrder = await createOrder({
+    ...order,
+    name: orderName,
+    price: orderPrice,
+  });
+  console.log("newOrder", newOrder);
+
+  if (newOrder) {
     try {
       let requestData = {
         RequestHeader: {
@@ -137,11 +159,11 @@ export async function POST(request) {
         TerminalId: process.env.SAFERPAY_TERMINAL_ID,
         Payment: {
           Amount: {
-            Value: memberProduct.price * 100,
+            Value: orderPrice * 100,
             CurrencyCode: "CHF",
           },
           OrderId: newOrder.id,
-          Description: memberProduct.name,
+          Description: orderName,
           // Recurring: {
           //   Initial: true
           // }
@@ -174,21 +196,29 @@ export async function POST(request) {
       });
     } catch (err) {
       console.log("Error creating SAFERPAY payment:", err);
-      return "Error SAFERPAY";
+      return NextResponse.json(
+        {
+          errorMessage: "Payment Initialisation Failed",
+        },
+        { status: 400 }
+      );
     }
   } else {
-    resMessage = "Missing type or id";
-    resStatus = 400;
+    return NextResponse.json(
+      {
+        errorMessage: "Create Order Failed",
+      },
+      { status: 400 }
+    );
   }
 
   //   // Fetch users logic
   return NextResponse.json(
     {
-      message: resMessage,
       saferpay_url:
         saferpay && saferpay.RedirectUrl ? saferpay.RedirectUrl : undefined,
       id: newOrder ? newOrder.id : undefined,
     },
-    { status: resStatus }
+    { status: 200 }
   );
 }

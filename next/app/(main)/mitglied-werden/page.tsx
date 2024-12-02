@@ -135,7 +135,9 @@ export default async function MitgliedPage(props) {
               width: "43vw",
             }}
           >
-            <YearlyProduct memberProducts={memberProducts || []}></YearlyProduct>
+            <YearlyProduct
+              memberProducts={memberProducts || []}
+            ></YearlyProduct>
           </div>
 
           <div
@@ -179,7 +181,10 @@ export default async function MitgliedPage(props) {
                 label={"Sendung unterstützen"}
                 color={Colors.white}
                 hoverColor={Colors.green}
-                href="/bestellung"
+                href={{
+                  pathname: "/bestellung",
+                  query: { slug: "choose" },
+                }}
               ></Button>
             </div>
           </div>

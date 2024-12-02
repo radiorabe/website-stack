@@ -8,10 +8,13 @@ import Input from "./Input";
 import Colors from "@/lib/Colors";
 import { useRouter } from "next/navigation";
 // import Layout from "../components/Layout";
+import Select from "react-select";
 
-export default function Statement({ id, type }) {
+export default function Statement({ id, type, options, defaultValue }) {
   const [errors, setErrors] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const [saferpayUrl, setSaferpayUrl] = useState();
+  const [programName, setProgramName] = useState("");
   const [orderId, setOrderId] = useState();
   const [iFrameHeight, setIFrameHeight] = useState(0);
   console.log("errors", errors);
@@ -66,8 +69,6 @@ export default function Statement({ id, type }) {
   ];
 
   const handleSubmit = (formData) => {
-    console.log("handleSubmit", formData);
-    // const { name, email, address } = Object.fromEntries(data);
     const data = Object.fromEntries(formData);
     console.log("data", data);
     let newErrors = [];
@@ -75,11 +76,23 @@ export default function Statement({ id, type }) {
       if (!data[obj.inputKey] && obj.required) {
         newErrors.push(obj.inputKey);
       }
-      setErrors(newErrors);
     });
+
+    if (data.program !== undefined && data.program === "") {
+      newErrors.push("program");
+    } else {
+      setProgramName(data.program);
+    }
+
+    if (data.amount !== undefined && (data.amount === "" || data.amount < 5)) {
+      newErrors.push("amount");
+    }
+
+    setErrors(newErrors);
 
     if (newErrors.length === 0) {
       console.log("fetch");
+      setErrorMessage("");
       fetch("http://localhost:3000/api/order/init", {
         method: "POST",
         body: formData,
@@ -89,19 +102,23 @@ export default function Statement({ id, type }) {
           return response.json();
         })
         .then((data) => {
-          console.log("asldkfj");
+          console.log("data", data);
           if (data.saferpay_url && data.id) {
             console.log("asldkfj");
             setSaferpayUrl(data.saferpay_url);
             setOrderId(data.id);
+          }
+          if (data.errorMessage) {
+            setErrorMessage(data.errorMessage);
           }
         })
         .catch((e) => console.log("error", e));
     }
   };
 
-  console.log("saferpayUrl", saferpayUrl);
-  console.log("iFrameHeight", iFrameHeight);
+  // console.log("saferpayUrl", saferpayUrl);
+  // console.log("saferpayUrl", saferpayUrl);
+  // console.log("iFrameHeight", iFrameHeight);
 
   return (
     <div
@@ -144,14 +161,101 @@ export default function Statement({ id, type }) {
           }}
         >
           <form action={handleSubmit} style={{}}>
+            {options && (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "74vw",
+                    maxWidth: 400,
+                    paddingTop: Metrics.baseMargin,
+                  }}
+                >
+                  <Text
+                    style={{
+                      ...Fonts.style.text,
+                      paddingBottom: Metrics.halfBaseMargin,
+                    }}
+                  >
+                    {"Support Sendung:"}
+                  </Text>
+                  <Select
+                    name={"program"}
+                    options={options}
+                    defaultValue={defaultValue}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderRadius: 0,
+                        alignSelf: "flex-end",
+                        borderWidth: 1,
+                        borderStyle: "solid",
+                        borderColor: errors.includes("program")
+                          ? "#f00"
+                          : "#ccc",
+                      }),
+                      option: (
+                        styles,
+                        { data, isDisabled, isFocused, isSelected }
+                      ) => ({
+                        ...styles,
+                        fontFamily: Fonts.type.regular,
+                        letterSpacing: 0,
+                        fontFeatureSettings: '"tnum" on',
+                        backgroundColor: isDisabled
+                          ? undefined
+                          : isSelected
+                            ? Colors.green
+                            : isFocused
+                              ? Colors.lightGreen
+                              : undefined,
+                      }),
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "74vw",
+                    maxWidth: 400,
+                    paddingTop: Metrics.baseMargin,
+                  }}
+                >
+                  <Text
+                    style={{
+                      ...Fonts.style.text,
+                      // marginBottom: Metrics.doubleBaseMargin,
+                    }}
+                  >
+                    {"Betrag"}
+                  </Text>
+                  <input
+                    type={"number"}
+                    name={"amount"}
+                    min="5"
+                    step="5"
+                    style={{
+                      alignSelf: "flex-end",
+                      borderWidth: 1,
+                      borderColor: errors.includes("amount") ? "#f00" : "#ccc",
+                      borderStyle: "solid",
+                      padding: "12px 16px",
+                    }}
+                  ></input>
+                </div>
+              </>
+            )}
+
             {inputs.map((obj, index) => {
               return (
                 <Input
                   key={"input-" + index}
-                  label={obj.label}
-                  inputKey={obj.inputKey}
                   error={errors.includes(obj.inputKey)}
-                  type={obj.type}
+                  {...obj}
                 ></Input>
               );
             })}
@@ -167,6 +271,7 @@ export default function Statement({ id, type }) {
             >
               <button type="submit" style={{ all: "unset" }}>
                 <Button label={"Absenden"}></Button>
+                <div>{errorMessage}</div>
               </button>
             </div>
           </form>
