@@ -10,7 +10,9 @@ import RadioButton from "./RadioButton";
 
 export default function YearlyProduct(props) {
   const { memberProducts } = props;
-  const [selectedProduct, setSelectedProduct] = useState(memberProducts[0].id);
+
+  const hasMemberProducts = memberProducts && memberProducts.length > 0;
+  const [selectedProduct, setSelectedProduct] = useState(hasMemberProducts && memberProducts[0].id);
 
   return (
     <div
