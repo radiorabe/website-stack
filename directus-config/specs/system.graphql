@@ -307,13 +307,15 @@ type Subscription {
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
+  iframe_mutated(event: EventEnum): iframe_mutated
+  post_mutated(event: EventEnum): post_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
-  post_mutated(event: EventEnum): post_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
   posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
+  events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -392,6 +394,8 @@ enum server_info_websocket_rest_authentication {
   handshake
   strict
 }
+
+union events_editor_nodes_item_union = iframe
 
 union page_history_nodes_item_union = image_box
 
@@ -1766,6 +1770,21 @@ type events {
   shows_func: count_functions
   logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
   logos_func: count_functions
+  editor_nodes(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_editor_nodes]
+  editor_nodes_func: count_functions
+}
+
+type events_editor_nodes {
+  id: ID!
+  events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
+  item: events_editor_nodes_item_union
+  collection: String
+}
+
+type events_editor_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: events_editor_nodes
 }
 
 type events_event_shows {
@@ -1796,6 +1815,17 @@ type events_mutated {
   key: ID!
   event: EventEnum
   data: events
+}
+
+type iframe {
+  id: ID!
+  code: String
+}
+
+type iframe_mutated {
+  key: ID!
+  event: EventEnum
+  data: iframe
 }
 
 type image_box {
@@ -1854,15 +1884,15 @@ type orders {
   date_updated: Date
   date_updated_func: datetime_functions
   status: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
   token: String
-  first_name: String
-  family_name: String
-  email: String
-  address: String
-  plz: String
-  city: String
+  first_name: String!
+  family_name: String!
+  email: String!
+  address: String!
+  plz: String!
+  city: String!
   phone_number: String
 }
 
@@ -2305,6 +2335,7 @@ type post {
   imagebox(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_box
   content: JSON!
   content_func: count_functions
+  preview_full_image: Boolean
   authors(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users]
   authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
@@ -2945,6 +2976,7 @@ input create_post_input {
   program: create_programs_input
   imagebox: create_image_box_input
   content: JSON!
+  preview_full_image: Boolean
   authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
   editor_nodes: [create_post_editor_nodes_input]
@@ -3544,6 +3576,15 @@ input event_shows_filter {
   _or: [event_shows_filter]
 }
 
+input events_editor_nodes_filter {
+  id: string_filter_operators
+  events_id: events_filter
+  collection: string_filter_operators
+  _and: [events_editor_nodes_filter]
+  _or: [events_editor_nodes_filter]
+  item__iframe: iframe_filter
+}
+
 input events_event_shows_filter {
   id: number_filter_operators
   events_id: events_filter
@@ -3585,6 +3626,8 @@ input events_filter {
   shows_func: count_function_filter_operators
   logos: events_files_filter
   logos_func: count_function_filter_operators
+  editor_nodes: events_editor_nodes_filter
+  editor_nodes_func: count_function_filter_operators
   _and: [events_filter]
   _or: [events_filter]
 }
@@ -3605,6 +3648,13 @@ input hash_filter_operators {
   _nnull: Boolean
   _empty: Boolean
   _nempty: Boolean
+}
+
+input iframe_filter {
+  id: number_filter_operators
+  code: string_filter_operators
+  _and: [iframe_filter]
+  _or: [iframe_filter]
 }
 
 input image_box_filter {
@@ -3917,6 +3967,7 @@ input post_filter {
   imagebox: image_box_filter
   content: string_filter_operators
   content_func: count_function_filter_operators
+  preview_full_image: boolean_filter_operators
   authors: post_directus_users_filter
   authors_func: count_function_filter_operators
   audio_files: post_files_filter
@@ -4457,6 +4508,7 @@ input update_post_input {
   program: update_programs_input
   imagebox: update_image_box_input
   content: JSON
+  preview_full_image: Boolean
   authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
   editor_nodes: [update_post_editor_nodes_input]

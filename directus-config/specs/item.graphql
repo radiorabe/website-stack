@@ -147,6 +147,14 @@ type Query {
   events_files_by_id(id: ID!, version: String): events_files
   events_files_aggregated(groupBy: [String], filter: events_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_files_aggregated!]!
   events_files_by_version(version: String!, id: ID!): version_events_files
+  iframe(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [iframe!]!
+  iframe_by_id(id: ID!, version: String): iframe
+  iframe_aggregated(groupBy: [String], filter: iframe_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [iframe_aggregated!]!
+  iframe_by_version(version: String!, id: ID!): version_iframe
+  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
+  post_by_id(id: ID!, version: String): post
+  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
+  post_by_version(version: String!, id: ID!): version_post
   events_event_shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows!]!
   events_event_shows_by_id(id: ID!, version: String): events_event_shows
   events_event_shows_aggregated(groupBy: [String], filter: events_event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_event_shows_aggregated!]!
@@ -159,10 +167,6 @@ type Query {
   post_editor_nodes_by_id(id: ID!, version: String): post_editor_nodes
   post_editor_nodes_aggregated(groupBy: [String], filter: post_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_editor_nodes_aggregated!]!
   post_editor_nodes_by_version(version: String!, id: ID!): version_post_editor_nodes
-  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
-  post_by_id(id: ID!, version: String): post
-  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
-  post_by_version(version: String!, id: ID!): version_post
   event_shows(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [event_shows!]!
   event_shows_by_id(id: ID!, version: String): event_shows
   event_shows_aggregated(groupBy: [String], filter: event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_shows_aggregated!]!
@@ -175,6 +179,10 @@ type Query {
   post_files_by_id(id: ID!, version: String): post_files
   post_files_aggregated(groupBy: [String], filter: post_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_files_aggregated!]!
   post_files_by_version(version: String!, id: ID!): version_post_files
+  events_editor_nodes(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_editor_nodes!]!
+  events_editor_nodes_by_id(id: ID!, version: String): events_editor_nodes
+  events_editor_nodes_aggregated(groupBy: [String], filter: events_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_editor_nodes_aggregated!]!
+  events_editor_nodes_by_version(version: String!, id: ID!): version_events_editor_nodes
 }
 
 type Mutation {
@@ -242,20 +250,24 @@ type Mutation {
   create_events_item(data: create_events_input!): events
   create_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_files_input!]): [events_files!]!
   create_events_files_item(data: create_events_files_input!): events_files
+  create_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_iframe_input!]): [iframe!]!
+  create_iframe_item(data: create_iframe_input!): iframe
+  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
+  create_post_item(data: create_post_input!): post
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
   create_events_event_shows_item(data: create_events_event_shows_input!): events_event_shows
   create_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_directus_users_input!]): [post_directus_users!]!
   create_post_directus_users_item(data: create_post_directus_users_input!): post_directus_users
   create_post_editor_nodes_items(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_editor_nodes_input!]): [post_editor_nodes!]!
   create_post_editor_nodes_item(data: create_post_editor_nodes_input!): post_editor_nodes
-  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
-  create_post_item(data: create_post_input!): post
   create_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_event_shows_input!]): [event_shows!]!
   create_event_shows_item(data: create_event_shows_input!): event_shows
   create_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_files_1_input!]): [posts_files_1!]!
   create_posts_files_1_item(data: create_posts_files_1_input!): posts_files_1
   create_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_files_input!]): [post_files!]!
   create_post_files_item(data: create_post_files_input!): post_files
+  create_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_editor_nodes_input!]): [events_editor_nodes!]!
+  create_events_editor_nodes_item(data: create_events_editor_nodes_input!): events_editor_nodes
   update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
   update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
   update_protocol_item(id: ID!, data: update_protocol_input!): protocol
@@ -362,6 +374,12 @@ type Mutation {
   update_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_files_input!): [events_files!]!
   update_events_files_batch(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_files_input!]): [events_files!]!
   update_events_files_item(id: ID!, data: update_events_files_input!): events_files
+  update_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_iframe_input!): [iframe!]!
+  update_iframe_batch(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_iframe_input!]): [iframe!]!
+  update_iframe_item(id: ID!, data: update_iframe_input!): iframe
+  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
+  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
+  update_post_item(id: ID!, data: update_post_input!): post
   update_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_event_shows_input!): [events_event_shows!]!
   update_events_event_shows_batch(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_event_shows_input!]): [events_event_shows!]!
   update_events_event_shows_item(id: ID!, data: update_events_event_shows_input!): events_event_shows
@@ -371,9 +389,6 @@ type Mutation {
   update_post_editor_nodes_items(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_editor_nodes_input!): [post_editor_nodes!]!
   update_post_editor_nodes_batch(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_editor_nodes_input!]): [post_editor_nodes!]!
   update_post_editor_nodes_item(id: ID!, data: update_post_editor_nodes_input!): post_editor_nodes
-  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
-  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
-  update_post_item(id: ID!, data: update_post_input!): post
   update_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_event_shows_input!): [event_shows!]!
   update_event_shows_batch(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_event_shows_input!]): [event_shows!]!
   update_event_shows_item(id: ID!, data: update_event_shows_input!): event_shows
@@ -383,6 +398,9 @@ type Mutation {
   update_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_files_input!): [post_files!]!
   update_post_files_batch(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_files_input!]): [post_files!]!
   update_post_files_item(id: ID!, data: update_post_files_input!): post_files
+  update_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_editor_nodes_input!): [events_editor_nodes!]!
+  update_events_editor_nodes_batch(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_editor_nodes_input!]): [events_editor_nodes!]!
+  update_events_editor_nodes_item(id: ID!, data: update_events_editor_nodes_input!): events_editor_nodes
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -447,20 +465,24 @@ type Mutation {
   delete_events_item(id: ID!): delete_one
   delete_events_files_items(ids: [ID]!): delete_many
   delete_events_files_item(id: ID!): delete_one
+  delete_iframe_items(ids: [ID]!): delete_many
+  delete_iframe_item(id: ID!): delete_one
+  delete_post_items(ids: [ID]!): delete_many
+  delete_post_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
   delete_events_event_shows_item(id: ID!): delete_one
   delete_post_directus_users_items(ids: [ID]!): delete_many
   delete_post_directus_users_item(id: ID!): delete_one
   delete_post_editor_nodes_items(ids: [ID]!): delete_many
   delete_post_editor_nodes_item(id: ID!): delete_one
-  delete_post_items(ids: [ID]!): delete_many
-  delete_post_item(id: ID!): delete_one
   delete_event_shows_items(ids: [ID]!): delete_many
   delete_event_shows_item(id: ID!): delete_one
   delete_posts_files_1_items(ids: [ID]!): delete_many
   delete_posts_files_1_item(id: ID!): delete_one
   delete_post_files_items(ids: [ID]!): delete_many
   delete_post_files_item(id: ID!): delete_one
+  delete_events_editor_nodes_items(ids: [ID]!): delete_many
+  delete_events_editor_nodes_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -527,13 +549,15 @@ type Subscription {
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
+  iframe_mutated(event: EventEnum): iframe_mutated
+  post_mutated(event: EventEnum): post_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
-  post_mutated(event: EventEnum): post_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
   posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
+  events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -584,6 +608,8 @@ enum EventEnum {
   update
   delete
 }
+
+union events_editor_nodes_item_union = iframe
 
 union page_history_nodes_item_union = image_box
 
@@ -1331,6 +1357,8 @@ type events {
   shows_func: count_functions
   logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
   logos_func: count_functions
+  editor_nodes(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_editor_nodes]
+  editor_nodes_func: count_functions
 }
 
 type events_aggregated {
@@ -1368,10 +1396,48 @@ type events_aggregated_count {
   promo_status: Int
   shows: Int
   logos: Int
+  editor_nodes: Int
 }
 
 type events_aggregated_fields {
   id: Float
+}
+
+type events_editor_nodes {
+  id: ID!
+  events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
+  item: events_editor_nodes_item_union
+  collection: String
+}
+
+type events_editor_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: events_editor_nodes_aggregated_count
+  countDistinct: events_editor_nodes_aggregated_count
+  avg: events_editor_nodes_aggregated_fields
+  sum: events_editor_nodes_aggregated_fields
+  avgDistinct: events_editor_nodes_aggregated_fields
+  sumDistinct: events_editor_nodes_aggregated_fields
+  min: events_editor_nodes_aggregated_fields
+  max: events_editor_nodes_aggregated_fields
+}
+
+type events_editor_nodes_aggregated_count {
+  id: Int
+  events_id: Int
+  item: Int
+  collection: Int
+}
+
+type events_editor_nodes_aggregated_fields {
+  events_id: Float
+}
+
+type events_editor_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: events_editor_nodes
 }
 
 type events_event_shows {
@@ -1451,6 +1517,39 @@ type events_mutated {
   key: ID!
   event: EventEnum
   data: events
+}
+
+type iframe {
+  id: ID!
+  code: String
+}
+
+type iframe_aggregated {
+  group: JSON
+  countAll: Int
+  count: iframe_aggregated_count
+  countDistinct: iframe_aggregated_count
+  avg: iframe_aggregated_fields
+  sum: iframe_aggregated_fields
+  avgDistinct: iframe_aggregated_fields
+  sumDistinct: iframe_aggregated_fields
+  min: iframe_aggregated_fields
+  max: iframe_aggregated_fields
+}
+
+type iframe_aggregated_count {
+  id: Int
+  code: Int
+}
+
+type iframe_aggregated_fields {
+  id: Float
+}
+
+type iframe_mutated {
+  key: ID!
+  event: EventEnum
+  data: iframe
 }
 
 type image_box {
@@ -1588,15 +1687,15 @@ type orders {
   date_updated: Date
   date_updated_func: datetime_functions
   status: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
   token: String
-  first_name: String
-  family_name: String
-  email: String
-  address: String
-  plz: String
-  city: String
+  first_name: String!
+  family_name: String!
+  email: String!
+  address: String!
+  plz: String!
+  city: String!
   phone_number: String
 }
 
@@ -2466,6 +2565,7 @@ type post {
   imagebox(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_box
   content: JSON!
   content_func: count_functions
+  preview_full_image: Boolean
   authors(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users]
   authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
@@ -2501,6 +2601,7 @@ type post_aggregated_count {
   program: Int
   imagebox: Int
   content: Int
+  preview_full_image: Int
   authors: Int
   audio_files: Int
   editor_nodes: Int
@@ -3097,6 +3198,15 @@ type version_events {
   promo_status: String
   shows: JSON
   logos: JSON
+  editor_nodes: JSON
+}
+
+""""""
+type version_events_editor_nodes {
+  id: ID
+  events_id: JSON
+  item: String
+  collection: String
 }
 
 """"""
@@ -3111,6 +3221,12 @@ type version_events_files {
   id: ID
   events_id: JSON
   directus_files_id: JSON
+}
+
+""""""
+type version_iframe {
+  id: ID
+  code: String
 }
 
 """"""
@@ -3425,6 +3541,7 @@ type version_post {
   program: JSON
   imagebox: JSON
   content: JSON
+  preview_full_image: Boolean
   authors: JSON
   audio_files: JSON
   editor_nodes: JSON
@@ -3735,6 +3852,13 @@ input create_event_shows_input {
   imagebox: create_image_box_input
 }
 
+input create_events_editor_nodes_input {
+  id: ID
+  events_id: create_events_input
+  item: String
+  collection: String
+}
+
 input create_events_event_shows_input {
   id: ID
   events_id: create_events_input
@@ -3769,6 +3893,12 @@ input create_events_input {
   promo_status: String
   shows: [create_events_event_shows_input]
   logos: [create_events_files_input]
+  editor_nodes: [create_events_editor_nodes_input]
+}
+
+input create_iframe_input {
+  id: ID
+  code: String
 }
 
 input create_image_box_input {
@@ -3804,15 +3934,15 @@ input create_orders_input {
   user_updated: create_directus_users_input
   date_updated: Date
   status: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
   token: String
-  first_name: String
-  family_name: String
-  email: String
-  address: String
-  plz: String
-  city: String
+  first_name: String!
+  family_name: String!
+  email: String!
+  address: String!
+  plz: String!
+  city: String!
   phone_number: String
 }
 
@@ -4045,6 +4175,7 @@ input create_post_input {
   program: create_programs_input
   imagebox: create_image_box_input
   content: JSON!
+  preview_full_image: Boolean
   authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
   editor_nodes: [create_post_editor_nodes_input]
@@ -4490,6 +4621,15 @@ input event_shows_filter {
   _or: [event_shows_filter]
 }
 
+input events_editor_nodes_filter {
+  id: string_filter_operators
+  events_id: events_filter
+  collection: string_filter_operators
+  _and: [events_editor_nodes_filter]
+  _or: [events_editor_nodes_filter]
+  item__iframe: iframe_filter
+}
+
 input events_event_shows_filter {
   id: number_filter_operators
   events_id: events_filter
@@ -4531,6 +4671,8 @@ input events_filter {
   shows_func: count_function_filter_operators
   logos: events_files_filter
   logos_func: count_function_filter_operators
+  editor_nodes: events_editor_nodes_filter
+  editor_nodes_func: count_function_filter_operators
   _and: [events_filter]
   _or: [events_filter]
 }
@@ -4551,6 +4693,13 @@ input hash_filter_operators {
   _nnull: Boolean
   _empty: Boolean
   _nempty: Boolean
+}
+
+input iframe_filter {
+  id: number_filter_operators
+  code: string_filter_operators
+  _and: [iframe_filter]
+  _or: [iframe_filter]
 }
 
 input image_box_filter {
@@ -4938,6 +5087,7 @@ input post_filter {
   imagebox: image_box_filter
   content: string_filter_operators
   content_func: count_function_filter_operators
+  preview_full_image: boolean_filter_operators
   authors: post_directus_users_filter
   authors_func: count_function_filter_operators
   audio_files: post_files_filter
@@ -5248,6 +5398,13 @@ input update_event_shows_input {
   imagebox: update_image_box_input
 }
 
+input update_events_editor_nodes_input {
+  id: ID
+  events_id: update_events_input
+  item: String
+  collection: String
+}
+
 input update_events_event_shows_input {
   id: ID
   events_id: update_events_input
@@ -5282,6 +5439,12 @@ input update_events_input {
   promo_status: String
   shows: [update_events_event_shows_input]
   logos: [update_events_files_input]
+  editor_nodes: [update_events_editor_nodes_input]
+}
+
+input update_iframe_input {
+  id: ID
+  code: String
 }
 
 input update_image_box_input {
@@ -5586,6 +5749,7 @@ input update_post_input {
   program: update_programs_input
   imagebox: update_image_box_input
   content: JSON
+  preview_full_image: Boolean
   authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
   editor_nodes: [update_post_editor_nodes_input]

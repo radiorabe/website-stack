@@ -13,7 +13,8 @@
     "interface": "list-o2m",
     "note": null,
     "options": {
-      "sort": null
+      "sort": null,
+      "template": "{{title}}"
     },
     "readonly": false,
     "required": false,

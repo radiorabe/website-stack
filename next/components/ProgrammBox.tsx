@@ -78,7 +78,7 @@ export interface ProgramBoxProps {
   textColor?: any;
   hoverColor?: any;
   backgroundColor?: any;
-  biggerFont: boolean;
+  biggerFont?: boolean;
 }
 
 export default async function ProgramBox({

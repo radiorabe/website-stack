@@ -1,44 +1,33 @@
 {
-  "collection": "events",
-  "field": "content",
-  "type": "json",
+  "collection": "iframe",
+  "field": "code",
+  "type": "text",
   "meta": {
-    "collection": "events",
+    "collection": "iframe",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "content",
+    "field": "code",
     "group": null,
     "hidden": false,
-    "interface": "flexible-editor-interface",
+    "interface": "input-multiline",
     "note": null,
     "options": {
-      "m2aField": "editor_nodes",
-      "tools": [
-        "bold",
-        "link",
-        "removeLink",
-        "autolink",
-        "undo",
-        "redo",
-        "fullscreen"
-      ]
+      "placeholder": "<iframe src=\"...."
     },
     "readonly": false,
     "required": false,
-    "sort": 12,
-    "special": [
-      "cast-json"
-    ],
+    "sort": 2,
+    "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
     "width": "full"
   },
   "schema": {
-    "name": "content",
-    "table": "events",
-    "data_type": "json",
+    "name": "code",
+    "table": "iframe",
+    "data_type": "text",
     "default_value": null,
     "max_length": null,
     "numeric_precision": null,

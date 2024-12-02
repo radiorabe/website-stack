@@ -1,45 +1,34 @@
 {
-  "collection": "events",
-  "field": "content",
-  "type": "json",
+  "collection": "post",
+  "field": "preview_full_image",
+  "type": "boolean",
   "meta": {
-    "collection": "events",
+    "collection": "post",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "content",
+    "field": "preview_full_image",
     "group": null,
     "hidden": false,
-    "interface": "flexible-editor-interface",
+    "interface": "boolean",
     "note": null,
-    "options": {
-      "m2aField": "editor_nodes",
-      "tools": [
-        "bold",
-        "link",
-        "removeLink",
-        "autolink",
-        "undo",
-        "redo",
-        "fullscreen"
-      ]
-    },
+    "options": null,
     "readonly": false,
     "required": false,
-    "sort": 12,
+    "sort": 14,
     "special": [
-      "cast-json"
+      "cast-boolean"
     ],
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
-    "name": "content",
-    "table": "events",
-    "data_type": "json",
-    "default_value": null,
+    "name": "preview_full_image",
+    "table": "post",
+    "data_type": "boolean",
+    "default_value": false,
     "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,

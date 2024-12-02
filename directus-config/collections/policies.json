@@ -128,10 +128,6 @@
     "app_access": false,
     "roles": [
       {
-        "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
-        "sort": 1
-      },
-      {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
         "sort": 4
       },

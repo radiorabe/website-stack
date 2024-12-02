@@ -406,6 +406,18 @@
     "_syncId": "71dbdaf8-e901-4390-83bd-fa6facce16ab"
   },
   {
+    "collection": "events_editor_nodes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "b2eaa56c-5ab7-4e9b-9c31-8c8991039dc1"
+  },
+  {
     "collection": "events_event_shows",
     "action": "read",
     "permissions": null,
@@ -440,6 +452,18 @@
     ],
     "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
     "_syncId": "af65d25b-601f-4173-ad50-e0593a103875"
+  },
+  {
+    "collection": "iframe",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "5326552a-0072-4b4d-86e0-4ddc8ae69a5f"
   },
   {
     "collection": "image_box",
@@ -1040,6 +1064,18 @@
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
     "_syncId": "2e28e3cc-6dfd-49c1-a92d-e81f566fff34"
+  },
+  {
+    "collection": "post_directus_users",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "00f8c9d8-c1a7-4de2-8f6e-9c6e56b96187"
   },
   {
     "collection": "post_directus_users",
@@ -2773,6 +2809,18 @@
     ],
     "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
     "_syncId": "20c143a6-672d-4b02-92ce-65ab1c014214"
+  },
+  {
+    "collection": "orders",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "6f608e61-452b-4541-9238-29afda529b5a",
+    "_syncId": "d6a32631-c040-492a-95c4-d1297861cc4d"
   },
   {
     "collection": "orders",
