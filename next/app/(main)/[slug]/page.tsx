@@ -1,6 +1,6 @@
 import { Api } from "@/lib/api";
 import {
-  ItemsPosts,
+  ItemsPost,
   ItemsPrograms,
   ItemsProgramsDirectusUsers,
   Users,
@@ -62,7 +62,6 @@ async function getSendung(slug) {
           "team.directus_users_id.last_name",
           "team.directus_users_id.first_name",
           "team.directus_users_id.email",
-          // "posts.*",
         ],
         // sort:"date_created.deep[articles][_sort]=-articles_id.date_created"
       },
@@ -139,6 +138,9 @@ async function getPosts(slug) {
           program: {
             _eq: slug,
           },
+          status: {
+            _eq: "published",
+          },
         }),
         sort: ["-date"],
         limit: 3,
@@ -153,7 +155,7 @@ async function getPosts(slug) {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts[] = itemResponse.data.data;
+    let item: ItemsPost[] = itemResponse.data.data;
     console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);

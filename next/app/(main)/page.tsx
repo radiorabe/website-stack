@@ -6,7 +6,7 @@ import {
   ItemsEvents,
   ItemsPartyLocation,
   ItemsPartyTips,
-  ItemsPosts,
+  ItemsPost,
 } from "@/lib/api/data-contracts";
 import Button from "@/components/Button";
 import ButtonFull from "@/components/ButtonFull";
@@ -48,7 +48,7 @@ async function getPosts() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts[] = itemResponse.data.data;
+    let item: ItemsPost[] = itemResponse.data.data;
     console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);

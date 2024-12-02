@@ -7,8 +7,8 @@ import { Api } from "@/lib/api";
 import {
   ItemsEvents,
   ItemsEventShows,
-  ItemsPosts,
-  ItemsPostsDirectusUsers1,
+  ItemsPost,
+  ItemsPostDirectusUsers1,
   ItemsPrograms,
   Users,
 } from "@/lib/api/data-contracts";
@@ -310,7 +310,7 @@ export default async function DynamicPage({ params }) {
             <View style={{ width: Metrics.doubleBaseMargin }}></View>
             <Text style={{ ...Fonts.style.text }}>
               <Text> {"Von "}</Text>
-              {post.authors.map((item: ItemsPostsDirectusUsers1, index) => {
+              {post.authors.map((item: ItemsPostDirectusUsers1, index) => {
                 let user: Users = item.directus_users_id as Users;
                 return (
                   <HoverText

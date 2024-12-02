@@ -4066,6 +4066,11 @@ rc-util@^5.36.0:
     "@babel/runtime" "^7.18.3"
     react-is "^18.2.0"
 
+react-aspect-ratio@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/react-aspect-ratio/-/react-aspect-ratio-1.1.8.tgz#89b1c700911ebd24c672a416704e3fac99bc6f21"
+  integrity sha512-8gwZYrH0wdjVEKT1i34C8AdTA11FZgbGeDPXgFVvLkGQIMYQGknZdOj4uqAjCQm5zOVAtagpr94yq/EUko0FZA==
+
 react-devtools-core@^5.3.1:
   version "5.3.1"
   resolved "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-5.3.1.tgz"

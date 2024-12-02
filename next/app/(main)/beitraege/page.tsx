@@ -8,7 +8,7 @@ import { View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../../lib/Fonts";
 import { Api } from "../../../lib/api";
-import { ItemsPosts } from "../../../lib/api/data-contracts";
+import { ItemsPost } from "../../../lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 
 async function getPosts() {
@@ -36,7 +36,7 @@ async function getPosts() {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPosts[] = itemResponse.data.data;
+    let item: ItemsPost[] = itemResponse.data.data;
     console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);

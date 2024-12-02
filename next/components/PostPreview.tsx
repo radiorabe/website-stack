@@ -1,5 +1,5 @@
 "use client";
-import { ItemsPosts, ItemsPrograms } from "@/lib/api/data-contracts";
+import { ItemsPost, ItemsPrograms } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
+import { AspectRatio } from "react-aspect-ratio"; // Recommended: if you are using React > 15.6
 
 const { ids, styles } = StyleSheet.create({
   border: {
@@ -26,67 +27,172 @@ const { ids, styles } = StyleSheet.create({
 });
 
 export interface HoverableProps {
-  data: ItemsPosts;
+  data: ItemsPost;
   index: number;
 }
 
 const PostPreview = ({ data, index }: HoverableProps) => {
-  let program: ItemsPrograms = data.program;
-  return (
-    <Link
-      href={`/beitrag/${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
+  let program = data.program as ItemsPrograms;
+
+  const preview = (
+    <View
       style={{
-        width: "30%",
-        paddingLeft: index % 3 ? "5%" : 0,
-        marginBottom: Metrics.doubleBaseMargin,
-        paddingBottom: 10,
-        textDecoration: "none",
+        maxHeight: "100%",
         overflow: "hidden",
         aspectRatio: 360 / 450,
       }}
     >
-      <View style={{ height: "100%" }}>
-        <View>
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              backgroundColor: "#00635F10",
-              borderRadius: 9,
-            }}
-          ></View>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=240&fit=cover`}
-            width={360}
-            height={240}
-            style={styles.avatar}
-            layout="responsive"
-            alt={data.title}
-            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </View>
+      <View>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: "#00635F10",
+            borderRadius: 9,
+          }}
+        ></View>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=240&fit=cover`}
+          width={360}
+          height={240}
+          style={styles.avatar}
+          layout="responsive"
+          alt={data.title}
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             paddingTop: Metrics.baseMargin,
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
           }}
         >
           <Button label={program.name} disabled={true} url=""></Button>
+        </View>
+        <Text
+          style={{
+            ...Fonts.style.text,
+            marginBottom: Metrics.baseMargin,
+            paddingTop: Metrics.baseMargin,
+          }}
+        >
+          {moment(data.date).format("DD. MMMM")}
+        </Text>
+      </View>
+      <div
+        style={{
+          ...Fonts.style.h2,
+          display: "-webkit-box",
+          overflow: "hidden",
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          color: Colors.black,
+        }}
+      >
+        {data.title}
+      </div>
+    </View>
+  );
+
+  const fullPreview = (
+    <View style={{ height: "100%" }}>
+      <View>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: "#00635F10",
+            borderRadius: 9,
+          }}
+        ></View>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=450&fit=cover`}
+          width={360}
+          height={450}
+          style={styles.avatar}
+          layout="responsive"
+          alt={data.title}
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </View>
+      <View
+        style={{
+          padding: Metrics.baseMargin,
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <View style={{}}>
+          <Button
+            label={program.name}
+            disabled={true}
+            url=""
+            color={Colors.white}
+          ></Button>
+        </View>
+        <View style={{}}>
           <Text
-            style={{ ...Fonts.style.text, marginBottom: Metrics.baseMargin }}
+            style={{
+              ...Fonts.style.text,
+              marginBottom: Metrics.baseMargin,
+              color: Colors.white,
+            }}
           >
             {moment(data.date).format("DD. MMMM")}
           </Text>
+          <Text
+            style={[
+              {
+                ...Fonts.style.h2,
+                color: Colors.white,
+              },
+            ]}
+          >
+            {data.title}
+          </Text>
         </View>
-        <Text style={[{ ...Fonts.style.h2 }]}>{data.title}</Text>
       </View>
-    </Link>
+    </View>
+  );
+
+  return (
+    <AspectRatio
+      ratio="360/450"
+      style={{
+        width: "30%",
+        paddingLeft: index % 3 ? "5%" : 0,
+        marginBottom: Metrics.doubleBaseMargin,
+      }}
+    >
+      <Link
+        href={`/beitrag/${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
+        style={{
+          textDecoration: "none",
+          overflow: "hidden",
+        }}
+      >
+        {data.preview_full_image ? fullPreview : preview}
+      </Link>
+    </AspectRatio>
   );
 };
 
