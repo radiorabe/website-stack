@@ -189,6 +189,9 @@ export default async function MitgliedPage(props) {
             </div>
           </div>
         </div>
+        <div>
+          {"*Studierende / RentnerInnen (AHV, IV), Besitzende einer Kulturlegi"}
+        </div>
         <div
           style={{
             width: "74vw",

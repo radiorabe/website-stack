@@ -131,7 +131,6 @@ const PostPreview = ({ data, index }: HoverableProps) => {
       </View>
       <View
         style={{
-          padding: Metrics.baseMargin,
           position: "absolute",
           top: 0,
           right: 0,
@@ -141,7 +140,20 @@ const PostPreview = ({ data, index }: HoverableProps) => {
           justifyContent: "space-between",
         }}
       >
-        <View style={{}}>
+        <View style={{ padding: Metrics.baseMargin }}>
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              top: 0,
+              background: `linear-gradient(180deg, black, transparent)`,
+              opacity: 0.4,
+              borderTopLeftRadius: 9,
+              borderTopRightRadius: 9,
+            }}
+          ></View>
           <Button
             label={program.name}
             disabled={true}
@@ -149,7 +161,21 @@ const PostPreview = ({ data, index }: HoverableProps) => {
             color={Colors.white}
           ></Button>
         </View>
-        <View style={{}}>
+        <View style={{ padding: Metrics.baseMargin }}>
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              top: 0,
+              background: `linear-gradient(0deg, black, transparent)`,
+              opacity: 0.4,
+              zIndex: -1,
+              borderBottomLeftRadius: 9,
+              borderBottomRightRadius: 9,
+            }}
+          ></View>
           <Text
             style={{
               ...Fonts.style.text,
