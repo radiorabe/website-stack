@@ -111,10 +111,23 @@ export default async function ProgramBox({
         >
           {"Heutiges Programm"}
         </Text>
-        <View>
+        <View
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            position: "relative",
+            height: 190,
+          }}
+        >
           <View
             style={{
-              maxHeight: 190,
+              // maxHeight: 190,
+              // overflow: "scroll",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 10,
+              right: -20,
               overflow: "scroll",
             }}
           >
@@ -179,10 +192,23 @@ export default async function ProgramBox({
         >
           {"Playlist"}
         </Text>
-        <View>
+        <View
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            position: "relative",
+            height: 190,
+          }}
+        >
           <View
             style={{
-              maxHeight: 190,
+              // maxHeight: 190,
+              // overflow: "scroll",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 10,
+              right: -20,
               overflow: "scroll",
             }}
           >
