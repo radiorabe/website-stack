@@ -4,14 +4,15 @@ import PostPreview from "@/components/PostPreview";
 import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { View } from "@/lib/server-react-native";
+import { View, Text } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../../lib/Fonts";
 import { Api } from "../../../lib/api";
 import { ItemsPost } from "../../../lib/api/data-contracts";
 import { logError } from "@/lib/loging";
+import SearchBox from "./SearchBox";
 
-async function getPosts() {
+async function getPosts(searchTerm) {
   try {
     const itemResponse = await Api.readItemsPost(
       {
@@ -19,9 +20,29 @@ async function getPosts() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
-          status: {
-            _eq: "published",
-          },
+          _and: [
+            {
+              status: {
+                _eq: "published",
+              },
+            },
+            {
+              _or: [
+                {
+                  tags: {
+                    tags_id: {
+                      value: {
+                        _icontains: searchTerm ? searchTerm : undefined,
+                      },
+                    },
+                  },
+                },
+                {
+                  title: { _icontains: searchTerm ? searchTerm : undefined },
+                },
+              ],
+            },
+          ],
         }),
         sort: ["-date"],
         // limit: 3,
@@ -37,30 +58,33 @@ async function getPosts() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    console.log("posts", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
+    console.log("item", item);
 
     return item;
   } catch (error) {
     logError(error);
-
     notFound();
   }
 }
 
 export const metadata: Metadata = {
-  title: "Impressum",
+  title: "Beiträge",
 };
 
-export default async function ImpressumPage(props) {
-  const posts = await getPosts();
-  console.log("posts", posts);
+export default async function ImpressumPage({ searchParams }) {
+  // Extract filters from searchParams
+  const filters = {
+    searchTerm: searchParams.searchTerm || "",
+    // category: searchParams.category || '',
+    // maxPrice: searchParams.maxPrice || '',
+  };
 
-  //
-  // use this to save the state: // from https://medium.com/@roman_j/mastering-state-in-next-js-app-router-with-url-query-parameters-a-practical-guide-03939921d09c
-  // already started in useProductFilter.tsx
-  //
+  // Construct the API endpoint with query parameters
+  const params = new URLSearchParams(filters).toString();
+  console.log("params", params);
+
+  const posts = await getPosts(filters.searchTerm);
+  // console.log("posts", posts);
 
   return (
     <View>
@@ -79,24 +103,32 @@ export default async function ImpressumPage(props) {
           }}
         >
           <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
-          <Button url={""} label={"suche"} />
+          {/* <Button url={""} label={"suche"} /> */}
+          <SearchBox></SearchBox>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          {posts.map((item, index) => {
-            return (
-              <PostPreview
-                key={"post" + index}
-                data={item}
-                index={index}
-              ></PostPreview>
-            );
-          })}
-        </View>
+
+        {posts.length > 0 ? (
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
+          >
+            {posts.map((item, index) => {
+              return (
+                <PostPreview
+                  key={"post" + index}
+                  data={item}
+                  index={index}
+                ></PostPreview>
+              );
+            })}
+          </View>
+        ) : (
+          <View>
+            <Text>{"Nothing found"}</Text>
+          </View>
+        )}
       </View>
     </View>
   );
