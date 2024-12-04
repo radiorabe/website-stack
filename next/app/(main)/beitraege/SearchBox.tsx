@@ -46,6 +46,7 @@ export default function SearchBox({}) {
         ]}
       >
         <input
+          id="inputID"
           style={{
             ...Fonts.style.TTtextLink,
             flexShrink: 1,
@@ -55,7 +56,7 @@ export default function SearchBox({}) {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Suche..."
+          placeholder="Suche"
         />
         <SearchIcon></SearchIcon>
       </View>

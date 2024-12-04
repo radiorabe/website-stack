@@ -8,6 +8,11 @@ body {
   font-feature-settings: 'tnum';
 }
 
+#inputID::placeholder {
+  color: #000000;
+  opacity: 1;
+}
+
 /* @import-normalize; */
  h4 > span, h3 > span, h2 > span, h1 > span { 
   font-family: inherit !important; 

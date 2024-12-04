@@ -125,8 +125,41 @@ export default async function ImpressumPage({ searchParams }) {
             })}
           </View>
         ) : (
-          <View>
-            <Text>{"Nothing found"}</Text>
+          <View
+            style={{
+              height: "40vh",
+              alignSelf: "center",
+              maxWidth: 800,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                ...Fonts.style.h1,
+                textAlign: "center",
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
+            >
+              {"Ohje, dazu gibt es noch keinen Beitrag :/"}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  ...Fonts.style.text,
+                  textAlign: "center",
+                  paddingRight: Metrics.doubleBaseMargin,
+                }}
+              >
+                {"Schreibe etwas zu diesem Thema."}
+              </Text>
+              <Button href={"/mitmachen"} label={"Jetzt mitmachen"} />
+            </View>
           </View>
         )}
       </View>
