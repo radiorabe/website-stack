@@ -7,12 +7,18 @@ import { notFound } from "next/navigation";
 import { View, Text } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../../lib/Fonts";
-import { Api } from "../../../lib/api";
-import { ItemsPost } from "../../../lib/api/data-contracts";
+import { Api, UserApi } from "../../../lib/api";
+import {
+  GetUsersData,
+  ItemsPost,
+  ItemsPrograms,
+  Users,
+} from "../../../lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import SearchBox from "./SearchBox";
+import FilterLabel from "@/components/FilterLabel";
 
-async function getPosts(searchTerm) {
+async function getPosts(filters) {
   try {
     const itemResponse = await Api.readItemsPost(
       {
@@ -26,19 +32,37 @@ async function getPosts(searchTerm) {
                 _eq: "published",
               },
             },
+            // {
+            //   authors: {
+            //     directus_users_id: {
+            //       id: filters.author ? filters.author : undefined,
+            //     },
+            //   },
+            // },
+            {
+              program: {
+                slug: filters.program ? filters.program : undefined,
+              },
+            },
             {
               _or: [
                 {
                   tags: {
                     tags_id: {
                       value: {
-                        _icontains: searchTerm ? searchTerm : undefined,
+                        _icontains: filters.searchTerm
+                          ? filters.searchTerm
+                          : undefined,
                       },
                     },
                   },
                 },
                 {
-                  title: { _icontains: searchTerm ? searchTerm : undefined },
+                  title: {
+                    _icontains: filters.searchTerm
+                      ? filters.searchTerm
+                      : undefined,
+                  },
                 },
               ],
             },
@@ -67,24 +91,77 @@ async function getPosts(searchTerm) {
   }
 }
 
+async function getProgram(slug) {
+  try {
+    const itemResponse = await Api.readSingleItemsPrograms(
+      {
+        id: slug,
+        fields: ["name"],
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPrograms = itemResponse.data.data;
+    console.log("item", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+  }
+}
+
+async function getAuthor(id) {
+  try {
+    const itemResponse = await UserApi.getUser(
+      {
+        id: id,
+        fields: ["*"],
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: Users = itemResponse.data.data;
+    console.log("item", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+  }
+}
+
 export const metadata: Metadata = {
   title: "Beiträge",
 };
 
-export default async function ImpressumPage({ searchParams }) {
+export default async function BeitraegePage({ searchParams }) {
   // Extract filters from searchParams
   const filters = {
     searchTerm: searchParams.searchTerm || "",
-    // category: searchParams.category || '',
-    // maxPrice: searchParams.maxPrice || '',
+    author: searchParams.author || "",
+    program: searchParams.program || "",
   };
 
   // Construct the API endpoint with query parameters
-  const params = new URLSearchParams(filters).toString();
-  console.log("params", params);
+  // const params = new URLSearchParams(filters).toString();
+  // console.log("params", params);
 
-  const posts = await getPosts(filters.searchTerm);
-  // console.log("posts", posts);
+  const posts = await getPosts(filters);
+  const program = await getProgram(filters.program);
+  const author = await getAuthor(filters.author);
 
   return (
     <View>
@@ -102,9 +179,10 @@ export default async function ImpressumPage({ searchParams }) {
             paddingBottom: Metrics.doubleBaseMargin,
           }}
         >
-          <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
-          {/* <Button url={""} label={"suche"} /> */}
-          <SearchBox></SearchBox>
+          <SearchBox
+            programName={program.name}
+            authorName={`${author.first_name} ${author.last_name}`}
+          ></SearchBox>
         </View>
 
         {posts.length > 0 ? (

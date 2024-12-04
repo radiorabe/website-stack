@@ -122,7 +122,7 @@ async function checkEventWithPromobox() {
       }
     );
     let item: ItemsEvents[] = itemResponse.data.data;
-    console.log("event", item);
+    // console.log("event", item);
 
     return item && item.length ? item[0] : null;
   } catch (error) {

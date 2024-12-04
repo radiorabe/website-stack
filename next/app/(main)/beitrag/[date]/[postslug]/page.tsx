@@ -1,7 +1,7 @@
-import IconDownload from "@/assets/svg/IconDownload";
 import AudioFilePlayer from "@/components/AudioFilePlayer";
 import Button from "@/components/Button";
 import HoverText from "@/components/HoverText";
+import ImageBox from "@/components/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
 import {
@@ -12,16 +12,15 @@ import {
 } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
+import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
-import moment from "moment";
-import Image from "next/image";
-import { notFound } from "next/navigation";
 import { Text, View } from "@/lib/server-react-native";
+import moment from "moment";
+import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
-import { logError } from "@/lib/loging";
 import AudioFiles from "./AudioFiles";
-import ImageBox from "@/components/ImageBox";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -73,6 +72,7 @@ async function getPost(params) {
           "program.slug",
           "authors.directus_users_id.first_name",
           "authors.directus_users_id.last_name",
+          "authors.directus_users_id.id",
           "audio_files.directus_files_id.*",
           "imagebox.*",
         ],
@@ -141,7 +141,37 @@ async function getRelatedPosts(slug) {
   }
 }
 
-export default async function DynamicPage({ params }) {
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const post = await getPost(params);
+  // console.log("constent", post.content.content);
+  let paragraph = post.content.content.find(
+    (item) => item.type === "paragraph"
+  );
+  let text = paragraph.content.find((item) => item.type === "text");
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: post.title,
+    description: text.text,
+    openGraph: {
+      images: [
+        `${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image}?width=${300}&height=${300}&fit=cover&format=webp`,
+        ...previousImages,
+      ],
+    },
+  };
+}
+
+export default async function BeitragPage({ params }: Props) {
   const post = await getPost(params);
   const program = post.program as ItemsPrograms;
   console.log("post.imagebox", post.imagebox);
@@ -176,7 +206,10 @@ export default async function DynamicPage({ params }) {
                 return (
                   <HoverText
                     key={"author" + index}
-                    href={"/beitraege"}
+                    href={{
+                      pathname: "/beitraege",
+                      query: { author: user.id },
+                    }}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
                   >{`${index ? "," : ""} ${user.first_name} ${

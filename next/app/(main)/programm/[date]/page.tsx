@@ -51,7 +51,7 @@ export async function getLiveData() {
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
-        console.log("liveData", liveData);
+        // console.log("liveData", liveData);
         // console.log("liveDataEnd");
 
         let todayShows: Show[] = liveData.shows.previous.filter(

@@ -89,7 +89,7 @@ async function getEvent(slug) {
       }
     );
     let item: ItemsEvents[] = itemResponse.data.data;
-    console.log("event", item.length);
+    // console.log("event", item.length);
 
     if (!item || item.length === 0 || item[0].status !== "published") {
       notFound();
@@ -103,7 +103,7 @@ async function getEvent(slug) {
   }
 }
 
-export default async function DynamicPage({ params }) {
+export default async function EventPage({ params }) {
   const event = await getEvent(params.slug);
 
   return (

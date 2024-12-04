@@ -99,7 +99,7 @@ export async function getNextShowForProgram(slug) {
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
-        console.log("liveData", liveData);
+        // console.log("liveData", liveData);
         // console.log("liveDataEnd");
         let nowPlaying = false;
 
@@ -168,7 +168,7 @@ async function getPosts(slug) {
   }
 }
 
-export default async function DynamicPage({ params }) {
+export default async function ProgramPage({ params }) {
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
   const { nowPlaying, nextShows } = await getNextShowForProgram("der-morgen");
@@ -252,7 +252,12 @@ export default async function DynamicPage({ params }) {
             >
               {sendung.team.map((item: ItemsProgramsDirectusUsers, index) => {
                 let user: Users = item.directus_users_id as Users;
-                return <MemberInfo user={user}></MemberInfo>;
+                return (
+                  <MemberInfo
+                    key={"Memberinfo" + index}
+                    user={user}
+                  ></MemberInfo>
+                );
               })}
             </View>
           </View>
@@ -315,7 +320,13 @@ export default async function DynamicPage({ params }) {
             {"Letzte Beiträge von " + sendung.name}
           </Text>
 
-          <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
+          <ButtonFull
+            href={{
+              pathname: "/beitraege",
+              query: { program: sendung.slug },
+            }}
+            label={"Alle Beiträge"}
+          />
         </View>
         <View
           style={{
