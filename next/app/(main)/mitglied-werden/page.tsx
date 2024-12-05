@@ -61,7 +61,7 @@ async function getStatements() {
     // console.log("response", infoResponse);
     let item: ItemsStatements[] = infoResponse.data.data;
 
-    console.log("ItemsStatements: ", item);
+    // console.log("ItemsStatements: ", item);
 
     return item;
   } catch (error) {
@@ -87,7 +87,7 @@ async function getMemberProducts() {
     // console.log("response", infoResponse);
     let item: ItemsMemberProduct[] = infoResponse.data.data;
 
-    console.log("member products: ", item);
+    // console.log("member products: ", item);
 
     return item;
   } catch (error) {
@@ -189,7 +189,7 @@ export default async function MitgliedPage(props) {
             </div>
           </div>
         </div>
-        <div>
+        <div style={{ paddingTop: Metrics.doubleBaseMargin }}>
           {"*Studierende / RentnerInnen (AHV, IV), Besitzende einer Kulturlegi"}
         </div>
         <div
