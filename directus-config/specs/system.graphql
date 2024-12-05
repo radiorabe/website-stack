@@ -264,7 +264,6 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
-  posts_editor_nodes_mutated(event: EventEnum): posts_editor_nodes_mutated
   page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
@@ -277,9 +276,7 @@ type Subscription {
   config_mutated(event: EventEnum): config_mutated
   programs_directus_users_mutated(event: EventEnum): programs_directus_users_mutated
   programs_mutated(event: EventEnum): programs_mutated
-  posts_mutated(event: EventEnum): posts_mutated
   page_contact_mutated(event: EventEnum): page_contact_mutated
-  posts_directus_users_1_mutated(event: EventEnum): posts_directus_users_1_mutated
   page_programs_mutated(event: EventEnum): page_programs_mutated
   page_agb_mutated(event: EventEnum): page_agb_mutated
   quote_mutated(event: EventEnum): quote_mutated
@@ -313,9 +310,10 @@ type Subscription {
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
-  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
   events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
+  tags_mutated(event: EventEnum): tags_mutated
+  post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -402,8 +400,6 @@ union page_history_nodes_item_union = image_box
 union page_receive_nodes_item_union = info_box
 
 union post_editor_nodes_item_union = info_box | quote
-
-union posts_editor_nodes_item_union = info_box | quote
 
 type auth_tokens {
   access_token: String
@@ -1562,8 +1558,6 @@ type directus_users {
   theme_light_overrides_func: count_functions
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
-  posts(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_directus_users_1]
-  posts_func: count_functions
   programs(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   programs_func: count_functions
   policies(filter: directus_access_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_access]
@@ -1604,7 +1598,6 @@ type directus_users_aggregated_count {
   theme_light: Int
   theme_light_overrides: Int
   theme_dark_overrides: Int
-  posts: Int
   programs: Int
   policies: Int
 }
@@ -2340,6 +2333,8 @@ type post {
   authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
   audio_files_func: count_functions
+  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
+  tags_func: count_functions
   editor_nodes(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_editor_nodes]
   editor_nodes_func: count_functions
 }
@@ -2388,76 +2383,16 @@ type post_mutated {
   data: post
 }
 
-type posts {
-  slug: ID!
-  status: String
-  sort: Int
-  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_created: Date
-  date_created_func: datetime_functions
-  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_updated: Date
-  date_updated_func: datetime_functions
-  title: String
-  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  date: Date
-  date_func: date_functions
-  imageTitle: String
-  imageText: String
-  program(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): programs
-  audio(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  content: JSON
-  content_func: count_functions
-  authors(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_directus_users_1]
-  authors_func: count_functions
-  editor_nodes(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_editor_nodes]
-  editor_nodes_func: count_functions
-  audioFiles(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_files_1]
-  audioFiles_func: count_functions
-}
-
-type posts_directus_users_1 {
+type post_tags_1 {
   id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  directus_users_id(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  post_id(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): post
+  tags_id(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): tags
 }
 
-type posts_directus_users_1_mutated {
+type post_tags_1_mutated {
   key: ID!
   event: EventEnum
-  data: posts_directus_users_1
-}
-
-type posts_editor_nodes {
-  id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  item: posts_editor_nodes_item_union
-  collection: String
-}
-
-type posts_editor_nodes_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts_editor_nodes
-}
-
-type posts_files_1 {
-  id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  sort: Int
-}
-
-type posts_files_1_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts_files_1
-}
-
-type posts_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts
+  data: post_tags_1
 }
 
 type programs {
@@ -2586,6 +2521,17 @@ type statements_mutated {
   key: ID!
   event: EventEnum
   data: statements
+}
+
+type tags {
+  id: ID!
+  value: String
+}
+
+type tags_mutated {
+  key: ID!
+  event: EventEnum
+  data: tags
 }
 
 type time_functions {
@@ -2902,7 +2848,6 @@ input create_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
-  posts: [create_posts_directus_users_1_input]
   programs: [create_programs_directus_users_input]
   policies: [create_directus_access_input]
 }
@@ -2979,48 +2924,14 @@ input create_post_input {
   preview_full_image: Boolean
   authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
+  tags: [create_post_tags_1_input]
   editor_nodes: [create_post_editor_nodes_input]
 }
 
-input create_posts_directus_users_1_input {
+input create_post_tags_1_input {
   id: ID
-  posts_slug: create_posts_input
-  directus_users_id: create_directus_users_input
-}
-
-input create_posts_editor_nodes_input {
-  id: ID
-  posts_slug: create_posts_input
-  item: String
-  collection: String
-}
-
-input create_posts_files_1_input {
-  id: ID
-  posts_slug: create_posts_input
-  directus_files_id: create_directus_files_input
-  sort: Int
-}
-
-input create_posts_input {
-  slug: ID!
-  status: String
-  sort: Int
-  user_created: create_directus_users_input
-  date_created: Date
-  user_updated: create_directus_users_input
-  date_updated: Date
-  title: String
-  image: create_directus_files_input
-  date: Date
-  imageTitle: String
-  imageText: String
-  program: create_programs_input
-  audio: create_directus_files_input
-  content: JSON
-  authors: [create_posts_directus_users_1_input]
-  editor_nodes: [create_posts_editor_nodes_input]
-  audioFiles: [create_posts_files_1_input]
+  post_id: create_post_input
+  tags_id: create_tags_input
 }
 
 input create_programs_directus_users_input {
@@ -3045,6 +2956,11 @@ input create_programs_input {
   image: create_directus_files_input
   team: [create_programs_directus_users_input]
   posts: [create_post_input]
+}
+
+input create_tags_input {
+  id: ID
+  value: String
 }
 
 input date_filter_operators {
@@ -3502,8 +3418,6 @@ input directus_users_filter {
   theme_light_overrides_func: count_function_filter_operators
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
-  posts: posts_directus_users_1_filter
-  posts_func: count_function_filter_operators
   programs: programs_directus_users_filter
   programs_func: count_function_filter_operators
   policies: directus_access_filter
@@ -3972,67 +3886,20 @@ input post_filter {
   authors_func: count_function_filter_operators
   audio_files: post_files_filter
   audio_files_func: count_function_filter_operators
+  tags: post_tags_1_filter
+  tags_func: count_function_filter_operators
   editor_nodes: post_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
   _and: [post_filter]
   _or: [post_filter]
 }
 
-input posts_directus_users_1_filter {
+input post_tags_1_filter {
   id: number_filter_operators
-  posts_slug: posts_filter
-  directus_users_id: directus_users_filter
-  _and: [posts_directus_users_1_filter]
-  _or: [posts_directus_users_1_filter]
-}
-
-input posts_editor_nodes_filter {
-  id: string_filter_operators
-  posts_slug: posts_filter
-  collection: string_filter_operators
-  _and: [posts_editor_nodes_filter]
-  _or: [posts_editor_nodes_filter]
-  item__info_box: info_box_filter
-  item__quote: quote_filter
-}
-
-input posts_files_1_filter {
-  id: number_filter_operators
-  posts_slug: posts_filter
-  directus_files_id: directus_files_filter
-  sort: number_filter_operators
-  _and: [posts_files_1_filter]
-  _or: [posts_files_1_filter]
-}
-
-input posts_filter {
-  slug: string_filter_operators
-  status: string_filter_operators
-  sort: number_filter_operators
-  user_created: directus_users_filter
-  date_created: date_filter_operators
-  date_created_func: datetime_function_filter_operators
-  user_updated: directus_users_filter
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  title: string_filter_operators
-  image: directus_files_filter
-  date: date_filter_operators
-  date_func: date_function_filter_operators
-  imageTitle: string_filter_operators
-  imageText: string_filter_operators
-  program: programs_filter
-  audio: directus_files_filter
-  content: string_filter_operators
-  content_func: count_function_filter_operators
-  authors: posts_directus_users_1_filter
-  authors_func: count_function_filter_operators
-  editor_nodes: posts_editor_nodes_filter
-  editor_nodes_func: count_function_filter_operators
-  audioFiles: posts_files_1_filter
-  audioFiles_func: count_function_filter_operators
-  _and: [posts_filter]
-  _or: [posts_filter]
+  post_id: post_filter
+  tags_id: tags_filter
+  _and: [post_tags_1_filter]
+  _or: [post_tags_1_filter]
 }
 
 input programs_directus_users_filter {
@@ -4117,6 +3984,13 @@ input string_filter_operators {
   _nnull: Boolean
   _empty: Boolean
   _nempty: Boolean
+}
+
+input tags_filter {
+  id: number_filter_operators
+  value: string_filter_operators
+  _and: [tags_filter]
+  _or: [tags_filter]
 }
 
 input time_function_filter_operators {
@@ -4434,7 +4308,6 @@ input update_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
-  posts: [update_posts_directus_users_1_input]
   programs: [update_programs_directus_users_input]
   policies: [update_directus_access_input]
 }
@@ -4511,48 +4384,14 @@ input update_post_input {
   preview_full_image: Boolean
   authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
+  tags: [update_post_tags_1_input]
   editor_nodes: [update_post_editor_nodes_input]
 }
 
-input update_posts_directus_users_1_input {
+input update_post_tags_1_input {
   id: ID
-  posts_slug: update_posts_input
-  directus_users_id: update_directus_users_input
-}
-
-input update_posts_editor_nodes_input {
-  id: ID
-  posts_slug: update_posts_input
-  item: String
-  collection: String
-}
-
-input update_posts_files_1_input {
-  id: ID
-  posts_slug: update_posts_input
-  directus_files_id: update_directus_files_input
-  sort: Int
-}
-
-input update_posts_input {
-  slug: ID
-  status: String
-  sort: Int
-  user_created: update_directus_users_input
-  date_created: Date
-  user_updated: update_directus_users_input
-  date_updated: Date
-  title: String
-  image: update_directus_files_input
-  date: Date
-  imageTitle: String
-  imageText: String
-  program: update_programs_input
-  audio: update_directus_files_input
-  content: JSON
-  authors: [update_posts_directus_users_1_input]
-  editor_nodes: [update_posts_editor_nodes_input]
-  audioFiles: [update_posts_files_1_input]
+  post_id: update_post_input
+  tags_id: update_tags_input
 }
 
 input update_programs_directus_users_input {
@@ -4577,4 +4416,9 @@ input update_programs_input {
   image: update_directus_files_input
   team: [update_programs_directus_users_input]
   posts: [update_post_input]
+}
+
+input update_tags_input {
+  id: ID
+  value: String
 }

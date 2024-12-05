@@ -15,10 +15,6 @@ type Query {
   image_box_by_id(id: ID!, version: String): image_box
   image_box_aggregated(groupBy: [String], filter: image_box_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_box_aggregated!]!
   image_box_by_version(version: String!, id: ID!): version_image_box
-  posts_editor_nodes(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_editor_nodes!]!
-  posts_editor_nodes_by_id(id: ID!, version: String): posts_editor_nodes
-  posts_editor_nodes_aggregated(groupBy: [String], filter: posts_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_editor_nodes_aggregated!]!
-  posts_editor_nodes_by_version(version: String!, id: ID!): version_posts_editor_nodes
   page_contact_files(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files!]!
   page_contact_files_by_id(id: ID!, version: String): page_contact_files
   page_contact_files_aggregated(groupBy: [String], filter: page_contact_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_files_aggregated!]!
@@ -45,16 +41,8 @@ type Query {
   programs_by_id(id: ID!, version: String): programs
   programs_aggregated(groupBy: [String], filter: programs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [programs_aggregated!]!
   programs_by_version(version: String!, id: ID!): version_programs
-  posts(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts!]!
-  posts_by_id(id: ID!, version: String): posts
-  posts_aggregated(groupBy: [String], filter: posts_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_aggregated!]!
-  posts_by_version(version: String!, id: ID!): version_posts
   page_contact(version: String): page_contact
   page_contact_by_version(version: String!): version_page_contact
-  posts_directus_users_1(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_directus_users_1!]!
-  posts_directus_users_1_by_id(id: ID!, version: String): posts_directus_users_1
-  posts_directus_users_1_aggregated(groupBy: [String], filter: posts_directus_users_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_directus_users_1_aggregated!]!
-  posts_directus_users_1_by_version(version: String!, id: ID!): version_posts_directus_users_1
   page_programs(version: String): page_programs
   page_programs_by_version(version: String!): version_page_programs
   page_agb(version: String): page_agb
@@ -171,10 +159,6 @@ type Query {
   event_shows_by_id(id: ID!, version: String): event_shows
   event_shows_aggregated(groupBy: [String], filter: event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [event_shows_aggregated!]!
   event_shows_by_version(version: String!, id: ID!): version_event_shows
-  posts_files_1(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_files_1!]!
-  posts_files_1_by_id(id: ID!, version: String): posts_files_1
-  posts_files_1_aggregated(groupBy: [String], filter: posts_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [posts_files_1_aggregated!]!
-  posts_files_1_by_version(version: String!, id: ID!): version_posts_files_1
   post_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files!]!
   post_files_by_id(id: ID!, version: String): post_files
   post_files_aggregated(groupBy: [String], filter: post_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_files_aggregated!]!
@@ -183,6 +167,14 @@ type Query {
   events_editor_nodes_by_id(id: ID!, version: String): events_editor_nodes
   events_editor_nodes_aggregated(groupBy: [String], filter: events_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_editor_nodes_aggregated!]!
   events_editor_nodes_by_version(version: String!, id: ID!): version_events_editor_nodes
+  tags(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [tags!]!
+  tags_by_id(id: ID!, version: String): tags
+  tags_aggregated(groupBy: [String], filter: tags_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [tags_aggregated!]!
+  tags_by_version(version: String!, id: ID!): version_tags
+  post_tags_1(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1!]!
+  post_tags_1_by_id(id: ID!, version: String): post_tags_1
+  post_tags_1_aggregated(groupBy: [String], filter: post_tags_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_tags_1_aggregated!]!
+  post_tags_1_by_version(version: String!, id: ID!): version_post_tags_1
 }
 
 type Mutation {
@@ -194,8 +186,6 @@ type Mutation {
   create_page_contact_contact_address_item(data: create_page_contact_contact_address_input!): page_contact_contact_address
   create_image_box_items(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_box_input!]): [image_box!]!
   create_image_box_item(data: create_image_box_input!): image_box
-  create_posts_editor_nodes_items(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_editor_nodes_input!]): [posts_editor_nodes!]!
-  create_posts_editor_nodes_item(data: create_posts_editor_nodes_input!): posts_editor_nodes
   create_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_files_input!]): [page_contact_files!]!
   create_page_contact_files_item(data: create_page_contact_files_input!): page_contact_files
   create_party_location_items(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_party_location_input!]): [party_location!]!
@@ -208,10 +198,6 @@ type Mutation {
   create_programs_directus_users_item(data: create_programs_directus_users_input!): programs_directus_users
   create_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_programs_input!]): [programs!]!
   create_programs_item(data: create_programs_input!): programs
-  create_posts_items(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_input!]): [posts!]!
-  create_posts_item(data: create_posts_input!): posts
-  create_posts_directus_users_1_items(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_directus_users_1_input!]): [posts_directus_users_1!]!
-  create_posts_directus_users_1_item(data: create_posts_directus_users_1_input!): posts_directus_users_1
   create_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_quote_input!]): [quote!]!
   create_quote_item(data: create_quote_input!): quote
   create_info_box_items(filter: info_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_info_box_input!]): [info_box!]!
@@ -262,12 +248,14 @@ type Mutation {
   create_post_editor_nodes_item(data: create_post_editor_nodes_input!): post_editor_nodes
   create_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_event_shows_input!]): [event_shows!]!
   create_event_shows_item(data: create_event_shows_input!): event_shows
-  create_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_posts_files_1_input!]): [posts_files_1!]!
-  create_posts_files_1_item(data: create_posts_files_1_input!): posts_files_1
   create_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_files_input!]): [post_files!]!
   create_post_files_item(data: create_post_files_input!): post_files
   create_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_editor_nodes_input!]): [events_editor_nodes!]!
   create_events_editor_nodes_item(data: create_events_editor_nodes_input!): events_editor_nodes
+  create_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_tags_input!]): [tags!]!
+  create_tags_item(data: create_tags_input!): tags
+  create_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_tags_1_input!]): [post_tags_1!]!
+  create_post_tags_1_item(data: create_post_tags_1_input!): post_tags_1
   update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
   update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
   update_protocol_item(id: ID!, data: update_protocol_input!): protocol
@@ -280,9 +268,6 @@ type Mutation {
   update_image_box_items(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_box_input!): [image_box!]!
   update_image_box_batch(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_box_input!]): [image_box!]!
   update_image_box_item(id: ID!, data: update_image_box_input!): image_box
-  update_posts_editor_nodes_items(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_editor_nodes_input!): [posts_editor_nodes!]!
-  update_posts_editor_nodes_batch(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_editor_nodes_input!]): [posts_editor_nodes!]!
-  update_posts_editor_nodes_item(id: ID!, data: update_posts_editor_nodes_input!): posts_editor_nodes
   update_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_files_input!): [page_contact_files!]!
   update_page_contact_files_batch(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_files_input!]): [page_contact_files!]!
   update_page_contact_files_item(id: ID!, data: update_page_contact_files_input!): page_contact_files
@@ -302,13 +287,7 @@ type Mutation {
   update_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_programs_input!): [programs!]!
   update_programs_batch(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_programs_input!]): [programs!]!
   update_programs_item(id: ID!, data: update_programs_input!): programs
-  update_posts_items(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_input!): [posts!]!
-  update_posts_batch(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_input!]): [posts!]!
-  update_posts_item(id: ID!, data: update_posts_input!): posts
   update_page_contact(data: update_page_contact_input!): page_contact
-  update_posts_directus_users_1_items(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_directus_users_1_input!): [posts_directus_users_1!]!
-  update_posts_directus_users_1_batch(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_directus_users_1_input!]): [posts_directus_users_1!]!
-  update_posts_directus_users_1_item(id: ID!, data: update_posts_directus_users_1_input!): posts_directus_users_1
   update_page_programs(data: update_page_programs_input!): page_programs
   update_page_agb(data: update_page_agb_input!): page_agb
   update_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_quote_input!): [quote!]!
@@ -392,15 +371,18 @@ type Mutation {
   update_event_shows_items(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_event_shows_input!): [event_shows!]!
   update_event_shows_batch(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_event_shows_input!]): [event_shows!]!
   update_event_shows_item(id: ID!, data: update_event_shows_input!): event_shows
-  update_posts_files_1_items(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_posts_files_1_input!): [posts_files_1!]!
-  update_posts_files_1_batch(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_posts_files_1_input!]): [posts_files_1!]!
-  update_posts_files_1_item(id: ID!, data: update_posts_files_1_input!): posts_files_1
   update_post_files_items(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_files_input!): [post_files!]!
   update_post_files_batch(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_files_input!]): [post_files!]!
   update_post_files_item(id: ID!, data: update_post_files_input!): post_files
   update_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_editor_nodes_input!): [events_editor_nodes!]!
   update_events_editor_nodes_batch(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_editor_nodes_input!]): [events_editor_nodes!]!
   update_events_editor_nodes_item(id: ID!, data: update_events_editor_nodes_input!): events_editor_nodes
+  update_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_tags_input!): [tags!]!
+  update_tags_batch(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_tags_input!]): [tags!]!
+  update_tags_item(id: ID!, data: update_tags_input!): tags
+  update_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_tags_1_input!): [post_tags_1!]!
+  update_post_tags_1_batch(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_tags_1_input!]): [post_tags_1!]!
+  update_post_tags_1_item(id: ID!, data: update_post_tags_1_input!): post_tags_1
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -409,8 +391,6 @@ type Mutation {
   delete_page_contact_contact_address_item(id: ID!): delete_one
   delete_image_box_items(ids: [ID]!): delete_many
   delete_image_box_item(id: ID!): delete_one
-  delete_posts_editor_nodes_items(ids: [ID]!): delete_many
-  delete_posts_editor_nodes_item(id: ID!): delete_one
   delete_page_contact_files_items(ids: [ID]!): delete_many
   delete_page_contact_files_item(id: ID!): delete_one
   delete_party_location_items(ids: [ID]!): delete_many
@@ -423,10 +403,6 @@ type Mutation {
   delete_programs_directus_users_item(id: ID!): delete_one
   delete_programs_items(ids: [ID]!): delete_many
   delete_programs_item(id: ID!): delete_one
-  delete_posts_items(ids: [ID]!): delete_many
-  delete_posts_item(id: ID!): delete_one
-  delete_posts_directus_users_1_items(ids: [ID]!): delete_many
-  delete_posts_directus_users_1_item(id: ID!): delete_one
   delete_quote_items(ids: [ID]!): delete_many
   delete_quote_item(id: ID!): delete_one
   delete_info_box_items(ids: [ID]!): delete_many
@@ -477,12 +453,14 @@ type Mutation {
   delete_post_editor_nodes_item(id: ID!): delete_one
   delete_event_shows_items(ids: [ID]!): delete_many
   delete_event_shows_item(id: ID!): delete_one
-  delete_posts_files_1_items(ids: [ID]!): delete_many
-  delete_posts_files_1_item(id: ID!): delete_one
   delete_post_files_items(ids: [ID]!): delete_many
   delete_post_files_item(id: ID!): delete_one
   delete_events_editor_nodes_items(ids: [ID]!): delete_many
   delete_events_editor_nodes_item(id: ID!): delete_one
+  delete_tags_items(ids: [ID]!): delete_many
+  delete_tags_item(id: ID!): delete_one
+  delete_post_tags_1_items(ids: [ID]!): delete_many
+  delete_post_tags_1_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -506,7 +484,6 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
-  posts_editor_nodes_mutated(event: EventEnum): posts_editor_nodes_mutated
   page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
@@ -519,9 +496,7 @@ type Subscription {
   config_mutated(event: EventEnum): config_mutated
   programs_directus_users_mutated(event: EventEnum): programs_directus_users_mutated
   programs_mutated(event: EventEnum): programs_mutated
-  posts_mutated(event: EventEnum): posts_mutated
   page_contact_mutated(event: EventEnum): page_contact_mutated
-  posts_directus_users_1_mutated(event: EventEnum): posts_directus_users_1_mutated
   page_programs_mutated(event: EventEnum): page_programs_mutated
   page_agb_mutated(event: EventEnum): page_agb_mutated
   quote_mutated(event: EventEnum): quote_mutated
@@ -555,9 +530,10 @@ type Subscription {
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
-  posts_files_1_mutated(event: EventEnum): posts_files_1_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
   events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
+  tags_mutated(event: EventEnum): tags_mutated
+  post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -616,8 +592,6 @@ union page_history_nodes_item_union = image_box
 union page_receive_nodes_item_union = info_box
 
 union post_editor_nodes_item_union = info_box | quote
-
-union posts_editor_nodes_item_union = info_box | quote
 
 type config {
   id: ID!
@@ -1201,8 +1175,6 @@ type directus_users {
   theme_light_overrides_func: count_functions
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
-  posts(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_directus_users_1]
-  posts_func: count_functions
   programs(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   programs_func: count_functions
   policies(filter: directus_access_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_access]
@@ -2570,6 +2542,8 @@ type post {
   authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
   audio_files_func: count_functions
+  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
+  tags_func: count_functions
   editor_nodes(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_editor_nodes]
   editor_nodes_func: count_functions
 }
@@ -2604,6 +2578,7 @@ type post_aggregated_count {
   preview_full_image: Int
   authors: Int
   audio_files: Int
+  tags: Int
   editor_nodes: Int
 }
 
@@ -2731,178 +2706,41 @@ type post_mutated {
   data: post
 }
 
-type posts {
-  slug: ID!
-  status: String
-  sort: Int
-  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_created: Date
-  date_created_func: datetime_functions
-  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
-  date_updated: Date
-  date_updated_func: datetime_functions
-  title: String
-  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  date: Date
-  date_func: date_functions
-  imageTitle: String
-  imageText: String
-  program(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): programs
-  audio(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  content: JSON
-  content_func: count_functions
-  authors(filter: posts_directus_users_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_directus_users_1]
-  authors_func: count_functions
-  editor_nodes(filter: posts_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_editor_nodes]
-  editor_nodes_func: count_functions
-  audioFiles(filter: posts_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [posts_files_1]
-  audioFiles_func: count_functions
-}
-
-type posts_aggregated {
-  group: JSON
-  countAll: Int
-  count: posts_aggregated_count
-  countDistinct: posts_aggregated_count
-  avg: posts_aggregated_fields
-  sum: posts_aggregated_fields
-  avgDistinct: posts_aggregated_fields
-  sumDistinct: posts_aggregated_fields
-  min: posts_aggregated_fields
-  max: posts_aggregated_fields
-}
-
-type posts_aggregated_count {
-  slug: Int
-  status: Int
-  sort: Int
-  user_created: Int
-  date_created: Int
-  user_updated: Int
-  date_updated: Int
-  title: Int
-  image: Int
-  date: Int
-  imageTitle: Int
-  imageText: Int
-  program: Int
-
-  """Maximale Dateigrösse 100MB"""
-  audio: Int
-  content: Int
-  authors: Int
-  editor_nodes: Int
-  audioFiles: Int
-}
-
-type posts_aggregated_fields {
-  sort: Float
-}
-
-type posts_directus_users_1 {
+type post_tags_1 {
   id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  directus_users_id(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  post_id(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): post
+  tags_id(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): tags
 }
 
-type posts_directus_users_1_aggregated {
+type post_tags_1_aggregated {
   group: JSON
   countAll: Int
-  count: posts_directus_users_1_aggregated_count
-  countDistinct: posts_directus_users_1_aggregated_count
-  avg: posts_directus_users_1_aggregated_fields
-  sum: posts_directus_users_1_aggregated_fields
-  avgDistinct: posts_directus_users_1_aggregated_fields
-  sumDistinct: posts_directus_users_1_aggregated_fields
-  min: posts_directus_users_1_aggregated_fields
-  max: posts_directus_users_1_aggregated_fields
+  count: post_tags_1_aggregated_count
+  countDistinct: post_tags_1_aggregated_count
+  avg: post_tags_1_aggregated_fields
+  sum: post_tags_1_aggregated_fields
+  avgDistinct: post_tags_1_aggregated_fields
+  sumDistinct: post_tags_1_aggregated_fields
+  min: post_tags_1_aggregated_fields
+  max: post_tags_1_aggregated_fields
 }
 
-type posts_directus_users_1_aggregated_count {
+type post_tags_1_aggregated_count {
   id: Int
-  posts_slug: Int
-  directus_users_id: Int
+  post_id: Int
+  tags_id: Int
 }
 
-type posts_directus_users_1_aggregated_fields {
+type post_tags_1_aggregated_fields {
   id: Float
+  post_id: Float
+  tags_id: Float
 }
 
-type posts_directus_users_1_mutated {
+type post_tags_1_mutated {
   key: ID!
   event: EventEnum
-  data: posts_directus_users_1
-}
-
-type posts_editor_nodes {
-  id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  item: posts_editor_nodes_item_union
-  collection: String
-}
-
-type posts_editor_nodes_aggregated {
-  group: JSON
-  countAll: Int
-  count: posts_editor_nodes_aggregated_count
-  countDistinct: posts_editor_nodes_aggregated_count
-}
-
-type posts_editor_nodes_aggregated_count {
-  id: Int
-  posts_slug: Int
-  item: Int
-  collection: Int
-}
-
-type posts_editor_nodes_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts_editor_nodes
-}
-
-type posts_files_1 {
-  id: ID!
-  posts_slug(filter: posts_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): posts
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  sort: Int
-}
-
-type posts_files_1_aggregated {
-  group: JSON
-  countAll: Int
-  count: posts_files_1_aggregated_count
-  countDistinct: posts_files_1_aggregated_count
-  avg: posts_files_1_aggregated_fields
-  sum: posts_files_1_aggregated_fields
-  avgDistinct: posts_files_1_aggregated_fields
-  sumDistinct: posts_files_1_aggregated_fields
-  min: posts_files_1_aggregated_fields
-  max: posts_files_1_aggregated_fields
-}
-
-type posts_files_1_aggregated_count {
-  id: Int
-  posts_slug: Int
-  directus_files_id: Int
-  sort: Int
-}
-
-type posts_files_1_aggregated_fields {
-  id: Float
-  sort: Float
-}
-
-type posts_files_1_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts_files_1
-}
-
-type posts_mutated {
-  key: ID!
-  event: EventEnum
-  data: posts
+  data: post_tags_1
 }
 
 type programs {
@@ -3123,6 +2961,39 @@ type statements_mutated {
   key: ID!
   event: EventEnum
   data: statements
+}
+
+type tags {
+  id: ID!
+  value: String
+}
+
+type tags_aggregated {
+  group: JSON
+  countAll: Int
+  count: tags_aggregated_count
+  countDistinct: tags_aggregated_count
+  avg: tags_aggregated_fields
+  sum: tags_aggregated_fields
+  avgDistinct: tags_aggregated_fields
+  sumDistinct: tags_aggregated_fields
+  min: tags_aggregated_fields
+  max: tags_aggregated_fields
+}
+
+type tags_aggregated_count {
+  id: Int
+  value: Int
+}
+
+type tags_aggregated_fields {
+  id: Float
+}
+
+type tags_mutated {
+  key: ID!
+  event: EventEnum
+  data: tags
 }
 
 type time_functions {
@@ -3544,6 +3415,7 @@ type version_post {
   preview_full_image: Boolean
   authors: JSON
   audio_files: JSON
+  tags: JSON
   editor_nodes: JSON
 }
 
@@ -3571,48 +3443,10 @@ type version_post_files {
 }
 
 """"""
-type version_posts {
-  slug: ID
-  status: String
-  sort: Int
-  user_created: JSON
-  date_created: Date
-  user_updated: JSON
-  date_updated: Date
-  title: String
-  image: JSON
-  date: Date
-  imageTitle: String
-  imageText: String
-  program: JSON
-  audio: JSON
-  content: JSON
-  authors: JSON
-  editor_nodes: JSON
-  audioFiles: JSON
-}
-
-""""""
-type version_posts_directus_users_1 {
+type version_post_tags_1 {
   id: ID
-  posts_slug: JSON
-  directus_users_id: JSON
-}
-
-""""""
-type version_posts_editor_nodes {
-  id: ID
-  posts_slug: JSON
-  item: String
-  collection: String
-}
-
-""""""
-type version_posts_files_1 {
-  id: ID
-  posts_slug: JSON
-  directus_files_id: JSON
-  sort: Int
+  post_id: JSON
+  tags_id: JSON
 }
 
 """"""
@@ -3667,6 +3501,12 @@ type version_statements {
   date_updated: Date
   text: String
   author: String
+}
+
+""""""
+type version_tags {
+  id: ID
+  value: String
 }
 
 input big_int_filter_operators {
@@ -3827,7 +3667,6 @@ input create_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
-  posts: [create_posts_directus_users_1_input]
   programs: [create_programs_directus_users_input]
   policies: [create_directus_access_input]
 }
@@ -4178,48 +4017,14 @@ input create_post_input {
   preview_full_image: Boolean
   authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
+  tags: [create_post_tags_1_input]
   editor_nodes: [create_post_editor_nodes_input]
 }
 
-input create_posts_directus_users_1_input {
+input create_post_tags_1_input {
   id: ID
-  posts_slug: create_posts_input
-  directus_users_id: create_directus_users_input
-}
-
-input create_posts_editor_nodes_input {
-  id: ID
-  posts_slug: create_posts_input
-  item: String
-  collection: String
-}
-
-input create_posts_files_1_input {
-  id: ID
-  posts_slug: create_posts_input
-  directus_files_id: create_directus_files_input
-  sort: Int
-}
-
-input create_posts_input {
-  slug: ID!
-  status: String
-  sort: Int
-  user_created: create_directus_users_input
-  date_created: Date
-  user_updated: create_directus_users_input
-  date_updated: Date
-  title: String
-  image: create_directus_files_input
-  date: Date
-  imageTitle: String
-  imageText: String
-  program: create_programs_input
-  audio: create_directus_files_input
-  content: JSON
-  authors: [create_posts_directus_users_1_input]
-  editor_nodes: [create_posts_editor_nodes_input]
-  audioFiles: [create_posts_files_1_input]
+  post_id: create_post_input
+  tags_id: create_tags_input
 }
 
 input create_programs_directus_users_input {
@@ -4269,6 +4074,11 @@ input create_statements_input {
   date_updated: Date
   text: String
   author: String
+}
+
+input create_tags_input {
+  id: ID
+  value: String
 }
 
 input date_filter_operators {
@@ -4564,8 +4374,6 @@ input directus_users_filter {
   theme_light_overrides_func: count_function_filter_operators
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
-  posts: posts_directus_users_1_filter
-  posts_func: count_function_filter_operators
   programs: programs_directus_users_filter
   programs_func: count_function_filter_operators
   policies: directus_access_filter
@@ -5092,67 +4900,20 @@ input post_filter {
   authors_func: count_function_filter_operators
   audio_files: post_files_filter
   audio_files_func: count_function_filter_operators
+  tags: post_tags_1_filter
+  tags_func: count_function_filter_operators
   editor_nodes: post_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
   _and: [post_filter]
   _or: [post_filter]
 }
 
-input posts_directus_users_1_filter {
+input post_tags_1_filter {
   id: number_filter_operators
-  posts_slug: posts_filter
-  directus_users_id: directus_users_filter
-  _and: [posts_directus_users_1_filter]
-  _or: [posts_directus_users_1_filter]
-}
-
-input posts_editor_nodes_filter {
-  id: string_filter_operators
-  posts_slug: posts_filter
-  collection: string_filter_operators
-  _and: [posts_editor_nodes_filter]
-  _or: [posts_editor_nodes_filter]
-  item__info_box: info_box_filter
-  item__quote: quote_filter
-}
-
-input posts_files_1_filter {
-  id: number_filter_operators
-  posts_slug: posts_filter
-  directus_files_id: directus_files_filter
-  sort: number_filter_operators
-  _and: [posts_files_1_filter]
-  _or: [posts_files_1_filter]
-}
-
-input posts_filter {
-  slug: string_filter_operators
-  status: string_filter_operators
-  sort: number_filter_operators
-  user_created: directus_users_filter
-  date_created: date_filter_operators
-  date_created_func: datetime_function_filter_operators
-  user_updated: directus_users_filter
-  date_updated: date_filter_operators
-  date_updated_func: datetime_function_filter_operators
-  title: string_filter_operators
-  image: directus_files_filter
-  date: date_filter_operators
-  date_func: date_function_filter_operators
-  imageTitle: string_filter_operators
-  imageText: string_filter_operators
-  program: programs_filter
-  audio: directus_files_filter
-  content: string_filter_operators
-  content_func: count_function_filter_operators
-  authors: posts_directus_users_1_filter
-  authors_func: count_function_filter_operators
-  editor_nodes: posts_editor_nodes_filter
-  editor_nodes_func: count_function_filter_operators
-  audioFiles: posts_files_1_filter
-  audioFiles_func: count_function_filter_operators
-  _and: [posts_filter]
-  _or: [posts_filter]
+  post_id: post_filter
+  tags_id: tags_filter
+  _and: [post_tags_1_filter]
+  _or: [post_tags_1_filter]
 }
 
 input programs_directus_users_filter {
@@ -5237,6 +4998,13 @@ input string_filter_operators {
   _nnull: Boolean
   _empty: Boolean
   _nempty: Boolean
+}
+
+input tags_filter {
+  id: number_filter_operators
+  value: string_filter_operators
+  _and: [tags_filter]
+  _or: [tags_filter]
 }
 
 input time_function_filter_operators {
@@ -5373,7 +5141,6 @@ input update_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
-  posts: [update_posts_directus_users_1_input]
   programs: [update_programs_directus_users_input]
   policies: [update_directus_access_input]
 }
@@ -5752,48 +5519,14 @@ input update_post_input {
   preview_full_image: Boolean
   authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
+  tags: [update_post_tags_1_input]
   editor_nodes: [update_post_editor_nodes_input]
 }
 
-input update_posts_directus_users_1_input {
+input update_post_tags_1_input {
   id: ID
-  posts_slug: update_posts_input
-  directus_users_id: update_directus_users_input
-}
-
-input update_posts_editor_nodes_input {
-  id: ID
-  posts_slug: update_posts_input
-  item: String
-  collection: String
-}
-
-input update_posts_files_1_input {
-  id: ID
-  posts_slug: update_posts_input
-  directus_files_id: update_directus_files_input
-  sort: Int
-}
-
-input update_posts_input {
-  slug: ID
-  status: String
-  sort: Int
-  user_created: update_directus_users_input
-  date_created: Date
-  user_updated: update_directus_users_input
-  date_updated: Date
-  title: String
-  image: update_directus_files_input
-  date: Date
-  imageTitle: String
-  imageText: String
-  program: update_programs_input
-  audio: update_directus_files_input
-  content: JSON
-  authors: [update_posts_directus_users_1_input]
-  editor_nodes: [update_posts_editor_nodes_input]
-  audioFiles: [update_posts_files_1_input]
+  post_id: update_post_input
+  tags_id: update_tags_input
 }
 
 input update_programs_directus_users_input {
@@ -5843,4 +5576,9 @@ input update_statements_input {
   date_updated: Date
   text: String
   author: String
+}
+
+input update_tags_input {
+  id: ID
+  value: String
 }

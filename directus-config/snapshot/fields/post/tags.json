@@ -1,23 +1,25 @@
 {
-  "collection": "directus_users",
-  "field": "posts",
+  "collection": "post",
+  "field": "tags",
   "type": "alias",
   "meta": {
-    "collection": "directus_users",
+    "collection": "post",
     "conditions": null,
-    "display": null,
+    "display": "related-values",
     "display_options": {
-      "template": null
+      "template": "{{tags_id.value}}"
     },
-    "field": "posts",
+    "field": "tags",
     "group": null,
     "hidden": false,
-    "interface": "list-m2m",
+    "interface": "extension-tags-m2m",
     "note": null,
-    "options": null,
+    "options": {
+      "referencingField": "value"
+    },
     "readonly": false,
     "required": false,
-    "sort": 1,
+    "sort": 18,
     "special": [
       "m2m"
     ],
