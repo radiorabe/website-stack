@@ -17,79 +17,8 @@ import {
 import { logError } from "@/lib/loging";
 import SearchBox from "./SearchBox";
 import FilterLabel from "@/components/FilterLabel";
-
-async function getPosts(filters) {
-  try {
-    const itemResponse = await Api.readItemsPost(
-      {
-        fields: ["*", "program.name", "imagebox.image"],
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        filter: JSON.stringify({
-          _and: [
-            {
-              status: {
-                _eq: "published",
-              },
-            },
-            // {
-            //   authors: {
-            //     directus_users_id: {
-            //       id: filters.author ? filters.author : undefined,
-            //     },
-            //   },
-            // },
-            {
-              program: {
-                slug: filters.program ? filters.program : undefined,
-              },
-            },
-            {
-              _or: [
-                {
-                  tags: {
-                    tags_id: {
-                      value: {
-                        _icontains: filters.searchTerm
-                          ? filters.searchTerm
-                          : undefined,
-                      },
-                    },
-                  },
-                },
-                {
-                  title: {
-                    _icontains: filters.searchTerm
-                      ? filters.searchTerm
-                      : undefined,
-                  },
-                },
-              ],
-            },
-          ],
-        }),
-        sort: ["-date"],
-        // limit: 3,
-      },
-      {
-        next: {
-          tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        },
-        cache:
-          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
-      }
-    );
-    // console.log("response", itemResponse);
-    let item: ItemsPost[] = itemResponse.data.data;
-    console.log("item", item);
-
-    return item;
-  } catch (error) {
-    logError(error);
-    notFound();
-  }
-}
+import { getPosts } from "./getPosts";
+import PostList from "./PostList";
 
 async function getProgram(slug) {
   try {
@@ -109,7 +38,7 @@ async function getProgram(slug) {
     );
     // console.log("response", itemResponse);
     let item: ItemsPrograms = itemResponse.data.data;
-    console.log("item", item);
+    // console.log("item", item);
 
     return item;
   } catch (error) {
@@ -135,7 +64,7 @@ async function getAuthor(id) {
     );
     // console.log("response", itemResponse);
     let item: Users = itemResponse.data.data;
-    console.log("item", item);
+    // console.log("item", item);
 
     return item;
   } catch (error) {
@@ -146,6 +75,7 @@ async function getAuthor(id) {
 export const metadata: Metadata = {
   title: "Beiträge",
 };
+const INITIAL_NUMBER_OF_POSTS = 3;
 
 export default async function BeitraegePage({ searchParams }) {
   // Extract filters from searchParams
@@ -155,11 +85,7 @@ export default async function BeitraegePage({ searchParams }) {
     program: searchParams.program || "",
   };
 
-  // Construct the API endpoint with query parameters
-  // const params = new URLSearchParams(filters).toString();
-  // console.log("params", params);
-
-  const posts = await getPosts(filters);
+  const posts = await getPosts(filters, 0, INITIAL_NUMBER_OF_POSTS);
   const program = await getProgram(filters.program);
   const author = await getAuthor(filters.author);
 
@@ -184,62 +110,7 @@ export default async function BeitraegePage({ searchParams }) {
             authorName={`${author.first_name} ${author.last_name}`}
           ></SearchBox>
         </View>
-
-        {posts.length > 0 ? (
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-            }}
-          >
-            {posts.map((item, index) => {
-              return (
-                <PostPreview
-                  key={"post" + index}
-                  data={item}
-                  index={index}
-                ></PostPreview>
-              );
-            })}
-          </View>
-        ) : (
-          <View
-            style={{
-              height: "40vh",
-              alignSelf: "center",
-              maxWidth: 800,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text
-              style={{
-                ...Fonts.style.h1,
-                textAlign: "center",
-                paddingBottom: Metrics.doubleBaseMargin,
-              }}
-            >
-              {"Ohje, dazu gibt es noch keinen Beitrag :/"}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  ...Fonts.style.text,
-                  textAlign: "center",
-                  paddingRight: Metrics.doubleBaseMargin,
-                }}
-              >
-                {"Schreibe etwas zu diesem Thema."}
-              </Text>
-              <Button href={"/mitmachen"} label={"Jetzt mitmachen"} />
-            </View>
-          </View>
-        )}
+        <PostList filters={filters} initialPosts={posts}></PostList>
       </View>
     </View>
   );

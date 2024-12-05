@@ -24,6 +24,7 @@
     "react": "^18.2.0",
     "react-aspect-ratio": "^1.1.8",
     "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.13.1",
     "react-native-media-query": "^2.0.1",
     "react-native-web": "^0.18.9",
     "react-select": "^5.8.3",

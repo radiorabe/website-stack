@@ -171,13 +171,12 @@ async function getPosts(slug) {
 export default async function ProgramPage({ params }) {
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
-  const { nowPlaying, nextShows } = await getNextShowForProgram("der-morgen");
+  const { nowPlaying, nextShows } = await getNextShowForProgram(sendung.slug);
   let nextShowTitle = nowPlaying
     ? "Jetzt Live"
     : nextShows.length > 0
       ? moment(nextShows[0].starts).calendar()
       : "";
-  console.log("nextShows", nextShows);
 
   return (
     <View style={styles.container}>
