@@ -150,17 +150,22 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const post = await getPost(params);
   // console.log("constent", post.content.content);
-  let paragraph = post.content.content.find(
-    (item) => item.type === "paragraph"
-  );
-  let text = paragraph.content.find((item) => item.type === "text");
+
+  let description = post.short_description;
+
+  if (!description) {
+    let paragraph = post.content.content.find(
+      (item) => item.type === "paragraph"
+    );
+    description = paragraph.content.find((item) => item.type === "text").text;
+  }
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: post.title,
-    description: text.text,
+    description: description,
     openGraph: {
       images: [
         `${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image}?width=${300}&height=${300}&fit=cover&format=webp`,
