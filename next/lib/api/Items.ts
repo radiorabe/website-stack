@@ -14,6 +14,10 @@ import {
   CreateItemsOrdersParams,
   CreateItemsOrdersPayload,
   ItemsOrders,
+  ReadItemsAudioPlayerData,
+  ReadItemsAudioPlayerFilesData,
+  ReadItemsAudioPlayerFilesParams,
+  ReadItemsAudioPlayerParams,
   ReadItemsContactAddressData,
   ReadItemsContactAddressParams,
   ReadItemsEventsData,
@@ -54,6 +58,10 @@ import {
   ReadItemsPageHistoryProtocolParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
+  ReadItemsPageJoinData,
+  ReadItemsPageJoinNodesData,
+  ReadItemsPageJoinNodesParams,
+  ReadItemsPageJoinParams,
   ReadItemsPageMemberData,
   ReadItemsPageMemberParams,
   ReadItemsPageMemberStatementsData,
@@ -108,6 +116,10 @@ import {
   ReadItemsStatementsParams,
   ReadItemsTagsData,
   ReadItemsTagsParams,
+  ReadSingleItemsAudioPlayerData,
+  ReadSingleItemsAudioPlayerFilesData,
+  ReadSingleItemsAudioPlayerFilesParams,
+  ReadSingleItemsAudioPlayerParams,
   ReadSingleItemsContactAddressData,
   ReadSingleItemsContactAddressParams,
   ReadSingleItemsEventsData,
@@ -148,6 +160,10 @@ import {
   ReadSingleItemsPageHistoryProtocolParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
+  ReadSingleItemsPageJoinData,
+  ReadSingleItemsPageJoinNodesData,
+  ReadSingleItemsPageJoinNodesParams,
+  ReadSingleItemsPageJoinParams,
   ReadSingleItemsPageMemberData,
   ReadSingleItemsPageMemberParams,
   ReadSingleItemsPageMemberStatementsData,
@@ -4176,6 +4192,333 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/post_tags_1/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the audio_player_files items.
+ *
+ * @tags Items, ItemsAudioPlayerFiles
+ * @name ReadItemsAudioPlayerFiles
+ * @summary List Items
+ * @request GET:/items/audio_player_files
+ * @secure
+ * @response `200` `ReadItemsAudioPlayerFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsAudioPlayerFiles = (query: ReadItemsAudioPlayerFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsAudioPlayerFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/audio_player_files`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single audio_player_files item by unique identifier.
+ *
+ * @tags Items, ItemsAudioPlayerFiles
+ * @name ReadSingleItemsAudioPlayerFiles
+ * @summary Retrieve an Item
+ * @request GET:/items/audio_player_files/{id}
+ * @response `200` `ReadSingleItemsAudioPlayerFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsAudioPlayerFiles = (
+    { id, ...query }: ReadSingleItemsAudioPlayerFilesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsAudioPlayerFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/audio_player_files/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the audio_player items.
+ *
+ * @tags Items, ItemsAudioPlayer
+ * @name ReadItemsAudioPlayer
+ * @summary List Items
+ * @request GET:/items/audio_player
+ * @secure
+ * @response `200` `ReadItemsAudioPlayerData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsAudioPlayer = (query: ReadItemsAudioPlayerParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsAudioPlayerData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/audio_player`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single audio_player item by unique identifier.
+ *
+ * @tags Items, ItemsAudioPlayer
+ * @name ReadSingleItemsAudioPlayer
+ * @summary Retrieve an Item
+ * @request GET:/items/audio_player/{id}
+ * @response `200` `ReadSingleItemsAudioPlayerData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsAudioPlayer = ({ id, ...query }: ReadSingleItemsAudioPlayerParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsAudioPlayerData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/audio_player/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_join items.
+ *
+ * @tags Items, ItemsPageJoin
+ * @name ReadItemsPageJoin
+ * @summary List Items
+ * @request GET:/items/page_join
+ * @secure
+ * @response `200` `ReadItemsPageJoinData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageJoin = (query: ReadItemsPageJoinParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageJoinData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_join`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_join item by unique identifier.
+ *
+ * @tags Items, ItemsPageJoin
+ * @name ReadSingleItemsPageJoin
+ * @summary Retrieve an Item
+ * @request GET:/items/page_join/{id}
+ * @response `200` `ReadSingleItemsPageJoinData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageJoin = ({ id, ...query }: ReadSingleItemsPageJoinParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageJoinData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_join/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_join_nodes items.
+ *
+ * @tags Items, ItemsPageJoinNodes
+ * @name ReadItemsPageJoinNodes
+ * @summary List Items
+ * @request GET:/items/page_join_nodes
+ * @secure
+ * @response `200` `ReadItemsPageJoinNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageJoinNodes = (query: ReadItemsPageJoinNodesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageJoinNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_join_nodes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_join_nodes item by unique identifier.
+ *
+ * @tags Items, ItemsPageJoinNodes
+ * @name ReadSingleItemsPageJoinNodes
+ * @summary Retrieve an Item
+ * @request GET:/items/page_join_nodes/{id}
+ * @response `200` `ReadSingleItemsPageJoinNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageJoinNodes = ({ id, ...query }: ReadSingleItemsPageJoinNodesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageJoinNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_join_nodes/${id}`,
       method: "GET",
       query: query,
       format: "json",

@@ -14,21 +14,21 @@ import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
 import Loader from "react-spinners/BounceLoader";
 import AudioFiles from "./AudioFiles";
+import Button from "./Button";
+import IconDownload from "@/assets/svg/IconDownload";
 
 export interface HoverableProps {
   audioFiles: any[];
 }
 
 const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
-  let [tracks, setTacks] = useState(
-    audioFiles.map((audioFile) => {
-      return {
-        src: `${process.env.NEXT_PUBLIC_BE_URL}/assets/${audioFile.directus_files_id.id}/${audioFile.directus_files_id.title}.mp3`,
-        title: audioFile.directus_files_id.title,
-        author: "",
-      };
-    })
-  );
+  let tracks = audioFiles.map((audioFile) => {
+    return {
+      src: `${process.env.NEXT_PUBLIC_BE_URL}/assets/${audioFile.directus_files_id.id}/${audioFile.directus_files_id.title}.mp3`,
+      title: audioFile.directus_files_id.title,
+      author: "",
+    };
+  });
 
   let [track, setTrack] = useState(tracks[0]);
 
@@ -182,7 +182,7 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
           </View>
         </View>
       </View>
-      {audioFiles.length >= 2 && (
+      {tracks.length >= 2 && (
         <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
           <AudioFiles
             tracks={tracks}
@@ -202,6 +202,16 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
             currentTrack={playerState === "playing" ? currentTrack : null}
           ></AudioFiles>
         </View>
+      )}
+      {tracks.length === 1 && (
+        <div style={{ marginTop: Metrics.tripleBaseMargin }}>
+          <Button
+            url={tracks[0].src + "?download"}
+            icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
+            label={"Herunterladen"}
+          ></Button>
+          <View style={{ width: Metrics.baseMargin }}></View>
+        </div>
       )}
     </View>
   );

@@ -786,6 +786,37 @@ export interface ItemsPostTags1 {
   tags_id?: number | ItemsTags | null;
 }
 
+export interface ItemsAudioPlayerFiles {
+  id?: number;
+  audio_player_id?: number | ItemsAudioPlayer | null;
+  directus_files_id?: string | Files | null;
+}
+
+export interface ItemsAudioPlayer {
+  id?: number;
+  files?: (number | ItemsAudioPlayerFiles)[] | null;
+}
+
+export interface ItemsPageJoin {
+  id?: number;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  content?: any;
+  editor_nodes?: (string | ItemsPageJoinNodes)[] | null;
+}
+
+export interface ItemsPageJoinNodes {
+  /** @format uuid */
+  id?: string;
+  page_join_id?: number | ItemsPageJoin | null;
+  item?: (string | ItemsInfoBox | ItemsAudioPlayer)[] | null;
+  collection?: string | null;
+}
+
 export interface GetAssetParams {
   /** The key of the asset size configured in settings. */
   key?: string;
@@ -2854,4 +2885,152 @@ export interface ReadSingleItemsPostTags1Params {
 
 export interface ReadSingleItemsPostTags1Data {
   data?: ItemsPostTags1;
+}
+
+export interface ReadItemsAudioPlayerFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsAudioPlayerFilesData {
+  data?: ItemsAudioPlayerFiles[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsAudioPlayerFilesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsAudioPlayerFilesData {
+  data?: ItemsAudioPlayerFiles;
+}
+
+export interface ReadItemsAudioPlayerParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsAudioPlayerData {
+  data?: ItemsAudioPlayer[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsAudioPlayerParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsAudioPlayerData {
+  data?: ItemsAudioPlayer;
+}
+
+export interface ReadItemsPageJoinParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageJoinData {
+  data?: ItemsPageJoin[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageJoinParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageJoinData {
+  data?: ItemsPageJoin;
+}
+
+export interface ReadItemsPageJoinNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageJoinNodesData {
+  data?: ItemsPageJoinNodes[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageJoinNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageJoinNodesData {
+  data?: ItemsPageJoinNodes;
 }

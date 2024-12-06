@@ -1,5 +1,6 @@
 import { Api } from "@/lib/api";
 import {
+  ItemsAudioPlayer,
   ItemsIframe,
   ItemsImageBox,
   ItemsInfoBox,
@@ -21,6 +22,8 @@ import ImageBox from "../ImageBox";
 import Colors from "@/lib/Colors";
 import Link from "./Link";
 import Iframe from "./Iframe";
+import AudioFilePlayer from "../AudioFilePlayer";
+import Metrics from "@/lib/Metrics";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library
@@ -118,6 +121,30 @@ async function getIframe(id) {
   }
 }
 
+async function getAudioPlayerFiles(id) {
+  try {
+    const itemResponse = await Api.readSingleItemsAudioPlayer(
+      {
+        id: id,
+        fields: ["*", "files.directus_files_id.*"],
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    let item: ItemsAudioPlayer = itemResponse.data.data;
+
+    return item;
+  } catch (error) {
+    logError(error);
+  }
+}
+
 async function getNodes(id, readNodes) {
   try {
     const itemResponse = await readNodes(
@@ -161,6 +188,9 @@ const Heading = (props: {
         <h2
           style={{
             ...Fonts.style.h2,
+            marginBlock: "unset",
+            marginTop: Metrics.tripleBaseMargin,
+            marginBottom: Metrics.doubleBaseMargin,
           }}
         >
           {props.children}
@@ -181,24 +211,16 @@ const Heading = (props: {
         <h4
           style={{
             ...Fonts.style.h4,
+            marginBlock: "unset",
+            marginTop: Metrics.doubleBaseMargin,
+            marginBottom: Metrics.baseMargin,
           }}
         >
           {props.children}
         </h4>
       );
 
-    // return (
-    //   <Text
-    //     style={{
-    //       ...Fonts.style.h4,
-    //     }}
-    //   >
-    //     {props.children[0].node}
-    //   </Text>
-    // );
     default:
-      // console.log("switch 4");
-
       return <h4>{props.children}</h4>;
   }
 };
@@ -260,7 +282,16 @@ const nodeHandlers: TipTapNodeHandlers = {
   text: (props) => (
     <span style={{ ...Fonts.style.TTtext }}>{props.node.text}</span>
   ),
-  paragraph: (props) => <p>{props.children}</p>,
+  paragraph: (props) => (
+    <p
+      style={{
+        marginBlock: "unset",
+        marginBlockEnd: Metrics.doubleBaseMargin,
+      }}
+    >
+      {props.children}
+    </p>
+  ),
   heading: (props) => (
     <Heading level={props.node.attrs.level}>{props.children}</Heading>
   ),
@@ -284,13 +315,30 @@ const nodeHandlers: TipTapNodeHandlers = {
       post_editor_nodes: Api.readSingleItemsPostEditorNodes,
       page_history_nodes: Api.readSingleItemsPageHistoryNodes,
       events_editor_nodes: Api.readSingleItemsEventsEditorNodes,
+      page_join_nodes: Api.readSingleItemsPageJoinNodes,
     };
     if (ApiMapper[props.node.attrs.junction]) {
       let node = await getNodes(
         props.node.attrs.id,
         ApiMapper[props.node.attrs.junction]
       );
-      // console.log("collection", props.node.attrs.collection);
+      console.log("collection", props.node.attrs.collection);
+
+      if (props.node.attrs.collection === "audio_player") {
+        let audioPlayer = await getAudioPlayerFiles(node.item);
+        // console.log("quote", quote);
+
+        return (
+          <div
+            style={{
+              paddingTop: Metrics.doubleBaseMargin,
+              paddingBottom: Metrics.doubleBaseMargin,
+            }}
+          >
+            <AudioFilePlayer audioFiles={audioPlayer.files}></AudioFilePlayer>
+          </div>
+        );
+      }
 
       if (props.node.attrs.collection === "quote") {
         let quote = await getQuote(node.item);
@@ -339,9 +387,12 @@ const handlers = (topProps) => {
   };
 };
 
-export const RenderTipTap = ({ content, topProps }) => {
-  // const contentJson = useMemo(() => JSON.parse(content), [content]);
+export type RenderTipTapProps = Readonly<{
+  content: any;
+  topProps?: any;
+}>;
 
+export const RenderTipTap = ({ content, topProps }: RenderTipTapProps) => {
   return (
     <div className="renderer-container">
       <TipTapRender node={content} handlers={handlers(topProps)} />
