@@ -96,7 +96,15 @@
         "page_receive_nodes",
         "party_location",
         "protocol",
-        "statements"
+        "statements",
+        "event_shows",
+        "events",
+        "events_files",
+        "page_join",
+        "post",
+        "post_directus_users",
+        "post_files",
+        "post_tags_1"
       ]
     },
     "operation": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d",
