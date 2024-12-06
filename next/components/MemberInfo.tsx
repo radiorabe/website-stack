@@ -7,11 +7,6 @@ import Image from "next/image";
 import HoverUrl from "./HoverUrl";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
-import StyleSheet from "react-native-media-query";
-
-const { ids, styles } = StyleSheet.create({
-  avatar: { borderRadius: 9 },
-});
 
 const MemberInfo = ({ user }) => {
   let avatarSrc = user.avatar
@@ -29,9 +24,9 @@ const MemberInfo = ({ user }) => {
         src={avatarSrc}
         width={90}
         height={90}
-        style={styles.avatar}
+        style={{ borderRadius: 9 }}
         // layout="responsive"
-        alt={`Foto von ${user.first_name} ${user.last_name}`}
+        alt={`Foto von ${user.first_name || ""} ${user.last_name || ""}`}
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
 
@@ -52,8 +47,6 @@ const MemberInfo = ({ user }) => {
         >
           {user.email}
         </HoverUrl>
-
-        {/* <Text style={{}}>{user.email}</Text> */}
       </View>
     </View>
   );

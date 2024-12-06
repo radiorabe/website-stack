@@ -211,8 +211,8 @@ export default async function BeitragPage({ params }: Props) {
                     }}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? "," : ""} ${user.first_name} ${
-                    user.last_name
+                  >{`${index ? "," : ""} ${user.first_name || ""} ${
+                    user.last_name || ""
                   }`}</HoverText>
                 );
               })}

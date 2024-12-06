@@ -1,24 +1,14 @@
-import Button from "@/components/Button";
-import ButtonFull from "@/components/ButtonFull";
-import PostPreview from "@/components/PostPreview";
-import Metrics from "@/lib/Metrics";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { View, Text } from "@/lib/server-react-native";
-import StyleSheet from "react-native-media-query";
-import Fonts from "../../../lib/Fonts";
-import { Api, UserApi } from "../../../lib/api";
-import {
-  GetUsersData,
-  ItemsPost,
-  ItemsPrograms,
-  Users,
-} from "../../../lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import SearchBox from "./SearchBox";
-import FilterLabel from "@/components/FilterLabel";
+import Metrics from "@/lib/Metrics";
+import { View } from "@/lib/server-react-native";
+import { Metadata } from "next";
+import StyleSheet from "react-native-media-query";
+import { Api, UserApi } from "../../../lib/api";
+import { ItemsPrograms, Users } from "../../../lib/api/data-contracts";
+import Fonts from "../../../lib/Fonts";
 import { getPosts } from "./getPosts";
 import PostList from "./PostList";
+import SearchBox from "./SearchBox";
 
 async function getProgram(slug) {
   try {
@@ -64,7 +54,7 @@ async function getAuthor(id) {
     );
     // console.log("response", itemResponse);
     let item: Users = itemResponse.data.data;
-    // console.log("item", item);
+    console.log("user", item);
 
     return item;
   } catch (error) {
@@ -107,7 +97,7 @@ export default async function BeitraegePage({ searchParams }) {
         >
           <SearchBox
             programName={program.name}
-            authorName={`${author.first_name} ${author.last_name}`}
+            authorName={`${author.first_name || ""} ${author.last_name || ""}`}
           ></SearchBox>
         </View>
         <PostList filters={filters} initialPosts={posts}></PostList>

@@ -118,7 +118,12 @@ export default async function TeaamPage(props) {
               {data.members_staff.map(
                 (item: ItemsPageTeamDirectusUsers, index) => {
                   let user: Users = item.directus_users_id as Users;
-                  return <MemberInfo user={user}></MemberInfo>;
+                  return (
+                    <MemberInfo
+                      key={"memberstaff" + index}
+                      user={user}
+                    ></MemberInfo>
+                  );
                 }
               )}
             </View>
@@ -145,7 +150,12 @@ export default async function TeaamPage(props) {
               {data.members_management.map(
                 (item: ItemsPageTeamDirectusUsers, index) => {
                   let user: Users = item.directus_users_id as Users;
-                  return <MemberInfo user={user}></MemberInfo>;
+                  return (
+                    <MemberInfo
+                      key={"membermanagement" + index}
+                      user={user}
+                    ></MemberInfo>
+                  );
                 }
               )}
             </View>
@@ -171,7 +181,12 @@ export default async function TeaamPage(props) {
               {data.members_program.map(
                 (item: ItemsPageTeamDirectusUsers, index) => {
                   let user: Users = item.directus_users_id as Users;
-                  return <MemberInfo user={user}></MemberInfo>;
+                  return (
+                    <MemberInfo
+                      key={"memberprogram" + index}
+                      user={user}
+                    ></MemberInfo>
+                  );
                 }
               )}
             </View>
