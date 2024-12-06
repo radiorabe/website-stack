@@ -20,7 +20,6 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
-import AudioFiles from "./AudioFiles";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -247,27 +246,10 @@ export default async function BeitragPage({ params }: Props) {
                 paddingBottom: Metrics.tripleBaseMargin,
               }}
             >
-              <AudioFilePlayer
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio_files[0].directus_files_id.id}/rabe-audio.mp3`}
-              ></AudioFilePlayer>
-              {post.audio_files.length >= 2 && (
-                <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
-                  <AudioFiles audioFiles={post.audio_files}></AudioFiles>
-                </View>
-              )}
+              <AudioFilePlayer audioFiles={post.audio_files}></AudioFilePlayer>
             </View>
           )}
           <View style={{ flexDirection: "row" }}>
-            {/* {post.audioFiles && (
-              <>
-                <Button
-                  url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audioFiles[0].directus_files_id.id}/${post.audioFiles[0].directus_files_id.title}.mp3?download`}
-                  icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
-                  label={"Herunterladen"}
-                ></Button>
-                <View style={{ width: Metrics.baseMargin }}></View>
-              </>
-            )} */}
             <Button
               url={"alksjdfkl"}
               icon={<IconShare color={Colors.darkGreen}></IconShare>}

@@ -1,31 +1,18 @@
-import IconDownload from "@/assets/svg/IconDownload";
-import AudioFilePlayer from "@/components/AudioFilePlayer";
-import Button from "@/components/Button";
-import HoverText from "@/components/HoverText";
+import ButtonFull from "@/components/ButtonFull";
+import ImageBox from "@/components/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
-import {
-  ItemsEvents,
-  ItemsEventShows,
-  ItemsPost,
-  ItemsPostDirectusUsers1,
-  ItemsPrograms,
-  Users,
-} from "@/lib/api/data-contracts";
-import Colors, { pSBC, shadeColor } from "@/lib/Colors";
+import { ItemsEvents, ItemsEventShows } from "@/lib/api/data-contracts";
+import Colors, { shadeColor } from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
+import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
+import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
-import IconShare from "../../../../assets/svg/IconShare";
-import { logError } from "@/lib/loging";
-import DownloadLogo from "../../geschichte/DownloadLogo";
 import ShowInfoText from "./ShowInfoText";
-import ImageBox from "@/components/ImageBox";
-import ButtonFull from "@/components/ButtonFull";
 import TicketIcon from "./TicketIcon";
 
 const { ids, styles } = StyleSheet.create({
@@ -288,146 +275,26 @@ export default async function EventPage({ params }) {
             );
           })}
         </View>
-
-        {/* <View style={styles.postContainer}> */}
-        {/* <View
+        {event && event.logos && event.logos.length > 0 && (
+          <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: Metrics.tripleBaseMargin,
+              backgroundColor: event.color,
+              width: "90vw",
+              alignSelf: "center",
+              padding: Metrics.doubleBaseMargin,
+              marginBottom: Metrics.tripleBaseMargin,
+              borderRadius: 9,
             }}
           >
-            <HoverText
-              href={"/" + program.slug}
-              style={[styles.sendungsInfo, styles.border]}
-              hoverStyle={{
-                color: Colors.green,
-                borderColor: Colors.green,
+            <Text
+              style={{
+                ...Fonts.style.h2,
+                color: Colors.white,
+                paddingBottom: Metrics.doubleBaseMargin,
               }}
             >
-              {program.name}
-            </HoverText>
-            <View style={{ width: Metrics.doubleBaseMargin }}></View>
-            <Text style={{ ...Fonts.style.text }}>
-              <Text> {"Von "}</Text>
-              {post.authors.map((item: ItemsPostDirectusUsers1, index) => {
-                let user: Users = item.directus_users_id as Users;
-                return (
-                  <HoverText
-                    key={"author" + index}
-                    href={"/beitraege"}
-                    style={{ ...Fonts.style.textLink, color: Colors.green }}
-                    hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? " &" : ""} ${user.first_name} ${
-                    user.last_name
-                  }`}</HoverText>
-                );
-              })}
-
-              <Text> {`am ${moment(post.date).format("DD. MMMM YY")}`}</Text>
+              {"Danke für die finanzielle Unterstützung:"}
             </Text>
-          </View>
-          <Text
-            style={{
-              ...Fonts.style.h1,
-              paddingBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            {post.title}
-          </Text>
-          {post.image && (
-            <View style={styles.imageContainer}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.image}?width=1440&height=960&fit=cover`}
-                width={1440}
-                height={960}
-                style={styles.image}
-                layout="responsive"
-                alt={post.title}
-                // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-              {post.imageTitle && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    paddingHorizontal: Metrics.tripleBaseMargin,
-                    paddingVertical: Metrics.doubleBaseMargin,
-                  }}
-                >
-                  <Text
-                    style={{
-                      ...Fonts.style.textSmall,
-                      fontFamily: Fonts.type.bold,
-                    }}
-                  >
-                    {"Foto: " + post.imageTitle}
-                  </Text>
-                  <Text style={{ ...Fonts.style.textSmall }}> </Text>
-                  {post.imageText && (
-                    <Text style={{ ...Fonts.style.textSmall }}>
-                      {post.imageText}
-                    </Text>
-                  )}
-                </View>
-              )}
-            </View>
-          )}
-
-          {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
-          {post.audio && (
-            <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
-              <AudioFilePlayer
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3`}
-              ></AudioFilePlayer>
-            </View>
-          )}
-          <View style={{ flexDirection: "row" }}>
-            {post.audio && (
-              <>
-                <Button
-                  url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.audio}/rabe-audio.mp3?download`}
-                  icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
-                  label={"Herunterladen"}
-                ></Button>
-                <View style={{ width: Metrics.baseMargin }}></View>
-              </>
-            )}
-            <Button
-              url={"alksjdfkl"}
-              icon={<IconShare color={Colors.darkGreen}></IconShare>}
-              label={"Teilen"}
-            ></Button>
-          </View>
-
-          <View>
-            <View
-              style={{
-                height: Metrics.tripleBaseMargin,
-              }}
-            ></View>
-          </View>
-        </View> */}
-
-        <View
-          style={{
-            backgroundColor: event.color,
-            width: "90vw",
-            alignSelf: "center",
-            padding: Metrics.doubleBaseMargin,
-            marginBottom: Metrics.tripleBaseMargin,
-            borderRadius: 9,
-          }}
-        >
-          <Text
-            style={{
-              ...Fonts.style.h2,
-              color: Colors.white,
-              paddingBottom: Metrics.doubleBaseMargin,
-            }}
-          >
-            {"Danke für die finanzielle Unterstützung:"}
-          </Text>
-          {event && event.logos && (
             <View style={{ flexDirection: "row" }}>
               {event.logos.map((item, index) => {
                 return (
@@ -460,8 +327,8 @@ export default async function EventPage({ params }) {
                 );
               })}
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </View>
     </View>
   );

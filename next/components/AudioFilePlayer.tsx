@@ -1,32 +1,37 @@
 "use client";
-import IconShare from "@/assets/svg/IconShare";
 import Pausebutton from "@/assets/svg/Pausebutton";
 import Playbutton from "@/assets/svg/Playbutton";
 import { useAudioPlayerContext } from "@/context/audio-player-context";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import metrics from "@/lib/Metrics";
-import Link from "next/link";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import React, {
-  ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { View, Text, Pressable } from "@/lib/server-react-native";
+import { ReactElement, useEffect, useState } from "react";
 
-import Loader from "react-spinners/BounceLoader";
+import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
+import Loader from "react-spinners/BounceLoader";
+import AudioFiles from "./AudioFiles";
 
 export interface HoverableProps {
-  src: string;
+  audioFiles: any[];
 }
 
-const AudioFilePlayer = ({ src }: HoverableProps) => {
-  let track = { src: src, title: "flakbja", author: "alksdjf " };
+const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
+  let [tracks, setTacks] = useState(
+    audioFiles.map((audioFile) => {
+      return {
+        src: `${process.env.NEXT_PUBLIC_BE_URL}/assets/${audioFile.directus_files_id.id}/${audioFile.directus_files_id.title}.mp3`,
+        title: audioFile.directus_files_id.title,
+        author: "",
+      };
+    })
+  );
+
+  let [track, setTrack] = useState(tracks[0]);
+
   const {
     currentTrack,
     setCurrentTrack,
@@ -39,7 +44,6 @@ const AudioFilePlayer = ({ src }: HoverableProps) => {
   } = useAudioPlayerContext();
   const [localTimeProgress, setLocalTimeProgress] = useState<number>(0);
   const [localyChanging, setLocalyChanging] = useState<boolean>(false);
-
   let thisTrackSet = track.src === currentTrack.src;
   let thisTrackLoading = thisTrackSet && playerState === "loading";
   let thisTrackPlaying = thisTrackSet && playerState === "playing";
@@ -178,6 +182,27 @@ const AudioFilePlayer = ({ src }: HoverableProps) => {
           </View>
         </View>
       </View>
+      {audioFiles.length >= 2 && (
+        <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+          <AudioFiles
+            tracks={tracks}
+            onChange={(track) => {
+              if (track !== currentTrack) {
+                setTrack(track);
+                setCurrentTrack(track);
+                audioRef.current?.load();
+              } else {
+                if (playerState === "playing") {
+                  audioRef.current?.pause();
+                } else if (playerState === "paused") {
+                  audioRef.current?.play();
+                }
+              }
+            }}
+            currentTrack={playerState === "playing" ? currentTrack : null}
+          ></AudioFiles>
+        </View>
+      )}
     </View>
   );
 };

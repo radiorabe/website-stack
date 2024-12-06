@@ -1,10 +1,9 @@
 "use client";
-import { PressableState } from "@/lib/Types";
-import { ItemsInfoBox, ItemsQuote } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import { PressableState } from "@/lib/Types";
 import { ReactElement } from "react";
 import DownloadIcon from "./DownloadIcon";
 
@@ -13,7 +12,7 @@ export interface Props {
   url: string;
 }
 
-const InfoBox = ({ label, url }: Props) => {
+const DownloadBox = ({ label, url }: Props) => {
   return (
     <Pressable
       style={{
@@ -50,4 +49,4 @@ const InfoBox = ({ label, url }: Props) => {
   );
 };
 
-export default InfoBox;
+export default DownloadBox;
