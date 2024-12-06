@@ -139,10 +139,6 @@ type Query {
   iframe_by_id(id: ID!, version: String): iframe
   iframe_aggregated(groupBy: [String], filter: iframe_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [iframe_aggregated!]!
   iframe_by_version(version: String!, id: ID!): version_iframe
-  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
-  post_by_id(id: ID!, version: String): post
-  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
-  post_by_version(version: String!, id: ID!): version_post
   events_event_shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows!]!
   events_event_shows_by_id(id: ID!, version: String): events_event_shows
   events_event_shows_aggregated(groupBy: [String], filter: events_event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_event_shows_aggregated!]!
@@ -167,6 +163,10 @@ type Query {
   events_editor_nodes_by_id(id: ID!, version: String): events_editor_nodes
   events_editor_nodes_aggregated(groupBy: [String], filter: events_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_editor_nodes_aggregated!]!
   events_editor_nodes_by_version(version: String!, id: ID!): version_events_editor_nodes
+  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
+  post_by_id(id: ID!, version: String): post
+  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
+  post_by_version(version: String!, id: ID!): version_post
   tags(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [tags!]!
   tags_by_id(id: ID!, version: String): tags
   tags_aggregated(groupBy: [String], filter: tags_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [tags_aggregated!]!
@@ -175,6 +175,8 @@ type Query {
   post_tags_1_by_id(id: ID!, version: String): post_tags_1
   post_tags_1_aggregated(groupBy: [String], filter: post_tags_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_tags_1_aggregated!]!
   post_tags_1_by_version(version: String!, id: ID!): version_post_tags_1
+  page_join(version: String): page_join
+  page_join_by_version(version: String!): version_page_join
 }
 
 type Mutation {
@@ -238,8 +240,6 @@ type Mutation {
   create_events_files_item(data: create_events_files_input!): events_files
   create_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_iframe_input!]): [iframe!]!
   create_iframe_item(data: create_iframe_input!): iframe
-  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
-  create_post_item(data: create_post_input!): post
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
   create_events_event_shows_item(data: create_events_event_shows_input!): events_event_shows
   create_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_directus_users_input!]): [post_directus_users!]!
@@ -252,6 +252,8 @@ type Mutation {
   create_post_files_item(data: create_post_files_input!): post_files
   create_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_editor_nodes_input!]): [events_editor_nodes!]!
   create_events_editor_nodes_item(data: create_events_editor_nodes_input!): events_editor_nodes
+  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
+  create_post_item(data: create_post_input!): post
   create_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_tags_input!]): [tags!]!
   create_tags_item(data: create_tags_input!): tags
   create_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_tags_1_input!]): [post_tags_1!]!
@@ -356,9 +358,6 @@ type Mutation {
   update_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_iframe_input!): [iframe!]!
   update_iframe_batch(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_iframe_input!]): [iframe!]!
   update_iframe_item(id: ID!, data: update_iframe_input!): iframe
-  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
-  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
-  update_post_item(id: ID!, data: update_post_input!): post
   update_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_event_shows_input!): [events_event_shows!]!
   update_events_event_shows_batch(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_event_shows_input!]): [events_event_shows!]!
   update_events_event_shows_item(id: ID!, data: update_events_event_shows_input!): events_event_shows
@@ -377,12 +376,16 @@ type Mutation {
   update_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_editor_nodes_input!): [events_editor_nodes!]!
   update_events_editor_nodes_batch(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_editor_nodes_input!]): [events_editor_nodes!]!
   update_events_editor_nodes_item(id: ID!, data: update_events_editor_nodes_input!): events_editor_nodes
+  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
+  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
+  update_post_item(id: ID!, data: update_post_input!): post
   update_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_tags_input!): [tags!]!
   update_tags_batch(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_tags_input!]): [tags!]!
   update_tags_item(id: ID!, data: update_tags_input!): tags
   update_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_tags_1_input!): [post_tags_1!]!
   update_post_tags_1_batch(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_tags_1_input!]): [post_tags_1!]!
   update_post_tags_1_item(id: ID!, data: update_post_tags_1_input!): post_tags_1
+  update_page_join(data: update_page_join_input!): page_join
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -443,8 +446,6 @@ type Mutation {
   delete_events_files_item(id: ID!): delete_one
   delete_iframe_items(ids: [ID]!): delete_many
   delete_iframe_item(id: ID!): delete_one
-  delete_post_items(ids: [ID]!): delete_many
-  delete_post_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
   delete_events_event_shows_item(id: ID!): delete_one
   delete_post_directus_users_items(ids: [ID]!): delete_many
@@ -457,6 +458,8 @@ type Mutation {
   delete_post_files_item(id: ID!): delete_one
   delete_events_editor_nodes_items(ids: [ID]!): delete_many
   delete_events_editor_nodes_item(id: ID!): delete_one
+  delete_post_items(ids: [ID]!): delete_many
+  delete_post_item(id: ID!): delete_one
   delete_tags_items(ids: [ID]!): delete_many
   delete_tags_item(id: ID!): delete_one
   delete_post_tags_1_items(ids: [ID]!): delete_many
@@ -525,15 +528,16 @@ type Subscription {
   events_mutated(event: EventEnum): events_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
-  post_mutated(event: EventEnum): post_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
   events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
+  post_mutated(event: EventEnum): post_mutated
   tags_mutated(event: EventEnum): tags_mutated
   post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
+  page_join_mutated(event: EventEnum): page_join_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -2000,6 +2004,24 @@ type page_impressum_mutated {
   data: page_impressum
 }
 
+type page_join {
+  id: ID!
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  content: JSON
+  content_func: count_functions
+}
+
+type page_join_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_join
+}
+
 type page_member {
   id: ID!
   content: JSON
@@ -2538,12 +2560,13 @@ type post {
   content: JSON!
   content_func: count_functions
   preview_full_image: Boolean
+  short_description: String
+  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
+  tags_func: count_functions
   authors(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users]
   authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
   audio_files_func: count_functions
-  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
-  tags_func: count_functions
   editor_nodes(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_editor_nodes]
   editor_nodes_func: count_functions
 }
@@ -2576,9 +2599,10 @@ type post_aggregated_count {
   imagebox: Int
   content: Int
   preview_full_image: Int
+  short_description: Int
+  tags: Int
   authors: Int
   audio_files: Int
-  tags: Int
   editor_nodes: Int
 }
 
@@ -3254,6 +3278,16 @@ type version_page_impressum {
 }
 
 """"""
+type version_page_join {
+  id: ID
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  content: JSON
+}
+
+""""""
 type version_page_member {
   id: ID
   content: JSON
@@ -3413,9 +3447,10 @@ type version_post {
   imagebox: JSON
   content: JSON
   preview_full_image: Boolean
+  short_description: String
+  tags: JSON
   authors: JSON
   audio_files: JSON
-  tags: JSON
   editor_nodes: JSON
 }
 
@@ -4015,9 +4050,10 @@ input create_post_input {
   imagebox: create_image_box_input
   content: JSON!
   preview_full_image: Boolean
+  short_description: String
+  tags: [create_post_tags_1_input]
   authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
-  tags: [create_post_tags_1_input]
   editor_nodes: [create_post_editor_nodes_input]
 }
 
@@ -4896,12 +4932,13 @@ input post_filter {
   content: string_filter_operators
   content_func: count_function_filter_operators
   preview_full_image: boolean_filter_operators
+  short_description: string_filter_operators
+  tags: post_tags_1_filter
+  tags_func: count_function_filter_operators
   authors: post_directus_users_filter
   authors_func: count_function_filter_operators
   audio_files: post_files_filter
   audio_files_func: count_function_filter_operators
-  tags: post_tags_1_filter
-  tags_func: count_function_filter_operators
   editor_nodes: post_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
   _and: [post_filter]
@@ -5354,6 +5391,15 @@ input update_page_impressum_input {
   content: JSON
 }
 
+input update_page_join_input {
+  id: ID
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  content: JSON
+}
+
 input update_page_member_input {
   id: ID
   content: JSON
@@ -5517,9 +5563,10 @@ input update_post_input {
   imagebox: update_image_box_input
   content: JSON
   preview_full_image: Boolean
+  short_description: String
+  tags: [update_post_tags_1_input]
   authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
-  tags: [update_post_tags_1_input]
   editor_nodes: [update_post_editor_nodes_input]
 }
 

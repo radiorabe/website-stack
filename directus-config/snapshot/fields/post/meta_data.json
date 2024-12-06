@@ -1,27 +1,27 @@
 {
   "collection": "post",
-  "field": "tags",
+  "field": "meta_data",
   "type": "alias",
   "meta": {
     "collection": "post",
     "conditions": null,
-    "display": "related-values",
-    "display_options": {
-      "template": "{{tags_id.value}}"
-    },
-    "field": "tags",
-    "group": "meta_data",
+    "display": null,
+    "display_options": null,
+    "field": "meta_data",
+    "group": null,
     "hidden": false,
-    "interface": "extension-tags-m2m",
+    "interface": "group-detail",
     "note": null,
     "options": {
-      "referencingField": "value"
+      "headerIcon": "screen_search_desktop"
     },
     "readonly": false,
     "required": false,
-    "sort": 1,
+    "sort": 18,
     "special": [
-      "m2m"
+      "alias",
+      "no-data",
+      "group"
     ],
     "translations": null,
     "validation": null,
