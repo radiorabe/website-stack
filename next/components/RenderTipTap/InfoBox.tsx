@@ -23,6 +23,7 @@ const InfoBox = ({ data }: HoverableProps) => {
       <Text
         style={{
           ...Fonts.style.h4,
+          paddingBottom: Metrics.baseMargin,
         }}
       >
         {data.title}

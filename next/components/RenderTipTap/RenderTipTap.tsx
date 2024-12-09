@@ -322,7 +322,7 @@ const nodeHandlers: TipTapNodeHandlers = {
         props.node.attrs.id,
         ApiMapper[props.node.attrs.junction]
       );
-      console.log("collection", props.node.attrs.collection);
+      // console.log("collection", props.node.attrs.collection);
 
       if (props.node.attrs.collection === "audio_player") {
         let audioPlayer = await getAudioPlayerFiles(node.item);

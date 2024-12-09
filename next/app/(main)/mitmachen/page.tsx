@@ -55,9 +55,7 @@ async function getPageData() {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPageJoin;
-    console.log("ItemsPageJoin", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
+    // console.log("ItemsPageJoin", item);
 
     return item;
   } catch (error) {
@@ -69,7 +67,6 @@ async function getPageData() {
 
 export default async function MitmachenPage(props) {
   const data = await getPageData();
-  console.log("data", data.content);
 
   return (
     <View>
@@ -90,8 +87,7 @@ export default async function MitmachenPage(props) {
           <View
             style={{
               flexDirection: "row",
-              // backgroundColor: "green",
-              paddingBottom: Metrics.doubleBaseMargin,
+              marginBottom: Metrics.tripleBaseMargin,
             }}
           >
             <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
