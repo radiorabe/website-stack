@@ -175,8 +175,34 @@ type Query {
   post_tags_1_by_id(id: ID!, version: String): post_tags_1
   post_tags_1_aggregated(groupBy: [String], filter: post_tags_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_tags_1_aggregated!]!
   post_tags_1_by_version(version: String!, id: ID!): version_post_tags_1
+  audio_player_files(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [audio_player_files!]!
+  audio_player_files_by_id(id: ID!, version: String): audio_player_files
+  audio_player_files_aggregated(groupBy: [String], filter: audio_player_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [audio_player_files_aggregated!]!
+  audio_player_files_by_version(version: String!, id: ID!): version_audio_player_files
+  audio_player(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [audio_player!]!
+  audio_player_by_id(id: ID!, version: String): audio_player
+  audio_player_aggregated(groupBy: [String], filter: audio_player_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [audio_player_aggregated!]!
+  audio_player_by_version(version: String!, id: ID!): version_audio_player
   page_join(version: String): page_join
   page_join_by_version(version: String!): version_page_join
+  page_join_nodes(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_join_nodes!]!
+  page_join_nodes_by_id(id: ID!, version: String): page_join_nodes
+  page_join_nodes_aggregated(groupBy: [String], filter: page_join_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_join_nodes_aggregated!]!
+  page_join_nodes_by_version(version: String!, id: ID!): version_page_join_nodes
+  page_internship_nodes(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_nodes!]!
+  page_internship_nodes_by_id(id: ID!, version: String): page_internship_nodes
+  page_internship_nodes_aggregated(groupBy: [String], filter: page_internship_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_internship_nodes_aggregated!]!
+  page_internship_nodes_by_version(version: String!, id: ID!): version_page_internship_nodes
+  internships(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [internships!]!
+  internships_by_id(id: ID!, version: String): internships
+  internships_aggregated(groupBy: [String], filter: internships_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [internships_aggregated!]!
+  internships_by_version(version: String!, id: ID!): version_internships
+  page_internship_internships(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_internships!]!
+  page_internship_internships_by_id(id: ID!, version: String): page_internship_internships
+  page_internship_internships_aggregated(groupBy: [String], filter: page_internship_internships_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_internship_internships_aggregated!]!
+  page_internship_internships_by_version(version: String!, id: ID!): version_page_internship_internships
+  page_internship(version: String): page_internship
+  page_internship_by_version(version: String!): version_page_internship
 }
 
 type Mutation {
@@ -258,6 +284,18 @@ type Mutation {
   create_tags_item(data: create_tags_input!): tags
   create_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_tags_1_input!]): [post_tags_1!]!
   create_post_tags_1_item(data: create_post_tags_1_input!): post_tags_1
+  create_audio_player_files_items(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_audio_player_files_input!]): [audio_player_files!]!
+  create_audio_player_files_item(data: create_audio_player_files_input!): audio_player_files
+  create_audio_player_items(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_audio_player_input!]): [audio_player!]!
+  create_audio_player_item(data: create_audio_player_input!): audio_player
+  create_page_join_nodes_items(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_join_nodes_input!]): [page_join_nodes!]!
+  create_page_join_nodes_item(data: create_page_join_nodes_input!): page_join_nodes
+  create_page_internship_nodes_items(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_internship_nodes_input!]): [page_internship_nodes!]!
+  create_page_internship_nodes_item(data: create_page_internship_nodes_input!): page_internship_nodes
+  create_internships_items(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_internships_input!]): [internships!]!
+  create_internships_item(data: create_internships_input!): internships
+  create_page_internship_internships_items(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_internship_internships_input!]): [page_internship_internships!]!
+  create_page_internship_internships_item(data: create_page_internship_internships_input!): page_internship_internships
   update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
   update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
   update_protocol_item(id: ID!, data: update_protocol_input!): protocol
@@ -385,7 +423,26 @@ type Mutation {
   update_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_tags_1_input!): [post_tags_1!]!
   update_post_tags_1_batch(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_tags_1_input!]): [post_tags_1!]!
   update_post_tags_1_item(id: ID!, data: update_post_tags_1_input!): post_tags_1
+  update_audio_player_files_items(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_audio_player_files_input!): [audio_player_files!]!
+  update_audio_player_files_batch(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_audio_player_files_input!]): [audio_player_files!]!
+  update_audio_player_files_item(id: ID!, data: update_audio_player_files_input!): audio_player_files
+  update_audio_player_items(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_audio_player_input!): [audio_player!]!
+  update_audio_player_batch(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_audio_player_input!]): [audio_player!]!
+  update_audio_player_item(id: ID!, data: update_audio_player_input!): audio_player
   update_page_join(data: update_page_join_input!): page_join
+  update_page_join_nodes_items(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_join_nodes_input!): [page_join_nodes!]!
+  update_page_join_nodes_batch(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_join_nodes_input!]): [page_join_nodes!]!
+  update_page_join_nodes_item(id: ID!, data: update_page_join_nodes_input!): page_join_nodes
+  update_page_internship_nodes_items(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_internship_nodes_input!): [page_internship_nodes!]!
+  update_page_internship_nodes_batch(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_internship_nodes_input!]): [page_internship_nodes!]!
+  update_page_internship_nodes_item(id: ID!, data: update_page_internship_nodes_input!): page_internship_nodes
+  update_internships_items(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_internships_input!): [internships!]!
+  update_internships_batch(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_internships_input!]): [internships!]!
+  update_internships_item(id: ID!, data: update_internships_input!): internships
+  update_page_internship_internships_items(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_internship_internships_input!): [page_internship_internships!]!
+  update_page_internship_internships_batch(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_internship_internships_input!]): [page_internship_internships!]!
+  update_page_internship_internships_item(id: ID!, data: update_page_internship_internships_input!): page_internship_internships
+  update_page_internship(data: update_page_internship_input!): page_internship
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -464,6 +521,18 @@ type Mutation {
   delete_tags_item(id: ID!): delete_one
   delete_post_tags_1_items(ids: [ID]!): delete_many
   delete_post_tags_1_item(id: ID!): delete_one
+  delete_audio_player_files_items(ids: [ID]!): delete_many
+  delete_audio_player_files_item(id: ID!): delete_one
+  delete_audio_player_items(ids: [ID]!): delete_many
+  delete_audio_player_item(id: ID!): delete_one
+  delete_page_join_nodes_items(ids: [ID]!): delete_many
+  delete_page_join_nodes_item(id: ID!): delete_one
+  delete_page_internship_nodes_items(ids: [ID]!): delete_many
+  delete_page_internship_nodes_item(id: ID!): delete_one
+  delete_internships_items(ids: [ID]!): delete_many
+  delete_internships_item(id: ID!): delete_one
+  delete_page_internship_internships_items(ids: [ID]!): delete_many
+  delete_page_internship_internships_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -537,7 +606,14 @@ type Subscription {
   post_mutated(event: EventEnum): post_mutated
   tags_mutated(event: EventEnum): tags_mutated
   post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
+  audio_player_files_mutated(event: EventEnum): audio_player_files_mutated
+  audio_player_mutated(event: EventEnum): audio_player_mutated
   page_join_mutated(event: EventEnum): page_join_mutated
+  page_join_nodes_mutated(event: EventEnum): page_join_nodes_mutated
+  page_internship_nodes_mutated(event: EventEnum): page_internship_nodes_mutated
+  internships_mutated(event: EventEnum): internships_mutated
+  page_internship_internships_mutated(event: EventEnum): page_internship_internships_mutated
+  page_internship_mutated(event: EventEnum): page_internship_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -593,9 +669,83 @@ union events_editor_nodes_item_union = iframe
 
 union page_history_nodes_item_union = image_box
 
+union page_internship_nodes_item_union = image_box
+
+union page_join_nodes_item_union = info_box | audio_player
+
 union page_receive_nodes_item_union = info_box
 
 union post_editor_nodes_item_union = info_box | quote
+
+type audio_player {
+  id: ID!
+  files(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [audio_player_files]
+  files_func: count_functions
+}
+
+type audio_player_aggregated {
+  group: JSON
+  countAll: Int
+  count: audio_player_aggregated_count
+  countDistinct: audio_player_aggregated_count
+  avg: audio_player_aggregated_fields
+  sum: audio_player_aggregated_fields
+  avgDistinct: audio_player_aggregated_fields
+  sumDistinct: audio_player_aggregated_fields
+  min: audio_player_aggregated_fields
+  max: audio_player_aggregated_fields
+}
+
+type audio_player_aggregated_count {
+  id: Int
+  files: Int
+}
+
+type audio_player_aggregated_fields {
+  id: Float
+}
+
+type audio_player_files {
+  id: ID!
+  audio_player_id(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): audio_player
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type audio_player_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: audio_player_files_aggregated_count
+  countDistinct: audio_player_files_aggregated_count
+  avg: audio_player_files_aggregated_fields
+  sum: audio_player_files_aggregated_fields
+  avgDistinct: audio_player_files_aggregated_fields
+  sumDistinct: audio_player_files_aggregated_fields
+  min: audio_player_files_aggregated_fields
+  max: audio_player_files_aggregated_fields
+}
+
+type audio_player_files_aggregated_count {
+  id: Int
+  audio_player_id: Int
+  directus_files_id: Int
+}
+
+type audio_player_files_aggregated_fields {
+  id: Float
+  audio_player_id: Float
+}
+
+type audio_player_files_mutated {
+  key: ID!
+  event: EventEnum
+  data: audio_player_files
+}
+
+type audio_player_mutated {
+  key: ID!
+  event: EventEnum
+  data: audio_player
+}
 
 type config {
   id: ID!
@@ -1420,6 +1570,7 @@ type events_event_shows {
   id: ID!
   events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
   event_shows_id(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): event_shows
+  sort: GraphQLBigInt
 }
 
 type events_event_shows_aggregated {
@@ -1439,12 +1590,14 @@ type events_event_shows_aggregated_count {
   id: Int
   events_id: Int
   event_shows_id: Int
+  sort: Int
 }
 
 type events_event_shows_aggregated_fields {
   id: Float
   events_id: Float
   event_shows_id: Float
+  sort: Float
 }
 
 type events_event_shows_mutated {
@@ -1599,6 +1752,68 @@ type info_box_mutated {
   key: ID!
   event: EventEnum
   data: info_box
+}
+
+type internships {
+  id: ID!
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  program: String
+  duration: String
+  workload: String
+  start: String
+  deadline: Date
+  deadline_func: date_functions
+  email: String
+  content: JSON
+  content_func: count_functions
+  title: String
+}
+
+type internships_aggregated {
+  group: JSON
+  countAll: Int
+  count: internships_aggregated_count
+  countDistinct: internships_aggregated_count
+  avg: internships_aggregated_fields
+  sum: internships_aggregated_fields
+  avgDistinct: internships_aggregated_fields
+  sumDistinct: internships_aggregated_fields
+  min: internships_aggregated_fields
+  max: internships_aggregated_fields
+}
+
+type internships_aggregated_count {
+  id: Int
+  sort: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  program: Int
+  duration: Int
+  workload: Int
+  start: Int
+  deadline: Int
+  email: Int
+  content: Int
+  title: Int
+}
+
+type internships_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+type internships_mutated {
+  key: ID!
+  event: EventEnum
+  data: internships
 }
 
 type member_product {
@@ -2004,6 +2219,108 @@ type page_impressum_mutated {
   data: page_impressum
 }
 
+type page_internship {
+  id: ID!
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  info_title: String
+  info_text: JSON
+  info_text_func: count_functions
+  content: JSON
+  content_func: count_functions
+  editor_nodes(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_nodes]
+  editor_nodes_func: count_functions
+  internships(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_internships]
+  internships_func: count_functions
+}
+
+type page_internship_internships {
+  id: ID!
+  page_internship_id(filter: page_internship_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_internship
+  internships_id(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): internships
+  sort: GraphQLBigInt
+}
+
+type page_internship_internships_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_internship_internships_aggregated_count
+  countDistinct: page_internship_internships_aggregated_count
+  avg: page_internship_internships_aggregated_fields
+  sum: page_internship_internships_aggregated_fields
+  avgDistinct: page_internship_internships_aggregated_fields
+  sumDistinct: page_internship_internships_aggregated_fields
+  min: page_internship_internships_aggregated_fields
+  max: page_internship_internships_aggregated_fields
+}
+
+type page_internship_internships_aggregated_count {
+  id: Int
+  page_internship_id: Int
+  internships_id: Int
+  sort: Int
+}
+
+type page_internship_internships_aggregated_fields {
+  id: Float
+  page_internship_id: Float
+  internships_id: Float
+  sort: Float
+}
+
+type page_internship_internships_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship_internships
+}
+
+type page_internship_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship
+}
+
+type page_internship_nodes {
+  id: ID!
+  page_internship_id(filter: page_internship_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_internship
+  item: page_internship_nodes_item_union
+  collection: String
+}
+
+type page_internship_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_internship_nodes_aggregated_count
+  countDistinct: page_internship_nodes_aggregated_count
+  avg: page_internship_nodes_aggregated_fields
+  sum: page_internship_nodes_aggregated_fields
+  avgDistinct: page_internship_nodes_aggregated_fields
+  sumDistinct: page_internship_nodes_aggregated_fields
+  min: page_internship_nodes_aggregated_fields
+  max: page_internship_nodes_aggregated_fields
+}
+
+type page_internship_nodes_aggregated_count {
+  id: Int
+  page_internship_id: Int
+  item: Int
+  collection: Int
+}
+
+type page_internship_nodes_aggregated_fields {
+  page_internship_id: Float
+}
+
+type page_internship_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship_nodes
+}
+
 type page_join {
   id: ID!
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
@@ -2014,12 +2331,51 @@ type page_join {
   date_updated_func: datetime_functions
   content: JSON
   content_func: count_functions
+  editor_nodes(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_join_nodes]
+  editor_nodes_func: count_functions
 }
 
 type page_join_mutated {
   key: ID!
   event: EventEnum
   data: page_join
+}
+
+type page_join_nodes {
+  id: ID!
+  page_join_id(filter: page_join_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_join
+  item: page_join_nodes_item_union
+  collection: String
+}
+
+type page_join_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_join_nodes_aggregated_count
+  countDistinct: page_join_nodes_aggregated_count
+  avg: page_join_nodes_aggregated_fields
+  sum: page_join_nodes_aggregated_fields
+  avgDistinct: page_join_nodes_aggregated_fields
+  sumDistinct: page_join_nodes_aggregated_fields
+  min: page_join_nodes_aggregated_fields
+  max: page_join_nodes_aggregated_fields
+}
+
+type page_join_nodes_aggregated_count {
+  id: Int
+  page_join_id: Int
+  item: Int
+  collection: Int
+}
+
+type page_join_nodes_aggregated_fields {
+  page_join_id: Float
+}
+
+type page_join_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_join_nodes
 }
 
 type page_member {
@@ -3027,6 +3383,19 @@ type time_functions {
 }
 
 """"""
+type version_audio_player {
+  id: ID
+  files: JSON
+}
+
+""""""
+type version_audio_player_files {
+  id: ID
+  audio_player_id: JSON
+  directus_files_id: JSON
+}
+
+""""""
 type version_config {
   id: ID
   front_end_url: String
@@ -3109,6 +3478,7 @@ type version_events_event_shows {
   id: ID
   events_id: JSON
   event_shows_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -3137,6 +3507,24 @@ type version_info_box {
   id: ID
   title: String
   text: JSON
+}
+
+""""""
+type version_internships {
+  id: ID
+  sort: Int
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  program: String
+  duration: String
+  workload: String
+  start: String
+  deadline: Date
+  email: String
+  content: JSON
+  title: String
 }
 
 """"""
@@ -3278,6 +3666,36 @@ type version_page_impressum {
 }
 
 """"""
+type version_page_internship {
+  id: ID
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  info_title: String
+  info_text: JSON
+  content: JSON
+  editor_nodes: JSON
+  internships: JSON
+}
+
+""""""
+type version_page_internship_internships {
+  id: ID
+  page_internship_id: JSON
+  internships_id: JSON
+  sort: GraphQLBigInt
+}
+
+""""""
+type version_page_internship_nodes {
+  id: ID
+  page_internship_id: JSON
+  item: String
+  collection: String
+}
+
+""""""
 type version_page_join {
   id: ID
   user_created: JSON
@@ -3285,6 +3703,15 @@ type version_page_join {
   user_updated: JSON
   date_updated: Date
   content: JSON
+  editor_nodes: JSON
+}
+
+""""""
+type version_page_join_nodes {
+  id: ID
+  page_join_id: JSON
+  item: String
+  collection: String
 }
 
 """"""
@@ -3544,6 +3971,22 @@ type version_tags {
   value: String
 }
 
+input audio_player_files_filter {
+  id: number_filter_operators
+  audio_player_id: audio_player_filter
+  directus_files_id: directus_files_filter
+  _and: [audio_player_files_filter]
+  _or: [audio_player_files_filter]
+}
+
+input audio_player_filter {
+  id: number_filter_operators
+  files: audio_player_files_filter
+  files_func: count_function_filter_operators
+  _and: [audio_player_filter]
+  _or: [audio_player_filter]
+}
+
 input big_int_filter_operators {
   _eq: GraphQLBigInt
   _neq: GraphQLBigInt
@@ -3577,6 +4020,17 @@ input contact_address_filter {
 
 input count_function_filter_operators {
   count: number_filter_operators
+}
+
+input create_audio_player_files_input {
+  id: ID
+  audio_player_id: create_audio_player_input
+  directus_files_id: create_directus_files_input
+}
+
+input create_audio_player_input {
+  id: ID
+  files: [create_audio_player_files_input]
 }
 
 input create_contact_address_input {
@@ -3737,6 +4191,7 @@ input create_events_event_shows_input {
   id: ID
   events_id: create_events_input
   event_shows_id: create_event_shows_input
+  sort: GraphQLBigInt
 }
 
 input create_events_files_input {
@@ -3786,6 +4241,23 @@ input create_info_box_input {
   id: ID
   title: String
   text: JSON
+}
+
+input create_internships_input {
+  id: ID
+  sort: Int
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  program: String
+  duration: String
+  workload: String
+  start: String
+  deadline: Date
+  email: String
+  content: JSON
+  title: String
 }
 
 input create_member_product_input {
@@ -3895,6 +4367,50 @@ input create_page_history_protocol_input {
   id: ID
   page_history_id: create_page_history_input
   protocol_id: create_protocol_input
+}
+
+input create_page_internship_input {
+  id: ID
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  info_title: String
+  info_text: JSON
+  content: JSON
+  editor_nodes: [create_page_internship_nodes_input]
+  internships: [create_page_internship_internships_input]
+}
+
+input create_page_internship_internships_input {
+  id: ID
+  page_internship_id: create_page_internship_input
+  internships_id: create_internships_input
+  sort: GraphQLBigInt
+}
+
+input create_page_internship_nodes_input {
+  id: ID
+  page_internship_id: create_page_internship_input
+  item: String
+  collection: String
+}
+
+input create_page_join_input {
+  id: ID
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  content: JSON
+  editor_nodes: [create_page_join_nodes_input]
+}
+
+input create_page_join_nodes_input {
+  id: ID
+  page_join_id: create_page_join_input
+  item: String
+  collection: String
 }
 
 input create_page_member_input {
@@ -4478,6 +4994,7 @@ input events_event_shows_filter {
   id: number_filter_operators
   events_id: events_filter
   event_shows_id: event_shows_filter
+  sort: big_int_filter_operators
   _and: [events_event_shows_filter]
   _or: [events_event_shows_filter]
 }
@@ -4562,6 +5079,29 @@ input info_box_filter {
   text_func: count_function_filter_operators
   _and: [info_box_filter]
   _or: [info_box_filter]
+}
+
+input internships_filter {
+  id: number_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  program: string_filter_operators
+  duration: string_filter_operators
+  workload: string_filter_operators
+  start: string_filter_operators
+  deadline: date_filter_operators
+  deadline_func: date_function_filter_operators
+  email: string_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  title: string_filter_operators
+  _and: [internships_filter]
+  _or: [internships_filter]
 }
 
 input member_product_filter {
@@ -4718,6 +5258,71 @@ input page_history_protocol_filter {
   protocol_id: protocol_filter
   _and: [page_history_protocol_filter]
   _or: [page_history_protocol_filter]
+}
+
+input page_internship_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  info_title: string_filter_operators
+  info_text: string_filter_operators
+  info_text_func: count_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_internship_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  internships: page_internship_internships_filter
+  internships_func: count_function_filter_operators
+  _and: [page_internship_filter]
+  _or: [page_internship_filter]
+}
+
+input page_internship_internships_filter {
+  id: number_filter_operators
+  page_internship_id: page_internship_filter
+  internships_id: internships_filter
+  sort: big_int_filter_operators
+  _and: [page_internship_internships_filter]
+  _or: [page_internship_internships_filter]
+}
+
+input page_internship_nodes_filter {
+  id: string_filter_operators
+  page_internship_id: page_internship_filter
+  collection: string_filter_operators
+  _and: [page_internship_nodes_filter]
+  _or: [page_internship_nodes_filter]
+  item__image_box: image_box_filter
+}
+
+input page_join_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_join_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  _and: [page_join_filter]
+  _or: [page_join_filter]
+}
+
+input page_join_nodes_filter {
+  id: string_filter_operators
+  page_join_id: page_join_filter
+  collection: string_filter_operators
+  _and: [page_join_nodes_filter]
+  _or: [page_join_nodes_filter]
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
 }
 
 input page_member_filter {
@@ -5050,6 +5655,17 @@ input time_function_filter_operators {
   second: number_filter_operators
 }
 
+input update_audio_player_files_input {
+  id: ID
+  audio_player_id: update_audio_player_input
+  directus_files_id: update_directus_files_input
+}
+
+input update_audio_player_input {
+  id: ID
+  files: [update_audio_player_files_input]
+}
+
 input update_config_input {
   id: ID
   front_end_url: String
@@ -5213,6 +5829,7 @@ input update_events_event_shows_input {
   id: ID
   events_id: update_events_input
   event_shows_id: update_event_shows_input
+  sort: GraphQLBigInt
 }
 
 input update_events_files_input {
@@ -5262,6 +5879,23 @@ input update_info_box_input {
   id: ID
   title: String
   text: JSON
+}
+
+input update_internships_input {
+  id: ID
+  sort: Int
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  program: String
+  duration: String
+  workload: String
+  start: String
+  deadline: Date
+  email: String
+  content: JSON
+  title: String
 }
 
 input update_member_product_input {
@@ -5391,6 +6025,33 @@ input update_page_impressum_input {
   content: JSON
 }
 
+input update_page_internship_input {
+  id: ID
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  info_title: String
+  info_text: JSON
+  content: JSON
+  editor_nodes: [update_page_internship_nodes_input]
+  internships: [update_page_internship_internships_input]
+}
+
+input update_page_internship_internships_input {
+  id: ID
+  page_internship_id: update_page_internship_input
+  internships_id: update_internships_input
+  sort: GraphQLBigInt
+}
+
+input update_page_internship_nodes_input {
+  id: ID
+  page_internship_id: update_page_internship_input
+  item: String
+  collection: String
+}
+
 input update_page_join_input {
   id: ID
   user_created: update_directus_users_input
@@ -5398,6 +6059,14 @@ input update_page_join_input {
   user_updated: update_directus_users_input
   date_updated: Date
   content: JSON
+  editor_nodes: [update_page_join_nodes_input]
+}
+
+input update_page_join_nodes_input {
+  id: ID
+  page_join_id: update_page_join_input
+  item: String
+  collection: String
 }
 
 input update_page_member_input {

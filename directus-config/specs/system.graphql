@@ -314,7 +314,14 @@ type Subscription {
   post_mutated(event: EventEnum): post_mutated
   tags_mutated(event: EventEnum): tags_mutated
   post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
+  audio_player_files_mutated(event: EventEnum): audio_player_files_mutated
+  audio_player_mutated(event: EventEnum): audio_player_mutated
   page_join_mutated(event: EventEnum): page_join_mutated
+  page_join_nodes_mutated(event: EventEnum): page_join_nodes_mutated
+  page_internship_nodes_mutated(event: EventEnum): page_internship_nodes_mutated
+  internships_mutated(event: EventEnum): internships_mutated
+  page_internship_internships_mutated(event: EventEnum): page_internship_internships_mutated
+  page_internship_mutated(event: EventEnum): page_internship_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -398,9 +405,37 @@ union events_editor_nodes_item_union = iframe
 
 union page_history_nodes_item_union = image_box
 
+union page_internship_nodes_item_union = image_box
+
+union page_join_nodes_item_union = info_box | audio_player
+
 union page_receive_nodes_item_union = info_box
 
 union post_editor_nodes_item_union = info_box | quote
+
+type audio_player {
+  id: ID!
+  files(filter: audio_player_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [audio_player_files]
+  files_func: count_functions
+}
+
+type audio_player_files {
+  id: ID!
+  audio_player_id(filter: audio_player_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): audio_player
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type audio_player_files_mutated {
+  key: ID!
+  event: EventEnum
+  data: audio_player_files
+}
+
+type audio_player_mutated {
+  key: ID!
+  event: EventEnum
+  data: audio_player
+}
 
 type auth_tokens {
   access_token: String
@@ -1785,6 +1820,7 @@ type events_event_shows {
   id: ID!
   events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
   event_shows_id(filter: event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): event_shows
+  sort: GraphQLBigInt
 }
 
 type events_event_shows_mutated {
@@ -1846,6 +1882,33 @@ type info_box_mutated {
   key: ID!
   event: EventEnum
   data: info_box
+}
+
+type internships {
+  id: ID!
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  program: String
+  duration: String
+  workload: String
+  start: String
+  deadline: Date
+  deadline_func: date_functions
+  email: String
+  content: JSON
+  content_func: count_functions
+  title: String
+}
+
+type internships_mutated {
+  key: ID!
+  event: EventEnum
+  data: internships
 }
 
 type member_product {
@@ -2061,6 +2124,57 @@ type page_impressum_mutated {
   data: page_impressum
 }
 
+type page_internship {
+  id: ID!
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  info_title: String
+  info_text: JSON
+  info_text_func: count_functions
+  content: JSON
+  content_func: count_functions
+  editor_nodes(filter: page_internship_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_nodes]
+  editor_nodes_func: count_functions
+  internships(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_internship_internships]
+  internships_func: count_functions
+}
+
+type page_internship_internships {
+  id: ID!
+  page_internship_id(filter: page_internship_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_internship
+  internships_id(filter: internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): internships
+  sort: GraphQLBigInt
+}
+
+type page_internship_internships_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship_internships
+}
+
+type page_internship_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship
+}
+
+type page_internship_nodes {
+  id: ID!
+  page_internship_id(filter: page_internship_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_internship
+  item: page_internship_nodes_item_union
+  collection: String
+}
+
+type page_internship_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_internship_nodes
+}
+
 type page_join {
   id: ID!
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
@@ -2071,12 +2185,27 @@ type page_join {
   date_updated_func: datetime_functions
   content: JSON
   content_func: count_functions
+  editor_nodes(filter: page_join_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_join_nodes]
+  editor_nodes_func: count_functions
 }
 
 type page_join_mutated {
   key: ID!
   event: EventEnum
   data: page_join
+}
+
+type page_join_nodes {
+  id: ID!
+  page_join_id(filter: page_join_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_join
+  item: page_join_nodes_item_union
+  collection: String
+}
+
+type page_join_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_join_nodes
 }
 
 type page_member {
@@ -2563,6 +2692,22 @@ type time_functions {
 type users_me_tfa_generate_data {
   secret: String
   otpauth_url: String
+}
+
+input audio_player_files_filter {
+  id: number_filter_operators
+  audio_player_id: audio_player_filter
+  directus_files_id: directus_files_filter
+  _and: [audio_player_files_filter]
+  _or: [audio_player_files_filter]
+}
+
+input audio_player_filter {
+  id: number_filter_operators
+  files: audio_player_files_filter
+  files_func: count_function_filter_operators
+  _and: [audio_player_filter]
+  _or: [audio_player_filter]
 }
 
 input big_int_filter_operators {
@@ -3524,6 +3669,7 @@ input events_event_shows_filter {
   id: number_filter_operators
   events_id: events_filter
   event_shows_id: event_shows_filter
+  sort: big_int_filter_operators
   _and: [events_event_shows_filter]
   _or: [events_event_shows_filter]
 }
@@ -3608,6 +3754,29 @@ input info_box_filter {
   text_func: count_function_filter_operators
   _and: [info_box_filter]
   _or: [info_box_filter]
+}
+
+input internships_filter {
+  id: number_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  program: string_filter_operators
+  duration: string_filter_operators
+  workload: string_filter_operators
+  start: string_filter_operators
+  deadline: date_filter_operators
+  deadline_func: date_function_filter_operators
+  email: string_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  title: string_filter_operators
+  _and: [internships_filter]
+  _or: [internships_filter]
 }
 
 input number_filter_operators {
@@ -3724,6 +3893,71 @@ input page_history_protocol_filter {
   protocol_id: protocol_filter
   _and: [page_history_protocol_filter]
   _or: [page_history_protocol_filter]
+}
+
+input page_internship_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  info_title: string_filter_operators
+  info_text: string_filter_operators
+  info_text_func: count_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_internship_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  internships: page_internship_internships_filter
+  internships_func: count_function_filter_operators
+  _and: [page_internship_filter]
+  _or: [page_internship_filter]
+}
+
+input page_internship_internships_filter {
+  id: number_filter_operators
+  page_internship_id: page_internship_filter
+  internships_id: internships_filter
+  sort: big_int_filter_operators
+  _and: [page_internship_internships_filter]
+  _or: [page_internship_internships_filter]
+}
+
+input page_internship_nodes_filter {
+  id: string_filter_operators
+  page_internship_id: page_internship_filter
+  collection: string_filter_operators
+  _and: [page_internship_nodes_filter]
+  _or: [page_internship_nodes_filter]
+  item__image_box: image_box_filter
+}
+
+input page_join_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_join_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  _and: [page_join_filter]
+  _or: [page_join_filter]
+}
+
+input page_join_nodes_filter {
+  id: string_filter_operators
+  page_join_id: page_join_filter
+  collection: string_filter_operators
+  _and: [page_join_nodes_filter]
+  _or: [page_join_nodes_filter]
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
 }
 
 input page_member_filter {

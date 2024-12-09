@@ -1,0 +1,25 @@
+{
+  "collection": "page_internship_internships",
+  "field": "page_internship_id",
+  "related_collection": "page_internship",
+  "meta": {
+    "junction_field": "internships_id",
+    "many_collection": "page_internship_internships",
+    "many_field": "page_internship_id",
+    "one_allowed_collections": null,
+    "one_collection": "page_internship",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "internships",
+    "sort_field": "sort"
+  },
+  "schema": {
+    "table": "page_internship_internships",
+    "column": "page_internship_id",
+    "foreign_key_table": "page_internship",
+    "foreign_key_column": "id",
+    "constraint_name": "page_internship_internships_page_internship_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "collection": "audio_player",
+  "field": "files",
+  "type": "alias",
+  "meta": {
+    "collection": "audio_player",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "files",
+    "group": null,
+    "hidden": false,
+    "interface": "files",
+    "note": null,
+    "options": {
+      "folder": "8af4d169-31f2-441d-8eda-f2bb07625d31"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 2,
+    "special": [
+      "files"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "collection": "page_internship",
+  "field": "internships",
+  "type": "alias",
+  "meta": {
+    "collection": "page_internship",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "internships",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": {
+      "enableSelect": false,
+      "template": "{{internships_id.title}}"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 10,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

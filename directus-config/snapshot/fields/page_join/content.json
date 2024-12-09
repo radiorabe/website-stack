@@ -13,11 +13,13 @@
     "interface": "flexible-editor-interface",
     "note": null,
     "options": {
+      "m2aField": "editor_nodes",
       "tools": [
-        "h4",
+        "h2",
         "link",
         "removeLink",
         "autolink",
+        "hardBreak",
         "undo",
         "redo",
         "fullscreen"

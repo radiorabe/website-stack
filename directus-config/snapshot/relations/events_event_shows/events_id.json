@@ -11,7 +11,7 @@
     "one_collection_field": null,
     "one_deselect_action": "nullify",
     "one_field": "shows",
-    "sort_field": null
+    "sort_field": "sort"
   },
   "schema": {
     "table": "events_event_shows",

@@ -1,0 +1,33 @@
+{
+  "collection": "page_join_nodes",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": null,
+    "collapse": "open",
+    "collection": "page_join_nodes",
+    "color": null,
+    "display_template": null,
+    "group": "page_join",
+    "hidden": true,
+    "icon": null,
+    "item_duplication_fields": [
+      "item:info_box.title",
+      "item:info_box.text",
+      "collection",
+      "item:audio_player.id"
+    ],
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": null,
+    "translations": null,
+    "unarchive_value": null,
+    "versioning": false
+  },
+  "schema": {
+    "name": "page_join_nodes"
+  }
+}

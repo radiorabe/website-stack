@@ -9,7 +9,7 @@
     "collection": "page_history_files",
     "color": null,
     "display_template": null,
-    "group": null,
+    "group": "page_history",
     "hidden": true,
     "icon": "import_export",
     "item_duplication_fields": null,

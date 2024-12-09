@@ -1,0 +1,35 @@
+{
+  "collection": "internships",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "internships",
+    "color": null,
+    "display_template": null,
+    "group": "page_internship",
+    "hidden": true,
+    "icon": null,
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "de-DE",
+        "plural": "Praktika",
+        "singular": "Praktikum",
+        "translation": "Praktika"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "internships"
+  }
+}
