@@ -8,22 +8,25 @@ import RenderTipTap from "./RenderTipTap";
 
 export interface HoverableProps {
   data: ItemsInfoBox;
+  backgroundColor?: any;
+  textColor?: any;
 }
 
-const InfoBox = ({ data }: HoverableProps) => {
+const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
   return (
     <View
       style={{
         padding: Metrics.doubleBaseMargin,
         paddingBottom: Metrics.halfBaseMargin,
         borderRadius: 9,
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: backgroundColor ? backgroundColor : Colors.lightGreen,
       }}
     >
       <Text
         style={{
           ...Fonts.style.h4,
           paddingBottom: Metrics.baseMargin,
+          color: textColor ? textColor : Colors.black,
         }}
       >
         {data.title}
@@ -33,7 +36,10 @@ const InfoBox = ({ data }: HoverableProps) => {
           flexDirection: "row",
         }}
       >
-        <RenderTipTap content={data.text}></RenderTipTap>
+        <RenderTipTap
+          content={data.text}
+          topProps={{ textColor: textColor ? textColor : undefined }}
+        ></RenderTipTap>
       </View>
     </View>
   );

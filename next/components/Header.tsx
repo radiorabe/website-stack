@@ -298,6 +298,17 @@ function Header() {
                   </Text>
                 </LinkComponent>
                 <LinkComponent
+                  href={`/praktikum`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Praktikum
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
                   href={`/empfangen`}
                   onPress={() => setShowDropdown(!showDropdown)}
                 >

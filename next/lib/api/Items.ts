@@ -36,6 +36,8 @@ import {
   ReadItemsImageBoxParams,
   ReadItemsInfoBoxData,
   ReadItemsInfoBoxParams,
+  ReadItemsInternshipsData,
+  ReadItemsInternshipsParams,
   ReadItemsMemberProductData,
   ReadItemsMemberProductParams,
   ReadItemsOrdersData,
@@ -58,6 +60,12 @@ import {
   ReadItemsPageHistoryProtocolParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
+  ReadItemsPageInternshipData,
+  ReadItemsPageInternshipInternshipsData,
+  ReadItemsPageInternshipInternshipsParams,
+  ReadItemsPageInternshipNodesData,
+  ReadItemsPageInternshipNodesParams,
+  ReadItemsPageInternshipParams,
   ReadItemsPageJoinData,
   ReadItemsPageJoinNodesData,
   ReadItemsPageJoinNodesParams,
@@ -138,6 +146,8 @@ import {
   ReadSingleItemsImageBoxParams,
   ReadSingleItemsInfoBoxData,
   ReadSingleItemsInfoBoxParams,
+  ReadSingleItemsInternshipsData,
+  ReadSingleItemsInternshipsParams,
   ReadSingleItemsMemberProductData,
   ReadSingleItemsMemberProductParams,
   ReadSingleItemsOrdersData,
@@ -160,6 +170,12 @@ import {
   ReadSingleItemsPageHistoryProtocolParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
+  ReadSingleItemsPageInternshipData,
+  ReadSingleItemsPageInternshipInternshipsData,
+  ReadSingleItemsPageInternshipInternshipsParams,
+  ReadSingleItemsPageInternshipNodesData,
+  ReadSingleItemsPageInternshipNodesParams,
+  ReadSingleItemsPageInternshipParams,
   ReadSingleItemsPageJoinData,
   ReadSingleItemsPageJoinNodesData,
   ReadSingleItemsPageJoinNodesParams,
@@ -4519,6 +4535,336 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_join_nodes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_internship_nodes items.
+ *
+ * @tags Items, ItemsPageInternshipNodes
+ * @name ReadItemsPageInternshipNodes
+ * @summary List Items
+ * @request GET:/items/page_internship_nodes
+ * @secure
+ * @response `200` `ReadItemsPageInternshipNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageInternshipNodes = (query: ReadItemsPageInternshipNodesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageInternshipNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship_nodes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_internship_nodes item by unique identifier.
+ *
+ * @tags Items, ItemsPageInternshipNodes
+ * @name ReadSingleItemsPageInternshipNodes
+ * @summary Retrieve an Item
+ * @request GET:/items/page_internship_nodes/{id}
+ * @response `200` `ReadSingleItemsPageInternshipNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageInternshipNodes = (
+    { id, ...query }: ReadSingleItemsPageInternshipNodesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageInternshipNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship_nodes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the internships items.
+ *
+ * @tags Items, ItemsInternships
+ * @name ReadItemsInternships
+ * @summary List Items
+ * @request GET:/items/internships
+ * @secure
+ * @response `200` `ReadItemsInternshipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsInternships = (query: ReadItemsInternshipsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsInternshipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/internships`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single internships item by unique identifier.
+ *
+ * @tags Items, ItemsInternships
+ * @name ReadSingleItemsInternships
+ * @summary Retrieve an Item
+ * @request GET:/items/internships/{id}
+ * @response `200` `ReadSingleItemsInternshipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsInternships = ({ id, ...query }: ReadSingleItemsInternshipsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsInternshipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/internships/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_internship_internships items.
+ *
+ * @tags Items, ItemsPageInternshipInternships
+ * @name ReadItemsPageInternshipInternships
+ * @summary List Items
+ * @request GET:/items/page_internship_internships
+ * @secure
+ * @response `200` `ReadItemsPageInternshipInternshipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageInternshipInternships = (query: ReadItemsPageInternshipInternshipsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageInternshipInternshipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship_internships`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_internship_internships item by unique identifier.
+ *
+ * @tags Items, ItemsPageInternshipInternships
+ * @name ReadSingleItemsPageInternshipInternships
+ * @summary Retrieve an Item
+ * @request GET:/items/page_internship_internships/{id}
+ * @response `200` `ReadSingleItemsPageInternshipInternshipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageInternshipInternships = (
+    { id, ...query }: ReadSingleItemsPageInternshipInternshipsParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageInternshipInternshipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship_internships/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_internship items.
+ *
+ * @tags Items, ItemsPageInternship
+ * @name ReadItemsPageInternship
+ * @summary List Items
+ * @request GET:/items/page_internship
+ * @secure
+ * @response `200` `ReadItemsPageInternshipData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageInternship = (query: ReadItemsPageInternshipParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageInternshipData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_internship item by unique identifier.
+ *
+ * @tags Items, ItemsPageInternship
+ * @name ReadSingleItemsPageInternship
+ * @summary Retrieve an Item
+ * @request GET:/items/page_internship/{id}
+ * @response `200` `ReadSingleItemsPageInternshipData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageInternship = ({ id, ...query }: ReadSingleItemsPageInternshipParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageInternshipData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_internship/${id}`,
       method: "GET",
       query: query,
       format: "json",

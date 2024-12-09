@@ -277,113 +277,124 @@ const markHandlers = (topProps) => {
   };
 };
 
-const nodeHandlers: TipTapNodeHandlers = {
-  doc: (props) => <>{props.children}</>,
-  text: (props) => (
-    <span style={{ ...Fonts.style.TTtext }}>{props.node.text}</span>
-  ),
-  paragraph: (props) => (
-    <p
-      style={{
-        marginBlock: "unset",
-        marginBlockEnd: Metrics.doubleBaseMargin,
-      }}
-    >
-      {props.children}
-    </p>
-  ),
-  heading: (props) => (
-    <Heading level={props.node.attrs.level}>{props.children}</Heading>
-  ),
-  hardBreak: () => <br />,
-  bulletList: (props) => <ul>{props.children}</ul>,
-  orderedList: (props) => <ol>{props.children}</ol>,
-  listItem: (props) => <li>{props.children}</li>,
-  codeBlock: (props) => (
-    <pre>
-      <code>{props.children}</code>
-    </pre>
-  ),
-  horizontalRule: () => <hr />,
-  blockquote: (props) => <blockquote>{props.children}</blockquote>,
-  "relation-block": async (props) => {
-    // console.log("relationBlock", props);
-    // console.log("junction", props.node.attrs.junction);
+// const nodeHandlers: TipTapNodeHandlers = {
+const nodeHandlers = (topProps) => {
+  return {
+    doc: (props) => <>{props.children}</>,
+    text: (props) => (
+      <span
+        style={{
+          ...Fonts.style.TTtext,
+          color: topProps.textColor ? topProps.textColor : Colors.black,
+        }}
+      >
+        {props.node.text}
+      </span>
+    ),
+    paragraph: (props) => (
+      <p
+        style={{
+          marginBlock: "unset",
+          marginBlockEnd: Metrics.doubleBaseMargin,
+        }}
+      >
+        {props.children}
+      </p>
+    ),
+    heading: (props) => (
+      <Heading level={props.node.attrs.level}>{props.children}</Heading>
+    ),
+    hardBreak: () => <br />,
+    bulletList: (props) => <ul>{props.children}</ul>,
+    orderedList: (props) => <ol>{props.children}</ol>,
+    listItem: (props) => <li>{props.children}</li>,
+    codeBlock: (props) => (
+      <pre>
+        <code>{props.children}</code>
+      </pre>
+    ),
+    horizontalRule: () => <hr />,
+    blockquote: (props) => <blockquote>{props.children}</blockquote>,
+    "relation-block": async (props) => {
+      // console.log("relationBlock", props);
+      // console.log("junction", props.node.attrs.junction);
 
-    const ApiMapper = {
-      page_receive_nodes: Api.readSingleItemsPageReceiveNodes,
-      post_editor_nodes: Api.readSingleItemsPostEditorNodes,
-      page_history_nodes: Api.readSingleItemsPageHistoryNodes,
-      events_editor_nodes: Api.readSingleItemsEventsEditorNodes,
-      page_join_nodes: Api.readSingleItemsPageJoinNodes,
-    };
-    if (ApiMapper[props.node.attrs.junction]) {
-      let node = await getNodes(
-        props.node.attrs.id,
-        ApiMapper[props.node.attrs.junction]
-      );
-      // console.log("collection", props.node.attrs.collection);
+      const ApiMapper = {
+        page_receive_nodes: Api.readSingleItemsPageReceiveNodes,
+        post_editor_nodes: Api.readSingleItemsPostEditorNodes,
+        page_history_nodes: Api.readSingleItemsPageHistoryNodes,
+        events_editor_nodes: Api.readSingleItemsEventsEditorNodes,
+        page_join_nodes: Api.readSingleItemsPageJoinNodes,
+        page_internship_nodes: Api.readSingleItemsPageInternshipNodes,
+      };
+      if (ApiMapper[props.node.attrs.junction]) {
+        let node = await getNodes(
+          props.node.attrs.id,
+          ApiMapper[props.node.attrs.junction]
+        );
+        // console.log("collection", props.node.attrs.collection);
 
-      if (props.node.attrs.collection === "audio_player") {
-        let audioPlayer = await getAudioPlayerFiles(node.item);
-        // console.log("quote", quote);
+        if (props.node.attrs.collection === "audio_player") {
+          let audioPlayer = await getAudioPlayerFiles(node.item);
+          // console.log("quote", quote);
 
-        return (
-          <div
-            style={{
-              paddingTop: Metrics.doubleBaseMargin,
-              paddingBottom: Metrics.doubleBaseMargin,
-            }}
-          >
-            <AudioFilePlayer audioFiles={audioPlayer.files}></AudioFilePlayer>
-          </div>
+          return (
+            <div
+              style={{
+                paddingTop: Metrics.doubleBaseMargin,
+                paddingBottom: Metrics.doubleBaseMargin,
+              }}
+            >
+              <AudioFilePlayer audioFiles={audioPlayer.files}></AudioFilePlayer>
+            </div>
+          );
+        }
+
+        if (props.node.attrs.collection === "quote") {
+          let quote = await getQuote(node.item);
+          // console.log("quote", quote);
+
+          return <Quote data={quote}></Quote>;
+        }
+        if (props.node.attrs.collection === "iframe") {
+          let iframe = await getIframe(node.item);
+          return <Iframe data={iframe.code}></Iframe>;
+        }
+        if (props.node.attrs.collection === "info_box") {
+          // console.log("info_box");
+          let infoBoxData = await getInfoBox(node.item);
+          // console.log("infoBoxData", infoBoxData);
+          return <InfoBox data={infoBoxData}></InfoBox>;
+        }
+        if (props.node.attrs.collection === "image_box") {
+          // console.log("info_box");
+          let imageBoxData = await getImageBox(node.item);
+          // console.log("imageBoxData", imageBoxData);
+          return (
+            <ImageBox
+              imageId={imageBoxData.image as string}
+              title={imageBoxData.title}
+              text={imageBoxData.text}
+              width={1440}
+              height={960}
+            ></ImageBox>
+          );
+        }
+      } else {
+        console.error(
+          "Junction Node Mapping is missing new Apifunction for: ",
+          props.node.attrs.junction
         );
       }
-
-      if (props.node.attrs.collection === "quote") {
-        let quote = await getQuote(node.item);
-        // console.log("quote", quote);
-
-        return <Quote data={quote}></Quote>;
-      }
-      if (props.node.attrs.collection === "iframe") {
-        let iframe = await getIframe(node.item);
-        return <Iframe data={iframe.code}></Iframe>;
-      }
-      if (props.node.attrs.collection === "info_box") {
-        // console.log("info_box");
-        let infoBoxData = await getInfoBox(node.item);
-        // console.log("infoBoxData", infoBoxData);
-        return <InfoBox data={infoBoxData}></InfoBox>;
-      }
-      if (props.node.attrs.collection === "image_box") {
-        // console.log("info_box");
-        let imageBoxData = await getImageBox(node.item);
-        // console.log("imageBoxData", imageBoxData);
-        return (
-          <ImageBox
-            imageId={imageBoxData.image as string}
-            title={imageBoxData.title}
-            text={imageBoxData.text}
-            width={1440}
-            height={960}
-          ></ImageBox>
-        );
-      }
-    } else {
-      console.error(
-        "Junction Node Mapping is missing new Apifunction for: ",
-        props.node.attrs.junction
-      );
-    }
-    // console.log("node", node);
-  },
+      // console.log("node", node);
+    },
+  };
 };
 
 const handlers = (topProps) => {
   return {
     ...markHandlers(topProps),
-    ...nodeHandlers,
+    ...nodeHandlers(topProps),
   };
 };
 
@@ -395,7 +406,7 @@ export type RenderTipTapProps = Readonly<{
 export const RenderTipTap = ({ content, topProps }: RenderTipTapProps) => {
   return (
     <div className="renderer-container">
-      <TipTapRender node={content} handlers={handlers(topProps)} />
+      <TipTapRender node={content} handlers={handlers(topProps || {})} />
     </div>
   );
 };

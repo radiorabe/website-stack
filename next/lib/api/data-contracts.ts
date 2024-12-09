@@ -694,6 +694,8 @@ export interface ItemsEventsEventShows {
   id?: number;
   events_id?: number | ItemsEvents | null;
   event_shows_id?: number | ItemsEventShows | null;
+  /** @format int64 */
+  sort?: number | null;
 }
 
 export interface ItemsPostDirectusUsers {
@@ -815,6 +817,57 @@ export interface ItemsPageJoinNodes {
   page_join_id?: number | ItemsPageJoin | null;
   item?: (string | ItemsInfoBox | ItemsAudioPlayer)[] | null;
   collection?: string | null;
+}
+
+export interface ItemsPageInternshipNodes {
+  /** @format uuid */
+  id?: string;
+  page_internship_id?: number | ItemsPageInternship | null;
+  item?: (string | ItemsImageBox)[] | null;
+  collection?: string | null;
+}
+
+export interface ItemsInternships {
+  id?: number;
+  sort?: number | null;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  program?: string | null;
+  duration?: string | null;
+  workload?: string | null;
+  start?: string | null;
+  /** @format date */
+  deadline?: string | null;
+  email?: string | null;
+  content?: any;
+  title?: string | null;
+}
+
+export interface ItemsPageInternshipInternships {
+  id?: number;
+  page_internship_id?: number | ItemsPageInternship | null;
+  internships_id?: number | ItemsInternships | null;
+  /** @format int64 */
+  sort?: number | null;
+}
+
+export interface ItemsPageInternship {
+  id?: number;
+  user_created?: string | Users | null;
+  /** @format timestamp */
+  date_created?: string | null;
+  user_updated?: string | Users | null;
+  /** @format timestamp */
+  date_updated?: string | null;
+  info_title?: string | null;
+  info_text?: any;
+  content?: any;
+  editor_nodes?: (string | ItemsPageInternshipNodes)[] | null;
+  internships?: (number | ItemsPageInternshipInternships)[] | null;
 }
 
 export interface GetAssetParams {
@@ -3033,4 +3086,152 @@ export interface ReadSingleItemsPageJoinNodesParams {
 
 export interface ReadSingleItemsPageJoinNodesData {
   data?: ItemsPageJoinNodes;
+}
+
+export interface ReadItemsPageInternshipNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageInternshipNodesData {
+  data?: ItemsPageInternshipNodes[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageInternshipNodesParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageInternshipNodesData {
+  data?: ItemsPageInternshipNodes;
+}
+
+export interface ReadItemsInternshipsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsInternshipsData {
+  data?: ItemsInternships[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsInternshipsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsInternshipsData {
+  data?: ItemsInternships;
+}
+
+export interface ReadItemsPageInternshipInternshipsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageInternshipInternshipsData {
+  data?: ItemsPageInternshipInternships[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageInternshipInternshipsParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageInternshipInternshipsData {
+  data?: ItemsPageInternshipInternships;
+}
+
+export interface ReadItemsPageInternshipParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageInternshipData {
+  data?: ItemsPageInternship[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageInternshipParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageInternshipData {
+  data?: ItemsPageInternship;
 }

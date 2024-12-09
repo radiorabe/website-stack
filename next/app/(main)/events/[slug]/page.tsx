@@ -2,7 +2,11 @@ import ButtonFull from "@/components/ButtonFull";
 import ImageBox from "@/components/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
-import { ItemsEvents, ItemsEventShows } from "@/lib/api/data-contracts";
+import {
+  ItemsEvents,
+  ItemsEventsEventShows,
+  ItemsEventShows,
+} from "@/lib/api/data-contracts";
 import Colors, { shadeColor } from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import { logError } from "@/lib/loging";
@@ -158,7 +162,7 @@ export default async function EventPage({ params }) {
             width: "74vw",
           }}
         >
-          {event.shows.map((sh, index) => {
+          {event.shows.map((sh: ItemsEventsEventShows, index) => {
             let show = sh.event_shows_id as ItemsEventShows;
             console.log("show", show);
             return (
