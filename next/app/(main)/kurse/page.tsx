@@ -86,22 +86,23 @@ export default async function PageClasses(props) {
             <Text style={{ ...Fonts.style.text }}>{"Kurse"}</Text>
           </View>
           {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-          <View
-            style={{
-              marginTop: Metrics.doubleBaseMargin,
-              width: "74vw",
-            }}
-          >
-            {data.classes.map((sh: ItemsPageClassesClasses, index) => {
-              let classItem = sh.classes_id as ItemsClasses;
-              return (
-                <ClassDropDown
-                  key={"classitem" + index}
-                  classItem={classItem}
-                ></ClassDropDown>
-              );
-            })}
-          </View>
+          {data.classes && (
+            <View
+              style={{
+                marginTop: Metrics.doubleBaseMargin,
+              }}
+            >
+              {data.classes.map((sh: ItemsPageClassesClasses, index) => {
+                let classItem = sh.classes_id as ItemsClasses;
+                return (
+                  <ClassDropDown
+                    key={"classitem" + index}
+                    classItem={classItem}
+                  ></ClassDropDown>
+                );
+              })}
+            </View>
+          )}
         </View>
       </View>
     </View>
