@@ -1,0 +1,30 @@
+{
+  "collection": "page_classes",
+  "field": "classes",
+  "type": "alias",
+  "meta": {
+    "collection": "page_classes",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "classes",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": {
+      "enableSelect": false,
+      "template": "{{classes_id.title}}"
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 8,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

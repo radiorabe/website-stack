@@ -346,6 +346,18 @@
     "_syncId": "d3ccca62-8b3d-4dd9-88b7-6b55eab3dbb0"
   },
   {
+    "collection": "classes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "cff734e6-8e98-4305-b732-58d90ac4fb5a"
+  },
+  {
     "collection": "contact_address",
     "action": "read",
     "permissions": {},
@@ -524,6 +536,42 @@
     ],
     "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
     "_syncId": "50f14733-96c6-4e49-9a7b-9430d23a98c1"
+  },
+  {
+    "collection": "page_classes_classes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "c370e0ca-c51c-4fb9-8a5e-f8d0c3e9f6d7"
+  },
+  {
+    "collection": "page_classes_nodes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "5d4626ab-9ef3-43f1-9576-989b11ddf400"
+  },
+  {
+    "collection": "page_classes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "885f035f-abb3-426d-a84e-67327df8e108"
   },
   {
     "collection": "page_contact_contact_address",

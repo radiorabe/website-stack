@@ -203,6 +203,20 @@ type Query {
   page_internship_internships_by_version(version: String!, id: ID!): version_page_internship_internships
   page_internship(version: String): page_internship
   page_internship_by_version(version: String!): version_page_internship
+  page_classes(version: String): page_classes
+  page_classes_by_version(version: String!): version_page_classes
+  page_classes_nodes(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_nodes!]!
+  page_classes_nodes_by_id(id: ID!, version: String): page_classes_nodes
+  page_classes_nodes_aggregated(groupBy: [String], filter: page_classes_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_nodes_aggregated!]!
+  page_classes_nodes_by_version(version: String!, id: ID!): version_page_classes_nodes
+  classes(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [classes!]!
+  classes_by_id(id: ID!, version: String): classes
+  classes_aggregated(groupBy: [String], filter: classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [classes_aggregated!]!
+  classes_by_version(version: String!, id: ID!): version_classes
+  page_classes_classes(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_classes!]!
+  page_classes_classes_by_id(id: ID!, version: String): page_classes_classes
+  page_classes_classes_aggregated(groupBy: [String], filter: page_classes_classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_classes_aggregated!]!
+  page_classes_classes_by_version(version: String!, id: ID!): version_page_classes_classes
 }
 
 type Mutation {
@@ -296,6 +310,12 @@ type Mutation {
   create_internships_item(data: create_internships_input!): internships
   create_page_internship_internships_items(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_internship_internships_input!]): [page_internship_internships!]!
   create_page_internship_internships_item(data: create_page_internship_internships_input!): page_internship_internships
+  create_page_classes_nodes_items(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_nodes_input!]): [page_classes_nodes!]!
+  create_page_classes_nodes_item(data: create_page_classes_nodes_input!): page_classes_nodes
+  create_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_classes_input!]): [classes!]!
+  create_classes_item(data: create_classes_input!): classes
+  create_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_classes_input!]): [page_classes_classes!]!
+  create_page_classes_classes_item(data: create_page_classes_classes_input!): page_classes_classes
   update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
   update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
   update_protocol_item(id: ID!, data: update_protocol_input!): protocol
@@ -443,6 +463,16 @@ type Mutation {
   update_page_internship_internships_batch(filter: page_internship_internships_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_internship_internships_input!]): [page_internship_internships!]!
   update_page_internship_internships_item(id: ID!, data: update_page_internship_internships_input!): page_internship_internships
   update_page_internship(data: update_page_internship_input!): page_internship
+  update_page_classes(data: update_page_classes_input!): page_classes
+  update_page_classes_nodes_items(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_nodes_input!): [page_classes_nodes!]!
+  update_page_classes_nodes_batch(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_nodes_input!]): [page_classes_nodes!]!
+  update_page_classes_nodes_item(id: ID!, data: update_page_classes_nodes_input!): page_classes_nodes
+  update_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_classes_input!): [classes!]!
+  update_classes_batch(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_classes_input!]): [classes!]!
+  update_classes_item(id: ID!, data: update_classes_input!): classes
+  update_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_classes_input!): [page_classes_classes!]!
+  update_page_classes_classes_batch(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_classes_input!]): [page_classes_classes!]!
+  update_page_classes_classes_item(id: ID!, data: update_page_classes_classes_input!): page_classes_classes
   delete_protocol_items(ids: [ID]!): delete_many
   delete_protocol_item(id: ID!): delete_one
   delete_page_history_protocol_items(ids: [ID]!): delete_many
@@ -533,6 +563,12 @@ type Mutation {
   delete_internships_item(id: ID!): delete_one
   delete_page_internship_internships_items(ids: [ID]!): delete_many
   delete_page_internship_internships_item(id: ID!): delete_one
+  delete_page_classes_nodes_items(ids: [ID]!): delete_many
+  delete_page_classes_nodes_item(id: ID!): delete_one
+  delete_classes_items(ids: [ID]!): delete_many
+  delete_classes_item(id: ID!): delete_one
+  delete_page_classes_classes_items(ids: [ID]!): delete_many
+  delete_page_classes_classes_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -614,6 +650,10 @@ type Subscription {
   internships_mutated(event: EventEnum): internships_mutated
   page_internship_internships_mutated(event: EventEnum): page_internship_internships_mutated
   page_internship_mutated(event: EventEnum): page_internship_mutated
+  page_classes_mutated(event: EventEnum): page_classes_mutated
+  page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
+  classes_mutated(event: EventEnum): classes_mutated
+  page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -666,6 +706,8 @@ enum EventEnum {
 }
 
 union events_editor_nodes_item_union = iframe
+
+union page_classes_nodes_item_union = image_box
 
 union page_history_nodes_item_union = image_box
 
@@ -745,6 +787,74 @@ type audio_player_mutated {
   key: ID!
   event: EventEnum
   data: audio_player
+}
+
+type classes {
+  id: ID!
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  date: Date
+  date_func: date_functions
+  time_start: Date
+  time_start_func: time_functions
+  time_end: Date
+  time_end_func: time_functions
+  location: String
+  price: String
+  teacher: String
+  what_else: String
+  email: String
+  content: JSON
+  content_func: count_functions
+}
+
+type classes_aggregated {
+  group: JSON
+  countAll: Int
+  count: classes_aggregated_count
+  countDistinct: classes_aggregated_count
+  avg: classes_aggregated_fields
+  sum: classes_aggregated_fields
+  avgDistinct: classes_aggregated_fields
+  sumDistinct: classes_aggregated_fields
+  min: classes_aggregated_fields
+  max: classes_aggregated_fields
+}
+
+type classes_aggregated_count {
+  id: Int
+  sort: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  title: Int
+  date: Int
+  time_start: Int
+  time_end: Int
+  location: Int
+  price: Int
+  teacher: Int
+  what_else: Int
+  email: Int
+  content: Int
+}
+
+type classes_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+type classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: classes
 }
 
 type config {
@@ -1948,6 +2058,105 @@ type page_agb_mutated {
   key: ID!
   event: EventEnum
   data: page_agb
+}
+
+type page_classes {
+  id: ID!
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  content: JSON
+  content_func: count_functions
+  editor_nodes(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_nodes]
+  editor_nodes_func: count_functions
+  classes(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_classes]
+  classes_func: count_functions
+}
+
+type page_classes_classes {
+  id: ID!
+  page_classes_id(filter: page_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_classes
+  classes_id(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): classes
+  sort: GraphQLBigInt
+}
+
+type page_classes_classes_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_classes_classes_aggregated_count
+  countDistinct: page_classes_classes_aggregated_count
+  avg: page_classes_classes_aggregated_fields
+  sum: page_classes_classes_aggregated_fields
+  avgDistinct: page_classes_classes_aggregated_fields
+  sumDistinct: page_classes_classes_aggregated_fields
+  min: page_classes_classes_aggregated_fields
+  max: page_classes_classes_aggregated_fields
+}
+
+type page_classes_classes_aggregated_count {
+  id: Int
+  page_classes_id: Int
+  classes_id: Int
+  sort: Int
+}
+
+type page_classes_classes_aggregated_fields {
+  id: Float
+  page_classes_id: Float
+  classes_id: Float
+  sort: Float
+}
+
+type page_classes_classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes_classes
+}
+
+type page_classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes
+}
+
+type page_classes_nodes {
+  id: ID!
+  page_classes_id(filter: page_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_classes
+  item: page_classes_nodes_item_union
+  collection: String
+}
+
+type page_classes_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_classes_nodes_aggregated_count
+  countDistinct: page_classes_nodes_aggregated_count
+  avg: page_classes_nodes_aggregated_fields
+  sum: page_classes_nodes_aggregated_fields
+  avgDistinct: page_classes_nodes_aggregated_fields
+  sumDistinct: page_classes_nodes_aggregated_fields
+  min: page_classes_nodes_aggregated_fields
+  max: page_classes_nodes_aggregated_fields
+}
+
+type page_classes_nodes_aggregated_count {
+  id: Int
+  page_classes_id: Int
+  item: Int
+  collection: Int
+}
+
+type page_classes_nodes_aggregated_fields {
+  page_classes_id: Float
+}
+
+type page_classes_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes_nodes
 }
 
 type page_contact {
@@ -3397,6 +3606,26 @@ type version_audio_player_files {
 }
 
 """"""
+type version_classes {
+  id: ID
+  sort: Int
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  title: String
+  date: Date
+  time_start: Date
+  time_end: Date
+  location: String
+  price: String
+  teacher: String
+  what_else: String
+  email: String
+  content: JSON
+}
+
+""""""
 type version_config {
   id: ID
   front_end_url: String
@@ -3570,6 +3799,34 @@ type version_page_agb {
   user_updated: JSON
   date_updated: Date
   content: JSON
+}
+
+""""""
+type version_page_classes {
+  id: ID
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  content: JSON
+  editor_nodes: JSON
+  classes: JSON
+}
+
+""""""
+type version_page_classes_classes {
+  id: ID
+  page_classes_id: JSON
+  classes_id: JSON
+  sort: GraphQLBigInt
+}
+
+""""""
+type version_page_classes_nodes {
+  id: ID
+  page_classes_id: JSON
+  item: String
+  collection: String
 }
 
 """"""
@@ -4010,6 +4267,33 @@ input boolean_filter_operators {
   _nnull: Boolean
 }
 
+input classes_filter {
+  id: number_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  date: date_filter_operators
+  date_func: date_function_filter_operators
+  time_start: date_filter_operators
+  time_start_func: time_function_filter_operators
+  time_end: date_filter_operators
+  time_end_func: time_function_filter_operators
+  location: string_filter_operators
+  price: string_filter_operators
+  teacher: string_filter_operators
+  what_else: string_filter_operators
+  email: string_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  _and: [classes_filter]
+  _or: [classes_filter]
+}
+
 input contact_address_filter {
   id: number_filter_operators
   name: string_filter_operators
@@ -4032,6 +4316,25 @@ input create_audio_player_files_input {
 input create_audio_player_input {
   id: ID
   files: [create_audio_player_files_input]
+}
+
+input create_classes_input {
+  id: ID
+  sort: Int
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  title: String
+  date: Date
+  time_start: Date
+  time_end: Date
+  location: String
+  price: String
+  teacher: String
+  what_else: String
+  email: String
+  content: JSON
 }
 
 input create_contact_address_input {
@@ -4291,6 +4594,31 @@ input create_orders_input {
   plz: String!
   city: String!
   phone_number: String
+}
+
+input create_page_classes_classes_input {
+  id: ID
+  page_classes_id: create_page_classes_input
+  classes_id: create_classes_input
+  sort: GraphQLBigInt
+}
+
+input create_page_classes_input {
+  id: ID
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  content: JSON
+  editor_nodes: [create_page_classes_nodes_input]
+  classes: [create_page_classes_classes_input]
+}
+
+input create_page_classes_nodes_input {
+  id: ID
+  page_classes_id: create_page_classes_input
+  item: String
+  collection: String
 }
 
 input create_page_contact_contact_address_input {
@@ -5160,6 +5488,42 @@ input orders_filter {
   _or: [orders_filter]
 }
 
+input page_classes_classes_filter {
+  id: number_filter_operators
+  page_classes_id: page_classes_filter
+  classes_id: classes_filter
+  sort: big_int_filter_operators
+  _and: [page_classes_classes_filter]
+  _or: [page_classes_classes_filter]
+}
+
+input page_classes_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_classes_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  classes: page_classes_classes_filter
+  classes_func: count_function_filter_operators
+  _and: [page_classes_filter]
+  _or: [page_classes_filter]
+}
+
+input page_classes_nodes_filter {
+  id: string_filter_operators
+  page_classes_id: page_classes_filter
+  collection: string_filter_operators
+  _and: [page_classes_nodes_filter]
+  _or: [page_classes_nodes_filter]
+  item__image_box: image_box_filter
+}
+
 input page_contact_contact_address_filter {
   id: number_filter_operators
   page_contact_id: page_contact_filter
@@ -5668,6 +6032,25 @@ input update_audio_player_input {
   files: [update_audio_player_files_input]
 }
 
+input update_classes_input {
+  id: ID
+  sort: Int
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  title: String
+  date: Date
+  time_start: Date
+  time_end: Date
+  location: String
+  price: String
+  teacher: String
+  what_else: String
+  email: String
+  content: JSON
+}
+
 input update_config_input {
   id: ID
   front_end_url: String
@@ -5939,6 +6322,31 @@ input update_page_agb_input {
   user_updated: update_directus_users_input
   date_updated: Date
   content: JSON
+}
+
+input update_page_classes_classes_input {
+  id: ID
+  page_classes_id: update_page_classes_input
+  classes_id: update_classes_input
+  sort: GraphQLBigInt
+}
+
+input update_page_classes_input {
+  id: ID
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  content: JSON
+  editor_nodes: [update_page_classes_nodes_input]
+  classes: [update_page_classes_classes_input]
+}
+
+input update_page_classes_nodes_input {
+  id: ID
+  page_classes_id: update_page_classes_input
+  item: String
+  collection: String
 }
 
 input update_page_contact_contact_address_input {

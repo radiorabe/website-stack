@@ -1,0 +1,25 @@
+{
+  "collection": "page_classes_classes",
+  "field": "page_classes_id",
+  "related_collection": "page_classes",
+  "meta": {
+    "junction_field": "classes_id",
+    "many_collection": "page_classes_classes",
+    "many_field": "page_classes_id",
+    "one_allowed_collections": null,
+    "one_collection": "page_classes",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "classes",
+    "sort_field": "sort"
+  },
+  "schema": {
+    "table": "page_classes_classes",
+    "column": "page_classes_id",
+    "foreign_key_table": "page_classes",
+    "foreign_key_column": "id",
+    "constraint_name": "page_classes_classes_page_classes_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

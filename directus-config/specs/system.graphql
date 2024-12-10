@@ -322,6 +322,10 @@ type Subscription {
   internships_mutated(event: EventEnum): internships_mutated
   page_internship_internships_mutated(event: EventEnum): page_internship_internships_mutated
   page_internship_mutated(event: EventEnum): page_internship_mutated
+  page_classes_mutated(event: EventEnum): page_classes_mutated
+  page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
+  classes_mutated(event: EventEnum): classes_mutated
+  page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -403,6 +407,8 @@ enum server_info_websocket_rest_authentication {
 
 union events_editor_nodes_item_union = iframe
 
+union page_classes_nodes_item_union = image_box
+
 union page_history_nodes_item_union = image_box
 
 union page_internship_nodes_item_union = image_box
@@ -441,6 +447,37 @@ type auth_tokens {
   access_token: String
   expires: GraphQLBigInt
   refresh_token: String
+}
+
+type classes {
+  id: ID!
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String
+  date: Date
+  date_func: date_functions
+  time_start: Date
+  time_start_func: time_functions
+  time_end: Date
+  time_end_func: time_functions
+  location: String
+  price: String
+  teacher: String
+  what_else: String
+  email: String
+  content: JSON
+  content_func: count_functions
+}
+
+type classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: classes
 }
 
 type config {
@@ -1977,6 +2014,54 @@ type page_agb_mutated {
   data: page_agb
 }
 
+type page_classes {
+  id: ID!
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  content: JSON
+  content_func: count_functions
+  editor_nodes(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_nodes]
+  editor_nodes_func: count_functions
+  classes(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_classes]
+  classes_func: count_functions
+}
+
+type page_classes_classes {
+  id: ID!
+  page_classes_id(filter: page_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_classes
+  classes_id(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): classes
+  sort: GraphQLBigInt
+}
+
+type page_classes_classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes_classes
+}
+
+type page_classes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes
+}
+
+type page_classes_nodes {
+  id: ID!
+  page_classes_id(filter: page_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_classes
+  item: page_classes_nodes_item_union
+  collection: String
+}
+
+type page_classes_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_classes_nodes
+}
+
 type page_contact {
   id: ID!
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
@@ -2731,6 +2816,33 @@ input boolean_filter_operators {
   _neq: Boolean
   _null: Boolean
   _nnull: Boolean
+}
+
+input classes_filter {
+  id: number_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  date: date_filter_operators
+  date_func: date_function_filter_operators
+  time_start: date_filter_operators
+  time_start_func: time_function_filter_operators
+  time_end: date_filter_operators
+  time_end_func: time_function_filter_operators
+  location: string_filter_operators
+  price: string_filter_operators
+  teacher: string_filter_operators
+  what_else: string_filter_operators
+  email: string_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  _and: [classes_filter]
+  _or: [classes_filter]
 }
 
 input contact_address_filter {
@@ -3793,6 +3905,42 @@ input number_filter_operators {
   _nnull: Boolean
   _between: [GraphQLStringOrFloat]
   _nbetween: [GraphQLStringOrFloat]
+}
+
+input page_classes_classes_filter {
+  id: number_filter_operators
+  page_classes_id: page_classes_filter
+  classes_id: classes_filter
+  sort: big_int_filter_operators
+  _and: [page_classes_classes_filter]
+  _or: [page_classes_classes_filter]
+}
+
+input page_classes_filter {
+  id: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  editor_nodes: page_classes_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  classes: page_classes_classes_filter
+  classes_func: count_function_filter_operators
+  _and: [page_classes_filter]
+  _or: [page_classes_filter]
+}
+
+input page_classes_nodes_filter {
+  id: string_filter_operators
+  page_classes_id: page_classes_filter
+  collection: string_filter_operators
+  _and: [page_classes_nodes_filter]
+  _or: [page_classes_nodes_filter]
+  item__image_box: image_box_filter
 }
 
 input page_contact_contact_address_filter {

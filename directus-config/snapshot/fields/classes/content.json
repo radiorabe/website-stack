@@ -1,0 +1,65 @@
+{
+  "collection": "classes",
+  "field": "content",
+  "type": "json",
+  "meta": {
+    "collection": "classes",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "content",
+    "group": null,
+    "hidden": false,
+    "interface": "flexible-editor-interface",
+    "note": null,
+    "options": {
+      "tools": [
+        "h4",
+        "link",
+        "removeLink",
+        "autolink",
+        "hardBreak",
+        "undo",
+        "redo",
+        "fullscreen"
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 16,
+    "special": [
+      "cast-json"
+    ],
+    "translations": [
+      {
+        "language": "en-GB",
+        "translation": "Description"
+      },
+      {
+        "language": "de-DE",
+        "translation": "Beschreibung"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "content",
+    "table": "classes",
+    "data_type": "json",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

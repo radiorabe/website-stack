@@ -1,12 +1,12 @@
 {
-  "collection": "page_team",
+  "collection": "page_classes",
   "meta": {
     "accountability": "all",
     "archive_app_filter": true,
     "archive_field": null,
     "archive_value": null,
     "collapse": "open",
-    "collection": "page_team",
+    "collection": "page_classes",
     "color": null,
     "display_template": null,
     "group": "Rabe_Website",
@@ -16,13 +16,13 @@
     "note": null,
     "preview_url": null,
     "singleton": true,
-    "sort": 13,
+    "sort": 3,
     "sort_field": null,
     "translations": null,
     "unarchive_value": null,
     "versioning": false
   },
   "schema": {
-    "name": "page_team"
+    "name": "page_classes"
   }
 }
