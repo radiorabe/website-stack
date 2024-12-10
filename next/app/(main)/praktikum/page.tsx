@@ -194,7 +194,7 @@ export default async function PageInternship(props) {
                         </View>
                       </View>
 
-                      <View>
+                      <View style={{ marginTop: Metrics.doubleBaseMargin }}>
                         {internship.content && (
                           <RenderTipTap
                             content={internship.content}

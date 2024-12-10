@@ -4,7 +4,13 @@ import StyleSheet from "react-native-media-query";
 import ButtonFull from "@/components/ButtonFull";
 import ProgramBox from "@/components/ProgrammBox";
 import { Api } from "@/lib/api";
-import { ItemsPageProgram } from "@/lib/api/data-contracts";
+import {
+  ItemsPageProgram,
+  ItemsPageProgramPrograms1,
+  ItemsPageProgramPrograms2,
+  ItemsPageProgramPrograms3,
+  ItemsPrograms,
+} from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import { logError } from "@/lib/loging";
@@ -334,17 +340,20 @@ export default async function ProgramPage({ params }) {
                   paddingBottom: Metrics.doubleBaseMargin,
                 }}
               >
-                {data.programs_group_1.map((program, index) => {
-                  return (
-                    <ButtonFull
-                      key={"Group1-" + index}
-                      style={{ padding: Metrics.halfBaseMargin }}
-                      href={program.programs_slug.slug}
-                      label={program.programs_slug.name}
-                      large
-                    ></ButtonFull>
-                  );
-                })}
+                {data.programs_group_1.map(
+                  (programNode: ItemsPageProgramPrograms1, index) => {
+                    let program = programNode.programs_slug as ItemsPrograms;
+                    return (
+                      <ButtonFull
+                        key={"Group1-" + index}
+                        style={{ padding: Metrics.halfBaseMargin }}
+                        href={program.slug}
+                        label={program.name}
+                        large
+                      ></ButtonFull>
+                    );
+                  }
+                )}
               </View>
               <Text style={{ ...Fonts.style.h4 }}>
                 {data.programs_group_2_title}
@@ -358,17 +367,20 @@ export default async function ProgramPage({ params }) {
                   paddingBottom: Metrics.doubleBaseMargin,
                 }}
               >
-                {data.programs_group_2.map((program, index) => {
-                  return (
-                    <ButtonFull
-                      key={"Group2-" + index}
-                      style={{ padding: Metrics.halfBaseMargin }}
-                      href={program.programs_slug.slug}
-                      label={program.programs_slug.name}
-                      large
-                    ></ButtonFull>
-                  );
-                })}
+                {data.programs_group_2.map(
+                  (programNode: ItemsPageProgramPrograms2, index) => {
+                    let program = programNode.programs_slug as ItemsPrograms;
+                    return (
+                      <ButtonFull
+                        key={"Group2-" + index}
+                        style={{ padding: Metrics.halfBaseMargin }}
+                        href={program.slug}
+                        label={program.name}
+                        large
+                      ></ButtonFull>
+                    );
+                  }
+                )}
               </View>
               <Text style={{ ...Fonts.style.h4 }}>
                 {data.programs_group_3_title}
@@ -382,17 +394,20 @@ export default async function ProgramPage({ params }) {
                   paddingBottom: Metrics.doubleBaseMargin,
                 }}
               >
-                {data.programs_group_3.map((program, index) => {
-                  return (
-                    <ButtonFull
-                      key={"Group3-" + index}
-                      style={{ padding: Metrics.halfBaseMargin }}
-                      href={program.programs_slug.slug}
-                      label={program.programs_slug.name}
-                      large
-                    ></ButtonFull>
-                  );
-                })}
+                {data.programs_group_3.map(
+                  (programNode: ItemsPageProgramPrograms3, index) => {
+                    let program = programNode.programs_slug as ItemsPrograms;
+                    return (
+                      <ButtonFull
+                        key={"Group3-" + index}
+                        style={{ padding: Metrics.halfBaseMargin }}
+                        href={program.slug}
+                        label={program.name}
+                        large
+                      ></ButtonFull>
+                    );
+                  }
+                )}
               </View>
             </View>
           )}
