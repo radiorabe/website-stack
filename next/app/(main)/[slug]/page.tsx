@@ -21,6 +21,7 @@ import { logError } from "@/lib/loging";
 import Heart from "./Heart";
 import moment from "moment";
 import { Show } from "@/lib/Types";
+import RenderTipTap from "@/components/RenderTipTap";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -76,7 +77,7 @@ async function getSendung(slug) {
       }
     );
     // console.log("response", itemResponse);
-    let item: ItemsPrograms = itemResponse.data.data;
+    let item = itemResponse.data.data as ItemsPrograms;
     // console.log("item", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
@@ -235,7 +236,12 @@ export default async function ProgramPage({ params }) {
           paddingVertical: Metrics.tripleBaseMargin,
         }}
       >
-        <Text style={{ ...Fonts.style.text }}>{sendung.description}</Text>
+        <View>
+          {sendung.content && (
+            <RenderTipTap content={sendung.content}></RenderTipTap>
+          )}
+        </View>
+
         <View style={{ height: Metrics.tripleBaseMargin }}></View>
         {sendung.team && sendung.team.length > 0 && (
           <View style={{ marginBottom: Metrics.tripleBaseMargin }}>

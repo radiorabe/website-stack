@@ -1,5 +1,6 @@
 import { defineHook } from "@directus/extensions-sdk";
 import { FailedValidationError } from "@directus/validation";
+// import { createError } from "@directus/errors";
 
 const audioTypes = [
   "audio/wav",
@@ -10,6 +11,11 @@ const audioTypes = [
 ];
 
 export default defineHook(async ({ filter }, { services, getSchema }) => {
+  // const ForbiddenError = createError(
+  //   "PRODUCTION_MODEL_FORBIDDEN",
+  //   "No data model changes on production."
+  // );
+
   const { FilesService } = services;
 
   const filesService = new FilesService({
@@ -40,4 +46,26 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
   };
   filter("posts.items.create", filterHandler);
   filter("posts.items.update", filterHandler);
+
+  /** Disallow model editing on production environments */
+  // // if (process.env.NODE_ENV === "development") {
+  // filter("items.create", () => {
+  //   throw new ForbiddenError();
+  // });
+  // filter("items.update", () => {
+  //   throw new ForbiddenError();
+  // });
+  // filter("items.delete", () => {
+  //   throw new ForbiddenError();
+  // });
+  // filter("fields.create", () => {
+  //   throw new ForbiddenError();
+  // });
+  // filter("fields.update", () => {
+  //   throw new ForbiddenError();
+  // });
+  // filter("fields.delete", () => {
+  //   throw new ForbiddenError();
+  // });
+  // // }
 });
