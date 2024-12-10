@@ -9,7 +9,7 @@
     "display_options": null,
     "field": "sort",
     "group": null,
-    "hidden": false,
+    "hidden": true,
     "interface": "input",
     "note": null,
     "options": null,

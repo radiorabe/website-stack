@@ -15,6 +15,10 @@ type Query {
   image_box_by_id(id: ID!, version: String): image_box
   image_box_aggregated(groupBy: [String], filter: image_box_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_box_aggregated!]!
   image_box_by_version(version: String!, id: ID!): version_image_box
+  programs(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs!]!
+  programs_by_id(id: ID!, version: String): programs
+  programs_aggregated(groupBy: [String], filter: programs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [programs_aggregated!]!
+  programs_by_version(version: String!, id: ID!): version_programs
   page_contact_files(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files!]!
   page_contact_files_by_id(id: ID!, version: String): page_contact_files
   page_contact_files_aggregated(groupBy: [String], filter: page_contact_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_files_aggregated!]!
@@ -37,10 +41,6 @@ type Query {
   programs_directus_users_by_id(id: ID!, version: String): programs_directus_users
   programs_directus_users_aggregated(groupBy: [String], filter: programs_directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [programs_directus_users_aggregated!]!
   programs_directus_users_by_version(version: String!, id: ID!): version_programs_directus_users
-  programs(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs!]!
-  programs_by_id(id: ID!, version: String): programs
-  programs_aggregated(groupBy: [String], filter: programs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [programs_aggregated!]!
-  programs_by_version(version: String!, id: ID!): version_programs
   page_contact(version: String): page_contact
   page_contact_by_version(version: String!): version_page_contact
   page_programs(version: String): page_programs
@@ -143,6 +143,10 @@ type Query {
   events_event_shows_by_id(id: ID!, version: String): events_event_shows
   events_event_shows_aggregated(groupBy: [String], filter: events_event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_event_shows_aggregated!]!
   events_event_shows_by_version(version: String!, id: ID!): version_events_event_shows
+  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
+  post_by_id(id: ID!, version: String): post
+  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
+  post_by_version(version: String!, id: ID!): version_post
   post_directus_users(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users!]!
   post_directus_users_by_id(id: ID!, version: String): post_directus_users
   post_directus_users_aggregated(groupBy: [String], filter: post_directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_directus_users_aggregated!]!
@@ -163,10 +167,6 @@ type Query {
   events_editor_nodes_by_id(id: ID!, version: String): events_editor_nodes
   events_editor_nodes_aggregated(groupBy: [String], filter: events_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_editor_nodes_aggregated!]!
   events_editor_nodes_by_version(version: String!, id: ID!): version_events_editor_nodes
-  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
-  post_by_id(id: ID!, version: String): post
-  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
-  post_by_version(version: String!, id: ID!): version_post
   tags(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [tags!]!
   tags_by_id(id: ID!, version: String): tags
   tags_aggregated(groupBy: [String], filter: tags_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [tags_aggregated!]!
@@ -214,6 +214,8 @@ type Mutation {
   create_page_contact_contact_address_item(data: create_page_contact_contact_address_input!): page_contact_contact_address
   create_image_box_items(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_box_input!]): [image_box!]!
   create_image_box_item(data: create_image_box_input!): image_box
+  create_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_programs_input!]): [programs!]!
+  create_programs_item(data: create_programs_input!): programs
   create_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_files_input!]): [page_contact_files!]!
   create_page_contact_files_item(data: create_page_contact_files_input!): page_contact_files
   create_party_location_items(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_party_location_input!]): [party_location!]!
@@ -224,8 +226,6 @@ type Mutation {
   create_member_product_item(data: create_member_product_input!): member_product
   create_programs_directus_users_items(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_programs_directus_users_input!]): [programs_directus_users!]!
   create_programs_directus_users_item(data: create_programs_directus_users_input!): programs_directus_users
-  create_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_programs_input!]): [programs!]!
-  create_programs_item(data: create_programs_input!): programs
   create_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_quote_input!]): [quote!]!
   create_quote_item(data: create_quote_input!): quote
   create_info_box_items(filter: info_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_info_box_input!]): [info_box!]!
@@ -268,6 +268,8 @@ type Mutation {
   create_iframe_item(data: create_iframe_input!): iframe
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
   create_events_event_shows_item(data: create_events_event_shows_input!): events_event_shows
+  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
+  create_post_item(data: create_post_input!): post
   create_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_directus_users_input!]): [post_directus_users!]!
   create_post_directus_users_item(data: create_post_directus_users_input!): post_directus_users
   create_post_editor_nodes_items(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_editor_nodes_input!]): [post_editor_nodes!]!
@@ -278,8 +280,6 @@ type Mutation {
   create_post_files_item(data: create_post_files_input!): post_files
   create_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_editor_nodes_input!]): [events_editor_nodes!]!
   create_events_editor_nodes_item(data: create_events_editor_nodes_input!): events_editor_nodes
-  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
-  create_post_item(data: create_post_input!): post
   create_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_tags_input!]): [tags!]!
   create_tags_item(data: create_tags_input!): tags
   create_post_tags_1_items(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_tags_1_input!]): [post_tags_1!]!
@@ -308,6 +308,9 @@ type Mutation {
   update_image_box_items(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_box_input!): [image_box!]!
   update_image_box_batch(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_box_input!]): [image_box!]!
   update_image_box_item(id: ID!, data: update_image_box_input!): image_box
+  update_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_programs_input!): [programs!]!
+  update_programs_batch(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_programs_input!]): [programs!]!
+  update_programs_item(id: ID!, data: update_programs_input!): programs
   update_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_files_input!): [page_contact_files!]!
   update_page_contact_files_batch(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_files_input!]): [page_contact_files!]!
   update_page_contact_files_item(id: ID!, data: update_page_contact_files_input!): page_contact_files
@@ -324,9 +327,6 @@ type Mutation {
   update_programs_directus_users_items(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_programs_directus_users_input!): [programs_directus_users!]!
   update_programs_directus_users_batch(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_programs_directus_users_input!]): [programs_directus_users!]!
   update_programs_directus_users_item(id: ID!, data: update_programs_directus_users_input!): programs_directus_users
-  update_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_programs_input!): [programs!]!
-  update_programs_batch(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_programs_input!]): [programs!]!
-  update_programs_item(id: ID!, data: update_programs_input!): programs
   update_page_contact(data: update_page_contact_input!): page_contact
   update_page_programs(data: update_page_programs_input!): page_programs
   update_page_agb(data: update_page_agb_input!): page_agb
@@ -399,6 +399,9 @@ type Mutation {
   update_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_event_shows_input!): [events_event_shows!]!
   update_events_event_shows_batch(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_event_shows_input!]): [events_event_shows!]!
   update_events_event_shows_item(id: ID!, data: update_events_event_shows_input!): events_event_shows
+  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
+  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
+  update_post_item(id: ID!, data: update_post_input!): post
   update_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_directus_users_input!): [post_directus_users!]!
   update_post_directus_users_batch(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_directus_users_input!]): [post_directus_users!]!
   update_post_directus_users_item(id: ID!, data: update_post_directus_users_input!): post_directus_users
@@ -414,9 +417,6 @@ type Mutation {
   update_events_editor_nodes_items(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_editor_nodes_input!): [events_editor_nodes!]!
   update_events_editor_nodes_batch(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_editor_nodes_input!]): [events_editor_nodes!]!
   update_events_editor_nodes_item(id: ID!, data: update_events_editor_nodes_input!): events_editor_nodes
-  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
-  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
-  update_post_item(id: ID!, data: update_post_input!): post
   update_tags_items(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_tags_input!): [tags!]!
   update_tags_batch(filter: tags_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_tags_input!]): [tags!]!
   update_tags_item(id: ID!, data: update_tags_input!): tags
@@ -451,6 +451,8 @@ type Mutation {
   delete_page_contact_contact_address_item(id: ID!): delete_one
   delete_image_box_items(ids: [ID]!): delete_many
   delete_image_box_item(id: ID!): delete_one
+  delete_programs_items(ids: [ID]!): delete_many
+  delete_programs_item(id: ID!): delete_one
   delete_page_contact_files_items(ids: [ID]!): delete_many
   delete_page_contact_files_item(id: ID!): delete_one
   delete_party_location_items(ids: [ID]!): delete_many
@@ -461,8 +463,6 @@ type Mutation {
   delete_member_product_item(id: ID!): delete_one
   delete_programs_directus_users_items(ids: [ID]!): delete_many
   delete_programs_directus_users_item(id: ID!): delete_one
-  delete_programs_items(ids: [ID]!): delete_many
-  delete_programs_item(id: ID!): delete_one
   delete_quote_items(ids: [ID]!): delete_many
   delete_quote_item(id: ID!): delete_one
   delete_info_box_items(ids: [ID]!): delete_many
@@ -505,6 +505,8 @@ type Mutation {
   delete_iframe_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
   delete_events_event_shows_item(id: ID!): delete_one
+  delete_post_items(ids: [ID]!): delete_many
+  delete_post_item(id: ID!): delete_one
   delete_post_directus_users_items(ids: [ID]!): delete_many
   delete_post_directus_users_item(id: ID!): delete_one
   delete_post_editor_nodes_items(ids: [ID]!): delete_many
@@ -515,8 +517,6 @@ type Mutation {
   delete_post_files_item(id: ID!): delete_one
   delete_events_editor_nodes_items(ids: [ID]!): delete_many
   delete_events_editor_nodes_item(id: ID!): delete_one
-  delete_post_items(ids: [ID]!): delete_many
-  delete_post_item(id: ID!): delete_one
   delete_tags_items(ids: [ID]!): delete_many
   delete_tags_item(id: ID!): delete_one
   delete_post_tags_1_items(ids: [ID]!): delete_many
@@ -556,6 +556,7 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
+  programs_mutated(event: EventEnum): programs_mutated
   page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
@@ -567,7 +568,6 @@ type Subscription {
   directus_versions_mutated(event: EventEnum): directus_versions_mutated
   config_mutated(event: EventEnum): config_mutated
   programs_directus_users_mutated(event: EventEnum): programs_directus_users_mutated
-  programs_mutated(event: EventEnum): programs_mutated
   page_contact_mutated(event: EventEnum): page_contact_mutated
   page_programs_mutated(event: EventEnum): page_programs_mutated
   page_agb_mutated(event: EventEnum): page_agb_mutated
@@ -598,12 +598,12 @@ type Subscription {
   events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
+  post_mutated(event: EventEnum): post_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
   events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
-  post_mutated(event: EventEnum): post_mutated
   tags_mutated(event: EventEnum): tags_mutated
   post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
   audio_player_files_mutated(event: EventEnum): audio_player_files_mutated
@@ -3137,8 +3137,9 @@ type programs {
   date_updated: Date
   date_updated_func: datetime_functions
   name: String
-  description: String
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  content: JSON
+  content_func: count_functions
   team(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   team_func: count_functions
   posts(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post]
@@ -3170,8 +3171,8 @@ type programs_aggregated_count {
   user_updated: Int
   date_updated: Int
   name: Int
-  description: Int
   image: Int
+  content: Int
   team: Int
   posts: Int
 }
@@ -3924,8 +3925,8 @@ type version_programs {
   user_updated: JSON
   date_updated: Date
   name: String
-  description: String
   image: JSON
+  content: JSON
   team: JSON
   posts: JSON
 }
@@ -4597,8 +4598,8 @@ input create_programs_input {
   user_updated: create_directus_users_input
   date_updated: Date
   name: String
-  description: String
   image: create_directus_files_input
+  content: JSON
   team: [create_programs_directus_users_input]
   posts: [create_post_input]
 }
@@ -5577,8 +5578,9 @@ input programs_filter {
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   name: string_filter_operators
-  description: string_filter_operators
   image: directus_files_filter
+  content: string_filter_operators
+  content_func: count_function_filter_operators
   team: programs_directus_users_filter
   team_func: count_function_filter_operators
   posts: post_filter
@@ -6263,8 +6265,8 @@ input update_programs_input {
   user_updated: update_directus_users_input
   date_updated: Date
   name: String
-  description: String
   image: update_directus_files_input
+  content: JSON
   team: [update_programs_directus_users_input]
   posts: [update_post_input]
 }

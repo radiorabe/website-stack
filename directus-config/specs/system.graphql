@@ -264,6 +264,7 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
+  programs_mutated(event: EventEnum): programs_mutated
   page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
@@ -275,7 +276,6 @@ type Subscription {
   directus_versions_mutated(event: EventEnum): directus_versions_mutated
   config_mutated(event: EventEnum): config_mutated
   programs_directus_users_mutated(event: EventEnum): programs_directus_users_mutated
-  programs_mutated(event: EventEnum): programs_mutated
   page_contact_mutated(event: EventEnum): page_contact_mutated
   page_programs_mutated(event: EventEnum): page_programs_mutated
   page_agb_mutated(event: EventEnum): page_agb_mutated
@@ -306,12 +306,12 @@ type Subscription {
   events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
+  post_mutated(event: EventEnum): post_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
   post_files_mutated(event: EventEnum): post_files_mutated
   events_editor_nodes_mutated(event: EventEnum): events_editor_nodes_mutated
-  post_mutated(event: EventEnum): post_mutated
   tags_mutated(event: EventEnum): tags_mutated
   post_tags_1_mutated(event: EventEnum): post_tags_1_mutated
   audio_player_files_mutated(event: EventEnum): audio_player_files_mutated
@@ -2558,8 +2558,9 @@ type programs {
   date_updated: Date
   date_updated_func: datetime_functions
   name: String
-  description: String
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  content: JSON
+  content_func: count_functions
   team(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   team_func: count_functions
   posts(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post]
@@ -3118,8 +3119,8 @@ input create_programs_input {
   user_updated: create_directus_users_input
   date_updated: Date
   name: String
-  description: String
   image: create_directus_files_input
+  content: JSON
   team: [create_programs_directus_users_input]
   posts: [create_post_input]
 }
@@ -4177,8 +4178,9 @@ input programs_filter {
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   name: string_filter_operators
-  description: string_filter_operators
   image: directus_files_filter
+  content: string_filter_operators
+  content_func: count_function_filter_operators
   team: programs_directus_users_filter
   team_func: count_function_filter_operators
   posts: post_filter
@@ -4669,8 +4671,8 @@ input update_programs_input {
   user_updated: update_directus_users_input
   date_updated: Date
   name: String
-  description: String
   image: update_directus_files_input
+  content: JSON
   team: [update_programs_directus_users_input]
   posts: [update_post_input]
 }

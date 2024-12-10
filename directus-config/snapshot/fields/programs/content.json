@@ -1,23 +1,39 @@
 {
   "collection": "programs",
-  "field": "description",
-  "type": "text",
+  "field": "content",
+  "type": "json",
   "meta": {
     "collection": "programs",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "description",
+    "field": "content",
     "group": null,
     "hidden": false,
-    "interface": "input-multiline",
+    "interface": "flexible-editor-interface",
     "note": null,
-    "options": null,
+    "options": {
+      "tools": [
+        "link",
+        "removeLink",
+        "autolink",
+        "hardBreak",
+        "undo",
+        "redo",
+        "fullscreen"
+      ]
+    },
     "readonly": false,
     "required": true,
     "sort": 9,
-    "special": null,
+    "special": [
+      "cast-json"
+    ],
     "translations": [
+      {
+        "language": "en-GB",
+        "translation": "Description"
+      },
       {
         "language": "de-DE",
         "translation": "Beschreibung"
@@ -28,9 +44,9 @@
     "width": "full"
   },
   "schema": {
-    "name": "description",
+    "name": "content",
     "table": "programs",
-    "data_type": "text",
+    "data_type": "json",
     "default_value": null,
     "max_length": null,
     "numeric_precision": null,
