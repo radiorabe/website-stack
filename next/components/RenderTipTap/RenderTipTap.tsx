@@ -326,6 +326,7 @@ const nodeHandlers = (topProps) => {
         events_editor_nodes: Api.readSingleItemsEventsEditorNodes,
         page_join_nodes: Api.readSingleItemsPageJoinNodes,
         page_internship_nodes: Api.readSingleItemsPageInternshipNodes,
+        page_classes_nodes: Api.readSingleItemsPageClassesNodes,
       };
       if (ApiMapper[props.node.attrs.junction]) {
         let node = await getNodes(

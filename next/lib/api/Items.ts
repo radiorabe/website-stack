@@ -18,6 +18,8 @@ import {
   ReadItemsAudioPlayerFilesData,
   ReadItemsAudioPlayerFilesParams,
   ReadItemsAudioPlayerParams,
+  ReadItemsClassesData,
+  ReadItemsClassesParams,
   ReadItemsContactAddressData,
   ReadItemsContactAddressParams,
   ReadItemsEventsData,
@@ -44,6 +46,12 @@ import {
   ReadItemsOrdersParams,
   ReadItemsPageAgbData,
   ReadItemsPageAgbParams,
+  ReadItemsPageClassesClassesData,
+  ReadItemsPageClassesClassesParams,
+  ReadItemsPageClassesData,
+  ReadItemsPageClassesNodesData,
+  ReadItemsPageClassesNodesParams,
+  ReadItemsPageClassesParams,
   ReadItemsPageContactContactAddressData,
   ReadItemsPageContactContactAddressParams,
   ReadItemsPageContactData,
@@ -128,6 +136,8 @@ import {
   ReadSingleItemsAudioPlayerFilesData,
   ReadSingleItemsAudioPlayerFilesParams,
   ReadSingleItemsAudioPlayerParams,
+  ReadSingleItemsClassesData,
+  ReadSingleItemsClassesParams,
   ReadSingleItemsContactAddressData,
   ReadSingleItemsContactAddressParams,
   ReadSingleItemsEventsData,
@@ -154,6 +164,12 @@ import {
   ReadSingleItemsOrdersParams,
   ReadSingleItemsPageAgbData,
   ReadSingleItemsPageAgbParams,
+  ReadSingleItemsPageClassesClassesData,
+  ReadSingleItemsPageClassesClassesParams,
+  ReadSingleItemsPageClassesData,
+  ReadSingleItemsPageClassesNodesData,
+  ReadSingleItemsPageClassesNodesParams,
+  ReadSingleItemsPageClassesParams,
   ReadSingleItemsPageContactContactAddressData,
   ReadSingleItemsPageContactContactAddressParams,
   ReadSingleItemsPageContactData,
@@ -4865,6 +4881,336 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_internship/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_classes items.
+ *
+ * @tags Items, ItemsPageClasses
+ * @name ReadItemsPageClasses
+ * @summary List Items
+ * @request GET:/items/page_classes
+ * @secure
+ * @response `200` `ReadItemsPageClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageClasses = (query: ReadItemsPageClassesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_classes item by unique identifier.
+ *
+ * @tags Items, ItemsPageClasses
+ * @name ReadSingleItemsPageClasses
+ * @summary Retrieve an Item
+ * @request GET:/items/page_classes/{id}
+ * @response `200` `ReadSingleItemsPageClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageClasses = ({ id, ...query }: ReadSingleItemsPageClassesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPageClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_classes_nodes items.
+ *
+ * @tags Items, ItemsPageClassesNodes
+ * @name ReadItemsPageClassesNodes
+ * @summary List Items
+ * @request GET:/items/page_classes_nodes
+ * @secure
+ * @response `200` `ReadItemsPageClassesNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageClassesNodes = (query: ReadItemsPageClassesNodesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageClassesNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes_nodes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_classes_nodes item by unique identifier.
+ *
+ * @tags Items, ItemsPageClassesNodes
+ * @name ReadSingleItemsPageClassesNodes
+ * @summary Retrieve an Item
+ * @request GET:/items/page_classes_nodes/{id}
+ * @response `200` `ReadSingleItemsPageClassesNodesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageClassesNodes = (
+    { id, ...query }: ReadSingleItemsPageClassesNodesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageClassesNodesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes_nodes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the classes items.
+ *
+ * @tags Items, ItemsClasses
+ * @name ReadItemsClasses
+ * @summary List Items
+ * @request GET:/items/classes
+ * @secure
+ * @response `200` `ReadItemsClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsClasses = (query: ReadItemsClassesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/classes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single classes item by unique identifier.
+ *
+ * @tags Items, ItemsClasses
+ * @name ReadSingleItemsClasses
+ * @summary Retrieve an Item
+ * @request GET:/items/classes/{id}
+ * @response `200` `ReadSingleItemsClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsClasses = ({ id, ...query }: ReadSingleItemsClassesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/classes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_classes_classes items.
+ *
+ * @tags Items, ItemsPageClassesClasses
+ * @name ReadItemsPageClassesClasses
+ * @summary List Items
+ * @request GET:/items/page_classes_classes
+ * @secure
+ * @response `200` `ReadItemsPageClassesClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageClassesClasses = (query: ReadItemsPageClassesClassesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageClassesClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes_classes`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_classes_classes item by unique identifier.
+ *
+ * @tags Items, ItemsPageClassesClasses
+ * @name ReadSingleItemsPageClassesClasses
+ * @summary Retrieve an Item
+ * @request GET:/items/page_classes_classes/{id}
+ * @response `200` `ReadSingleItemsPageClassesClassesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageClassesClasses = (
+    { id, ...query }: ReadSingleItemsPageClassesClassesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageClassesClassesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_classes_classes/${id}`,
       method: "GET",
       query: query,
       format: "json",

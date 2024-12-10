@@ -38,7 +38,11 @@ const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
       >
         <RenderTipTap
           content={data.text}
-          topProps={{ textColor: textColor ? textColor : undefined }}
+          topProps={{
+            textColor: textColor ? textColor : undefined,
+            linkColor: Colors.green,
+            linkHoverColor: Colors.darkGreen,
+          }}
         ></RenderTipTap>
       </View>
     </View>

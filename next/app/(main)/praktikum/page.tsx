@@ -44,7 +44,7 @@ const { styles } = StyleSheet.create({
 });
 
 export const metadata: Metadata = {
-  title: "Mitmachen",
+  title: "Praktikum",
 };
 
 async function getPageData() {
