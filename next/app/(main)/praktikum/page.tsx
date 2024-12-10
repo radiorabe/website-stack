@@ -121,102 +121,103 @@ export default async function PageInternship(props) {
             </View>
           )}
           {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-
-          <View style={{ marginTop: 0 }}>
-            {data.internships.map(
-              (item: ItemsPageInternshipInternships, index) => {
-                let internship = item.internships_id as ItemsInternships;
-                return (
-                  <View
-                    key={"internship" + index}
-                    style={{
-                      marginBottom: Metrics.tripleBaseMargin,
-                      // marginTop: Metrics.tripleBaseMargin,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        ...Fonts.style.h2,
-                        paddingBottom: Metrics.doubleBaseMargin,
-                      }}
-                    >
-                      {internship.title}
-                    </Text>
+          {data.internships && (
+            <View style={{ marginTop: 0 }}>
+              {data.internships.map(
+                (item: ItemsPageInternshipInternships, index) => {
+                  let internship = item.internships_id as ItemsInternships;
+                  return (
                     <View
+                      key={"internship" + index}
                       style={{
-                        flexDirection: "row",
-                        width: "100%",
-                        paddingBottom: Metrics.doubleBaseMargins,
+                        marginBottom: Metrics.tripleBaseMargin,
+                        // marginTop: Metrics.tripleBaseMargin,
                       }}
                     >
-                      <View style={{ width: "50%" }}>
-                        {internship.program && (
-                          <InfoText
-                            label="Sendung"
-                            text={internship.program}
-                          ></InfoText>
-                        )}
-                        {internship.duration && (
-                          <InfoText
-                            label="Dauer"
-                            text={internship.duration}
-                          ></InfoText>
-                        )}
-                        {internship.workload && (
-                          <InfoText
-                            label="Pensum"
-                            text={internship.workload}
-                          ></InfoText>
-                        )}
+                      <Text
+                        style={{
+                          ...Fonts.style.h2,
+                          paddingBottom: Metrics.doubleBaseMargin,
+                        }}
+                      >
+                        {internship.title}
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          width: "100%",
+                          paddingBottom: Metrics.doubleBaseMargins,
+                        }}
+                      >
+                        <View style={{ width: "50%" }}>
+                          {internship.program && (
+                            <InfoText
+                              label="Sendung"
+                              text={internship.program}
+                            ></InfoText>
+                          )}
+                          {internship.duration && (
+                            <InfoText
+                              label="Dauer"
+                              text={internship.duration}
+                            ></InfoText>
+                          )}
+                          {internship.workload && (
+                            <InfoText
+                              label="Pensum"
+                              text={internship.workload}
+                            ></InfoText>
+                          )}
+                        </View>
+
+                        <View style={{ width: "50%" }}>
+                          {internship.start && (
+                            <InfoText
+                              label="Start"
+                              text={internship.start}
+                            ></InfoText>
+                          )}
+                          {internship.deadline && (
+                            <InfoText
+                              label="Bewerbungsfrist"
+                              text={moment(internship.deadline).format(
+                                "DD. MMMM YYYY"
+                              )}
+                            ></InfoText>
+                          )}
+                          {internship.email && (
+                            <InfoText
+                              label="Bewerbung an"
+                              text={internship.email}
+                            ></InfoText>
+                          )}
+                        </View>
                       </View>
 
-                      <View style={{ width: "50%" }}>
-                        {internship.start && (
-                          <InfoText
-                            label="Start"
-                            text={internship.start}
-                          ></InfoText>
-                        )}
-                        {internship.deadline && (
-                          <InfoText
-                            label="Bewerbungsfrist"
-                            text={moment(internship.deadline).format(
-                              "DD. MMMM YYYY"
-                            )}
-                          ></InfoText>
-                        )}
-                        {internship.email && (
-                          <InfoText
-                            label="Bewerbung an"
-                            text={internship.email}
-                          ></InfoText>
+                      <View>
+                        {internship.content && (
+                          <RenderTipTap
+                            content={internship.content}
+                          ></RenderTipTap>
                         )}
                       </View>
+                      <View
+                        style={{
+                          alignItems: "flex-start",
+                        }}
+                      >
+                        <Button
+                          label={"Jetzt Bewerben"}
+                          href={"mailto:" + internship.email}
+                          large
+                        ></Button>
+                      </View>
                     </View>
-
-                    <View>
-                      {internship.content && (
-                        <RenderTipTap
-                          content={internship.content}
-                        ></RenderTipTap>
-                      )}
-                    </View>
-                    <View
-                      style={{
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <Button
-                        label={"Jetzt Bewerben"}
-                        href={"mailto:" + internship.email}
-                        large
-                      ></Button>
-                    </View>
-                  </View>
-                );
-              }
-            )}
-          </View>
+                  );
+                }
+              )}
+            </View>
+          )}
         </View>
       </View>
     </View>
