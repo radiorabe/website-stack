@@ -2750,6 +2750,7 @@ type statements {
   date_updated_func: datetime_functions
   text: String
   author: String
+  test: String
 }
 
 type statements_mutated {
@@ -4366,6 +4367,7 @@ input statements_filter {
   date_updated_func: datetime_function_filter_operators
   text: string_filter_operators
   author: string_filter_operators
+  test: string_filter_operators
   _and: [statements_filter]
   _or: [statements_filter]
 }

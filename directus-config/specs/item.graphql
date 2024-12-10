@@ -3515,6 +3515,7 @@ type statements {
   date_updated_func: datetime_functions
   text: String
   author: String
+  test: String
 }
 
 type statements_aggregated {
@@ -3540,6 +3541,7 @@ type statements_aggregated_count {
   date_updated: Int
   text: Int
   author: Int
+  test: Int
 }
 
 type statements_aggregated_fields {
@@ -4221,6 +4223,7 @@ type version_statements {
   date_updated: Date
   text: String
   author: String
+  test: String
 }
 
 """"""
@@ -4955,6 +4958,7 @@ input create_statements_input {
   date_updated: Date
   text: String
   author: String
+  test: String
 }
 
 input create_tags_input {
@@ -5982,6 +5986,7 @@ input statements_filter {
   date_updated_func: datetime_function_filter_operators
   text: string_filter_operators
   author: string_filter_operators
+  test: string_filter_operators
   _and: [statements_filter]
   _or: [statements_filter]
 }
@@ -6702,6 +6707,7 @@ input update_statements_input {
   date_updated: Date
   text: String
   author: String
+  test: String
 }
 
 input update_tags_input {
