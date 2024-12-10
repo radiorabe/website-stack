@@ -115,10 +115,6 @@ type Query {
   page_history_nodes_by_id(id: ID!, version: String): page_history_nodes
   page_history_nodes_aggregated(groupBy: [String], filter: page_history_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_nodes_aggregated!]!
   page_history_nodes_by_version(version: String!, id: ID!): version_page_history_nodes
-  statements(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [statements!]!
-  statements_by_id(id: ID!, version: String): statements
-  statements_aggregated(groupBy: [String], filter: statements_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [statements_aggregated!]!
-  statements_by_version(version: String!, id: ID!): version_statements
   orders(filter: orders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [orders!]!
   orders_by_id(id: ID!, version: String): orders
   orders_aggregated(groupBy: [String], filter: orders_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [orders_aggregated!]!
@@ -131,6 +127,10 @@ type Query {
   events_by_id(id: ID!, version: String): events
   events_aggregated(groupBy: [String], filter: events_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_aggregated!]!
   events_by_version(version: String!, id: ID!): version_events
+  statements(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [statements!]!
+  statements_by_id(id: ID!, version: String): statements
+  statements_aggregated(groupBy: [String], filter: statements_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [statements_aggregated!]!
+  statements_by_version(version: String!, id: ID!): version_statements
   events_files(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files!]!
   events_files_by_id(id: ID!, version: String): events_files
   events_files_aggregated(groupBy: [String], filter: events_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_files_aggregated!]!
@@ -268,14 +268,14 @@ type Mutation {
   create_page_receive_nodes_item(data: create_page_receive_nodes_input!): page_receive_nodes
   create_page_history_nodes_items(filter: page_history_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_nodes_input!]): [page_history_nodes!]!
   create_page_history_nodes_item(data: create_page_history_nodes_input!): page_history_nodes
-  create_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_statements_input!]): [statements!]!
-  create_statements_item(data: create_statements_input!): statements
   create_orders_items(filter: orders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_orders_input!]): [orders!]!
   create_orders_item(data: create_orders_input!): orders
   create_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
   create_events_items(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_input!]): [events!]!
   create_events_item(data: create_events_input!): events
+  create_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_statements_input!]): [statements!]!
+  create_statements_item(data: create_statements_input!): statements
   create_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_files_input!]): [events_files!]!
   create_events_files_item(data: create_events_files_input!): events_files
   create_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_iframe_input!]): [iframe!]!
@@ -398,9 +398,6 @@ type Mutation {
   update_page_history_nodes_items(filter: page_history_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_nodes_input!): [page_history_nodes!]!
   update_page_history_nodes_batch(filter: page_history_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_nodes_input!]): [page_history_nodes!]!
   update_page_history_nodes_item(id: ID!, data: update_page_history_nodes_input!): page_history_nodes
-  update_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_statements_input!): [statements!]!
-  update_statements_batch(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_statements_input!]): [statements!]!
-  update_statements_item(id: ID!, data: update_statements_input!): statements
   update_orders_items(filter: orders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_orders_input!): [orders!]!
   update_orders_batch(filter: orders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_orders_input!]): [orders!]!
   update_orders_item(id: ID!, data: update_orders_input!): orders
@@ -410,6 +407,9 @@ type Mutation {
   update_events_items(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_input!): [events!]!
   update_events_batch(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_input!]): [events!]!
   update_events_item(id: ID!, data: update_events_input!): events
+  update_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_statements_input!): [statements!]!
+  update_statements_batch(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_statements_input!]): [statements!]!
+  update_statements_item(id: ID!, data: update_statements_input!): statements
   update_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_files_input!): [events_files!]!
   update_events_files_batch(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_files_input!]): [events_files!]!
   update_events_files_item(id: ID!, data: update_events_files_input!): events_files
@@ -521,14 +521,14 @@ type Mutation {
   delete_page_receive_nodes_item(id: ID!): delete_one
   delete_page_history_nodes_items(ids: [ID]!): delete_many
   delete_page_history_nodes_item(id: ID!): delete_one
-  delete_statements_items(ids: [ID]!): delete_many
-  delete_statements_item(id: ID!): delete_one
   delete_orders_items(ids: [ID]!): delete_many
   delete_orders_item(id: ID!): delete_one
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_events_items(ids: [ID]!): delete_many
   delete_events_item(id: ID!): delete_one
+  delete_statements_items(ids: [ID]!): delete_many
+  delete_statements_item(id: ID!): delete_one
   delete_events_files_items(ids: [ID]!): delete_many
   delete_events_files_item(id: ID!): delete_one
   delete_iframe_items(ids: [ID]!): delete_many
@@ -627,10 +627,10 @@ type Subscription {
   contact_address_mutated(event: EventEnum): contact_address_mutated
   page_receive_nodes_mutated(event: EventEnum): page_receive_nodes_mutated
   page_history_nodes_mutated(event: EventEnum): page_history_nodes_mutated
-  statements_mutated(event: EventEnum): statements_mutated
   orders_mutated(event: EventEnum): orders_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
+  statements_mutated(event: EventEnum): statements_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated

@@ -1,6 +1,6 @@
 import { defineHook } from "@directus/extensions-sdk";
 import { FailedValidationError } from "@directus/validation";
-import { createError } from "@directus/errors";
+// import { createError } from "@directus/errors";
 
 const audioTypes = [
   "audio/wav",
@@ -10,11 +10,11 @@ const audioTypes = [
   "audio/mpeg",
 ];
 
-export default defineHook(async ({ filter }, { services, getSchema }) => {
-  const ForbiddenError = createError(
-    "FORBIDDEN_PROD",
-    "No direct changes on production."
-  );
+export default defineHook(async ({ filter }, { services, getSchema, env }) => {
+  // const ForbiddenError = createError(
+  //   "FORBIDDEN_PROD",
+  //   "No direct changes on production."
+  // );
 
   const { FilesService } = services;
 
@@ -26,11 +26,9 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
   const audioFilterHandler = async (payload) => {
     if (payload.audio) {
       const file = await filesService.readOne(payload.audio);
-      console.log("process.env.AUDIO_FOLDER_ID", process.env.AUDIO_FOLDER_ID);
-      console.log("file", file);
 
       if (!audioTypes.includes(file.type)) {
-        if (file.folder === process.env.AUDIO_FOLDER_ID) {
+        if (file.folder === env.AUDIO_FOLDER_ID) {
           await filesService.deleteOne(payload.audio);
         }
         throw new FailedValidationError({
@@ -45,20 +43,21 @@ export default defineHook(async ({ filter }, { services, getSchema }) => {
   filter("posts.items.create", audioFilterHandler);
   filter("posts.items.update", audioFilterHandler);
 
-  const throwForbiddenError = async (payload) => {
-    throw new ForbiddenError();
-  };
+  // const throwForbiddenError = async (payload) => {
+  //   throw new ForbiddenError();
+  // };
 
+  // how to know if the changes are comming from the sync command????????????? and not from hand?
   /** Disallow model editing on production environments */
-  if (process.env.NODE_ENV !== "development") {
-    filter("collections.create", throwForbiddenError);
-    filter("collections.update", throwForbiddenError);
-    filter("collections.delete", throwForbiddenError);
-    filter("fields.create", throwForbiddenError);
-    filter("fields.update", throwForbiddenError);
-    filter("fields.delete", throwForbiddenError);
-    filter("policies.create", throwForbiddenError);
-    filter("policies.update", throwForbiddenError);
-    filter("policies.delete", throwForbiddenError);
-  }
+  // if (env.NODE_ENV !== "development") {
+  //   filter("collections.create", throwForbiddenError);
+  //   filter("collections.update", throwForbiddenError);
+  //   filter("collections.delete", throwForbiddenError);
+  //   filter("fields.create", throwForbiddenError);
+  //   filter("fields.update", throwForbiddenError);
+  //   filter("fields.delete", throwForbiddenError);
+  //   filter("policies.create", throwForbiddenError);
+  //   filter("policies.update", throwForbiddenError);
+  //   filter("policies.delete", throwForbiddenError);
+  // }
 });

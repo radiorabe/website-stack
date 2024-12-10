@@ -299,10 +299,10 @@ type Subscription {
   contact_address_mutated(event: EventEnum): contact_address_mutated
   page_receive_nodes_mutated(event: EventEnum): page_receive_nodes_mutated
   page_history_nodes_mutated(event: EventEnum): page_history_nodes_mutated
-  statements_mutated(event: EventEnum): statements_mutated
   orders_mutated(event: EventEnum): orders_mutated
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
+  statements_mutated(event: EventEnum): statements_mutated
   events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
