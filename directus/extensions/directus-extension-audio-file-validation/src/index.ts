@@ -45,8 +45,14 @@ export default defineHook(async ({ filter }, { services, getSchema, env }) => {
 
   const throwForbiddenError = async (payload, meta, ctx) => {
     // only SYNC_USER_ID user (admin) can edit on production
-    if (ctx.accountability.user !== env.SYNC_USER_ID)
+    if (
+      ctx.accountability === null || // kind of a bug: https://github.com/directus/directus/discussions/13308
+      ctx.accountability.user === env.SYNC_USER_ID // or the only real admin
+    ) {
+      // All good nothing to do
+    } else {
       throw new ForbiddenError();
+    }
   };
 
   // how to know if the changes are comming from the sync command????????????? and not from hand?
