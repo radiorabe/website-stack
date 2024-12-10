@@ -17,7 +17,12 @@
     "required": false,
     "sort": 34,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Ombuds Ort 2"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "half"

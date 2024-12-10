@@ -28,7 +28,12 @@
     "special": [
       "cast-json"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Text"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

@@ -18,7 +18,12 @@
     "singleton": true,
     "sort": 6,
     "sort_field": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Page Praktikum"
+      }
+    ],
     "unarchive_value": null,
     "versioning": false
   },

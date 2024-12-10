@@ -2189,10 +2189,10 @@ type page_contact {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  contact_addresses(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_contact_address]
-  contact_addresses_func: count_functions
   partner_logos(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files]
   partner_logos_func: count_functions
+  contact_addresses(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_contact_address]
+  contact_addresses_func: count_functions
 }
 
 type page_contact_contact_address {
@@ -2647,12 +2647,12 @@ type page_program {
   programs_group_1_title: String
   programs_group_2_title: String
   programs_group_3_title: String
-  programs_group_3(filter: page_program_programs_3_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_program_programs_3]
-  programs_group_3_func: count_functions
   programs_group_1(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_program_programs_2]
   programs_group_1_func: count_functions
   programs_group_2(filter: page_program_programs_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_program_programs_1]
   programs_group_2_func: count_functions
+  programs_group_3(filter: page_program_programs_3_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_program_programs_3]
+  programs_group_3_func: count_functions
 }
 
 type page_program_mutated {
@@ -3125,15 +3125,17 @@ type post {
   content: JSON!
   content_func: count_functions
   preview_full_image: Boolean
+
+  """Maximal zwei Sätze"""
   short_description: String
-  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
-  tags_func: count_functions
-  authors(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users]
-  authors_func: count_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
   audio_files_func: count_functions
+  tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
+  tags_func: count_functions
   editor_nodes(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_editor_nodes]
   editor_nodes_func: count_functions
+  authors(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users]
+  authors_func: count_functions
 }
 
 type post_aggregated {
@@ -3164,11 +3166,13 @@ type post_aggregated_count {
   imagebox: Int
   content: Int
   preview_full_image: Int
+
+  """Maximal zwei Sätze"""
   short_description: Int
-  tags: Int
-  authors: Int
   audio_files: Int
+  tags: Int
   editor_nodes: Int
+  authors: Int
 }
 
 type post_aggregated_fields {
@@ -3858,8 +3862,8 @@ type version_page_contact {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  contact_addresses: JSON
   partner_logos: JSON
+  contact_addresses: JSON
 }
 
 """"""
@@ -3995,9 +3999,9 @@ type version_page_program {
   programs_group_1_title: String
   programs_group_2_title: String
   programs_group_3_title: String
-  programs_group_3: JSON
   programs_group_1: JSON
   programs_group_2: JSON
+  programs_group_3: JSON
 }
 
 """"""
@@ -4132,11 +4136,13 @@ type version_post {
   imagebox: JSON
   content: JSON
   preview_full_image: Boolean
+
+  """Maximal zwei Sätze"""
   short_description: String
-  tags: JSON
-  authors: JSON
   audio_files: JSON
+  tags: JSON
   editor_nodes: JSON
+  authors: JSON
 }
 
 """"""
@@ -4661,8 +4667,8 @@ input create_page_contact_input {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  contact_addresses: [create_page_contact_contact_address_input]
   partner_logos: [create_page_contact_files_input]
+  contact_addresses: [create_page_contact_contact_address_input]
 }
 
 input create_page_history_files_input {
@@ -4762,9 +4768,9 @@ input create_page_program_input {
   programs_group_1_title: String
   programs_group_2_title: String
   programs_group_3_title: String
-  programs_group_3: [create_page_program_programs_3_input]
   programs_group_1: [create_page_program_programs_2_input]
   programs_group_2: [create_page_program_programs_1_input]
+  programs_group_3: [create_page_program_programs_3_input]
 }
 
 input create_page_program_programs_1_input {
@@ -4895,11 +4901,13 @@ input create_post_input {
   imagebox: create_image_box_input
   content: JSON!
   preview_full_image: Boolean
+
+  """Maximal zwei Sätze"""
   short_description: String
-  tags: [create_post_tags_1_input]
-  authors: [create_post_directus_users_input]
   audio_files: [create_post_files_input]
+  tags: [create_post_tags_1_input]
   editor_nodes: [create_post_editor_nodes_input]
+  authors: [create_post_directus_users_input]
 }
 
 input create_post_tags_1_input {
@@ -5570,10 +5578,10 @@ input page_contact_filter {
   ombuds_postfach: string_filter_operators
   ombuds_postfach_2: string_filter_operators
   location: geometry_filter_operators
-  contact_addresses: page_contact_contact_address_filter
-  contact_addresses_func: count_function_filter_operators
   partner_logos: page_contact_files_filter
   partner_logos_func: count_function_filter_operators
+  contact_addresses: page_contact_contact_address_filter
+  contact_addresses_func: count_function_filter_operators
   _and: [page_contact_filter]
   _or: [page_contact_filter]
 }
@@ -5717,12 +5725,12 @@ input page_program_filter {
   programs_group_1_title: string_filter_operators
   programs_group_2_title: string_filter_operators
   programs_group_3_title: string_filter_operators
-  programs_group_3: page_program_programs_3_filter
-  programs_group_3_func: count_function_filter_operators
   programs_group_1: page_program_programs_2_filter
   programs_group_1_func: count_function_filter_operators
   programs_group_2: page_program_programs_1_filter
   programs_group_2_func: count_function_filter_operators
+  programs_group_3: page_program_programs_3_filter
+  programs_group_3_func: count_function_filter_operators
   _and: [page_program_filter]
   _or: [page_program_filter]
 }
@@ -5903,14 +5911,14 @@ input post_filter {
   content_func: count_function_filter_operators
   preview_full_image: boolean_filter_operators
   short_description: string_filter_operators
-  tags: post_tags_1_filter
-  tags_func: count_function_filter_operators
-  authors: post_directus_users_filter
-  authors_func: count_function_filter_operators
   audio_files: post_files_filter
   audio_files_func: count_function_filter_operators
+  tags: post_tags_1_filter
+  tags_func: count_function_filter_operators
   editor_nodes: post_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
+  authors: post_directus_users_filter
+  authors_func: count_function_filter_operators
   _and: [post_filter]
   _or: [post_filter]
 }
@@ -6389,8 +6397,8 @@ input update_page_contact_input {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  contact_addresses: [update_page_contact_contact_address_input]
   partner_logos: [update_page_contact_files_input]
+  contact_addresses: [update_page_contact_contact_address_input]
 }
 
 input update_page_history_files_input {
@@ -6499,9 +6507,9 @@ input update_page_program_input {
   programs_group_1_title: String
   programs_group_2_title: String
   programs_group_3_title: String
-  programs_group_3: [update_page_program_programs_3_input]
   programs_group_1: [update_page_program_programs_2_input]
   programs_group_2: [update_page_program_programs_1_input]
+  programs_group_3: [update_page_program_programs_3_input]
 }
 
 input update_page_program_programs_1_input {
@@ -6642,11 +6650,13 @@ input update_post_input {
   imagebox: update_image_box_input
   content: JSON
   preview_full_image: Boolean
+
+  """Maximal zwei Sätze"""
   short_description: String
-  tags: [update_post_tags_1_input]
-  authors: [update_post_directus_users_input]
   audio_files: [update_post_files_input]
+  tags: [update_post_tags_1_input]
   editor_nodes: [update_post_editor_nodes_input]
+  authors: [update_post_directus_users_input]
 }
 
 input update_post_tags_1_input {

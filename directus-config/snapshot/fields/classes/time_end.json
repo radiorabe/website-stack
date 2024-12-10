@@ -17,7 +17,12 @@
     "required": false,
     "sort": 10,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Zeit Ende"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "half"

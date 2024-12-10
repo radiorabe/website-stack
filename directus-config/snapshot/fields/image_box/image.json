@@ -19,7 +19,12 @@
     "special": [
       "file"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Bild"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

@@ -33951,20 +33951,6 @@
             "nullable": true,
             "type": "object"
           },
-          "contact_addresses": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "$ref": "#/components/schemas/ItemsPageContactContactAddress"
-                }
-              ]
-            }
-          },
           "partner_logos": {
             "nullable": true,
             "type": "array",
@@ -33975,6 +33961,20 @@
                 },
                 {
                   "$ref": "#/components/schemas/ItemsPageContactFiles"
+                }
+              ]
+            }
+          },
+          "contact_addresses": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsPageContactContactAddress"
                 }
               ]
             }
@@ -34570,20 +34570,6 @@
             "nullable": true,
             "type": "string"
           },
-          "programs_group_3": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "$ref": "#/components/schemas/ItemsPageProgramPrograms3"
-                }
-              ]
-            }
-          },
           "programs_group_1": {
             "nullable": true,
             "type": "array",
@@ -34608,6 +34594,20 @@
                 },
                 {
                   "$ref": "#/components/schemas/ItemsPageProgramPrograms1"
+                }
+              ]
+            }
+          },
+          "programs_group_3": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsPageProgramPrograms3"
                 }
               ]
             }
@@ -35479,35 +35479,8 @@
           },
           "short_description": {
             "nullable": true,
+            "description": "Maximal zwei Sätze",
             "type": "string"
-          },
-          "tags": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "$ref": "#/components/schemas/ItemsPostTags1"
-                }
-              ]
-            }
-          },
-          "authors": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "$ref": "#/components/schemas/ItemsPostDirectusUsers"
-                }
-              ]
-            }
           },
           "audio_files": {
             "nullable": true,
@@ -35523,6 +35496,20 @@
               ]
             }
           },
+          "tags": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsPostTags1"
+                }
+              ]
+            }
+          },
           "editor_nodes": {
             "nullable": true,
             "type": "array",
@@ -35534,6 +35521,20 @@
                 },
                 {
                   "$ref": "#/components/schemas/ItemsPostEditorNodes"
+                }
+              ]
+            }
+          },
+          "authors": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsPostDirectusUsers"
                 }
               ]
             }

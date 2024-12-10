@@ -17,7 +17,12 @@
     "required": false,
     "sort": 31,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Ombuds Strassennummer 2"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "half"

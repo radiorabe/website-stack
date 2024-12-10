@@ -17,7 +17,12 @@
     "required": false,
     "sort": 9,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Titel 2"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

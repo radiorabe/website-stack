@@ -11,7 +11,7 @@
     "group": null,
     "hidden": false,
     "interface": "group-detail",
-    "note": null,
+    "note": "Damit dein Beitrag von Suchmaschinen gefunden wird.",
     "options": {
       "headerIcon": "screen_search_desktop"
     },
@@ -23,7 +23,12 @@
       "no-data",
       "group"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Metadaten"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

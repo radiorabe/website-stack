@@ -11,13 +11,18 @@
     "group": "meta_data",
     "hidden": false,
     "interface": "input",
-    "note": null,
+    "note": "Maximal zwei Sätze",
     "options": null,
     "readonly": false,
     "required": false,
     "sort": 2,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Kurzbeschreib"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

@@ -18,7 +18,12 @@
     "singleton": true,
     "sort": 3,
     "sort_field": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Page Kurse"
+      }
+    ],
     "unarchive_value": null,
     "versioning": false
   },

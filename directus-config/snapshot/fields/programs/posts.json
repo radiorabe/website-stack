@@ -22,7 +22,12 @@
     "special": [
       "o2m"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Beiträge"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

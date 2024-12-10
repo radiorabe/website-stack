@@ -21,7 +21,12 @@
     "special": [
       "files"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Audiodateien"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

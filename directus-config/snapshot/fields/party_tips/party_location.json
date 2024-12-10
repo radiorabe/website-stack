@@ -19,7 +19,12 @@
     "special": [
       "m2o"
     ],
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Party Standort"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "full"

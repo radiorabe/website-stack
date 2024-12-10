@@ -17,7 +17,12 @@
     "required": false,
     "sort": 12,
     "special": null,
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Kosten"
+      }
+    ],
     "validation": null,
     "validation_message": null,
     "width": "half"
