@@ -1,6 +1,6 @@
 import { defineHook } from "@directus/extensions-sdk";
 import { FailedValidationError } from "@directus/validation";
-// import { createError } from "@directus/errors";
+import { createError } from "@directus/errors";
 
 const audioTypes = [
   "audio/wav",
@@ -11,10 +11,10 @@ const audioTypes = [
 ];
 
 export default defineHook(async ({ filter }, { services, getSchema, env }) => {
-  // const ForbiddenError = createError(
-  //   "FORBIDDEN_PROD",
-  //   "No direct changes on production."
-  // );
+  const ForbiddenError = createError(
+    "FORBIDDEN_PROD",
+    "No direct changes on production."
+  );
 
   const { FilesService } = services;
 
@@ -43,21 +43,23 @@ export default defineHook(async ({ filter }, { services, getSchema, env }) => {
   filter("posts.items.create", audioFilterHandler);
   filter("posts.items.update", audioFilterHandler);
 
-  // const throwForbiddenError = async (payload) => {
-  //   throw new ForbiddenError();
-  // };
+  const throwForbiddenError = async (payload, meta, ctx) => {
+    // only SYNC_USER_ID user (admin) can edit on production
+    if (ctx.accountability.user !== env.SYNC_USER_ID)
+      throw new ForbiddenError();
+  };
 
   // how to know if the changes are comming from the sync command????????????? and not from hand?
   /** Disallow model editing on production environments */
-  // if (env.NODE_ENV !== "development") {
-  //   filter("collections.create", throwForbiddenError);
-  //   filter("collections.update", throwForbiddenError);
-  //   filter("collections.delete", throwForbiddenError);
-  //   filter("fields.create", throwForbiddenError);
-  //   filter("fields.update", throwForbiddenError);
-  //   filter("fields.delete", throwForbiddenError);
-  //   filter("policies.create", throwForbiddenError);
-  //   filter("policies.update", throwForbiddenError);
-  //   filter("policies.delete", throwForbiddenError);
-  // }
+  if (env.NODE_ENV !== "development") {
+    filter("collections.create", throwForbiddenError);
+    filter("collections.update", throwForbiddenError);
+    filter("collections.delete", throwForbiddenError);
+    filter("fields.create", throwForbiddenError);
+    filter("fields.update", throwForbiddenError);
+    filter("fields.delete", throwForbiddenError);
+    filter("policies.create", throwForbiddenError);
+    filter("policies.update", throwForbiddenError);
+    filter("policies.delete", throwForbiddenError);
+  }
 });
