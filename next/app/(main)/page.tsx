@@ -198,7 +198,7 @@ export default async function HomePage(props) {
                   label={event.promo_button_label}
                   href={event.promo_button_url}
                   color={Colors.white}
-                  hoverColor={Colors.black}
+                  hoverColor={Colors.whiteTransparent}
                 ></Button>
               </View>
             </View>
