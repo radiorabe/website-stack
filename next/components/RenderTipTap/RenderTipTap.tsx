@@ -378,6 +378,7 @@ const nodeHandlers = (topProps) => {
               text={imageBoxData.text}
               width={1440}
               height={960}
+              style={{ marginTop: Metrics.tripleBaseMargin }}
             ></ImageBox>
           );
         }

@@ -59,13 +59,13 @@ import {
   ReadItemsPageContactFilesParams,
   ReadItemsPageContactParams,
   ReadItemsPageHistoryData,
+  ReadItemsPageHistoryFiles1Data,
+  ReadItemsPageHistoryFiles1Params,
   ReadItemsPageHistoryFilesData,
   ReadItemsPageHistoryFilesParams,
   ReadItemsPageHistoryNodesData,
   ReadItemsPageHistoryNodesParams,
   ReadItemsPageHistoryParams,
-  ReadItemsPageHistoryProtocolData,
-  ReadItemsPageHistoryProtocolParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
   ReadItemsPageInternshipData,
@@ -124,8 +124,6 @@ import {
   ReadItemsProgramsDirectusUsersData,
   ReadItemsProgramsDirectusUsersParams,
   ReadItemsProgramsParams,
-  ReadItemsProtocolData,
-  ReadItemsProtocolParams,
   ReadItemsQuoteData,
   ReadItemsQuoteParams,
   ReadItemsStatementsData,
@@ -177,13 +175,13 @@ import {
   ReadSingleItemsPageContactFilesParams,
   ReadSingleItemsPageContactParams,
   ReadSingleItemsPageHistoryData,
+  ReadSingleItemsPageHistoryFiles1Data,
+  ReadSingleItemsPageHistoryFiles1Params,
   ReadSingleItemsPageHistoryFilesData,
   ReadSingleItemsPageHistoryFilesParams,
   ReadSingleItemsPageHistoryNodesData,
   ReadSingleItemsPageHistoryNodesParams,
   ReadSingleItemsPageHistoryParams,
-  ReadSingleItemsPageHistoryProtocolData,
-  ReadSingleItemsPageHistoryProtocolParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
   ReadSingleItemsPageInternshipData,
@@ -242,8 +240,6 @@ import {
   ReadSingleItemsProgramsDirectusUsersData,
   ReadSingleItemsProgramsDirectusUsersParams,
   ReadSingleItemsProgramsParams,
-  ReadSingleItemsProtocolData,
-  ReadSingleItemsProtocolParams,
   ReadSingleItemsQuoteData,
   ReadSingleItemsQuoteParams,
   ReadSingleItemsStatementsData,
@@ -259,171 +255,6 @@ import {
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
 export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
-  /**
- * @description List the protocol items.
- *
- * @tags Items, ItemsProtocol
- * @name ReadItemsProtocol
- * @summary List Items
- * @request GET:/items/protocol
- * @secure
- * @response `200` `ReadItemsProtocolData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsProtocol = (query: ReadItemsProtocolParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsProtocolData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/protocol`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single protocol item by unique identifier.
- *
- * @tags Items, ItemsProtocol
- * @name ReadSingleItemsProtocol
- * @summary Retrieve an Item
- * @request GET:/items/protocol/{id}
- * @response `200` `ReadSingleItemsProtocolData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsProtocol = ({ id, ...query }: ReadSingleItemsProtocolParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsProtocolData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/protocol/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the page_history_protocol items.
- *
- * @tags Items, ItemsPageHistoryProtocol
- * @name ReadItemsPageHistoryProtocol
- * @summary List Items
- * @request GET:/items/page_history_protocol
- * @secure
- * @response `200` `ReadItemsPageHistoryProtocolData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsPageHistoryProtocol = (query: ReadItemsPageHistoryProtocolParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsPageHistoryProtocolData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/page_history_protocol`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single page_history_protocol item by unique identifier.
- *
- * @tags Items, ItemsPageHistoryProtocol
- * @name ReadSingleItemsPageHistoryProtocol
- * @summary Retrieve an Item
- * @request GET:/items/page_history_protocol/{id}
- * @response `200` `ReadSingleItemsPageHistoryProtocolData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsPageHistoryProtocol = (
-    { id, ...query }: ReadSingleItemsPageHistoryProtocolParams,
-    params: RequestParams = {},
-  ) =>
-    this.request<
-      ReadSingleItemsPageHistoryProtocolData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/page_history_protocol/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
   /**
  * @description List the page_contact_contact_address items.
  *
@@ -2978,87 +2809,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the statements items.
- *
- * @tags Items, ItemsStatements
- * @name ReadItemsStatements
- * @summary List Items
- * @request GET:/items/statements
- * @secure
- * @response `200` `ReadItemsStatementsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsStatements = (query: ReadItemsStatementsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsStatementsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/statements`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single statements item by unique identifier.
- *
- * @tags Items, ItemsStatements
- * @name ReadSingleItemsStatements
- * @summary Retrieve an Item
- * @request GET:/items/statements/{id}
- * @response `200` `ReadSingleItemsStatementsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsStatements = ({ id, ...query }: ReadSingleItemsStatementsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsStatementsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/statements/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
  * @description Create a new orders item.
  *
  * @tags Items, ItemsOrders
@@ -3321,6 +3071,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/events/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the statements items.
+ *
+ * @tags Items, ItemsStatements
+ * @name ReadItemsStatements
+ * @summary List Items
+ * @request GET:/items/statements
+ * @secure
+ * @response `200` `ReadItemsStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsStatements = (query: ReadItemsStatementsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/statements`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single statements item by unique identifier.
+ *
+ * @tags Items, ItemsStatements
+ * @name ReadSingleItemsStatements
+ * @summary Retrieve an Item
+ * @request GET:/items/statements/{id}
+ * @response `200` `ReadSingleItemsStatementsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsStatements = ({ id, ...query }: ReadSingleItemsStatementsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsStatementsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/statements/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -5211,6 +5042,90 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_classes_classes/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_history_files_1 items.
+ *
+ * @tags Items, ItemsPageHistoryFiles1
+ * @name ReadItemsPageHistoryFiles1
+ * @summary List Items
+ * @request GET:/items/page_history_files_1
+ * @secure
+ * @response `200` `ReadItemsPageHistoryFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageHistoryFiles1 = (query: ReadItemsPageHistoryFiles1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageHistoryFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files_1`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_history_files_1 item by unique identifier.
+ *
+ * @tags Items, ItemsPageHistoryFiles1
+ * @name ReadSingleItemsPageHistoryFiles1
+ * @summary Retrieve an Item
+ * @request GET:/items/page_history_files_1/{id}
+ * @response `200` `ReadSingleItemsPageHistoryFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageHistoryFiles1 = (
+    { id, ...query }: ReadSingleItemsPageHistoryFiles1Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageHistoryFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files_1/${id}`,
       method: "GET",
       query: query,
       format: "json",

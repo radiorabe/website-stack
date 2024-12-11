@@ -1,6 +1,11 @@
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
-import { ItemsPageHistory } from "@/lib/api/data-contracts";
+import {
+  Files,
+  ItemsPageHistory,
+  ItemsPageHistoryFiles,
+  ItemsPageHistoryFiles1,
+} from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
@@ -43,7 +48,11 @@ async function getPageData() {
   try {
     const itemResponse = await Api.readItemsPageHistory(
       {
-        fields: ["*", "protocols.protocol_id.*", "logos.directus_files_id"],
+        fields: [
+          "*",
+          "protocols.directus_files_id.*",
+          "logos.directus_files_id.*",
+        ],
         // limit: 3,
       },
       {
@@ -91,6 +100,7 @@ export default async function HistoryPage(props) {
             style={{
               flexDirection: "row",
               // backgroundColor: "green",
+              paddingBottom: Metrics.tripleBaseMargin,
             }}
           >
             <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
@@ -104,6 +114,7 @@ export default async function HistoryPage(props) {
             </Text>
             <Text style={{ ...Fonts.style.text }}>{"Geschichte"}</Text>
           </View>
+
           {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -133,18 +144,16 @@ export default async function HistoryPage(props) {
               >
                 {"Protokolle der Mitgliederversammlungen"}
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                }}
-              >
+              <View>
                 {data.protocols &&
                   data.protocols.map((item, index) => {
+                    let protocol = item as ItemsPageHistoryFiles1;
+                    let file = protocol.directus_files_id as Files;
                     return (
                       <DownloadProtocol
                         key={"protocol" + index}
-                        label={item.protocol_id.name}
-                        url={item.protocol_id.file}
+                        label={file.title}
+                        url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${file.id}/${file.filename_download}?download`}
                       ></DownloadProtocol>
                     );
                   })}
@@ -166,27 +175,20 @@ export default async function HistoryPage(props) {
               >
                 {data.logos &&
                   data.logos.map((item, index) => {
+                    let logo = item as ItemsPageHistoryFiles;
+                    let file = logo.directus_files_id as Files;
                     return (
-                      <DownloadLogo
+                      <View
                         key={"logo" + index}
-                        label={"logo" + index}
-                        url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}`}
                         style={{
                           marginLeft: index ? Metrics.doubleBaseMargin : 0,
                         }}
-                      ></DownloadLogo>
-                      // <Image
-                      //   key={"logo" + index}
-                      //   src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}?width=120&height=120&fit=cover`}
-                      //   width={120}
-                      //   height={120}
-                      //   style={{
-                      //     marginLeft: index ? Metrics.doubleBaseMargin : 0,
-                      //     borderRadius: 9,
-                      //   }}
-                      //   layout="responsive"
-                      //   alt={"sendung.name"}
-                      // ></Image>
+                      >
+                        <DownloadLogo
+                          label={"logo" + index}
+                          url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${file.id}/${file.filename_download}`}
+                        ></DownloadLogo>
+                      </View>
                     );
                   })}
               </View>

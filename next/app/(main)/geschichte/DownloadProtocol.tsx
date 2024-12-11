@@ -12,7 +12,7 @@ export interface Props {
   url: string;
 }
 
-const InfoBox = ({ label, url }: Props) => {
+const DownloadProtocol = ({ label, url }: Props) => {
   return (
     <Pressable
       style={
@@ -56,4 +56,4 @@ const InfoBox = ({ label, url }: Props) => {
   );
 };
 
-export default InfoBox;
+export default DownloadProtocol;

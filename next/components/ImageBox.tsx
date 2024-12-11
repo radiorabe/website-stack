@@ -12,11 +12,12 @@ export interface Props {
   width: number;
   height: number;
   icon?: any;
+  style?: any;
 }
 
-const ImageBox = ({ imageId, width, height, title, text }: Props) => {
+const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
   return (
-    <View style={styles.imageContainer}>
+    <View style={[styles.imageContainer, style]}>
       <Image
         src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageId}?width=${width}&height=${height}&fit=cover`}
         width={width}

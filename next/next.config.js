@@ -10,6 +10,7 @@ module.exports = {
     ];
   },
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: process.env.IMAGES_PROTOCOL,
