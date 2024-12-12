@@ -7,6 +7,7 @@ import { Text, View } from "@/lib/server-react-native";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
+import ButtonFull from "./ButtonFull";
 
 export interface Props {
   event: ItemsEvents;
@@ -43,12 +44,12 @@ const EventBox = ({ event }: Props) => {
           style={styles.buttonContainer}
           dataSet={{ media: ids.buttonContainer }}
         >
-          <Button
+          <ButtonFull
             label={event.promo_button_label}
             href={event.promo_button_url}
-            color={Colors.white}
-            hoverColor={Colors.whiteTransparent}
-          ></Button>
+            textColor={Colors.white}
+            hoverTextColor={Colors.whiteTransparent}
+          ></ButtonFull>
         </View>
       </View>
     </View>

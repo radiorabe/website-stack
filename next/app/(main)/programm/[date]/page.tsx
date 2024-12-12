@@ -2,7 +2,7 @@ import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
 import ButtonFull from "@/components/ButtonFull";
-import ProgramBox from "@/components/ProgrammBox";
+import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import { Api } from "@/lib/api";
 import {
   ItemsPageProgram,
@@ -260,7 +260,12 @@ export default async function ProgramPage({ params }) {
                 ></Arrow>
               )}
             </View>
-            <ButtonFull href={"/programm"} label={"Heute"} />
+            <ButtonFull
+              href={"/programm"}
+              label={"Heute"}
+              full
+              textColor={Colors.white}
+            />
           </View>
         </View>
       </View>
@@ -350,6 +355,8 @@ export default async function ProgramPage({ params }) {
                         href={program.slug}
                         label={program.name}
                         large
+                        full
+                        textColor={Colors.white}
                       ></ButtonFull>
                     );
                   }
@@ -377,6 +384,8 @@ export default async function ProgramPage({ params }) {
                         href={program.slug}
                         label={program.name}
                         large
+                        full
+                        textColor={Colors.white}
                       ></ButtonFull>
                     );
                   }
@@ -404,6 +413,8 @@ export default async function ProgramPage({ params }) {
                         href={program.slug}
                         label={program.name}
                         large
+                        full
+                        textColor={Colors.white}
                       ></ButtonFull>
                     );
                   }

@@ -6,13 +6,16 @@ import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import { useEffect, useState } from "react";
 import RadioButton from "./RadioButton";
+import ButtonFull from "@/components/ButtonFull";
 // import Layout from "../components/Layout";
 
 export default function YearlyProduct(props) {
   const { memberProducts } = props;
 
   const hasMemberProducts = memberProducts && memberProducts.length > 0;
-  const [selectedProduct, setSelectedProduct] = useState(hasMemberProducts && memberProducts[0].id);
+  const [selectedProduct, setSelectedProduct] = useState(
+    hasMemberProducts && memberProducts[0].id
+  );
 
   return (
     <div
@@ -53,16 +56,16 @@ export default function YearlyProduct(props) {
         );
       })}
       <div style={{ paddingTop: Metrics.baseMargin }}>
-        <Button
+        <ButtonFull
           label={"Mitglied werden"}
-          color={Colors.white}
-          hoverColor={Colors.green}
+          textColor={Colors.white}
+          hovertextColor={Colors.green}
           disabled={selectedProduct === ""}
           href={{
             pathname: "/bestellung",
             query: { id: selectedProduct },
           }}
-        ></Button>
+        ></ButtonFull>
       </div>
     </div>
   );

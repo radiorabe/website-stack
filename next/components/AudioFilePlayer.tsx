@@ -16,6 +16,7 @@ import Loader from "react-spinners/BounceLoader";
 import AudioFiles from "./AudioFiles";
 import Button from "./Button";
 import IconDownload from "@/assets/svg/IconDownload";
+import ButtonFull from "./ButtonFull";
 
 export interface HoverableProps {
   audioFiles: any[];
@@ -205,11 +206,11 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
       )}
       {tracks.length === 1 && (
         <div style={{ marginTop: Metrics.tripleBaseMargin }}>
-          <Button
+          <ButtonFull
             url={tracks[0].src + "?download"}
             icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
             label={"Herunterladen"}
-          ></Button>
+          ></ButtonFull>
           <View style={{ width: Metrics.baseMargin }}></View>
         </div>
       )}

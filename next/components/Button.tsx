@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ReactElement } from "react";
 import StyleSheet from "react-native-media-query";
 
-export interface HoverableProps {
+export interface Props {
   url?: string;
   label: string;
   icon?: any;

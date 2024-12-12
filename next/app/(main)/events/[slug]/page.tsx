@@ -273,6 +273,8 @@ export default async function EventPage({ params }) {
                     backgroundColor={event.color}
                     backgroundHoverColor={shadeColor(event.color, 30)}
                     large
+                    full
+                    textColor={Colors.white}
                   ></ButtonFull>
                 </View>
               </View>

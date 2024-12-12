@@ -216,7 +216,7 @@ export default async function ProgramPage({ params }) {
                   query: { slug: sendung.slug },
                 }}
                 label={"Sendung supporten"}
-                // large
+                full
                 icon={<Heart></Heart>}
                 textColor={Colors.black}
                 backgroundColor={Colors.white}
@@ -331,6 +331,8 @@ export default async function ProgramPage({ params }) {
               query: { program: sendung.slug },
             }}
             label={"Alle Beiträge"}
+            full
+            textColor={Colors.white}
           />
         </View>
         <View

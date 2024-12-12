@@ -20,6 +20,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
+import ButtonFull from "@/components/ButtonFull";
 
 const { ids, styles } = StyleSheet.create({
   container: {
@@ -255,11 +256,11 @@ export default async function BeitragPage({ params }: Props) {
             </View>
           )}
           <View style={{ flexDirection: "row" }}>
-            <Button
+            <ButtonFull
               url={"alksjdfkl"}
               icon={<IconShare color={Colors.darkGreen}></IconShare>}
               label={"Teilen"}
-            ></Button>
+            ></ButtonFull>
           </View>
 
           <View>

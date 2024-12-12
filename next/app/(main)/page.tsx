@@ -21,7 +21,7 @@ import { getLiveData } from "./programm/[date]/page";
 import HoverText from "@/components/HoverText";
 import { logError } from "@/lib/loging";
 import Image from "next/image";
-import ProgramBox from "@/components/ProgrammBox";
+import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import EventBox from "@/components/EventBox";
 
 async function getPosts() {
@@ -161,7 +161,12 @@ export default async function HomePage(props) {
           <View>
             <Text style={{ ...Fonts.style.h2 }}>{"Neuste Beiträge"}</Text>
           </View>
-          <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
+          <ButtonFull
+            full
+            textColor={Colors.white}
+            href={"/beitraege"}
+            label={"Alle Beiträge"}
+          />
         </View>
         <View
           style={{
@@ -297,10 +302,10 @@ export default async function HomePage(props) {
                       </Text>
                     </View>
                     <View>
-                      <Button
+                      <ButtonFull
                         url={partyLocation.url}
                         label={"Website"}
-                      ></Button>
+                      ></ButtonFull>
                     </View>
                   </View>
                 );

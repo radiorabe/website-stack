@@ -44,7 +44,12 @@ export default function SearchBox({ programName, authorName }) {
           display: "flex",
         }}
       >
-        <ButtonFull href={"/beitraege"} label={"Alle Beiträge"} />
+        <ButtonFull
+          href={"/beitraege"}
+          label={"Alle Beiträge"}
+          full
+          textColor={Colors.white}
+        />
         {author && (
           <FilterLabel
             label={authorName}

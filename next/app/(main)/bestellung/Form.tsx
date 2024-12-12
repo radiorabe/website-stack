@@ -9,6 +9,7 @@ import Colors from "@/lib/Colors";
 import { useRouter } from "next/navigation";
 // import Layout from "../components/Layout";
 import Select from "react-select";
+import ButtonFull from "@/components/ButtonFull";
 
 export default function Statement({ id, type, options, defaultValue }) {
   const [errors, setErrors] = useState([]);
@@ -270,7 +271,7 @@ export default function Statement({ id, type, options, defaultValue }) {
               }}
             >
               <button type="submit" style={{ all: "unset" }}>
-                <Button label={"Absenden"}></Button>
+                <ButtonFull label={"Absenden"}></ButtonFull>
                 <div>{errorMessage}</div>
               </button>
             </div>

@@ -206,11 +206,11 @@ export default async function PageInternship(props) {
                           alignItems: "flex-start",
                         }}
                       >
-                        <Button
+                        <ButtonFull
                           label={"Jetzt Bewerben"}
                           href={"mailto:" + internship.email}
                           large
-                        ></Button>
+                        ></ButtonFull>
                       </View>
                     </View>
                   );

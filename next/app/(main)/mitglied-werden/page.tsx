@@ -17,6 +17,7 @@ import { useState } from "react";
 import YearlyProduct from "./YearlyProducts";
 import Heart from "./Heart";
 import Button from "@/components/Button";
+import ButtonFull from "@/components/ButtonFull";
 
 async function getPageData() {
   try {
@@ -177,15 +178,15 @@ export default async function MitgliedPage(props) {
               >
                 <Heart color={Colors.green}></Heart>
               </div>
-              <Button
+              <ButtonFull
                 label={"Sendung unterstützen"}
-                color={Colors.white}
-                hoverColor={Colors.green}
+                textColor={Colors.white}
+                hoverTextColor={Colors.green}
                 href={{
                   pathname: "/bestellung",
                   query: { slug: "choose" },
                 }}
-              ></Button>
+              ></ButtonFull>
             </div>
           </div>
         </div>

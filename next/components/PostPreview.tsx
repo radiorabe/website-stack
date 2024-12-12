@@ -15,6 +15,7 @@ import StyleSheet from "react-native-media-query";
 import Button from "./Button";
 import { AspectRatio } from "react-aspect-ratio"; // Recommended: if you are using React > 15.6
 import useResponsive from "@/lib/useResponsisve";
+import ButtonFull from "./ButtonFull";
 
 export interface HoverableProps {
   data: ItemsPost;
@@ -62,7 +63,12 @@ const PostPreview = ({ data, index }: HoverableProps) => {
         dataSet={{ media: ids.titleContainer }}
       >
         <View style={styles.button} dataSet={{ media: ids.button }}>
-          <Button label={program.name} disabled={true} url=""></Button>
+          <ButtonFull
+            label={program.name}
+            disabled={true}
+            url=""
+            hoverTextColor={Colors.green}
+          ></ButtonFull>
         </View>
         <Text style={styles.date} dataSet={{ media: ids.date }}>
           {moment(data.date).format("DD. MMMM")}
@@ -136,12 +142,13 @@ const PostPreview = ({ data, index }: HoverableProps) => {
               borderTopRightRadius: 9,
             }}
           ></View>
-          <Button
+          <ButtonFull
             label={program.name}
             disabled={true}
             url=""
-            color={Colors.white}
-          ></Button>
+            textColor={Colors.white}
+            hoverTextColor={Colors.green}
+          ></ButtonFull>
         </View>
         <View
           style={styles.fullContainer}

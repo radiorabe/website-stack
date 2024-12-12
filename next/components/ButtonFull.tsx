@@ -13,23 +13,28 @@ import {
 } from "@/lib/server-react-native";
 import { PressableState } from "@/lib/Types";
 
-export interface HoverableProps {
+export interface Props {
   url?: string;
   href?: string;
   label: string;
   icon?: any;
+  disabled?: boolean;
+  onPress?(): void;
   style?: any;
   large?: boolean;
   backgroundColor?: any;
   backgroundHoverColor?: any;
   textColor?: any;
   hoverTextColor?: any;
+  full: boolean;
 }
 
 const ButtonFull = ({
   url,
   label,
   icon,
+  disabled,
+  onPress,
   href,
   style,
   large,
@@ -37,12 +42,20 @@ const ButtonFull = ({
   backgroundHoverColor,
   textColor,
   hoverTextColor,
+  full,
 }: HoverableProps) => {
   const button = (
     <Pressable
       style={style}
       onPress={() => {
-        if (!href && url) Linking.openURL(url);
+        if (!disabled) {
+          if (onPress) {
+            onPress();
+          }
+          if (url) {
+            Linking.openURL(url);
+          }
+        }
       }}
     >
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
@@ -50,7 +63,9 @@ const ButtonFull = ({
           <View
             style={[
               {
+                borderColor: textColor ? textColor : Colors.black,
                 borderRadius: 9,
+                borderWidth: full ? 0 : 1,
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
@@ -58,12 +73,18 @@ const ButtonFull = ({
                 paddingHorizontal: large ? 12 : 9,
                 backgroundColor: backgroundColor
                   ? backgroundColor
-                  : Colors.darkGreen,
+                  : full
+                    ? Colors.darkGreen
+                    : undefined,
               },
               hovered && {
+                borderColor: hoverTextColor ? hoverTextColor : Colors.green,
+
                 backgroundColor: backgroundHoverColor
                   ? backgroundHoverColor
-                  : Colors.green,
+                  : full
+                    ? Colors.green
+                    : undefined,
               },
             ]}
           >
@@ -73,13 +94,17 @@ const ButtonFull = ({
                 {
                   ...Fonts.style.textLink,
                   flexShrink: 1,
-                  color: textColor ? textColor : Colors.white,
+                  userSelect: "none",
+                  MozUserSelect: "none",
+                  WebkitUserSelect: "none",
+                  msUserSelect: "none",
+                  color: textColor ? textColor : Colors.black,
                 },
                 large && { ...Fonts.style.h2 },
-                icon && { paddingLeft: 6 },
                 hovered && {
                   color: hoverTextColor ? hoverTextColor : Colors.white,
                 },
+                icon && { paddingLeft: 6 },
               ]}
             >
               {label}

@@ -134,6 +134,8 @@ const ClassDropDown = ({ classItem }: Props) => {
             <ButtonFull
               label={"Jetzt anmelden"}
               href={"mailto:" + classItem.email}
+              full
+              textColor={Colors.white}
             ></ButtonFull>
           </View>
         </View>
