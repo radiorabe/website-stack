@@ -1,5 +1,9 @@
 "use client";
-import { ItemsPost, ItemsPrograms } from "@/lib/api/data-contracts";
+import {
+  ItemsImageBox,
+  ItemsPost,
+  ItemsPrograms,
+} from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
@@ -10,21 +14,7 @@ import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
 import { AspectRatio } from "react-aspect-ratio"; // Recommended: if you are using React > 15.6
-
-const { ids, styles } = StyleSheet.create({
-  border: {
-    borderBlockColor: Colors.black,
-    borderRadius: 9,
-    borderWidth: 1,
-    alignSelf: "flex-start",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 3,
-    paddingHorizontal: 6,
-  },
-  sendungsInfo: { ...Fonts.style.text, color: "black" },
-  avatar: { borderRadius: 9 },
-});
+import useResponsive from "@/lib/useResponsisve";
 
 export interface HoverableProps {
   data: ItemsPost;
@@ -33,6 +23,9 @@ export interface HoverableProps {
 
 const PostPreview = ({ data, index }: HoverableProps) => {
   let program = data.program as ItemsPrograms;
+  let imagebox = data.imagebox as ItemsImageBox;
+
+  const { isMobile } = useResponsive();
 
   const preview = (
     <View
@@ -55,7 +48,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
           }}
         ></View>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=240&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=360&height=240&fit=cover`}
           width={360}
           height={240}
           style={styles.avatar}
@@ -65,27 +58,13 @@ const PostPreview = ({ data, index }: HoverableProps) => {
         />
       </View>
       <View
-        style={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        style={styles.titleContainer}
+        dataSet={{ media: ids.titleContainer }}
       >
-        <View
-          style={{
-            paddingTop: Metrics.baseMargin,
-          }}
-        >
+        <View style={styles.button} dataSet={{ media: ids.button }}>
           <Button label={program.name} disabled={true} url=""></Button>
         </View>
-        <Text
-          style={{
-            ...Fonts.style.text,
-            marginBottom: Metrics.baseMargin,
-            paddingTop: Metrics.baseMargin,
-          }}
-        >
+        <Text style={styles.date} dataSet={{ media: ids.date }}>
           {moment(data.date).format("DD. MMMM")}
         </Text>
       </View>
@@ -120,7 +99,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
           }}
         ></View>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${data.imagebox.image}?width=360&height=450&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=360&height=450&fit=cover`}
           width={360}
           height={450}
           style={styles.avatar}
@@ -140,7 +119,10 @@ const PostPreview = ({ data, index }: HoverableProps) => {
           justifyContent: "space-between",
         }}
       >
-        <View style={{ padding: Metrics.baseMargin }}>
+        <View
+          style={styles.fullContainer}
+          dataSet={{ media: ids.fullContainer }}
+        >
           <View
             style={{
               position: "absolute",
@@ -161,7 +143,10 @@ const PostPreview = ({ data, index }: HoverableProps) => {
             color={Colors.white}
           ></Button>
         </View>
-        <View style={{ padding: Metrics.baseMargin }}>
+        <View
+          style={styles.fullContainer}
+          dataSet={{ media: ids.fullContainer }}
+        >
           <View
             style={{
               position: "absolute",
@@ -204,9 +189,9 @@ const PostPreview = ({ data, index }: HoverableProps) => {
     <AspectRatio
       ratio="360/450"
       style={{
-        width: "30%",
-        paddingLeft: index % 3 ? "5%" : 0,
-        marginTop: index >= 3 ? "4vw" : 0,
+        width: isMobile ? "100%" : "30%",
+        paddingLeft: isMobile ? 0 : index % 3 ? "5%" : 0,
+        marginTop: isMobile && index >= 1 ? "8vw" : index >= 3 ? "4vw" : 0,
       }}
     >
       <Link
@@ -223,3 +208,36 @@ const PostPreview = ({ data, index }: HoverableProps) => {
 };
 
 export default PostPreview;
+
+const { ids, styles } = StyleSheet.create({
+  avatar: { borderRadius: 9 },
+  fullContainer: {
+    padding: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      padding: Metrics.tripleBaseMargin,
+    },
+  },
+  titleContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    // backgroundColor: "yellow",
+  },
+  button: {
+    marginTop: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      marginTop: Metrics.tripleBaseMargin,
+    },
+  },
+  date: {
+    ...Fonts.style.text,
+    paddingBottom: Metrics.halfBaseMargin,
+    paddingTop: Metrics.halfBaseMargin,
+    marginBottom: Metrics.baseMargin,
+    marginTop: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      marginBottom: Metrics.tripleBaseMargin,
+      marginTop: Metrics.tripleBaseMargin,
+    },
+  },
+});
