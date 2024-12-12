@@ -23,130 +23,6 @@ import BurgerIcon from "./BurgerIcon";
 import Burger from "./burger.svg";
 import AspectRatio from "react-aspect-ratio";
 
-const { ids, styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    backgroundColor: Colors.lightGreen,
-    width: "100%",
-    height: "5vw",
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    position: "fixed",
-    zIndex: 999,
-    borderBottomWidth: 1,
-    borderColor: Colors.lightGreen,
-    "@media (max-width: 910px)": {
-      height: "13vw",
-    },
-  },
-  innerContainer: {
-    flexDirection: "row",
-    width: "100%",
-    height: "100%",
-    // aspectRatio: 100 / 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-    // paddingHorizontal: Metrics.baseMargin,
-  },
-  navItemsContainer: {
-    flexDirection: "row",
-    height: "100%",
-  },
-  link: {
-    color: "blue",
-  },
-
-  textContainer: {
-    alignItems: "center",
-    marginTop: 16,
-  },
-  rabeLogo: {
-    ...Fonts.style.navigation,
-    fontSize: 18,
-    color: Colors.darkGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-      borderColor: Colors.green,
-    },
-  },
-  dropDownItem: {
-    ...Fonts.style.navigation,
-    fontSize: 18,
-    color: Colors.darkGreen,
-    paddingVertical: Metrics.halfHalfBaseMargin,
-  },
-  rabeLogoBorder: {
-    ...Fonts.style.navigation,
-    fontSize: 18,
-    color: Colors.darkGreen,
-    borderWidth: 1,
-    borderColor: Colors.darkGreen,
-    padding: 7,
-    borderRadius: 10,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-      borderColor: Colors.green,
-    },
-  },
-  navItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    height: "100%",
-    paddingHorizontal: Metrics.baseMargin,
-    color: Colors.darkGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-    },
-  },
-  navBarRabeLogoContainer: {
-    height: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    minWidth: "25%",
-    flexGrow: 1,
-    marginLeft: Metrics.tripleBaseMargin,
-  },
-  navBarSmallContainer: {
-    display: "none",
-    "@media (max-width: 910px)": {
-      display: "flex",
-    },
-  },
-  navBarMediumContainer: {
-    display: "none",
-    "@media (min-width: 911px) and (max-width:1799px)": {
-      display: "flex",
-    },
-  },
-  navBarLargeContainer: {
-    display: "none",
-    "@media (min-width: 1800px)": {
-      display: "flex",
-      paddingRight: 12,
-    },
-  },
-  audioPlayerContainer: {
-    minWidth: "9vw",
-    maxWidth: "25vw",
-    flexGrow: 1,
-    height: "100%",
-    backgroundColor: Colors.darkGreen,
-    justifyContent: "center",
-    paddingHorizontal: Metrics.doubleBaseMargin,
-    marginLeft: Metrics.baseMargin,
-    "@media (max-width: 910px)": {
-      flexGrow: 0,
-      paddingHorizontal: Metrics.tripleBaseMargin,
-    },
-  },
-});
-
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -460,3 +336,127 @@ function Header() {
 }
 
 export default Header;
+
+const { ids, styles } = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    backgroundColor: Colors.lightGreen,
+    width: "100%",
+    height: "5vw",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    position: "fixed",
+    zIndex: 999,
+    borderBottomWidth: 1,
+    borderColor: Colors.lightGreen,
+    "@media (max-width: 910px)": {
+      height: "13vw",
+    },
+  },
+  innerContainer: {
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    // aspectRatio: 100 / 5,
+    alignItems: "center",
+    justifyContent: "space-between",
+    // paddingHorizontal: Metrics.baseMargin,
+  },
+  navItemsContainer: {
+    flexDirection: "row",
+    height: "100%",
+  },
+  link: {
+    color: "blue",
+  },
+
+  textContainer: {
+    alignItems: "center",
+    marginTop: 16,
+  },
+  rabeLogo: {
+    ...Fonts.style.navigation,
+    fontSize: 18,
+    color: Colors.darkGreen,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ":hover": {
+      color: Colors.green,
+      borderColor: Colors.green,
+    },
+  },
+  dropDownItem: {
+    ...Fonts.style.navigation,
+    fontSize: 18,
+    color: Colors.darkGreen,
+    paddingVertical: Metrics.halfHalfBaseMargin,
+  },
+  rabeLogoBorder: {
+    ...Fonts.style.navigation,
+    fontSize: 18,
+    color: Colors.darkGreen,
+    borderWidth: 1,
+    borderColor: Colors.darkGreen,
+    padding: 7,
+    borderRadius: 10,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ":hover": {
+      color: Colors.green,
+      borderColor: Colors.green,
+    },
+  },
+  navItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: "100%",
+    paddingHorizontal: Metrics.baseMargin,
+    color: Colors.darkGreen,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ":hover": {
+      color: Colors.green,
+    },
+  },
+  navBarRabeLogoContainer: {
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    minWidth: "25%",
+    flexGrow: 1,
+    marginLeft: Metrics.tripleBaseMargin,
+  },
+  navBarSmallContainer: {
+    display: "none",
+    "@media (max-width: 910px)": {
+      display: "flex",
+    },
+  },
+  navBarMediumContainer: {
+    display: "none",
+    "@media (min-width: 911px) and (max-width:1799px)": {
+      display: "flex",
+    },
+  },
+  navBarLargeContainer: {
+    display: "none",
+    "@media (min-width: 1800px)": {
+      display: "flex",
+      paddingRight: 12,
+    },
+  },
+  audioPlayerContainer: {
+    minWidth: "9vw",
+    maxWidth: "25vw",
+    flexGrow: 1,
+    height: "100%",
+    backgroundColor: Colors.darkGreen,
+    justifyContent: "center",
+    paddingHorizontal: Metrics.doubleBaseMargin,
+    marginLeft: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      flexGrow: 0,
+      paddingHorizontal: Metrics.tripleBaseMargin,
+    },
+  },
+});
