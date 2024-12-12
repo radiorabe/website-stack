@@ -23,6 +23,7 @@ import { logError } from "@/lib/loging";
 import Image from "next/image";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import EventBox from "@/components/EventBox";
+import Ausgehtips from "@/components/Ausgehtips";
 
 async function getPosts() {
   try {
@@ -204,115 +205,7 @@ export default async function HomePage(props) {
           ></ProgramBox>
         </View>
       </View>
-      <View
-        style={{
-          width: "90%",
-          alignSelf: "center",
-        }}
-      >
-        <View
-          style={{
-            paddingVertical: Metrics.tripleBaseMargin,
-          }}
-        >
-          <View>
-            <Text
-              style={{
-                ...Fonts.style.h3,
-                color: Colors.black,
-                marginBottom: Metrics.doubleBaseMargin,
-              }}
-            >
-              {"Ausgehtips"}
-            </Text>
-            <View
-              style={{
-                width: "100%",
-              }}
-            >
-              {partyTips.map((item, index) => {
-                let partyLocation = item.party_location as ItemsPartyLocation;
-                return (
-                  <View
-                    key={"partyTips" + index}
-                    style={{
-                      width: "100%",
-                      flexDirection: "row",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      paddingBottom: Metrics.baseMargin,
-                    }}
-                  >
-                    {partyLocation && partyLocation.logo && (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
-                        width={70}
-                        height={70}
-                        style={{ paddingRight: Metrics.tripleBaseMargin }}
-                        // layout="responsive"
-                        alt={partyLocation.address_line_1}
-                        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    )}
-                    <View style={{ width: "50%" }}>
-                      <Text
-                        style={{
-                          ...Fonts.style.h3,
-                        }}
-                      >
-                        {item.title_1}
-                      </Text>
-                      <Text
-                        style={{
-                          ...Fonts.style.h3,
-                        }}
-                      >
-                        {item.title_2 ? item.title_2 : ""}
-                      </Text>
-                    </View>
-
-                    <View style={{ flexGrow: 1 }}>
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                        }}
-                      >
-                        {partyLocation.address_line_1}
-                      </Text>
-
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                        }}
-                      >
-                        {partyLocation.address_line_2
-                          ? partyLocation.address_line_2
-                          : ""}
-                      </Text>
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                        }}
-                      >
-                        {moment(item.date).format("dd DD.MM") +
-                          ", ab " +
-                          moment(item.date).format("hh:mm") +
-                          " Uhr"}
-                      </Text>
-                    </View>
-                    <View>
-                      <ButtonFull
-                        url={partyLocation.url}
-                        label={"Website"}
-                      ></ButtonFull>
-                    </View>
-                  </View>
-                );
-              })}
-            </View>
-          </View>
-        </View>
-      </View>
+      <Ausgehtips partyTips={partyTips}></Ausgehtips>
     </View>
   );
 }
