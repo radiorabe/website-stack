@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import { FontBold, FontRegular } from "@/lib/Fonts";
 import { AudioPlayerProvider } from "@/context/audio-player-context";
 import Footer from "@/components/Footer";
 import Metrics from "@/lib/Metrics";
 require("moment/locale/de.js");
 import { draftMode } from "next/headers";
+import { RNMQProvider } from "@/context/RNMQProvider";
+import HeaderOffset from "@/components/HeaderOffset";
 
 export const metadata: Metadata = {
   title: "Radio Bern - Das Berner Kulturradio",
@@ -38,49 +40,50 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
-      <AudioPlayerProvider>
-        <body className={`${FontRegular.variable} ${FontBold.variable}`}>
-          {isEnabled && (
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                backgroundColor: "#ff7777",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "fixed",
-                height: 30,
-                zIndex: 998,
-              }}
-            >
-              <div style={{ paddingRight: Metrics.halfBaseMargin }}>
-                Draft mode
+      <RNMQProvider>
+        <AudioPlayerProvider>
+          <body className={`${FontRegular.variable} ${FontBold.variable}`}>
+            {isEnabled && (
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  backgroundColor: "#ff7777",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "fixed",
+                  height: 30,
+                  zIndex: 998,
+                }}
+              >
+                <div style={{ paddingRight: Metrics.halfBaseMargin }}>
+                  Preview mode
+                </div>
+                <form method="POST" action="/api/draft">
+                  <button>End preview</button>
+                </form>
               </div>
-              <form method="POST" action="/api/draft">
-                <button>End preview</button>
-              </form>
+            )}
+            {isEnabled && (
+              <div
+                style={{
+                  height: 30,
+                }}
+              ></div>
+            )}
+            <div>
+              <Header />
             </div>
-          )}
-          {isEnabled && (
-            <div
-              style={{
-                height: 30,
-              }}
-            ></div>
-          )}
-          <div>
-            <Header />
-          </div>
+            <HeaderOffset />
 
-          <div style={{ width: "100%", aspectRatio: 100 / 5 }}></div>
-
-          <div>{children}</div>
-          <div>
-            <Footer />
-          </div>
-        </body>
-      </AudioPlayerProvider>
+            <div>{children}</div>
+            <div>
+              <Footer />
+            </div>
+          </body>
+        </AudioPlayerProvider>
+      </RNMQProvider>
     </html>
   );
 }

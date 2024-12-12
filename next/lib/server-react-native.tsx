@@ -1,6 +1,13 @@
 "use client";
 
-import { Text, Pressable, View, TextStyle, Linking } from "react-native";
+import {
+  Text,
+  Pressable,
+  View,
+  TextStyle,
+  Linking,
+  StyleSheet,
+} from "react-native";
 
 // function View({ style, children, ...otherProps }) {
 //   let newStyle = Object.assign(
@@ -43,4 +50,4 @@ import { Text, Pressable, View, TextStyle, Linking } from "react-native";
 //       {children}
 //   </div>;
 
-export { Text, Pressable, View, TextStyle, Linking };
+export { Text, Pressable, View, TextStyle, Linking, StyleSheet };

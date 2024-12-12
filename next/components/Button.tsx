@@ -5,6 +5,7 @@ import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
 import { PressableState } from "@/lib/Types";
 import Link from "next/link";
 import { ReactElement } from "react";
+import StyleSheet from "react-native-media-query";
 
 export interface HoverableProps {
   url?: string;
@@ -16,6 +17,21 @@ export interface HoverableProps {
   hoverColor?: any;
   href?: string;
 }
+
+const { ids, styles } = StyleSheet.create({
+  example: {
+    backgroundColor: "green",
+    borderRadius: 5,
+    "@media (max-width: 1600px) and (min-width: 800px)": {
+      backgroundColor: "red",
+      borderRadius: 10,
+    },
+    "@media (max-width: 800px)": {
+      backgroundColor: "blue",
+      borderRadius: 15,
+    },
+  },
+});
 
 const Button = ({
   url,

@@ -6,6 +6,7 @@ import XMLParser from "react-xml-parser";
 import { useAnimate } from "framer-motion";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
+import Metrics from "@/lib/Metrics";
 
 export interface HoverableProps {}
 
@@ -85,6 +86,7 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
   useEffect(() => {
     if (newDataFetched && scope.current) {
       console.log("start Animation");
+      let numberOfChars = show.length + artist.length + title.length;
       animate(
         scope.current,
         { x: "-50%" },
@@ -92,7 +94,7 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
           repeat: Infinity,
           repeatType: "loop",
           ease: "linear",
-          duration: 10,
+          duration: numberOfChars / 3,
         }
       );
       // refetch new data on track end
@@ -112,6 +114,28 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
       }}
     >
       <div style={{ width: "100%", height: 20 }}>
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: Metrics.halfBaseMargin,
+            top: 0,
+            background: `linear-gradient(90deg, ${Colors.darkGreen}, transparent)`,
+            zIndex: 10,
+          }}
+        ></View>
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            width: Metrics.halfBaseMargin,
+            top: 0,
+            background: `linear-gradient(270deg, ${Colors.darkGreen}, transparent)`,
+            zIndex: 10,
+          }}
+        ></View>
         <div
           style={{
             position: "absolute",

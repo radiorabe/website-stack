@@ -11,6 +11,8 @@ import Loader from "react-spinners/BounceLoader";
 import dynamic from "next/dynamic";
 import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
+import useResponsive from "@/lib/useResponsisve";
+import AspectRatio from "react-aspect-ratio";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
@@ -19,6 +21,8 @@ const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
 export interface HoverableProps {}
 
 const AudioRabePlayer = ({}: HoverableProps) => {
+  const { isClient, isMobile } = useResponsive();
+
   let track = {
     title: "Rabe Stream",
     src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
@@ -146,50 +150,78 @@ const AudioRabePlayer = ({}: HoverableProps) => {
         <source src={currentTrack.src} type="audio/mpeg" />
       </audio>
 
-      {thisTrackPlaying && (
-        <Pressable
-          style={{}}
-          onPress={() => {
-            audioRef.current?.pause();
+      {isClient && thisTrackPlaying && (
+        <AspectRatio
+          ratio="1/1"
+          style={{
+            width: isMobile ? "8vw" : "3vw",
           }}
         >
-          {({ pressed, hovered }: PressableState): ReactElement => {
-            let newColor = pressed
-              ? Colors.darkGreen
-              : hovered
-                ? Colors.green
-                : Colors.lightGreen;
-            return <Pausebutton color={newColor} scale={0.6}></Pausebutton>;
-          }}
-        </Pressable>
+          <Pressable
+            style={{}}
+            onPress={() => {
+              audioRef.current?.pause();
+            }}
+          >
+            {({ pressed, hovered }: PressableState): ReactElement => {
+              let newColor = pressed
+                ? Colors.darkGreen
+                : hovered
+                  ? Colors.green
+                  : Colors.lightGreen;
+              return (
+                <Pausebutton
+                  color={newColor}
+                  height="100%"
+                  width="100%"
+                ></Pausebutton>
+              );
+            }}
+          </Pressable>
+        </AspectRatio>
       )}
-      {!thisTrackPlaying && !thisTrackLoading && (
-        <Pressable
-          style={{}}
-          onPress={() => {
-            setCurrentTrack(track);
-            // audioRef.current?.pause();
-            audioRef.current?.load();
+      {isClient && !thisTrackPlaying && !thisTrackLoading && (
+        <AspectRatio
+          ratio="1/1"
+          style={{
+            width: isMobile ? "8vw" : "3vw",
           }}
         >
-          {({ pressed, hovered }: PressableState): ReactElement => {
-            let newColor = pressed
-              ? Colors.darkGreen
-              : hovered
-                ? Colors.green
-                : Colors.lightGreen;
-            return <Playbutton color={newColor} scale={0.6}></Playbutton>;
-          }}
-        </Pressable>
+          <Pressable
+            style={{}}
+            onPress={() => {
+              setCurrentTrack(track);
+              // audioRef.current?.pause();
+              audioRef.current?.load();
+            }}
+          >
+            {({ pressed, hovered }: PressableState): ReactElement => {
+              let newColor = pressed
+                ? Colors.darkGreen
+                : hovered
+                  ? Colors.green
+                  : Colors.lightGreen;
+              return (
+                <Playbutton
+                  color={newColor}
+                  height="100%"
+                  width="100%"
+                ></Playbutton>
+              );
+            }}
+          </Pressable>
+        </AspectRatio>
       )}
       {thisTrackLoading && (
         <View style={{ width: 38, height: 38 }}>
           <Loader color={Colors.green} size={38} loading={true}></Loader>
         </View>
       )}
-      <View style={{ flexGrow: 1, paddingLeft: Metrics.doubleBaseMargin }}>
-        <AudioRabePlayerLabel></AudioRabePlayerLabel>
-      </View>
+      {!isMobile && (
+        <View style={{ flexGrow: 1, paddingLeft: Metrics.doubleBaseMargin }}>
+          <AudioRabePlayerLabel></AudioRabePlayerLabel>
+        </View>
+      )}
     </View>
   );
 };
