@@ -43,7 +43,7 @@ const ButtonFull = ({
   textColor,
   hoverTextColor,
   full,
-}: HoverableProps) => {
+}: Props) => {
   const button = (
     <Pressable
       style={style}
@@ -77,15 +77,15 @@ const ButtonFull = ({
                     ? Colors.darkGreen
                     : undefined,
               },
-              hovered && {
-                borderColor: hoverTextColor ? hoverTextColor : Colors.green,
-
-                backgroundColor: backgroundHoverColor
-                  ? backgroundHoverColor
-                  : full
-                    ? Colors.green
-                    : undefined,
-              },
+              hovered &&
+                !disabled && {
+                  borderColor: hoverTextColor ? hoverTextColor : Colors.green,
+                  backgroundColor: backgroundHoverColor
+                    ? backgroundHoverColor
+                    : full
+                      ? Colors.green
+                      : undefined,
+                },
             ]}
           >
             {icon}
@@ -101,9 +101,14 @@ const ButtonFull = ({
                   color: textColor ? textColor : Colors.black,
                 },
                 large && { ...Fonts.style.h2 },
-                hovered && {
-                  color: hoverTextColor ? hoverTextColor : Colors.white,
-                },
+                hovered &&
+                  !disabled && {
+                    color: hoverTextColor
+                      ? hoverTextColor
+                      : full
+                        ? Colors.white
+                        : Colors.green,
+                  },
                 icon && { paddingLeft: 6 },
               ]}
             >

@@ -1,19 +1,17 @@
 "use client";
+import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
-import moment from "moment";
-import HoverText from "../HoverText";
 import { Show } from "@/lib/Types";
-import StyleSheet from "react-native-media-query";
-import ShowsList from "./ShowsList";
-import PlayList from "./PlayList";
-import { useEffect, useState } from "react";
 import useResponsive from "@/lib/useResponsisve";
-import Button from "../Button";
-import Colors from "@/lib/Colors";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import StyleSheet from "react-native-media-query";
 import ButtonFull from "../ButtonFull";
+import PlayList from "./PlayList";
+import ShowsList from "./ShowsList";
 
 export async function getLiveData() {
   try {
@@ -74,7 +72,6 @@ export async function getPlaylistData(numbers) {
       })
       .catch((error) => {
         console.log("error", error);
-
         return [];
       });
   } catch (error) {
@@ -100,6 +97,7 @@ export default function ProgramBox({
   let [playlistData, setPlaylistData] = useState();
   let { isMobile } = useResponsive();
   let [showPlaylist, setShowPlaylist] = useState(false);
+  const [refetch, setRefetch] = useState(true);
 
   const loadLiveData = async () => {
     let { todayShows, currentShow } = await getLiveData();
@@ -111,16 +109,22 @@ export default function ProgramBox({
   const loadPlaylistData = async () => {
     const data = await getPlaylistData(20);
     setPlaylistData(data);
+    setTimeout(() => {
+      setRefetch(true);
+    }, 120000); // refresh every 2 minutes
   };
 
   useEffect(() => {
     //load on inital rendering
-    loadLiveData();
-    loadPlaylistData();
-  }, []);
+    if (refetch) {
+      loadLiveData();
+      loadPlaylistData();
+      setRefetch(false);
+    }
+  }, [refetch]);
 
   return (
-    <View style={{ flexDirection: "column" }}>
+    <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
       {!isMobile && (
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ width: "50%" }}>
@@ -154,30 +158,42 @@ export default function ProgramBox({
           <ButtonFull
             label={"Heutiges Programm"}
             textColor={Colors.white}
+            full={!showPlaylist}
+            disabled={!showPlaylist}
+            backgroundColor={showPlaylist ? undefined : Colors.white}
+            textColor={showPlaylist ? Colors.white : Colors.darkGreen}
+            onPress={() => setShowPlaylist(false)}
           ></ButtonFull>
-          <ButtonFull label={"Playlist"}></ButtonFull>
+          <View style={{ width: Metrics.tripleBaseMargin }}></View>
+          <ButtonFull
+            label={"Playlist"}
+            textColor={Colors.white}
+            full={showPlaylist}
+            disabled={showPlaylist}
+            backgroundColor={!showPlaylist ? undefined : Colors.white}
+            textColor={!showPlaylist ? Colors.white : Colors.darkGreen}
+            onPress={() => setShowPlaylist(true)}
+          ></ButtonFull>
         </View>
       )}
       <View style={styles.container} dataSet={{ media: ids.container }}>
-        {!isMobile ||
-          (!showPlaylist && (
-            <ShowsList
-              initialShows={shows}
-              currentShow={currentShow}
-              hoverColor={hoverColor}
-              backgroundColor={backgroundColor}
-              textColor={textColor}
-            ></ShowsList>
-          ))}
-        {!isMobile ||
-          (showPlaylist && (
-            <PlayList
-              playlistData={playlistData}
-              hoverColor={hoverColor}
-              backgroundColor={backgroundColor}
-              textColor={textColor}
-            ></PlayList>
-          ))}
+        {(!isMobile || !showPlaylist) && (
+          <ShowsList
+            initialShows={shows}
+            currentShow={currentShow}
+            hoverColor={hoverColor}
+            backgroundColor={backgroundColor}
+            textColor={textColor}
+          ></ShowsList>
+        )}
+        {(!isMobile || showPlaylist) && (
+          <PlayList
+            playlistData={playlistData}
+            hoverColor={hoverColor}
+            backgroundColor={backgroundColor}
+            textColor={textColor}
+          ></PlayList>
+        )}
       </View>
     </View>
   );
@@ -192,6 +208,12 @@ const { ids, styles } = StyleSheet.create({
       justifyContent: "space-between",
     },
   },
+  outerContainer: {
+    marginVertical: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      marginVertical: Metrics.tripleBaseMargin,
+    },
+  },
 
   container: {
     flexDirection: "row",
@@ -199,12 +221,6 @@ const { ids, styles } = StyleSheet.create({
     // "@media (max-width: 910px)": {
     //   flexDirection: "column",
     //   justifyContent: "space-between",
-    // },
-  },
-  halfContainer: {
-    width: "50%",
-    // "@media (max-width: 910px)": {
-    //   width: "100%",
     // },
   },
 });

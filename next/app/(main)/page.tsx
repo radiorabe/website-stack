@@ -195,7 +195,6 @@ export default async function HomePage(props) {
           style={{
             width: "90vw",
             alignSelf: "center",
-            paddingVertical: Metrics.tripleBaseMargin,
           }}
         >
           <ProgramBox

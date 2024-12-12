@@ -24,17 +24,11 @@ export default function PlayList({
   return (
     <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>
       <View
-        style={{
-          width: "100%",
-          overflow: "hidden",
-          position: "relative",
-          height: 190,
-        }}
+        style={styles.innerContainer}
+        dataSet={{ media: ids.innerContainer }}
       >
         <View
           style={{
-            // maxHeight: 190,
-            // overflow: "scroll",
             position: "absolute",
             top: 0,
             left: 0,
@@ -47,11 +41,9 @@ export default function PlayList({
             playlistData.map((track, index) => {
               return (
                 <View
-                  style={{
-                    flexDirection: "row",
-                    paddingTop: Metrics.halfBaseMargin,
-                  }}
-                  key={"todayshows" + index}
+                  style={styles.showContainer}
+                  dataSet={{ media: ids.showContainer }}
+                  key={"playlist" + index}
                 >
                   <Text
                     style={{
@@ -94,21 +86,22 @@ export default function PlayList({
 }
 
 const { ids, styles } = StyleSheet.create({
-  title: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  innerContainer: {
+    width: "100%",
+    overflow: "hidden",
+    position: "relative",
+    height: 190,
+    marginTop: Metrics.halfBaseMargin,
     "@media (max-width: 910px)": {
-      flexDirection: "column",
-      justifyContent: "space-between",
+      height: 320,
+      marginTop: Metrics.doubleBaseMargin,
     },
   },
-
-  container: {
+  showContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    paddingBottom: Metrics.halfBaseMargin,
     "@media (max-width: 910px)": {
-      flexDirection: "column",
-      justifyContent: "space-between",
+      paddingBottom: Metrics.doubleBaseMargin,
     },
   },
   halfContainer: {

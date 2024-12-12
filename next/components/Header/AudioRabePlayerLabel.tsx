@@ -11,8 +11,6 @@ import Metrics from "@/lib/Metrics";
 export interface HoverableProps {}
 
 const AudioRabePlayerLabel = ({}: HoverableProps) => {
-  const [isClient, setIsClient] = useState(false);
-
   const [show, setShow] = useState("");
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
@@ -24,10 +22,6 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
   // console.log("show", show);
   // console.log("artist", artist);
   // console.log("title", title);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     if (refetch) {

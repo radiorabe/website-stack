@@ -228,7 +228,11 @@ const { ids, styles } = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    // backgroundColor: "yellow",
+    alignItems: "baseline",
+    marginBottom: Metrics.halfBaseMargin,
+    "@media (max-width: 910px)": {
+      marginBottom: Metrics.tripleBaseMargin,
+    },
   },
   button: {
     marginTop: Metrics.baseMargin,
@@ -238,12 +242,8 @@ const { ids, styles } = StyleSheet.create({
   },
   date: {
     ...Fonts.style.text,
-    paddingBottom: Metrics.halfBaseMargin,
-    paddingTop: Metrics.halfBaseMargin,
-    marginBottom: Metrics.baseMargin,
     marginTop: Metrics.baseMargin,
     "@media (max-width: 910px)": {
-      marginBottom: Metrics.tripleBaseMargin,
       marginTop: Metrics.tripleBaseMargin,
     },
   },
