@@ -22,6 +22,7 @@ import HoverText from "@/components/HoverText";
 import { logError } from "@/lib/loging";
 import Image from "next/image";
 import ProgramBox from "@/components/ProgrammBox";
+import EventBox from "@/components/EventBox";
 
 async function getPosts() {
   try {
@@ -148,62 +149,7 @@ export default async function HomePage(props) {
           paddingVertical: Metrics.tripleBaseMargin,
         }}
       >
-        {event && (
-          <View
-            style={{
-              backgroundColor: event.color,
-              borderRadius: 9,
-              padding: Metrics.doubleBaseMargin,
-              marginBottom: Metrics.tripleBaseMargin,
-              flexDirection: "row",
-            }}
-          >
-            <View
-              style={{
-                width: "50%",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=280&height=220&fit=cover`}
-                width={280}
-                height={220}
-                style={{ paddingRight: Metrics.tripleBaseMargin }}
-                // layout="responsive"
-                alt={event.promo_title}
-                // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </View>
-            <View
-              style={{
-                width: "50%",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ ...Fonts.style.h2, color: Colors.white }}>
-                {event.promo_title}
-              </Text>
-              <Text
-                style={{
-                  ...Fonts.style.text,
-                  color: Colors.white,
-                  paddingVertical: Metrics.baseMargin,
-                }}
-              >
-                {event.promo_text}
-              </Text>
-              <View style={{ alignItems: "flex-start" }}>
-                <Button
-                  label={event.promo_button_label}
-                  href={event.promo_button_url}
-                  color={Colors.white}
-                  hoverColor={Colors.whiteTransparent}
-                ></Button>
-              </View>
-            </View>
-          </View>
-        )}
+        {event && <EventBox event={event}></EventBox>}
 
         <View
           style={{
