@@ -213,8 +213,17 @@ const AudioRabePlayer = ({}: HoverableProps) => {
         </AspectRatio>
       )}
       {thisTrackLoading && (
-        <View style={{ width: 38, height: 38 }}>
-          <Loader color={Colors.green} size={38} loading={true}></Loader>
+        <View
+          style={{
+            width: isMobile ? "8vw" : "3vw",
+            height: isMobile ? "8vw" : "3vw",
+          }}
+        >
+          <Loader
+            color={Colors.green}
+            size={isMobile ? "8vw" : "3vw"}
+            loading={true}
+          ></Loader>
         </View>
       )}
       {!isMobile && (

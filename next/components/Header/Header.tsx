@@ -1,27 +1,24 @@
 "use client";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
 import IconArrowDown from "@/assets/svg/IconArrowDown";
 import NavRabe from "@/assets/svg/NavRabe";
-import NavRabeMediumText from "@/assets/svg/NavRabeMediumText";
 import NavRabeLargeText from "@/assets/svg/NavRabeLargeText";
+import NavRabeMediumText from "@/assets/svg/NavRabeMediumText";
 import NavRabeSmallText from "@/assets/svg/NavRabeSmallText";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
+import { PressableState } from "@/lib/Types";
 import { useClickOutside } from "@/lib/useClickOutside";
-import Link from "next/link";
-import Image from "next/image";
+import useResponsive from "@/lib/useResponsisve";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactElement, useRef, useState } from "react";
-import AudioRabePlayer from "../AudioRabePlayer";
-import LinkComponent from "../LinkComponent";
-import { PressableState } from "@/lib/Types";
-import useResponsive from "@/lib/useResponsisve";
-import BurgerIcon from "./BurgerIcon";
-import Burger from "./burger.svg";
 import AspectRatio from "react-aspect-ratio";
+import LinkComponent from "../LinkComponent";
+import AudioRabePlayer from "./AudioRabePlayer";
+import BurgerIcon from "./BurgerIcon";
 
 function Header() {
   const pathname = usePathname();
