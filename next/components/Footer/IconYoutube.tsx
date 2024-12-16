@@ -1,7 +1,13 @@
 import * as React from "react";
 import { SVGProps } from "react";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    height="100%"
+    viewBox="0 0 23 23"
+    {...props}
+  >
     <g fill={props.color} fillRule="evenodd" data-name="Group 1869">
       <path d="m10.141 13.522 3.5-2.021-3.5-2.022Z" data-name="Path 354" />
       <path

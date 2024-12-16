@@ -1,3 +1,44 @@
 import Footer from "./Footer";
 
-export default Footer;
+import { Api } from "@/lib/api";
+import { ItemsPageContact } from "@/lib/api/data-contracts";
+import { notFound } from "next/navigation";
+import { logError } from "@/lib/loging";
+
+async function getContactData() {
+  try {
+    const itemResponse = await Api.readItemsPageContact(
+      {
+        fields: ["*"],
+        // limit: 3,
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    // console.log("response", itemResponse);
+    let item: ItemsPageContact = itemResponse.data.data as ItemsPageContact;
+    // console.log("PageContact", item);
+    // console.log("team", item.team);
+    // console.log("posts", item.posts);
+
+    return item;
+  } catch (error) {
+    logError(error);
+
+    notFound();
+  }
+}
+
+async function DataFooter(props) {
+  let contactData = await getContactData();
+
+  return <Footer data={contactData}></Footer>;
+}
+
+export default DataFooter;

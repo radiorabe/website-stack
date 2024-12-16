@@ -1,97 +1,48 @@
+"use client";
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
+import Metrics from "@/lib/Metrics";
+import AspectRatio from "react-aspect-ratio";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
 import HoverUrl from "../HoverUrl";
 import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
 import FooterRabe from "./FooterRabe";
-import { Api } from "@/lib/api";
-import { ItemsPageContact } from "@/lib/api/data-contracts";
-import { notFound } from "next/navigation";
-import { logError } from "@/lib/loging";
 
-const { ids, styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    backgroundColor: Colors.darkGreen,
-    width: "100%",
-  },
-  innerContainer: {
-    width: "100%",
-    maxWidth: 1280,
-    minHeight: 250,
-    justifyContent: "space-around",
-  },
-
-  hoverText: {
-    color: Colors.lightGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-    },
-  },
-});
-
-async function getContactData() {
-  try {
-    const itemResponse = await Api.readItemsPageContact(
-      {
-        fields: ["*"],
-        // limit: 3,
-      },
-      {
-        next: {
-          tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        },
-        cache:
-          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
-      }
-    );
-    // console.log("response", itemResponse);
-    let item: ItemsPageContact = itemResponse.data.data as ItemsPageContact;
-    // console.log("PageContact", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
-
-    return item;
-  } catch (error) {
-    logError(error);
-
-    notFound();
-  }
-}
-async function Footer(props) {
-  const contactData = await getContactData();
+function Footer(contactData) {
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <View
+    <View style={styles.container} dataSet={{ media: ids.container }}>
+      <View style={styles.rabeContainer} dataSet={{ media: ids.rabeContainer }}>
+        <AspectRatio
+          ratio="1/1"
           style={{
-            position: "absolute",
-            right: 75,
-            bottom: 0,
+            height: "100%",
           }}
         >
-          <FooterRabe color={Colors.black} scale={1}></FooterRabe>
-        </View>
-        <View>
-          <Text
-            style={{
-              flexDirection: "row",
-              color: Colors.lightGreen,
-              ...Fonts.style.navigation,
-              textAlign: "center",
-            }}
-          >
-            <Text>{`Radio Bern: RaBe ${contactData.street} ${contactData.street_number}, ${contactData.plz} ${contactData.city}, `}</Text>
+          <FooterRabe color={Colors.black}></FooterRabe>
+        </AspectRatio>
+      </View>
+
+      <View
+        style={styles.innerContainer}
+        dataSet={{ media: ids.innerContainer }}
+      >
+        <View
+          style={styles.textContainer}
+          dataSet={{ media: ids.textContainer }}
+        >
+          <Text style={styles.text} dataSet={{ media: ids.text }}>
+            <Text
+              style={styles.textOpacity}
+              dataSet={{ media: ids.textOpacity }}
+            >{`Radio Bern: RaBe ${contactData.street} ${contactData.street_number}, ${contactData.plz} ${contactData.city}, `}</Text>
             <HoverUrl
               url={`mailto:${contactData.email}`}
-              style={{ color: Colors.lightGreen }}
-              hoverStyle={{ color: Colors.green }}
+              style={styles.textOpacity}
+              dataSet={{ media: ids.textOpacity }}
+              hoverStyle={{ opacity: 1 }}
             >
               {contactData.email}
             </HoverUrl>
@@ -99,15 +50,13 @@ async function Footer(props) {
         </View>
 
         <View>
-          <Text
-            style={{
-              flexDirection: "row",
-              color: Colors.lightGreen,
-              ...Fonts.style.navigation,
-              textAlign: "center",
-            }}
-          >
-            <Text>{"Studio: "}</Text>
+          <Text style={styles.text} dataSet={{ media: ids.text }}>
+            <Text
+              style={styles.textOpacity}
+              dataSet={{ media: ids.textOpacity }}
+            >
+              {"Studio: "}
+            </Text>
             <HoverUrl
               url={`tel:${contactData.studio_phone_number}`}
               style={{ color: Colors.lightGreen }}
@@ -115,7 +64,12 @@ async function Footer(props) {
             >
               {contactData.studio_phone_number}
             </HoverUrl>
-            <Text>{", "}</Text>
+            <Text
+              style={styles.textOpacity}
+              dataSet={{ media: ids.textOpacity }}
+            >
+              {", "}
+            </Text>
 
             <HoverUrl
               url={`mailto:${contactData.studio_email}`}
@@ -141,3 +95,46 @@ async function Footer(props) {
 }
 
 export default Footer;
+
+const { ids, styles } = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.darkGreen,
+  },
+  innerContainer: {
+    alignItems: "center",
+    width: "100%",
+    padding: "3vw",
+    "@media (max-width: 910px)": {
+      padding: "8vw",
+    },
+  },
+
+  rabeContainer: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    left: 0,
+    top: 0,
+    marginTop: "5vw",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    "@media (max-width: 910px)": {
+      alignItems: "center",
+    },
+  },
+  textContainer: {
+    marginBottom: Metrics.tripleBaseMargin,
+  },
+  text: {
+    flexDirection: "row",
+    color: Colors.lightGreen,
+    ...Fonts.style.navigation,
+    textAlign: "center",
+  },
+  textOpacity: {
+    opacity: 0.75,
+    "@media (max-width: 910px)": {
+      opacity: 1,
+    },
+  },
+});

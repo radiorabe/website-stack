@@ -10,6 +10,7 @@ export interface HoverableProps {
   focusStyle?: any;
   url: string;
   children?: any;
+  dataSet?: any;
 }
 
 const HoverUrl = ({
@@ -19,12 +20,14 @@ const HoverUrl = ({
   focusStyle,
   url,
   children,
+  dataSet,
 }: HoverableProps) => {
   return (
     <Pressable style={{}} onPress={() => Linking.openURL(url)}>
       {({ pressed, hovered, focused }: PressableState): ReactElement => {
         return (
           <Text
+            dataSet={dataSet}
             style={[
               style,
               hovered && hoverStyle,

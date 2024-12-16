@@ -115,7 +115,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                       label={"Zur Webseite"}
                     ></ButtonFull>
                   </View>
-                </View>{" "}
+                </View>
               </View>
             );
           })}
