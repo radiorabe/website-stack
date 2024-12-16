@@ -41,7 +41,8 @@ export const style: Record<string, TextStyle> = {
   h2: {
     fontFamily: type.bold,
     fontSize: size.h2,
-    // lineHeight: 1.4,
+    // lineHeight: 1.2,
+    lineHeight: 34.8,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
   },
@@ -72,6 +73,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 20,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 22.4,
+    },
   },
   TTtext: {
     fontFamily: type.regular,

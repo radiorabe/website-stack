@@ -8,12 +8,16 @@ import moment from "moment";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import ButtonFull from "./ButtonFull";
+import AspectRatio from "react-aspect-ratio";
+import useResponsive from "@/lib/useResponsisve";
 
 export interface Props {
   partyTips: any[];
 }
 
 const Ausgehtips = ({ partyTips }: Props) => {
+  const { isMobile } = useResponsive();
+
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>
       <View>
@@ -45,15 +49,23 @@ const Ausgehtips = ({ partyTips }: Props) => {
                 }}
               >
                 {partyLocation && partyLocation.logo && (
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=70&height=70&fit=cover`}
-                    width={70}
-                    height={70}
-                    style={{ paddingRight: Metrics.tripleBaseMargin }}
-                    // layout="responsive"
-                    alt={partyLocation.address_line_1}
-                    // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                  <AspectRatio
+                    ratio="1/1"
+                    style={{
+                      width: isMobile ? "12vw" : "5vw",
+                      marginRight: Metrics.tripleBaseMargin,
+                    }}
+                  >
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=120&height=120&fit=cover`}
+                      width={120}
+                      height={120}
+                      style={{}}
+                      layout="responsive"
+                      alt={partyLocation.address_line_1}
+                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </AspectRatio>
                 )}
                 <View
                   style={styles.infoContainer}
@@ -63,51 +75,33 @@ const Ausgehtips = ({ partyTips }: Props) => {
                     style={styles.titleContainer}
                     dataSet={{ media: ids.titleContainer }}
                   >
-                    <Text
-                      style={{
-                        ...Fonts.style.h3,
-                      }}
-                    >
+                    <Text style={styles.title} dataSet={{ media: ids.title }}>
                       {item.title_1}
                     </Text>
-                    <Text
-                      style={{
-                        ...Fonts.style.h3,
-                      }}
-                    >
+                    <Text style={styles.title} dataSet={{ media: ids.title }}>
                       {item.title_2 ? item.title_2 : ""}
                     </Text>
                   </View>
 
-                  <View style={{ flexGrow: 1 }}>
+                  <View
+                    style={styles.detailsContainer}
+                    dataSet={{ media: ids.detailsContainer }}
+                  >
                     <View
                       style={styles.addressContainer}
                       dataSet={{ media: ids.addressContainer }}
                     >
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                        }}
-                      >
+                      <Text style={styles.text} dataSet={{ media: ids.text }}>
                         {partyLocation.address_line_1}
                       </Text>
 
-                      <Text
-                        style={{
-                          ...Fonts.style.text,
-                        }}
-                      >
+                      <Text style={styles.text} dataSet={{ media: ids.text }}>
                         {partyLocation.address_line_2
                           ? partyLocation.address_line_2
                           : ""}
                       </Text>
                     </View>
-
-                    <Text
-                      style={{
-                        ...Fonts.style.text,
-                      }}
-                    >
+                    <Text style={styles.text} dataSet={{ media: ids.text }}>
                       {moment(item.date).format("dd DD.MM") +
                         ", ab " +
                         moment(item.date).format("hh:mm") +
@@ -118,7 +112,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                   <View>
                     <ButtonFull
                       url={partyLocation.url}
-                      label={"Website"}
+                      label={"Zur Webseite"}
                     ></ButtonFull>
                   </View>
                 </View>{" "}
@@ -141,21 +135,40 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   infoContainer: {
-    flexDirection: "rows",
-    backgroundColor: "green",
-
+    flexDirection: "row",
+    // backgroundColor: "green",
+    flexGrow: 1,
     "@media (max-width: 910px)": {
       flexDirection: "column",
-      flexGrow: 1,
       maxWidth: "80%",
       overflow: "hidden",
     },
   },
   titleContainer: {
     width: "50%",
-    backgroundColor: "red",
+    // backgroundColor: "red",
     "@media (max-width: 910px)": {
       width: "100%",
+    },
+  },
+  title: {
+    ...Fonts.style.h2,
+    "@media (max-width: 910px)": {
+      ...Fonts.style.textLink,
+      lineHeight: 22.4,
+    },
+  },
+  text: {
+    ...Fonts.style.text,
+    // "@media (max-width: 910px)": {
+    //   fontSize: 16,
+    //   lineHeight: 22.4,
+    // },
+  },
+  detailsContainer: {
+    flexGrow: 1,
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.baseMargin,
     },
   },
   addressContainer: {

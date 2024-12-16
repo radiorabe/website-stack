@@ -23,7 +23,7 @@ import { logError } from "@/lib/loging";
 import Image from "next/image";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import EventBox from "@/components/EventBox";
-import Ausgehtips from "@/components/Ausgehtips";
+import PartyTips from "@/components/PartyTips";
 
 async function getPosts() {
   try {
@@ -205,7 +205,7 @@ export default async function HomePage(props) {
           ></ProgramBox>
         </View>
       </View>
-      <Ausgehtips partyTips={partyTips}></Ausgehtips>
+      <PartyTips partyTips={partyTips}></PartyTips>
     </View>
   );
 }
