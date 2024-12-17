@@ -11,6 +11,7 @@ const Metrics = {
   doubleBaseMargin: "3vw",
   tripleBaseMargin: "5vw",
   quadBaseMargin: "8vw",
+  halfQuadBaseMargin: "4vw",
   octBaseMargin: "13vw",
   gridSpacing,
 };

@@ -3,26 +3,26 @@ import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
 import Metrics from "@/lib/Metrics";
-import AspectRatio from "react-aspect-ratio";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
 import HoverUrl from "../HoverUrl";
 import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
-import FooterRabe from "./FooterRabe";
+import IconFooterRabe from "./IconFooterRabe";
+import ButtonText from "../ButtonText";
 
-function Footer(contactData) {
+function Footer({ data }) {
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>
       <View style={styles.rabeContainer} dataSet={{ media: ids.rabeContainer }}>
-        <AspectRatio
-          ratio="1/1"
+        <View
           style={{
             height: "100%",
+            aspectRatio: 1,
           }}
         >
-          <FooterRabe color={Colors.black}></FooterRabe>
-        </AspectRatio>
+          <IconFooterRabe color={Colors.black}></IconFooterRabe>
+        </View>
       </View>
 
       <View
@@ -37,15 +37,14 @@ function Footer(contactData) {
             <Text
               style={styles.textOpacity}
               dataSet={{ media: ids.textOpacity }}
-            >{`Radio Bern: RaBe ${contactData.street} ${contactData.street_number}, ${contactData.plz} ${contactData.city}, `}</Text>
-            <HoverUrl
-              url={`mailto:${contactData.email}`}
-              style={styles.textOpacity}
-              dataSet={{ media: ids.textOpacity }}
-              hoverStyle={{ opacity: 1 }}
+            >{`Radio Bern: RaBe ${data.street} ${data.street_number}, ${data.plz} ${data.city}, `}</Text>
+            <ButtonText
+              url={`mailto:${data.email}`}
+              style={styles.textButton}
+              dataSet={{ media: ids.textButton }}
             >
-              {contactData.email}
-            </HoverUrl>
+              {data.email}
+            </ButtonText>
           </Text>
         </View>
 
@@ -57,13 +56,14 @@ function Footer(contactData) {
             >
               {"Studio: "}
             </Text>
-            <HoverUrl
-              url={`tel:${contactData.studio_phone_number}`}
-              style={{ color: Colors.lightGreen }}
-              hoverStyle={{ color: Colors.green }}
+            <ButtonText
+              url={`tel:${data.studio_phone_number}`}
+              style={styles.textButton}
+              dataSet={{ media: ids.textButton }}
             >
-              {contactData.studio_phone_number}
-            </HoverUrl>
+              {data.studio_phone_number}
+            </ButtonText>
+
             <Text
               style={styles.textOpacity}
               dataSet={{ media: ids.textOpacity }}
@@ -71,24 +71,19 @@ function Footer(contactData) {
               {", "}
             </Text>
 
-            <HoverUrl
-              url={`mailto:${contactData.studio_email}`}
-              style={{ color: Colors.lightGreen }}
-              hoverStyle={{ color: Colors.green }}
+            <ButtonText
+              url={`mailto:${data.studio_email}`}
+              style={styles.textButton}
+              dataSet={{ media: ids.textButton }}
             >
-              {contactData.studio_email}
-            </HoverUrl>
+              {data.studio_email}
+            </ButtonText>
           </Text>
         </View>
 
-        {/* <View style={{ height: Metrics.quadBaseMargin }}></View> */}
-
         <BarIcons></BarIcons>
 
-        {/* <View style={{ height: Metrics.quadBaseMargin }}></View> */}
         <BarLinks></BarLinks>
-
-        {/* <View style={{ height: Metrics.quadBaseMargin }}></View> */}
       </View>
     </View>
   );
@@ -103,27 +98,31 @@ const { ids, styles } = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
     width: "100%",
-    padding: "3vw",
+    padding: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
-      padding: "8vw",
+      padding: Metrics.quadBaseMargin,
     },
   },
 
   rabeContainer: {
     position: "absolute",
-    right: 0,
+    right: "10%",
     bottom: 0,
     left: 0,
     top: 0,
-    marginTop: "5vw",
+    marginTop: Metrics.doubleBaseMargin,
     justifyContent: "flex-end",
     alignItems: "flex-end",
     "@media (max-width: 910px)": {
+      marginTop: Metrics.tripleBaseMargin,
       alignItems: "center",
     },
   },
   textContainer: {
-    marginBottom: Metrics.tripleBaseMargin,
+    marginBottom: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      marginBottom: Metrics.tripleBaseMargin,
+    },
   },
   text: {
     flexDirection: "row",
@@ -134,6 +133,15 @@ const { ids, styles } = StyleSheet.create({
   textOpacity: {
     opacity: 0.75,
     "@media (max-width: 910px)": {
+      opacity: 1,
+    },
+  },
+  textButton: {
+    opacity: 0.75,
+    "@media (max-width: 910px)": {
+      opacity: 1,
+    },
+    ":hover": {
       opacity: 1,
     },
   },

@@ -7,90 +7,107 @@ import HoverText from "../HoverText";
 import HoverUrl from "../HoverUrl";
 import LinkComponent from "../LinkComponent";
 import StyleSheet from "react-native-media-query";
-
-const { ids, styles } = StyleSheet.create({
-  hoverText: {
-    ...Fonts.style.footer,
-    color: Colors.lightGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-    },
-  },
-});
+import ButtonText from "../ButtonText";
 
 export interface HoverableProps {}
 
+let linkData = [
+  { href: "/kontakt", children: "Logo Download" },
+  { href: "/kontakt", children: "Kontakt" },
+  { href: "/agb", children: "AGB und Datenschutz" },
+  { href: "/impressum", children: "Impressum" },
+  { href: "https://www.aarefabrik.ch", children: "aarefabrik.ch" },
+];
+
 export default ({}: HoverableProps) => {
   return (
-    <View
-      style={{
-        justifyContent: "center",
-        flexDirection: "row",
-        width: "100%",
-        flexWrap: "wrap",
-      }}
-    >
+    <View style={styles.container} dataSet={{ media: ids.container }}>
       <View
-        style={{
-          flexDirection: "row",
-        }}
+        style={styles.halfContainer1}
+        dataSet={{ media: ids.halfContainer1 }}
       >
-        <Text style={styles.hoverText} dataSet={{ media: ids.hoverText }}>
-          {"Logo Download"}
-        </Text>
-        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-        <LinkComponent href={`/kontakt`}>
-          <Text style={styles.hoverText} dataSet={{ media: ids.hoverText }}>
-            {"Kontakt"}
-          </Text>
-        </LinkComponent>
-
-        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-        <LinkComponent href={`/agb`}>
-          <HoverText
-            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-            hoverStyle={{ color: Colors.green }}
-          >
-            {"AGB und Datenschutz"}
-          </HoverText>
-        </LinkComponent>
+        {linkData.slice(0, 3).map((data) => {
+          return (
+            <ButtonText
+              {...data}
+              style={styles.hoverText}
+              dataSet={{ media: ids.hoverText }}
+            ></ButtonText>
+          );
+        })}
       </View>
       <View
-        style={{
-          flexDirection: "row",
-          // paddingBottom: Metrics.tripleBaseMargin,
-        }}
+        style={styles.halfContainer2}
+        dataSet={{ media: ids.halfContainer2 }}
       >
-        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-        <LinkComponent href={`/impressum`}>
-          <HoverText
-            style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-            hoverStyle={{ color: Colors.green }}
-          >
-            {"Impressum"}
-          </HoverText>
-        </LinkComponent>
-
-        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-
-        <HoverText
-          style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-          hoverStyle={{ color: Colors.green }}
-        >
-          {"Login"}
-        </HoverText>
-        <View style={{ width: Metrics.doubleBaseMargin, flexShrink: 1 }}></View>
-
-        <HoverUrl
-          style={{ color: Colors.lightGreen, ...Fonts.style.footer }}
-          hoverStyle={{ color: Colors.green }}
-          url={"https://www.aarefabrik.ch"}
-        >
-          {"aarefabrik.ch"}
-        </HoverUrl>
+        {linkData.slice(3, 6).map((data) => {
+          return (
+            <ButtonText
+              {...data}
+              style={styles.hoverText}
+              dataSet={{ media: ids.hoverText }}
+            ></ButtonText>
+          );
+        })}
       </View>
     </View>
   );
 };
+
+const { ids, styles } = StyleSheet.create({
+  // container: {
+  //   justifyContent: "center",
+  //   flexDirection: "row",
+  //   width: "100%",
+  //   flexWrap: "wrap",
+  //   // backgroundColor: "green",
+  // },
+  // halfContainer: {
+  //   marginTop: Metrics.doubleBaseMargin,
+  //   flexDirection: "row",
+  //   "@media (max-width: 910px)": {
+  //     marginTop: Metrics.quadBaseMargin,
+  //   },
+  // },
+  container: {
+    justifyContent: "center",
+    width: "100%",
+    flexDirection: "row",
+    // backgroundColor: "blue",
+    marginTop: Metrics.doubleBaseMargin,
+
+    "@media (max-width: 910px)": {
+      flexDirection: "column",
+      alignItems: "center",
+      marginTop: Metrics.quadBaseMargin,
+    },
+  },
+  halfContainer1: {
+    flexDirection: "row",
+    "@media (max-width: 910px)": {
+      alignItems: "center",
+    },
+  },
+  halfContainer2: {
+    flexDirection: "row",
+    "@media (max-width: 910px)": {
+      alignItems: "center",
+      marginTop: Metrics.tripleBaseMargin,
+    },
+  },
+  hoverText: {
+    ...Fonts.style.footer,
+    color: Colors.lightGreen,
+    // backgroundColor: "red",
+    marginLeft: Metrics.baseMargin,
+    opacity: 0.75,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ":hover": {
+      opacity: 1,
+    },
+    "@media (max-width: 910px)": {
+      opacity: 1,
+    },
+  },
+});

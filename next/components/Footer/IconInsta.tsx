@@ -5,7 +5,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width="100%"
     height="100%"
-    viewBox="0 0 23 23"
+    viewBox="0 0 24 24"
     {...props}
   >
     <g fill={props.color} fillRule="evenodd" data-name="Group 1877">

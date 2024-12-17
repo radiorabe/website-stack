@@ -8,6 +8,7 @@ import {
   ItemsQuote,
 } from "@/lib/api/data-contracts";
 import Fonts from "@/lib/Fonts";
+import { Text } from "@/lib/server-react-native";
 import {
   TipTapMarkHandlers,
   TipTapNodeHandlers,
@@ -177,7 +178,7 @@ const Heading = (props: {
       return (
         <h1
           style={{
-            ...Fonts.style.h1,
+            ...Fonts.style.TTh1,
           }}
         >
           {props.children}
@@ -187,7 +188,7 @@ const Heading = (props: {
       return (
         <h2
           style={{
-            ...Fonts.style.h2,
+            ...Fonts.style.TTh2,
             marginBlock: "unset",
             marginTop: Metrics.tripleBaseMargin,
             marginBottom: Metrics.doubleBaseMargin,
@@ -200,7 +201,7 @@ const Heading = (props: {
       return (
         <h3
           style={{
-            ...Fonts.style.h3,
+            ...Fonts.style.TTh3,
           }}
         >
           {props.children}
@@ -210,7 +211,7 @@ const Heading = (props: {
       return (
         <h4
           style={{
-            ...Fonts.style.h4,
+            ...Fonts.style.TTh4,
             marginBlock: "unset",
             marginTop: Metrics.doubleBaseMargin,
             marginBottom: Metrics.baseMargin,
@@ -250,23 +251,6 @@ const markHandlers = (topProps) => {
               : Colors.darkGreen
           }
         ></Link>
-        // <a
-        //   href={props.node.attrs.href}
-        //   target="_blank"
-        //   rel="noreferrer"
-        //   textDecoration="none"
-        //   style={{
-        //     ...Fonts.style.text,
-        //     color:
-        //       topProps && topProps.linkColor
-        //         ? topProps.linkColor
-        //         : Colors.lightGreen,
-        //   }}
-        //   // onMouseEnter={() => setHover(true)}
-        //   // onMouseLeave={() => setHover(false)}
-        // >
-        //   {props.children}
-        // </a>
       );
     },
     bold: (props) => <b>{props.children}</b>,
@@ -282,6 +266,14 @@ const nodeHandlers = (topProps) => {
   return {
     doc: (props) => <>{props.children}</>,
     text: (props) => (
+      // <Text
+      //   style={{
+      //     ...Fonts.style.text,
+      //     color: topProps.textColor ? topProps.textColor : Colors.black,
+      //   }}
+      // >
+      //   {props.node.text}
+      // </Text>
       <span
         style={{
           ...Fonts.style.TTtext,
