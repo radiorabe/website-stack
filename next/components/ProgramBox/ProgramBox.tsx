@@ -9,7 +9,7 @@ import useResponsive from "@/lib/useResponsisve";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import StyleSheet from "react-native-media-query";
-import ButtonFull from "../ButtonFull";
+import Button from "../Button";
 import PlayList from "./PlayList";
 import ShowsList from "./ShowsList";
 
@@ -155,7 +155,7 @@ export default function ProgramBox({
       )}
       {isMobile && (
         <View style={{ flexDirection: "row" }}>
-          <ButtonFull
+          <Button
             label={"Heutiges Programm"}
             textColor={Colors.white}
             full={!showPlaylist}
@@ -163,9 +163,9 @@ export default function ProgramBox({
             backgroundColor={showPlaylist ? undefined : Colors.white}
             textColor={showPlaylist ? Colors.white : Colors.darkGreen}
             onPress={() => setShowPlaylist(false)}
-          ></ButtonFull>
+          ></Button>
           <View style={{ width: Metrics.tripleBaseMargin }}></View>
-          <ButtonFull
+          <Button
             label={"Playlist"}
             textColor={Colors.white}
             full={showPlaylist}
@@ -173,7 +173,7 @@ export default function ProgramBox({
             backgroundColor={!showPlaylist ? undefined : Colors.white}
             textColor={!showPlaylist ? Colors.white : Colors.darkGreen}
             onPress={() => setShowPlaylist(true)}
-          ></ButtonFull>
+          ></Button>
         </View>
       )}
       <View style={styles.container} dataSet={{ media: ids.container }}>

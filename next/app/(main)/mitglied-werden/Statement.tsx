@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/Button";
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
@@ -53,13 +53,13 @@ export default function Statement(props) {
         >
           {"Hörer*innen Statement von " + randomStatment.author}
         </Text>
-        <ButtonFull
+        <Button
           label={"Nächstes Statement"}
           onPress={() => {
             console.log("aösdlklfj");
             setRandomIndex(Math.floor(Math.random() * props.statements.length));
           }}
-        ></ButtonFull>
+        ></Button>
       </div>
     </div>
   );

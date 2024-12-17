@@ -7,7 +7,7 @@ import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
-import ButtonFull from "./ButtonFull";
+import Button from "./Button";
 import AspectRatio from "react-aspect-ratio";
 import useResponsive from "@/lib/useResponsisve";
 
@@ -110,10 +110,10 @@ const Ausgehtips = ({ partyTips }: Props) => {
                   </View>
 
                   <View>
-                    <ButtonFull
+                    <Button
                       url={partyLocation.url}
                       label={"Zur Webseite"}
-                    ></ButtonFull>
+                    ></Button>
                   </View>
                 </View>
               </View>

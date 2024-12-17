@@ -10,7 +10,7 @@ import { getPosts } from "./getPosts";
 import { useInView } from "react-intersection-observer";
 import Colors from "@/lib/Colors";
 import Loader from "react-spinners/ClipLoader";
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 
 const NUMBER_OF_POSTS_TO_FETCH = 3;
 
@@ -98,7 +98,7 @@ export default function PostList({ initialPosts, filters }) {
             >
               {"Schreibe etwas zu diesem Thema."}
             </Text>
-            <ButtonFull href={"/mitmachen"} label={"Jetzt mitmachen"} />
+            <Button href={"/mitmachen"} label={"Jetzt mitmachen"} />
           </View>
         </View>
       )}

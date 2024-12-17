@@ -1,7 +1,7 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import { Api } from "@/lib/api";
 import {
@@ -260,7 +260,7 @@ export default async function ProgramPage({ params }) {
                 ></Arrow>
               )}
             </View>
-            <ButtonFull
+            <Button
               href={"/programm"}
               label={"Heute"}
               full
@@ -349,7 +349,7 @@ export default async function ProgramPage({ params }) {
                   (programNode: ItemsPageProgramPrograms1, index) => {
                     let program = programNode.programs_slug as ItemsPrograms;
                     return (
-                      <ButtonFull
+                      <Button
                         key={"Group1-" + index}
                         style={{ padding: Metrics.halfBaseMargin }}
                         href={program.slug}
@@ -357,7 +357,7 @@ export default async function ProgramPage({ params }) {
                         large
                         full
                         textColor={Colors.white}
-                      ></ButtonFull>
+                      ></Button>
                     );
                   }
                 )}
@@ -378,7 +378,7 @@ export default async function ProgramPage({ params }) {
                   (programNode: ItemsPageProgramPrograms2, index) => {
                     let program = programNode.programs_slug as ItemsPrograms;
                     return (
-                      <ButtonFull
+                      <Button
                         key={"Group2-" + index}
                         style={{ padding: Metrics.halfBaseMargin }}
                         href={program.slug}
@@ -386,7 +386,7 @@ export default async function ProgramPage({ params }) {
                         large
                         full
                         textColor={Colors.white}
-                      ></ButtonFull>
+                      ></Button>
                     );
                   }
                 )}
@@ -407,7 +407,7 @@ export default async function ProgramPage({ params }) {
                   (programNode: ItemsPageProgramPrograms3, index) => {
                     let program = programNode.programs_slug as ItemsPrograms;
                     return (
-                      <ButtonFull
+                      <Button
                         key={"Group3-" + index}
                         style={{ padding: Metrics.halfBaseMargin }}
                         href={program.slug}
@@ -415,7 +415,7 @@ export default async function ProgramPage({ params }) {
                         large
                         full
                         textColor={Colors.white}
-                      ></ButtonFull>
+                      ></Button>
                     );
                   }
                 )}

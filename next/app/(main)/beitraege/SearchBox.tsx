@@ -6,7 +6,7 @@ import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
 import SearchIcon from "./SearchIcon";
 import Metrics from "@/lib/Metrics";
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import FilterLabel from "@/components/FilterLabel";
 
 export default function SearchBox({ programName, authorName }) {
@@ -44,7 +44,7 @@ export default function SearchBox({ programName, authorName }) {
           display: "flex",
         }}
       >
-        <ButtonFull
+        <Button
           href={"/beitraege"}
           label={"Alle Beiträge"}
           full
@@ -82,7 +82,6 @@ export default function SearchBox({ programName, authorName }) {
         })} */}
       </div>
 
-      {/* <Button url={""} label={"suche"} /> */}
       <View
         style={[
           {

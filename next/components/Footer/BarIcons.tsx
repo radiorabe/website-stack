@@ -39,6 +39,7 @@ export default function BarIcon({}: Props) {
         {socialData.slice(0, 3).map((iconData, index) => {
           return (
             <Pressable
+              key={"Baricon" + index}
               style={[styles.button]}
               dataSet={{ media: ids.button }}
               onPress={() => Linking.openURL(iconData.link)}
@@ -60,6 +61,7 @@ export default function BarIcon({}: Props) {
         {socialData.slice(3, 6).map((iconData, index) => {
           return (
             <Pressable
+              key={"Baricon2" + index}
               style={[styles.button]}
               dataSet={{ media: ids.button }}
               onPress={() => Linking.openURL(iconData.link)}

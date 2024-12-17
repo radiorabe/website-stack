@@ -1,4 +1,4 @@
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import ImageBox from "@/components/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
@@ -266,7 +266,7 @@ export default async function EventPage({ params }) {
                     paddingTop: Metrics.baseMargin,
                   }}
                 >
-                  <ButtonFull
+                  <Button
                     label={show.button_label ? show.button_label : "Tickets"}
                     href={show.button_url}
                     icon={<TicketIcon color={Colors.white}></TicketIcon>}
@@ -275,7 +275,7 @@ export default async function EventPage({ params }) {
                     large
                     full
                     textColor={Colors.white}
-                  ></ButtonFull>
+                  ></Button>
                 </View>
               </View>
             );

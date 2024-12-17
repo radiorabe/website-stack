@@ -9,7 +9,6 @@ import {
   ItemsPost,
 } from "@/lib/api/data-contracts";
 import Button from "@/components/Button";
-import ButtonFull from "@/components/ButtonFull";
 import PostPreview from "@/components/PostPreview";
 import PartyTip from "@/assets/svg/IconPartyTip";
 import Metrics from "@/lib/Metrics";
@@ -162,7 +161,7 @@ export default async function HomePage(props) {
           <View>
             <Text style={{ ...Fonts.style.h2 }}>{"Neuste Beiträge"}</Text>
           </View>
-          <ButtonFull
+          <Button
             full
             textColor={Colors.white}
             href={"/beitraege"}

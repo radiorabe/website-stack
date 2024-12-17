@@ -6,7 +6,7 @@ import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import { useEffect, useState } from "react";
 import RadioButton from "./RadioButton";
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 // import Layout from "../components/Layout";
 
 export default function YearlyProduct(props) {
@@ -56,7 +56,7 @@ export default function YearlyProduct(props) {
         );
       })}
       <div style={{ paddingTop: Metrics.baseMargin }}>
-        <ButtonFull
+        <Button
           label={"Mitglied werden"}
           textColor={Colors.white}
           hovertextColor={Colors.green}
@@ -65,7 +65,7 @@ export default function YearlyProduct(props) {
             pathname: "/bestellung",
             query: { id: selectedProduct },
           }}
-        ></ButtonFull>
+        ></Button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import RenderTipTap from "@/components/RenderTipTap";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
@@ -131,12 +131,12 @@ const ClassDropDown = ({ classItem }: Props) => {
               alignItems: "flex-start",
             }}
           >
-            <ButtonFull
+            <Button
               label={"Jetzt anmelden"}
               href={"mailto:" + classItem.email}
               full
               textColor={Colors.white}
-            ></ButtonFull>
+            ></Button>
           </View>
         </View>
       )}

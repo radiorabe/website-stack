@@ -5,33 +5,22 @@ import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
 import { PressableState } from "@/lib/Types";
 import Link from "next/link";
 import { ReactElement } from "react";
-import StyleSheet from "react-native-media-query";
 
 export interface Props {
   url?: string;
+  href?: string;
   label: string;
   icon?: any;
   disabled?: boolean;
   onPress?(): void;
-  color?: any;
-  hoverColor?: any;
-  href?: string;
+  style?: any;
+  large?: boolean;
+  backgroundColor?: any;
+  backgroundHoverColor?: any;
+  textColor?: any;
+  hoverTextColor?: any;
+  full?: boolean;
 }
-
-const { ids, styles } = StyleSheet.create({
-  example: {
-    backgroundColor: "green",
-    borderRadius: 5,
-    "@media (max-width: 1600px) and (min-width: 800px)": {
-      backgroundColor: "red",
-      borderRadius: 10,
-    },
-    "@media (max-width: 800px)": {
-      backgroundColor: "blue",
-      borderRadius: 15,
-    },
-  },
-});
 
 const Button = ({
   url,
@@ -39,13 +28,18 @@ const Button = ({
   icon,
   disabled,
   onPress,
-  color,
-  hoverColor,
   href,
-}: HoverableProps) => {
+  style,
+  large,
+  backgroundColor,
+  backgroundHoverColor,
+  textColor,
+  hoverTextColor,
+  full,
+}: Props) => {
   const button = (
     <Pressable
-      style={{}}
+      style={style}
       onPress={() => {
         if (!disabled) {
           if (onPress) {
@@ -62,18 +56,29 @@ const Button = ({
           <View
             style={[
               {
-                borderColor: color ? color : Colors.black,
+                borderColor: textColor ? textColor : Colors.black,
                 borderRadius: 9,
-                borderWidth: 1,
+                borderWidth: full ? 0 : 1,
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
-                paddingVertical: 3,
-                paddingHorizontal: 6,
+                paddingVertical: large ? 9 : 6,
+                paddingHorizontal: large ? 12 : 9,
+                backgroundColor: backgroundColor
+                  ? backgroundColor
+                  : full
+                    ? Colors.darkGreen
+                    : undefined,
               },
-              hovered && {
-                borderColor: hoverColor ? hoverColor : Colors.green,
-              },
+              hovered &&
+                !disabled && {
+                  borderColor: hoverTextColor ? hoverTextColor : Colors.green,
+                  backgroundColor: backgroundHoverColor
+                    ? backgroundHoverColor
+                    : full
+                      ? Colors.green
+                      : undefined,
+                },
             ]}
           >
             {icon}
@@ -86,13 +91,17 @@ const Button = ({
                   MozUserSelect: "none",
                   WebkitUserSelect: "none",
                   msUserSelect: "none",
-                  color: color ? color : Colors.black,
-                  // "-webkit-user-select": "none",
+                  color: textColor ? textColor : Colors.black,
                 },
-                hovered && {
-                  color: hoverColor ? hoverColor : Colors.green,
-                  borderColor: hoverColor ? hoverColor : Colors.green,
-                },
+                large && { ...Fonts.style.h2 },
+                hovered &&
+                  !disabled && {
+                    color: hoverTextColor
+                      ? hoverTextColor
+                      : full
+                        ? Colors.white
+                        : Colors.green,
+                  },
                 icon && { paddingLeft: 6 },
               ]}
             >

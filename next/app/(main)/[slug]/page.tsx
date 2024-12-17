@@ -14,7 +14,7 @@ import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../assets/svg/IconShare";
 
-import ButtonFull from "@/components/ButtonFull";
+import Button from "@/components/Button";
 import MemberInfo from "@/components/MemberInfo";
 import PostPreview from "@/components/PostPreview";
 import { logError } from "@/lib/loging";
@@ -210,7 +210,7 @@ export default async function ProgramPage({ params }) {
                 alignItems: "center",
               }}
             >
-              <ButtonFull
+              <Button
                 href={{
                   pathname: "/bestellung",
                   query: { slug: sendung.slug },
@@ -325,7 +325,7 @@ export default async function ProgramPage({ params }) {
             {"Letzte Beiträge von " + sendung.name}
           </Text>
 
-          <ButtonFull
+          <Button
             href={{
               pathname: "/beitraege",
               query: { program: sendung.slug },

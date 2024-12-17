@@ -26,9 +26,10 @@ export default ({}: HoverableProps) => {
         style={styles.halfContainer1}
         dataSet={{ media: ids.halfContainer1 }}
       >
-        {linkData.slice(0, 3).map((data) => {
+        {linkData.slice(0, 3).map((data, index) => {
           return (
             <ButtonText
+              key={"Barlinks" + index}
               {...data}
               style={styles.hoverText}
               dataSet={{ media: ids.hoverText }}
@@ -40,9 +41,10 @@ export default ({}: HoverableProps) => {
         style={styles.halfContainer2}
         dataSet={{ media: ids.halfContainer2 }}
       >
-        {linkData.slice(3, 6).map((data) => {
+        {linkData.slice(3, 6).map((data, index) => {
           return (
             <ButtonText
+              key={"Barlinks2" + index}
               {...data}
               style={styles.hoverText}
               dataSet={{ media: ids.hoverText }}
