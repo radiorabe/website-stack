@@ -1,7 +1,7 @@
 "use client";
 import AudioFilePlayer from "@/components/AudioFilePlayer";
 import Button from "@/components/Button";
-import HoverText from "@/components/HoverText";
+import ButtonText from "@/components/ButtonText";
 import ImageBox from "@/components/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import {
@@ -29,94 +29,98 @@ export default function BeitragPage({ post }: Props) {
   const imagebox = post.imagebox as ItemsImageBox;
 
   return (
-    <View>
-      <View style={styles.container}>
-        <View style={styles.postContainer}>
+    <View dataSet={{ media: ids.container }} style={styles.container}>
+      <View dataSet={{ media: ids.postContainer }} style={styles.postContainer}>
+        <View
+          dataSet={{ media: ids.postInfoContainer }}
+          style={styles.postInfoContainer}
+        >
+          <Button href={"/" + program.slug} label={program.name}></Button>
+
           <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: Metrics.tripleBaseMargin,
-            }}
-          >
-            <HoverText
-              href={"/" + program.slug}
-              style={[styles.sendungsInfo, styles.border]}
-              hoverStyle={{
-                color: Colors.green,
-                borderColor: Colors.green,
-              }}
-            >
-              {program.name}
-            </HoverText>
-
-            <View style={{ width: Metrics.doubleBaseMargin }}></View>
-            <Text style={{ ...Fonts.style.text }}>
-              <Text> {"Von "}</Text>
-              {post.authors.map((item: ItemsPostDirectusUsers, index) => {
-                let user: Users = item.directus_users_id as Users;
-                return (
-                  <HoverText
-                    key={"author" + index}
-                    href={{
-                      pathname: "/beitraege",
-                      query: { author: user.id },
-                    }}
-                    style={{ ...Fonts.style.textLink, color: Colors.green }}
-                    hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? "," : ""} ${user.first_name || ""} ${
-                    user.last_name || ""
-                  }`}</HoverText>
-                );
-              })}
-
-              <Text> {`am ${moment(post.date).format("DD. MMMM YY")}`}</Text>
-            </Text>
-          </View>
+            // dataSet={{media:ids.}}
+            style={{ width: Metrics.doubleBaseMargin }}
+          ></View>
           <Text
+            // dataSet={{media:ids.}}
+            style={{ ...Fonts.style.text }}
+          >
+            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+              {"Von "}
+            </Text>
+            {post.authors.map((item: ItemsPostDirectusUsers, index) => {
+              let user: Users = item.directus_users_id as Users;
+              return (
+                <ButtonText
+                  key={"author" + index}
+                  href={{
+                    pathname: "/beitraege",
+                    query: { author: user.id },
+                  }}
+                  // dataSet={{media:ids.}}
+                  style={{ ...Fonts.style.textLink, color: Colors.green }}
+                  hoverStyle={{ color: Colors.darkGreen }}
+                >{`${index ? "," : ""} ${user.first_name || ""} ${
+                  user.last_name || ""
+                }`}</ButtonText>
+              );
+            })}
+
+            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+              {"am "}
+            </Text>
+            <Text> {`${moment(post.date).format("DD. MMMM YYYY")}`}</Text>
+          </Text>
+        </View>
+        <Text
+          // dataSet={{media:ids.}}
+          style={{
+            ...Fonts.style.h1,
+            paddingBottom: Metrics.tripleBaseMargin,
+          }}
+        >
+          {post.title}
+        </Text>
+        {imagebox && (
+          <ImageBox
+            imageId={imagebox.image}
+            width={1440}
+            height={960}
+            title={imagebox.title}
+            text={imagebox.text}
+          ></ImageBox>
+        )}
+
+        {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
+
+        {post.audio_files && post.audio_files.length !== 0 && (
+          <View
+            // dataSet={{media:ids.}}
             style={{
-              ...Fonts.style.h1,
               paddingBottom: Metrics.tripleBaseMargin,
             }}
           >
-            {post.title}
-          </Text>
-          {imagebox && (
-            <ImageBox
-              imageId={imagebox.image}
-              width={1440}
-              height={960}
-              title={imagebox.title}
-              text={imagebox.text}
-            ></ImageBox>
-          )}
-
-          {post.content && <RenderTipTap content={post.content}></RenderTipTap>}
-
-          {post.audio_files && post.audio_files.length !== 0 && (
-            <View
-              style={{
-                paddingBottom: Metrics.tripleBaseMargin,
-              }}
-            >
-              <AudioFilePlayer audioFiles={post.audio_files}></AudioFilePlayer>
-            </View>
-          )}
-          <View style={{ flexDirection: "row" }}>
-            <Button
-              url={"alksjdfkl"}
-              icon={<IconShare color={Colors.darkGreen}></IconShare>}
-              label={"Teilen"}
-            ></Button>
+            <AudioFilePlayer audioFiles={post.audio_files}></AudioFilePlayer>
           </View>
+        )}
+        <View
+          // dataSet={{media:ids.}}
+          style={{ flexDirection: "row" }}
+        >
+          <Button
+            url={"alksjdfkl"}
+            icon={<IconShare color={Colors.darkGreen}></IconShare>}
+            label={"Teilen"}
+          ></Button>
+        </View>
 
-          <View>
-            <View
-              style={{
-                height: Metrics.tripleBaseMargin,
-              }}
-            ></View>
-          </View>
+        <View>
+          <View
+            // dataSet={{media:ids.}}
+            style={{
+              height: Metrics.tripleBaseMargin,
+            }}
+          ></View>
         </View>
       </View>
     </View>
@@ -125,17 +129,26 @@ export default function BeitragPage({ post }: Props) {
 
 const { ids, styles } = StyleSheet.create({
   container: {
-    maxWidth: 1280,
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
   },
+  postContainer: {
+    width: "75%",
+    "@media (max-width: 910px)": {
+      width: "90%",
+    },
+  },
+  postInfoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: Metrics.tripleBaseMargin,
+  },
+
   imageContainer: {
     width: "100%",
   },
-  postContainer: {
-    width: "75%",
-  },
+
   border: {
     borderBlockColor: Colors.black,
     borderRadius: 9,
@@ -154,4 +167,9 @@ const { ids, styles } = StyleSheet.create({
   },
   sendungsInfo: { ...Fonts.style.text, color: "black" },
   image: { width: "100%", borderRadius: 9 },
+  hide: {
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
 });

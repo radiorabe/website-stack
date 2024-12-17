@@ -34,9 +34,13 @@ export const style: Record<string, TextStyle> = {
   h1: {
     fontFamily: type.bold,
     fontSize: size.h1,
-    // lineHeight: 1.2,
+    lineHeight: 56.4,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 42,
+      lineHeight: 50.4,
+    },
   },
   TTh1: {
     fontFamily: type.bold,
@@ -44,6 +48,10 @@ export const style: Record<string, TextStyle> = {
     // lineHeight: 1.2,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 42,
+      // lineHeight: 50.4,
+    },
   },
   h2: {
     fontFamily: type.bold,
@@ -80,13 +88,21 @@ export const style: Record<string, TextStyle> = {
     // lineHeight: 1.4,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 22.4,
+    },
   },
   TTh4: {
     fontFamily: type.bold,
     fontSize: size.h4,
-    // lineHeight: 1.4,
+    lineHeight: 1.4,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 1.2,
+    },
   },
   quote: {
     fontFamily: type.bold,
@@ -112,6 +128,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 1.4,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 1.2,
+    },
   },
 
   textLink: {

@@ -5,6 +5,7 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import RenderTipTap from "./RenderTipTap";
+import StyleSheet from "react-native-media-query";
 
 export interface HoverableProps {
   data: ItemsInfoBox;
@@ -15,19 +16,19 @@ export interface HoverableProps {
 const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
   return (
     <View
-      style={{
-        padding: Metrics.doubleBaseMargin,
-        paddingBottom: Metrics.halfBaseMargin,
-        borderRadius: 9,
-        backgroundColor: backgroundColor ? backgroundColor : Colors.lightGreen,
-      }}
+      style={[
+        styles.container,
+        {
+          backgroundColor: backgroundColor
+            ? backgroundColor
+            : Colors.lightGreen,
+        },
+      ]}
+      dataSet={{ media: ids.container }}
     >
       <Text
-        style={{
-          ...Fonts.style.h4,
-          paddingBottom: Metrics.baseMargin,
-          color: textColor ? textColor : Colors.black,
-        }}
+        style={[styles.title, { color: textColor ? textColor : Colors.black }]}
+        dataSet={{ media: ids.title }}
       >
         {data.title}
       </Text>
@@ -50,3 +51,23 @@ const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
 };
 
 export default InfoBox;
+
+const { ids, styles } = StyleSheet.create({
+  container: {
+    paddingHorizontal: Metrics.doubleBaseMargin,
+    paddingTop: Metrics.doubleBaseMargin,
+    marginVertical: Metrics.tripleBaseMargin,
+    borderRadius: 9,
+    "@media (max-width: 910px)": {
+      paddingHorizontal: Metrics.tripleBaseMargin,
+      paddingTop: Metrics.tripleBaseMargin,
+    },
+  },
+  title: {
+    ...Fonts.style.h4,
+    paddingBottom: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.doubleBaseMargin,
+    },
+  },
+});

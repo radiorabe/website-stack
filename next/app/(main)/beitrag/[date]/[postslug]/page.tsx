@@ -5,6 +5,7 @@ import moment from "moment";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import PagePost from "./PagePost";
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 
 async function getPost(params) {
   try {
@@ -44,11 +45,16 @@ async function getPost(params) {
       }
     );
     let items: ItemsPost[] = itemResponse.data.data;
-    console.log("post", items);
+
     // console.log("post.audioFiles", items.audioFiles);
     if (items.length === 0) {
       notFound();
     }
+    // load relational tiptap components
+    if (items[0].content) {
+      items[0].content = await loadTipTapContent(items[0].content);
+    }
+
     return items[0];
   } catch (error) {
     logError(error);
