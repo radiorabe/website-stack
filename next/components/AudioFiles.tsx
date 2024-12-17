@@ -115,7 +115,7 @@ const { ids, styles } = StyleSheet.create({
     width: Metrics.baseMargin,
     aspectRatio: 1,
     "@media (max-width: 910px)": {
-      width: Metrics.quadBaseMargin,
+      width: Metrics.doubleBaseMargin,
     },
   },
 });

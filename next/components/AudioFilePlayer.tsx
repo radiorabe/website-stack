@@ -187,7 +187,10 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
         </View>
       </View>
       {tracks.length >= 2 && (
-        <View style={{ paddingTop: Metrics.doubleBaseMargin }}>
+        <View
+          style={styles.audioFilesContainer}
+          dataSet={{ media: ids.audioFilesContainer }}
+        >
           <AudioFiles
             tracks={tracks}
             onChange={(track) => {
@@ -231,6 +234,12 @@ const { ids, styles } = StyleSheet.create({
     aspectRatio: 1,
     "@media (max-width: 910px)": {
       width: Metrics.quadBaseMargin,
+    },
+  },
+  audioFilesContainer: {
+    marginTop: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      marginTop: Metrics.tripleBaseMargin,
     },
   },
 });
