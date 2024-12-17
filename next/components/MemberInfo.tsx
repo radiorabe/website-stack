@@ -1,5 +1,4 @@
-// LinkComponent.js
-
+"use client";
 import Metrics from "@/lib/Metrics";
 import React from "react";
 import { View, Text } from "@/lib/server-react-native";
@@ -7,19 +6,14 @@ import Image from "next/image";
 import HoverUrl from "./HoverUrl";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
+import StyleSheet from "react-native-media-query";
 
 const MemberInfo = ({ user }) => {
   let avatarSrc = user.avatar
     ? `${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`
     : "/images/anonym-profile.png";
   return (
-    <View
-      style={{
-        paddingBottom: Metrics.baseMargin,
-        width: "50%",
-        flexDirection: "row",
-      }}
-    >
+    <View style={styles.container} dataSet={{ media: ids.container }}>
       <Image
         src={avatarSrc}
         width={90}
@@ -53,3 +47,15 @@ const MemberInfo = ({ user }) => {
 };
 
 export default MemberInfo;
+
+const { ids, styles } = StyleSheet.create({
+  container: {
+    paddingBottom: Metrics.baseMargin,
+    width: "50%",
+    flexDirection: "row",
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.doubleBaseMargin,
+      width: "100%",
+    },
+  },
+});
