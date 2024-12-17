@@ -9,12 +9,9 @@ import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader
 
 async function getPost(params) {
   try {
-    console.log("params", params);
     const date = moment(params.date, "DD-MM-YYYY");
     const slug = params.postslug;
     const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d");
-    console.log("date", date);
-    console.log("nextDayDate", nextDayDate);
 
     const itemResponse = await Api.readItemsPost(
       {
@@ -46,7 +43,7 @@ async function getPost(params) {
     );
     let items: ItemsPost[] = itemResponse.data.data;
 
-    // console.log("post.audioFiles", items.audioFiles);
+    // check if not empty
     if (items.length === 0) {
       notFound();
     }

@@ -19,7 +19,7 @@ import React from "react";
 import InfoBox from "./InfoBox";
 import Quote from "./Quote";
 import { logError } from "@/lib/loging";
-import ImageBox from "../ImageBox";
+import ImageBox from "./ImageBox";
 import Colors from "@/lib/Colors";
 import Link from "./Link";
 import Iframe from "./Iframe";

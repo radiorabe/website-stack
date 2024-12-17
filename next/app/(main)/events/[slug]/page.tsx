@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import ImageBox from "@/components/ImageBox";
+import ImageBox from "@/components/RenderTipTap/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import { Api } from "@/lib/api";
 import {

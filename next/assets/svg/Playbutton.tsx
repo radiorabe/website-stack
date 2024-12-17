@@ -4,9 +4,9 @@ function SvgComponent(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={38}
-      height={38}
-      viewBox="0 0 38 38"
+      height="100%"
+      width="100%"
+      viewBox="0 0 39 39"
       {...props}
     >
       <g data-name="Group 2132">

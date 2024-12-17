@@ -2,7 +2,7 @@
 import AudioFilePlayer from "@/components/AudioFilePlayer";
 import Button from "@/components/Button";
 import ButtonText from "@/components/ButtonText";
-import ImageBox from "@/components/ImageBox";
+import ImageBox from "@/components/RenderTipTap/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import {
   ItemsImageBox,

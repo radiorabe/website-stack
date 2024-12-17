@@ -11,8 +11,8 @@ import Loader from "react-spinners/BounceLoader";
 import dynamic from "next/dynamic";
 import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
-import useResponsive from "@/lib/useResponsisve";
-import AspectRatio from "react-aspect-ratio";
+
+import StyleSheet from "react-native-media-query";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
@@ -21,8 +21,6 @@ const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
 export interface HoverableProps {}
 
 const AudioRabePlayer = ({}: HoverableProps) => {
-  const { isClient, isMobile } = useResponsive();
-
   let track = {
     title: "Rabe Stream",
     src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
@@ -149,14 +147,11 @@ const AudioRabePlayer = ({}: HoverableProps) => {
       >
         <source src={currentTrack.src} type="audio/mpeg" />
       </audio>
-
-      {isClient && thisTrackPlaying && (
-        <AspectRatio
-          ratio="1/1"
-          style={{
-            width: isMobile ? "8vw" : "3vw",
-          }}
-        >
+      <View
+        style={styles.buttonContainer}
+        dataSet={{ media: ids.buttonContainer }}
+      >
+        {thisTrackPlaying && (
           <Pressable
             style={{}}
             onPress={() => {
@@ -169,24 +164,11 @@ const AudioRabePlayer = ({}: HoverableProps) => {
                 : hovered
                   ? Colors.green
                   : Colors.lightGreen;
-              return (
-                <Pausebutton
-                  color={newColor}
-                  height="100%"
-                  width="100%"
-                ></Pausebutton>
-              );
+              return <Pausebutton color={newColor}></Pausebutton>;
             }}
           </Pressable>
-        </AspectRatio>
-      )}
-      {isClient && !thisTrackPlaying && !thisTrackLoading && (
-        <AspectRatio
-          ratio="1/1"
-          style={{
-            width: isMobile ? "8vw" : "3vw",
-          }}
-        >
+        )}
+        {!thisTrackPlaying && !thisTrackLoading && (
           <Pressable
             style={{}}
             onPress={() => {
@@ -201,38 +183,42 @@ const AudioRabePlayer = ({}: HoverableProps) => {
                 : hovered
                   ? Colors.green
                   : Colors.lightGreen;
-              return (
-                <Playbutton
-                  color={newColor}
-                  height="100%"
-                  width="100%"
-                ></Playbutton>
-              );
+              return <Playbutton color={newColor}></Playbutton>;
             }}
           </Pressable>
-        </AspectRatio>
-      )}
-      {thisTrackLoading && (
-        <View
-          style={{
-            width: isMobile ? "8vw" : "3vw",
-            height: isMobile ? "8vw" : "3vw",
-          }}
-        >
-          <Loader
-            color={Colors.green}
-            size={isMobile ? "8vw" : "3vw"}
-            loading={true}
-          ></Loader>
-        </View>
-      )}
-      {!isMobile && (
-        <View style={{ flexGrow: 1, paddingLeft: Metrics.doubleBaseMargin }}>
-          <AudioRabePlayerLabel></AudioRabePlayerLabel>
-        </View>
-      )}
+        )}
+        {thisTrackLoading && (
+          <Loader color={Colors.green} size={"100%"} loading={true}></Loader>
+        )}
+      </View>
+
+      <View
+        style={styles.audioPlayerLabelContainer}
+        dataSet={{ media: ids.audioPlayerLabelContainer }}
+      >
+        <AudioRabePlayerLabel></AudioRabePlayerLabel>
+      </View>
     </View>
   );
 };
 
 export default AudioRabePlayer;
+
+const { ids, styles } = StyleSheet.create({
+  buttonContainer: {
+    width: Metrics.doubleBaseMargin,
+    aspectRatio: 1,
+    // height: Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      width: Metrics.quadBaseMargin,
+      // height: Metrics.quadBaseMargin,
+    },
+  },
+  audioPlayerLabelContainer: {
+    flexGrow: 1,
+    paddingLeft: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+});

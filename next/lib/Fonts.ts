@@ -140,6 +140,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 20,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 22.4,
+    },
   },
 
   TTtextLink: {
@@ -148,6 +152,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 1.4,
     letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 16,
+      lineHeight: 1.2,
+    },
   },
 
   textSmall: {
@@ -156,6 +164,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 14,
     letterSpacing: size.letterSpacing,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 10.5,
+      lineHeight: 14.7,
+    },
   },
 
   TTtextSmall: {
@@ -164,6 +176,10 @@ export const style: Record<string, TextStyle> = {
     lineHeight: 1.4,
     letterSpacing: size.letterSpacing,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 10.5,
+      lineHeight: 1.2,
+    },
   },
 
   button: {

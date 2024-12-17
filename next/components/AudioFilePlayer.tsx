@@ -16,6 +16,7 @@ import Loader from "react-spinners/BounceLoader";
 import AudioFiles from "./AudioFiles";
 import Button from "./Button";
 import IconDownload from "@/assets/svg/IconDownload";
+import StyleSheet from "react-native-media-query";
 
 export interface HoverableProps {
   audioFiles: any[];
@@ -47,7 +48,10 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
   let thisTrackSet = track.src === currentTrack.src;
   let thisTrackLoading = thisTrackSet && playerState === "loading";
   let thisTrackPlaying = thisTrackSet && playerState === "playing";
-
+  // console.log("thisTrackSet", thisTrackSet);
+  // console.log("playerState", playerState);
+  // console.log("thisTrackPlaying", thisTrackPlaying);
+  // console.log("thisTrackLoading", thisTrackLoading);
   const handleProgressChange = (progress) => {
     if (thisTrackSet && audioRef.current) {
       setLocalyChanging(true);
@@ -91,9 +95,11 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
 
   return (
     <View>
-      {/* <div className="flex items-center justify-center gap-5 w-full"> */}
       <View style={{ flexDirection: "row" }}>
-        <View>
+        <View
+          style={styles.buttonContainer}
+          dataSet={{ media: ids.buttonContainer }}
+        >
           {thisTrackPlaying && (
             <Pressable
               style={{}}
@@ -107,7 +113,7 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
                   : hovered
                     ? Colors.darkGreen
                     : Colors.green;
-                return <Pausebutton color={newColor} scale={1}></Pausebutton>;
+                return <Pausebutton color={newColor}></Pausebutton>;
               }}
             </Pressable>
           )}
@@ -129,14 +135,12 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
                   : hovered
                     ? Colors.darkGreen
                     : Colors.green;
-                return <Playbutton color={newColor} scale={1}></Playbutton>;
+                return <Playbutton color={newColor}></Playbutton>;
               }}
             </Pressable>
           )}
           {thisTrackLoading && (
-            <View style={{ width: 64, height: 64 }}>
-              <Loader color={Colors.green} size={64} loading={true}></Loader>
-            </View>
+            <Loader color={Colors.green} size={"100%"} loading={true}></Loader>
           )}
         </View>
         <View
@@ -187,7 +191,9 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
           <AudioFiles
             tracks={tracks}
             onChange={(track) => {
-              if (track !== currentTrack) {
+              console.log("track", track);
+              console.log("currentTrack", currentTrack);
+              if (track.src !== currentTrack.src) {
                 setTrack(track);
                 setCurrentTrack(track);
                 audioRef.current?.load();
@@ -218,3 +224,13 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
 };
 
 export default AudioFilePlayer;
+
+const { ids, styles } = StyleSheet.create({
+  buttonContainer: {
+    width: Metrics.tripleBaseMargin,
+    aspectRatio: 1,
+    "@media (max-width: 910px)": {
+      width: Metrics.quadBaseMargin,
+    },
+  },
+});

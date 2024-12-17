@@ -4,9 +4,9 @@ function SvgComponent(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={64}
-      height={64}
-      viewBox="0 0 64 64"
+      width={"100%"}
+      height={"100%"}
+      viewBox="0 0 65 65"
       {...props}
     >
       <path

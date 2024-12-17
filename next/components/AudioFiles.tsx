@@ -6,6 +6,7 @@ import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import StyleSheet from "react-native-media-query";
 
 export interface Props {
   tracks: any[];
@@ -28,7 +29,7 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
       {tracks.map((track, index) => {
         return (
           <View
-            key={"audiofiles" + track.title}
+            key={"audiofiles" + track.title + index}
             style={{
               flexDirection: "row",
               paddingTop: Metrics.baseMargin,
@@ -49,18 +50,22 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                 focused,
               }: PressableState): ReactElement => {
                 return (
-                  <>
-                    {currentTrack === track ? (
-                      <Pausebutton
-                        scale={0.3}
-                        color={hovered ? Colors.green : Colors.darkGreen}
-                      ></Pausebutton>
-                    ) : (
-                      <Playbutton
-                        scale={0.3}
-                        color={hovered ? Colors.green : Colors.darkGreen}
-                      ></Playbutton>
-                    )}
+                  <View style={{ flexDirection: "row" }}>
+                    <View
+                      style={styles.buttonContainer}
+                      dataSet={{ media: ids.buttonContainer }}
+                    >
+                      {currentTrack && currentTrack.src === track.src ? (
+                        <Pausebutton
+                          color={hovered ? Colors.green : Colors.darkGreen}
+                        ></Pausebutton>
+                      ) : (
+                        <Playbutton
+                          color={hovered ? Colors.green : Colors.darkGreen}
+                        ></Playbutton>
+                      )}
+                    </View>
+
                     <Text
                       style={{
                         ...Fonts.style.text,
@@ -69,32 +74,33 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                     >
                       {track.title}
                     </Text>
-                  </>
+                  </View>
                 );
               }}
             </Pressable>
-            <Pressable
-              style={{
-                paddingRight: Metrics.baseMargin,
-                justifyContent: "center",
-                height: "100%",
-              }}
-              onPress={() => {
-                Linking.openURL(track.src + "?download");
-              }}
+            <View
+              style={styles.buttonContainer}
+              dataSet={{ media: ids.buttonContainer }}
             >
-              {({
-                pressed,
-                hovered,
-                focused,
-              }: PressableState): ReactElement => {
-                return (
-                  <IconDownload
-                    color={hovered ? Colors.green : Colors.darkGreen}
-                  ></IconDownload>
-                );
-              }}
-            </Pressable>
+              <Pressable
+                style={{}}
+                onPress={() => {
+                  Linking.openURL(track.src + "?download");
+                }}
+              >
+                {({
+                  pressed,
+                  hovered,
+                  focused,
+                }: PressableState): ReactElement => {
+                  return (
+                    <IconDownload
+                      color={hovered ? Colors.green : Colors.darkGreen}
+                    ></IconDownload>
+                  );
+                }}
+              </Pressable>
+            </View>
           </View>
         );
       })}
@@ -103,3 +109,13 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
 };
 
 export default AudioFiles;
+
+const { ids, styles } = StyleSheet.create({
+  buttonContainer: {
+    width: Metrics.baseMargin,
+    aspectRatio: 1,
+    "@media (max-width: 910px)": {
+      width: Metrics.quadBaseMargin,
+    },
+  },
+});
