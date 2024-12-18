@@ -17,6 +17,8 @@ import { ReactElement, useRef, useState } from "react";
 import LinkComponent from "../LinkComponent";
 import AudioRabePlayer from "./AudioRabePlayer";
 import BurgerIcon from "./BurgerIcon";
+import MobileMenu from "./MobileMenu";
+import CloseIcon from "./CloseIcon";
 
 function Header() {
   const pathname = usePathname();
@@ -28,6 +30,8 @@ function Header() {
   useClickOutside([dropDownRef, menuRef], () => {
     setShowDropdown(false);
   });
+
+  let [showMenu, setShowMenu] = useState(false);
 
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>
@@ -277,6 +281,8 @@ function Header() {
         >
           <AudioRabePlayer></AudioRabePlayer>
         </View>
+        <MobileMenu showMenu={showMenu}></MobileMenu>
+
         <View
           style={styles.burgerContainer}
           dataSet={{ media: ids.burgerContainer }}
@@ -288,7 +294,12 @@ function Header() {
                 height: "100%",
               }}
               onPress={() => {
-                // Linking.openURL(url + "?download");
+                setShowMenu(!showMenu);
+                //disable scrolling on main page
+                document.body.style.overflowY =
+                  document.body.style.overflowY === "hidden"
+                    ? "visible"
+                    : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
               }}
             >
               {({
@@ -296,13 +307,18 @@ function Header() {
                 hovered,
                 focused,
               }: PressableState): ReactElement => {
-                // return <Burger></Burger>;
                 return (
-                  <BurgerIcon
-                    color={hovered ? Colors.green : Colors.lightGreen}
-                    height="100%"
-                    width="100%"
-                  ></BurgerIcon>
+                  <View>
+                    {showMenu ? (
+                      <CloseIcon
+                        color={hovered ? Colors.green : Colors.lightGreen}
+                      ></CloseIcon>
+                    ) : (
+                      <BurgerIcon
+                        color={hovered ? Colors.green : Colors.lightGreen}
+                      ></BurgerIcon>
+                    )}
+                  </View>
                 );
               }}
             </Pressable>
@@ -388,16 +404,9 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   navItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: "center",
     height: "100%",
     paddingHorizontal: Metrics.baseMargin,
-    color: Colors.darkGreen,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      color: Colors.green,
-    },
   },
   navBarRabeLogoContainer: {
     height: "100%",

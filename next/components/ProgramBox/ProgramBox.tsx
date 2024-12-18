@@ -235,7 +235,6 @@ const { ids, styles } = StyleSheet.create({
       marginVertical: Metrics.tripleBaseMargin,
     },
   },
-
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
