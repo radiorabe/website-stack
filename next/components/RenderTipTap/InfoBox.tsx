@@ -7,13 +7,19 @@ import { Text, View } from "@/lib/server-react-native";
 import RenderTipTap from "./RenderTipTap";
 import StyleSheet from "react-native-media-query";
 
-export interface HoverableProps {
+export interface Props {
   data: ItemsInfoBox;
   backgroundColor?: any;
   textColor?: any;
+  constainerStyle?: any;
 }
 
-const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
+const InfoBox = ({
+  data,
+  backgroundColor,
+  textColor,
+  constainerStyle,
+}: Props) => {
   return (
     <View
       style={[
@@ -23,6 +29,7 @@ const InfoBox = ({ data, backgroundColor, textColor }: HoverableProps) => {
             ? backgroundColor
             : Colors.lightGreen,
         },
+        constainerStyle,
       ]}
       dataSet={{ media: ids.container }}
     >

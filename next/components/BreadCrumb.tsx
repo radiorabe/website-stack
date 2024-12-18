@@ -14,7 +14,7 @@ export default function BreadCrump({ label1, label2 }: Props) {
     <View
       style={{
         flexDirection: "row",
-        // backgroundColor: "green",
+        marginBottom: Metrics.tripleBaseMargin,
       }}
     >
       <Text style={{ ...Fonts.style.text }}>{label1}</Text>

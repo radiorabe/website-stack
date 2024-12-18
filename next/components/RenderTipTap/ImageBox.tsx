@@ -28,9 +28,9 @@ const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       {title && (
-        <View
+        <Text
           style={{
-            flexDirection: "row",
+            flexDirection: "column",
             paddingHorizontal: Metrics.tripleBaseMargin,
             paddingVertical: Metrics.doubleBaseMargin,
           }}
@@ -46,7 +46,7 @@ const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
           {text && (
             <Text style={{ ...Fonts.style.textSmall }}>{" " + text}</Text>
           )}
-        </View>
+        </Text>
       )}
     </View>
   );

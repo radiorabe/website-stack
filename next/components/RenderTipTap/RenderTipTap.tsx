@@ -169,6 +169,14 @@ const nodeHandlers = (topProps) => {
     horizontalRule: () => <hr />,
     blockquote: (props) => <blockquote>{props.children}</blockquote>,
     "relation-block": (props) => {
+      if (!props.node.data) {
+        console.error(
+          "TipTap missing relational data for: ",
+          props.node.attrs.collection
+        );
+        return;
+      }
+
       if (props.node.attrs.collection === "audio_player") {
         let audioPlayer = props.node.data;
         return (
@@ -182,7 +190,6 @@ const nodeHandlers = (topProps) => {
           </div>
         );
       }
-
       if (props.node.attrs.collection === "quote") {
         let quote = props.node.data;
         return <Quote data={quote}></Quote>;

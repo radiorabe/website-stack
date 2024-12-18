@@ -208,7 +208,6 @@ const { styles, ids } = StyleSheet.create({
     marginBottom: 24,
   },
   programBoxContainer: {
-    marginTop: Metrics.tripleBaseMargin,
     paddingHorizontal: Metrics.doubleBaseMargin,
     paddingVertical: Metrics.doubleBaseMargin,
 
