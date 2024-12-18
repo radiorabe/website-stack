@@ -12,10 +12,8 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
 import { useClickOutside } from "@/lib/useClickOutside";
-import useResponsive from "@/lib/useResponsisve";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactElement, useRef, useState } from "react";
-import AspectRatio from "react-aspect-ratio";
 import LinkComponent from "../LinkComponent";
 import AudioRabePlayer from "./AudioRabePlayer";
 import BurgerIcon from "./BurgerIcon";
@@ -23,7 +21,6 @@ import BurgerIcon from "./BurgerIcon";
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isDesktop, isMobile, isClient } = useResponsive();
 
   let [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
@@ -102,231 +99,215 @@ function Header() {
             );
           }}
         </Pressable>
-        {/* </View> */}
-        {!isMobile && (
-          <View style={styles.navItemsContainer}>
-            <View style={styles.navItem}>
-              <LinkComponent href={`/sendungen`}>
-                <Text
-                  style={[styles.rabeLogo]}
-                  dataSet={{ media: ids.rabeLogo }}
-                >
-                  Sendungen
-                </Text>
-              </LinkComponent>
-            </View>
-            <View>
-              <Pressable
-                ref={menuRef}
-                style={{ height: "100%" }}
-                onPress={() => setShowDropdown(!showDropdown)}
-              >
-                {({
-                  pressed,
-                  hovered,
-                  focused,
-                }: PressableState): ReactElement => {
-                  return (
-                    <View style={[styles.navItem]}>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          height: "100%",
-                          alignItems: "center",
-                        }}
+        <View
+          style={styles.navItemsContainer}
+          dataSet={{ media: ids.navItemsContainer }}
+        >
+          <View style={styles.navItem}>
+            <LinkComponent href={`/sendungen`}>
+              <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
+                Sendungen
+              </Text>
+            </LinkComponent>
+          </View>
+          <View>
+            <Pressable
+              ref={menuRef}
+              style={{ height: "100%" }}
+              onPress={() => setShowDropdown(!showDropdown)}
+            >
+              {({
+                pressed,
+                hovered,
+                focused,
+              }: PressableState): ReactElement => {
+                return (
+                  <View style={[styles.navItem]}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        height: "100%",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text
+                        style={[
+                          styles.rabeLogo,
+                          { paddingRight: 4 },
+                          hovered && { color: Colors.green },
+                        ]}
+                        dataSet={{ media: ids.rabeLogo }}
                       >
-                        <Text
-                          style={[
-                            styles.rabeLogo,
-                            { paddingRight: 4 },
-                            hovered && { color: Colors.green },
-                          ]}
-                          dataSet={{ media: ids.rabeLogo }}
-                        >
-                          Über RaBe
-                        </Text>
-                        <View
-                          style={[
-                            showDropdown && { transform: "rotate(180deg)" },
-                          ]}
-                        >
-                          <IconArrowDown
-                            color={hovered ? Colors.green : Colors.darkGreen}
-                          ></IconArrowDown>
-                        </View>
+                        Über RaBe
+                      </Text>
+                      <View
+                        style={[
+                          showDropdown && { transform: "rotate(180deg)" },
+                        ]}
+                      >
+                        <IconArrowDown
+                          color={hovered ? Colors.green : Colors.darkGreen}
+                        ></IconArrowDown>
                       </View>
                     </View>
-                  );
+                  </View>
+                );
+              }}
+            </Pressable>
+            {showDropdown && (
+              <View
+                ref={dropDownRef}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: "6.8vw",
+                  backgroundColor: Colors.lightGreen,
+                  paddingHorizontal: Metrics.baseMargin,
+                  paddingVertical: Metrics.halfBaseMargin,
+                  borderRadius: 9,
                 }}
-              </Pressable>
-              {showDropdown && (
-                <View
-                  ref={dropDownRef}
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    right: 0,
-                    top: "6.8vw",
-                    backgroundColor: Colors.lightGreen,
-                    paddingHorizontal: Metrics.baseMargin,
-                    paddingVertical: Metrics.halfBaseMargin,
-                    borderRadius: 9,
-                  }}
+              >
+                <LinkComponent
+                  href={`/programm`}
+                  onPress={() => setShowDropdown(!showDropdown)}
                 >
-                  <LinkComponent
-                    href={`/programm`}
-                    onPress={() => setShowDropdown(!showDropdown)}
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
                   >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Programm
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/mitmachen`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Mitmachen
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/kontakt`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Kontakt
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/geschichte`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Geschichte
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/team`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Team
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/praktikum`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Praktikum
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/kurse`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Kurse
-                    </Text>
-                  </LinkComponent>
-                  <LinkComponent
-                    href={`/empfangen`}
-                    onPress={() => setShowDropdown(!showDropdown)}
-                  >
-                    <Text
-                      style={styles.dropDownItem}
-                      dataSet={{ media: ids.rabeLogo }}
-                    >
-                      Empfangen
-                    </Text>
-                  </LinkComponent>
-                </View>
-              )}
-            </View>
-
-            <View style={styles.navItem}>
-              <LinkComponent href={`/mitglied-werden`}>
-                <Text
-                  style={styles.rabeLogoBorder}
-                  dataSet={{ media: ids.rabeLogoBorder }}
+                    Programm
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/mitmachen`}
+                  onPress={() => setShowDropdown(!showDropdown)}
                 >
-                  Mitglied werden
-                </Text>
-              </LinkComponent>
-            </View>
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Mitmachen
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/kontakt`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Kontakt
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/geschichte`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Geschichte
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/team`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Team
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/praktikum`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Praktikum
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/kurse`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Kurse
+                  </Text>
+                </LinkComponent>
+                <LinkComponent
+                  href={`/empfangen`}
+                  onPress={() => setShowDropdown(!showDropdown)}
+                >
+                  <Text
+                    style={styles.dropDownItem}
+                    dataSet={{ media: ids.rabeLogo }}
+                  >
+                    Empfangen
+                  </Text>
+                </LinkComponent>
+              </View>
+            )}
           </View>
-        )}
+
+          <View style={styles.navItem}>
+            <LinkComponent href={`/mitglied-werden`}>
+              <Text
+                style={styles.rabeLogoBorder}
+                dataSet={{ media: ids.rabeLogoBorder }}
+              >
+                Mitglied werden
+              </Text>
+            </LinkComponent>
+          </View>
+        </View>
         <View
           style={styles.audioPlayerContainer}
           dataSet={{ media: ids.audioPlayerContainer }}
         >
           <AudioRabePlayer></AudioRabePlayer>
         </View>
-        {isClient && isMobile && (
-          <View
-            style={{
-              height: "100%",
-              backgroundColor: Colors.darkGreen,
-              // backgroundColor: Colors.black,
-              justifyContent: "center",
-              paddingRight: Metrics.tripleBaseMargin,
-            }}
-          >
-            <AspectRatio
-              ratio="1/1"
+        <View
+          style={styles.burgerContainer}
+          dataSet={{ media: ids.burgerContainer }}
+        >
+          <View style={{ width: "5vw", aspectRatio: 1 }}>
+            <Pressable
               style={{
-                width: "5vw",
-                // backgroundColor: "white",
+                overflow: "hidden",
+                height: "100%",
+              }}
+              onPress={() => {
+                // Linking.openURL(url + "?download");
               }}
             >
-              <Pressable
-                style={{
-                  overflow: "hidden",
-                  height: "100%",
-                }}
-                onPress={() => {
-                  // Linking.openURL(url + "?download");
-                }}
-              >
-                {({
-                  pressed,
-                  hovered,
-                  focused,
-                }: PressableState): ReactElement => {
-                  // return <Burger></Burger>;
-                  return (
-                    <BurgerIcon
-                      color={hovered ? Colors.green : Colors.lightGreen}
-                      height="100%"
-                      width="100%"
-                    ></BurgerIcon>
-                  );
-                }}
-              </Pressable>
-            </AspectRatio>
+              {({
+                pressed,
+                hovered,
+                focused,
+              }: PressableState): ReactElement => {
+                // return <Burger></Burger>;
+                return (
+                  <BurgerIcon
+                    color={hovered ? Colors.green : Colors.lightGreen}
+                    height="100%"
+                    width="100%"
+                  ></BurgerIcon>
+                );
+              }}
+            </Pressable>
           </View>
-        )}
+        </View>
       </View>
     </View>
   );
@@ -362,6 +343,9 @@ const { ids, styles } = StyleSheet.create({
   navItemsContainer: {
     flexDirection: "row",
     height: "100%",
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
   },
   link: {
     color: "blue",
@@ -454,6 +438,16 @@ const { ids, styles } = StyleSheet.create({
     "@media (max-width: 910px)": {
       flexGrow: 0,
       paddingHorizontal: Metrics.tripleBaseMargin,
+    },
+  },
+  burgerContainer: {
+    display: "none",
+    "@media (max-width: 910px)": {
+      height: "100%",
+      backgroundColor: Colors.darkGreen,
+      // backgroundColor: Colors.black,
+      justifyContent: "center",
+      paddingRight: Metrics.tripleBaseMargin,
     },
   },
 });
