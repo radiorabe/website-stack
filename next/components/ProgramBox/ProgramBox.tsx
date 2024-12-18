@@ -153,31 +153,51 @@ export default function ProgramBox({
           </View>
         </View>
       )}
-      {isMobile && (
-        <View style={{ flexDirection: "row" }}>
-          <Button
-            label={"Heutiges Programm"}
-            textColor={Colors.white}
-            full={!showPlaylist}
-            disabled={!showPlaylist}
-            backgroundColor={showPlaylist ? undefined : Colors.white}
-            textColor={showPlaylist ? Colors.white : Colors.darkGreen}
-            onPress={() => setShowPlaylist(false)}
-          ></Button>
-          <View style={{ width: Metrics.tripleBaseMargin }}></View>
-          <Button
-            label={"Playlist"}
-            textColor={Colors.white}
-            full={showPlaylist}
-            disabled={showPlaylist}
-            backgroundColor={!showPlaylist ? undefined : Colors.white}
-            textColor={!showPlaylist ? Colors.white : Colors.darkGreen}
-            onPress={() => setShowPlaylist(true)}
-          ></Button>
-        </View>
-      )}
+      <View
+        style={styles.mobileButtonContainer}
+        dataSet={{ media: ids.mobileButtonContainer }}
+      >
+        <Button
+          label={"Heutiges Programm"}
+          textColor={Colors.white}
+          full={!showPlaylist}
+          disabled={!showPlaylist}
+          backgroundColor={showPlaylist ? undefined : Colors.white}
+          textColor={showPlaylist ? Colors.white : Colors.darkGreen}
+          onPress={() => setShowPlaylist(false)}
+        ></Button>
+        <View style={{ width: Metrics.tripleBaseMargin }}></View>
+        <Button
+          label={"Playlist"}
+          textColor={Colors.white}
+          full={showPlaylist}
+          disabled={showPlaylist}
+          backgroundColor={!showPlaylist ? undefined : Colors.white}
+          textColor={!showPlaylist ? Colors.white : Colors.darkGreen}
+          onPress={() => setShowPlaylist(true)}
+        ></Button>
+      </View>
       <View style={styles.container} dataSet={{ media: ids.container }}>
-        {(!isMobile || !showPlaylist) && (
+        <ShowsList
+          initialShows={shows}
+          currentShow={currentShow}
+          hoverColor={hoverColor}
+          backgroundColor={backgroundColor}
+          textColor={textColor}
+        ></ShowsList>
+
+        <PlayList
+          playlistData={playlistData}
+          hoverColor={hoverColor}
+          backgroundColor={backgroundColor}
+          textColor={textColor}
+        ></PlayList>
+      </View>
+      <View
+        style={styles.mobileContainer}
+        dataSet={{ media: ids.mobileContainer }}
+      >
+        {!showPlaylist && (
           <ShowsList
             initialShows={shows}
             currentShow={currentShow}
@@ -186,7 +206,8 @@ export default function ProgramBox({
             textColor={textColor}
           ></ShowsList>
         )}
-        {(!isMobile || showPlaylist) && (
+
+        {showPlaylist && (
           <PlayList
             playlistData={playlistData}
             hoverColor={hoverColor}
@@ -218,9 +239,24 @@ const { ids, styles } = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // "@media (max-width: 910px)": {
-    //   flexDirection: "column",
-    //   justifyContent: "space-between",
-    // },
+    display: "flex",
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  mobileContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    display: "none",
+    "@media (max-width: 910px)": {
+      display: "flex",
+    },
+  },
+  mobileButtonContainer: {
+    display: "none",
+    "@media (max-width: 910px)": {
+      display: "flex",
+      flexDirection: "row",
+    },
   },
 });

@@ -24,8 +24,8 @@ export default function ShowsList({
   backgroundColor,
   textColor,
 }: Props) {
-  console.log("initialShows", initialShows);
-  console.log("currentShow", currentShow);
+  // console.log("initialShows", initialShows);
+  // console.log("currentShow", currentShow);
 
   return (
     <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>

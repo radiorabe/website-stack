@@ -443,9 +443,9 @@ const { ids, styles } = StyleSheet.create({
   burgerContainer: {
     display: "none",
     "@media (max-width: 910px)": {
+      display: "flex",
       height: "100%",
       backgroundColor: Colors.darkGreen,
-      // backgroundColor: Colors.black,
       justifyContent: "center",
       paddingRight: Metrics.tripleBaseMargin,
     },
