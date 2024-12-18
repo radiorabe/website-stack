@@ -84,6 +84,8 @@ export interface Props {
   hoverColor?: any;
   backgroundColor?: any;
   biggerFont?: boolean;
+  buttonColor?: any;
+  buttonBackgroundColor?: any;
 }
 
 export default function ProgramBox({
@@ -91,6 +93,8 @@ export default function ProgramBox({
   textColor,
   backgroundColor,
   biggerFont,
+  buttonColor,
+  buttonBackgroundColor,
 }: Props) {
   let [shows, setShows] = useState([]);
   let [currentShow, setCurrentShow] = useState();
@@ -162,8 +166,8 @@ export default function ProgramBox({
           textColor={Colors.white}
           full={!showPlaylist}
           disabled={!showPlaylist}
-          backgroundColor={showPlaylist ? undefined : Colors.white}
-          textColor={showPlaylist ? Colors.white : Colors.darkGreen}
+          backgroundColor={showPlaylist ? undefined : buttonColor}
+          textColor={showPlaylist ? buttonColor : buttonBackgroundColor}
           onPress={() => setShowPlaylist(false)}
         ></Button>
         <View style={{ width: Metrics.tripleBaseMargin }}></View>
@@ -172,8 +176,8 @@ export default function ProgramBox({
           textColor={Colors.white}
           full={showPlaylist}
           disabled={showPlaylist}
-          backgroundColor={!showPlaylist ? undefined : Colors.white}
-          textColor={!showPlaylist ? Colors.white : Colors.darkGreen}
+          backgroundColor={!showPlaylist ? undefined : buttonColor}
+          textColor={!showPlaylist ? buttonColor : buttonBackgroundColor}
           onPress={() => setShowPlaylist(true)}
         ></Button>
       </View>

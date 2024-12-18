@@ -201,6 +201,8 @@ export default async function HomePage(props) {
             textColor={Colors.lightGreen}
             hoverColor={Colors.green}
             backgroundColor={Colors.darkGreen}
+            buttonColor={Colors.white}
+            buttonBackgroundColor={Colors.darkGreen}
           ></ProgramBox>
         </View>
       </View>
