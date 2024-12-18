@@ -1,9 +1,9 @@
 {
-  "collection": "page_history_protocol",
+  "collection": "page_history_files_1",
   "field": "id",
   "type": "integer",
   "meta": {
-    "collection": "page_history_protocol",
+    "collection": "page_history_files_1",
     "conditions": null,
     "display": null,
     "display_options": null,
@@ -24,9 +24,9 @@
   },
   "schema": {
     "name": "id",
-    "table": "page_history_protocol",
+    "table": "page_history_files_1",
     "data_type": "integer",
-    "default_value": "nextval('page_history_protocol_id_seq'::regclass)",
+    "default_value": "nextval('page_history_files_1_id_seq'::regclass)",
     "max_length": null,
     "numeric_precision": 32,
     "numeric_scale": 0,

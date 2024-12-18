@@ -10,21 +10,16 @@
     "field": "protocols",
     "group": null,
     "hidden": false,
-    "interface": "list-m2m",
+    "interface": "files",
     "note": null,
     "options": null,
     "readonly": false,
     "required": false,
     "sort": 10,
     "special": [
-      "m2m"
+      "files"
     ],
-    "translations": [
-      {
-        "language": "de-DE",
-        "translation": "Protokolle"
-      }
-    ],
+    "translations": null,
     "validation": null,
     "validation_message": null,
     "width": "full"

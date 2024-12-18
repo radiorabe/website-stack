@@ -18,7 +18,12 @@
     "singleton": false,
     "sort": 1,
     "sort_field": "sort",
-    "translations": null,
+    "translations": [
+      {
+        "language": "de-DE",
+        "translation": "Kurse"
+      }
+    ],
     "unarchive_value": null,
     "versioning": false
   },

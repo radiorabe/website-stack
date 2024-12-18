@@ -1,10 +1,10 @@
 {
-  "collection": "page_history_protocol",
+  "collection": "page_history_files_1",
   "field": "page_history_id",
   "related_collection": "page_history",
   "meta": {
-    "junction_field": "protocol_id",
-    "many_collection": "page_history_protocol",
+    "junction_field": "directus_files_id",
+    "many_collection": "page_history_files_1",
     "many_field": "page_history_id",
     "one_allowed_collections": null,
     "one_collection": "page_history",
@@ -14,11 +14,11 @@
     "sort_field": null
   },
   "schema": {
-    "table": "page_history_protocol",
+    "table": "page_history_files_1",
     "column": "page_history_id",
     "foreign_key_table": "page_history",
     "foreign_key_column": "id",
-    "constraint_name": "page_history_protocol_page_history_id_foreign",
+    "constraint_name": "page_history_files_1_page_history_id_foreign",
     "on_update": "NO ACTION",
     "on_delete": "SET NULL"
   }

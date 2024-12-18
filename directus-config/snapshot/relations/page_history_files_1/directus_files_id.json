@@ -1,11 +1,11 @@
 {
-  "collection": "protocol",
-  "field": "file",
+  "collection": "page_history_files_1",
+  "field": "directus_files_id",
   "related_collection": "directus_files",
   "meta": {
-    "junction_field": null,
-    "many_collection": "protocol",
-    "many_field": "file",
+    "junction_field": "page_history_id",
+    "many_collection": "page_history_files_1",
+    "many_field": "directus_files_id",
     "one_allowed_collections": null,
     "one_collection": "directus_files",
     "one_collection_field": null,
@@ -14,11 +14,11 @@
     "sort_field": null
   },
   "schema": {
-    "table": "protocol",
-    "column": "file",
+    "table": "page_history_files_1",
+    "column": "directus_files_id",
     "foreign_key_table": "directus_files",
     "foreign_key_column": "id",
-    "constraint_name": "protocol_file_foreign",
+    "constraint_name": "page_history_files_1_directus_files_id_foreign",
     "on_update": "NO ACTION",
     "on_delete": "SET NULL"
   }

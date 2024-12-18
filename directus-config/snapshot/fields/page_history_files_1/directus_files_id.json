@@ -1,13 +1,13 @@
 {
-  "collection": "page_history_protocol",
-  "field": "protocol_id",
-  "type": "integer",
+  "collection": "page_history_files_1",
+  "field": "directus_files_id",
+  "type": "uuid",
   "meta": {
-    "collection": "page_history_protocol",
+    "collection": "page_history_files_1",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "protocol_id",
+    "field": "directus_files_id",
     "group": null,
     "hidden": true,
     "interface": null,
@@ -23,13 +23,13 @@
     "width": "full"
   },
   "schema": {
-    "name": "protocol_id",
-    "table": "page_history_protocol",
-    "data_type": "integer",
+    "name": "directus_files_id",
+    "table": "page_history_files_1",
+    "data_type": "uuid",
     "default_value": null,
     "max_length": null,
-    "numeric_precision": 32,
-    "numeric_scale": 0,
+    "numeric_precision": null,
+    "numeric_scale": null,
     "is_nullable": true,
     "is_unique": false,
     "is_indexed": false,
@@ -37,7 +37,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "protocol",
+    "foreign_key_table": "directus_files",
     "foreign_key_column": "id"
   }
 }

@@ -1,17 +1,17 @@
 {
-  "collection": "protocol",
+  "collection": "page_history_files_1",
   "meta": {
     "accountability": "all",
     "archive_app_filter": true,
     "archive_field": null,
     "archive_value": null,
     "collapse": "open",
-    "collection": "protocol",
+    "collection": "page_history_files_1",
     "color": null,
-    "display_template": "{{name}}",
+    "display_template": null,
     "group": "page_history",
     "hidden": true,
-    "icon": null,
+    "icon": "import_export",
     "item_duplication_fields": null,
     "note": null,
     "preview_url": null,
@@ -23,6 +23,6 @@
     "versioning": false
   },
   "schema": {
-    "name": "protocol"
+    "name": "page_history_files_1"
   }
 }

@@ -1,12 +1,4 @@
 type Query {
-  protocol(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [protocol!]!
-  protocol_by_id(id: ID!, version: String): protocol
-  protocol_aggregated(groupBy: [String], filter: protocol_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [protocol_aggregated!]!
-  protocol_by_version(version: String!, id: ID!): version_protocol
-  page_history_protocol(filter: page_history_protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_protocol!]!
-  page_history_protocol_by_id(id: ID!, version: String): page_history_protocol
-  page_history_protocol_aggregated(groupBy: [String], filter: page_history_protocol_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_protocol_aggregated!]!
-  page_history_protocol_by_version(version: String!, id: ID!): version_page_history_protocol
   page_contact_contact_address(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_contact_address!]!
   page_contact_contact_address_by_id(id: ID!, version: String): page_contact_contact_address
   page_contact_contact_address_aggregated(groupBy: [String], filter: page_contact_contact_address_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_contact_address_aggregated!]!
@@ -217,13 +209,13 @@ type Query {
   page_classes_classes_by_id(id: ID!, version: String): page_classes_classes
   page_classes_classes_aggregated(groupBy: [String], filter: page_classes_classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_classes_aggregated!]!
   page_classes_classes_by_version(version: String!, id: ID!): version_page_classes_classes
+  page_history_files_1(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files_1!]!
+  page_history_files_1_by_id(id: ID!, version: String): page_history_files_1
+  page_history_files_1_aggregated(groupBy: [String], filter: page_history_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_1_aggregated!]!
+  page_history_files_1_by_version(version: String!, id: ID!): version_page_history_files_1
 }
 
 type Mutation {
-  create_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_protocol_input!]): [protocol!]!
-  create_protocol_item(data: create_protocol_input!): protocol
-  create_page_history_protocol_items(filter: page_history_protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_protocol_input!]): [page_history_protocol!]!
-  create_page_history_protocol_item(data: create_page_history_protocol_input!): page_history_protocol
   create_page_contact_contact_address_items(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_contact_address_input!]): [page_contact_contact_address!]!
   create_page_contact_contact_address_item(data: create_page_contact_contact_address_input!): page_contact_contact_address
   create_image_box_items(filter: image_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_box_input!]): [image_box!]!
@@ -316,12 +308,8 @@ type Mutation {
   create_classes_item(data: create_classes_input!): classes
   create_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_classes_input!]): [page_classes_classes!]!
   create_page_classes_classes_item(data: create_page_classes_classes_input!): page_classes_classes
-  update_protocol_items(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_protocol_input!): [protocol!]!
-  update_protocol_batch(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_protocol_input!]): [protocol!]!
-  update_protocol_item(id: ID!, data: update_protocol_input!): protocol
-  update_page_history_protocol_items(filter: page_history_protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_protocol_input!): [page_history_protocol!]!
-  update_page_history_protocol_batch(filter: page_history_protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_protocol_input!]): [page_history_protocol!]!
-  update_page_history_protocol_item(id: ID!, data: update_page_history_protocol_input!): page_history_protocol
+  create_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_1_input!]): [page_history_files_1!]!
+  create_page_history_files_1_item(data: create_page_history_files_1_input!): page_history_files_1
   update_page_contact_contact_address_items(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_contact_address_input!): [page_contact_contact_address!]!
   update_page_contact_contact_address_batch(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_contact_address_input!]): [page_contact_contact_address!]!
   update_page_contact_contact_address_item(id: ID!, data: update_page_contact_contact_address_input!): page_contact_contact_address
@@ -473,10 +461,9 @@ type Mutation {
   update_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_classes_input!): [page_classes_classes!]!
   update_page_classes_classes_batch(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_classes_input!]): [page_classes_classes!]!
   update_page_classes_classes_item(id: ID!, data: update_page_classes_classes_input!): page_classes_classes
-  delete_protocol_items(ids: [ID]!): delete_many
-  delete_protocol_item(id: ID!): delete_one
-  delete_page_history_protocol_items(ids: [ID]!): delete_many
-  delete_page_history_protocol_item(id: ID!): delete_one
+  update_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_1_input!): [page_history_files_1!]!
+  update_page_history_files_1_batch(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_1_input!]): [page_history_files_1!]!
+  update_page_history_files_1_item(id: ID!, data: update_page_history_files_1_input!): page_history_files_1
   delete_page_contact_contact_address_items(ids: [ID]!): delete_many
   delete_page_contact_contact_address_item(id: ID!): delete_one
   delete_image_box_items(ids: [ID]!): delete_many
@@ -569,19 +556,19 @@ type Mutation {
   delete_classes_item(id: ID!): delete_one
   delete_page_classes_classes_items(ids: [ID]!): delete_many
   delete_page_classes_classes_item(id: ID!): delete_one
+  delete_page_history_files_1_items(ids: [ID]!): delete_many
+  delete_page_history_files_1_item(id: ID!): delete_one
 }
 
 type Subscription {
   directus_activity_mutated(event: EventEnum): directus_activity_mutated
   directus_permissions_mutated(event: EventEnum): directus_permissions_mutated
   directus_folders_mutated(event: EventEnum): directus_folders_mutated
-  protocol_mutated(event: EventEnum): protocol_mutated
   directus_roles_mutated(event: EventEnum): directus_roles_mutated
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
   directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
   directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
-  page_history_protocol_mutated(event: EventEnum): page_history_protocol_mutated
   page_contact_contact_address_mutated(event: EventEnum): page_contact_contact_address_mutated
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_notifications_mutated(event: EventEnum): directus_notifications_mutated
@@ -654,6 +641,7 @@ type Subscription {
   page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
   classes_mutated(event: EventEnum): classes_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
+  page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -2286,7 +2274,7 @@ type page_history {
   content_func: count_functions
   vision(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
   statutes(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  protocols(filter: page_history_protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_protocol]
+  protocols(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files_1]
   protocols_func: count_functions
   editor_nodes(filter: page_history_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_nodes]
   editor_nodes_func: count_functions
@@ -2298,6 +2286,42 @@ type page_history_files {
   id: ID!
   page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type page_history_files_1 {
+  id: ID!
+  page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type page_history_files_1_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_history_files_1_aggregated_count
+  countDistinct: page_history_files_1_aggregated_count
+  avg: page_history_files_1_aggregated_fields
+  sum: page_history_files_1_aggregated_fields
+  avgDistinct: page_history_files_1_aggregated_fields
+  sumDistinct: page_history_files_1_aggregated_fields
+  min: page_history_files_1_aggregated_fields
+  max: page_history_files_1_aggregated_fields
+}
+
+type page_history_files_1_aggregated_count {
+  id: Int
+  page_history_id: Int
+  directus_files_id: Int
+}
+
+type page_history_files_1_aggregated_fields {
+  id: Float
+  page_history_id: Float
+}
+
+type page_history_files_1_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_history_files_1
 }
 
 type page_history_files_aggregated {
@@ -2371,43 +2395,6 @@ type page_history_nodes_mutated {
   key: ID!
   event: EventEnum
   data: page_history_nodes
-}
-
-type page_history_protocol {
-  id: ID!
-  page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
-  protocol_id(filter: protocol_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): protocol
-}
-
-type page_history_protocol_aggregated {
-  group: JSON
-  countAll: Int
-  count: page_history_protocol_aggregated_count
-  countDistinct: page_history_protocol_aggregated_count
-  avg: page_history_protocol_aggregated_fields
-  sum: page_history_protocol_aggregated_fields
-  avgDistinct: page_history_protocol_aggregated_fields
-  sumDistinct: page_history_protocol_aggregated_fields
-  min: page_history_protocol_aggregated_fields
-  max: page_history_protocol_aggregated_fields
-}
-
-type page_history_protocol_aggregated_count {
-  id: Int
-  page_history_id: Int
-  protocol_id: Int
-}
-
-type page_history_protocol_aggregated_fields {
-  id: Float
-  page_history_id: Float
-  protocol_id: Float
-}
-
-type page_history_protocol_mutated {
-  key: ID!
-  event: EventEnum
-  data: page_history_protocol
 }
 
 type page_impressum {
@@ -3435,41 +3422,6 @@ type programs_mutated {
   data: programs
 }
 
-type protocol {
-  id: ID!
-  name: String
-  file(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-}
-
-type protocol_aggregated {
-  group: JSON
-  countAll: Int
-  count: protocol_aggregated_count
-  countDistinct: protocol_aggregated_count
-  avg: protocol_aggregated_fields
-  sum: protocol_aggregated_fields
-  avgDistinct: protocol_aggregated_fields
-  sumDistinct: protocol_aggregated_fields
-  min: protocol_aggregated_fields
-  max: protocol_aggregated_fields
-}
-
-type protocol_aggregated_count {
-  id: Int
-  name: Int
-  file: Int
-}
-
-type protocol_aggregated_fields {
-  id: Float
-}
-
-type protocol_mutated {
-  key: ID!
-  event: EventEnum
-  data: protocol
-}
-
 type quote {
   id: ID!
   text: String
@@ -3903,18 +3855,18 @@ type version_page_history_files {
 }
 
 """"""
+type version_page_history_files_1 {
+  id: ID
+  page_history_id: JSON
+  directus_files_id: JSON
+}
+
+""""""
 type version_page_history_nodes {
   id: ID
   page_history_id: JSON
   item: String
   collection: String
-}
-
-""""""
-type version_page_history_protocol {
-  id: ID
-  page_history_id: JSON
-  protocol_id: JSON
 }
 
 """"""
@@ -4199,13 +4151,6 @@ type version_programs_directus_users {
   id: ID
   programs_slug: JSON
   directus_users_id: JSON
-}
-
-""""""
-type version_protocol {
-  id: ID
-  name: String
-  file: JSON
 }
 
 """"""
@@ -4671,6 +4616,12 @@ input create_page_contact_input {
   contact_addresses: [create_page_contact_contact_address_input]
 }
 
+input create_page_history_files_1_input {
+  id: ID
+  page_history_id: create_page_history_input
+  directus_files_id: create_directus_files_input
+}
+
 input create_page_history_files_input {
   id: ID
   page_history_id: create_page_history_input
@@ -4686,7 +4637,7 @@ input create_page_history_input {
   content: JSON
   vision: create_directus_files_input
   statutes: create_directus_files_input
-  protocols: [create_page_history_protocol_input]
+  protocols: [create_page_history_files_1_input]
   editor_nodes: [create_page_history_nodes_input]
   logos: [create_page_history_files_input]
 }
@@ -4696,12 +4647,6 @@ input create_page_history_nodes_input {
   page_history_id: create_page_history_input
   item: String
   collection: String
-}
-
-input create_page_history_protocol_input {
-  id: ID
-  page_history_id: create_page_history_input
-  protocol_id: create_protocol_input
 }
 
 input create_page_internship_input {
@@ -4938,12 +4883,6 @@ input create_programs_input {
   content: JSON
   team: [create_programs_directus_users_input]
   posts: [create_post_input]
-}
-
-input create_protocol_input {
-  id: ID
-  name: String
-  file: create_directus_files_input
 }
 
 input create_quote_input {
@@ -5586,6 +5525,14 @@ input page_contact_filter {
   _or: [page_contact_filter]
 }
 
+input page_history_files_1_filter {
+  id: number_filter_operators
+  page_history_id: page_history_filter
+  directus_files_id: directus_files_filter
+  _and: [page_history_files_1_filter]
+  _or: [page_history_files_1_filter]
+}
+
 input page_history_files_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
@@ -5606,7 +5553,7 @@ input page_history_filter {
   content_func: count_function_filter_operators
   vision: directus_files_filter
   statutes: directus_files_filter
-  protocols: page_history_protocol_filter
+  protocols: page_history_files_1_filter
   protocols_func: count_function_filter_operators
   editor_nodes: page_history_nodes_filter
   editor_nodes_func: count_function_filter_operators
@@ -5623,14 +5570,6 @@ input page_history_nodes_filter {
   _and: [page_history_nodes_filter]
   _or: [page_history_nodes_filter]
   item__image_box: image_box_filter
-}
-
-input page_history_protocol_filter {
-  id: number_filter_operators
-  page_history_id: page_history_filter
-  protocol_id: protocol_filter
-  _and: [page_history_protocol_filter]
-  _or: [page_history_protocol_filter]
 }
 
 input page_internship_filter {
@@ -5959,14 +5898,6 @@ input programs_filter {
   posts_func: count_function_filter_operators
   _and: [programs_filter]
   _or: [programs_filter]
-}
-
-input protocol_filter {
-  id: number_filter_operators
-  name: string_filter_operators
-  file: directus_files_filter
-  _and: [protocol_filter]
-  _or: [protocol_filter]
 }
 
 input quote_filter {
@@ -6401,6 +6332,12 @@ input update_page_contact_input {
   contact_addresses: [update_page_contact_contact_address_input]
 }
 
+input update_page_history_files_1_input {
+  id: ID
+  page_history_id: update_page_history_input
+  directus_files_id: update_directus_files_input
+}
+
 input update_page_history_files_input {
   id: ID
   page_history_id: update_page_history_input
@@ -6416,7 +6353,7 @@ input update_page_history_input {
   content: JSON
   vision: update_directus_files_input
   statutes: update_directus_files_input
-  protocols: [update_page_history_protocol_input]
+  protocols: [update_page_history_files_1_input]
   editor_nodes: [update_page_history_nodes_input]
   logos: [update_page_history_files_input]
 }
@@ -6426,12 +6363,6 @@ input update_page_history_nodes_input {
   page_history_id: update_page_history_input
   item: String
   collection: String
-}
-
-input update_page_history_protocol_input {
-  id: ID
-  page_history_id: update_page_history_input
-  protocol_id: update_protocol_input
 }
 
 input update_page_impressum_input {
@@ -6687,12 +6618,6 @@ input update_programs_input {
   content: JSON
   team: [update_programs_directus_users_input]
   posts: [update_post_input]
-}
-
-input update_protocol_input {
-  id: ID
-  name: String
-  file: update_directus_files_input
 }
 
 input update_quote_input {
