@@ -5,7 +5,6 @@ import StyleSheet from "react-native-media-query";
 import Metrics from "@/lib/Metrics";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
-import HoverUrl from "../HoverUrl";
 import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
 import IconFooterRabe from "./IconFooterRabe";

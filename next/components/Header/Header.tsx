@@ -33,6 +33,41 @@ function Header() {
 
   let [showMenu, setShowMenu] = useState(false);
 
+  const dropDownArray = [
+    {
+      href: "/programm",
+      label: "Programm",
+    },
+    {
+      href: "/mitmachen",
+      label: "Mitmachen",
+    },
+    {
+      href: "/kontakt",
+      label: "Kontakt",
+    },
+    {
+      href: "/geschichte",
+      label: "Geschichte",
+    },
+    {
+      href: "/team",
+      label: "Team",
+    },
+    {
+      href: "/praktikum",
+      label: "Praktikum",
+    },
+    {
+      href: "/kurse",
+      label: "Kurse",
+    },
+    {
+      href: "/empfangen",
+      label: "Empfangen",
+    },
+  ];
+
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>
       <View style={styles.innerContainer}>
@@ -172,94 +207,22 @@ function Header() {
                   borderRadius: 9,
                 }}
               >
-                <LinkComponent
-                  href={`/programm`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Programm
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/mitmachen`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Mitmachen
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/kontakt`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Kontakt
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/geschichte`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Geschichte
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/team`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Team
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/praktikum`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Praktikum
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/kurse`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Kurse
-                  </Text>
-                </LinkComponent>
-                <LinkComponent
-                  href={`/empfangen`}
-                  onPress={() => setShowDropdown(!showDropdown)}
-                >
-                  <Text
-                    style={styles.dropDownItem}
-                    dataSet={{ media: ids.rabeLogo }}
-                  >
-                    Empfangen
-                  </Text>
-                </LinkComponent>
+                {dropDownArray.map((item, index) => {
+                  return (
+                    <LinkComponent
+                      key={"dropdownItem" + index}
+                      href={item.href}
+                      onPress={() => setShowDropdown(!showDropdown)}
+                    >
+                      <Text
+                        style={styles.dropDownItem}
+                        dataSet={{ media: ids.rabeLogo }}
+                      >
+                        {item.label}
+                      </Text>
+                    </LinkComponent>
+                  );
+                })}
               </View>
             )}
           </View>
@@ -281,7 +244,12 @@ function Header() {
         >
           <AudioRabePlayer></AudioRabePlayer>
         </View>
-        <MobileMenu showMenu={showMenu}></MobileMenu>
+        <MobileMenu
+          showMenu={showMenu}
+          closeMenu={() => {
+            setShowMenu(false);
+          }}
+        ></MobileMenu>
 
         <View
           style={styles.burgerContainer}

@@ -14,7 +14,7 @@ import StyleSheet from "react-native-media-query";
 
 export interface Props {}
 
-let socialData = [
+export const socialData = [
   { link: "https://www.facebook.com/RadioRaBe/", icon: IconFb },
   { link: "https://www.instagram.com/radiorabe", icon: IconInsta },
   { link: "https://m.twitch.tv/radio_rabe/home", icon: IconFace },
@@ -38,44 +38,44 @@ export default function BarIcon({}: Props) {
       <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>
         {socialData.slice(0, 3).map((iconData, index) => {
           return (
-            <Pressable
-              key={"Baricon" + index}
-              style={[styles.button]}
-              dataSet={{ media: ids.button }}
-              onPress={() => Linking.openURL(iconData.link)}
-            >
-              {({
-                pressed,
-                hovered,
-                focused,
-              }: PressableState): ReactElement => {
-                return (
-                  <iconData.icon color={Colors.lightGreen}></iconData.icon>
-                );
-              }}
-            </Pressable>
+            <View style={[styles.button]} dataSet={{ media: ids.button }}>
+              <Pressable
+                key={"Baricon" + index}
+                onPress={() => Linking.openURL(iconData.link)}
+              >
+                {({
+                  pressed,
+                  hovered,
+                  focused,
+                }: PressableState): ReactElement => {
+                  return (
+                    <iconData.icon color={Colors.lightGreen}></iconData.icon>
+                  );
+                }}
+              </Pressable>
+            </View>
           );
         })}
       </View>
       <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>
         {socialData.slice(3, 6).map((iconData, index) => {
           return (
-            <Pressable
-              key={"Baricon2" + index}
-              style={[styles.button]}
-              dataSet={{ media: ids.button }}
-              onPress={() => Linking.openURL(iconData.link)}
-            >
-              {({
-                pressed,
-                hovered,
-                focused,
-              }: PressableState): ReactElement => {
-                return (
-                  <iconData.icon color={Colors.lightGreen}></iconData.icon>
-                );
-              }}
-            </Pressable>
+            <View style={[styles.button]} dataSet={{ media: ids.button }}>
+              <Pressable
+                key={"Baricon2" + index}
+                onPress={() => Linking.openURL(iconData.link)}
+              >
+                {({
+                  pressed,
+                  hovered,
+                  focused,
+                }: PressableState): ReactElement => {
+                  return (
+                    <iconData.icon color={Colors.lightGreen}></iconData.icon>
+                  );
+                }}
+              </Pressable>
+            </View>
           );
         })}
       </View>

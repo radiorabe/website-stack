@@ -56,17 +56,22 @@ export const style: Record<string, TextStyle> = {
   h2: {
     fontFamily: type.bold,
     fontSize: size.h2,
-    // lineHeight: 1.2,
     lineHeight: 34.8,
-    // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 26,
+      lineHeight: 31.2,
+    },
   },
   TTh2: {
     fontFamily: type.bold,
     fontSize: size.h2,
-    lineHeight: 1.2,
-    // letterSpacing: 0,
+    lineHeight: 1.4,
     fontFeatureSettings: '"tnum" on',
+    "@media (max-width: 910px)": {
+      fontSize: 26,
+      lineHeight: 1.2,
+    },
   },
   h3: {
     fontFamily: type.bold,
