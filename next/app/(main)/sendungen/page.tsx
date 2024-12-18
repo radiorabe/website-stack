@@ -1,32 +1,10 @@
-import Fonts, { style } from "@/lib/Fonts";
-import Metrics from "@/lib/Metrics";
 import { Api } from "@/lib/api";
-import { Text, View } from "@/lib/server-react-native";
-import { ItemsPagePrograms } from "../../../lib/api/data-contracts";
-import { notFound } from "next/navigation";
-import StyleSheet from "react-native-media-query";
-import Sendung from "./Sendung";
 import { logError } from "@/lib/loging";
+import { notFound } from "next/navigation";
+import { ItemsPagePrograms } from "../../../lib/api/data-contracts";
+import PagePrograms from "./PagePrograms";
 
-const { ids, styles } = StyleSheet.create({
-  container: {
-    width: "90vw",
-    alignItems: "center",
-    alignSelf: "center",
-    paddingVertical: Metrics.tripleBaseMargin,
-  },
-  textContainer: {
-    width: "74vw",
-  },
-  title: {
-    ...Fonts.style.h2,
-  },
-  text: {
-    ...Fonts.style.text,
-  },
-});
-
-async function getSendungsInfo() {
+async function getPageData() {
   try {
     const infoResponse = await Api.readItemsPagePrograms(
       {},
@@ -83,44 +61,8 @@ async function getSendungen() {
 }
 
 export default async function SendungenPage(props) {
-  const sendungsInfo = await getSendungsInfo();
+  const pageData = await getPageData();
   const sendungen = await getSendungen();
 
-  return (
-    <View>
-      <View style={styles.container}>
-        <View
-          style={styles.textContainer}
-          dataSet={{ media: ids.textContainer }}
-        >
-          <Text accessibilityRole="header" style={styles.title}>
-            {sendungsInfo.title}
-          </Text>
-          <View style={{ height: Metrics.tripleBaseMargin }}></View>
-          <Text style={styles.text}>{sendungsInfo.text}</Text>
-        </View>
-        <View style={{ height: Metrics.tripleBaseMargin }}></View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          {sendungen.map((item, index) => {
-            return (
-              <Sendung
-                key={"sendung-" + index}
-                name={item.name}
-                image={item.image}
-                slug={item.slug}
-              ></Sendung>
-            );
-          })}
-        </View>
-      </View>
-    </View>
-  );
+  return <PagePrograms pageData={pageData} programs={sendungen}></PagePrograms>;
 }
