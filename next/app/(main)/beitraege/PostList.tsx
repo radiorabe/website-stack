@@ -10,7 +10,6 @@ import { getPosts } from "./getPosts";
 import { useInView } from "react-intersection-observer";
 import Colors from "@/lib/Colors";
 import Loader from "react-spinners/ClipLoader";
-import Button from "@/components/Button";
 
 const NUMBER_OF_POSTS_TO_FETCH = 3;
 

@@ -99,10 +99,13 @@ export default function SearchBox({ programName, authorName }) {
         <input
           id="inputID"
           style={{
+            // display: "flex",
             ...Fonts.style.TTtextLink,
-            flexShrink: 1,
+            // flexShrink: 1,
             color: Colors.black,
             borderWidth: 0,
+            width: "25vw",
+            maxWidth: 150,
           }}
           type="text"
           value={searchTerm}
