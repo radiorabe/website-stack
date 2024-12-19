@@ -1,13 +1,8 @@
 import { Api } from "@/lib/api";
-import { ItemsMemberProduct, ItemsPrograms } from "@/lib/api/data-contracts";
+import { ItemsMemberProduct } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import Input from "./Input";
-import Form from "./Form";
-import Metrics from "@/lib/Metrics";
-import Fonts from "@/lib/Fonts";
-import { Text } from "@/lib/server-react-native";
+import { notFound } from "next/navigation";
+import PageOrder from "./PageOrder";
 
 async function getMemberProduct(id) {
   try {
@@ -75,40 +70,11 @@ export default async function BestellungPage({ searchParams }) {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        paddingTop: Metrics.tripleBaseMargin,
-        paddingBottom: Metrics.tripleBaseMargin,
-      }}
-    >
-      {product && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              ...Fonts.style.text,
-              textAlign: "center",
-            }}
-          >
-            <div>{"Bestellung:"}</div>
-            <div>{product.name}</div>
-          </Text>
-        </div>
-      )}
-      <Form
-        type={searchParams.type}
-        id={searchParams.id}
-        options={selectOptions}
-        defaultValue={defaultValue}
-      ></Form>
-    </div>
+    <PageOrder
+      product={product}
+      selectOptions={selectOptions}
+      defaultValue={defaultValue}
+      searchParams={searchParams}
+    ></PageOrder>
   );
 }

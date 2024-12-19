@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/Button";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
@@ -7,7 +6,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import Input from "./Input";
 import Colors from "@/lib/Colors";
 import { useRouter } from "next/navigation";
-// import Layout from "../components/Layout";
+import StyleSheet from "react-native-media-query";
 import Select from "react-select";
 import Button from "@/components/Button";
 
@@ -122,22 +121,16 @@ export default function Statement({ id, type, options, defaultValue }) {
   // console.log("iFrameHeight", iFrameHeight);
 
   return (
-    <div
+    <View
       style={{
-        display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         width: "100%",
       }}
     >
       {saferpayUrl ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "74vw",
-            minWidth: 280,
-          }}
+        <View
+          style={styles.iFrameContainer}
+          dataSet={{ media: ids.iFrameContainer }}
         >
           <iframe
             // onLoad={(loadData) => {
@@ -150,25 +143,18 @@ export default function Statement({ id, type, options, defaultValue }) {
             scrolling="no"
             height={iFrameHeight === 0 ? undefined : iFrameHeight}
           />
-        </div>
+        </View>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignSelf: "center",
-            alignItems: "center",
-            width: "74vw",
-          }}
+        <View
+          style={styles.formContainer}
+          dataSet={{ media: ids.formContainer }}
         >
           <form action={handleSubmit} style={{}}>
             {options && (
               <>
-                <div
+                <View
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "74vw",
+                    width: "100%",
                     maxWidth: 400,
                     paddingTop: Metrics.baseMargin,
                   }}
@@ -214,14 +200,13 @@ export default function Statement({ id, type, options, defaultValue }) {
                       }),
                     }}
                   />
-                </div>
-                <div
+                </View>
+                <View
                   style={{
-                    display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    width: "74vw",
+                    width: "100%",
                     maxWidth: 400,
                     paddingTop: Metrics.baseMargin,
                   }}
@@ -247,7 +232,7 @@ export default function Statement({ id, type, options, defaultValue }) {
                       padding: "12px 16px",
                     }}
                   ></input>
-                </div>
+                </View>
               </>
             )}
 
@@ -263,9 +248,9 @@ export default function Statement({ id, type, options, defaultValue }) {
             <input type="hidden" name={"id"} value={id} />
             <input type="hidden" name={"type"} value={type} />
 
-            <div
+            <View
               style={{
-                display: "flex",
+                flexDirection: "row",
                 justifyContent: "flex-end",
                 paddingTop: Metrics.baseMargin,
               }}
@@ -274,10 +259,28 @@ export default function Statement({ id, type, options, defaultValue }) {
                 <Button label={"Absenden"}></Button>
                 <div>{errorMessage}</div>
               </button>
-            </div>
+            </View>
           </form>
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   );
 }
+
+const { styles, ids } = StyleSheet.create({
+  formContainer: {
+    alignSelf: "center",
+    alignItems: "center",
+    width: "74vw",
+    "@media (max-width: 910px)": {
+      width: "90vw",
+    },
+  },
+  iFrameContainer: {
+    width: "74vw",
+    minWidth: 280,
+    "@media (max-width: 910px)": {
+      width: "90vw",
+    },
+  },
+});
