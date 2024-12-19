@@ -6,6 +6,7 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
 import { ReactElement } from "react";
+import StyleSheet from "react-native-media-query";
 
 export interface Props {
   label: string;
@@ -37,9 +38,14 @@ const DownloadProtocol = ({ label, url }: Props) => {
               alignItems: "center",
             }}
           >
-            <IconDownload
-              color={hovered ? Colors.green : Colors.darkGreen}
-            ></IconDownload>
+            <View
+              style={styles.iconContainer}
+              dataSet={{ meidia: ids.iconContainer }}
+            >
+              <IconDownload
+                color={hovered ? Colors.green : Colors.darkGreen}
+              ></IconDownload>
+            </View>
             <Text
               style={{
                 paddingLeft: Metrics.baseMargin,
@@ -57,3 +63,14 @@ const DownloadProtocol = ({ label, url }: Props) => {
 };
 
 export default DownloadProtocol;
+
+const { styles, ids } = StyleSheet.create({
+  iconContainer: {
+    width: Metrics.doubleBaseMargin,
+    height: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      width: Metrics.tripleBaseMargin,
+      height: Metrics.tripleBaseMargin,
+    },
+  },
+});
