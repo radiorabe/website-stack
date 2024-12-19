@@ -38,7 +38,7 @@ type Props = {
 
 export default function ProgramPage({ liveData, pageData, params }: Props) {
   let { isMobile } = useResponsive();
-  console.log("data", pageData);
+  // console.log("data", pageData);
   let { todayShows, currentShow, shows } = liveData;
 
   // params.date is of format 12-2024 Week 12 of year 2024
@@ -53,7 +53,7 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
       parseInt(yearString) > currentYear + 1 ||
       parseInt(yearString) < currentYear)
   ) {
-    console.log("not found", params.date);
+    // console.log("not found", params.date);
     notFound();
   }
 

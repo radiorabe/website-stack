@@ -1,36 +1,11 @@
-import { Text, View } from "@/lib/server-react-native";
-import StyleSheet from "react-native-media-query";
-import Fonts from "../../../lib/Fonts";
 // import Layout from "../components/Layout";
-import { Metadata } from "next";
-import RenderTipTap from "@/components/RenderTipTap";
-import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
-import Metrics from "@/lib/Metrics";
-import { ItemsPageReceive } from "@/lib/api/data-contracts";
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import { Api } from "@/lib/api";
-import Colors from "@/lib/Colors";
-
-const { styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
-  },
-  link: {
-    color: "blue",
-  },
-  textContainer: {
-    alignItems: "center",
-    marginTop: 16,
-  },
-  text: {
-    ...Fonts.style.text,
-    alignItems: "center",
-    fontSize: 24,
-    marginBottom: 24,
-  },
-});
+import { ItemsPageReceive } from "@/lib/api/data-contracts";
+import { logError } from "@/lib/loging";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import PageReceive from "./PageReceive";
 
 export const metadata: Metadata = {
   title: "Empfangen",
@@ -44,19 +19,20 @@ async function getPageData() {
         // limit: 3,
       },
       {
-          next: {
-            tags:
-              process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-          },
-          cache:
-            process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", itemResponse);
     let item: ItemsPageReceive = itemResponse.data.data as ItemsPageReceive;
-    // console.log("ItemsPageImpressum", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
+    // load relational tiptap components
+    if (item.content) {
+      item.content = await loadTipTapContent(item.content);
+    }
 
     return item;
   } catch (error) {
@@ -69,40 +45,5 @@ async function getPageData() {
 export default async function ReceivePage(props) {
   const data = await getPageData();
 
-  return (
-    <View>
-      <View
-        style={{
-          width: "100%",
-        }}
-      >
-        <View
-          style={{
-            width: "74vw",
-            alignSelf: "center",
-            paddingVertical: Metrics.tripleBaseMargin,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              // backgroundColor: "green",
-            }}
-          >
-            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
-            <Text
-              style={[
-                { ...Fonts.style.h4 },
-                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
-              ]}
-            >
-              {"\u2192"}
-            </Text>
-            <Text style={{ ...Fonts.style.text }}>{"Empfangen"}</Text>
-          </View>
-          {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-        </View>
-      </View>
-    </View>
-  );
+  return <PageReceive pageData={data}></PageReceive>;
 }

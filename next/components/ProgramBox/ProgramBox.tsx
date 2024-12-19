@@ -34,7 +34,7 @@ export async function getLiveData() {
           (item) => moment().endOf("day") > moment(item.starts)
         );
         todayShows.push(...nextShowsToday);
-        console.log("todayShows", todayShows);
+        // console.log("todayShows", todayShows);
 
         let shows = [
           ...liveData.shows.previous,

@@ -1,7 +1,5 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
-
-import HoverText from "@/components/HoverText";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";

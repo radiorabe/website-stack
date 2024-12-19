@@ -9,6 +9,7 @@ import BarIcons from "./BarIcons";
 import BarLinks from "./BarLinks";
 import IconFooterRabe from "./IconFooterRabe";
 import ButtonText from "../ButtonText";
+import Image from "next/image";
 
 function Footer({ data }) {
   return (
@@ -17,13 +18,20 @@ function Footer({ data }) {
         <View
           style={{
             height: "100%",
-            aspectRatio: 1,
+            aspectRatio: 0.88,
           }}
         >
-          <IconFooterRabe color={Colors.black}></IconFooterRabe>
+          {/* <IconFooterRabe color={Colors.black}></IconFooterRabe> */}
+          <Image
+            src={"/images/IconRabe.png"}
+            width={200}
+            height={400}
+            layout="responsive"
+            alt={`Rabe`}
+            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </View>
       </View>
-
       <View
         style={styles.innerContainer}
         dataSet={{ media: ids.innerContainer }}

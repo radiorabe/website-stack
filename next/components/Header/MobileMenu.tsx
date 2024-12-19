@@ -84,6 +84,7 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
           {buttonArray.map((item, index) => {
             return (
               <Button
+                key={"mobileMenuButton" + index}
                 href={item.href}
                 label={item.label}
                 textColor={Colors.lightGreen}
@@ -134,6 +135,7 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
         {socialData.map((iconData, index) => {
           return (
             <View
+              key={"mobileMenuitem" + index}
               style={[styles.iconButton]}
               dataSet={{ media: ids.iconButton }}
             >

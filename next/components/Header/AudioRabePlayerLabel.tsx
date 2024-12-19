@@ -79,7 +79,7 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
 
   useEffect(() => {
     if (newDataFetched && scope.current) {
-      console.log("start Animation");
+      // console.log("start Animation");
       let numberOfChars = show.length + artist.length + title.length;
       animate(
         scope.current,

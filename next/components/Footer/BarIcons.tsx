@@ -38,11 +38,12 @@ export default function BarIcon({}: Props) {
       <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>
         {socialData.slice(0, 3).map((iconData, index) => {
           return (
-            <View style={[styles.button]} dataSet={{ media: ids.button }}>
-              <Pressable
-                key={"Baricon" + index}
-                onPress={() => Linking.openURL(iconData.link)}
-              >
+            <View
+              key={"Baricon1" + index}
+              style={[styles.button]}
+              dataSet={{ media: ids.button }}
+            >
+              <Pressable onPress={() => Linking.openURL(iconData.link)}>
                 {({
                   pressed,
                   hovered,
@@ -60,11 +61,12 @@ export default function BarIcon({}: Props) {
       <View style={styles.halfContainer} dataSet={{ media: ids.halfContainer }}>
         {socialData.slice(3, 6).map((iconData, index) => {
           return (
-            <View style={[styles.button]} dataSet={{ media: ids.button }}>
-              <Pressable
-                key={"Baricon2" + index}
-                onPress={() => Linking.openURL(iconData.link)}
-              >
+            <View
+              key={"Baricon2" + index}
+              style={[styles.button]}
+              dataSet={{ media: ids.button }}
+            >
+              <Pressable onPress={() => Linking.openURL(iconData.link)}>
                 {({
                   pressed,
                   hovered,
