@@ -73,7 +73,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
           {moment(data.date).format("DD. MMMM")}
         </Text>
       </View>
-      <div
+      <View
         style={{
           ...Fonts.style.h2,
           display: "-webkit-box",
@@ -85,7 +85,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
         }}
       >
         {data.title}
-      </div>
+      </View>
     </View>
   );
 
