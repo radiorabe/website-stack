@@ -6,7 +6,7 @@ import { Text, View } from "@/lib/server-react-native";
 
 export interface Props {
   label1: string;
-  label2: string;
+  label2?: string;
   style?: any;
 }
 

@@ -1,11 +1,10 @@
 "use client";
-import BreadCrump from "@/components/BreadCrumb";
 import RenderTipTap from "@/components/RenderTipTap";
 import Metrics from "@/lib/Metrics";
 import { View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-export default function PageImpressum({ pageData }) {
+export default function PageAgb({ pageData }) {
   const data = pageData;
 
   return (
