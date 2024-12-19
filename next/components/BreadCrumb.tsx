@@ -7,15 +7,19 @@ import { Text, View } from "@/lib/server-react-native";
 export interface Props {
   label1: string;
   label2: string;
+  style?: any;
 }
 
-export default function BreadCrump({ label1, label2 }: Props) {
+export default function BreadCrump({ label1, label2, style }: Props) {
   return (
     <View
-      style={{
-        flexDirection: "row",
-        marginBottom: Metrics.tripleBaseMargin,
-      }}
+      style={[
+        {
+          flexDirection: "row",
+          marginBottom: Metrics.tripleBaseMargin,
+        },
+        style,
+      ]}
     >
       <Text style={{ ...Fonts.style.text }}>{label1}</Text>
       <Text
