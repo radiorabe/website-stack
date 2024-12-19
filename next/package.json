@@ -17,7 +17,7 @@
     "google-maps-react-markers": "^2.0.11",
     "jsdom": "^24.1.1",
     "moment": "^2.30.1",
-    "next": "14.2.5",
+    "next": "14.2.15",
     "normalize.css": "^8.0.1",
     "prompt-sync": "^4.2.0",
     "rc-slider": "^11.1.5",
