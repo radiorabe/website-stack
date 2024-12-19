@@ -40,21 +40,13 @@ const Ausgehtips = ({ partyTips }: Props) => {
             return (
               <View
                 key={"partyTips" + index}
-                style={{
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  paddingBottom: Metrics.baseMargin,
-                }}
+                style={styles.partyTipContainer}
+                dataSet={{ media: ids.partyTipContainer }}
               >
                 {partyLocation && partyLocation.logo && (
-                  <AspectRatio
-                    ratio="1/1"
-                    style={{
-                      width: isMobile ? "12vw" : "5vw",
-                      marginRight: Metrics.tripleBaseMargin,
-                    }}
+                  <View
+                    style={styles.imageContainer}
+                    dataSet={{ media: ids.imageContainer }}
                   >
                     <Image
                       src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=120&height=120&fit=cover`}
@@ -65,7 +57,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                       alt={partyLocation.address_line_1}
                       // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                  </AspectRatio>
+                  </View>
                 )}
                 <View
                   style={styles.infoContainer}
@@ -75,10 +67,18 @@ const Ausgehtips = ({ partyTips }: Props) => {
                     style={styles.titleContainer}
                     dataSet={{ media: ids.titleContainer }}
                   >
-                    <Text style={styles.title} dataSet={{ media: ids.title }}>
+                    <Text
+                      numberOfLines={1}
+                      style={styles.title}
+                      dataSet={{ media: ids.title }}
+                    >
                       {item.title_1}
                     </Text>
-                    <Text style={styles.title} dataSet={{ media: ids.title }}>
+                    <Text
+                      numberOfLines={1}
+                      style={styles.title}
+                      dataSet={{ media: ids.title }}
+                    >
                       {item.title_2 ? item.title_2 : ""}
                     </Text>
                   </View>
@@ -109,7 +109,10 @@ const Ausgehtips = ({ partyTips }: Props) => {
                     </Text>
                   </View>
 
-                  <View>
+                  <View
+                    style={styles.buttonContainer}
+                    dataSet={{ media: ids.buttonContainer }}
+                  >
                     <Button
                       url={partyLocation.url}
                       label={"Zur Webseite"}
@@ -134,10 +137,28 @@ const { ids, styles } = StyleSheet.create({
       paddingVertical: Metrics.quadBaseMargin,
     },
   },
+  partyTipContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingBottom: Metrics.baseMargin,
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.tripleBaseMargin,
+    },
+  },
+  imageContainer: {
+    width: "5vw",
+    aspectRatio: 1,
+    marginRight: Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      width: "12vw",
+    },
+  },
   infoContainer: {
     flexDirection: "row",
     // backgroundColor: "green",
-    flexGrow: 1,
+    flex: 1,
     "@media (max-width: 910px)": {
       flexDirection: "column",
       maxWidth: "80%",
@@ -145,12 +166,32 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   titleContainer: {
-    width: "50%",
+    flex: 6,
     // backgroundColor: "red",
     "@media (max-width: 910px)": {
       width: "100%",
     },
   },
+  detailsContainer: {
+    flex: 3,
+    paddingLeft: Metrics.doubleBaseMargin,
+    // backgroundColor: "blue",
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.baseMargin,
+      paddingLeft: 0,
+    },
+  },
+  buttonContainer: {
+    flex: 1.3,
+    alignSelf: "center",
+    alignItems: "flex-end",
+    // backgroundColor: "orange",
+    "@media (max-width: 910px)": {
+      alignSelf: "flex-start",
+      alignItems: "flex-start",
+    },
+  },
+
   title: {
     ...Fonts.style.h2,
     "@media (max-width: 910px)": {
@@ -165,12 +206,7 @@ const { ids, styles } = StyleSheet.create({
     //   lineHeight: 22.4,
     // },
   },
-  detailsContainer: {
-    flexGrow: 1,
-    "@media (max-width: 910px)": {
-      paddingBottom: Metrics.baseMargin,
-    },
-  },
+
   addressContainer: {
     flexDirection: "column",
   },
