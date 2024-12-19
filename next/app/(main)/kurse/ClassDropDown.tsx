@@ -10,6 +10,7 @@ import moment from "moment";
 import { ReactElement, useState } from "react";
 import ShowInfoText from "../praktikum/InfoText";
 import ArrowIcon from "./ArrowIcon";
+import StyleSheet from "react-native-media-query";
 
 export interface Props {
   classItem: any;
@@ -18,14 +19,7 @@ export interface Props {
 const ClassDropDown = ({ classItem }: Props) => {
   let [isOpen, setIsOpen] = useState(false);
   return (
-    <View
-      style={{
-        marginBottom: Metrics.doubleBaseMargin,
-        backgroundColor: Colors.lightGreen,
-        borderRadius: 9,
-        padding: Metrics.doubleBaseMargin,
-      }}
-    >
+    <View style={styles.container} dataSet={{ media: ids.container }}>
       <Pressable
         style={{ marginBottom: isOpen ? Metrics.doubleBaseMargin : 0 }}
         onPress={() => setIsOpen(!isOpen)}
@@ -80,9 +74,9 @@ const ClassDropDown = ({ classItem }: Props) => {
                 <ShowInfoText
                   label="Zeit"
                   text={
-                    moment(classItem.time_start) +
+                    classItem.time_start.slice(0, -3) +
                     " - " +
-                    moment(classItem.time_end)
+                    classItem.time_end.slice(0, -3)
                   }
                 ></ShowInfoText>
               )}
@@ -109,7 +103,7 @@ const ClassDropDown = ({ classItem }: Props) => {
               )}
               {classItem.what_else && (
                 <ShowInfoText
-                  label="Webseite"
+                  label="Was noch"
                   text={classItem.what_else}
                 ></ShowInfoText>
               )}
@@ -145,3 +139,15 @@ const ClassDropDown = ({ classItem }: Props) => {
 };
 
 export default ClassDropDown;
+
+const { styles, ids } = StyleSheet.create({
+  container: {
+    marginBottom: Metrics.doubleBaseMargin,
+    backgroundColor: Colors.lightGreen,
+    borderRadius: 9,
+    padding: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      marginBottom: Metrics.tripleBaseMargin,
+    },
+  },
+});

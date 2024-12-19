@@ -1,21 +1,10 @@
-import { Text, View } from "@/lib/server-react-native";
-import StyleSheet from "react-native-media-query";
-
-import Fonts from "@/lib/Fonts";
-
-import RenderTipTap from "@/components/RenderTipTap";
-import Colors from "@/lib/Colors";
-import Metrics from "@/lib/Metrics";
 import { Api } from "@/lib/api";
-import {
-  ItemsClasses,
-  ItemsPageClasses,
-  ItemsPageClassesClasses,
-} from "@/lib/api/data-contracts";
+import { ItemsPageClasses } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ClassDropDown from "./ClassDropDown";
+import PageClasses from "./PageClasses";
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 
 export const metadata: Metadata = {
   title: "Kurse",
@@ -39,7 +28,12 @@ async function getPageData() {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPageClasses;
-    console.log("ItemsPageClasses", item);
+    // console.log("ItemsPageClasses", item);
+
+    // load relational tiptap components
+    if (item.content) {
+      item.content = await loadTipTapContent(item.content);
+    }
 
     return item;
   } catch (error) {
@@ -49,62 +43,8 @@ async function getPageData() {
   }
 }
 
-export default async function PageClasses(props) {
+export default async function page(props) {
   const data = await getPageData();
 
-  return (
-    <View>
-      <View
-        style={{
-          width: "100%",
-          alignSelf: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "74vw",
-            alignSelf: "center",
-            paddingVertical: Metrics.tripleBaseMargin,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              marginBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
-            <Text
-              style={[
-                { ...Fonts.style.h4 },
-                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
-              ]}
-            >
-              {"\u2192"}
-            </Text>
-            <Text style={{ ...Fonts.style.text }}>{"Kurse"}</Text>
-          </View>
-          {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-          {data.classes && (
-            <View
-              style={{
-                marginTop: Metrics.doubleBaseMargin,
-              }}
-            >
-              {data.classes.map((sh: ItemsPageClassesClasses, index) => {
-                let classItem = sh.classes_id as ItemsClasses;
-                return (
-                  <ClassDropDown
-                    key={"classitem" + index}
-                    classItem={classItem}
-                  ></ClassDropDown>
-                );
-              })}
-            </View>
-          )}
-        </View>
-      </View>
-    </View>
-  );
+  return <PageClasses pageData={data}></PageClasses>;
 }
