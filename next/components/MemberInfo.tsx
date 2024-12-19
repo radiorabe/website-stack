@@ -23,20 +23,25 @@ const MemberInfo = ({ user }) => {
         alt={`Foto von ${user.first_name || ""} ${user.last_name || ""}`}
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-
       <View
         style={{
           justifyContent: "center",
           paddingLeft: Metrics.doubleBaseMargin,
+          overflow: "hidden",
+          flexGrow: 1,
+          maxWidth: "75%",
         }}
       >
-        <Text style={{ ...Fonts.style.text }}>
+        <Text style={{ ...Fonts.style.text }} numberOfLines={1}>
           {`${user.first_name} ${user.last_name}`}
         </Text>
 
         <HoverUrl
           url={"mailto:" + user.email}
-          style={{ ...Fonts.style.textLink, color: Colors.green }}
+          style={{
+            ...Fonts.style.textLink,
+            color: Colors.green,
+          }}
           hoverStyle={{ color: Colors.darkGreen }}
         >
           {user.email}
@@ -52,10 +57,12 @@ const { ids, styles } = StyleSheet.create({
   container: {
     paddingBottom: Metrics.baseMargin,
     width: "50%",
+    maxWidth: "50%",
     flexDirection: "row",
     "@media (max-width: 910px)": {
       paddingBottom: Metrics.doubleBaseMargin,
       width: "100%",
+      maxWidth: "100%",
     },
   },
 });
