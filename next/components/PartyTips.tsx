@@ -182,7 +182,7 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   buttonContainer: {
-    flex: 1.5,
+    width: 160,
     alignSelf: "center",
     alignItems: "flex-end",
     // backgroundColor: "orange",
