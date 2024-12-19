@@ -27,14 +27,14 @@ const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
         alt={title}
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-      {title && (
-        <Text
-          style={{
-            flexDirection: "column",
-            paddingHorizontal: Metrics.tripleBaseMargin,
-            paddingVertical: Metrics.doubleBaseMargin,
-          }}
-        >
+      <Text
+        style={{
+          flexDirection: "column",
+          paddingHorizontal: Metrics.tripleBaseMargin,
+          paddingVertical: Metrics.doubleBaseMargin,
+        }}
+      >
+        {title && (
           <Text
             style={{
               ...Fonts.style.textSmall,
@@ -43,11 +43,10 @@ const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
           >
             {"Foto: " + title}
           </Text>
-          {text && (
-            <Text style={{ ...Fonts.style.textSmall }}>{" " + text}</Text>
-          )}
-        </Text>
-      )}
+        )}
+
+        {text && <Text style={{ ...Fonts.style.textSmall }}>{" " + text}</Text>}
+      </Text>
     </View>
   );
 };
