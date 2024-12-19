@@ -11,31 +11,8 @@ import { ItemsPageJoin } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 import RenderTipTap from "@/components/RenderTipTap";
-
-const { styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
-  },
-  link: {
-    color: "blue",
-  },
-  textContainer: {
-    alignItems: "center",
-    marginTop: 16,
-  },
-  text: {
-    ...Fonts.style.text,
-    alignItems: "center",
-    fontSize: 24,
-    marginBottom: 24,
-  },
-});
-
-export const metadata: Metadata = {
-  title: "Mitmachen",
-};
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
+import PageJoin from "./PageJoin";
 
 async function getPageData() {
   try {
@@ -56,6 +33,10 @@ async function getPageData() {
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPageJoin;
     // console.log("ItemsPageJoin", item);
+    // load relational tiptap components
+    if (item.content) {
+      item.content = await loadTipTapContent(item.content);
+    }
 
     return item;
   } catch (error) {
@@ -65,45 +46,8 @@ async function getPageData() {
   }
 }
 
-export default async function MitmachenPage(props) {
+export default async function Page(props) {
   const data = await getPageData();
 
-  return (
-    <View>
-      <View
-        style={{
-          width: "100%",
-          alignSelf: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "74vw",
-            alignSelf: "center",
-            paddingVertical: Metrics.tripleBaseMargin,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              marginBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            <Text style={{ ...Fonts.style.text }}>{"Über Rabe"}</Text>
-            <Text
-              style={[
-                { ...Fonts.style.h4 },
-                { color: Colors.green, paddingHorizontal: Metrics.baseMargin },
-              ]}
-            >
-              {"\u2192"}
-            </Text>
-            <Text style={{ ...Fonts.style.text }}>{"Deine Sendung"}</Text>
-          </View>
-          {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-        </View>
-      </View>
-    </View>
-  );
+  return <PageJoin pageData={data}></PageJoin>;
 }
