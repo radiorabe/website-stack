@@ -1,11 +1,10 @@
 "use client";
 import Button from "@/components/Button";
-import Button from "@/components/Button";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import { useEffect, useState } from "react";
-// import Layout from "../components/Layout";
+import StyleSheet from "react-native-media-query";
 
 export default function Statement(props) {
   const [randomIndex, setRandomIndex] = useState(0);
@@ -18,10 +17,8 @@ export default function Statement(props) {
       : "No statments provided";
 
   return (
-    <div
+    <View
       style={{
-        display: "flex",
-        flexDirection: "column",
         alignSelf: "center",
         alignItems: "center",
         width: "74vw",
@@ -36,21 +33,8 @@ export default function Statement(props) {
       >
         {"«" + randomStatment.text + "»"}
       </Text>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          paddingLeft: Metrics.doubleBaseMargin + Metrics.tripleBaseMargin,
-        }}
-      >
-        <Text
-          style={{
-            ...Fonts.style.textSmall,
-            fontFamily: Fonts.type.bold,
-            paddingRight: Metrics.doubleBaseMargin,
-          }}
-        >
+      <View style={styles.infoContainer} dataSet={{ media: ids.infoContainer }}>
+        <Text style={styles.text} dataSet={{ media: ids.text }}>
           {"Hörer*innen Statement von " + randomStatment.author}
         </Text>
         <Button
@@ -60,7 +44,27 @@ export default function Statement(props) {
             setRandomIndex(Math.floor(Math.random() * props.statements.length));
           }}
         ></Button>
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
+
+const { styles, ids } = StyleSheet.create({
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: Metrics.doubleBaseMargin + Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      flexDirection: "column",
+    },
+  },
+  text: {
+    ...Fonts.style.textSmall,
+    fontFamily: Fonts.type.bold,
+    paddingRight: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      textAlign: "center",
+      paddingBottom: Metrics.tripleBaseMargin,
+    },
+  },
+});

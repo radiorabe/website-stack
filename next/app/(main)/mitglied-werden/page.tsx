@@ -1,4 +1,4 @@
-import RenderTipTap from "@/components/RenderTipTap";
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import { Api } from "@/lib/api";
 import {
   ItemsMemberProduct,
@@ -6,18 +6,8 @@ import {
   ItemsStatements,
 } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import Metrics from "@/lib/Metrics";
 import { notFound } from "next/navigation";
-import Statement from "./Statement";
-import Colors from "@/lib/Colors";
-import { Text } from "@/lib/server-react-native";
-import Fonts from "@/lib/Fonts";
-import RadioButton from "./RadioButton";
-import { useState } from "react";
-import YearlyProduct from "./YearlyProducts";
-import Heart from "./Heart";
-import Button from "@/components/Button";
-import Button from "@/components/Button";
+import PageMember from "./PageMember";
 
 async function getPageData() {
   try {
@@ -36,7 +26,9 @@ async function getPageData() {
     // console.log("response", infoResponse);
     let item: ItemsPageMember = infoResponse.data.data as ItemsPageMember;
 
-    console.log("member data: ", item);
+    if (item.content) {
+      item.content = await loadTipTapContent(item.content);
+    }
 
     return item;
   } catch (error) {
@@ -97,111 +89,16 @@ async function getMemberProducts() {
   }
 }
 
-export default async function MitgliedPage(props) {
+export default async function Page(props) {
   const data = await getPageData();
   const memberProducts = await getMemberProducts();
   const statements = await getStatements();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "90vw",
-          alignSelf: "center",
-          alignItems: "center",
-          paddingTop: Metrics.tripleBaseMargin,
-          paddingBottom: Metrics.tripleBaseMargin,
-        }}
-      >
-        <Statement statements={statements}></Statement>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignSelf: "center",
-            width: "90vw",
-            marginTop: Metrics.tripleBaseMargin,
-          }}
-        >
-          <div
-            style={{
-              width: "43vw",
-            }}
-          >
-            <YearlyProduct
-              memberProducts={memberProducts || []}
-            ></YearlyProduct>
-          </div>
-
-          <div
-            style={{
-              width: "43vw",
-              display: "flex",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: Colors.darkGreen,
-                borderRadius: 9,
-                padding: Metrics.doubleBaseMargin,
-                flexGrow: 1,
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.white,
-                  ...Fonts.style.h2,
-                  marginBottom: Metrics.halfBaseMargin,
-                }}
-              >
-                {"Sendung unterstützen"}
-              </Text>
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexGrow: 1,
-                }}
-              >
-                <Heart color={Colors.green}></Heart>
-              </div>
-              <Button
-                label={"Sendung unterstützen"}
-                textColor={Colors.white}
-                hoverTextColor={Colors.green}
-                href={{
-                  pathname: "/bestellung",
-                  query: { slug: "choose" },
-                }}
-              ></Button>
-            </div>
-          </div>
-        </div>
-        <div style={{ paddingTop: Metrics.doubleBaseMargin }}>
-          {"*Studierende / RentnerInnen (AHV, IV), Besitzende einer Kulturlegi"}
-        </div>
-        <div
-          style={{
-            width: "74vw",
-            paddingTop: Metrics.tripleBaseMargin,
-          }}
-        >
-          {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
-        </div>
-      </div>
-    </div>
+    <PageMember
+      pageData={data}
+      memberProducts={memberProducts}
+      statements={statements}
+    ></PageMember>
   );
 }

@@ -6,8 +6,7 @@ import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import { useEffect, useState } from "react";
 import RadioButton from "./RadioButton";
-import Button from "@/components/Button";
-// import Layout from "../components/Layout";
+import StyleSheet from "react-native-media-query";
 
 export default function YearlyProduct(props) {
   const { memberProducts } = props;
@@ -18,15 +17,7 @@ export default function YearlyProduct(props) {
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: Colors.darkGreen,
-        borderRadius: 9,
-        padding: Metrics.doubleBaseMargin,
-      }}
-    >
+    <View style={styles.container} dataSet={{ media: ids.container }}>
       <Text
         style={{
           color: Colors.white,
@@ -38,12 +29,10 @@ export default function YearlyProduct(props) {
       </Text>
       {memberProducts.map((prod) => {
         return (
-          <div
+          <View
             key={`yearly-prod-${prod.id}`}
-            style={{
-              paddingTop: Metrics.halfBaseMargin,
-              paddingBottom: Metrics.halfBaseMargin,
-            }}
+            style={styles.radioButtonContainer}
+            dataSet={{ media: ids.radioButtonContainer }}
           >
             <RadioButton
               selected={selectedProduct && prod.id === selectedProduct}
@@ -52,10 +41,10 @@ export default function YearlyProduct(props) {
               label={prod.label}
               onPress={(id) => setSelectedProduct(id)}
             ></RadioButton>
-          </div>
+          </View>
         );
       })}
-      <div style={{ paddingTop: Metrics.baseMargin }}>
+      <View style={{ paddingTop: Metrics.baseMargin }}>
         <Button
           label={"Mitglied werden"}
           textColor={Colors.white}
@@ -66,7 +55,27 @@ export default function YearlyProduct(props) {
             query: { id: selectedProduct },
           }}
         ></Button>
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
+
+const { styles, ids } = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.darkGreen,
+    borderRadius: 9,
+    padding: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      padding: Metrics.tripleBaseMargin,
+    },
+  },
+  radioButtonContainer: {
+    paddingTop: Metrics.halfBaseMargin,
+    paddingBottom: Metrics.halfBaseMargin,
+
+    "@media (max-width: 910px)": {
+      paddingTop: Metrics.baseMargin,
+      paddingBottom: Metrics.baseMargin,
+    },
+  },
+});
