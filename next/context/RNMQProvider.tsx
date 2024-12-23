@@ -1,6 +1,6 @@
 "use client";
 import { useServerInsertedHTML } from "next/navigation";
-import { StyleSheet } from "@/lib/server-react-native";
+import { StyleSheet } from "react-native";
 import { flush } from "react-native-media-query";
 export function RNMQProvider({ children }: { children: React.ReactNode }) {
   useServerInsertedHTML(() => {

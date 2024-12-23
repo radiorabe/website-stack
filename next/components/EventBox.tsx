@@ -78,7 +78,7 @@ const { ids, styles } = StyleSheet.create({
     paddingRight: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       paddingRight: 0,
-      width: "65%",
+      width: "100%",
       alignItems: "center",
       // justifyContent: "center",
     },

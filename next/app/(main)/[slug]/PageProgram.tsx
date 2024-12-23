@@ -211,6 +211,7 @@ export default function ProgramPage({
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
+            justifyContent: "space-between",
             marginBottom: Metrics.tripleBaseMargin,
           }}
         >

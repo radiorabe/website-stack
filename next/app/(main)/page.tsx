@@ -172,6 +172,7 @@ export default async function HomePage(props) {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
+            justifyContent: "space-between",
           }}
         >
           {posts.map((item, index) => {

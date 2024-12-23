@@ -62,8 +62,8 @@ const Button = ({
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
-                paddingVertical: large ? 9 : 6,
-                paddingHorizontal: large ? 12 : 9,
+                paddingVertical: large ? 13 : 8,
+                paddingHorizontal: large ? 15 : 11,
                 backgroundColor: backgroundColor
                   ? backgroundColor
                   : full

@@ -50,6 +50,7 @@ export default function PostList({ initialPosts, filters }) {
         <View
           style={{
             flexDirection: "row",
+            justifyContent: "space-between",
             flexWrap: "wrap",
           }}
         >

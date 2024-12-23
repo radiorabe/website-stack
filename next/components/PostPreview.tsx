@@ -13,7 +13,6 @@ import Image from "next/image";
 import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
-import { AspectRatio } from "react-aspect-ratio"; // Recommended: if you are using React > 15.6
 import useResponsive from "@/lib/useResponsisve";
 
 export interface HoverableProps {
@@ -28,13 +27,7 @@ const PostPreview = ({ data, index }: HoverableProps) => {
   const { isMobile } = useResponsive();
 
   const preview = (
-    <View
-      style={{
-        maxHeight: "100%",
-        overflow: "hidden",
-        aspectRatio: 360 / 450,
-      }}
-    >
+    <View>
       <View>
         <View
           style={{
@@ -89,40 +82,34 @@ const PostPreview = ({ data, index }: HoverableProps) => {
     </View>
   );
 
+  // <Image
+  //   src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=1280&height=600&fit=cover`}
+  //   fill
+  //   objectFit="cover"
+  //   alt={program.name}
+  //   // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  // />
+
   const fullPreview = (
-    <View style={{ height: "100%" }}>
-      <View>
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            backgroundColor: "#00635F10",
-            borderRadius: 9,
-          }}
-        ></View>
+    <View>
+      <View
+        style={styles.fullImageContainer}
+        dataSet={{ media: ids.fullImageContainer }}
+      >
         <Image
           src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=360&height=450&fit=cover`}
-          width={360}
-          height={450}
+          width={isMobile ? undefined : 360}
+          height={isMobile ? undefined : 450}
+          fill={isMobile}
           style={styles.avatar}
-          layout="responsive"
+          objectFit={isMobile ? "cover" : undefined}
+          layout={isMobile ? undefined : "responsive"}
           alt={data.title}
-          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </View>
       <View
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
+        style={styles.fullContentContainer}
+        dataSet={{ media: ids.fullContentContainer }}
       >
         <View
           style={styles.fullContainer}
@@ -192,13 +179,14 @@ const PostPreview = ({ data, index }: HoverableProps) => {
   );
 
   return (
-    <AspectRatio
-      ratio="360/450"
-      style={{
-        width: isMobile ? "100%" : "30%",
-        paddingLeft: isMobile ? 0 : index % 3 ? "5%" : 0,
-        marginTop: isMobile && index >= 1 ? "8vw" : index >= 3 ? "4vw" : 0,
-      }}
+    <View
+      style={[
+        styles.outerContainer,
+        {
+          marginTop: isMobile && index >= 1 ? "8vw" : index >= 3 ? "4vw" : 0,
+        },
+      ]}
+      dataSet={{ media: ids.outerContainer }}
     >
       <Link
         href={`/beitrag/${moment(data.date).format("DD-MM-YYYY")}/${data.slug}`}
@@ -209,18 +197,52 @@ const PostPreview = ({ data, index }: HoverableProps) => {
       >
         {data.preview_full_image ? fullPreview : preview}
       </Link>
-    </AspectRatio>
+    </View>
   );
 };
 
 export default PostPreview;
 
 const { ids, styles } = StyleSheet.create({
-  avatar: { borderRadius: 9 },
+  outerContainer: {
+    width: "100%",
+    maxWidth: "100%",
+    // marginTop: "8vw",
+
+    "@media (min-width: 911px)": {
+      width: "30%",
+      maxWidth: "30%",
+      aspectRatio: 0.8,
+      // marginTop: "4vw",
+    },
+  },
+
+  avatar: { borderRadius: 9, width: "100%" },
   fullContainer: {
     padding: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       padding: Metrics.tripleBaseMargin,
+    },
+  },
+  fullContentContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    "@media (max-width: 910px)": {
+      position: "relative",
+    },
+  },
+  fullImageContainer: {
+    "@media (max-width: 910px)": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
   },
   titleContainer: {
