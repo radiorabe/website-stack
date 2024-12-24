@@ -1,5 +1,6 @@
 "use client";
 import Fonts from "@/lib/Fonts";
+import Metrics from "@/lib/Metrics";
 import { Text } from "@/lib/server-react-native";
 
 export interface Props {
@@ -9,7 +10,7 @@ export interface Props {
 
 const ShowInfoText = ({ label, text }: Props) => {
   return (
-    <Text>
+    <Text style={{ marginVertical: Metrics.halfHalfBaseMargin }}>
       <Text
         style={{
           ...Fonts.style.textLink,

@@ -509,12 +509,6 @@ export interface ItemsPageProgramPrograms2 {
   programs_slug?: string | ItemsPrograms | null;
 }
 
-export interface ItemsPageHistoryFiles {
-  id?: number;
-  page_history_id?: number | ItemsPageHistory | null;
-  directus_files_id?: string | Files | null;
-}
-
 export interface ItemsPageProgram {
   id?: number;
   user_created?: string | Users | null;
@@ -573,7 +567,7 @@ export interface ItemsPageHistory {
   statutes?: string | Files | null;
   protocols?: (number | ItemsPageHistoryFiles1)[] | null;
   editor_nodes?: (string | ItemsPageHistoryNodes)[] | null;
-  logos?: (number | ItemsPageHistoryFiles)[] | null;
+  partner_logos?: (number | ItemsPageHistoryImageLink)[] | null;
 }
 
 export interface ItemsPageMember {
@@ -648,9 +642,10 @@ export interface ItemsEvents {
   promo_button_label?: string | null;
   promo_button_url?: string | null;
   promo_status?: string | null;
+  partner_title?: string | null;
   shows?: (number | ItemsEventsEventShows)[] | null;
-  logos?: (number | ItemsEventsFiles)[] | null;
   editor_nodes?: (string | ItemsEventsEditorNodes)[] | null;
+  partner_logos?: (number | ItemsEventsImageLink)[] | null;
 }
 
 export interface ItemsStatements {
@@ -665,12 +660,6 @@ export interface ItemsStatements {
   date_updated?: string | null;
   text?: string | null;
   author?: string | null;
-}
-
-export interface ItemsEventsFiles {
-  id?: number;
-  events_id?: number | ItemsEvents | null;
-  directus_files_id?: string | Files | null;
 }
 
 export interface ItemsIframe {
@@ -880,6 +869,14 @@ export interface ItemsPageClassesNodes {
   collection?: string | null;
 }
 
+export interface ItemsPageHistoryImageLink {
+  id?: number;
+  page_history_id?: number | ItemsPageHistory | null;
+  image_link_id?: number | ItemsImageLink | null;
+  /** @format int64 */
+  sort?: number | null;
+}
+
 export interface ItemsClasses {
   id?: number;
   sort?: number | null;
@@ -916,6 +913,20 @@ export interface ItemsPageHistoryFiles1 {
   id?: number;
   page_history_id?: number | ItemsPageHistory | null;
   directus_files_id?: string | Files | null;
+}
+
+export interface ItemsImageLink {
+  id?: number;
+  url?: string | null;
+  image?: string | Files | null;
+}
+
+export interface ItemsEventsImageLink {
+  id?: number;
+  events_id?: number | ItemsEvents | null;
+  image_link_id?: number | ItemsImageLink | null;
+  /** @format int64 */
+  sort?: number | null;
 }
 
 export interface GetAssetParams {
@@ -2016,43 +2027,6 @@ export interface ReadSingleItemsPageProgramPrograms2Data {
   data?: ItemsPageProgramPrograms2;
 }
 
-export interface ReadItemsPageHistoryFilesParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** A limit on the number of objects that are returned. */
-  limit?: number;
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** How many items to skip when fetching data. */
-  offset?: number;
-  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-  sort?: string[];
-  /** Select items in collection by given conditions. */
-  filter?: object;
-  /** Filter by items that contain the given search query in one of their fields. */
-  search?: string;
-}
-
-export interface ReadItemsPageHistoryFilesData {
-  data?: ItemsPageHistoryFiles[];
-  meta?: XMetadata;
-}
-
-export interface ReadSingleItemsPageHistoryFilesParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
-  version?: string;
-  /** Index of the item. */
-  id: number | string;
-}
-
-export interface ReadSingleItemsPageHistoryFilesData {
-  data?: ItemsPageHistoryFiles;
-}
-
 export interface ReadItemsPageProgramParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -2505,43 +2479,6 @@ export interface ReadSingleItemsStatementsParams {
 
 export interface ReadSingleItemsStatementsData {
   data?: ItemsStatements;
-}
-
-export interface ReadItemsEventsFilesParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** A limit on the number of objects that are returned. */
-  limit?: number;
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** How many items to skip when fetching data. */
-  offset?: number;
-  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
-  sort?: string[];
-  /** Select items in collection by given conditions. */
-  filter?: object;
-  /** Filter by items that contain the given search query in one of their fields. */
-  search?: string;
-}
-
-export interface ReadItemsEventsFilesData {
-  data?: ItemsEventsFiles[];
-  meta?: XMetadata;
-}
-
-export interface ReadSingleItemsEventsFilesParams {
-  /** Control what fields are being returned in the object. */
-  fields?: string[];
-  /** What metadata to return in the response. */
-  meta?: string;
-  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
-  version?: string;
-  /** Index of the item. */
-  id: number | string;
-}
-
-export interface ReadSingleItemsEventsFilesData {
-  data?: ItemsEventsFiles;
 }
 
 export interface ReadItemsIframeParams {
@@ -3284,6 +3221,43 @@ export interface ReadSingleItemsPageClassesNodesData {
   data?: ItemsPageClassesNodes;
 }
 
+export interface ReadItemsPageHistoryImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsPageHistoryImageLinkData {
+  data?: ItemsPageHistoryImageLink[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsPageHistoryImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsPageHistoryImageLinkData {
+  data?: ItemsPageHistoryImageLink;
+}
+
 export interface ReadItemsClassesParams {
   /** Control what fields are being returned in the object. */
   fields?: string[];
@@ -3393,4 +3367,78 @@ export interface ReadSingleItemsPageHistoryFiles1Params {
 
 export interface ReadSingleItemsPageHistoryFiles1Data {
   data?: ItemsPageHistoryFiles1;
+}
+
+export interface ReadItemsImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsImageLinkData {
+  data?: ItemsImageLink[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsImageLinkData {
+  data?: ItemsImageLink;
+}
+
+export interface ReadItemsEventsImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** A limit on the number of objects that are returned. */
+  limit?: number;
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** How many items to skip when fetching data. */
+  offset?: number;
+  /** How to sort the returned items. `sort` is a CSV of fields used to sort the fetched items. Sorting defaults to ascending (ASC) order but a minus sign (` - `) can be used to reverse this to descending (DESC) order. Fields are prioritized by their order in the CSV. You can also use a ` ? ` to sort randomly. */
+  sort?: string[];
+  /** Select items in collection by given conditions. */
+  filter?: object;
+  /** Filter by items that contain the given search query in one of their fields. */
+  search?: string;
+}
+
+export interface ReadItemsEventsImageLinkData {
+  data?: ItemsEventsImageLink[];
+  meta?: XMetadata;
+}
+
+export interface ReadSingleItemsEventsImageLinkParams {
+  /** Control what fields are being returned in the object. */
+  fields?: string[];
+  /** What metadata to return in the response. */
+  meta?: string;
+  /** Retrieve an item's state from a specific Content Version. The value corresponds to the "key" of the Content Version. */
+  version?: string;
+  /** Index of the item. */
+  id: number | string;
+}
+
+export interface ReadSingleItemsEventsImageLinkData {
+  data?: ItemsEventsImageLink;
 }
