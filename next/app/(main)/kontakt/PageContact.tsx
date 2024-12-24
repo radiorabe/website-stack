@@ -2,15 +2,26 @@
 import HoverUrl from "@/components/HoverUrl";
 import Colors from "@/lib/Colors";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "@/lib/server-react-native";
+import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
 import { Metadata } from "next";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../../lib/Fonts";
 import Map from "./Map";
 import BreadCrump from "@/components/BreadCrumb";
+import {
+  ItemsContactAddress,
+  ItemsImageLink,
+  ItemsPageContact,
+  ItemsPageContactContactAddress,
+  ItemsPageContactImageLink,
+} from "@/lib/api/data-contracts";
 
-export default function PageContact({ pageData }) {
+export interface Props {
+  pageData: ItemsPageContact;
+}
+
+export default function PageContact({ pageData }: Props) {
   const data = pageData;
 
   return (
@@ -130,6 +141,9 @@ export default function PageContact({ pageData }) {
               }}
             >
               {data.contact_addresses.map((item, index) => {
+                let addressRelation = item as ItemsPageContactContactAddress;
+                let address =
+                  addressRelation.contact_address_id as ItemsContactAddress;
                 return (
                   <View
                     key={"contact" + index}
@@ -148,40 +162,40 @@ export default function PageContact({ pageData }) {
                         }}
                         numberOfLines={1}
                       >
-                        {item.contact_address_id.name}
+                        {address.name}
                       </Text>
 
                       <HoverUrl
-                        url={`tel:${item.contact_address_id.phone_number}`}
+                        url={`tel:${address.phone_number}`}
                         style={{
                           ...Fonts.style.text,
                           color: Colors.lightGreen,
                         }}
                         hoverStyle={{ color: Colors.green }}
                       >
-                        {item.contact_address_id.phone_number}
+                        {address.phone_number}
                       </HoverUrl>
 
                       <HoverUrl
-                        url={`mailto:${item.contact_address_id.email}`}
+                        url={`mailto:${address.email}`}
                         style={{
                           ...Fonts.style.text,
                           color: Colors.lightGreen,
                         }}
                         hoverStyle={{ color: Colors.green }}
                       >
-                        {item.contact_address_id.email}
+                        {address.email}
                       </HoverUrl>
 
                       {/* <Text
                       style={{ ...Fonts.style.text, color: Colors.lightGreen }}
                     >
-                      {item.contact_address_id.phone_number}
+                      {address.phone_number}
                     </Text>
                     <Text
                       style={{ ...Fonts.style.text, color: Colors.lightGreen }}
                     >
-                      {item.contact_address_id.email}
+                      {address.email}
                     </Text> */}
                     </View>
                   </View>
@@ -254,15 +268,17 @@ export default function PageContact({ pageData }) {
         {data && data.partner_logos && (
           <View style={{ flexDirection: "row", overflow: "scroll" }}>
             {data.partner_logos.map((item, index) => {
+              let logoRelation = item as ItemsPageContactImageLink;
+              let imageLink = logoRelation.image_link_id as ItemsImageLink;
               return (
-                <View
+                <Pressable
                   key={"partner" + index}
-                  style={{
-                    flexGrow: 1,
-                    borderLeftColor: Colors.white,
-                    borderLeftWidth: index && 2,
-                    alignItems: "center",
-                  }}
+                  style={[
+                    styles.partnerLogoContainer,
+                    { borderLeftWidth: index && 2 },
+                  ]}
+                  dataSet={{ media: ids.partnerLogoContainer }}
+                  onPress={() => Linking.openURL(imageLink.url)}
                 >
                   <View
                     style={{
@@ -272,7 +288,7 @@ export default function PageContact({ pageData }) {
                     }}
                   >
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${item.directus_files_id}?width=240&height=160&fit=cover`}
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageLink.image}?width=240&height=160&fit=cover`}
                       width={240}
                       height={160}
                       layout="responsive"
@@ -280,7 +296,7 @@ export default function PageContact({ pageData }) {
                       // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     ></Image>
                   </View>
-                </View>
+                </Pressable>
               );
             })}
           </View>
@@ -340,6 +356,14 @@ const { styles, ids } = StyleSheet.create({
     paddingBottom: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       textAlign: "center",
+    },
+  },
+  partnerLogoContainer: {
+    flexGrow: 1,
+    borderLeftColor: Colors.white,
+    alignItems: "center",
+    ":hover": {
+      opacity: 0.75,
     },
   },
 });

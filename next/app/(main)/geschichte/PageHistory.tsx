@@ -2,6 +2,7 @@
 import RenderTipTap from "@/components/RenderTipTap";
 import {
   Files,
+  ItemsPageHistory,
   ItemsPageHistoryFiles,
   ItemsPageHistoryFiles1,
 } from "@/lib/api/data-contracts";
@@ -15,7 +16,11 @@ import DownloadLogo from "./DownloadLogo";
 import DownloadProtocol from "./DownloadProtocol";
 import BreadCrump from "@/components/BreadCrumb";
 
-export default function PageHistory({ pageData }) {
+export interface Props {
+  pageData: ItemsPageHistory;
+}
+
+export default function PageHistory({ pageData }: Props) {
   const data = pageData;
   console.log("data", data.protocols);
   return (
@@ -72,22 +77,22 @@ export default function PageHistory({ pageData }) {
                 })}
             </View>
           </View>
-          <View>
-            <Text
-              style={{
-                ...Fonts.style.h2,
-                paddingVertical: Metrics.tripleBaseMargin,
-              }}
-            >
-              {"Logo Downloads"}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-              }}
-            >
-              {data.logos &&
-                data.logos.map((item, index) => {
+          {data.logos && data.logos.length > 0 && (
+            <View>
+              <Text
+                style={{
+                  ...Fonts.style.h2,
+                  paddingVertical: Metrics.tripleBaseMargin,
+                }}
+              >
+                {"Logo Downloads"}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                }}
+              >
+                {data.logos.map((item, index) => {
                   let logo = item as ItemsPageHistoryFiles;
                   let file = logo.directus_files_id as Files;
                   return (
@@ -104,8 +109,9 @@ export default function PageHistory({ pageData }) {
                     </View>
                   );
                 })}
+              </View>
             </View>
-          </View>
+          )}
         </View>
       </View>
     </View>

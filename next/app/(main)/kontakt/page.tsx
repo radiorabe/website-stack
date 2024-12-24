@@ -16,7 +16,7 @@ async function getPageData() {
         fields: [
           "*",
           "contact_addresses.contact_address_id.*",
-          "partner_logos.*",
+          "partner_logos.image_link_id.*",
         ],
         // limit: 3,
       },
