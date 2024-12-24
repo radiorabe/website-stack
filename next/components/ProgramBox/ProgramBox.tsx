@@ -129,34 +129,36 @@ export default function ProgramBox({
 
   return (
     <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
-      {!isMobile && (
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={{ width: "50%" }}>
-            <Text
-              style={[
-                styles.title,
-                biggerFont && { ...Fonts.style.h2 },
-                textColor && { color: textColor },
-              ]}
-              dataSet={{ media: ids.title }}
-            >
-              {"Heutiges Programm"}
-            </Text>
-          </View>
-          <View style={{ width: "50%" }}>
-            <Text
-              style={[
-                styles.title,
-                biggerFont && { ...Fonts.style.h2 },
-                textColor && { color: textColor },
-              ]}
-              dataSet={{ media: ids.title }}
-            >
-              {"Playlist"}
-            </Text>
-          </View>
+      <View
+        style={styles.desktopContainer}
+        dataSet={{ media: ids.desktopContainer }}
+      >
+        <View style={{ width: "50%" }}>
+          <Text
+            style={[
+              styles.title,
+              biggerFont && { ...Fonts.style.h2 },
+              textColor && { color: textColor },
+            ]}
+            dataSet={{ media: ids.title }}
+          >
+            {"Heutiges Programm"}
+          </Text>
         </View>
-      )}
+        <View style={{ width: "50%" }}>
+          <Text
+            style={[
+              styles.title,
+              biggerFont && { ...Fonts.style.h2 },
+              textColor && { color: textColor },
+            ]}
+            dataSet={{ media: ids.title }}
+          >
+            {"Playlist"}
+          </Text>
+        </View>
+      </View>
+
       <View
         style={styles.mobileButtonContainer}
         dataSet={{ media: ids.mobileButtonContainer }}
@@ -227,7 +229,6 @@ export default function ProgramBox({
 const { ids, styles } = StyleSheet.create({
   title: {
     ...Fonts.style.h3,
-    paddingBottom: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       flexDirection: "column",
       justifyContent: "space-between",
@@ -235,14 +236,25 @@ const { ids, styles } = StyleSheet.create({
   },
   outerContainer: {
     marginVertical: Metrics.doubleBaseMargin,
+    // marginBottom: Metrics.baseMargin,
+    // backgroundColor: "blue",
     "@media (max-width: 910px)": {
       marginVertical: Metrics.tripleBaseMargin,
     },
   },
   container: {
+    // backgroundColor: "green",
     flexDirection: "row",
     justifyContent: "space-between",
     display: "flex",
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  desktopContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingBottom: Metrics.halfBaseMargin,
     "@media (max-width: 910px)": {
       display: "none",
     },

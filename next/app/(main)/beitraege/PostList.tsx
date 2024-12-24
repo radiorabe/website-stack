@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/Button";
-import PostPreview from "@/components/PostPreview";
+import PostPreview from "@/components/PostPreview/PostPreview";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import Fonts from "../../../lib/Fonts";

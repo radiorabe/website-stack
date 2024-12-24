@@ -43,40 +43,42 @@ export default function ShowsList({
             overflow: "scroll",
           }}
         >
-          {initialShows &&
-            initialShows.map((show, index) => {
-              let isCurrentshow = show.starts === currentShow.starts;
-              return (
-                <View
-                  style={styles.showContainer}
-                  dataSet={{ media: ids.showContainer }}
-                  key={"todayshows" + index}
-                >
-                  <Text
-                    style={{
-                      ...Fonts.style.text,
-                      color: textColor,
-                      paddingRight: Metrics.doubleBaseMargin,
-                    }}
+          <View style={{ paddingTop: Metrics.halfBaseMargin }}>
+            {initialShows &&
+              initialShows.map((show, index) => {
+                let isCurrentshow = show.starts === currentShow.starts;
+                return (
+                  <View
+                    style={styles.showContainer}
+                    dataSet={{ media: ids.showContainer }}
+                    key={"todayshows" + index}
                   >
-                    {moment(show.starts).format("HH:mm")}
-                  </Text>
-                  <HoverText
-                    href={show.url}
-                    style={[
-                      {
-                        ...Fonts.style.navigation,
-                        fontSize: 18,
-                        color: isCurrentshow ? hoverColor : textColor,
-                      },
-                    ]}
-                    hoverStyle={{ color: hoverColor }}
-                  >
-                    {show.name}
-                  </HoverText>
-                </View>
-              );
-            })}
+                    <Text
+                      style={{
+                        ...Fonts.style.text,
+                        color: textColor,
+                        paddingRight: Metrics.doubleBaseMargin,
+                      }}
+                    >
+                      {moment(show.starts).format("HH:mm")}
+                    </Text>
+                    <HoverText
+                      href={show.url}
+                      style={[
+                        {
+                          ...Fonts.style.navigation,
+                          fontSize: 18,
+                          color: isCurrentshow ? hoverColor : textColor,
+                        },
+                      ]}
+                      hoverStyle={{ color: hoverColor }}
+                    >
+                      {show.name}
+                    </HoverText>
+                  </View>
+                );
+              })}
+          </View>
         </View>
         <View
           style={{
@@ -86,6 +88,16 @@ export default function ShowsList({
             left: 0,
             right: 0,
             background: `linear-gradient(0deg, ${backgroundColor}, transparent)`,
+          }}
+        ></View>
+        <View
+          style={{
+            height: 30,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            background: `linear-gradient(180deg, ${backgroundColor}, transparent)`,
           }}
         ></View>
       </View>
@@ -98,8 +110,7 @@ const { ids, styles } = StyleSheet.create({
     width: "100%",
     overflow: "hidden",
     position: "relative",
-    height: 190,
-    marginTop: Metrics.halfBaseMargin,
+    height: 200,
     "@media (max-width: 910px)": {
       height: 320,
       marginTop: Metrics.doubleBaseMargin,

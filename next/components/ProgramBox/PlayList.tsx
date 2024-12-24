@@ -37,38 +37,40 @@ export default function PlayList({
             overflow: "scroll",
           }}
         >
-          {playlistData &&
-            playlistData.map((track, index) => {
-              return (
-                <View
-                  style={styles.showContainer}
-                  dataSet={{ media: ids.showContainer }}
-                  key={"playlist" + index}
-                >
-                  <Text
-                    style={{
-                      ...Fonts.style.text,
-                      color: textColor,
-                      paddingRight: Metrics.doubleBaseMargin,
-                    }}
+          <View style={{ paddingTop: Metrics.halfBaseMargin }}>
+            {playlistData &&
+              playlistData.map((track, index) => {
+                return (
+                  <View
+                    style={styles.showContainer}
+                    dataSet={{ media: ids.showContainer }}
+                    key={"playlist" + index}
                   >
-                    {moment(track.attributes.started_at).format("HH:mm")}
-                  </Text>
-                  <Text
-                    numberOfLines={1}
-                    style={[
-                      {
-                        ...Fonts.style.navigationText,
-                        fontSize: 18,
+                    <Text
+                      style={{
+                        ...Fonts.style.text,
                         color: textColor,
-                      },
-                    ]}
-                  >
-                    {track.attributes.artist + " - " + track.attributes.title}
-                  </Text>
-                </View>
-              );
-            })}
+                        paddingRight: Metrics.doubleBaseMargin,
+                      }}
+                    >
+                      {moment(track.attributes.started_at).format("HH:mm")}
+                    </Text>
+                    <Text
+                      numberOfLines={1}
+                      style={[
+                        {
+                          ...Fonts.style.navigationText,
+                          fontSize: 18,
+                          color: textColor,
+                        },
+                      ]}
+                    >
+                      {track.attributes.artist + " - " + track.attributes.title}
+                    </Text>
+                  </View>
+                );
+              })}
+          </View>
         </View>
         <View
           style={{
@@ -78,6 +80,16 @@ export default function PlayList({
             left: 0,
             right: 0,
             background: `linear-gradient(0deg, ${backgroundColor}, transparent)`,
+          }}
+        ></View>
+        <View
+          style={{
+            height: 30,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            background: `linear-gradient(180deg, ${backgroundColor}, transparent)`,
           }}
         ></View>
       </View>
@@ -90,8 +102,7 @@ const { ids, styles } = StyleSheet.create({
     width: "100%",
     overflow: "hidden",
     position: "relative",
-    height: 190,
-    marginTop: Metrics.halfBaseMargin,
+    height: 200,
     "@media (max-width: 910px)": {
       height: 320,
       marginTop: Metrics.doubleBaseMargin,

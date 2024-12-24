@@ -16,7 +16,7 @@ import { Show } from "@/lib/Types";
 
 import Button from "@/components/Button";
 import MemberInfo from "@/components/MemberInfo";
-import PostPreview from "@/components/PostPreview";
+import PostPreview from "@/components/PostPreview/PostPreview";
 import RenderTipTap from "@/components/RenderTipTap";
 import moment from "moment";
 import Heart from "./Heart";

@@ -9,7 +9,7 @@ import {
   ItemsPost,
 } from "@/lib/api/data-contracts";
 import Button from "@/components/Button";
-import PostPreview from "@/components/PostPreview";
+import PostPreview from "@/components/PostPreview/PostPreview";
 import PartyTip from "@/assets/svg/IconPartyTip";
 import Metrics from "@/lib/Metrics";
 import { Metadata } from "next";
