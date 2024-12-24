@@ -3,13 +3,12 @@ import { ItemsPartyLocation } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "@/lib/server-react-native";
+import { Linking, Text, View } from "@/lib/server-react-native";
+import useResponsive from "@/lib/useResponsisve";
 import moment from "moment";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
-import AspectRatio from "react-aspect-ratio";
-import useResponsive from "@/lib/useResponsisve";
 
 export interface Props {
   partyTips: any[];
@@ -42,6 +41,11 @@ const Ausgehtips = ({ partyTips }: Props) => {
                 key={"partyTips" + index}
                 style={styles.partyTipContainer}
                 dataSet={{ media: ids.partyTipContainer }}
+                onClick={() => {
+                  if (isMobile) {
+                    Linking.openURL(partyLocation.url);
+                  }
+                }}
               >
                 {partyLocation && partyLocation.logo && (
                   <View
@@ -143,6 +147,7 @@ const { ids, styles } = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingBottom: Metrics.baseMargin,
+    // backgroundColor: "yellow",
     "@media (max-width: 910px)": {
       paddingBottom: Metrics.tripleBaseMargin,
     },
@@ -151,13 +156,15 @@ const { ids, styles } = StyleSheet.create({
     width: "5vw",
     aspectRatio: 1,
     marginRight: Metrics.tripleBaseMargin,
+    // backgroundColor: "green",
     "@media (max-width: 910px)": {
       width: "12vw",
     },
   },
   infoContainer: {
     flexDirection: "row",
-    // backgroundColor: "green",
+    // backgroundColor: "blue",
+
     flex: 1,
     "@media (max-width: 910px)": {
       flexDirection: "column",
@@ -177,7 +184,6 @@ const { ids, styles } = StyleSheet.create({
     paddingLeft: Metrics.doubleBaseMargin,
     // backgroundColor: "blue",
     "@media (max-width: 910px)": {
-      paddingBottom: Metrics.baseMargin,
       paddingLeft: 0,
     },
   },
@@ -187,8 +193,7 @@ const { ids, styles } = StyleSheet.create({
     alignItems: "flex-end",
     // backgroundColor: "orange",
     "@media (max-width: 910px)": {
-      alignSelf: "flex-start",
-      alignItems: "flex-start",
+      display: "none",
     },
   },
 

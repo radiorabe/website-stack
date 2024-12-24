@@ -48,6 +48,7 @@ const ButtonText = ({
         return (
           <Text
             style={[
+              { textDecoration: "none" },
               style,
               hovered && hoverStyle,
               pressed && pressStyle,
