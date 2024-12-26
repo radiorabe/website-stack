@@ -43,6 +43,7 @@ export default function ProgramGroups({ pageData }: Props) {
                 label={program.name}
                 large
                 full
+                labelAlign="center"
                 textColor={Colors.white}
               ></Button>
             );
@@ -73,6 +74,7 @@ const { ids, styles } = StyleSheet.create({
   container: {},
   groupTitle: {
     ...Fonts.style.h4,
+    textAlign: "center",
     "@media (max-width: 910px)": {
       ...Fonts.style.h2,
     },

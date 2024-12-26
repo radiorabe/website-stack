@@ -23,7 +23,7 @@ export default function RootLayout({
   const { isEnabled } = draftMode();
 
   return (
-    <html lang="en">
+    <html lang="de">
       <head>
         <link
           rel="icon"

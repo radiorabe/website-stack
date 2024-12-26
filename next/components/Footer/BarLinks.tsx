@@ -3,9 +3,6 @@ import { View, Text } from "@/lib/server-react-native";
 import Colors from "../../lib/Colors";
 import Fonts from "../../lib/Fonts";
 import Metrics from "../../lib/Metrics";
-import HoverText from "../HoverText";
-import HoverUrl from "../HoverUrl";
-import LinkComponent from "../LinkComponent";
 import StyleSheet from "react-native-media-query";
 import ButtonText from "../ButtonText";
 

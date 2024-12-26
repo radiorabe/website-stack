@@ -166,12 +166,17 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
                 ></Arrow>
               )}
             </View>
-            <Button
-              href={"/programm"}
-              label={"Heute"}
-              full
-              textColor={Colors.white}
-            />
+            <View
+              style={styles.heuteButton}
+              dataSet={{ media: ids.heuteButton }}
+            >
+              <Button
+                href={"/programm"}
+                label={"Heute"}
+                full
+                textColor={Colors.white}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -222,6 +227,11 @@ const { styles, ids } = StyleSheet.create({
   monthControlContainer: {
     flexDirection: "row",
     alignItems: "center",
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  heuteButton: {
     "@media (max-width: 910px)": {
       display: "none",
     },

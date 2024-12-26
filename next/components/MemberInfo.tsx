@@ -3,10 +3,10 @@ import Metrics from "@/lib/Metrics";
 import React from "react";
 import { View, Text } from "@/lib/server-react-native";
 import Image from "next/image";
-import HoverUrl from "./HoverUrl";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
 import StyleSheet from "react-native-media-query";
+import ButtonText from "./ButtonText";
 
 const MemberInfo = ({ user }) => {
   let avatarSrc = user.avatar
@@ -36,7 +36,7 @@ const MemberInfo = ({ user }) => {
           {`${user.first_name} ${user.last_name}`}
         </Text>
 
-        <HoverUrl
+        <ButtonText
           url={"mailto:" + user.email}
           style={{
             ...Fonts.style.textLink,
@@ -45,7 +45,7 @@ const MemberInfo = ({ user }) => {
           hoverStyle={{ color: Colors.darkGreen }}
         >
           {user.email}
-        </HoverUrl>
+        </ButtonText>
       </View>
     </View>
   );

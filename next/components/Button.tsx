@@ -10,6 +10,7 @@ export interface Props {
   url?: string;
   href?: string;
   label: string;
+  labelAlign?: string;
   icon?: any;
   disabled?: boolean;
   onPress?(): void;
@@ -25,6 +26,7 @@ export interface Props {
 const Button = ({
   url,
   label,
+  labelAlign,
   icon,
   disabled,
   onPress,
@@ -81,7 +83,11 @@ const Button = ({
                 },
             ]}
           >
-            {icon && <View style={{ width: 18, height: 18 }}>{icon}</View>}
+            {icon && (
+              <View style={{ width: large ? 32 : 18, height: large ? 32 : 18 }}>
+                {icon}
+              </View>
+            )}
             <Text
               style={[
                 {
@@ -92,6 +98,7 @@ const Button = ({
                   WebkitUserSelect: "none",
                   msUserSelect: "none",
                   color: textColor ? textColor : Colors.black,
+                  textAlign: labelAlign ? labelAlign : undefined,
                 },
                 large && { ...Fonts.style.h2 },
                 hovered &&

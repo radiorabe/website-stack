@@ -1,21 +1,18 @@
 "use client";
-import HoverUrl from "@/components/HoverUrl";
-import Colors from "@/lib/Colors";
-import Metrics from "@/lib/Metrics";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
-import { Metadata } from "next";
-import Image from "next/image";
-import StyleSheet from "react-native-media-query";
-import Fonts from "../../../lib/Fonts";
-import Map from "./Map";
 import BreadCrump from "@/components/BreadCrumb";
+import ButtonText from "@/components/ButtonText";
 import {
   ItemsContactAddress,
-  ItemsImageLink,
   ItemsPageContact,
   ItemsPageContactContactAddress,
-  ItemsPageContactImageLink,
 } from "@/lib/api/data-contracts";
+import Colors from "@/lib/Colors";
+import Metrics from "@/lib/Metrics";
+import { Text, View } from "@/lib/server-react-native";
+import StyleSheet from "react-native-media-query";
+import LogoBox from "./LogoBox";
+import Map from "./Map";
+import Fonts from "@/lib/Fonts";
 
 export interface Props {
   pageData: ItemsPageContact;
@@ -52,23 +49,23 @@ export default function PageContact({ pageData }: Props) {
               {data.plz + " " + data.city}
             </Text>
 
-            <HoverUrl
+            <ButtonText
               url={`tel:${data.phone_number}`}
               style={styles.text}
               dataSet={{ media: ids.text }}
               hoverStyle={{ color: Colors.green }}
             >
               {data.phone_number}
-            </HoverUrl>
+            </ButtonText>
 
-            <HoverUrl
+            <ButtonText
               url={`mailto:${data.email}`}
               style={styles.text}
               dataSet={{ media: ids.text }}
               hoverStyle={{ color: Colors.green }}
             >
               {data.email}
-            </HoverUrl>
+            </ButtonText>
           </View>
         </View>
         <View>
@@ -107,27 +104,27 @@ export default function PageContact({ pageData }: Props) {
             }}
           >
             <View style={{ flexDirection: "row" }}>
-              <HoverUrl
+              <ButtonText
                 url={`tel:${data.studio_phone_number}`}
                 style={styles.text}
                 dataSet={{ media: ids.text }}
                 hoverStyle={{ color: Colors.green }}
               >
                 {data.studio_phone_number}
-              </HoverUrl>
+              </ButtonText>
               <Text style={styles.text} dataSet={{ media: ids.text }}>
                 {" (nur während Livesendungen)"}
               </Text>
             </View>
 
-            <HoverUrl
+            <ButtonText
               url={`mailto:${data.studio_email}`}
               style={styles.text}
               dataSet={{ media: ids.text }}
               hoverStyle={{ color: Colors.green }}
             >
               {data.studio_email}
-            </HoverUrl>
+            </ButtonText>
           </View>
         </View>
         <View>
@@ -165,7 +162,7 @@ export default function PageContact({ pageData }: Props) {
                         {address.name}
                       </Text>
 
-                      <HoverUrl
+                      <ButtonText
                         url={`tel:${address.phone_number}`}
                         style={{
                           ...Fonts.style.text,
@@ -174,9 +171,9 @@ export default function PageContact({ pageData }: Props) {
                         hoverStyle={{ color: Colors.green }}
                       >
                         {address.phone_number}
-                      </HoverUrl>
+                      </ButtonText>
 
-                      <HoverUrl
+                      <ButtonText
                         url={`mailto:${address.email}`}
                         style={{
                           ...Fonts.style.text,
@@ -185,7 +182,7 @@ export default function PageContact({ pageData }: Props) {
                         hoverStyle={{ color: Colors.green }}
                       >
                         {address.email}
-                      </HoverUrl>
+                      </ButtonText>
 
                       {/* <Text
                       style={{ ...Fonts.style.text, color: Colors.lightGreen }}
@@ -258,50 +255,13 @@ export default function PageContact({ pageData }: Props) {
           </View>
         </View>
       </View>
-      <View
-        style={styles.patnerContainer}
-        dataSet={{ media: ids.patnerContainer }}
-      >
-        <Text style={styles.partnerTitle} dataSet={{ media: ids.partnerTitle }}>
-          {"Partnerorganisationen"}
-        </Text>
-        {data && data.partner_logos && (
-          <View style={{ flexDirection: "row", overflow: "scroll" }}>
-            {data.partner_logos.map((item, index) => {
-              let logoRelation = item as ItemsPageContactImageLink;
-              let imageLink = logoRelation.image_link_id as ItemsImageLink;
-              return (
-                <Pressable
-                  key={"partner" + index}
-                  style={[
-                    styles.partnerLogoContainer,
-                    { borderLeftWidth: index && 2 },
-                  ]}
-                  dataSet={{ media: ids.partnerLogoContainer }}
-                  onPress={() => Linking.openURL(imageLink.url)}
-                >
-                  <View
-                    style={{
-                      marginHorizontal: Metrics.baseMargin,
-                      maxWidth: 200,
-                      width: "80%",
-                    }}
-                  >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageLink.image}?width=240&height=160&fit=cover`}
-                      width={240}
-                      height={160}
-                      layout="responsive"
-                      alt={"partner" + index}
-                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    ></Image>
-                  </View>
-                </Pressable>
-              );
-            })}
-          </View>
-        )}
-      </View>
+      {data && data.partner_logos && (
+        <LogoBox
+          title="Partnerorganisationen"
+          logos={data.partner_logos}
+          backgroundColor={Colors.darkGreen}
+        ></LogoBox>
+      )}
     </View>
   );
 }
@@ -352,7 +312,7 @@ const { styles, ids } = StyleSheet.create({
   },
   partnerTitle: {
     ...Fonts.style.h2,
-    color: Colors.lightGreen,
+    color: Colors.white,
     paddingBottom: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       textAlign: "center",

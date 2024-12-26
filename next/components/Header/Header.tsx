@@ -19,10 +19,13 @@ import AudioRabePlayer from "./AudioRabePlayer";
 import BurgerIcon from "./BurgerIcon";
 import MobileMenu from "./MobileMenu";
 import CloseIcon from "./CloseIcon";
+import useResponsive from "@/lib/useResponsisve";
 
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
+
+  let { isMobile } = useResponsive();
 
   let [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
@@ -245,7 +248,7 @@ function Header() {
           <AudioRabePlayer></AudioRabePlayer>
         </View>
         <MobileMenu
-          showMenu={showMenu}
+          showMenu={isMobile && showMenu}
           closeMenu={() => {
             setShowMenu(false);
           }}

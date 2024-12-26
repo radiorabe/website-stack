@@ -46,6 +46,7 @@ html {
 body {
   display: flex;
   flex-direction: column;
+  hyphens: auto;
   /* Allows you to scroll below the viewport; default value is visible */
   overflow-y: auto;
   overscroll-behavior-y: none;

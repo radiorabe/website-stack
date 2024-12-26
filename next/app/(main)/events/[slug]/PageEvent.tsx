@@ -15,6 +15,7 @@ import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Show from "./Show";
 import Link from "next/link";
+import LogoBox from "../../kontakt/LogoBox";
 
 export interface Props {
   pageData: ItemsEvents;
@@ -89,54 +90,11 @@ export default function EventPage({ pageData }: Props) {
         })}
       </View>
       {event && event.partner_logos && event.partner_logos.length > 0 && (
-        <View
-          style={{
-            backgroundColor: event.color,
-            width: "90vw",
-            alignSelf: "center",
-            padding: Metrics.doubleBaseMargin,
-            marginBottom: Metrics.tripleBaseMargin,
-            borderRadius: 9,
-          }}
-        >
-          <Text
-            style={styles.partnerTitle}
-            dataSet={{ media: ids.partnerTitle }}
-          >
-            {event.partner_title}
-          </Text>
-          <View style={{ flexDirection: "row" }}>
-            {event.partner_logos.map((item, index) => {
-              let logoRelation = item as ItemsEventsImageLink;
-              let logo = logoRelation.image_link_id as ItemsImageLink;
-
-              return (
-                <Pressable
-                  style={[styles.logoLink, { borderLeftWidth: index && 2 }]}
-                  dataSet={{ media: ids.logoLink }}
-                  onPress={() => Linking.openURL(logo.url)}
-                >
-                  <View
-                    style={{
-                      marginHorizontal: Metrics.baseMargin,
-                      maxWidth: 200,
-                      width: "80%",
-                    }}
-                  >
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${logo.image}?width=240&height=160&fit=cover`}
-                      width={240}
-                      height={160}
-                      layout="responsive"
-                      alt={"partner" + index}
-                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    ></Image>
-                  </View>
-                </Pressable>
-              );
-            })}
-          </View>
-        </View>
+        <LogoBox
+          backgroundColor={event.color}
+          title={event.partner_title}
+          logos={event.partner_logos}
+        ></LogoBox>
       )}
     </View>
   );
