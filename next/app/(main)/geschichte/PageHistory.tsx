@@ -8,13 +8,16 @@ import {
 } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "@/lib/server-react-native";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Fonts from "../../../lib/Fonts";
 import DownloadBox from "./DownloadBox";
 import DownloadLogo from "./DownloadLogo";
 import DownloadProtocol from "./DownloadProtocol";
 import BreadCrump from "@/components/BreadCrumb";
+import { ReactElement, useState } from "react";
+import ArrowIcon from "../kurse/ArrowIcon";
+import { PressableState } from "@/lib/Types";
 
 export interface Props {
   pageData: ItemsPageHistory;
@@ -22,6 +25,8 @@ export interface Props {
 
 export default function PageHistory({ pageData }: Props) {
   const data = pageData;
+  let [isOpen, setIsOpen] = useState(false);
+
   console.log("data", data.protocols);
   return (
     <View
@@ -55,27 +60,63 @@ export default function PageHistory({ pageData }: Props) {
               backgroundColor: Colors.lightGreen,
             }}
           >
-            <Text
+            <Pressable
               style={{
-                ...Fonts.style.h4,
+                marginBottom: isOpen ? Metrics.doubleBaseMargin : 0,
               }}
+              onPress={() => setIsOpen(!isOpen)}
             >
-              {"Protokolle der Mitgliederversammlungen"}
-            </Text>
-            <View>
-              {data.protocols &&
-                data.protocols.map((item, index) => {
-                  let protocol = item as ItemsPageHistoryFiles1;
-                  let file = protocol.directus_files_id as Files;
-                  return (
-                    <DownloadProtocol
-                      key={"protocol" + index}
-                      label={file.title}
-                      url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${file.id}/${file.filename_download}?download`}
-                    ></DownloadProtocol>
-                  );
-                })}
-            </View>
+              {({
+                pressed,
+                hovered,
+                focused,
+              }: PressableState): ReactElement => {
+                return (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        ...Fonts.style.h4,
+                      }}
+                    >
+                      {"Protokolle der Mitgliederversammlungen"}
+                    </Text>
+
+                    <View
+                      style={{
+                        width: 22,
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                    >
+                      <ArrowIcon
+                        color={hovered ? Colors.green : Colors.darkGreen}
+                      ></ArrowIcon>
+                    </View>
+                  </View>
+                );
+              }}
+            </Pressable>
+            {isOpen && (
+              <View>
+                {data.protocols &&
+                  data.protocols.map((item, index) => {
+                    let protocol = item as ItemsPageHistoryFiles1;
+                    let file = protocol.directus_files_id as Files;
+                    return (
+                      <DownloadProtocol
+                        key={"protocol" + index}
+                        label={file.title}
+                        url={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${file.id}/${file.filename_download}?download`}
+                      ></DownloadProtocol>
+                    );
+                  })}
+              </View>
+            )}
           </View>
           {data.logos && data.logos.length > 0 && (
             <View>
@@ -90,6 +131,7 @@ export default function PageHistory({ pageData }: Props) {
               <View
                 style={{
                   flexDirection: "row",
+                  flexWrap: "wrap",
                 }}
               >
                 {data.logos.map((item, index) => {

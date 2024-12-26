@@ -43,6 +43,7 @@ const ClassDropDown = ({ classItem }: Props) => {
 
               <View
                 style={{
+                  width: 42,
                   transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                 }}
               >
