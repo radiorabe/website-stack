@@ -12,6 +12,7 @@ export interface HoverableProps {}
 
 const AudioRabePlayerLabel = ({}: HoverableProps) => {
   const [show, setShow] = useState("");
+  const [maxWidth, setMaxwidth] = useState(0);
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
   const [timeDiff, setTimeDiff] = useState(undefined);
@@ -81,6 +82,7 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
     if (newDataFetched && scope.current) {
       // console.log("start Animation");
       let numberOfChars = show.length + artist.length + title.length;
+      setMaxwidth(numberOfChars * 10);
       animate(
         scope.current,
         { x: "-50%" },
@@ -105,9 +107,17 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
     <View
       style={{
         overflow: "hidden",
+        maxWidth: maxWidth,
+        width: "100%",
       }}
     >
-      <div style={{ width: "100%", height: 20 }}>
+      <View
+        style={{
+          width: "100%",
+          height: 20,
+          flexDirection: "row",
+        }}
+      >
         <View
           style={{
             position: "absolute",
@@ -130,18 +140,17 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
             zIndex: 10,
           }}
         ></View>
-        <div
+        <View
           style={{
             position: "absolute",
             top: 0,
             left: 0,
           }}
         >
-          <div
+          <View
             key={show + artist + title}
             ref={scope}
             style={{
-              display: "flex",
               flexDirection: "row",
               whiteSpace: "nowrap",
               flexWrap: "nowrap",
@@ -185,9 +194,9 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
                 {artist + " - " + title + "    "}
               </Text>
             </Text>
-          </div>
-        </div>
-      </div>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };

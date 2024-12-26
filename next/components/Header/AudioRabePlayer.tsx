@@ -13,6 +13,7 @@ import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
 
 import StyleSheet from "react-native-media-query";
+import PlayButton from "./PlayButton";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
@@ -151,45 +152,24 @@ const AudioRabePlayer = ({}: HoverableProps) => {
         style={styles.buttonContainer}
         dataSet={{ media: ids.buttonContainer }}
       >
-        {thisTrackPlaying && (
-          <Pressable
-            style={{}}
-            onPress={() => {
+        <PlayButton
+          state={
+            thisTrackPlaying
+              ? "playing"
+              : !thisTrackPlaying && !thisTrackLoading
+                ? "paused"
+                : "loading"
+          }
+          onPress={() => {
+            if (thisTrackPlaying) {
               audioRef.current?.pause();
-            }}
-          >
-            {({ pressed, hovered }: PressableState): ReactElement => {
-              let newColor = pressed
-                ? Colors.darkGreen
-                : hovered
-                  ? Colors.green
-                  : Colors.lightGreen;
-              return <Pausebutton color={newColor}></Pausebutton>;
-            }}
-          </Pressable>
-        )}
-        {!thisTrackPlaying && !thisTrackLoading && (
-          <Pressable
-            style={{}}
-            onPress={() => {
+            } else if (!thisTrackPlaying && !thisTrackLoading) {
               setCurrentTrack(track);
               // audioRef.current?.pause();
               audioRef.current?.load();
-            }}
-          >
-            {({ pressed, hovered }: PressableState): ReactElement => {
-              let newColor = pressed
-                ? Colors.darkGreen
-                : hovered
-                  ? Colors.green
-                  : Colors.lightGreen;
-              return <Playbutton color={newColor}></Playbutton>;
-            }}
-          </Pressable>
-        )}
-        {thisTrackLoading && (
-          <Loader color={Colors.green} size={"100%"} loading={true}></Loader>
-        )}
+            }
+          }}
+        ></PlayButton>
       </View>
 
       <View
@@ -207,11 +187,8 @@ export default AudioRabePlayer;
 const { ids, styles } = StyleSheet.create({
   buttonContainer: {
     width: Metrics.doubleBaseMargin,
-    aspectRatio: 1,
-    // height: Metrics.tripleBaseMargin,
     "@media (max-width: 910px)": {
       width: Metrics.quadBaseMargin,
-      // height: Metrics.quadBaseMargin,
     },
   },
   audioPlayerLabelContainer: {

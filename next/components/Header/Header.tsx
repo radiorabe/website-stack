@@ -184,6 +184,7 @@ function Header() {
                       </Text>
                       <View
                         style={[
+                          { width: 14 },
                           showDropdown && { transform: "rotate(180deg)" },
                         ]}
                       >

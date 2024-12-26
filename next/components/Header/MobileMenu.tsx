@@ -14,6 +14,14 @@ import Button from "../Button";
 import AudioRabePlayer from "./AudioRabePlayer";
 import dynamic from "next/dynamic";
 import { socialData } from "../Footer/BarIcons";
+import ButtonText from "../ButtonText";
+import { useAudioPlayerContext } from "@/context/audio-player-context";
+import Pausebutton from "@/assets/svg/Pausebutton";
+import Playbutton from "@/assets/svg/Playbutton";
+import Loader from "react-spinners/BounceLoader";
+import PlayButton from "./PlayButton";
+import IconArrowDown from "@/assets/svg/IconArrowDown";
+
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,
 });
@@ -35,7 +43,10 @@ const buttonArray = [
     href: "/kontakt",
     label: "Kontakt",
   },
-
+  {
+    href: "/geschichte",
+    label: "Geschichte",
+  },
   {
     href: "/team",
     label: "Team",
@@ -55,6 +66,24 @@ const buttonArray = [
 ];
 
 export default function MobileMenu({ showMenu, closeMenu }: Props) {
+  let [showDropdown, setShowDropdown] = useState(false);
+  let track = {
+    title: "Rabe Stream",
+    src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
+    author: "Trinix ft Rushawn",
+  };
+  const { currentTrack, setCurrentTrack, playerState, audioRef } =
+    useAudioPlayerContext();
+  let thisTrackSet = track.src === currentTrack.src;
+  let thisTrackLoading = thisTrackSet && playerState === "loading";
+  let thisTrackPlaying = thisTrackSet && playerState === "playing";
+
+  useEffect(() => {
+    if (showMenu) {
+      setShowDropdown(false);
+    }
+  }, [showMenu]);
+
   return (
     <View
       style={[styles.outerContainer, { left: showMenu ? 0 : "100%" }]}
@@ -66,53 +95,89 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
             {"Sendungen"}
           </Text>
         </LinkComponent>
-        <View style={{ maxHeight: Metrics.octBaseMargin, flexGrow: 1 }}></View>
-        <LinkComponent href={`/geschichte`} onPress={closeMenu}>
+        <View style={{ height: Metrics.octBaseMargin }}></View>
+
+        <View
+          style={{ flexDirection: "row" }}
+          onClick={() => {
+            setShowDropdown(!showDropdown);
+          }}
+        >
           <Text style={[styles.bigLink]} dataSet={{ media: ids.bigLink }}>
             {"Über Rabe"}
           </Text>
-        </LinkComponent>
-        <View style={{ maxHeight: Metrics.quadBaseMargin, flexGrow: 1 }}></View>
-
-        <View
-          style={{
-            justifyContent: "center",
-            flexWrap: "wrap",
-            flexDirection: "row",
-          }}
-        >
-          {buttonArray.map((item, index) => {
-            return (
-              <Button
-                key={"mobileMenuButton" + index}
-                href={item.href}
-                label={item.label}
-                textColor={Colors.lightGreen}
-                hoverTextColor={Colors.green}
-                large={true}
-                style={{ margin: Metrics.doubleBaseMargin }}
-              ></Button>
-            );
-          })}
+          <View
+            style={[
+              { width: 32, marginLeft: Metrics.doubleBaseMargin },
+              showDropdown && { transform: "rotate(180deg)" },
+            ]}
+          >
+            <IconArrowDown color={Colors.white}></IconArrowDown>
+          </View>
         </View>
-        <View style={{ maxHeight: Metrics.quadBaseMargin, flexGrow: 1 }}></View>
+
+        {showDropdown ? (
+          <View
+            style={{
+              justifyContent: "center",
+              paddingBottom: Metrics.quadBaseMargin,
+            }}
+          >
+            {buttonArray.map((item, index) => {
+              return (
+                <ButtonText
+                  key={"mobileMenuButton" + index}
+                  href={item.href}
+                  style={{
+                    paddingTop: Metrics.quadBaseMargin,
+                    ...Fonts.style.h2,
+                    color: Colors.lightGreen,
+                    alignSelf: "center",
+                  }}
+                >
+                  {item.label}
+                </ButtonText>
+              );
+            })}
+          </View>
+        ) : (
+          <View style={{ height: Metrics.octBaseMargin }}></View>
+        )}
 
         <LinkComponent href={`/mitglied-werden`} onPress={closeMenu}>
           <Text style={[styles.bigLink]} dataSet={{ media: ids.bigLink }}>
             {"Mitglied werden"}
           </Text>
         </LinkComponent>
-        <View style={{ maxHeight: Metrics.octBaseMargin, flexGrow: 1 }}></View>
+        <View style={{ height: Metrics.octBaseMargin }}></View>
 
         <View
           style={styles.playerContainer}
           dataSet={{ media: ids.playerContainer }}
         >
           <View
-            style={styles.audioPlayerContainer}
-            dataSet={{ media: ids.audioPlayerContainer }}
+            style={styles.buttonContainer}
+            dataSet={{ media: ids.buttonContainer }}
           >
-            <AudioRabePlayer></AudioRabePlayer>
+            <PlayButton
+              state={
+                thisTrackPlaying
+                  ? "playing"
+                  : !thisTrackPlaying && !thisTrackLoading
+                    ? "paused"
+                    : "loading"
+              }
+              onPress={() => {
+                if (thisTrackPlaying) {
+                  audioRef.current?.pause();
+                } else if (!thisTrackPlaying && !thisTrackLoading) {
+                  setCurrentTrack(track);
+                  // audioRef.current?.pause();
+                  audioRef.current?.load();
+                }
+              }}
+              width={undefined}
+            ></PlayButton>
           </View>
 
           <View
@@ -123,7 +188,7 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
           </View>
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           flexDirection: "row",
           width: "90%",
@@ -156,7 +221,7 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
             </View>
           );
         })}
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -173,7 +238,7 @@ const { ids, styles } = StyleSheet.create({
     overflowX: "hidden",
     transition: "left 0.3s ease-in-out",
     alignItems: "center",
-    paddingHorizontal: Metrics.doubleBaseMargin,
+    padding: Metrics.quadBaseMargin,
   },
   container: {
     flexGrow: 1,
@@ -183,19 +248,20 @@ const { ids, styles } = StyleSheet.create({
   bigLink: {
     ...Fonts.style.h1,
     color: Colors.lightGreen,
+    textAlign: "center",
   },
   playerContainer: {
-    flexDirection: "row",
-    width: "66%",
+    width: "90vw",
     alignItems: "center",
-  },
-  audioPlayerContainer: {
-    width: "8vw",
-    height: "8vw",
+    // backgroundColor: "orange",
   },
   audioPlayerLabelContainer: {
-    flexGrow: 1,
-    marginLeft: Metrics.quadBaseMargin,
+    width: "100%",
+    marginTop: Metrics.quadBaseMargin,
+    alignItems: "center",
+  },
+  buttonContainer: {
+    width: Metrics.octBaseMargin,
   },
   iconButton: {
     opacity: 1,
