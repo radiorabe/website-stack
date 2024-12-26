@@ -20,6 +20,7 @@ import BurgerIcon from "./BurgerIcon";
 import MobileMenu from "./MobileMenu";
 import CloseIcon from "./CloseIcon";
 import useResponsive from "@/lib/useResponsisve";
+import { disableScroll, enableScroll } from "@/lib/scroll";
 
 function Header() {
   const pathname = usePathname();
@@ -267,11 +268,16 @@ function Header() {
               }}
               onPress={() => {
                 setShowMenu(!showMenu);
-                //disable scrolling on main page
-                document.body.style.overflowY =
-                  document.body.style.overflowY === "hidden"
-                    ? "visible"
-                    : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
+                if (showMenu) {
+                  enableScroll();
+                } else {
+                  disableScroll();
+                }
+                // //disable scrolling on main page
+                // document.body.style.overflowY =
+                //   document.body.style.overflowY === "hidden"
+                //     ? "visible"
+                //     : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
               }}
             >
               {({
