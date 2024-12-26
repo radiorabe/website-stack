@@ -268,7 +268,7 @@ function Header() {
               }}
               onPress={() => {
                 setShowMenu(!showMenu);
-                if (showMenu) {
+                if (isMobile && showMenu) {
                   enableScroll();
                 } else {
                   disableScroll();
