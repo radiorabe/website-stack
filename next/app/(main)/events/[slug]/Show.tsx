@@ -45,10 +45,15 @@ const Show = ({ show, eventColor }: Props) => {
             <ShowInfoText
               label="Datum"
               text={moment(show.date).format("DD. MMMM YYYY")}
+              bold
             ></ShowInfoText>
           )}
           {show.program && (
-            <ShowInfoText label="Programm" text={show.program}></ShowInfoText>
+            <ShowInfoText
+              label="Programm"
+              text={show.program}
+              bold
+            ></ShowInfoText>
           )}
           {show.opening_time && (
             <ShowInfoText
@@ -59,6 +64,7 @@ const Show = ({ show, eventColor }: Props) => {
                 show.opening_time.split(":")[1] +
                 " Uhr"
               }
+              bold
             ></ShowInfoText>
           )}
         </View>
@@ -76,15 +82,17 @@ const Show = ({ show, eventColor }: Props) => {
                 show.starting_time.split(":")[1] +
                 " Uhr"
               }
+              bold
             ></ShowInfoText>
           )}
           {show.place && (
-            <ShowInfoText label="Ort" text={show.place}></ShowInfoText>
+            <ShowInfoText label="Ort" text={show.place} bold></ShowInfoText>
           )}
           {show.website && (
             <ShowInfoText
               label="Webseite"
               text={show.website}
+              bold
               // text={moment(show.opening_time).format("HH:MM")}
             ></ShowInfoText>
           )}

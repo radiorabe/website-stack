@@ -16,15 +16,7 @@ export default function PageMember({ pageData, memberProducts, statements }) {
         width: "100%",
       }}
     >
-      <View
-        style={{
-          width: "90vw",
-          alignSelf: "center",
-          alignItems: "center",
-          paddingTop: Metrics.tripleBaseMargin,
-          paddingBottom: Metrics.tripleBaseMargin,
-        }}
-      >
+      <View style={styles.container} dataSet={{ media: ids.container }}>
         <Statement statements={statements}></Statement>
         <View
           style={styles.outerProductContainer}
@@ -63,6 +55,16 @@ export default function PageMember({ pageData, memberProducts, statements }) {
 }
 
 const { styles, ids } = StyleSheet.create({
+  container: {
+    width: "90vw",
+    alignSelf: "center",
+    alignItems: "center",
+    paddingTop: Metrics.tripleBaseMargin,
+    paddingBottom: Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      paddingTop: Metrics.quadBaseMargin,
+    },
+  },
   outerProductContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -77,7 +79,7 @@ const { styles, ids } = StyleSheet.create({
     width: "43vw",
     "@media (max-width: 910px)": {
       width: "90vw",
-      marginBottom: Metrics.tripleBaseMargin,
+      marginTop: Metrics.quadBaseMargin,
     },
   },
   contentContainer: {
@@ -85,6 +87,7 @@ const { styles, ids } = StyleSheet.create({
     paddingTop: Metrics.tripleBaseMargin,
     "@media (max-width: 910px)": {
       width: "90vw",
+      paddingTop: Metrics.quadBaseMargin,
     },
   },
 });

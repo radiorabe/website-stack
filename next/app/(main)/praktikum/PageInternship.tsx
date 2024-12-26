@@ -60,10 +60,14 @@ export default function PageInternship({ pageData }) {
                       style={{
                         flexDirection: "row",
                         width: "100%",
+                        flexWrap: "wrap",
                         paddingBottom: Metrics.doubleBaseMargins,
                       }}
                     >
-                      <View style={{ width: "50%" }}>
+                      <View
+                        style={styles.halfContainer}
+                        dataSet={{ media: ids.halfContainer }}
+                      >
                         {internship.program && (
                           <InfoText
                             label="Sendung"
@@ -84,7 +88,10 @@ export default function PageInternship({ pageData }) {
                         )}
                       </View>
 
-                      <View style={{ width: "50%" }}>
+                      <View
+                        style={styles.halfContainer}
+                        dataSet={{ media: ids.halfContainer }}
+                      >
                         {internship.start && (
                           <InfoText
                             label="Start"
@@ -154,6 +161,12 @@ const { styles, ids } = StyleSheet.create({
     marginBottom: Metrics.tripleBaseMargin,
     "@media (max-width: 910px)": {
       marginBottom: Metrics.quadBaseMargin,
+    },
+  },
+  halfContainer: {
+    width: "50%",
+    "@media (max-width: 910px)": {
+      width: "100%",
     },
   },
 });

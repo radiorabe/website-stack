@@ -33,19 +33,16 @@ const ClassDropDown = ({ classItem }: Props) => {
                 justifyContent: "space-between",
               }}
             >
-              <Text
-                style={{
-                  ...Fonts.style.h2,
-                }}
-              >
+              <Text style={styles.title} dataSet={{ media: ids.title }}>
                 {classItem.title}
               </Text>
 
               <View
-                style={{
-                  width: 42,
-                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                }}
+                style={[
+                  styles.arrowContainer,
+                  { transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" },
+                ]}
+                dataSet={{ media: ids.arrowContainer }}
               >
                 <ArrowIcon
                   color={hovered ? Colors.green : Colors.darkGreen}
@@ -60,15 +57,20 @@ const ClassDropDown = ({ classItem }: Props) => {
           <View
             style={{
               flexDirection: "row",
+              flexWrap: "wrap",
               width: "100%",
               paddingBottom: Metrics.doubleBaseMargin,
             }}
           >
-            <View style={{ width: "50%" }}>
+            <View
+              style={styles.halfContainer}
+              dataSet={{ media: ids.halfContainer }}
+            >
               {classItem.date && (
                 <ShowInfoText
                   label="Datum"
                   text={moment(classItem.date).format("DD. MMMM YYYY")}
+                  bold
                 ></ShowInfoText>
               )}
               {classItem.time_start && (
@@ -79,33 +81,41 @@ const ClassDropDown = ({ classItem }: Props) => {
                     " - " +
                     classItem.time_end.slice(0, -3)
                   }
+                  bold
                 ></ShowInfoText>
               )}
               {classItem.location && (
                 <ShowInfoText
                   label="Standort"
                   text={classItem.location}
+                  bold
                 ></ShowInfoText>
               )}
             </View>
 
-            <View style={{ width: "50%" }}>
+            <View
+              style={styles.halfContainer}
+              dataSet={{ media: ids.halfContainer }}
+            >
               {classItem.price && (
                 <ShowInfoText
                   label="Kosten"
                   text={classItem.price}
+                  bold
                 ></ShowInfoText>
               )}
               {classItem.teacher && (
                 <ShowInfoText
                   label="KursleiterIn"
                   text={classItem.teacher}
+                  bold
                 ></ShowInfoText>
               )}
               {classItem.what_else && (
                 <ShowInfoText
                   label="Was noch"
                   text={classItem.what_else}
+                  bold
                 ></ShowInfoText>
               )}
             </View>
@@ -149,6 +159,24 @@ const { styles, ids } = StyleSheet.create({
     padding: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       marginBottom: Metrics.tripleBaseMargin,
+    },
+  },
+  title: {
+    ...Fonts.style.h2,
+    "@media (max-width: 910px)": {
+      ...Fonts.style.h4,
+    },
+  },
+  halfContainer: {
+    width: "50%",
+    "@media (max-width: 910px)": {
+      width: "100%",
+    },
+  },
+  arrowContainer: {
+    width: 42,
+    "@media (max-width: 910px)": {
+      width: 22,
     },
   },
 });

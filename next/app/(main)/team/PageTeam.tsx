@@ -23,7 +23,7 @@ export default function TeaamPage({ pageData }) {
 
   let memberData = [
     { title: "RaBe Staff", members: data.members_staff },
-    { title: "Vorstandsmitglieder", members: data.membermanagement },
+    { title: "Vorstandsmitglieder", members: data.members_management },
     { title: "Programmkommissionsmitglieder", members: data.members_program },
   ];
 
