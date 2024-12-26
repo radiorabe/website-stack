@@ -18,6 +18,7 @@ import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
+import { useState } from "react";
 
 type Props = {
   post: ItemsPost;
@@ -25,8 +26,9 @@ type Props = {
 
 export default function BeitragPage({ post }: Props) {
   const program = post.program as ItemsPrograms;
-
   const imagebox = post.imagebox as ItemsImageBox;
+
+  let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
 
   return (
     <View dataSet={{ media: ids.container }} style={styles.container}>
@@ -36,41 +38,38 @@ export default function BeitragPage({ post }: Props) {
           style={styles.postInfoContainer}
         >
           <Button href={"/" + program.slug} label={program.name}></Button>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text
+              dataSet={{ media: ids.postAuthorText }}
+              style={styles.postAuthorText}
+            >
+              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+                {"Von "}
+              </Text>
+              {post.authors.map((item: ItemsPostDirectusUsers, index) => {
+                let user: Users = item.directus_users_id as Users;
+                return (
+                  <ButtonText
+                    key={"author" + index}
+                    href={{
+                      pathname: "/beitraege",
+                      query: { author: user.id },
+                    }}
+                    // dataSet={{media:ids.}}
+                    style={{ ...Fonts.style.textLink, color: Colors.green }}
+                    hoverStyle={{ color: Colors.darkGreen }}
+                  >{`${index ? "," : ""} ${user.first_name || ""} ${
+                    user.last_name || ""
+                  }`}</ButtonText>
+                );
+              })}
 
-          <View
-            // dataSet={{media:ids.}}
-            style={{ width: Metrics.doubleBaseMargin }}
-          ></View>
-          <Text
-            // dataSet={{media:ids.}}
-            style={{ ...Fonts.style.text }}
-          >
-            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-              {"Von "}
+              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+                {"am "}
+              </Text>
+              <Text> {`${moment(post.date).format("DD. MMMM YYYY")}`}</Text>
             </Text>
-            {post.authors.map((item: ItemsPostDirectusUsers, index) => {
-              let user: Users = item.directus_users_id as Users;
-              return (
-                <ButtonText
-                  key={"author" + index}
-                  href={{
-                    pathname: "/beitraege",
-                    query: { author: user.id },
-                  }}
-                  // dataSet={{media:ids.}}
-                  style={{ ...Fonts.style.textLink, color: Colors.green }}
-                  hoverStyle={{ color: Colors.darkGreen }}
-                >{`${index ? "," : ""} ${user.first_name || ""} ${
-                  user.last_name || ""
-                }`}</ButtonText>
-              );
-            })}
-
-            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-              {"am "}
-            </Text>
-            <Text> {`${moment(post.date).format("DD. MMMM YYYY")}`}</Text>
-          </Text>
+          </View>
         </View>
         <Text
           // dataSet={{media:ids.}}
@@ -97,6 +96,7 @@ export default function BeitragPage({ post }: Props) {
           <View
             // dataSet={{media:ids.}}
             style={{
+              paddingTop: Metrics.doubleBaseMargin,
               paddingBottom: Metrics.tripleBaseMargin,
             }}
           >
@@ -108,9 +108,27 @@ export default function BeitragPage({ post }: Props) {
           style={{ flexDirection: "row" }}
         >
           <Button
-            url={"alksjdfkl"}
+            onPress={() => {
+              let shareUrl = `${process.env.NEXT_PUBLIC_FE_URL}/beitrag/${moment(post.date).format("DD-MM-YYYY")}/${post.slug}`;
+              if (navigator.share) {
+                // Web Share API is supported
+                navigator
+                  .share({
+                    title: "RaBe Beitrag: " + post.title,
+                    url: shareUrl,
+                  })
+                  .then(() => {
+                    setShareButtonTitle("Geteilt");
+                  })
+                  .catch(console.error);
+              } else {
+                // Fallback
+                navigator.clipboard.writeText(shareUrl);
+                setShareButtonTitle("Kopiert");
+              }
+            }}
             icon={<IconShare color={Colors.darkGreen}></IconShare>}
-            label={"Teilen"}
+            label={shareButtonTitle}
           ></Button>
         </View>
 
@@ -143,6 +161,18 @@ const { ids, styles } = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      flexDirection: "column",
+      alignItems: "flex-start",
+    },
+  },
+  postAuthorText: {
+    ...Fonts.style.text,
+    paddingLeft: Metrics.doubleBaseMargin,
+    "@media (max-width: 910px)": {
+      paddingLeft: 0,
+      paddingTop: Metrics.doubleBaseMargin,
+    },
   },
 
   imageContainer: {

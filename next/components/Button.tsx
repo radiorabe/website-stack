@@ -81,7 +81,7 @@ const Button = ({
                 },
             ]}
           >
-            {icon}
+            {icon && <View style={{ width: 18, height: 18 }}>{icon}</View>}
             <Text
               style={[
                 {

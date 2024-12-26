@@ -216,13 +216,7 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
         <div style={{ marginTop: Metrics.tripleBaseMargin }}>
           <Button
             url={tracks[0].src + "?download"}
-            icon={
-              <IconDownload
-                color={Colors.darkGreen}
-                width={Metrics.baseMargin}
-                height={Metrics.baseMargin}
-              ></IconDownload>
-            }
+            icon={<IconDownload color={Colors.darkGreen}></IconDownload>}
             label={"Herunterladen"}
           ></Button>
           <View style={{ width: Metrics.baseMargin }}></View>

@@ -42,7 +42,10 @@ export default function ProgramPage({
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <View
+        style={styles.imageContainer}
+        dataSet={{ media: ids.imageContainer }}
+      >
         <Image
           src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=1280&height=600&fit=cover`}
           fill
@@ -239,6 +242,9 @@ const { ids, styles } = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: "75vH",
+    "@media (max-width: 910px)": {
+      height: "50vH",
+    },
   },
   imageOverlayContainer: {
     position: "absolute",
