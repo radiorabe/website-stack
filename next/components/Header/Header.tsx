@@ -20,13 +20,17 @@ import BurgerIcon from "./BurgerIcon";
 import MobileMenu from "./MobileMenu";
 import CloseIcon from "./CloseIcon";
 import useResponsive from "@/lib/useResponsisve";
-import { disableScroll, enableScroll } from "@/lib/scroll";
+import dynamic from "next/dynamic";
+
+const Burger = dynamic(() => import("./Burger"), {
+  ssr: false,
+});
 
 function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
-  let { isMobile } = useResponsive();
+  let { isMobile, isClient } = useResponsive();
 
   let [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
@@ -260,47 +264,12 @@ function Header() {
           style={styles.burgerContainer}
           dataSet={{ media: ids.burgerContainer }}
         >
-          <View style={{ width: "5vw", aspectRatio: 1 }}>
-            <Pressable
-              style={{
-                overflow: "hidden",
-                height: "100%",
-              }}
-              onPress={() => {
-                setShowMenu(!showMenu);
-                if (isMobile && showMenu) {
-                  enableScroll();
-                } else {
-                  disableScroll();
-                }
-                // //disable scrolling on main page
-                // document.body.style.overflowY =
-                //   document.body.style.overflowY === "hidden"
-                //     ? "visible"
-                //     : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
-              }}
-            >
-              {({
-                pressed,
-                hovered,
-                focused,
-              }: PressableState): ReactElement => {
-                return (
-                  <View>
-                    {showMenu ? (
-                      <CloseIcon
-                        color={hovered ? Colors.green : Colors.lightGreen}
-                      ></CloseIcon>
-                    ) : (
-                      <BurgerIcon
-                        color={hovered ? Colors.green : Colors.lightGreen}
-                      ></BurgerIcon>
-                    )}
-                  </View>
-                );
-              }}
-            </Pressable>
-          </View>
+          <Burger
+            onPress={() => {
+              setShowMenu(!showMenu);
+            }}
+            menuOpen={showMenu}
+          ></Burger>
         </View>
       </View>
     </View>
