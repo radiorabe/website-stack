@@ -263,7 +263,6 @@ type Subscription {
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
   programs_mutated(event: EventEnum): programs_mutated
-  page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
   page_member_statements_mutated(event: EventEnum): page_member_statements_mutated
@@ -288,7 +287,6 @@ type Subscription {
   page_team_directus_users_2_mutated(event: EventEnum): page_team_directus_users_2_mutated
   page_program_programs_1_mutated(event: EventEnum): page_program_programs_1_mutated
   page_program_programs_2_mutated(event: EventEnum): page_program_programs_2_mutated
-  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_program_mutated(event: EventEnum): page_program_mutated
   page_receive_mutated(event: EventEnum): page_receive_mutated
   party_tips_mutated(event: EventEnum): party_tips_mutated
@@ -301,7 +299,6 @@ type Subscription {
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
   statements_mutated(event: EventEnum): statements_mutated
-  events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_mutated(event: EventEnum): post_mutated
@@ -322,9 +319,14 @@ type Subscription {
   page_internship_mutated(event: EventEnum): page_internship_mutated
   page_classes_mutated(event: EventEnum): page_classes_mutated
   page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
+  page_history_image_link_mutated(event: EventEnum): page_history_image_link_mutated
   classes_mutated(event: EventEnum): classes_mutated
+  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
   page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
+  image_link_mutated(event: EventEnum): image_link_mutated
+  events_image_link_mutated(event: EventEnum): events_image_link_mutated
+  page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1831,12 +1833,13 @@ type events {
   promo_button_label: String
   promo_button_url: String
   promo_status: String
+  partner_title: String
   shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows]
   shows_func: count_functions
-  logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
-  logos_func: count_functions
   editor_nodes(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_editor_nodes]
   editor_nodes_func: count_functions
+  partner_logos(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_image_link]
+  partner_logos_func: count_functions
 }
 
 type events_editor_nodes {
@@ -1865,16 +1868,17 @@ type events_event_shows_mutated {
   data: events_event_shows
 }
 
-type events_files {
+type events_image_link {
   id: ID!
   events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
 }
 
-type events_files_mutated {
+type events_image_link_mutated {
   key: ID!
   event: EventEnum
-  data: events_files
+  data: events_image_link
 }
 
 type events_mutated {
@@ -1905,6 +1909,18 @@ type image_box_mutated {
   key: ID!
   event: EventEnum
   data: image_box
+}
+
+type image_link {
+  id: ID!
+  url: String
+  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type image_link_mutated {
+  key: ID!
+  event: EventEnum
+  data: image_link
 }
 
 type info_box {
@@ -2091,7 +2107,7 @@ type page_contact {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  partner_logos(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files]
+  partner_logos(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_image_link]
   partner_logos_func: count_functions
   contact_addresses(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_contact_address]
   contact_addresses_func: count_functions
@@ -2109,16 +2125,17 @@ type page_contact_contact_address_mutated {
   data: page_contact_contact_address
 }
 
-type page_contact_files {
+type page_contact_image_link {
   id: ID!
   page_contact_id(filter: page_contact_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_contact
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
 }
 
-type page_contact_files_mutated {
+type page_contact_image_link_mutated {
   key: ID!
   event: EventEnum
-  data: page_contact_files
+  data: page_contact_image_link
 }
 
 type page_contact_mutated {
@@ -2169,6 +2186,19 @@ type page_history_files_mutated {
   key: ID!
   event: EventEnum
   data: page_history_files
+}
+
+type page_history_image_link {
+  id: ID!
+  page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
+}
+
+type page_history_image_link_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_history_image_link
 }
 
 type page_history_mutated {
@@ -3778,14 +3808,6 @@ input events_event_shows_filter {
   _or: [events_event_shows_filter]
 }
 
-input events_files_filter {
-  id: number_filter_operators
-  events_id: events_filter
-  directus_files_id: directus_files_filter
-  _and: [events_files_filter]
-  _or: [events_files_filter]
-}
-
 input events_filter {
   id: number_filter_operators
   status: string_filter_operators
@@ -3807,14 +3829,24 @@ input events_filter {
   promo_button_label: string_filter_operators
   promo_button_url: string_filter_operators
   promo_status: string_filter_operators
+  partner_title: string_filter_operators
   shows: events_event_shows_filter
   shows_func: count_function_filter_operators
-  logos: events_files_filter
-  logos_func: count_function_filter_operators
   editor_nodes: events_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
+  partner_logos: events_image_link_filter
+  partner_logos_func: count_function_filter_operators
   _and: [events_filter]
   _or: [events_filter]
+}
+
+input events_image_link_filter {
+  id: number_filter_operators
+  events_id: events_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [events_image_link_filter]
+  _or: [events_image_link_filter]
 }
 
 input geometry_filter_operators {
@@ -3849,6 +3881,14 @@ input image_box_filter {
   title: string_filter_operators
   _and: [image_box_filter]
   _or: [image_box_filter]
+}
+
+input image_link_filter {
+  id: number_filter_operators
+  url: string_filter_operators
+  image: directus_files_filter
+  _and: [image_link_filter]
+  _or: [image_link_filter]
 }
 
 input info_box_filter {
@@ -3942,14 +3982,6 @@ input page_contact_contact_address_filter {
   _or: [page_contact_contact_address_filter]
 }
 
-input page_contact_files_filter {
-  id: number_filter_operators
-  page_contact_id: page_contact_filter
-  directus_files_id: directus_files_filter
-  _and: [page_contact_files_filter]
-  _or: [page_contact_files_filter]
-}
-
 input page_contact_filter {
   id: number_filter_operators
   user_created: directus_users_filter
@@ -3980,12 +4012,21 @@ input page_contact_filter {
   ombuds_postfach: string_filter_operators
   ombuds_postfach_2: string_filter_operators
   location: geometry_filter_operators
-  partner_logos: page_contact_files_filter
+  partner_logos: page_contact_image_link_filter
   partner_logos_func: count_function_filter_operators
   contact_addresses: page_contact_contact_address_filter
   contact_addresses_func: count_function_filter_operators
   _and: [page_contact_filter]
   _or: [page_contact_filter]
+}
+
+input page_contact_image_link_filter {
+  id: number_filter_operators
+  page_contact_id: page_contact_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [page_contact_image_link_filter]
+  _or: [page_contact_image_link_filter]
 }
 
 input page_history_files_1_filter {

@@ -10,14 +10,14 @@
     "field": "partner_logos",
     "group": null,
     "hidden": false,
-    "interface": "files",
+    "interface": "list-m2m",
     "note": null,
     "options": null,
     "readonly": false,
     "required": false,
     "sort": 35,
     "special": [
-      "files"
+      "m2m"
     ],
     "translations": null,
     "validation": null,

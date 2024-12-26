@@ -1,15 +1,15 @@
 {
-  "collection": "events_files",
+  "collection": "page_history_image_link",
   "meta": {
     "accountability": "all",
     "archive_app_filter": true,
     "archive_field": null,
     "archive_value": null,
     "collapse": "open",
-    "collection": "events_files",
+    "collection": "page_history_image_link",
     "color": null,
     "display_template": null,
-    "group": "events",
+    "group": "page_history",
     "hidden": true,
     "icon": "import_export",
     "item_duplication_fields": null,
@@ -23,6 +23,6 @@
     "versioning": false
   },
   "schema": {
-    "name": "events_files"
+    "name": "page_history_image_link"
   }
 }

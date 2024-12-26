@@ -1,13 +1,13 @@
 {
-  "collection": "events_files",
-  "field": "id",
+  "collection": "events_image_link",
+  "field": "image_link_id",
   "type": "integer",
   "meta": {
-    "collection": "events_files",
+    "collection": "events_image_link",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "id",
+    "field": "image_link_id",
     "group": null,
     "hidden": true,
     "interface": null,
@@ -15,7 +15,7 @@
     "options": null,
     "readonly": false,
     "required": false,
-    "sort": 1,
+    "sort": 3,
     "special": null,
     "translations": null,
     "validation": null,
@@ -23,21 +23,21 @@
     "width": "full"
   },
   "schema": {
-    "name": "id",
-    "table": "events_files",
+    "name": "image_link_id",
+    "table": "events_image_link",
     "data_type": "integer",
-    "default_value": "nextval('events_files_id_seq'::regclass)",
+    "default_value": null,
     "max_length": null,
     "numeric_precision": 32,
     "numeric_scale": 0,
-    "is_nullable": false,
-    "is_unique": true,
+    "is_nullable": true,
+    "is_unique": false,
     "is_indexed": false,
-    "is_primary_key": true,
+    "is_primary_key": false,
     "is_generated": false,
     "generation_expression": null,
-    "has_auto_increment": true,
-    "foreign_key_table": null,
-    "foreign_key_column": null
+    "has_auto_increment": false,
+    "foreign_key_table": "image_link",
+    "foreign_key_column": "id"
   }
 }

@@ -1,11 +1,11 @@
 {
-  "collection": "events_files",
-  "field": "directus_files_id",
+  "collection": "image_link",
+  "field": "image",
   "related_collection": "directus_files",
   "meta": {
-    "junction_field": "events_id",
-    "many_collection": "events_files",
-    "many_field": "directus_files_id",
+    "junction_field": null,
+    "many_collection": "image_link",
+    "many_field": "image",
     "one_allowed_collections": null,
     "one_collection": "directus_files",
     "one_collection_field": null,
@@ -14,11 +14,11 @@
     "sort_field": null
   },
   "schema": {
-    "table": "events_files",
-    "column": "directus_files_id",
+    "table": "image_link",
+    "column": "image",
     "foreign_key_table": "directus_files",
     "foreign_key_column": "id",
-    "constraint_name": "events_files_directus_files_id_foreign",
+    "constraint_name": "image_link_image_foreign",
     "on_update": "NO ACTION",
     "on_delete": "SET NULL"
   }

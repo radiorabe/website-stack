@@ -1,23 +1,25 @@
 {
   "collection": "events",
-  "field": "logos",
+  "field": "partner_logos",
   "type": "alias",
   "meta": {
     "collection": "events",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "logos",
+    "field": "partner_logos",
     "group": null,
     "hidden": false,
-    "interface": "files",
+    "interface": "list-m2m",
     "note": null,
-    "options": null,
+    "options": {
+      "template": "{{image_link_id.image.$thumbnail}} {{image_link_id.url}}"
+    },
     "readonly": false,
     "required": false,
-    "sort": 15,
+    "sort": 16,
     "special": [
-      "files"
+      "m2m"
     ],
     "translations": null,
     "validation": null,

@@ -1,21 +1,21 @@
 {
-  "collection": "page_contact_files",
-  "field": "directus_files_id",
-  "type": "uuid",
+  "collection": "page_history_image_link",
+  "field": "sort",
+  "type": "bigInteger",
   "meta": {
-    "collection": "page_contact_files",
+    "collection": "page_history_image_link",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "directus_files_id",
+    "field": "sort",
     "group": null,
     "hidden": true,
-    "interface": null,
+    "interface": "input",
     "note": null,
     "options": null,
     "readonly": false,
     "required": false,
-    "sort": 3,
+    "sort": 4,
     "special": null,
     "translations": null,
     "validation": null,
@@ -23,13 +23,13 @@
     "width": "full"
   },
   "schema": {
-    "name": "directus_files_id",
-    "table": "page_contact_files",
-    "data_type": "uuid",
+    "name": "sort",
+    "table": "page_history_image_link",
+    "data_type": "bigint",
     "default_value": null,
     "max_length": null,
-    "numeric_precision": null,
-    "numeric_scale": null,
+    "numeric_precision": 64,
+    "numeric_scale": 0,
     "is_nullable": true,
     "is_unique": false,
     "is_indexed": false,
@@ -37,7 +37,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "directus_files",
-    "foreign_key_column": "id"
+    "foreign_key_table": null,
+    "foreign_key_column": null
   }
 }

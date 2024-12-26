@@ -1,24 +1,24 @@
 {
-  "collection": "page_contact_files",
+  "collection": "page_contact_image_link",
   "field": "page_contact_id",
   "related_collection": "page_contact",
   "meta": {
-    "junction_field": "directus_files_id",
-    "many_collection": "page_contact_files",
+    "junction_field": "image_link_id",
+    "many_collection": "page_contact_image_link",
     "many_field": "page_contact_id",
     "one_allowed_collections": null,
     "one_collection": "page_contact",
     "one_collection_field": null,
     "one_deselect_action": "nullify",
     "one_field": "partner_logos",
-    "sort_field": null
+    "sort_field": "sort"
   },
   "schema": {
-    "table": "page_contact_files",
+    "table": "page_contact_image_link",
     "column": "page_contact_id",
     "foreign_key_table": "page_contact",
     "foreign_key_column": "id",
-    "constraint_name": "page_contact_files_page_contact_id_foreign",
+    "constraint_name": "page_contact_image_link_page_contact_id_foreign",
     "on_update": "NO ACTION",
     "on_delete": "SET NULL"
   }

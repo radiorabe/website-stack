@@ -11,10 +11,6 @@ type Query {
   programs_by_id(id: ID!, version: String): programs
   programs_aggregated(groupBy: [String], filter: programs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [programs_aggregated!]!
   programs_by_version(version: String!, id: ID!): version_programs
-  page_contact_files(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files!]!
-  page_contact_files_by_id(id: ID!, version: String): page_contact_files
-  page_contact_files_aggregated(groupBy: [String], filter: page_contact_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_files_aggregated!]!
-  page_contact_files_by_version(version: String!, id: ID!): version_page_contact_files
   party_location(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [party_location!]!
   party_location_by_id(id: ID!, version: String): party_location
   party_location_aggregated(groupBy: [String], filter: party_location_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [party_location_aggregated!]!
@@ -79,10 +75,6 @@ type Query {
   page_program_programs_2_by_id(id: ID!, version: String): page_program_programs_2
   page_program_programs_2_aggregated(groupBy: [String], filter: page_program_programs_2_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_program_programs_2_aggregated!]!
   page_program_programs_2_by_version(version: String!, id: ID!): version_page_program_programs_2
-  page_history_files(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files!]!
-  page_history_files_by_id(id: ID!, version: String): page_history_files
-  page_history_files_aggregated(groupBy: [String], filter: page_history_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_aggregated!]!
-  page_history_files_by_version(version: String!, id: ID!): version_page_history_files
   page_program(version: String): page_program
   page_program_by_version(version: String!): version_page_program
   page_receive(version: String): page_receive
@@ -123,10 +115,6 @@ type Query {
   statements_by_id(id: ID!, version: String): statements
   statements_aggregated(groupBy: [String], filter: statements_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [statements_aggregated!]!
   statements_by_version(version: String!, id: ID!): version_statements
-  events_files(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files!]!
-  events_files_by_id(id: ID!, version: String): events_files
-  events_files_aggregated(groupBy: [String], filter: events_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_files_aggregated!]!
-  events_files_by_version(version: String!, id: ID!): version_events_files
   iframe(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [iframe!]!
   iframe_by_id(id: ID!, version: String): iframe
   iframe_aggregated(groupBy: [String], filter: iframe_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [iframe_aggregated!]!
@@ -201,10 +189,18 @@ type Query {
   page_classes_nodes_by_id(id: ID!, version: String): page_classes_nodes
   page_classes_nodes_aggregated(groupBy: [String], filter: page_classes_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_nodes_aggregated!]!
   page_classes_nodes_by_version(version: String!, id: ID!): version_page_classes_nodes
+  page_history_image_link(filter: page_history_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_image_link!]!
+  page_history_image_link_by_id(id: ID!, version: String): page_history_image_link
+  page_history_image_link_aggregated(groupBy: [String], filter: page_history_image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_image_link_aggregated!]!
+  page_history_image_link_by_version(version: String!, id: ID!): version_page_history_image_link
   classes(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [classes!]!
   classes_by_id(id: ID!, version: String): classes
   classes_aggregated(groupBy: [String], filter: classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [classes_aggregated!]!
   classes_by_version(version: String!, id: ID!): version_classes
+  page_history_files(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files!]!
+  page_history_files_by_id(id: ID!, version: String): page_history_files
+  page_history_files_aggregated(groupBy: [String], filter: page_history_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_aggregated!]!
+  page_history_files_by_version(version: String!, id: ID!): version_page_history_files
   page_classes_classes(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_classes!]!
   page_classes_classes_by_id(id: ID!, version: String): page_classes_classes
   page_classes_classes_aggregated(groupBy: [String], filter: page_classes_classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_classes_aggregated!]!
@@ -213,6 +209,18 @@ type Query {
   page_history_files_1_by_id(id: ID!, version: String): page_history_files_1
   page_history_files_1_aggregated(groupBy: [String], filter: page_history_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_1_aggregated!]!
   page_history_files_1_by_version(version: String!, id: ID!): version_page_history_files_1
+  image_link(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [image_link!]!
+  image_link_by_id(id: ID!, version: String): image_link
+  image_link_aggregated(groupBy: [String], filter: image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_link_aggregated!]!
+  image_link_by_version(version: String!, id: ID!): version_image_link
+  events_image_link(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_image_link!]!
+  events_image_link_by_id(id: ID!, version: String): events_image_link
+  events_image_link_aggregated(groupBy: [String], filter: events_image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_image_link_aggregated!]!
+  events_image_link_by_version(version: String!, id: ID!): version_events_image_link
+  page_contact_image_link(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_image_link!]!
+  page_contact_image_link_by_id(id: ID!, version: String): page_contact_image_link
+  page_contact_image_link_aggregated(groupBy: [String], filter: page_contact_image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_image_link_aggregated!]!
+  page_contact_image_link_by_version(version: String!, id: ID!): version_page_contact_image_link
 }
 
 type Mutation {
@@ -222,8 +230,6 @@ type Mutation {
   create_image_box_item(data: create_image_box_input!): image_box
   create_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_programs_input!]): [programs!]!
   create_programs_item(data: create_programs_input!): programs
-  create_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_files_input!]): [page_contact_files!]!
-  create_page_contact_files_item(data: create_page_contact_files_input!): page_contact_files
   create_party_location_items(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_party_location_input!]): [party_location!]!
   create_party_location_item(data: create_party_location_input!): party_location
   create_page_member_statements_items(filter: page_member_statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_member_statements_input!]): [page_member_statements!]!
@@ -250,8 +256,6 @@ type Mutation {
   create_page_program_programs_1_item(data: create_page_program_programs_1_input!): page_program_programs_1
   create_page_program_programs_2_items(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_program_programs_2_input!]): [page_program_programs_2!]!
   create_page_program_programs_2_item(data: create_page_program_programs_2_input!): page_program_programs_2
-  create_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_input!]): [page_history_files!]!
-  create_page_history_files_item(data: create_page_history_files_input!): page_history_files
   create_party_tips_items(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_party_tips_input!]): [party_tips!]!
   create_party_tips_item(data: create_party_tips_input!): party_tips
   create_contact_address_items(filter: contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_contact_address_input!]): [contact_address!]!
@@ -268,8 +272,6 @@ type Mutation {
   create_events_item(data: create_events_input!): events
   create_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_statements_input!]): [statements!]!
   create_statements_item(data: create_statements_input!): statements
-  create_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_files_input!]): [events_files!]!
-  create_events_files_item(data: create_events_files_input!): events_files
   create_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_iframe_input!]): [iframe!]!
   create_iframe_item(data: create_iframe_input!): iframe
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
@@ -304,12 +306,22 @@ type Mutation {
   create_page_internship_internships_item(data: create_page_internship_internships_input!): page_internship_internships
   create_page_classes_nodes_items(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_nodes_input!]): [page_classes_nodes!]!
   create_page_classes_nodes_item(data: create_page_classes_nodes_input!): page_classes_nodes
+  create_page_history_image_link_items(filter: page_history_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_image_link_input!]): [page_history_image_link!]!
+  create_page_history_image_link_item(data: create_page_history_image_link_input!): page_history_image_link
   create_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_classes_input!]): [classes!]!
   create_classes_item(data: create_classes_input!): classes
+  create_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_input!]): [page_history_files!]!
+  create_page_history_files_item(data: create_page_history_files_input!): page_history_files
   create_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_classes_input!]): [page_classes_classes!]!
   create_page_classes_classes_item(data: create_page_classes_classes_input!): page_classes_classes
   create_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_1_input!]): [page_history_files_1!]!
   create_page_history_files_1_item(data: create_page_history_files_1_input!): page_history_files_1
+  create_image_link_items(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_link_input!]): [image_link!]!
+  create_image_link_item(data: create_image_link_input!): image_link
+  create_events_image_link_items(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_image_link_input!]): [events_image_link!]!
+  create_events_image_link_item(data: create_events_image_link_input!): events_image_link
+  create_page_contact_image_link_items(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_image_link_input!]): [page_contact_image_link!]!
+  create_page_contact_image_link_item(data: create_page_contact_image_link_input!): page_contact_image_link
   update_page_contact_contact_address_items(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_contact_address_input!): [page_contact_contact_address!]!
   update_page_contact_contact_address_batch(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_contact_address_input!]): [page_contact_contact_address!]!
   update_page_contact_contact_address_item(id: ID!, data: update_page_contact_contact_address_input!): page_contact_contact_address
@@ -319,9 +331,6 @@ type Mutation {
   update_programs_items(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_programs_input!): [programs!]!
   update_programs_batch(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_programs_input!]): [programs!]!
   update_programs_item(id: ID!, data: update_programs_input!): programs
-  update_page_contact_files_items(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_files_input!): [page_contact_files!]!
-  update_page_contact_files_batch(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_files_input!]): [page_contact_files!]!
-  update_page_contact_files_item(id: ID!, data: update_page_contact_files_input!): page_contact_files
   update_party_location_items(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_party_location_input!): [party_location!]!
   update_party_location_batch(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_party_location_input!]): [party_location!]!
   update_party_location_item(id: ID!, data: update_party_location_input!): party_location
@@ -367,9 +376,6 @@ type Mutation {
   update_page_program_programs_2_items(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_program_programs_2_input!): [page_program_programs_2!]!
   update_page_program_programs_2_batch(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_program_programs_2_input!]): [page_program_programs_2!]!
   update_page_program_programs_2_item(id: ID!, data: update_page_program_programs_2_input!): page_program_programs_2
-  update_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_input!): [page_history_files!]!
-  update_page_history_files_batch(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_input!]): [page_history_files!]!
-  update_page_history_files_item(id: ID!, data: update_page_history_files_input!): page_history_files
   update_page_program(data: update_page_program_input!): page_program
   update_page_receive(data: update_page_receive_input!): page_receive
   update_party_tips_items(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_party_tips_input!): [party_tips!]!
@@ -398,9 +404,6 @@ type Mutation {
   update_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_statements_input!): [statements!]!
   update_statements_batch(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_statements_input!]): [statements!]!
   update_statements_item(id: ID!, data: update_statements_input!): statements
-  update_events_files_items(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_files_input!): [events_files!]!
-  update_events_files_batch(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_files_input!]): [events_files!]!
-  update_events_files_item(id: ID!, data: update_events_files_input!): events_files
   update_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_iframe_input!): [iframe!]!
   update_iframe_batch(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_iframe_input!]): [iframe!]!
   update_iframe_item(id: ID!, data: update_iframe_input!): iframe
@@ -455,23 +458,36 @@ type Mutation {
   update_page_classes_nodes_items(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_nodes_input!): [page_classes_nodes!]!
   update_page_classes_nodes_batch(filter: page_classes_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_nodes_input!]): [page_classes_nodes!]!
   update_page_classes_nodes_item(id: ID!, data: update_page_classes_nodes_input!): page_classes_nodes
+  update_page_history_image_link_items(filter: page_history_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_image_link_input!): [page_history_image_link!]!
+  update_page_history_image_link_batch(filter: page_history_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_image_link_input!]): [page_history_image_link!]!
+  update_page_history_image_link_item(id: ID!, data: update_page_history_image_link_input!): page_history_image_link
   update_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_classes_input!): [classes!]!
   update_classes_batch(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_classes_input!]): [classes!]!
   update_classes_item(id: ID!, data: update_classes_input!): classes
+  update_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_input!): [page_history_files!]!
+  update_page_history_files_batch(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_input!]): [page_history_files!]!
+  update_page_history_files_item(id: ID!, data: update_page_history_files_input!): page_history_files
   update_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_classes_input!): [page_classes_classes!]!
   update_page_classes_classes_batch(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_classes_input!]): [page_classes_classes!]!
   update_page_classes_classes_item(id: ID!, data: update_page_classes_classes_input!): page_classes_classes
   update_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_1_input!): [page_history_files_1!]!
   update_page_history_files_1_batch(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_1_input!]): [page_history_files_1!]!
   update_page_history_files_1_item(id: ID!, data: update_page_history_files_1_input!): page_history_files_1
+  update_image_link_items(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_link_input!): [image_link!]!
+  update_image_link_batch(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_link_input!]): [image_link!]!
+  update_image_link_item(id: ID!, data: update_image_link_input!): image_link
+  update_events_image_link_items(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_image_link_input!): [events_image_link!]!
+  update_events_image_link_batch(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_image_link_input!]): [events_image_link!]!
+  update_events_image_link_item(id: ID!, data: update_events_image_link_input!): events_image_link
+  update_page_contact_image_link_items(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_image_link_input!): [page_contact_image_link!]!
+  update_page_contact_image_link_batch(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_image_link_input!]): [page_contact_image_link!]!
+  update_page_contact_image_link_item(id: ID!, data: update_page_contact_image_link_input!): page_contact_image_link
   delete_page_contact_contact_address_items(ids: [ID]!): delete_many
   delete_page_contact_contact_address_item(id: ID!): delete_one
   delete_image_box_items(ids: [ID]!): delete_many
   delete_image_box_item(id: ID!): delete_one
   delete_programs_items(ids: [ID]!): delete_many
   delete_programs_item(id: ID!): delete_one
-  delete_page_contact_files_items(ids: [ID]!): delete_many
-  delete_page_contact_files_item(id: ID!): delete_one
   delete_party_location_items(ids: [ID]!): delete_many
   delete_party_location_item(id: ID!): delete_one
   delete_page_member_statements_items(ids: [ID]!): delete_many
@@ -498,8 +514,6 @@ type Mutation {
   delete_page_program_programs_1_item(id: ID!): delete_one
   delete_page_program_programs_2_items(ids: [ID]!): delete_many
   delete_page_program_programs_2_item(id: ID!): delete_one
-  delete_page_history_files_items(ids: [ID]!): delete_many
-  delete_page_history_files_item(id: ID!): delete_one
   delete_party_tips_items(ids: [ID]!): delete_many
   delete_party_tips_item(id: ID!): delete_one
   delete_contact_address_items(ids: [ID]!): delete_many
@@ -516,8 +530,6 @@ type Mutation {
   delete_events_item(id: ID!): delete_one
   delete_statements_items(ids: [ID]!): delete_many
   delete_statements_item(id: ID!): delete_one
-  delete_events_files_items(ids: [ID]!): delete_many
-  delete_events_files_item(id: ID!): delete_one
   delete_iframe_items(ids: [ID]!): delete_many
   delete_iframe_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
@@ -552,12 +564,22 @@ type Mutation {
   delete_page_internship_internships_item(id: ID!): delete_one
   delete_page_classes_nodes_items(ids: [ID]!): delete_many
   delete_page_classes_nodes_item(id: ID!): delete_one
+  delete_page_history_image_link_items(ids: [ID]!): delete_many
+  delete_page_history_image_link_item(id: ID!): delete_one
   delete_classes_items(ids: [ID]!): delete_many
   delete_classes_item(id: ID!): delete_one
+  delete_page_history_files_items(ids: [ID]!): delete_many
+  delete_page_history_files_item(id: ID!): delete_one
   delete_page_classes_classes_items(ids: [ID]!): delete_many
   delete_page_classes_classes_item(id: ID!): delete_one
   delete_page_history_files_1_items(ids: [ID]!): delete_many
   delete_page_history_files_1_item(id: ID!): delete_one
+  delete_image_link_items(ids: [ID]!): delete_many
+  delete_image_link_item(id: ID!): delete_one
+  delete_events_image_link_items(ids: [ID]!): delete_many
+  delete_events_image_link_item(id: ID!): delete_one
+  delete_page_contact_image_link_items(ids: [ID]!): delete_many
+  delete_page_contact_image_link_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -580,7 +602,6 @@ type Subscription {
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
   programs_mutated(event: EventEnum): programs_mutated
-  page_contact_files_mutated(event: EventEnum): page_contact_files_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
   page_member_statements_mutated(event: EventEnum): page_member_statements_mutated
@@ -605,7 +626,6 @@ type Subscription {
   page_team_directus_users_2_mutated(event: EventEnum): page_team_directus_users_2_mutated
   page_program_programs_1_mutated(event: EventEnum): page_program_programs_1_mutated
   page_program_programs_2_mutated(event: EventEnum): page_program_programs_2_mutated
-  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_program_mutated(event: EventEnum): page_program_mutated
   page_receive_mutated(event: EventEnum): page_receive_mutated
   party_tips_mutated(event: EventEnum): party_tips_mutated
@@ -618,7 +638,6 @@ type Subscription {
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
   statements_mutated(event: EventEnum): statements_mutated
-  events_files_mutated(event: EventEnum): events_files_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
   post_mutated(event: EventEnum): post_mutated
@@ -639,9 +658,14 @@ type Subscription {
   page_internship_mutated(event: EventEnum): page_internship_mutated
   page_classes_mutated(event: EventEnum): page_classes_mutated
   page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
+  page_history_image_link_mutated(event: EventEnum): page_history_image_link_mutated
   classes_mutated(event: EventEnum): classes_mutated
+  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
   page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
+  image_link_mutated(event: EventEnum): image_link_mutated
+  events_image_link_mutated(event: EventEnum): events_image_link_mutated
+  page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1577,12 +1601,13 @@ type events {
   promo_button_label: String
   promo_button_url: String
   promo_status: String
+  partner_title: String
   shows(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_event_shows]
   shows_func: count_functions
-  logos(filter: events_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_files]
-  logos_func: count_functions
   editor_nodes(filter: events_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_editor_nodes]
   editor_nodes_func: count_functions
+  partner_logos(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [events_image_link]
+  partner_logos_func: count_functions
 }
 
 type events_aggregated {
@@ -1618,9 +1643,10 @@ type events_aggregated_count {
   promo_button_label: Int
   promo_button_url: Int
   promo_status: Int
+  partner_title: Int
   shows: Int
-  logos: Int
   editor_nodes: Int
+  partner_logos: Int
 }
 
 type events_aggregated_fields {
@@ -1704,40 +1730,44 @@ type events_event_shows_mutated {
   data: events_event_shows
 }
 
-type events_files {
+type events_image_link {
   id: ID!
   events_id(filter: events_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): events
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
 }
 
-type events_files_aggregated {
+type events_image_link_aggregated {
   group: JSON
   countAll: Int
-  count: events_files_aggregated_count
-  countDistinct: events_files_aggregated_count
-  avg: events_files_aggregated_fields
-  sum: events_files_aggregated_fields
-  avgDistinct: events_files_aggregated_fields
-  sumDistinct: events_files_aggregated_fields
-  min: events_files_aggregated_fields
-  max: events_files_aggregated_fields
+  count: events_image_link_aggregated_count
+  countDistinct: events_image_link_aggregated_count
+  avg: events_image_link_aggregated_fields
+  sum: events_image_link_aggregated_fields
+  avgDistinct: events_image_link_aggregated_fields
+  sumDistinct: events_image_link_aggregated_fields
+  min: events_image_link_aggregated_fields
+  max: events_image_link_aggregated_fields
 }
 
-type events_files_aggregated_count {
+type events_image_link_aggregated_count {
   id: Int
   events_id: Int
-  directus_files_id: Int
+  image_link_id: Int
+  sort: Int
 }
 
-type events_files_aggregated_fields {
+type events_image_link_aggregated_fields {
   id: Float
   events_id: Float
+  image_link_id: Float
+  sort: Float
 }
 
-type events_files_mutated {
+type events_image_link_mutated {
   key: ID!
   event: EventEnum
-  data: events_files
+  data: events_image_link
 }
 
 type events_mutated {
@@ -1814,6 +1844,41 @@ type image_box_mutated {
   key: ID!
   event: EventEnum
   data: image_box
+}
+
+type image_link {
+  id: ID!
+  url: String
+  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type image_link_aggregated {
+  group: JSON
+  countAll: Int
+  count: image_link_aggregated_count
+  countDistinct: image_link_aggregated_count
+  avg: image_link_aggregated_fields
+  sum: image_link_aggregated_fields
+  avgDistinct: image_link_aggregated_fields
+  sumDistinct: image_link_aggregated_fields
+  min: image_link_aggregated_fields
+  max: image_link_aggregated_fields
+}
+
+type image_link_aggregated_count {
+  id: Int
+  url: Int
+  image: Int
+}
+
+type image_link_aggregated_fields {
+  id: Float
+}
+
+type image_link_mutated {
+  key: ID!
+  event: EventEnum
+  data: image_link
 }
 
 type info_box {
@@ -2177,7 +2242,7 @@ type page_contact {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  partner_logos(filter: page_contact_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_files]
+  partner_logos(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_image_link]
   partner_logos_func: count_functions
   contact_addresses(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_contact_contact_address]
   contact_addresses_func: count_functions
@@ -2220,40 +2285,44 @@ type page_contact_contact_address_mutated {
   data: page_contact_contact_address
 }
 
-type page_contact_files {
+type page_contact_image_link {
   id: ID!
   page_contact_id(filter: page_contact_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_contact
-  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
 }
 
-type page_contact_files_aggregated {
+type page_contact_image_link_aggregated {
   group: JSON
   countAll: Int
-  count: page_contact_files_aggregated_count
-  countDistinct: page_contact_files_aggregated_count
-  avg: page_contact_files_aggregated_fields
-  sum: page_contact_files_aggregated_fields
-  avgDistinct: page_contact_files_aggregated_fields
-  sumDistinct: page_contact_files_aggregated_fields
-  min: page_contact_files_aggregated_fields
-  max: page_contact_files_aggregated_fields
+  count: page_contact_image_link_aggregated_count
+  countDistinct: page_contact_image_link_aggregated_count
+  avg: page_contact_image_link_aggregated_fields
+  sum: page_contact_image_link_aggregated_fields
+  avgDistinct: page_contact_image_link_aggregated_fields
+  sumDistinct: page_contact_image_link_aggregated_fields
+  min: page_contact_image_link_aggregated_fields
+  max: page_contact_image_link_aggregated_fields
 }
 
-type page_contact_files_aggregated_count {
+type page_contact_image_link_aggregated_count {
   id: Int
   page_contact_id: Int
-  directus_files_id: Int
+  image_link_id: Int
+  sort: Int
 }
 
-type page_contact_files_aggregated_fields {
+type page_contact_image_link_aggregated_fields {
   id: Float
   page_contact_id: Float
+  image_link_id: Float
+  sort: Float
 }
 
-type page_contact_files_mutated {
+type page_contact_image_link_mutated {
   key: ID!
   event: EventEnum
-  data: page_contact_files
+  data: page_contact_image_link
 }
 
 type page_contact_mutated {
@@ -2352,6 +2421,46 @@ type page_history_files_mutated {
   key: ID!
   event: EventEnum
   data: page_history_files
+}
+
+type page_history_image_link {
+  id: ID!
+  page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
+  image_link_id(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): image_link
+  sort: GraphQLBigInt
+}
+
+type page_history_image_link_aggregated {
+  group: JSON
+  countAll: Int
+  count: page_history_image_link_aggregated_count
+  countDistinct: page_history_image_link_aggregated_count
+  avg: page_history_image_link_aggregated_fields
+  sum: page_history_image_link_aggregated_fields
+  avgDistinct: page_history_image_link_aggregated_fields
+  sumDistinct: page_history_image_link_aggregated_fields
+  min: page_history_image_link_aggregated_fields
+  max: page_history_image_link_aggregated_fields
+}
+
+type page_history_image_link_aggregated_count {
+  id: Int
+  page_history_id: Int
+  image_link_id: Int
+  sort: Int
+}
+
+type page_history_image_link_aggregated_fields {
+  id: Float
+  page_history_id: Float
+  image_link_id: Float
+  sort: Float
+}
+
+type page_history_image_link_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_history_image_link
 }
 
 type page_history_mutated {
@@ -3646,9 +3755,10 @@ type version_events {
   promo_button_label: String
   promo_button_url: String
   promo_status: String
+  partner_title: String
   shows: JSON
-  logos: JSON
   editor_nodes: JSON
+  partner_logos: JSON
 }
 
 """"""
@@ -3668,10 +3778,11 @@ type version_events_event_shows {
 }
 
 """"""
-type version_events_files {
+type version_events_image_link {
   id: ID
   events_id: JSON
-  directus_files_id: JSON
+  image_link_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -3686,6 +3797,13 @@ type version_image_box {
   image: JSON
   text: String
   title: String
+}
+
+""""""
+type version_image_link {
+  id: ID
+  url: String
+  image: JSON
 }
 
 """"""
@@ -3826,10 +3944,11 @@ type version_page_contact_contact_address {
 }
 
 """"""
-type version_page_contact_files {
+type version_page_contact_image_link {
   id: ID
   page_contact_id: JSON
-  directus_files_id: JSON
+  image_link_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -3859,6 +3978,14 @@ type version_page_history_files_1 {
   id: ID
   page_history_id: JSON
   directus_files_id: JSON
+}
+
+""""""
+type version_page_history_image_link {
+  id: ID
+  page_history_id: JSON
+  image_link_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -4449,10 +4576,11 @@ input create_events_event_shows_input {
   sort: GraphQLBigInt
 }
 
-input create_events_files_input {
+input create_events_image_link_input {
   id: ID
   events_id: create_events_input
-  directus_files_id: create_directus_files_input
+  image_link_id: create_image_link_input
+  sort: GraphQLBigInt
 }
 
 input create_events_input {
@@ -4475,9 +4603,10 @@ input create_events_input {
   promo_button_label: String
   promo_button_url: String
   promo_status: String
+  partner_title: String
   shows: [create_events_event_shows_input]
-  logos: [create_events_files_input]
   editor_nodes: [create_events_editor_nodes_input]
+  partner_logos: [create_events_image_link_input]
 }
 
 input create_iframe_input {
@@ -4490,6 +4619,12 @@ input create_image_box_input {
   image: create_directus_files_input
   text: String
   title: String
+}
+
+input create_image_link_input {
+  id: ID
+  url: String
+  image: create_directus_files_input
 }
 
 input create_info_box_input {
@@ -4578,10 +4713,11 @@ input create_page_contact_contact_address_input {
   contact_address_id: create_contact_address_input
 }
 
-input create_page_contact_files_input {
+input create_page_contact_image_link_input {
   id: ID
   page_contact_id: create_page_contact_input
-  directus_files_id: create_directus_files_input
+  image_link_id: create_image_link_input
+  sort: GraphQLBigInt
 }
 
 input create_page_contact_input {
@@ -4612,7 +4748,7 @@ input create_page_contact_input {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  partner_logos: [create_page_contact_files_input]
+  partner_logos: [create_page_contact_image_link_input]
   contact_addresses: [create_page_contact_contact_address_input]
 }
 
@@ -4626,6 +4762,13 @@ input create_page_history_files_input {
   id: ID
   page_history_id: create_page_history_input
   directus_files_id: create_directus_files_input
+}
+
+input create_page_history_image_link_input {
+  id: ID
+  page_history_id: create_page_history_input
+  image_link_id: create_image_link_input
+  sort: GraphQLBigInt
 }
 
 input create_page_history_input {
@@ -5275,14 +5418,6 @@ input events_event_shows_filter {
   _or: [events_event_shows_filter]
 }
 
-input events_files_filter {
-  id: number_filter_operators
-  events_id: events_filter
-  directus_files_id: directus_files_filter
-  _and: [events_files_filter]
-  _or: [events_files_filter]
-}
-
 input events_filter {
   id: number_filter_operators
   status: string_filter_operators
@@ -5304,14 +5439,24 @@ input events_filter {
   promo_button_label: string_filter_operators
   promo_button_url: string_filter_operators
   promo_status: string_filter_operators
+  partner_title: string_filter_operators
   shows: events_event_shows_filter
   shows_func: count_function_filter_operators
-  logos: events_files_filter
-  logos_func: count_function_filter_operators
   editor_nodes: events_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
+  partner_logos: events_image_link_filter
+  partner_logos_func: count_function_filter_operators
   _and: [events_filter]
   _or: [events_filter]
+}
+
+input events_image_link_filter {
+  id: number_filter_operators
+  events_id: events_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [events_image_link_filter]
+  _or: [events_image_link_filter]
 }
 
 input geometry_filter_operators {
@@ -5346,6 +5491,14 @@ input image_box_filter {
   title: string_filter_operators
   _and: [image_box_filter]
   _or: [image_box_filter]
+}
+
+input image_link_filter {
+  id: number_filter_operators
+  url: string_filter_operators
+  image: directus_files_filter
+  _and: [image_link_filter]
+  _or: [image_link_filter]
 }
 
 input info_box_filter {
@@ -5479,14 +5632,6 @@ input page_contact_contact_address_filter {
   _or: [page_contact_contact_address_filter]
 }
 
-input page_contact_files_filter {
-  id: number_filter_operators
-  page_contact_id: page_contact_filter
-  directus_files_id: directus_files_filter
-  _and: [page_contact_files_filter]
-  _or: [page_contact_files_filter]
-}
-
 input page_contact_filter {
   id: number_filter_operators
   user_created: directus_users_filter
@@ -5517,12 +5662,21 @@ input page_contact_filter {
   ombuds_postfach: string_filter_operators
   ombuds_postfach_2: string_filter_operators
   location: geometry_filter_operators
-  partner_logos: page_contact_files_filter
+  partner_logos: page_contact_image_link_filter
   partner_logos_func: count_function_filter_operators
   contact_addresses: page_contact_contact_address_filter
   contact_addresses_func: count_function_filter_operators
   _and: [page_contact_filter]
   _or: [page_contact_filter]
+}
+
+input page_contact_image_link_filter {
+  id: number_filter_operators
+  page_contact_id: page_contact_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [page_contact_image_link_filter]
+  _or: [page_contact_image_link_filter]
 }
 
 input page_history_files_1_filter {
@@ -5561,6 +5715,15 @@ input page_history_filter {
   logos_func: count_function_filter_operators
   _and: [page_history_filter]
   _or: [page_history_filter]
+}
+
+input page_history_image_link_filter {
+  id: number_filter_operators
+  page_history_id: page_history_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [page_history_image_link_filter]
+  _or: [page_history_image_link_filter]
 }
 
 input page_history_nodes_filter {
@@ -6156,10 +6319,11 @@ input update_events_event_shows_input {
   sort: GraphQLBigInt
 }
 
-input update_events_files_input {
+input update_events_image_link_input {
   id: ID
   events_id: update_events_input
-  directus_files_id: update_directus_files_input
+  image_link_id: update_image_link_input
+  sort: GraphQLBigInt
 }
 
 input update_events_input {
@@ -6182,9 +6346,10 @@ input update_events_input {
   promo_button_label: String
   promo_button_url: String
   promo_status: String
+  partner_title: String
   shows: [update_events_event_shows_input]
-  logos: [update_events_files_input]
   editor_nodes: [update_events_editor_nodes_input]
+  partner_logos: [update_events_image_link_input]
 }
 
 input update_iframe_input {
@@ -6197,6 +6362,12 @@ input update_image_box_input {
   image: update_directus_files_input
   text: String
   title: String
+}
+
+input update_image_link_input {
+  id: ID
+  url: String
+  image: update_directus_files_input
 }
 
 input update_info_box_input {
@@ -6294,10 +6465,11 @@ input update_page_contact_contact_address_input {
   contact_address_id: update_contact_address_input
 }
 
-input update_page_contact_files_input {
+input update_page_contact_image_link_input {
   id: ID
   page_contact_id: update_page_contact_input
-  directus_files_id: update_directus_files_input
+  image_link_id: update_image_link_input
+  sort: GraphQLBigInt
 }
 
 input update_page_contact_input {
@@ -6328,7 +6500,7 @@ input update_page_contact_input {
   ombuds_postfach: String
   ombuds_postfach_2: String
   location: GraphQLGeoJSON
-  partner_logos: [update_page_contact_files_input]
+  partner_logos: [update_page_contact_image_link_input]
   contact_addresses: [update_page_contact_contact_address_input]
 }
 
@@ -6342,6 +6514,13 @@ input update_page_history_files_input {
   id: ID
   page_history_id: update_page_history_input
   directus_files_id: update_directus_files_input
+}
+
+input update_page_history_image_link_input {
+  id: ID
+  page_history_id: update_page_history_input
+  image_link_id: update_image_link_input
+  sort: GraphQLBigInt
 }
 
 input update_page_history_input {

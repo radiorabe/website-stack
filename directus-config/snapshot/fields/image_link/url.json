@@ -1,21 +1,23 @@
 {
-  "collection": "events_files",
-  "field": "directus_files_id",
-  "type": "uuid",
+  "collection": "image_link",
+  "field": "url",
+  "type": "string",
   "meta": {
-    "collection": "events_files",
+    "collection": "image_link",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "directus_files_id",
+    "field": "url",
     "group": null,
-    "hidden": true,
-    "interface": null,
+    "hidden": false,
+    "interface": "input",
     "note": null,
-    "options": null,
+    "options": {
+      "placeholder": "https://..."
+    },
     "readonly": false,
     "required": false,
-    "sort": 3,
+    "sort": 2,
     "special": null,
     "translations": null,
     "validation": null,
@@ -23,11 +25,11 @@
     "width": "full"
   },
   "schema": {
-    "name": "directus_files_id",
-    "table": "events_files",
-    "data_type": "uuid",
+    "name": "url",
+    "table": "image_link",
+    "data_type": "character varying",
     "default_value": null,
-    "max_length": null,
+    "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,
     "is_nullable": true,
@@ -37,7 +39,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "directus_files",
-    "foreign_key_column": "id"
+    "foreign_key_table": null,
+    "foreign_key_column": null
   }
 }
