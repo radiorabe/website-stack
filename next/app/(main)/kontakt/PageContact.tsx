@@ -255,7 +255,7 @@ export default function PageContact({ pageData }: Props) {
           </View>
         </View>
       </View>
-      {data && data.partner_logos && (
+      {data && data.partner_logos && data.partner_logos.length > 0 && (
         <LogoBox
           title="Partnerorganisationen"
           logos={data.partner_logos}
