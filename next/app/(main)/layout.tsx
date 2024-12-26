@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        <meta name="format-detection" content="telephone=no" />
+        {/* <meta name="format-detection" content="telephone=no" /> */}
         <link
           rel="icon"
           type="image/png"
