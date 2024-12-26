@@ -3,20 +3,11 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
-import Fonts from "@/lib/Fonts";
-import { Api } from "@/lib/api";
-import {
-  ItemsPageTeam,
-  ItemsPageTeamDirectusUsers,
-  Users,
-} from "@/lib/api/data-contracts";
-import MemberInfo from "@/components/MemberInfo";
-import Colors from "@/lib/Colors";
-import Metrics from "@/lib/Metrics";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { logError } from "@/lib/loging";
 import BreadCrump from "@/components/BreadCrumb";
+import MemberInfo from "@/components/MemberInfo";
+import Fonts from "@/lib/Fonts";
+import Metrics from "@/lib/Metrics";
+import { ItemsPageTeamDirectusUsers, Users } from "@/lib/api/data-contracts";
 
 export default function TeaamPage({ pageData }) {
   const data = pageData;
