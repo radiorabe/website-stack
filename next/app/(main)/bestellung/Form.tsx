@@ -98,7 +98,7 @@ export default function Statement({ id, type, options, defaultValue }) {
     if (newErrors.length === 0) {
       console.log("fetch");
       setErrorMessage("");
-        fetch(process.env.NEXT_PUBLIC_FE_URL + "/api/order/init", {
+        fetch( "/api/order/init", {
           method: "POST",
         body: formData,
       })
@@ -162,6 +162,7 @@ export default function Statement({ id, type, options, defaultValue }) {
                     width: "100%",
                     maxWidth: 400,
                     paddingTop: Metrics.baseMargin,
+                    zIndex: 900,
                   }}
                 >
                   <Text

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 async function checkOrder([slug, id]) {
   try {
-    let response = await fetch(`http://localhost:3000${slug}?id=${id}`, {
+    let response = await fetch(`${slug}?id=${id}`, {
       method: "GET",
     });
     let data = await response.json();
