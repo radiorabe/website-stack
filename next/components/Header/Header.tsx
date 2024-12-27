@@ -20,11 +20,6 @@ import BurgerIcon from "./BurgerIcon";
 import MobileMenu from "./MobileMenu";
 import CloseIcon from "./CloseIcon";
 import useResponsive from "@/lib/useResponsisve";
-import dynamic from "next/dynamic";
-
-const Burger = dynamic(() => import("./Burger"), {
-  ssr: false,
-});
 
 function Header() {
   const pathname = usePathname();
@@ -264,12 +259,44 @@ function Header() {
           style={styles.burgerContainer}
           dataSet={{ media: ids.burgerContainer }}
         >
-          <Burger
-            onPress={() => {
-              setShowMenu(!showMenu);
-            }}
-            menuOpen={showMenu}
-          ></Burger>
+          <View style={{ width: "5vw", aspectRatio: 1 }}>
+            <Pressable
+              style={{
+                overflow: "hidden",
+                height: "100%",
+              }}
+              onPress={() => {
+                setShowMenu(!showMenu);
+                //disable scrolling on main page
+                document.body.style.overflowY =
+                  document.body.style.overflowY === "hidden"
+                    ? "visible"
+                    : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
+                document.body.style.height =
+                  document.body.style.height === "100%" ? "initial" : "100%"; // if current styling is *hidden* then change to visible, otherwise change to hidden
+              }}
+            >
+              {({
+                pressed,
+                hovered,
+                focused,
+              }: PressableState): ReactElement => {
+                return (
+                  <View>
+                    {showMenu ? (
+                      <CloseIcon
+                        color={hovered ? Colors.green : Colors.lightGreen}
+                      ></CloseIcon>
+                    ) : (
+                      <BurgerIcon
+                        color={hovered ? Colors.green : Colors.lightGreen}
+                      ></BurgerIcon>
+                    )}
+                  </View>
+                );
+              }}
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
