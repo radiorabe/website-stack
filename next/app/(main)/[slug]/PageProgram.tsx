@@ -51,7 +51,8 @@ export default function ProgramPage({
           fill
           objectFit="cover"
           alt={program.name}
-          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          placeholder="blur"
+          blurDataURL={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=300&transforms=[["blur",45]]`}
         />
         <View
           style={{
