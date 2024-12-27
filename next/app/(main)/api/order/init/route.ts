@@ -170,12 +170,15 @@ export async function POST(request) {
         },
         // PaymentMethods,
         ReturnUrls: {
-          Success: `${process.env.FE_URL}/bestellung/check?id=${newOrder.id}`,
-          Fail: `${process.env.FE_URL}/bestellung/check/?id=${newOrder.id}`,
+          Success: `${process.env.NEXT_PUBLIC_FE_URL}/bestellung/check?id=${newOrder.id}`,
+          Fail: `${process.env.NEXT_PUBLIC_FE_URL}/bestellung/check/?id=${newOrder.id}`,
         },
       };
       let initPaymentURL =
         process.env.SAFERPAY_URL + "/Payment/v1/PaymentPage/Initialize";
+        console.log("initPaymentURL", initPaymentURL);
+        console.log("ENCODED_SAFERPAY_CREDENTIALS", ENCODED_SAFERPAY_CREDENTIALS);
+        console.log("requestData", requestData);
 
       const response = await fetch(initPaymentURL, {
         method: "post",
@@ -187,6 +190,17 @@ export async function POST(request) {
         },
         body: JSON.stringify(requestData),
       });
+      console.log("initPaymentresponse", response)
+      if(response.status !== 200){
+        const text = await response.text();
+        console.log("Response error: ", text);
+        return NextResponse.json(
+          {
+            errorMessage: "Payment Request Failed",
+          },
+          { status: 400 }
+        );
+      }
       const data = await response.json();
       console.log("Response data: ", data);
       saferpay = data;
