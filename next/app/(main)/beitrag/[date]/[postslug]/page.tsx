@@ -123,7 +123,7 @@ export async function generateMetadata(
     description: description,
     openGraph: {
       images: [
-        `${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image}?width=${300}&height=${300}&fit=cover&format=webp`,
+        `${process.env.NEXT_PUBLIC_BE_URL}/assets/${post.imagebox.image.id}?width=${300}&height=${300}&fit=cover&format=webp`,
         ...previousImages,
       ],
     },
