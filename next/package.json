@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@wokaylabs/tiptap-react-render": "^0.0.1",
+    "blurhash-base64": "^0.0.3",
     "cross-fetch": "^4.0.0",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",

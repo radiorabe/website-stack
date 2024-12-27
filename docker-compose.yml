@@ -12,10 +12,9 @@ services:
 
   directus:
     container_name: rabe-directus
-    # image: directus/directus:10.12.1
-    image: directus/directus:11.2.1
-    # image: tractr/directus-sync:11.2.1
-
+    build:
+      dockerfile: ${DOCKERFILENAME:-./Dockerfile.prod}
+      context: ./directus
     ports:
       - ${BE_PORT}:8055
     volumes:

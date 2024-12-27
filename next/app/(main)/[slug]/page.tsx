@@ -18,6 +18,7 @@ async function getSendung(slug) {
           "team.directus_users_id.last_name",
           "team.directus_users_id.first_name",
           "team.directus_users_id.email",
+          "image.*",
         ],
         // sort:"date_created.deep[articles][_sort]=-articles_id.date_created"
       },
@@ -33,7 +34,7 @@ async function getSendung(slug) {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPrograms;
-    // console.log("item", item);
+    console.log("item", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -112,9 +113,6 @@ async function getPosts(slug) {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    console.log("posts", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
 
     return item;
   } catch (error) {

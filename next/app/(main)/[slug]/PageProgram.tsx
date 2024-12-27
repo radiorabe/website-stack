@@ -20,6 +20,7 @@ import PostPreview from "@/components/PostPreview/PostPreview";
 import RenderTipTap from "@/components/RenderTipTap";
 import moment from "moment";
 import Heart from "./Heart";
+import { blurhashToBase64 } from "blurhash-base64";
 
 type Props = {
   program: ItemsPrograms;
@@ -47,12 +48,12 @@ export default function ProgramPage({
         dataSet={{ media: ids.imageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=3000&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image.id}?width=3000&fit=cover`}
           fill
           objectFit="cover"
           alt={program.name}
           placeholder="blur"
-          blurDataURL={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=300&transforms=[["blur",45]]`}
+          blurDataURL={blurhashToBase64(program.image.blurhash)}
         />
         <View
           style={{

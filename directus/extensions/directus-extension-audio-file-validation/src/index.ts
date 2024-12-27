@@ -47,6 +47,8 @@ export default defineHook(async ({ filter }, { services, getSchema, env }) => {
     // only SYNC_USER_ID user (admin) can edit on production
     if (
       ctx.accountability === null || // kind of a bug: https://github.com/directus/directus/discussions/13308
+      ctx.accountability === undefined || // kind of a bug: https://github.com/directus/directus/discussions/13308
+      !ctx.accountability.user || // kind of a bug: https://github.com/directus/directus/discussions/13308
       ctx.accountability.user === env.SYNC_USER_ID // or the only real admin
     ) {
       // All good nothing to do

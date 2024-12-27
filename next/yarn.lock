@@ -1900,6 +1900,18 @@ bl@^4.1.0:
     inherits "^2.0.4"
     readable-stream "^3.4.0"
 
+blurhash-base64@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/blurhash-base64/-/blurhash-base64-0.0.3.tgz#d6421f26757184204b5fd7e3a4b6b70995d6536d"
+  integrity sha512-9cK+r4IZ73Bn6ee2ukHhURAkYX/aMvpHzuZHAe+y0mPqc2rsjpUwHBAv0HHHaOkeneQF+Odt1Qfps2K1wm7r5w==
+  dependencies:
+    blurhash "^2.0.5"
+
+blurhash@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/blurhash/-/blurhash-2.0.5.tgz#efde729fc14a2f03571a6aa91b49cba80d1abe4b"
+  integrity sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.11.tgz"
