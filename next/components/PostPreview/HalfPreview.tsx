@@ -36,7 +36,7 @@ const HalfPreview = ({ data }: Props) => {
           }}
         ></View>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=360&height=240&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=720&height=480&fit=cover`}
           width={360}
           height={240}
           style={styles.avatar}

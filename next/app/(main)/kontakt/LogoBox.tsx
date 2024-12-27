@@ -62,7 +62,7 @@ const LogoBox = ({ backgroundColor, logos, title }: Props) => {
                     }}
                   >
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageLink.image}?width=240&height=160&fit=cover`}
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageLink.image}?width=480&height=320&fit=cover`}
                       width={240}
                       height={160}
                       layout="responsive"

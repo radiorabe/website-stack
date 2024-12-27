@@ -53,7 +53,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                     dataSet={{ media: ids.imageContainer }}
                   >
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=120&height=120&fit=cover`}
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${partyLocation.logo}?width=300&height=300&fit=cover`}
                       width={120}
                       height={120}
                       style={{}}

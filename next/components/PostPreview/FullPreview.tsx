@@ -30,7 +30,7 @@ const FullPreview = ({ data }: Props) => {
         dataSet={{ media: ids.fullImageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=360&height=450&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=720&height=900&fit=cover`}
           width={isMobile ? undefined : 360}
           height={isMobile ? undefined : 450}
           fill={isMobile}

@@ -10,7 +10,7 @@ import ButtonText from "./ButtonText";
 
 const MemberInfo = ({ user }) => {
   let avatarSrc = user.avatar
-    ? `${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=90&height=90&fit=cover`
+    ? `${process.env.NEXT_PUBLIC_BE_URL}/assets/${user.avatar}?width=200&height=200&fit=cover`
     : "/images/anonym-profile.png";
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>

@@ -47,7 +47,7 @@ export default function ProgramPage({
         dataSet={{ media: ids.imageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=1280&height=600&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${program.image}?width=3000&fit=cover`}
           fill
           objectFit="cover"
           alt={program.name}

@@ -23,7 +23,7 @@ const EventBox = ({ event }: Props) => {
         dataSet={{ media: ids.imageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=1000&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=2000&fit=cover`}
           width={1000}
           height={500}
           layout="responsive"

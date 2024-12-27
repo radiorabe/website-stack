@@ -29,7 +29,7 @@ const DownLoadLogo = ({ url, style, label }: Props) => {
         {({ pressed, hovered, focused }: PressableState): ReactElement => {
           return (
             <Image
-              src={url + "?width=120&height=120&fit=cover"}
+              src={url + "?width=500&height=500&fit=cover"}
               width={120}
               height={120}
               style={{ borderRadius: 9, opacity: hovered ? 0.75 : 1 }}

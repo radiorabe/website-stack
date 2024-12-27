@@ -19,7 +19,7 @@ export default function ProgramBox(props) {
           dataSet={{ media: ids.imageContainer }}
         >
           <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=166&height=166&fit=cover`}
+            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=332&height=332&fit=cover`}
             width={166}
             height={166}
             style={styles.image}

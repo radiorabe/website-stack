@@ -44,7 +44,7 @@ export default function EventPage({ pageData }: Props) {
           }}
         >
           <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=2000`}
+            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=3000`}
             objectFit="contain"
             fill
             alt={event.title}
