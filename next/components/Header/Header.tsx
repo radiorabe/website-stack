@@ -252,6 +252,7 @@ function Header() {
           showMenu={isMobile && showMenu}
           closeMenu={() => {
             setShowMenu(false);
+            document.body.style.overflowY = "visible";
           }}
         ></MobileMenu>
 
@@ -267,7 +268,6 @@ function Header() {
               }}
               onPress={() => {
                 setShowMenu(!showMenu);
-
                 document.body.style.overflowY =
                   document.body.style.overflowY === "hidden"
                     ? "visible"
