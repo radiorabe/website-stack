@@ -2,11 +2,12 @@
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
+import { blurhashToBase64 } from "blurhash-base64";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 
 export interface Props {
-  imageId: string;
+  image: any;
   title?: string;
   text?: string;
   width: number;
@@ -15,16 +16,18 @@ export interface Props {
   style?: any;
 }
 
-const ImageBox = ({ imageId, width, height, title, text, style }: Props) => {
+const ImageBox = ({ image, width, height, title, text, style }: Props) => {
   return (
     <View style={[styles.imageContainer, style]}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageId}?width=${2 * width}&height=${2 * height}&fit=cover`}
+        src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${image.id}?width=${2 * width}&height=${2 * height}&fit=cover`}
         width={width}
         height={height}
         style={styles.image}
         layout="responsive"
         alt={title}
+        placeholder="blur"
+        blurDataURL={blurhashToBase64(image.blurhash)}
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       <Text

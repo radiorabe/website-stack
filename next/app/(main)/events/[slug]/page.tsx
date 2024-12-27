@@ -21,6 +21,7 @@ async function getEvent(slug) {
           "logos.directus_files_id",
           "shows.event_shows_id.*",
           "shows.event_shows_id.imagebox.*",
+          "shows.event_shows_id.imagebox.image.*",
           "partner_logos.image_link_id.*",
         ],
       },

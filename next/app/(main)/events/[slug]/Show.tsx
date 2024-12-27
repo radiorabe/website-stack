@@ -104,7 +104,7 @@ const Show = ({ show, eventColor }: Props) => {
       >
         {imagebox && (
           <ImageBox
-            imageId={imagebox.image}
+            image={imagebox.image}
             width={1440}
             height={960}
             title={imagebox.title}

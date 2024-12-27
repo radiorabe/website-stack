@@ -24,6 +24,7 @@ async function getPost(params) {
           "authors.directus_users_id.id",
           "audio_files.directus_files_id.*",
           "imagebox.*",
+          "imagebox.image.*",
         ],
         filter: JSON.stringify({
           slug: {

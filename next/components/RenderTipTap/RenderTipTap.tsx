@@ -207,7 +207,7 @@ const nodeHandlers = (topProps) => {
         let imageBoxData = props.node.data;
         return (
           <ImageBox
-            imageId={imageBoxData.image as string}
+            image={imageBoxData.image}
             title={imageBoxData.title}
             text={imageBoxData.text}
             width={1440}

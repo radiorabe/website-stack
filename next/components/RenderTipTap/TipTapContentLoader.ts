@@ -106,7 +106,7 @@ async function getImageBox(id) {
     const itemResponse = await Api.readSingleItemsImageBox(
       {
         id: id,
-        fields: ["*"],
+        fields: ["*", "image.*"],
       },
       {
         next: {
