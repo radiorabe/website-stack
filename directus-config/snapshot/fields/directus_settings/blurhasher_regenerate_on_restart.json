@@ -1,39 +1,34 @@
 {
-  "collection": "image_box",
-  "field": "image",
-  "type": "uuid",
+  "collection": "directus_settings",
+  "field": "blurhasher_regenerate_on_restart",
+  "type": "boolean",
   "meta": {
-    "collection": "image_box",
+    "collection": "directus_settings",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "image",
+    "field": "blurhasher_regenerate_on_restart",
     "group": null,
     "hidden": false,
-    "interface": "file-image",
-    "note": null,
+    "interface": "boolean",
+    "note": "Enables regeneration of all BlurHashes for illustrations upon system restart.",
     "options": null,
     "readonly": false,
-    "required": true,
+    "required": false,
     "sort": 2,
     "special": [
-      "file"
+      "cast-boolean"
     ],
-    "translations": [
-      {
-        "language": "de-DE",
-        "translation": "Bild"
-      }
-    ],
+    "translations": null,
     "validation": null,
     "validation_message": null,
     "width": "full"
   },
   "schema": {
-    "name": "image",
-    "table": "image_box",
-    "data_type": "uuid",
-    "default_value": null,
+    "name": "blurhasher_regenerate_on_restart",
+    "table": "directus_settings",
+    "data_type": "boolean",
+    "default_value": false,
     "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
@@ -44,7 +39,7 @@
     "is_generated": false,
     "generation_expression": null,
     "has_auto_increment": false,
-    "foreign_key_table": "directus_files",
-    "foreign_key_column": "id"
+    "foreign_key_table": null,
+    "foreign_key_column": null
   }
 }
