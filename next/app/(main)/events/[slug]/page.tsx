@@ -3,6 +3,7 @@ import { ItemsEvents } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 import PageEvent from "./PageEvent";
+import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 
 async function getEvent(slug) {
   try {
@@ -32,14 +33,19 @@ async function getEvent(slug) {
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    let item = itemResponse.data.data as ItemsEvents[];
-    console.log("event", item);
+    let items = itemResponse.data.data as ItemsEvents[];
+    console.log("event", items);
 
-    if (!item || item.length === 0 || item[0].status !== "published") {
+    if (!items || items.length === 0 || items[0].status !== "published") {
       notFound();
     }
 
-    return item[0];
+    // load relational tiptap components
+    if (items[0].content) {
+      items[0].content = await loadTipTapContent(items[0].content);
+    }
+
+    return items[0];
   } catch (error) {
     logError(error);
 
