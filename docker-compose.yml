@@ -13,7 +13,7 @@ services:
   directus:
     container_name: rabe-directus
     build:
-      dockerfile: ${DOCKERFILENAME:-./Dockerfile.prod}
+      dockerfile: ./Dockerfile
       context: ./directus
     ports:
       - ${BE_PORT}:8055
