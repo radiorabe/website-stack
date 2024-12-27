@@ -12,14 +12,14 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
 import { useClickOutside } from "@/lib/useClickOutside";
+import useResponsive from "@/lib/useResponsisve";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactElement, useRef, useState } from "react";
 import LinkComponent from "../LinkComponent";
 import AudioRabePlayer from "./AudioRabePlayer";
 import BurgerIcon from "./BurgerIcon";
-import MobileMenu from "./MobileMenu";
 import CloseIcon from "./CloseIcon";
-import useResponsive from "@/lib/useResponsisve";
+import MobileMenu from "./MobileMenu";
 
 function Header() {
   const pathname = usePathname();
@@ -267,9 +267,7 @@ function Header() {
               }}
               onPress={() => {
                 setShowMenu(!showMenu);
-                //disable scrolling on main page
-                document.body.style.touchAction =
-                  document.body.style.touchAction === "none" ? "auto" : "none"; // if current styling is *hidden* then change to visible, otherwise change to hidden
+
                 document.body.style.overflowY =
                   document.body.style.overflowY === "hidden"
                     ? "visible"

@@ -234,7 +234,7 @@ const { ids, styles } = StyleSheet.create({
     height: "100%",
     width: "100%",
     backgroundColor: Colors.darkGreen,
-    overflow: "auto",
+    overflow: "scroll", // make it scroll so the main page is not scrolling
     overflowX: "hidden",
     transition: "left 0.3s ease-in-out",
     alignItems: "center",
@@ -242,6 +242,8 @@ const { ids, styles } = StyleSheet.create({
   },
   container: {
     flexGrow: 1,
+    width: "100%",
+    minHeight: "101%", // make it a little bigger so it scrolls, so the main page is not scrolling
     alignItems: "center",
     justifyContent: "center",
   },
