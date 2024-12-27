@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import StyleSheet from "react-native-media-query";
 import Select from "react-select";
 import Button from "@/components/Button";
+import ButtonText from "@/components/ButtonText";
 
 export default function Statement({ id, type, options, defaultValue }) {
   const [errors, setErrors] = useState([]);
@@ -86,6 +87,10 @@ export default function Statement({ id, type, options, defaultValue }) {
 
     if (data.amount !== undefined && (data.amount === "" || data.amount < 5)) {
       newErrors.push("amount");
+    }
+
+    if (!data.agb) {
+      newErrors.push("agb");
     }
 
     setErrors(newErrors);
@@ -245,9 +250,45 @@ export default function Statement({ id, type, options, defaultValue }) {
                 ></Input>
               );
             })}
+            <View
+              style={{ paddingTop: Metrics.baseMargin, flexDirection: "row" }}
+            >
+              <input type="checkbox" name="agb" id="agb" value="yes" />
+              <label
+                for="agb"
+                style={{
+                  display: "flex",
+                  paddingLeft: Metrics.halfBaseMargin,
+                  flexDirection: "row",
+                }}
+              >
+                <Text
+                  style={{
+                    ...Fonts.style.textSmall,
+                    color: errors.includes("agb") ? "red" : Colors.black,
+                  }}
+                >
+                  Ich habe die
+                </Text>
+                <ButtonText
+                  style={{ ...Fonts.style.textSmall, color: Colors.darkGreen }}
+                  hoverStyle={{ color: Colors.green }}
+                  href={"/agb"}
+                >
+                  {" RaBe AGBs "}
+                </ButtonText>
+                <Text
+                  style={{
+                    ...Fonts.style.textSmall,
+                    color: errors.includes("agb") ? "red" : Colors.black,
+                  }}
+                >
+                  glesen und akzeptiere diese.
+                </Text>
+              </label>
+            </View>
             <input type="hidden" name={"id"} value={id} />
             <input type="hidden" name={"type"} value={type} />
-
             <View
               style={{
                 flexDirection: "row",
