@@ -98,8 +98,8 @@ export default function Statement({ id, type, options, defaultValue }) {
     if (newErrors.length === 0) {
       console.log("fetch");
       setErrorMessage("");
-      fetch("http://localhost:3000/api/order/init", {
-        method: "POST",
+        fetch(process.env.NEXT_PUBLIC_FE_URL + "/api/order/init", {
+          method: "POST",
         body: formData,
       })
         .then((response) => {
