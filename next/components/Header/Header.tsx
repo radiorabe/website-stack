@@ -13,7 +13,7 @@ import Metrics from "@/lib/Metrics";
 import { PressableState } from "@/lib/Types";
 import { useClickOutside } from "@/lib/useClickOutside";
 import useResponsive from "@/lib/useResponsisve";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ReactElement, useRef, useState } from "react";
 import LinkComponent from "../LinkComponent";
 import AudioRabePlayer from "./AudioRabePlayer";
@@ -22,10 +22,9 @@ import CloseIcon from "./CloseIcon";
 import MobileMenu from "./MobileMenu";
 
 function Header() {
-  const pathname = usePathname();
   const router = useRouter();
 
-  let { isMobile, isClient } = useResponsive();
+  let { isMobile } = useResponsive();
 
   let [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
