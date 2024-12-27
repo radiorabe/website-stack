@@ -1,14 +1,16 @@
 "use client";
 import {
   createContext,
-  useContext,
-  useState,
-  ReactNode,
   Dispatch,
-  SetStateAction,
-  useRef,
   MutableRefObject,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useRef,
+  useState,
 } from "react";
+import moment from "moment";
+let deLocale = require("moment/locale/de");
 // import { tracks } from "../data/tracks";
 export interface Track {
   title: string;
@@ -57,6 +59,9 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressBarRef = useRef<HTMLInputElement>(null);
+
+  // set global locale
+  moment.updateLocale("de", deLocale);
 
   // if (audioRef.current !== null) {
   //   // console.log("audioRef.current");

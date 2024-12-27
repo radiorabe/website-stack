@@ -5,7 +5,6 @@ import { FontBold, FontRegular } from "@/lib/Fonts";
 import { AudioPlayerProvider } from "@/context/audio-player-context";
 import Footer from "@/components/Footer";
 import Metrics from "@/lib/Metrics";
-require("moment/locale/de.js");
 import { draftMode } from "next/headers";
 import { RNMQProvider } from "@/context/RNMQProvider";
 import HeaderOffset from "@/components/HeaderOffset";
