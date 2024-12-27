@@ -186,51 +186,53 @@ export default function ProgramPage({
           </Text>
         </View> */}
       </View>
-      <View style={{ width: "90vw" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: Metrics.doubleBaseMargin,
-          }}
-        >
-          <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
-            {"Letzte Beiträge von " + program.name}
-          </Text>
+      {posts && posts.length > 0 && (
+        <View style={{ width: "90vw" }}>
           <View
-            style={styles.buttonContainer}
-            dataSet={{ media: ids.buttonContainer }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: Metrics.doubleBaseMargin,
+            }}
           >
-            <Button
-              href={{
-                pathname: "/beitraege",
-                query: { program: program.slug },
-              }}
-              label={"Alle Beiträge"}
-              full
-              textColor={Colors.white}
-            />
+            <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
+              {"Letzte Beiträge von " + program.name}
+            </Text>
+            <View
+              style={styles.buttonContainer}
+              dataSet={{ media: ids.buttonContainer }}
+            >
+              <Button
+                href={{
+                  pathname: "/beitraege",
+                  query: { program: program.slug },
+                }}
+                label={"Alle Beiträge"}
+                full
+                textColor={Colors.white}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              marginBottom: Metrics.tripleBaseMargin,
+            }}
+          >
+            {posts.map((item, index) => {
+              return (
+                <PostPreview
+                  key={"post" + index}
+                  data={item}
+                  index={index}
+                ></PostPreview>
+              );
+            })}
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            marginBottom: Metrics.tripleBaseMargin,
-          }}
-        >
-          {posts.map((item, index) => {
-            return (
-              <PostPreview
-                key={"post" + index}
-                data={item}
-                index={index}
-              ></PostPreview>
-            );
-          })}
-        </View>
-      </View>
+      )}
     </View>
   );
 }
