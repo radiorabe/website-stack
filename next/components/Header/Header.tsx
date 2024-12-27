@@ -268,12 +268,12 @@ function Header() {
               onPress={() => {
                 setShowMenu(!showMenu);
                 //disable scrolling on main page
+                document.body.style.touchAction =
+                  document.body.style.touchAction === "none" ? "auto" : "none"; // if current styling is *hidden* then change to visible, otherwise change to hidden
                 document.body.style.overflowY =
                   document.body.style.overflowY === "hidden"
                     ? "visible"
                     : "hidden"; // if current styling is *hidden* then change to visible, otherwise change to hidden
-                document.body.style.height =
-                  document.body.style.height === "100%" ? "initial" : "100%"; // if current styling is *hidden* then change to visible, otherwise change to hidden
               }}
             >
               {({
