@@ -12,6 +12,7 @@ import moment from "moment";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "../Button";
+import { blurhashToBase64 } from "blurhash-base64";
 
 export interface Props {
   data: ItemsPost;
@@ -36,12 +37,14 @@ const HalfPreview = ({ data }: Props) => {
           }}
         ></View>
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=720&height=480&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image.id}?width=720&height=480&fit=cover`}
           width={360}
           height={240}
           style={styles.avatar}
           layout="responsive"
           alt={data.title}
+          placeholder="blur"
+          blurDataURL={blurhashToBase64(imagebox.image.blurhash)}
           // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </View>

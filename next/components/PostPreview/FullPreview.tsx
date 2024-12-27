@@ -13,6 +13,7 @@ import moment from "moment";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "../Button";
+import { blurhashToBase64 } from "blurhash-base64";
 
 export interface Props {
   data: ItemsPost;
@@ -30,13 +31,15 @@ const FullPreview = ({ data }: Props) => {
         dataSet={{ media: ids.fullImageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image}?width=720&height=900&fit=cover`}
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image.id}?width=720&height=900&fit=cover`}
           width={isMobile ? undefined : 360}
           height={isMobile ? undefined : 450}
           fill={isMobile}
           style={styles.avatar}
           objectFit={isMobile ? "cover" : undefined}
           layout={isMobile ? undefined : "responsive"}
+          placeholder="blur"
+          blurDataURL={blurhashToBase64(imagebox.image.blurhash)}
           alt={data.title}
         />
       </View>

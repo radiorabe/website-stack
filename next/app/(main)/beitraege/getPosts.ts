@@ -9,7 +9,7 @@ export const getPosts = async (filters, offset, limit) => {
   try {
     const itemResponse = await Api.readItemsPost(
       {
-        fields: ["*", "program.name", "imagebox.image"],
+        fields: ["*", "program.name", "imagebox.image.*"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
