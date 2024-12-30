@@ -82,6 +82,7 @@ async function getPageData() {
 
 export default async function ProgramPage({ params }) {
   let liveData = await getLiveData();
+
   let data = await getPageData();
 
   return (

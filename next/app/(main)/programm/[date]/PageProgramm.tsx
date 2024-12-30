@@ -40,6 +40,7 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
   let { isMobile } = useResponsive();
   // console.log("data", pageData);
   let { todayShows, currentShow, shows } = liveData;
+  // console.log("shows", shows);
 
   // params.date is of format 12-2024 Week 12 of year 2024
   let weeknumberString = params.date.split("-")[0];
@@ -59,7 +60,10 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
 
   let weekNumber =
     params.date === "heute" ? moment().week() : parseInt(weeknumberString);
-  let year = params.date === "heute" ? moment().year() : parseInt(yearString);
+  let year =
+    params.date === "heute"
+      ? moment().endOf("week").year()
+      : parseInt(yearString);
   let maxWeeksThisYear = moment(year + "-12-31").isoWeeksInYear();
 
   let currentWeekNumber = moment().week();
@@ -120,11 +124,8 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
           }}
         >
           <View
-            style={{
-              paddingVertical: Metrics.doubleBaseMargin,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
+            style={styles.actuelProgramContainer}
+            dataSet={{ media: ids.actuelProgramContainer }}
           >
             <Text
               style={{
@@ -222,6 +223,14 @@ const { styles, ids } = StyleSheet.create({
       // padding: Metrics.doubleBaseMargin,
       paddingHorizontal: Metrics.tripleBaseMargin,
       paddingVertical: 0,
+    },
+  },
+  actuelProgramContainer: {
+    paddingTop: Metrics.doubleBaseMargin,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.doubleBaseMargin,
     },
   },
   monthControlContainer: {

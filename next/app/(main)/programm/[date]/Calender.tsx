@@ -14,9 +14,10 @@ export default function Calender({
   prevWeekArrowLink,
 }) {
   let monday = moment()
-    .startOf("year")
+    .startOf("week")
     .add(week - 1, "weeks");
-  console.log("monday", monday);
+
+  // console.log("monday", monday);
 
   return (
     <View style={{ overflow: "hidden" }}>
