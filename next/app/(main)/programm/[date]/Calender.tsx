@@ -9,11 +9,12 @@ import Arrow from "./Arrow";
 
 export default function Calender({
   shows,
+  year,
   week,
   nextWeekArrowLink,
   prevWeekArrowLink,
 }) {
-  let monday = moment()
+  let monday = moment(year, "YYYY")
     .startOf("week")
     .add(week - 1, "weeks");
 

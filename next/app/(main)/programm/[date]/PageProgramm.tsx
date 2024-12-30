@@ -185,6 +185,7 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
       <Calender
         shows={shows}
         week={weekNumber}
+        year={year}
         nextWeekArrowLink={nextWeekArrowLink}
         prevWeekArrowLink={prevWeekArrowLink}
       ></Calender>
