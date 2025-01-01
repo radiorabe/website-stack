@@ -98,6 +98,9 @@ async function getPosts(slug) {
           status: {
             _eq: "published",
           },
+          date: {
+            _lte: "NOW",
+          },
         }),
         sort: ["-date"],
         limit: 3,

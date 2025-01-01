@@ -20,6 +20,11 @@ export const getPosts = async (filters, offset, limit) => {
               },
             },
             {
+              date: {
+                _lte: "NOW",
+              },
+            },
+            {
               authors: {
                 directus_users_id: {
                   id: filters.author ? filters.author : undefined,

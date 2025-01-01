@@ -20,6 +20,9 @@ async function getPosts() {
           status: {
             _eq: "published",
           },
+          date: {
+            _lte: "NOW",
+          },
         }),
         sort: ["-date"],
         limit: 6,
