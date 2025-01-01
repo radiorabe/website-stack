@@ -197,18 +197,10 @@ type Query {
   classes_by_id(id: ID!, version: String): classes
   classes_aggregated(groupBy: [String], filter: classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [classes_aggregated!]!
   classes_by_version(version: String!, id: ID!): version_classes
-  page_history_files(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files!]!
-  page_history_files_by_id(id: ID!, version: String): page_history_files
-  page_history_files_aggregated(groupBy: [String], filter: page_history_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_aggregated!]!
-  page_history_files_by_version(version: String!, id: ID!): version_page_history_files
   page_classes_classes(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_classes_classes!]!
   page_classes_classes_by_id(id: ID!, version: String): page_classes_classes
   page_classes_classes_aggregated(groupBy: [String], filter: page_classes_classes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_classes_classes_aggregated!]!
   page_classes_classes_by_version(version: String!, id: ID!): version_page_classes_classes
-  page_history_files_1(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files_1!]!
-  page_history_files_1_by_id(id: ID!, version: String): page_history_files_1
-  page_history_files_1_aggregated(groupBy: [String], filter: page_history_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_1_aggregated!]!
-  page_history_files_1_by_version(version: String!, id: ID!): version_page_history_files_1
   image_link(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [image_link!]!
   image_link_by_id(id: ID!, version: String): image_link
   image_link_aggregated(groupBy: [String], filter: image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_link_aggregated!]!
@@ -221,6 +213,14 @@ type Query {
   page_contact_image_link_by_id(id: ID!, version: String): page_contact_image_link
   page_contact_image_link_aggregated(groupBy: [String], filter: page_contact_image_link_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_contact_image_link_aggregated!]!
   page_contact_image_link_by_version(version: String!, id: ID!): version_page_contact_image_link
+  page_history_files(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files!]!
+  page_history_files_by_id(id: ID!, version: String): page_history_files
+  page_history_files_aggregated(groupBy: [String], filter: page_history_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_aggregated!]!
+  page_history_files_by_version(version: String!, id: ID!): version_page_history_files
+  page_history_files_1(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_history_files_1!]!
+  page_history_files_1_by_id(id: ID!, version: String): page_history_files_1
+  page_history_files_1_aggregated(groupBy: [String], filter: page_history_files_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_history_files_1_aggregated!]!
+  page_history_files_1_by_version(version: String!, id: ID!): version_page_history_files_1
 }
 
 type Mutation {
@@ -310,18 +310,18 @@ type Mutation {
   create_page_history_image_link_item(data: create_page_history_image_link_input!): page_history_image_link
   create_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_classes_input!]): [classes!]!
   create_classes_item(data: create_classes_input!): classes
-  create_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_input!]): [page_history_files!]!
-  create_page_history_files_item(data: create_page_history_files_input!): page_history_files
   create_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_classes_classes_input!]): [page_classes_classes!]!
   create_page_classes_classes_item(data: create_page_classes_classes_input!): page_classes_classes
-  create_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_1_input!]): [page_history_files_1!]!
-  create_page_history_files_1_item(data: create_page_history_files_1_input!): page_history_files_1
   create_image_link_items(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_link_input!]): [image_link!]!
   create_image_link_item(data: create_image_link_input!): image_link
   create_events_image_link_items(filter: events_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_image_link_input!]): [events_image_link!]!
   create_events_image_link_item(data: create_events_image_link_input!): events_image_link
   create_page_contact_image_link_items(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_contact_image_link_input!]): [page_contact_image_link!]!
   create_page_contact_image_link_item(data: create_page_contact_image_link_input!): page_contact_image_link
+  create_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_input!]): [page_history_files!]!
+  create_page_history_files_item(data: create_page_history_files_input!): page_history_files
+  create_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_history_files_1_input!]): [page_history_files_1!]!
+  create_page_history_files_1_item(data: create_page_history_files_1_input!): page_history_files_1
   update_page_contact_contact_address_items(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_contact_address_input!): [page_contact_contact_address!]!
   update_page_contact_contact_address_batch(filter: page_contact_contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_contact_address_input!]): [page_contact_contact_address!]!
   update_page_contact_contact_address_item(id: ID!, data: update_page_contact_contact_address_input!): page_contact_contact_address
@@ -464,15 +464,9 @@ type Mutation {
   update_classes_items(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_classes_input!): [classes!]!
   update_classes_batch(filter: classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_classes_input!]): [classes!]!
   update_classes_item(id: ID!, data: update_classes_input!): classes
-  update_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_input!): [page_history_files!]!
-  update_page_history_files_batch(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_input!]): [page_history_files!]!
-  update_page_history_files_item(id: ID!, data: update_page_history_files_input!): page_history_files
   update_page_classes_classes_items(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_classes_classes_input!): [page_classes_classes!]!
   update_page_classes_classes_batch(filter: page_classes_classes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_classes_classes_input!]): [page_classes_classes!]!
   update_page_classes_classes_item(id: ID!, data: update_page_classes_classes_input!): page_classes_classes
-  update_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_1_input!): [page_history_files_1!]!
-  update_page_history_files_1_batch(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_1_input!]): [page_history_files_1!]!
-  update_page_history_files_1_item(id: ID!, data: update_page_history_files_1_input!): page_history_files_1
   update_image_link_items(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_link_input!): [image_link!]!
   update_image_link_batch(filter: image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_link_input!]): [image_link!]!
   update_image_link_item(id: ID!, data: update_image_link_input!): image_link
@@ -482,6 +476,12 @@ type Mutation {
   update_page_contact_image_link_items(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_contact_image_link_input!): [page_contact_image_link!]!
   update_page_contact_image_link_batch(filter: page_contact_image_link_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_contact_image_link_input!]): [page_contact_image_link!]!
   update_page_contact_image_link_item(id: ID!, data: update_page_contact_image_link_input!): page_contact_image_link
+  update_page_history_files_items(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_input!): [page_history_files!]!
+  update_page_history_files_batch(filter: page_history_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_input!]): [page_history_files!]!
+  update_page_history_files_item(id: ID!, data: update_page_history_files_input!): page_history_files
+  update_page_history_files_1_items(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_history_files_1_input!): [page_history_files_1!]!
+  update_page_history_files_1_batch(filter: page_history_files_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_history_files_1_input!]): [page_history_files_1!]!
+  update_page_history_files_1_item(id: ID!, data: update_page_history_files_1_input!): page_history_files_1
   delete_page_contact_contact_address_items(ids: [ID]!): delete_many
   delete_page_contact_contact_address_item(id: ID!): delete_one
   delete_image_box_items(ids: [ID]!): delete_many
@@ -568,18 +568,18 @@ type Mutation {
   delete_page_history_image_link_item(id: ID!): delete_one
   delete_classes_items(ids: [ID]!): delete_many
   delete_classes_item(id: ID!): delete_one
-  delete_page_history_files_items(ids: [ID]!): delete_many
-  delete_page_history_files_item(id: ID!): delete_one
   delete_page_classes_classes_items(ids: [ID]!): delete_many
   delete_page_classes_classes_item(id: ID!): delete_one
-  delete_page_history_files_1_items(ids: [ID]!): delete_many
-  delete_page_history_files_1_item(id: ID!): delete_one
   delete_image_link_items(ids: [ID]!): delete_many
   delete_image_link_item(id: ID!): delete_one
   delete_events_image_link_items(ids: [ID]!): delete_many
   delete_events_image_link_item(id: ID!): delete_one
   delete_page_contact_image_link_items(ids: [ID]!): delete_many
   delete_page_contact_image_link_item(id: ID!): delete_one
+  delete_page_history_files_items(ids: [ID]!): delete_many
+  delete_page_history_files_item(id: ID!): delete_one
+  delete_page_history_files_1_items(ids: [ID]!): delete_many
+  delete_page_history_files_1_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -660,12 +660,12 @@ type Subscription {
   page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
   page_history_image_link_mutated(event: EventEnum): page_history_image_link_mutated
   classes_mutated(event: EventEnum): classes_mutated
-  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
-  page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
   image_link_mutated(event: EventEnum): image_link_mutated
   events_image_link_mutated(event: EventEnum): events_image_link_mutated
   page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
+  page_history_files_mutated(event: EventEnum): page_history_files_mutated
+  page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -717,7 +717,7 @@ enum EventEnum {
   delete
 }
 
-union events_editor_nodes_item_union = iframe
+union events_editor_nodes_item_union = iframe | image_box | quote | info_box | audio_player
 
 union page_classes_nodes_item_union = image_box
 
@@ -2368,12 +2368,14 @@ type page_history_files {
   id: ID!
   page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: GraphQLBigInt
 }
 
 type page_history_files_1 {
   id: ID!
   page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: GraphQLBigInt
 }
 
 type page_history_files_1_aggregated {
@@ -2393,11 +2395,13 @@ type page_history_files_1_aggregated_count {
   id: Int
   page_history_id: Int
   directus_files_id: Int
+  sort: Int
 }
 
 type page_history_files_1_aggregated_fields {
   id: Float
   page_history_id: Float
+  sort: Float
 }
 
 type page_history_files_1_mutated {
@@ -2423,11 +2427,13 @@ type page_history_files_aggregated_count {
   id: Int
   page_history_id: Int
   directus_files_id: Int
+  sort: Int
 }
 
 type page_history_files_aggregated_fields {
   id: Float
   page_history_id: Float
+  sort: Float
 }
 
 type page_history_files_mutated {
@@ -3984,6 +3990,7 @@ type version_page_history_files {
   id: ID
   page_history_id: JSON
   directus_files_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -3991,6 +3998,7 @@ type version_page_history_files_1 {
   id: ID
   page_history_id: JSON
   directus_files_id: JSON
+  sort: GraphQLBigInt
 }
 
 """"""
@@ -4772,12 +4780,14 @@ input create_page_history_files_1_input {
   id: ID
   page_history_id: create_page_history_input
   directus_files_id: create_directus_files_input
+  sort: GraphQLBigInt
 }
 
 input create_page_history_files_input {
   id: ID
   page_history_id: create_page_history_input
   directus_files_id: create_directus_files_input
+  sort: GraphQLBigInt
 }
 
 input create_page_history_image_link_input {
@@ -5424,6 +5434,10 @@ input events_editor_nodes_filter {
   _and: [events_editor_nodes_filter]
   _or: [events_editor_nodes_filter]
   item__iframe: iframe_filter
+  item__image_box: image_box_filter
+  item__quote: quote_filter
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
 }
 
 input events_event_shows_filter {
@@ -5700,6 +5714,7 @@ input page_history_files_1_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
   directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
   _and: [page_history_files_1_filter]
   _or: [page_history_files_1_filter]
 }
@@ -5708,6 +5723,7 @@ input page_history_files_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
   directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
   _and: [page_history_files_filter]
   _or: [page_history_files_filter]
 }
@@ -6528,12 +6544,14 @@ input update_page_history_files_1_input {
   id: ID
   page_history_id: update_page_history_input
   directus_files_id: update_directus_files_input
+  sort: GraphQLBigInt
 }
 
 input update_page_history_files_input {
   id: ID
   page_history_id: update_page_history_input
   directus_files_id: update_directus_files_input
+  sort: GraphQLBigInt
 }
 
 input update_page_history_image_link_input {

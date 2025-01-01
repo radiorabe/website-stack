@@ -7,7 +7,11 @@
     "many_collection": "events_editor_nodes",
     "many_field": "item",
     "one_allowed_collections": [
-      "iframe"
+      "iframe",
+      "image_box",
+      "quote",
+      "info_box",
+      "audio_player"
     ],
     "one_collection": null,
     "one_collection_field": "collection",

@@ -321,12 +321,12 @@ type Subscription {
   page_classes_nodes_mutated(event: EventEnum): page_classes_nodes_mutated
   page_history_image_link_mutated(event: EventEnum): page_history_image_link_mutated
   classes_mutated(event: EventEnum): classes_mutated
-  page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
-  page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
   image_link_mutated(event: EventEnum): image_link_mutated
   events_image_link_mutated(event: EventEnum): events_image_link_mutated
   page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
+  page_history_files_mutated(event: EventEnum): page_history_files_mutated
+  page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -406,7 +406,7 @@ enum server_info_websocket_rest_authentication {
   strict
 }
 
-union events_editor_nodes_item_union = iframe
+union events_editor_nodes_item_union = iframe | image_box | quote | info_box | audio_player
 
 union page_classes_nodes_item_union = image_box
 
@@ -2184,12 +2184,14 @@ type page_history_files {
   id: ID!
   page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: GraphQLBigInt
 }
 
 type page_history_files_1 {
   id: ID!
   page_history_id(filter: page_history_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_history
   directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  sort: GraphQLBigInt
 }
 
 type page_history_files_1_mutated {
@@ -3817,6 +3819,10 @@ input events_editor_nodes_filter {
   _and: [events_editor_nodes_filter]
   _or: [events_editor_nodes_filter]
   item__iframe: iframe_filter
+  item__image_box: image_box_filter
+  item__quote: quote_filter
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
 }
 
 input events_event_shows_filter {
@@ -4053,6 +4059,7 @@ input page_history_files_1_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
   directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
   _and: [page_history_files_1_filter]
   _or: [page_history_files_1_filter]
 }
@@ -4061,6 +4068,7 @@ input page_history_files_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
   directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
   _and: [page_history_files_filter]
   _or: [page_history_files_filter]
 }

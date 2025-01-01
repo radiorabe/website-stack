@@ -3220,6 +3220,102 @@
     "_syncId": "03ec02ce-d798-496f-af0c-4ffbd184a500"
   },
   {
+    "collection": "audio_player_files",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "b20ca44f-482c-4cd1-b39f-9ddc1cc1eac9"
+  },
+  {
+    "collection": "audio_player_files",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "abd549a6-059b-41e3-9205-f3c09529f6fe"
+  },
+  {
+    "collection": "audio_player_files",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "726c3de6-1f0d-4a73-854a-2f1d914cb15a"
+  },
+  {
+    "collection": "audio_player_files",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "77fe6636-70b3-4b57-8e4c-2d9f746439a9"
+  },
+  {
+    "collection": "audio_player",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "aef02047-8e7f-4f50-8899-562c0c668152"
+  },
+  {
+    "collection": "audio_player",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "db5cbab7-ffff-4d0d-92b3-a56248ebf495"
+  },
+  {
+    "collection": "audio_player",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "40f53c98-56d0-4647-b0c6-6a22d71105b6"
+  },
+  {
+    "collection": "audio_player",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "8b03bfd8-a356-471a-81bc-eeb741c0a3ed"
+  },
+  {
     "collection": "directus_users",
     "action": "read",
     "permissions": null,
@@ -3483,6 +3579,54 @@
     ],
     "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
     "_syncId": "b6df7490-6953-4439-925d-ae5fb845b397"
+  },
+  {
+    "collection": "iframe",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "f1258eb9-5d36-4a29-ad42-4a0ac547fcec"
+  },
+  {
+    "collection": "iframe",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "628b5926-f692-4ca3-8429-8a385a5f3d44"
+  },
+  {
+    "collection": "iframe",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "828b15da-9eff-4650-bf36-1a37464fcf8e"
+  },
+  {
+    "collection": "iframe",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "56ef2a0e-08c5-4e71-8318-631743f2d136"
   },
   {
     "collection": "image_box",

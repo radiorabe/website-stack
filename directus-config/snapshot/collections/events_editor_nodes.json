@@ -14,7 +14,16 @@
     "icon": null,
     "item_duplication_fields": [
       "item:iframe.code",
-      "collection"
+      "collection",
+      "item:image_box.image.id",
+      "item:image_box.title",
+      "item:image_box.text",
+      "item:quote.text",
+      "item:quote.info",
+      "item:quote.author",
+      "item:info_box.title",
+      "item:info_box.text",
+      "item:audio_player.id"
     ],
     "note": null,
     "preview_url": null,
