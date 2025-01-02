@@ -1,35 +1,28 @@
 {
-  "collection": "page_history",
+  "collection": "promo_box",
   "meta": {
     "accountability": "all",
     "archive_app_filter": true,
     "archive_field": null,
     "archive_value": null,
     "collapse": "open",
-    "collection": "page_history",
+    "collection": "promo_box",
     "color": null,
     "display_template": null,
-    "group": "Rabe_Website",
-    "hidden": false,
+    "group": "Collections",
+    "hidden": true,
     "icon": null,
     "item_duplication_fields": null,
     "note": null,
     "preview_url": null,
-    "singleton": true,
-    "sort": 6,
+    "singleton": false,
+    "sort": 10,
     "sort_field": null,
-    "translations": [
-      {
-        "language": "de-DE",
-        "plural": "Page Geschichte",
-        "singular": "Page Geschichte",
-        "translation": "Page Geschichte"
-      }
-    ],
+    "translations": null,
     "unarchive_value": null,
     "versioning": false
   },
   "schema": {
-    "name": "page_history"
+    "name": "promo_box"
   }
 }

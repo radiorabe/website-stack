@@ -1,40 +1,30 @@
 {
-  "collection": "party_location",
-  "field": "url",
+  "collection": "promo_box",
+  "field": "button_label",
   "type": "string",
   "meta": {
-    "collection": "party_location",
+    "collection": "promo_box",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "url",
+    "field": "button_label",
     "group": null,
     "hidden": false,
     "interface": "input",
     "note": null,
-    "options": {
-      "placeholder": "https://www.dachstock.ch"
-    },
+    "options": null,
     "readonly": false,
-    "required": true,
-    "sort": 2,
+    "required": false,
+    "sort": 6,
     "special": null,
     "translations": null,
-    "validation": {
-      "_and": [
-        {
-          "url": {
-            "_starts_with": "https://"
-          }
-        }
-      ]
-    },
-    "validation_message": "Der Link muss mit https:// anfangen",
-    "width": "full"
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
   },
   "schema": {
-    "name": "url",
-    "table": "party_location",
+    "name": "button_label",
+    "table": "promo_box",
     "data_type": "character varying",
     "default_value": null,
     "max_length": 255,

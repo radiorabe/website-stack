@@ -657,6 +657,18 @@
     "_syncId": "a2cb79ec-6ace-4d2b-b14f-3409e58dc369"
   },
   {
+    "collection": "page_home",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "66b036f0-08aa-4b46-82ab-2b04d3fd82d0"
+  },
+  {
     "collection": "page_impressum",
     "action": "read",
     "permissions": {},
@@ -1003,6 +1015,18 @@
     ],
     "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
     "_syncId": "67108ad6-260d-4b4f-b344-106e0cdecc0d"
+  },
+  {
+    "collection": "promo_box",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
+    "_syncId": "fb2ab419-6fed-4f26-897c-d404166983b7"
   },
   {
     "collection": "quote",
@@ -1498,10 +1522,64 @@
       "posts",
       "description",
       "name",
-      "content"
+      "content",
+      "promo_box"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
     "_syncId": "6bec5747-f248-4eae-8794-5a4954b1caab"
+  },
+  {
+    "collection": "promo_box",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "a78acc5a-f661-4908-9068-754ffd6bf785"
+  },
+  {
+    "collection": "promo_box",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "7ca05d3b-72af-4a72-942f-3bf98c5abbce"
+  },
+  {
+    "collection": "promo_box",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "title",
+      "text",
+      "button_label",
+      "button_url",
+      "image"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "d1046d3f-beb6-4545-9303-ea132fdcb8e7"
+  },
+  {
+    "collection": "promo_box",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "8d226eb0-2049-4047-852f-e7b7acacb680"
   },
   {
     "collection": "quote",
@@ -2222,6 +2300,54 @@
     ],
     "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
     "_syncId": "d3579fda-8d8f-4a31-a683-2a65876d9e59"
+  },
+  {
+    "collection": "page_home",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "cd7c313b-caed-4496-8125-f33e31706124"
+  },
+  {
+    "collection": "page_home",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "a8e66d90-818b-4cc6-bcee-bddb14ff6359"
+  },
+  {
+    "collection": "page_home",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "f2a82ff3-d0ed-42d6-a166-96226bcd01db"
+  },
+  {
+    "collection": "page_home",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "67b8bad8-28ef-4ba3-963e-4cdd2f4dce3b"
   },
   {
     "collection": "page_impressum",
@@ -3182,6 +3308,54 @@
     ],
     "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
     "_syncId": "20c143a6-672d-4b02-92ce-65ab1c014214"
+  },
+  {
+    "collection": "promo_box",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "bd959414-47c0-4b15-a450-0995581bebce"
+  },
+  {
+    "collection": "promo_box",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "0da7fc28-bca8-401f-9576-75b1bca52ae2"
+  },
+  {
+    "collection": "promo_box",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "a323fcac-28b2-45e9-85e0-6b8509a5f24b"
+  },
+  {
+    "collection": "promo_box",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "660a85b6-4c7f-4c7e-b106-4f50630f239e",
+    "_syncId": "25862e1c-c132-4549-8cd1-e4bab5c08524"
   },
   {
     "collection": "orders",

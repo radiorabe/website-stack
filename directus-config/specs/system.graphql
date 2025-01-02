@@ -262,7 +262,6 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   image_box_mutated(event: EventEnum): image_box_mutated
-  programs_mutated(event: EventEnum): programs_mutated
   party_location_mutated(event: EventEnum): party_location_mutated
   directus_policies_mutated(event: EventEnum): directus_policies_mutated
   page_member_statements_mutated(event: EventEnum): page_member_statements_mutated
@@ -272,6 +271,7 @@ type Subscription {
   directus_versions_mutated(event: EventEnum): directus_versions_mutated
   config_mutated(event: EventEnum): config_mutated
   directus_files_mutated(event: EventEnum): directus_files_mutated
+  programs_mutated(event: EventEnum): programs_mutated
   programs_directus_users_mutated(event: EventEnum): programs_directus_users_mutated
   page_contact_mutated(event: EventEnum): page_contact_mutated
   page_programs_mutated(event: EventEnum): page_programs_mutated
@@ -322,7 +322,9 @@ type Subscription {
   page_history_image_link_mutated(event: EventEnum): page_history_image_link_mutated
   classes_mutated(event: EventEnum): classes_mutated
   page_classes_classes_mutated(event: EventEnum): page_classes_classes_mutated
+  page_home_mutated(event: EventEnum): page_home_mutated
   image_link_mutated(event: EventEnum): image_link_mutated
+  promo_box_mutated(event: EventEnum): promo_box_mutated
   events_image_link_mutated(event: EventEnum): events_image_link_mutated
   page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
   page_history_files_mutated(event: EventEnum): page_history_files_mutated
@@ -2238,6 +2240,20 @@ type page_history_nodes_mutated {
   data: page_history_nodes
 }
 
+type page_home {
+  id: ID!
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  promo_box(filter: promo_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): promo_box
+}
+
+type page_home_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_home
+}
+
 type page_impressum {
   id: ID!
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
@@ -2695,6 +2711,7 @@ type programs {
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
   content: JSON
   content_func: count_functions
+  promo_box(filter: promo_box_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): promo_box
   team(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   team_func: count_functions
   posts(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post]
@@ -2717,6 +2734,23 @@ type programs_mutated {
   key: ID!
   event: EventEnum
   data: programs
+}
+
+type promo_box {
+  id: ID!
+  title: String!
+  text: String
+  button_label: String
+  button_url: String
+  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  text_color: String
+  background_color: String
+}
+
+type promo_box_mutated {
+  key: ID!
+  event: EventEnum
+  data: promo_box
 }
 
 type quote {
@@ -3275,8 +3309,20 @@ input create_programs_input {
   name: String
   image: create_directus_files_input
   content: JSON
+  promo_box: create_promo_box_input
   team: [create_programs_directus_users_input]
   posts: [create_post_input]
+}
+
+input create_promo_box_input {
+  id: ID
+  title: String!
+  text: String
+  button_label: String
+  button_url: String
+  image: create_directus_files_input
+  text_color: String
+  background_color: String
 }
 
 input create_tags_input {
@@ -4389,12 +4435,26 @@ input programs_filter {
   image: directus_files_filter
   content: string_filter_operators
   content_func: count_function_filter_operators
+  promo_box: promo_box_filter
   team: programs_directus_users_filter
   team_func: count_function_filter_operators
   posts: post_filter
   posts_func: count_function_filter_operators
   _and: [programs_filter]
   _or: [programs_filter]
+}
+
+input promo_box_filter {
+  id: number_filter_operators
+  title: string_filter_operators
+  text: string_filter_operators
+  button_label: string_filter_operators
+  button_url: string_filter_operators
+  image: directus_files_filter
+  text_color: string_filter_operators
+  background_color: string_filter_operators
+  _and: [promo_box_filter]
+  _or: [promo_box_filter]
 }
 
 input quote_filter {
@@ -4888,8 +4948,20 @@ input update_programs_input {
   name: String
   image: update_directus_files_input
   content: JSON
+  promo_box: update_promo_box_input
   team: [update_programs_directus_users_input]
   posts: [update_post_input]
+}
+
+input update_promo_box_input {
+  id: ID
+  title: String
+  text: String
+  button_label: String
+  button_url: String
+  image: update_directus_files_input
+  text_color: String
+  background_color: String
 }
 
 input update_tags_input {

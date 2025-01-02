@@ -1,0 +1,25 @@
+{
+  "collection": "programs",
+  "field": "promo_box",
+  "related_collection": "promo_box",
+  "meta": {
+    "junction_field": null,
+    "many_collection": "programs",
+    "many_field": "promo_box",
+    "one_allowed_collections": null,
+    "one_collection": "promo_box",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  },
+  "schema": {
+    "table": "programs",
+    "column": "promo_box",
+    "foreign_key_table": "promo_box",
+    "foreign_key_column": "id",
+    "constraint_name": "programs_promo_box_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}
