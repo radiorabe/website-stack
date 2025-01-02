@@ -3,6 +3,7 @@ import {
   ItemsPost,
   ItemsPrograms,
   ItemsProgramsDirectusUsers,
+  ItemsPromoBox,
   Users,
 } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
@@ -21,6 +22,7 @@ import RenderTipTap from "@/components/RenderTipTap";
 import moment from "moment";
 import Heart from "./Heart";
 import { blurhashToBase64 } from "blurhash-base64";
+import PromoBox from "@/components/PromoBox";
 
 type Props = {
   program: ItemsPrograms;
@@ -40,6 +42,8 @@ export default function ProgramPage({
     : nextShows.length > 0
       ? moment(nextShows[0].starts).calendar()
       : "";
+
+  let promo_box = program.promo_box as ItemsPromoBox;
 
   return (
     <View style={styles.container}>
@@ -186,6 +190,20 @@ export default function ProgramPage({
           </Text>
         </View> */}
       </View>
+      {promo_box && (
+        <View style={{ width: "90%" }}>
+          <PromoBox
+            title={promo_box.title}
+            text={promo_box.text}
+            backgroundColor={promo_box.background_color}
+            textColor={promo_box.text_color}
+            imageId={promo_box.image as string}
+            buttonLabel={promo_box.button_label}
+            buttonUrl={promo_box.button_url}
+            goldenRatio
+          ></PromoBox>
+        </View>
+      )}
       {posts && posts.length > 0 && (
         <View style={{ width: "90vw" }}>
           <View
@@ -213,6 +231,7 @@ export default function ProgramPage({
               />
             </View>
           </View>
+
           <View
             style={{
               flexDirection: "row",

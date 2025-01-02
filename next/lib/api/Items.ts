@@ -437,87 +437,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the programs items.
- *
- * @tags Items, ItemsPrograms
- * @name ReadItemsPrograms
- * @summary List Items
- * @request GET:/items/programs
- * @secure
- * @response `200` `ReadItemsProgramsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsPrograms = (query: ReadItemsProgramsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsProgramsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/programs`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single programs item by unique identifier.
- *
- * @tags Items, ItemsPrograms
- * @name ReadSingleItemsPrograms
- * @summary Retrieve an Item
- * @request GET:/items/programs/{id}
- * @response `200` `ReadSingleItemsProgramsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsPrograms = ({ id, ...query }: ReadSingleItemsProgramsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsProgramsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/programs/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
  * @description List the party_location items.
  *
  * @tags Items, ItemsPartyLocation
@@ -758,6 +677,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/member_product/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the programs items.
+ *
+ * @tags Items, ItemsPrograms
+ * @name ReadItemsPrograms
+ * @summary List Items
+ * @request GET:/items/programs
+ * @secure
+ * @response `200` `ReadItemsProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPrograms = (query: ReadItemsProgramsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/programs`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single programs item by unique identifier.
+ *
+ * @tags Items, ItemsPrograms
+ * @name ReadSingleItemsPrograms
+ * @summary Retrieve an Item
+ * @request GET:/items/programs/{id}
+ * @response `200` `ReadSingleItemsProgramsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPrograms = ({ id, ...query }: ReadSingleItemsProgramsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsProgramsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/programs/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -4815,87 +4815,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the promo_box items.
- *
- * @tags Items, ItemsPromoBox
- * @name ReadItemsPromoBox
- * @summary List Items
- * @request GET:/items/promo_box
- * @secure
- * @response `200` `ReadItemsPromoBoxData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsPromoBox = (query: ReadItemsPromoBoxParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsPromoBoxData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/promo_box`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single promo_box item by unique identifier.
- *
- * @tags Items, ItemsPromoBox
- * @name ReadSingleItemsPromoBox
- * @summary Retrieve an Item
- * @request GET:/items/promo_box/{id}
- * @response `200` `ReadSingleItemsPromoBoxData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsPromoBox = ({ id, ...query }: ReadSingleItemsPromoBoxParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsPromoBoxData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/promo_box/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
  * @description List the page_classes_classes items.
  *
  * @tags Items, ItemsPageClassesClasses
@@ -5136,6 +5055,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/image_link/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the promo_box items.
+ *
+ * @tags Items, ItemsPromoBox
+ * @name ReadItemsPromoBox
+ * @summary List Items
+ * @request GET:/items/promo_box
+ * @secure
+ * @response `200` `ReadItemsPromoBoxData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPromoBox = (query: ReadItemsPromoBoxParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPromoBoxData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/promo_box`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single promo_box item by unique identifier.
+ *
+ * @tags Items, ItemsPromoBox
+ * @name ReadSingleItemsPromoBox
+ * @summary Retrieve an Item
+ * @request GET:/items/promo_box/{id}
+ * @response `200` `ReadSingleItemsPromoBoxData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPromoBox = ({ id, ...query }: ReadSingleItemsPromoBoxParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPromoBoxData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/promo_box/${id}`,
       method: "GET",
       query: query,
       format: "json",

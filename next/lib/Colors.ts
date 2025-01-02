@@ -34,4 +34,16 @@ function shadeColor(color, percent) {
   return "#" + RR + GG + BB;
 }
 
-export { shadeColor };
+function translucentColor(color, percent) {
+  var A = parseInt((255 * percent) / 100);
+
+  A = A < 255 ? A : 255;
+
+  A = Math.round(A);
+
+  var AA = A.toString(16).length == 1 ? "0" + A.toString(16) : A.toString(16);
+
+  return color + AA;
+}
+
+export { shadeColor, translucentColor };

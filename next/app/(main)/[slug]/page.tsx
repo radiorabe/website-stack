@@ -19,6 +19,7 @@ async function getSendung(slug) {
           "team.directus_users_id.first_name",
           "team.directus_users_id.email",
           "image.*",
+          "promo_box.*",
         ],
         // sort:"date_created.deep[articles][_sort]=-articles_id.date_created"
       },

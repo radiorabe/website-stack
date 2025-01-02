@@ -1,5 +1,5 @@
 "use client";
-import Colors from "@/lib/Colors";
+import { translucentColor } from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
@@ -12,6 +12,7 @@ export interface Props {
   title: string;
   text: string;
   backgroundColor: any;
+  textColor: any;
   imageId: string;
   buttonLabel?: string;
   buttonUrl?: string;
@@ -22,6 +23,7 @@ const PromoBox = ({
   title,
   text,
   backgroundColor,
+  textColor,
   imageId,
   buttonLabel,
   buttonUrl,
@@ -53,10 +55,16 @@ const PromoBox = ({
         style={[styles.textContainer, { width: goldenRatio ? "62%" : "50%" }]}
         dataSet={{ media: ids.textContainer }}
       >
-        <Text style={styles.title} dataSet={{ media: ids.title }}>
+        <Text
+          style={[styles.title, { color: textColor }]}
+          dataSet={{ media: ids.title }}
+        >
           {title}
         </Text>
-        <Text style={styles.text} dataSet={{ media: ids.text }}>
+        <Text
+          style={[styles.text, { color: textColor }]}
+          dataSet={{ media: ids.text }}
+        >
           {text}
         </Text>
         {buttonLabel !== "" && buttonUrl !== "" && (
@@ -67,8 +75,8 @@ const PromoBox = ({
             <Button
               label={buttonLabel}
               href={buttonUrl}
-              textColor={Colors.white}
-              hoverTextColor={Colors.whiteTransparent}
+              textColor={textColor}
+              hoverTextColor={translucentColor(textColor, 50)}
             ></Button>
           </View>
         )}
@@ -114,7 +122,6 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   title: {
-    color: Colors.white,
     ...Fonts.style.h2,
     "@media (max-width: 910px)": {
       textAlign: "center",
@@ -124,7 +131,6 @@ const { ids, styles } = StyleSheet.create({
   text: {
     textAlign: "left",
     ...Fonts.style.text,
-    color: Colors.white,
     paddingVertical: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       textAlign: "center",

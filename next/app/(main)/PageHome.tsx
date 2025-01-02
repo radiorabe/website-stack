@@ -41,6 +41,7 @@ export default function HomePage({ pageData, posts, partyTips, event }: Props) {
             title={event.promo_title}
             text={event.promo_text}
             backgroundColor={event.color}
+            textColor={Colors.white}
             imageId={event.title_image as string}
             buttonLabel={event.promo_button_label}
             buttonUrl={event.promo_button_url}
@@ -129,7 +130,8 @@ export default function HomePage({ pageData, posts, partyTips, event }: Props) {
           <PromoBox
             title={promo_box.title}
             text={promo_box.text}
-            backgroundColor={promo_box.color}
+            backgroundColor={promo_box.background_color}
+            textColor={promo_box.text_color}
             imageId={promo_box.image as string}
             buttonLabel={promo_box.button_label}
             buttonUrl={promo_box.button_url}
