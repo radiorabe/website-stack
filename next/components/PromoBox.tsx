@@ -12,7 +12,7 @@ export interface Props {
   event: ItemsEvents;
 }
 
-const EventBox = ({ event }: Props) => {
+const PromoBox = ({ event }: Props) => {
   return (
     <View
       style={[styles.container, { backgroundColor: event.color }]}
@@ -55,7 +55,7 @@ const EventBox = ({ event }: Props) => {
   );
 };
 
-export default EventBox;
+export default PromoBox;
 
 const { ids, styles } = StyleSheet.create({
   container: {

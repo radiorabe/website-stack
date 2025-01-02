@@ -1,29 +1,14 @@
 "use client";
-import { View, Text } from "@/lib/server-react-native";
-import StyleSheet from "react-native-media-query";
-import Fonts from "@/lib/Fonts";
-import { Api } from "@/lib/api";
-import {
-  ItemsEvents,
-  ItemsPartyLocation,
-  ItemsPartyTips,
-  ItemsPost,
-} from "@/lib/api/data-contracts";
 import Button from "@/components/Button";
-import PostPreview from "@/components/PostPreview/PostPreview";
-import PartyTip from "@/assets/svg/IconPartyTip";
-import Metrics from "@/lib/Metrics";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Colors from "@/lib/Colors";
-import moment from "moment";
-import { getLiveData } from "./programm/[date]/page";
-import HoverText from "@/components/HoverText";
-import { logError } from "@/lib/loging";
-import Image from "next/image";
-import ProgramBox from "@/components/ProgramBox/ProgramBox";
-import EventBox from "@/components/EventBox";
+import PromoBox from "@/components/PromoBox";
 import PartyTips from "@/components/PartyTips";
+import PostPreview from "@/components/PostPreview/PostPreview";
+import ProgramBox from "@/components/ProgramBox/ProgramBox";
+import Colors from "@/lib/Colors";
+import Fonts from "@/lib/Fonts";
+import Metrics from "@/lib/Metrics";
+import { Text, View } from "@/lib/server-react-native";
+import StyleSheet from "react-native-media-query";
 
 export default function HomePage({ posts, partyTips, event }) {
   return (
@@ -35,7 +20,7 @@ export default function HomePage({ posts, partyTips, event }) {
           paddingVertical: Metrics.tripleBaseMargin,
         }}
       >
-        {event && <EventBox event={event}></EventBox>}
+        {event && <PromoBox event={event}></PromoBox>}
 
         <View
           style={{
