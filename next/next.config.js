@@ -7,6 +7,11 @@ module.exports = {
         destination: "/programm/heute",
         permanent: true,
       },
+      {
+        source: "/umzug",
+        destination: "/events/rabe-zieht-um",
+        permanent: true,
+      },
     ];
   },
   images: {
