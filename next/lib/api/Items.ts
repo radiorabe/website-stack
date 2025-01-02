@@ -70,6 +70,8 @@ import {
   ReadItemsPageHistoryNodesData,
   ReadItemsPageHistoryNodesParams,
   ReadItemsPageHistoryParams,
+  ReadItemsPageHomeData,
+  ReadItemsPageHomeParams,
   ReadItemsPageImpressumData,
   ReadItemsPageImpressumParams,
   ReadItemsPageInternshipData,
@@ -128,6 +130,8 @@ import {
   ReadItemsProgramsDirectusUsersData,
   ReadItemsProgramsDirectusUsersParams,
   ReadItemsProgramsParams,
+  ReadItemsPromoBoxData,
+  ReadItemsPromoBoxParams,
   ReadItemsQuoteData,
   ReadItemsQuoteParams,
   ReadItemsStatementsData,
@@ -190,6 +194,8 @@ import {
   ReadSingleItemsPageHistoryNodesData,
   ReadSingleItemsPageHistoryNodesParams,
   ReadSingleItemsPageHistoryParams,
+  ReadSingleItemsPageHomeData,
+  ReadSingleItemsPageHomeParams,
   ReadSingleItemsPageImpressumData,
   ReadSingleItemsPageImpressumParams,
   ReadSingleItemsPageInternshipData,
@@ -248,6 +254,8 @@ import {
   ReadSingleItemsProgramsDirectusUsersData,
   ReadSingleItemsProgramsDirectusUsersParams,
   ReadSingleItemsProgramsParams,
+  ReadSingleItemsPromoBoxData,
+  ReadSingleItemsPromoBoxParams,
   ReadSingleItemsQuoteData,
   ReadSingleItemsQuoteParams,
   ReadSingleItemsStatementsData,
@@ -4807,14 +4815,14 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the page_history_files items.
+ * @description List the promo_box items.
  *
- * @tags Items, ItemsPageHistoryFiles
- * @name ReadItemsPageHistoryFiles
+ * @tags Items, ItemsPromoBox
+ * @name ReadItemsPromoBox
  * @summary List Items
- * @request GET:/items/page_history_files
+ * @request GET:/items/promo_box
  * @secure
- * @response `200` `ReadItemsPageHistoryFilesData` Successful request
+ * @response `200` `ReadItemsPromoBoxData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -4825,9 +4833,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readItemsPageHistoryFiles = (query: ReadItemsPageHistoryFilesParams, params: RequestParams = {}) =>
+  readItemsPromoBox = (query: ReadItemsPromoBoxParams, params: RequestParams = {}) =>
     this.request<
-      ReadItemsPageHistoryFilesData,
+      ReadItemsPromoBoxData,
       {
         error?: {
           /** @format int64 */
@@ -4836,7 +4844,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/page_history_files`,
+      path: `/items/promo_box`,
       method: "GET",
       query: query,
       secure: true,
@@ -4844,13 +4852,13 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description Retrieve a single page_history_files item by unique identifier.
+ * @description Retrieve a single promo_box item by unique identifier.
  *
- * @tags Items, ItemsPageHistoryFiles
- * @name ReadSingleItemsPageHistoryFiles
+ * @tags Items, ItemsPromoBox
+ * @name ReadSingleItemsPromoBox
  * @summary Retrieve an Item
- * @request GET:/items/page_history_files/{id}
- * @response `200` `ReadSingleItemsPageHistoryFilesData` Successful request
+ * @request GET:/items/promo_box/{id}
+ * @response `200` `ReadSingleItemsPromoBoxData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -4870,12 +4878,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readSingleItemsPageHistoryFiles = (
-    { id, ...query }: ReadSingleItemsPageHistoryFilesParams,
-    params: RequestParams = {},
-  ) =>
+  readSingleItemsPromoBox = ({ id, ...query }: ReadSingleItemsPromoBoxParams, params: RequestParams = {}) =>
     this.request<
-      ReadSingleItemsPageHistoryFilesData,
+      ReadSingleItemsPromoBoxData,
       {
         error?: {
           /** @format int64 */
@@ -4884,7 +4889,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/page_history_files/${id}`,
+      path: `/items/promo_box/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -4975,14 +4980,14 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description List the page_history_files_1 items.
+ * @description List the page_home items.
  *
- * @tags Items, ItemsPageHistoryFiles1
- * @name ReadItemsPageHistoryFiles1
+ * @tags Items, ItemsPageHome
+ * @name ReadItemsPageHome
  * @summary List Items
- * @request GET:/items/page_history_files_1
+ * @request GET:/items/page_home
  * @secure
- * @response `200` `ReadItemsPageHistoryFiles1Data` Successful request
+ * @response `200` `ReadItemsPageHomeData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -4993,9 +4998,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readItemsPageHistoryFiles1 = (query: ReadItemsPageHistoryFiles1Params, params: RequestParams = {}) =>
+  readItemsPageHome = (query: ReadItemsPageHomeParams, params: RequestParams = {}) =>
     this.request<
-      ReadItemsPageHistoryFiles1Data,
+      ReadItemsPageHomeData,
       {
         error?: {
           /** @format int64 */
@@ -5004,7 +5009,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/page_history_files_1`,
+      path: `/items/page_home`,
       method: "GET",
       query: query,
       secure: true,
@@ -5012,13 +5017,13 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
- * @description Retrieve a single page_history_files_1 item by unique identifier.
+ * @description Retrieve a single page_home item by unique identifier.
  *
- * @tags Items, ItemsPageHistoryFiles1
- * @name ReadSingleItemsPageHistoryFiles1
+ * @tags Items, ItemsPageHome
+ * @name ReadSingleItemsPageHome
  * @summary Retrieve an Item
- * @request GET:/items/page_history_files_1/{id}
- * @response `200` `ReadSingleItemsPageHistoryFiles1Data` Successful request
+ * @request GET:/items/page_home/{id}
+ * @response `200` `ReadSingleItemsPageHomeData` Successful request
  * @response `401` `{
     error?: {
   \** @format int64 *\
@@ -5038,12 +5043,9 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
 
 }`
  */
-  readSingleItemsPageHistoryFiles1 = (
-    { id, ...query }: ReadSingleItemsPageHistoryFiles1Params,
-    params: RequestParams = {},
-  ) =>
+  readSingleItemsPageHome = ({ id, ...query }: ReadSingleItemsPageHomeParams, params: RequestParams = {}) =>
     this.request<
-      ReadSingleItemsPageHistoryFiles1Data,
+      ReadSingleItemsPageHomeData,
       {
         error?: {
           /** @format int64 */
@@ -5052,7 +5054,7 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
         };
       }
     >({
-      path: `/items/page_history_files_1/${id}`,
+      path: `/items/page_home/${id}`,
       method: "GET",
       query: query,
       format: "json",
@@ -5302,6 +5304,174 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_contact_image_link/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_history_files items.
+ *
+ * @tags Items, ItemsPageHistoryFiles
+ * @name ReadItemsPageHistoryFiles
+ * @summary List Items
+ * @request GET:/items/page_history_files
+ * @secure
+ * @response `200` `ReadItemsPageHistoryFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageHistoryFiles = (query: ReadItemsPageHistoryFilesParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageHistoryFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_history_files item by unique identifier.
+ *
+ * @tags Items, ItemsPageHistoryFiles
+ * @name ReadSingleItemsPageHistoryFiles
+ * @summary Retrieve an Item
+ * @request GET:/items/page_history_files/{id}
+ * @response `200` `ReadSingleItemsPageHistoryFilesData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageHistoryFiles = (
+    { id, ...query }: ReadSingleItemsPageHistoryFilesParams,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageHistoryFilesData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_history_files_1 items.
+ *
+ * @tags Items, ItemsPageHistoryFiles1
+ * @name ReadItemsPageHistoryFiles1
+ * @summary List Items
+ * @request GET:/items/page_history_files_1
+ * @secure
+ * @response `200` `ReadItemsPageHistoryFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageHistoryFiles1 = (query: ReadItemsPageHistoryFiles1Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageHistoryFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files_1`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_history_files_1 item by unique identifier.
+ *
+ * @tags Items, ItemsPageHistoryFiles1
+ * @name ReadSingleItemsPageHistoryFiles1
+ * @summary Retrieve an Item
+ * @request GET:/items/page_history_files_1/{id}
+ * @response `200` `ReadSingleItemsPageHistoryFiles1Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageHistoryFiles1 = (
+    { id, ...query }: ReadSingleItemsPageHistoryFiles1Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageHistoryFiles1Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_history_files_1/${id}`,
       method: "GET",
       query: query,
       format: "json",

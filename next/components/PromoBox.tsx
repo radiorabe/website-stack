@@ -1,55 +1,77 @@
 "use client";
-import { ItemsEvents } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
+import useResponsive from "@/lib/useResponsisve";
 import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "./Button";
 
 export interface Props {
-  event: ItemsEvents;
+  title: string;
+  text: string;
+  backgroundColor: any;
+  imageId: string;
+  buttonLabel?: string;
+  buttonUrl?: string;
+  goldenRatio?: boolean;
 }
 
-const PromoBox = ({ event }: Props) => {
+const PromoBox = ({
+  title,
+  text,
+  backgroundColor,
+  imageId,
+  buttonLabel,
+  buttonUrl,
+  goldenRatio,
+}: Props) => {
+  const { isMobile } = useResponsive();
+
   return (
     <View
-      style={[styles.container, { backgroundColor: event.color }]}
+      style={[styles.container, { backgroundColor: backgroundColor }]}
       dataSet={{ media: ids.container }}
     >
       <View
-        style={styles.imageContainer}
+        style={[styles.imageContainer, { width: goldenRatio ? "38%" : "50%" }]}
         dataSet={{ media: ids.imageContainer }}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${event.title_image}?width=2000&fit=cover`}
-          width={1000}
-          height={500}
-          layout="responsive"
-          alt={event.promo_title}
-          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imageId}?width=2000&fit=cover`}
+          width={!isMobile ? undefined : 500}
+          height={!isMobile ? undefined : 100}
+          objectFit={!isMobile ? "contain" : undefined}
+          layout={!isMobile ? undefined : "responsive"}
+          fill={!isMobile}
+          alt={title}
         />
       </View>
 
-      <View style={styles.textContainer} dataSet={{ media: ids.textContainer }}>
+      <View
+        style={[styles.textContainer, { width: goldenRatio ? "62%" : "50%" }]}
+        dataSet={{ media: ids.textContainer }}
+      >
         <Text style={styles.title} dataSet={{ media: ids.title }}>
-          {event.promo_title}
+          {title}
         </Text>
         <Text style={styles.text} dataSet={{ media: ids.text }}>
-          {event.promo_text}
+          {text}
         </Text>
-        <View
-          style={styles.buttonContainer}
-          dataSet={{ media: ids.buttonContainer }}
-        >
-          <Button
-            label={event.promo_button_label}
-            href={event.promo_button_url}
-            textColor={Colors.white}
-            hoverTextColor={Colors.whiteTransparent}
-          ></Button>
-        </View>
+        {buttonLabel !== "" && buttonUrl !== "" && (
+          <View
+            style={styles.buttonContainer}
+            dataSet={{ media: ids.buttonContainer }}
+          >
+            <Button
+              label={buttonLabel}
+              href={buttonUrl}
+              textColor={Colors.white}
+              hoverTextColor={Colors.whiteTransparent}
+            ></Button>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -68,28 +90,24 @@ const { ids, styles } = StyleSheet.create({
       flexDirection: "column",
       alignItems: "center",
       padding: Metrics.tripleBaseMargin,
-      // justifyContent: "center",
     },
   },
   imageContainer: {
-    width: "50%",
-    alignItems: "center",
-    justifyContent: "center",
     paddingRight: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       paddingRight: 0,
-      width: "100%",
+      width: "62%",
       alignItems: "center",
-      // justifyContent: "center",
     },
   },
   textContainer: {
-    width: "50%",
     paddingLeft: Metrics.baseMargin,
-    justifyContent: "center",
-    paddingTop: 0,
+    paddingTop: Metrics.doubleBaseMargin,
+    paddingBottom: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       paddingTop: Metrics.tripleBaseMargin,
+      paddingBottom: 0,
+
       paddingLeft: 0,
       width: "100%",
       alignItems: "center",

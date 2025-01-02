@@ -1,6 +1,7 @@
 import { Api } from "@/lib/api";
 import {
   ItemsEvents,
+  ItemsPageHome,
   ItemsPartyTips,
   ItemsPost,
 } from "@/lib/api/data-contracts";
@@ -119,16 +120,49 @@ async function checkEventWithPromobox() {
   }
 }
 
+async function getPageData() {
+  try {
+    const itemResponse = await Api.readItemsPageHome(
+      {
+        fields: ["*", "promo_box.*"],
+      },
+      {
+        next: {
+          tags:
+            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      }
+    );
+    let item = itemResponse.data.data as ItemsPageHome;
+    console.log("ItemsPageHome", item);
+
+    return item;
+  } catch (error) {
+    logError(error);
+
+    notFound();
+  }
+}
+
 export const metadata: Metadata = {
   title: "RaBe - Home",
 };
 
 export default async function HomePage(props) {
+  const pageData = await getPageData();
+
   const posts = await getPosts();
   const partyTips = await getPartyTips();
   const event = await checkEventWithPromobox();
 
   return (
-    <PageHome posts={posts} partyTips={partyTips} event={event}></PageHome>
+    <PageHome
+      pageData={pageData}
+      posts={posts}
+      partyTips={partyTips}
+      event={event}
+    ></PageHome>
   );
 }

@@ -9,8 +9,24 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
+import {
+  ItemsEvents,
+  ItemsPageHome,
+  ItemsPartyTips,
+  ItemsPost,
+  ItemsPromoBox,
+} from "@/lib/api/data-contracts";
 
-export default function HomePage({ posts, partyTips, event }) {
+export interface Props {
+  pageData: ItemsPageHome;
+  posts: ItemsPost[];
+  partyTips: ItemsPartyTips[];
+  event: ItemsEvents;
+}
+
+export default function HomePage({ pageData, posts, partyTips, event }: Props) {
+  let promo_box = pageData.promo_box as ItemsPromoBox;
+
   return (
     <View>
       <View
@@ -20,7 +36,16 @@ export default function HomePage({ posts, partyTips, event }) {
           paddingVertical: Metrics.tripleBaseMargin,
         }}
       >
-        {event && <PromoBox event={event}></PromoBox>}
+        {event && (
+          <PromoBox
+            title={event.promo_title}
+            text={event.promo_text}
+            backgroundColor={event.color}
+            imageId={event.title_image as string}
+            buttonLabel={event.promo_button_label}
+            buttonUrl={event.promo_button_url}
+          ></PromoBox>
+        )}
 
         <View
           style={{
@@ -95,6 +120,23 @@ export default function HomePage({ posts, partyTips, event }) {
         </View>
       </View>
       <PartyTips partyTips={partyTips}></PartyTips>
+
+      {promo_box && (
+        <View
+          style={styles.promoBoxContainer}
+          dataSet={{ media: ids.promoBoxContainer }}
+        >
+          <PromoBox
+            title={promo_box.title}
+            text={promo_box.text}
+            backgroundColor={promo_box.color}
+            imageId={promo_box.image as string}
+            buttonLabel={promo_box.button_label}
+            buttonUrl={promo_box.button_url}
+            goldenRatio
+          ></PromoBox>
+        </View>
+      )}
     </View>
   );
 }
@@ -112,5 +154,8 @@ const { styles, ids } = StyleSheet.create({
       alignItems: "center",
       paddingTop: Metrics.tripleBaseMargin,
     },
+  },
+  promoBoxContainer: {
+    paddingHorizontal: Metrics.tripleBaseMargin,
   },
 });

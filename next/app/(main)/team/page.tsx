@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Team",
 };
 
-async function getTeamData() {
+async function getPageData() {
   try {
     const itemResponse = await Api.readItemsPageTeam(
       {
@@ -40,7 +40,7 @@ async function getTeamData() {
   }
 }
 
-export default async function TeaamPage(props) {
-  const data = await getTeamData();
+export default async function TeamPage(props) {
+  const data = await getPageData();
   return <PageTeam pageData={data}></PageTeam>;
 }
