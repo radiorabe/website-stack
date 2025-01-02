@@ -129,6 +129,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
       <audio
         // key={currentTrack.src}
         // src={currentTrack.src}
+        preload={"auto"} // hint for browser to start download the stream for faster user experience
         ref={audioRef}
         onWaiting={onWaiting}
         onPlaying={onPlaying}
