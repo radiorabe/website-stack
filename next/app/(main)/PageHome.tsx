@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import PromoBox from "@/components/PromoBox";
 import PartyTips from "@/components/PartyTips";
-import PostPreview from "@/components/PostPreview/PostPreview";
+import PostPreviewBox from "@/components/PostPreview/PostPreviewBox";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
@@ -70,23 +70,7 @@ export default function HomePage({ pageData, posts, partyTips, event }: Props) {
             />
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
-          {posts.map((item, index) => {
-            return (
-              <PostPreview
-                key={"post" + index}
-                data={item}
-                index={index}
-              ></PostPreview>
-            );
-          })}
-        </View>
+        <PostPreviewBox posts={posts}></PostPreviewBox>
         <View
           style={styles.mobileShowPostButton}
           dataSet={{ media: ids.mobileShowPostButton }}

@@ -17,7 +17,7 @@ import { Show } from "@/lib/Types";
 
 import Button from "@/components/Button";
 import MemberInfo from "@/components/MemberInfo";
-import PostPreview from "@/components/PostPreview/PostPreview";
+import PostPreviewBox from "@/components/PostPreview/PostPreviewBox";
 import RenderTipTap from "@/components/RenderTipTap";
 import moment from "moment";
 import Heart from "./Heart";
@@ -234,21 +234,10 @@ export default function ProgramPage({
 
           <View
             style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
               marginBottom: Metrics.tripleBaseMargin,
             }}
           >
-            {posts.map((item, index) => {
-              return (
-                <PostPreview
-                  key={"post" + index}
-                  data={item}
-                  index={index}
-                ></PostPreview>
-              );
-            })}
+            <PostPreviewBox posts={posts}></PostPreviewBox>
           </View>
         </View>
       )}

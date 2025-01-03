@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/Button";
-import PostPreview from "@/components/PostPreview/PostPreview";
+import PostPreviewBox from "@/components/PostPreview/PostPreviewBox";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import Fonts from "../../../lib/Fonts";
@@ -47,23 +47,7 @@ export default function PostList({ initialPosts, filters }) {
   return (
     <>
       {posts.length > 0 ? (
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-          }}
-        >
-          {posts.map((item, index) => {
-            return (
-              <PostPreview
-                key={"post" + index}
-                data={item}
-                index={index}
-              ></PostPreview>
-            );
-          })}
-        </View>
+        <PostPreviewBox posts={posts}></PostPreviewBox>
       ) : (
         <View
           style={{
