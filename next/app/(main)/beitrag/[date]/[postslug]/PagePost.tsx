@@ -19,6 +19,7 @@ import moment from "moment";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
 import { useState } from "react";
+import useResponsive from "@/lib/useResponsisve";
 
 type Props = {
   post: ItemsPost;
@@ -27,6 +28,7 @@ type Props = {
 export default function BeitragPage({ post }: Props) {
   const program = post.program as ItemsPrograms;
   const imagebox = post.imagebox as ItemsImageBox;
+  let { isMobile } = useResponsive();
 
   let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
 
@@ -110,7 +112,7 @@ export default function BeitragPage({ post }: Props) {
           <Button
             onPress={() => {
               let shareUrl = `${process.env.NEXT_PUBLIC_FE_URL}/beitrag/${moment(post.date).format("DD-MM-YYYY")}/${post.slug}`;
-              if (navigator.share) {
+              if (navigator.share && isMobile) {
                 // Web Share API is supported
                 navigator
                   .share({
@@ -124,7 +126,7 @@ export default function BeitragPage({ post }: Props) {
               } else {
                 // Fallback
                 navigator.clipboard.writeText(shareUrl);
-                setShareButtonTitle("Kopiert");
+                setShareButtonTitle("Link kopiert");
               }
             }}
             icon={<IconShare color={Colors.darkGreen}></IconShare>}
