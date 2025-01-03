@@ -38,7 +38,7 @@ export default function ShowsList({
             position: "absolute",
             top: 0,
             left: 0,
-            bottom: 10,
+            bottom: 0,
             right: -20,
             overflow: "scroll",
           }}

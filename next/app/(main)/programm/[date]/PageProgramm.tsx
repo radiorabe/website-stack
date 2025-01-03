@@ -94,7 +94,7 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
     : `/programm/${prevWeekNumber}-${prevYearNumber}`;
 
   return (
-    <View>
+    <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
       <View style={styles.container} dataSet={{ media: ids.container }}>
         <View
           style={styles.textContainer}
@@ -189,12 +189,24 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
         nextWeekArrowLink={nextWeekArrowLink}
         prevWeekArrowLink={prevWeekArrowLink}
       ></Calender>
-      {pageData && <ProgramGroups pageData={pageData}></ProgramGroups>}
+      {pageData && (
+        <View
+          style={styles.groupsContainer}
+          dataSet={{ media: ids.groupsContainer }}
+        >
+          <ProgramGroups pageData={pageData}></ProgramGroups>
+        </View>
+      )}
     </View>
   );
 }
 
 const { styles, ids } = StyleSheet.create({
+  outerContainer: {
+    "@media (max-width: 910px)": {
+      paddingBottom: Metrics.quadBaseMargin,
+    },
+  },
   container: {
     width: "100%",
     alignItems: "center",
@@ -216,7 +228,7 @@ const { styles, ids } = StyleSheet.create({
   },
   programBoxContainer: {
     paddingHorizontal: Metrics.doubleBaseMargin,
-    paddingVertical: Metrics.doubleBaseMargin,
+    // paddingVertical: Metrics.doubleBaseMargin,
 
     borderRadius: 9,
     backgroundColor: Colors.lightGreen,
@@ -242,6 +254,11 @@ const { styles, ids } = StyleSheet.create({
     },
   },
   heuteButton: {
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  groupsContainer: {
     "@media (max-width: 910px)": {
       display: "none",
     },

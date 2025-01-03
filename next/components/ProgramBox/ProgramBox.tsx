@@ -265,6 +265,7 @@ const { ids, styles } = StyleSheet.create({
     display: "none",
     "@media (max-width: 910px)": {
       display: "flex",
+      paddingTop: 7,
     },
   },
   mobileButtonContainer: {

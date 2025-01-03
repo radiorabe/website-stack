@@ -47,7 +47,7 @@ export default function Calender({
                 style={{
                   width: `${90 / 7}vw`,
                   alignItems: "center",
-                  minWidth: 115, // mediawith for mobile: 910/7
+                  minWidth: 150,
                 }}
               >
                 <View

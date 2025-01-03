@@ -39,7 +39,7 @@ export default function ProgramGroups({ pageData }: Props) {
               <Button
                 key={title + index}
                 style={{ padding: Metrics.halfBaseMargin }}
-                href={program.slug}
+                href={"/" + program.slug}
                 label={program.name}
                 large
                 full
