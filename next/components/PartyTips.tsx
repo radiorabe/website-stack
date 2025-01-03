@@ -1,5 +1,5 @@
 "use client";
-import { ItemsPartyLocation } from "@/lib/api/data-contracts";
+import { ItemsPartyLocation, ItemsPartyTips } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
@@ -11,10 +11,14 @@ import StyleSheet from "react-native-media-query";
 import Button from "./Button";
 
 export interface Props {
-  partyTips: any[];
+  partyTips: ItemsPartyTips[];
 }
 
 const Ausgehtips = ({ partyTips }: Props) => {
+  if (!partyTips || partyTips.length === 0) {
+    return null;
+  }
+
   const { isMobile } = useResponsive();
 
   return (
@@ -36,6 +40,14 @@ const Ausgehtips = ({ partyTips }: Props) => {
         >
           {partyTips.map((item, index) => {
             let partyLocation = item.party_location as ItemsPartyLocation;
+            console.log("item.date_label", item);
+            let dateText =
+              item.date_label && item.date_label !== ""
+                ? item.date_label
+                : moment(item.date).format("dd DD.MM") +
+                  ", ab " +
+                  moment(item.date).format("HH:mm") +
+                  " Uhr";
             return (
               <View
                 key={"partyTips" + index}
@@ -106,10 +118,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                       </Text>
                     </View>
                     <Text style={styles.text} dataSet={{ media: ids.text }}>
-                      {moment(item.date).format("dd DD.MM") +
-                        ", ab " +
-                        moment(item.date).format("hh:mm") +
-                        " Uhr"}
+                      {dateText}
                     </Text>
                   </View>
 
@@ -183,6 +192,7 @@ const { ids, styles } = StyleSheet.create({
     flex: 3,
     paddingLeft: Metrics.doubleBaseMargin,
     // backgroundColor: "blue",
+    justifyContent: "center",
     "@media (max-width: 910px)": {
       paddingLeft: 0,
     },

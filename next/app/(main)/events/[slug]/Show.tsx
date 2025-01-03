@@ -93,7 +93,6 @@ const Show = ({ show, eventColor }: Props) => {
               label="Webseite"
               text={show.website}
               bold
-              // text={moment(show.opening_time).format("HH:MM")}
             ></ShowInfoText>
           )}
         </View>

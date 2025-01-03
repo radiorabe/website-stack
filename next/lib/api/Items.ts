@@ -1919,6 +1919,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the party_tips items.
+ *
+ * @tags Items, ItemsPartyTips
+ * @name ReadItemsPartyTips
+ * @summary List Items
+ * @request GET:/items/party_tips
+ * @secure
+ * @response `200` `ReadItemsPartyTipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPartyTips = (query: ReadItemsPartyTipsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPartyTipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/party_tips`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single party_tips item by unique identifier.
+ *
+ * @tags Items, ItemsPartyTips
+ * @name ReadSingleItemsPartyTips
+ * @summary Retrieve an Item
+ * @request GET:/items/party_tips/{id}
+ * @response `200` `ReadSingleItemsPartyTipsData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPartyTips = ({ id, ...query }: ReadSingleItemsPartyTipsParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPartyTipsData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/party_tips/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the page_program_programs_2 items.
  *
  * @tags Items, ItemsPageProgramPrograms2
@@ -2159,87 +2240,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_receive/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the party_tips items.
- *
- * @tags Items, ItemsPartyTips
- * @name ReadItemsPartyTips
- * @summary List Items
- * @request GET:/items/party_tips
- * @secure
- * @response `200` `ReadItemsPartyTipsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsPartyTips = (query: ReadItemsPartyTipsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsPartyTipsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/party_tips`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single party_tips item by unique identifier.
- *
- * @tags Items, ItemsPartyTips
- * @name ReadSingleItemsPartyTips
- * @summary Retrieve an Item
- * @request GET:/items/party_tips/{id}
- * @response `200` `ReadSingleItemsPartyTipsData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsPartyTips = ({ id, ...query }: ReadSingleItemsPartyTipsParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsPartyTipsData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/party_tips/${id}`,
       method: "GET",
       query: query,
       format: "json",

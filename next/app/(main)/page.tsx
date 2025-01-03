@@ -22,7 +22,7 @@ async function getPosts() {
             _eq: "published",
           },
           date: {
-            _lte: "NOW",
+            _lte: "$NOW",
           },
         }),
         sort: ["-date"],
@@ -55,15 +55,35 @@ async function getPartyTips() {
   try {
     const itemResponse = await Api.readItemsPartyTips(
       {
-        fields: ["title_1", "title_2", "date", "party_location.*"],
+        fields: [
+          "title_1",
+          "title_2",
+          "date",
+          "date_label",
+          "party_location.*",
+        ],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
-          status: {
-            _eq: "published",
-          },
+          _and: [
+            {
+              status: {
+                _eq: "published",
+              },
+            },
+            {
+              date: {
+                _gte: "$NOW",
+              },
+            },
+            {
+              date: {
+                _lte: "$NOW(+6 days)",
+              },
+            },
+          ],
         }),
-        sort: ["-date"],
+        sort: ["date"],
         // limit: 3,
       },
       {

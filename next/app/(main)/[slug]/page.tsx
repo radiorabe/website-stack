@@ -100,7 +100,7 @@ async function getPosts(slug) {
             _eq: "published",
           },
           date: {
-            _lte: "NOW",
+            _lte: "$NOW",
           },
         }),
         sort: ["-date"],
