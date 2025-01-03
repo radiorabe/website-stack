@@ -52,6 +52,12 @@ export default function BeitragPage({ post, morePosts }: Props) {
               </Text>
               {post.authors.map((item: ItemsPostDirectusUsers, index) => {
                 let user: Users = item.directus_users_id as Users;
+                let userName = `${index ? "," : ""} ${user.first_name || ""}`;
+
+                if (user.last_name && user.last_name !== "") {
+                  userName = userName + " " + user.last_name;
+                }
+
                 return (
                   <ButtonText
                     key={"author" + index}
@@ -62,18 +68,23 @@ export default function BeitragPage({ post, morePosts }: Props) {
                     // dataSet={{media:ids.}}
                     style={{ ...Fonts.style.textLink, color: Colors.green }}
                     hoverStyle={{ color: Colors.darkGreen }}
-                  >{`${index ? "," : ""} ${user.first_name || ""} ${
-                    user.last_name || ""
-                  }`}</ButtonText>
+                  >
+                    {userName}
+                  </ButtonText>
                 );
               })}
 
               <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-                {"am "}
+                {" am "}
               </Text>
-              <Text> {`${moment(post.date).format("DD. MMMM YYYY")}`}</Text>
+              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+                {`${moment(post.date).format("D. MMMM YYYY")}`}
+              </Text>
             </Text>
           </View>
+          <Text dataSet={{ media: ids.mobileDate }} style={styles.mobileDate}>
+            {`${moment(post.date).format("D. MMMM YYYY")}`}
+          </Text>
         </View>
         <Text
           // dataSet={{media:ids.}}
@@ -236,6 +247,14 @@ const { ids, styles } = StyleSheet.create({
   hide: {
     "@media (max-width: 910px)": {
       display: "none",
+    },
+  },
+  mobileDate: {
+    display: "none",
+    "@media (max-width: 910px)": {
+      display: "flex",
+      ...Fonts.style.text,
+      paddingTop: Metrics.baseMargin,
     },
   },
   morePostsContainer: {

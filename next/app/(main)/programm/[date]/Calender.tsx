@@ -77,7 +77,7 @@ export default function Calender({
                       textAlign: "center",
                     }}
                   >
-                    {thisDay.format("DD. MMMM")}
+                    {thisDay.format("D. MMMM")}
                   </Text>
                 </View>
                 <View

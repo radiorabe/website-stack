@@ -69,7 +69,7 @@ const ClassDropDown = ({ classItem }: Props) => {
               {classItem.date && (
                 <ShowInfoText
                   label="Datum"
-                  text={moment(classItem.date).format("DD. MMMM YYYY")}
+                  text={moment(classItem.date).format("D. MMMM YYYY")}
                   bold
                 ></ShowInfoText>
               )}

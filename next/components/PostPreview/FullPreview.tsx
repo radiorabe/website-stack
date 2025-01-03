@@ -94,7 +94,7 @@ const FullPreview = ({ data }: Props) => {
               color: Colors.white,
             }}
           >
-            {moment(data.date).format("DD. MMMM")}
+            {moment(data.date).format("D. MMMM")}
           </Text>
           <Text
             style={[

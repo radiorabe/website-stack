@@ -102,7 +102,7 @@ export default function PageInternship({ pageData }) {
                           <InfoText
                             label="Bewerbungsfrist"
                             text={moment(internship.deadline).format(
-                              "DD. MMMM YYYY"
+                              "D. MMMM YYYY"
                             )}
                           ></InfoText>
                         )}

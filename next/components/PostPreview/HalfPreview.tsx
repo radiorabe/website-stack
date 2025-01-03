@@ -58,7 +58,7 @@ const HalfPreview = ({ data }: Props) => {
           ></Button>
         </View>
         <Text style={styles.date} dataSet={{ media: ids.date }}>
-          {moment(data.date).format("DD. MMMM")}
+          {moment(data.date).format("D. MMMM")}
         </Text>
       </View>
       <Text style={styles.title} dataSet={{ media: ids.title }}>

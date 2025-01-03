@@ -44,7 +44,7 @@ const Show = ({ show, eventColor }: Props) => {
           {show.date && (
             <ShowInfoText
               label="Datum"
-              text={moment(show.date).format("DD. MMMM YYYY")}
+              text={moment(show.date).format("D. MMMM YYYY")}
               bold
             ></ShowInfoText>
           )}
