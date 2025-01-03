@@ -71,6 +71,10 @@ type Query {
   page_program_programs_1_by_id(id: ID!, version: String): page_program_programs_1
   page_program_programs_1_aggregated(groupBy: [String], filter: page_program_programs_1_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_program_programs_1_aggregated!]!
   page_program_programs_1_by_version(version: String!, id: ID!): version_page_program_programs_1
+  party_tips(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [party_tips!]!
+  party_tips_by_id(id: ID!, version: String): party_tips
+  party_tips_aggregated(groupBy: [String], filter: party_tips_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [party_tips_aggregated!]!
+  party_tips_by_version(version: String!, id: ID!): version_party_tips
   page_program_programs_2(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_program_programs_2!]!
   page_program_programs_2_by_id(id: ID!, version: String): page_program_programs_2
   page_program_programs_2_aggregated(groupBy: [String], filter: page_program_programs_2_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [page_program_programs_2_aggregated!]!
@@ -79,10 +83,6 @@ type Query {
   page_program_by_version(version: String!): version_page_program
   page_receive(version: String): page_receive
   page_receive_by_version(version: String!): version_page_receive
-  party_tips(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [party_tips!]!
-  party_tips_by_id(id: ID!, version: String): party_tips
-  party_tips_aggregated(groupBy: [String], filter: party_tips_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [party_tips_aggregated!]!
-  party_tips_by_version(version: String!, id: ID!): version_party_tips
   page_history(version: String): page_history
   page_history_by_version(version: String!): version_page_history
   page_member(version: String): page_member
@@ -260,10 +260,10 @@ type Mutation {
   create_page_team_directus_users_2_item(data: create_page_team_directus_users_2_input!): page_team_directus_users_2
   create_page_program_programs_1_items(filter: page_program_programs_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_program_programs_1_input!]): [page_program_programs_1!]!
   create_page_program_programs_1_item(data: create_page_program_programs_1_input!): page_program_programs_1
-  create_page_program_programs_2_items(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_program_programs_2_input!]): [page_program_programs_2!]!
-  create_page_program_programs_2_item(data: create_page_program_programs_2_input!): page_program_programs_2
   create_party_tips_items(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_party_tips_input!]): [party_tips!]!
   create_party_tips_item(data: create_party_tips_input!): party_tips
+  create_page_program_programs_2_items(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_program_programs_2_input!]): [page_program_programs_2!]!
+  create_page_program_programs_2_item(data: create_page_program_programs_2_input!): page_program_programs_2
   create_contact_address_items(filter: contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_contact_address_input!]): [contact_address!]!
   create_contact_address_item(data: create_contact_address_input!): contact_address
   create_page_receive_nodes_items(filter: page_receive_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_page_receive_nodes_input!]): [page_receive_nodes!]!
@@ -381,14 +381,14 @@ type Mutation {
   update_page_program_programs_1_items(filter: page_program_programs_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_program_programs_1_input!): [page_program_programs_1!]!
   update_page_program_programs_1_batch(filter: page_program_programs_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_program_programs_1_input!]): [page_program_programs_1!]!
   update_page_program_programs_1_item(id: ID!, data: update_page_program_programs_1_input!): page_program_programs_1
+  update_party_tips_items(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_party_tips_input!): [party_tips!]!
+  update_party_tips_batch(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_party_tips_input!]): [party_tips!]!
+  update_party_tips_item(id: ID!, data: update_party_tips_input!): party_tips
   update_page_program_programs_2_items(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_page_program_programs_2_input!): [page_program_programs_2!]!
   update_page_program_programs_2_batch(filter: page_program_programs_2_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_page_program_programs_2_input!]): [page_program_programs_2!]!
   update_page_program_programs_2_item(id: ID!, data: update_page_program_programs_2_input!): page_program_programs_2
   update_page_program(data: update_page_program_input!): page_program
   update_page_receive(data: update_page_receive_input!): page_receive
-  update_party_tips_items(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_party_tips_input!): [party_tips!]!
-  update_party_tips_batch(filter: party_tips_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_party_tips_input!]): [party_tips!]!
-  update_party_tips_item(id: ID!, data: update_party_tips_input!): party_tips
   update_page_history(data: update_page_history_input!): page_history
   update_page_member(data: update_page_member_input!): page_member
   update_contact_address_items(filter: contact_address_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_contact_address_input!): [contact_address!]!
@@ -524,10 +524,10 @@ type Mutation {
   delete_page_team_directus_users_2_item(id: ID!): delete_one
   delete_page_program_programs_1_items(ids: [ID]!): delete_many
   delete_page_program_programs_1_item(id: ID!): delete_one
-  delete_page_program_programs_2_items(ids: [ID]!): delete_many
-  delete_page_program_programs_2_item(id: ID!): delete_one
   delete_party_tips_items(ids: [ID]!): delete_many
   delete_party_tips_item(id: ID!): delete_one
+  delete_page_program_programs_2_items(ids: [ID]!): delete_many
+  delete_page_program_programs_2_item(id: ID!): delete_one
   delete_contact_address_items(ids: [ID]!): delete_many
   delete_contact_address_item(id: ID!): delete_one
   delete_page_receive_nodes_items(ids: [ID]!): delete_many
@@ -639,10 +639,10 @@ type Subscription {
   page_team_directus_users_1_mutated(event: EventEnum): page_team_directus_users_1_mutated
   page_team_directus_users_2_mutated(event: EventEnum): page_team_directus_users_2_mutated
   page_program_programs_1_mutated(event: EventEnum): page_program_programs_1_mutated
+  party_tips_mutated(event: EventEnum): party_tips_mutated
   page_program_programs_2_mutated(event: EventEnum): page_program_programs_2_mutated
   page_program_mutated(event: EventEnum): page_program_mutated
   page_receive_mutated(event: EventEnum): page_receive_mutated
-  party_tips_mutated(event: EventEnum): party_tips_mutated
   page_history_mutated(event: EventEnum): page_history_mutated
   page_member_mutated(event: EventEnum): page_member_mutated
   contact_address_mutated(event: EventEnum): contact_address_mutated
@@ -3210,6 +3210,9 @@ type party_tips {
   title_2: String
   title_1: String
   party_location(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): party_location
+
+  """Label überschreibt das Start-Datum"""
+  date_label: String
 }
 
 type party_tips_aggregated {
@@ -3237,6 +3240,9 @@ type party_tips_aggregated_count {
   title_2: Int
   title_1: Int
   party_location: Int
+
+  """Label überschreibt das Start-Datum"""
+  date_label: Int
 }
 
 type party_tips_aggregated_fields {
@@ -3590,7 +3596,6 @@ type promo_box {
   button_label: String
   button_url: String
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  text_color: String
   background_color: String
 }
 
@@ -3614,7 +3619,6 @@ type promo_box_aggregated_count {
   button_label: Int
   button_url: Int
   image: Int
-  text_color: Int
   background_color: Int
 }
 
@@ -4304,6 +4308,9 @@ type version_party_tips {
   title_2: String
   title_1: String
   party_location: JSON
+
+  """Label überschreibt das Start-Datum"""
+  date_label: String
 }
 
 """"""
@@ -4396,7 +4403,6 @@ type version_promo_box {
   button_label: String
   button_url: String
   image: JSON
-  text_color: String
   background_color: String
 }
 
@@ -5077,6 +5083,9 @@ input create_party_tips_input {
   title_2: String
   title_1: String
   party_location: create_party_location_input
+
+  """Label überschreibt das Start-Datum"""
+  date_label: String
 }
 
 input create_post_directus_users_input {
@@ -5161,7 +5170,6 @@ input create_promo_box_input {
   button_label: String
   button_url: String
   image: create_directus_files_input
-  text_color: String
   background_color: String
 }
 
@@ -6106,6 +6114,7 @@ input party_tips_filter {
   title_2: string_filter_operators
   title_1: string_filter_operators
   party_location: party_location_filter
+  date_label: string_filter_operators
   _and: [party_tips_filter]
   _or: [party_tips_filter]
 }
@@ -6215,7 +6224,6 @@ input promo_box_filter {
   button_label: string_filter_operators
   button_url: string_filter_operators
   image: directus_files_filter
-  text_color: string_filter_operators
   background_color: string_filter_operators
   _and: [promo_box_filter]
   _or: [promo_box_filter]
@@ -6893,6 +6901,9 @@ input update_party_tips_input {
   title_2: String
   title_1: String
   party_location: update_party_location_input
+
+  """Label überschreibt das Start-Datum"""
+  date_label: String
 }
 
 input update_post_directus_users_input {
@@ -6977,7 +6988,6 @@ input update_promo_box_input {
   button_label: String
   button_url: String
   image: update_directus_files_input
-  text_color: String
   background_color: String
 }
 

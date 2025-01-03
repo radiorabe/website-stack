@@ -14,12 +14,13 @@
     "note": null,
     "options": {
       "tools": [
-        "autolink",
-        "fullscreen",
         "link",
-        "redo",
         "removeLink",
-        "undo"
+        "autolink",
+        "hardBreak",
+        "undo",
+        "redo",
+        "fullscreen"
       ]
     },
     "readonly": false,

@@ -15,14 +15,16 @@
     "options": {
       "m2aField": "editor_nodes",
       "tools": [
-        "bulletList",
-        "fullscreen",
         "h4",
         "link",
-        "orderedList",
-        "redo",
         "removeLink",
-        "undo"
+        "autolink",
+        "hardBreak",
+        "bulletList",
+        "orderedList",
+        "undo",
+        "redo",
+        "fullscreen"
       ]
     },
     "readonly": false,

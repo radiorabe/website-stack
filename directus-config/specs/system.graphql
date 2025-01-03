@@ -286,10 +286,10 @@ type Subscription {
   page_team_directus_users_1_mutated(event: EventEnum): page_team_directus_users_1_mutated
   page_team_directus_users_2_mutated(event: EventEnum): page_team_directus_users_2_mutated
   page_program_programs_1_mutated(event: EventEnum): page_program_programs_1_mutated
+  party_tips_mutated(event: EventEnum): party_tips_mutated
   page_program_programs_2_mutated(event: EventEnum): page_program_programs_2_mutated
   page_program_mutated(event: EventEnum): page_program_mutated
   page_receive_mutated(event: EventEnum): page_receive_mutated
-  party_tips_mutated(event: EventEnum): party_tips_mutated
   page_history_mutated(event: EventEnum): page_history_mutated
   page_member_mutated(event: EventEnum): page_member_mutated
   contact_address_mutated(event: EventEnum): contact_address_mutated
@@ -2592,6 +2592,9 @@ type party_tips {
   title_2: String
   title_1: String
   party_location(filter: party_location_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): party_location
+
+  """Label überschreibt das Start-Datum"""
+  date_label: String
 }
 
 type party_tips_mutated {
@@ -2743,7 +2746,6 @@ type promo_box {
   button_label: String
   button_url: String
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
-  text_color: String
   background_color: String
 }
 
@@ -3321,7 +3323,6 @@ input create_promo_box_input {
   button_label: String
   button_url: String
   image: create_directus_files_input
-  text_color: String
   background_color: String
 }
 
@@ -4451,7 +4452,6 @@ input promo_box_filter {
   button_label: string_filter_operators
   button_url: string_filter_operators
   image: directus_files_filter
-  text_color: string_filter_operators
   background_color: string_filter_operators
   _and: [promo_box_filter]
   _or: [promo_box_filter]
@@ -4960,7 +4960,6 @@ input update_promo_box_input {
   button_label: String
   button_url: String
   image: update_directus_files_input
-  text_color: String
   background_color: String
 }
 

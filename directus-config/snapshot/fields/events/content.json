@@ -17,10 +17,10 @@
       "tools": [
         "h2",
         "h4",
-        "bold",
         "link",
         "removeLink",
         "autolink",
+        "hardBreak",
         "bulletList",
         "orderedList",
         "undo",

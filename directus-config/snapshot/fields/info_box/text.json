@@ -14,13 +14,15 @@
     "note": null,
     "options": {
       "tools": [
-        "bulletList",
-        "fullscreen",
         "link",
-        "orderedList",
-        "redo",
         "removeLink",
-        "undo"
+        "autolink",
+        "hardBreak",
+        "bulletList",
+        "orderedList",
+        "undo",
+        "redo",
+        "fullscreen"
       ]
     },
     "readonly": false,
