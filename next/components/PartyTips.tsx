@@ -90,13 +90,15 @@ const Ausgehtips = ({ partyTips }: Props) => {
                     >
                       {item.title_1}
                     </Text>
-                    <Text
-                      numberOfLines={1}
-                      style={styles.title}
-                      dataSet={{ media: ids.title }}
-                    >
-                      {item.title_2 ? item.title_2 : ""}
-                    </Text>
+                    {item.title_2 && (
+                      <Text
+                        numberOfLines={1}
+                        style={styles.title}
+                        dataSet={{ media: ids.title }}
+                      >
+                        {item.title_2}
+                      </Text>
+                    )}
                   </View>
 
                   <View
@@ -184,6 +186,7 @@ const { ids, styles } = StyleSheet.create({
   titleContainer: {
     flex: 6,
     // backgroundColor: "red",
+    justifyContent: "center",
     "@media (max-width: 910px)": {
       width: "100%",
     },

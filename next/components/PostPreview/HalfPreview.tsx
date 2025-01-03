@@ -104,6 +104,8 @@ const { ids, styles } = StyleSheet.create({
     lineClamp: 2,
     WebkitBoxOrient: "vertical",
     color: Colors.black,
-    marginTop: -9,
+    "@media (max-width: 910px)": {
+      marginTop: -9,
+    },
   },
 });
