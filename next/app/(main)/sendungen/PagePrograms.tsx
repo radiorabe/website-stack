@@ -75,7 +75,7 @@ const { ids, styles } = StyleSheet.create({
   },
   text: {
     ...Fonts.style.text,
-    marginTop: Metrics.tripleBaseMargin,
+    marginTop: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       marginTop: Metrics.quadBaseMargin,
     },

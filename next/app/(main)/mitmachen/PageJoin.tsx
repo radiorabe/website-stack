@@ -13,7 +13,7 @@ export default function PageJoin({ pageData }) {
     <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
       <View style={styles.container} dataSet={{ media: ids.container }}>
         <BreadCrump
-          style={{ marginBottom: Metrics.doubleBaseMargin }}
+          // style={{ marginBottom: Metrics.doubleBaseMargin }}
           label1={"Über Rabe"}
           label2={"Deine Sendung"}
         ></BreadCrump>
