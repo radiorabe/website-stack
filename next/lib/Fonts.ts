@@ -90,7 +90,7 @@ export const style: Record<string, TextStyle> = {
   h4: {
     fontFamily: type.bold,
     fontSize: size.h4,
-    // lineHeight: 1.4,
+    lineHeight: 25.2,
     // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
     "@media (max-width: 910px)": {

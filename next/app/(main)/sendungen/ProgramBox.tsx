@@ -58,6 +58,7 @@ const { ids, styles } = StyleSheet.create({
   },
   title: {
     ...Fonts.style.h2,
+    maxWidth: "87%",
     paddingLeft: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       paddingLeft: Metrics.tripleBaseMargin,

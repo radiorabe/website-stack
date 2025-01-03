@@ -138,6 +138,7 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   buttonContainer: {
+    marginTop: 7,
     alignItems: "flex-start",
     "@media (max-width: 910px)": {
       alignItems: "center",

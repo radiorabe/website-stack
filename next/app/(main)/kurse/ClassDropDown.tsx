@@ -164,7 +164,8 @@ const { styles, ids } = StyleSheet.create({
   title: {
     ...Fonts.style.h2,
     "@media (max-width: 910px)": {
-      ...Fonts.style.h4,
+      lineHeight: 22,
+      fontSize: 18,
     },
   },
   halfContainer: {
