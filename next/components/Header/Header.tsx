@@ -37,8 +37,8 @@ function Header() {
 
   const dropDownArray = [
     {
-      href: "/programm",
-      label: "Programm",
+      href: "/sendungen",
+      label: "Sendungen",
     },
     {
       href: "/mitmachen",
@@ -145,9 +145,9 @@ function Header() {
           dataSet={{ media: ids.navItemsContainer }}
         >
           <View style={styles.navItem}>
-            <LinkComponent href={`/sendungen`}>
+            <LinkComponent href={`/programm`}>
               <Text style={[styles.rabeLogo]} dataSet={{ media: ids.rabeLogo }}>
-                Sendungen
+                Programm
               </Text>
             </LinkComponent>
           </View>

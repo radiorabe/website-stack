@@ -32,8 +32,8 @@ export interface Props {
 
 const buttonArray = [
   {
-    href: "/programm",
-    label: "Programm",
+    href: "/sendungen",
+    label: "Sendungen",
   },
   {
     href: "/mitmachen",
@@ -90,9 +90,9 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
       dataSet={{ media: ids.outerContainer }}
     >
       <View style={[styles.container]} dataSet={{ media: ids.container }}>
-        <LinkComponent href={`/sendungen`} onPress={closeMenu}>
+        <LinkComponent href={`/programm`} onPress={closeMenu}>
           <Text style={[styles.bigLink]} dataSet={{ media: ids.bigLink }}>
-            {"Sendungen"}
+            {"Programm"}
           </Text>
         </LinkComponent>
         <View style={{ height: Metrics.octBaseMargin }}></View>
