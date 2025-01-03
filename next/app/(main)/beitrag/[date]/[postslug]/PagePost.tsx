@@ -20,12 +20,14 @@ import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
 import { useState } from "react";
 import useResponsive from "@/lib/useResponsisve";
+import PostPreviewBox from "@/components/PostPreview/PostPreviewBox";
 
 type Props = {
   post: ItemsPost;
+  morePosts: ItemsPost[];
 };
 
-export default function BeitragPage({ post }: Props) {
+export default function BeitragPage({ post, morePosts }: Props) {
   const program = post.program as ItemsPrograms;
   const imagebox = post.imagebox as ItemsImageBox;
   let { isMobile } = useResponsive();
@@ -133,16 +135,48 @@ export default function BeitragPage({ post }: Props) {
             label={shareButtonTitle}
           ></Button>
         </View>
-
-        <View>
-          <View
-            // dataSet={{media:ids.}}
-            style={{
-              height: Metrics.tripleBaseMargin,
-            }}
-          ></View>
-        </View>
       </View>
+
+      {morePosts && morePosts.length > 0 && (
+        <View
+          style={styles.morePostsContainer}
+          dataSet={{ media: ids.morePostsContainer }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: Metrics.doubleBaseMargin,
+            }}
+          >
+            <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
+              {"Weitere Beiträge von " + program.name}
+            </Text>
+            <View
+              style={styles.buttonContainer}
+              dataSet={{ media: ids.buttonContainer }}
+            >
+              <Button
+                href={{
+                  pathname: "/beitraege",
+                  query: { program: program.slug },
+                }}
+                label={"Alle Beiträge"}
+                full
+                textColor={Colors.white}
+              />
+            </View>
+          </View>
+
+          <View
+            style={{
+              marginBottom: Metrics.tripleBaseMargin,
+            }}
+          >
+            <PostPreviewBox posts={morePosts}></PostPreviewBox>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -200,6 +234,21 @@ const { ids, styles } = StyleSheet.create({
   sendungsInfo: { ...Fonts.style.text, color: "black" },
   image: { width: "100%", borderRadius: 9 },
   hide: {
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  morePostsContainer: {
+    width: "90vw",
+    paddingTop: Metrics.quadBaseMargin,
+    "@media (max-width: 910px)": {
+      paddingTop: Metrics.octBaseMargin,
+    },
+  },
+  h2Title: {
+    ...Fonts.style.h2,
+  },
+  buttonContainer: {
     "@media (max-width: 910px)": {
       display: "none",
     },

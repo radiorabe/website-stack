@@ -63,9 +63,9 @@ async function getPost(params) {
 
 async function getRelatedPosts(slug) {
   try {
-    const itemResponse = await Api.readItemsPost(
+    const itemResponse = await Api.randomizedItemsPost(
       {
-        fields: ["*"],
+        fields: ["*", "imagebox.image.*", "program.name", , "program.slug"],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
@@ -73,7 +73,6 @@ async function getRelatedPosts(slug) {
             _eq: slug,
           },
         }),
-        sort: ["-date"],
         limit: 3,
       },
       {
@@ -85,9 +84,11 @@ async function getRelatedPosts(slug) {
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    // console.log("response", itemResponse);
-    let item: ItemsPost[] = itemResponse.data.data;
-    return item;
+    console.log("response", itemResponse);
+    let items: ItemsPost[] = itemResponse.data;
+    console.log("getRelatedPosts", items);
+
+    return items;
   } catch (error) {
     logError(error);
 
@@ -132,5 +133,6 @@ export async function generateMetadata(
 
 export default async function BeitragPage({ params }: Props) {
   const post = await getPost(params);
-  return <PagePost post={post}></PagePost>;
+  const morePosts = await getRelatedPosts(post.program.slug);
+  return <PagePost post={post} morePosts={morePosts}></PagePost>;
 }

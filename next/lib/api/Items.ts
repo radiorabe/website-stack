@@ -3208,6 +3208,46 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description Randomized post items.
+ *
+ * @tags Items, ItemsPost
+ * @name randomizedItemsPost
+ * @summary List Items
+ * @request GET:/items/post
+ * @secure
+ * @response `200` `ReadItemsPostData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  randomizedItemsPost = (
+    query: ReadItemsPostParams,
+    params: RequestParams = {}
+  ) =>
+    this.request<
+      ReadItemsPostData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/randomized/post`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description Retrieve a single post item by unique identifier.
  *
  * @tags Items, ItemsPost

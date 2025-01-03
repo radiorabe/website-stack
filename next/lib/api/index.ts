@@ -12,4 +12,4 @@ let UserApi = new Users({
   baseUrl: process.env.NEXT_PUBLIC_BE_URL,
 });
 
-export { Assets, ApiTypes, Api, Server, UserApi };
+export { Api, ApiTypes, Assets, Server, UserApi };

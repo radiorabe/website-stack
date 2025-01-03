@@ -166,29 +166,6 @@ export default function ProgramPage({
             </View>
           </View>
         )}
-        {/* <View
-          style={{
-            borderBlockColor: Colors.black,
-            borderRadius: 9,
-            borderWidth: 1,
-            alignSelf: "flex-start",
-            flexDirection: "row",
-            alignItems: "center",
-            paddingVertical: 3,
-            paddingHorizontal: 6,
-          }}
-        >
-          <IconShare color={Colors.darkGreen}></IconShare>
-          <Text
-            style={{
-              ...Fonts.style.textLink,
-              flexShrink: 1,
-              paddingLeft: 6,
-            }}
-          >
-            {"Teilen"}
-          </Text>
-        </View> */}
       </View>
       {promo_box && (
         <View style={{ width: "90%" }}>
