@@ -148,7 +148,7 @@ export default function ProgramPage({
             dataSet={{ media: ids.memberContainer }}
           >
             <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
-              {"Nächste Sendung"}
+              {"Nächste Sendungen"}
             </Text>
             <View
               style={{

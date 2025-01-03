@@ -144,12 +144,8 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
           )}
         </View>
         <View
-          style={{
-            flexGrow: 1,
-            paddingLeft: metrics.tripleBaseMargin,
-            paddingVertical: 3,
-            justifyContent: "space-between",
-          }}
+          style={styles.sliderContainer}
+          dataSet={{ media: ids.sliderContainer }}
         >
           <Slider
             value={localTimeProgress}
@@ -171,9 +167,9 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
           />
           <View
             style={{
-              paddingTop: metrics.baseMargin,
               flexDirection: "row",
               justifyContent: "space-between",
+              marginLeft: -5,
             }}
           >
             <Text style={{ ...Fonts.style.navigation, color: Colors.green }}>
@@ -234,6 +230,16 @@ const { ids, styles } = StyleSheet.create({
     aspectRatio: 1,
     "@media (max-width: 910px)": {
       width: Metrics.quadBaseMargin,
+    },
+  },
+  sliderContainer: {
+    flexGrow: 1,
+    paddingLeft: Metrics.tripleBaseMargin,
+    paddingVertical: Metrics.halfHalfBaseMargin,
+    justifyContent: "space-between",
+    height: Metrics.tripleBaseMargin,
+    "@media (max-width: 910px)": {
+      height: Metrics.quadBaseMargin,
     },
   },
   audioFilesContainer: {
