@@ -48,10 +48,7 @@ const HalfPreview = ({ data }: Props) => {
           // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </View>
-      <View
-        style={styles.titleContainer}
-        dataSet={{ media: ids.titleContainer }}
-      >
+      <View style={styles.metaContainer} dataSet={{ media: ids.metaContainer }}>
         <View style={styles.button} dataSet={{ media: ids.button }}>
           <Button
             label={program.name}
@@ -64,17 +61,7 @@ const HalfPreview = ({ data }: Props) => {
           {moment(data.date).format("DD. MMMM")}
         </Text>
       </View>
-      <Text
-        style={{
-          ...Fonts.style.h2,
-          display: "-webkit-box",
-          overflow: "hidden",
-          WebkitLineClamp: 2,
-          lineClamp: 2,
-          WebkitBoxOrient: "vertical",
-          color: Colors.black,
-        }}
-      >
+      <Text style={styles.title} dataSet={{ media: ids.title }}>
         {data.title}
       </Text>
     </View>
@@ -86,7 +73,7 @@ export default HalfPreview;
 const { ids, styles } = StyleSheet.create({
   avatar: { borderRadius: 9, width: "100%" },
 
-  titleContainer: {
+  metaContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -108,5 +95,15 @@ const { ids, styles } = StyleSheet.create({
     "@media (max-width: 910px)": {
       marginTop: Metrics.tripleBaseMargin,
     },
+  },
+  title: {
+    ...Fonts.style.h2,
+    display: "-webkit-box",
+    overflow: "hidden",
+    WebkitLineClamp: 2,
+    lineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    color: Colors.black,
+    marginTop: -9,
   },
 });

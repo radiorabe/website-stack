@@ -23,7 +23,6 @@ const FullPreview = ({ data }: Props) => {
   let program = data.program as ItemsPrograms;
   let imagebox = data.imagebox as ItemsImageBox;
 
-  const { isMobile } = useResponsive();
   return (
     <View>
       <View
@@ -32,12 +31,10 @@ const FullPreview = ({ data }: Props) => {
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${imagebox.image.id}?width=720&height=900&fit=cover`}
-          width={isMobile ? undefined : 360}
-          height={isMobile ? undefined : 450}
-          fill={isMobile}
+          width={360}
+          height={450}
           style={styles.avatar}
-          objectFit={isMobile ? "cover" : undefined}
-          layout={isMobile ? undefined : "responsive"}
+          layout={"responsive"}
           placeholder="blur"
           blurDataURL={blurhashToBase64(imagebox.image.blurhash)}
           alt={data.title}
@@ -133,18 +130,18 @@ const { ids, styles } = StyleSheet.create({
     left: 0,
     flexDirection: "column",
     justifyContent: "space-between",
-    "@media (max-width: 910px)": {
-      position: "relative",
-    },
+    // "@media (max-width: 910px)": {
+    //   position: "relative",
+    // },
   },
   fullImageContainer: {
-    "@media (max-width: 910px)": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
+    // "@media (max-width: 910px)": {
+    //   position: "absolute",
+    //   top: 0,
+    //   left: 0,
+    //   right: 0,
+    //   bottom: 0,
+    // },
   },
   titleContainer: {
     flexDirection: "row",

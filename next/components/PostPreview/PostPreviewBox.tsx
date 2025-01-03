@@ -7,6 +7,7 @@ import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import FullPreview from "./FullPreview";
 import HalfPreview from "./HalfPreview";
+import Metrics from "@/lib/Metrics";
 
 export interface Props {
   posts: ItemsPost[];
@@ -20,28 +21,15 @@ const PostPreviewBox = ({ posts }: Props) => {
   const { isMobile } = useResponsive();
 
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-      }}
-    >
+    <View style={styles.boxContainer} dataSet={{ media: ids.boxContainer }}>
       {posts.map((item, index) => {
         return (
-          // <PostPreview
-          //   key={"post" + index}
-          //   data={item}
-          //   index={index}
-          // ></PostPreview>
           <View
+            key={"post" + index}
             style={[
               styles.outerContainer,
               {
-                marginTop:
-                  isMobile && index >= 1 ? "8vw" : index >= 3 ? "4vw" : 0,
-                // backSgroundColor: "green",
-                // aspectRatio: data.preview_full_image ? 0.8 : "initial",
+                aspectRatio: item.preview_full_image ? 0.8 : "initial",
               },
             ]}
             dataSet={{ media: ids.outerContainer }}
@@ -69,14 +57,23 @@ const PostPreviewBox = ({ posts }: Props) => {
 export default PostPreviewBox;
 
 const { ids, styles } = StyleSheet.create({
+  boxContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: "-4vw",
+    "@media (max-width: 910px)": {
+      marginTop: "-8vw",
+    },
+  },
   outerContainer: {
     width: "30%",
     maxWidth: "30%",
-    // aspectRatio: 0.8,
+    marginTop: "4vw",
     "@media (max-width: 910px)": {
       width: "100%",
       maxWidth: "100%",
-      aspectRatio: "initial",
+      marginTop: "8vw",
     },
   },
 });
