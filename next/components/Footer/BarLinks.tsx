@@ -9,11 +9,12 @@ import ButtonText from "../ButtonText";
 export interface HoverableProps {}
 
 let linkData = [
-  { href: "/kontakt", children: "Logo Download" },
+  { href: "/geschichte#logos", children: "Logo Download" },
   { href: "/kontakt", children: "Kontakt" },
   { href: "/agb", children: "AGB und Datenschutz" },
   { href: "/impressum", children: "Impressum" },
-  { href: "https://www.aarefabrik.ch", children: "aarefabrik.ch" },
+  { url: "https://archiv.rabe.ch/", children: "Archiv" },
+  { url: "https://www.aarefabrik.ch", children: "aarefabrik.ch" },
 ];
 
 export default ({}: HoverableProps) => {

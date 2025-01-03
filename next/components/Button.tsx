@@ -122,7 +122,7 @@ const Button = ({
 
   if (href) {
     return (
-      <Link href={href} style={{ textDecoration: "none" }}>
+      <Link href={href} style={{ textDecoration: "none" }} passHref={true}>
         {button}
       </Link>
     );

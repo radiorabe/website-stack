@@ -119,7 +119,7 @@ export default function PageHistory({ pageData }: Props) {
             )}
           </View>
           {data.logos && data.logos.length > 0 && (
-            <View>
+            <View nativeID="logos">
               <Text
                 style={{
                   ...Fonts.style.h2,

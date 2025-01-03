@@ -112,7 +112,7 @@ const { ids, styles } = StyleSheet.create({
     opacity: 0.75,
     aspectRatio: 1,
     "@media (max-width: 910px)": {
-      width: Metrics.quadBaseMargin,
+      width: Metrics.octBaseMargin,
       marginHorizontal: Metrics.halfQuadBaseMargin,
       opacity: 1,
     },

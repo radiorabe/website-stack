@@ -3,7 +3,7 @@ import { PressableState } from "@/lib/Types";
 import { Linking, Pressable, View } from "@/lib/server-react-native";
 import Image from "next/image";
 import { ReactElement } from "react";
-import { AspectRatio } from "react-aspect-ratio"; // Recommended: if you are using React > 15.6
+import StyleSheet from "react-native-media-query";
 
 export interface Props {
   label: string;
@@ -13,13 +13,7 @@ export interface Props {
 
 const DownLoadLogo = ({ url, style, label }: Props) => {
   return (
-    <AspectRatio
-      ratio="1/1"
-      style={{
-        width: "12.4vw",
-        ...style,
-      }}
-    >
+    <View style={[styles.container, style]} dataSet={{ media: ids.container }}>
       <Pressable
         style={{ overflow: "hidden", height: "100%" }}
         onPress={() => {
@@ -40,8 +34,17 @@ const DownLoadLogo = ({ url, style, label }: Props) => {
           );
         }}
       </Pressable>
-    </AspectRatio>
+    </View>
   );
 };
 
 export default DownLoadLogo;
+
+const { styles, ids } = StyleSheet.create({
+  container: {
+    width: "12.4vw",
+    "@media (max-width: 910px)": {
+      width: "15.6vw",
+    },
+  },
+});
