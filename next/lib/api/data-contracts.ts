@@ -929,7 +929,6 @@ export interface ItemsPromoBox {
   button_label?: string | null;
   button_url?: string | null;
   image?: string | Files;
-  text_color?: string | null;
   background_color?: string | null;
 }
 

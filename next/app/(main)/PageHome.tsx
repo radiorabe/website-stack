@@ -115,7 +115,7 @@ export default function HomePage({ pageData, posts, partyTips, event }: Props) {
             title={promo_box.title}
             text={promo_box.text}
             backgroundColor={promo_box.background_color}
-            textColor={promo_box.text_color}
+            textColor={Colors.white}
             imageId={promo_box.image as string}
             buttonLabel={promo_box.button_label}
             buttonUrl={promo_box.button_url}
