@@ -12,7 +12,11 @@ export default function PageJoin({ pageData }) {
   return (
     <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
       <View style={styles.container} dataSet={{ media: ids.container }}>
-        <BreadCrump label1={"Über Rabe"} label2={"Deine Sendung"}></BreadCrump>
+        <BreadCrump
+          style={{ marginBottom: Metrics.doubleBaseMargin }}
+          label1={"Über Rabe"}
+          label2={"Deine Sendung"}
+        ></BreadCrump>
         {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
       </View>
     </View>
