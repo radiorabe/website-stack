@@ -5,7 +5,7 @@
   "meta": {
     "collection": "page_classes",
     "conditions": null,
-    "display": null,
+    "display": "flexible-editor-display",
     "display_options": null,
     "field": "content",
     "group": null,

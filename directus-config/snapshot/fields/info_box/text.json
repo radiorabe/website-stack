@@ -5,7 +5,7 @@
   "meta": {
     "collection": "info_box",
     "conditions": null,
-    "display": null,
+    "display": "flexible-editor-display",
     "display_options": null,
     "field": "text",
     "group": null,
