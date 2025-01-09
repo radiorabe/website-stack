@@ -110,7 +110,7 @@
     "position_x": 37,
     "position_y": 1,
     "options": {
-      "url": "{{read_front_end_url.front_end_url}}/api/revalidate"
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&keys={{$trigger.keys}}"
     },
     "resolve": null,
     "reject": null,

@@ -9,7 +9,7 @@ import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
 import { ItemsPageTeamDirectusUsers, Users } from "@/lib/api/data-contracts";
 
-export default function TeaamPage({ pageData }) {
+export default function TeamPage({ pageData }) {
   const data = pageData;
 
   let memberData = [
@@ -17,8 +17,6 @@ export default function TeaamPage({ pageData }) {
     { title: "Vorstandsmitglieder", members: data.members_management },
     { title: "Programmkommissionsmitglieder", members: data.members_program },
   ];
-
-  console.log("memberData", memberData);
 
   return (
     <View style={styles.outerContainer} dataSet={{ media: ids.outerContainer }}>
@@ -31,7 +29,7 @@ export default function TeaamPage({ pageData }) {
 
         {memberData.map((item, index) => {
           return (
-            <View>
+            <View key={"team-member-data" + index}>
               <Text
                 style={{
                   ...Fonts.style.h3,

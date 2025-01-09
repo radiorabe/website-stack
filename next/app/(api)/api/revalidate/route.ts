@@ -8,11 +8,7 @@ export async function GET(request: Request) {
   const collection = searchParams.get("collection");
   const keys = searchParams.get("keys");
 
-  console.log(
-    "revalidateTag for collection: " + collection + " and keys: " + keys
-  );
-
   // Fetch users logic
-  revalidateTag("collection");
+  revalidateTag(collection);
   return NextResponse.json({ status: "all good" });
 }
