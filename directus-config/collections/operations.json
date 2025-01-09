@@ -34,6 +34,46 @@
     "_syncId": "880f617a-8687-42c2-b6a2-d748a8b81141"
   },
   {
+    "name": "isPost",
+    "key": "is_post",
+    "type": "condition",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "filter": {
+        "$trigger": {
+          "collection": {
+            "_eq": "post"
+          }
+        }
+      }
+    },
+    "resolve": "0e9b51bc-a14d-46ca-b253-9d1f3c8623ba",
+    "reject": "f3a774b7-a626-480c-a0a4-34993cf7eda8",
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "518fadef-9c88-440b-bd0e-8456c6adcc09"
+  },
+  {
+    "name": "is_program",
+    "key": "is_program",
+    "type": "condition",
+    "position_x": 37,
+    "position_y": 19,
+    "options": {
+      "filter": {
+        "$trigger": {
+          "collection": {
+            "_eq": "programs"
+          }
+        }
+      }
+    },
+    "resolve": "c8df7c5f-2db8-40a1-8979-ba5c8a4eddc5",
+    "reject": "0904c20b-417e-48da-bb89-8227c48c7d07",
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "f3a774b7-a626-480c-a0a4-34993cf7eda8"
+  },
+  {
     "name": "Notification RaBe",
     "key": "notification_rabe",
     "type": "mail",
@@ -81,7 +121,7 @@
         "1"
       ]
     },
-    "resolve": "2422cd7e-a3c5-4c68-9b79-ed852c2c1cfd",
+    "resolve": "518fadef-9c88-440b-bd0e-8456c6adcc09",
     "reject": null,
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
     "_syncId": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d"
@@ -104,17 +144,79 @@
     "_syncId": "8a1db783-bf0e-484f-8c02-37de11d92078"
   },
   {
-    "name": "Webhook / Request URL",
-    "key": "webhook_request_url_wmfhm",
-    "type": "request",
-    "position_x": 37,
+    "name": "read_post",
+    "key": "read_post",
+    "type": "item-read",
+    "position_x": 55,
     "position_y": 1,
     "options": {
-      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&keys={{$trigger.keys}}"
+      "collection": "post",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ]
+    },
+    "resolve": "4128ad20-5aaa-45bd-9039-179fcc7ed017",
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "0e9b51bc-a14d-46ca-b253-9d1f3c8623ba"
+  },
+  {
+    "name": "read_program",
+    "key": "read_program",
+    "type": "item-read",
+    "position_x": 55,
+    "position_y": 19,
+    "options": {
+      "collection": "programs",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ]
+    },
+    "resolve": "eed01029-7491-473d-92fe-325172193850",
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "c8df7c5f-2db8-40a1-8979-ba5c8a4eddc5"
+  },
+  {
+    "name": "Revalidate Post",
+    "key": "revalidate_post",
+    "type": "request",
+    "position_x": 73,
+    "position_y": 1,
+    "options": {
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&key={{read_post.slug}}"
     },
     "resolve": null,
     "reject": null,
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
-    "_syncId": "2422cd7e-a3c5-4c68-9b79-ed852c2c1cfd"
+    "_syncId": "4128ad20-5aaa-45bd-9039-179fcc7ed017"
+  },
+  {
+    "name": "Revalidate Program",
+    "key": "revalidate_program",
+    "type": "request",
+    "position_x": 73,
+    "position_y": 19,
+    "options": {
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&key={{read_program.slug}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "eed01029-7491-473d-92fe-325172193850"
+  },
+  {
+    "name": "Webhook / Request URL",
+    "key": "Webhook__Request_URL",
+    "type": "request",
+    "position_x": 55,
+    "position_y": 36,
+    "options": {
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&keys={{$trigger.keys}}&key={{$trigger.key}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "0904c20b-417e-48da-bb89-8227c48c7d07"
   }
 ]
