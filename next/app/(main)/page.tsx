@@ -31,7 +31,7 @@ async function getPosts() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? ["page_home"] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -39,7 +39,7 @@ async function getPosts() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    console.log("posts", item);
+    // console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -156,7 +156,7 @@ async function getPageData() {
       }
     );
     let item = itemResponse.data.data as ItemsPageHome;
-    console.log("ItemsPageHome", item);
+    // console.log("ItemsPageHome", item);
 
     return item;
   } catch (error) {

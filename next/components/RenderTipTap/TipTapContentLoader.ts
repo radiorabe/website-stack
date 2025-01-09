@@ -70,7 +70,7 @@ export const loadTipTapContent = async (docContent) => {
   const unresolvedPromises = docContent.content.map(mapData);
   // console.log("unresolvedPromises", unresolvedPromises);
   const results = await Promise.all(unresolvedPromises);
-  console.log("results", results);
+  // console.log("results", results);
 
   return {
     type: "doc",

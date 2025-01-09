@@ -3,6 +3,7 @@ import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 import { ItemsPagePrograms } from "../../../lib/api/data-contracts";
 import PagePrograms from "./PagePrograms";
+import Flows from "@/lib/api/Flows";
 
 async function getPageData() {
   try {
@@ -11,7 +12,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_programs]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -44,7 +47,9 @@ async function getSendungen() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.programs]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -63,6 +68,8 @@ async function getSendungen() {
 export default async function SendungenPage(props) {
   const pageData = await getPageData();
   const sendungen = await getSendungen();
+
+  console.info("Rerender PagePrograms");
 
   return <PagePrograms pageData={pageData} programs={sendungen}></PagePrograms>;
 }

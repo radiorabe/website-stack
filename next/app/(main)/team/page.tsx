@@ -23,15 +23,18 @@ async function getPageData() {
       },
       {
         next: {
-          tags: [Flows.collections.page_team],
-          // process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_team]
+              : undefined,
         },
-        cache: "force-cache",
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
     // console.log("ItemsPageTeam", item);
-    console.log("RerenderPageTeam", Flows.collections.page_team);
+    // console.log("RerenderPageTeam", Flows.collections.page_team);
 
     return item;
   } catch (error) {
@@ -43,7 +46,7 @@ async function getPageData() {
 
 export default async function TeamPage(props) {
   const data = await getPageData();
-  console.log("RerenderPageTeam");
+  console.info("Rerender PageTeam");
 
   return <PageTeam pageData={data}></PageTeam>;
 }

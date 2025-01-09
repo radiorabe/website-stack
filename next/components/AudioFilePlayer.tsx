@@ -190,8 +190,6 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
           <AudioFiles
             tracks={tracks}
             onChange={(track) => {
-              console.log("track", track);
-              console.log("currentTrack", currentTrack);
               if (track.src !== currentTrack.src) {
                 setTrack(track);
                 setCurrentTrack(track);

@@ -9,9 +9,9 @@ const Iframe = ({ data }: HoverableProps) => {
   const [iFrameHeight, setIFrameHeight] = useState(300);
 
   const handleIframeMessage = useCallback((e) => {
-    console.log("handleIframeMessage", e);
+    // console.log("handleIframeMessage", e);
     if (e.data.height) {
-      console.log("height", e.data.height);
+      // console.log("height", e.data.height);
       setIFrameHeight(e.data.height);
     }
   }, []);

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Api } from "../../../lib/api";
 import { ItemsPageImpressum } from "../../../lib/api/data-contracts";
 import PageImpressum from "./PageImpressum";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -20,7 +21,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_impressum]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -43,6 +46,7 @@ async function getPageData() {
 
 export default async function ImpressumPage(props) {
   const data = await getPageData();
+  console.info("Rerender PageImpressum");
 
   return <PageImpressum pageData={data}></PageImpressum>;
 }

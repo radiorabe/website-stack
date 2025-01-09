@@ -9,6 +9,7 @@ import Fonts from "../../../lib/Fonts";
 import { getPosts } from "./getPosts";
 import PostList from "./PostList";
 import SearchBox from "./SearchBox";
+import Flows from "@/lib/api/Flows";
 
 async function getProgram(slug) {
   try {
@@ -20,7 +21,9 @@ async function getProgram(slug) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.posts, Flows.collections.post]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -54,7 +57,7 @@ async function getAuthor(id) {
     );
     // console.log("response", itemResponse);
     let item: Users = itemResponse.data.data;
-    console.log("user", item);
+    // console.log("user", item);
 
     return item;
   } catch (error) {
@@ -78,6 +81,7 @@ export default async function BeitraegePage({ searchParams }) {
   const posts = await getPosts(filters, 0, INITIAL_NUMBER_OF_POSTS);
   const program = await getProgram(filters.program);
   const author = await getAuthor(filters.author);
+  console.info("Rerender PageBeiträge: ");
 
   return (
     <View>

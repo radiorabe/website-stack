@@ -26,8 +26,7 @@ async function getSendung(slug) {
       // { id: slug, fields: ["*,team.directus_users_id.*"] },
       {
         next: {
-          tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+          tags: process.env.NODE_ENV === "production" ? [slug] : undefined, // reload only when slug is revalidated
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -35,7 +34,7 @@ async function getSendung(slug) {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPrograms;
-    console.log("item", item);
+    // console.log("item", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -75,7 +74,7 @@ export async function getNextShowForProgram(slug) {
         return { nowPlaying, nextShows };
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error("error", error);
 
         return { nowPlaying: false, nextShows: [] };
       });
@@ -109,7 +108,7 @@ async function getPosts(slug) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? ["all_posts"] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -130,6 +129,7 @@ export default async function ProgramPage({ params }) {
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
   const { nowPlaying, nextShows } = await getNextShowForProgram(sendung.slug);
+  console.info("Rerender PageSendung: " + params.slug);
 
   return (
     <PageProgram

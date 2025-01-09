@@ -31,7 +31,7 @@ const Map = ({ lat, lng }: Props) => {
   };
 
   const onMarkerClick = (e, { markerId, lat, lng }) => {
-    console.log("This is ->", markerId);
+    // console.log("This is ->", markerId);
 
     // inside the map instance you can call any google maps method
     mapRef.current.setCenter({ lat, lng });

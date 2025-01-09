@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 import RenderTipTap from "@/components/RenderTipTap";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import PageJoin from "./PageJoin";
+import Flows from "@/lib/api/Flows";
 
 async function getPageData() {
   try {
@@ -24,7 +25,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_join]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -48,6 +51,7 @@ async function getPageData() {
 
 export default async function Page(props) {
   const data = await getPageData();
+  console.info("Rerender PageJoin");
 
   return <PageJoin pageData={data}></PageJoin>;
 }

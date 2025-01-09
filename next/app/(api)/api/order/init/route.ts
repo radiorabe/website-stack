@@ -176,9 +176,9 @@ export async function POST(request) {
       };
       let initPaymentURL =
         process.env.SAFERPAY_URL + "/Payment/v1/PaymentPage/Initialize";
-        console.log("initPaymentURL", initPaymentURL);
-        console.log("ENCODED_SAFERPAY_CREDENTIALS", ENCODED_SAFERPAY_CREDENTIALS);
-        console.log("requestData", requestData);
+      console.log("initPaymentURL", initPaymentURL);
+      console.log("ENCODED_SAFERPAY_CREDENTIALS", ENCODED_SAFERPAY_CREDENTIALS);
+      console.log("requestData", requestData);
 
       const response = await fetch(initPaymentURL, {
         method: "post",
@@ -190,8 +190,8 @@ export async function POST(request) {
         },
         body: JSON.stringify(requestData),
       });
-      console.log("initPaymentresponse", response)
-      if(response.status !== 200){
+      console.log("initPaymentresponse", response);
+      if (response.status !== 200) {
         const text = await response.text();
         console.log("Response error: ", text);
         return NextResponse.json(
@@ -209,7 +209,7 @@ export async function POST(request) {
         token: saferpay.Token,
       });
     } catch (err) {
-      console.log("Error creating SAFERPAY payment:", err);
+      console.error("Error creating SAFERPAY payment:", err);
       return NextResponse.json(
         {
           errorMessage: "Payment Initialisation Failed",

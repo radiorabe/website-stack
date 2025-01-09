@@ -3,6 +3,7 @@ import { ItemsMemberProduct } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 import PageOrder from "./PageOrder";
+import Flows from "@/lib/api/Flows";
 
 async function getMemberProduct(id) {
   try {
@@ -11,12 +12,17 @@ async function getMemberProduct(id) {
         id,
       },
       {
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.member_product]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let item: ItemsMemberProduct = infoResponse.data.data;
-
-    console.log("member product: ", item);
 
     return item;
   } catch (error) {
@@ -36,12 +42,19 @@ async function getSendungen() {
         }),
       },
       {
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.programs]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     let items = infoResponse.data.data;
 
-    console.log("sendungen : ", items);
+    // console.log("sendungen : ", items);
 
     return items;
   } catch (error) {
@@ -50,6 +63,8 @@ async function getSendungen() {
 }
 
 export default async function BestellungPage({ searchParams }) {
+  console.info("Rerender PageOrder: ");
+
   if ((!searchParams.id || searchParams.id === "") && !searchParams.slug) {
     return null;
   }

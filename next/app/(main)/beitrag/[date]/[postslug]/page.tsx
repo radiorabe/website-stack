@@ -12,6 +12,7 @@ async function getPost(params) {
     const date = moment(params.date, "DD-MM-YYYY");
     const slug = params.postslug;
     const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d");
+    console.info("Rerender Post: " + slug);
 
     const itemResponse = await Api.readItemsPost(
       {
@@ -35,8 +36,7 @@ async function getPost(params) {
       },
       {
         next: {
-          tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+          tags: process.env.NODE_ENV === "production" ? [slug] : undefined, // reload only when slug is revalidated
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -78,15 +78,15 @@ async function getRelatedPosts(slug) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? ["all_posts"] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    console.log("response", itemResponse);
+    // console.log("response", itemResponse);
     let items: ItemsPost[] = itemResponse.data;
-    console.log("getRelatedPosts", items);
+    // console.log("getRelatedPosts", items);
 
     return items;
   } catch (error) {
@@ -134,5 +134,6 @@ export async function generateMetadata(
 export default async function BeitragPage({ params }: Props) {
   const post = await getPost(params);
   const morePosts = await getRelatedPosts(post.program.slug);
+
   return <PagePost post={post} morePosts={morePosts}></PagePost>;
 }

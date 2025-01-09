@@ -18,11 +18,11 @@ export default function Statement({ id, type, options, defaultValue }) {
   const [programName, setProgramName] = useState("");
   const [orderId, setOrderId] = useState();
   const [iFrameHeight, setIFrameHeight] = useState(0);
-  console.log("errors", errors);
+  // console.log("errors", errors);
   const router = useRouter();
 
   const handleIframeMessage = useCallback((e) => {
-    console.log("handleIframeMessage", e);
+    // console.log("handleIframeMessage", e);
 
     if (e.data.height) {
       setIFrameHeight(e.data.height);
@@ -71,7 +71,7 @@ export default function Statement({ id, type, options, defaultValue }) {
 
   const handleSubmit = (formData) => {
     const data = Object.fromEntries(formData);
-    console.log("data", data);
+    // console.log("data", data);
     let newErrors = [];
     inputs.forEach((obj) => {
       if (!data[obj.inputKey] && obj.required) {
@@ -96,20 +96,19 @@ export default function Statement({ id, type, options, defaultValue }) {
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      console.log("fetch");
+      // console.log("fetch");
       setErrorMessage("");
-        fetch( "/api/order/init", {
-          method: "POST",
+      fetch("/api/order/init", {
+        method: "POST",
         body: formData,
       })
         .then((response) => {
-          console.log("respons", response);
+          // console.log("respons", response);
           return response.json();
         })
         .then((data) => {
-          console.log("data", data);
+          // console.log("data", data);
           if (data.saferpay_url && data.id) {
-            console.log("asldkfj");
             setSaferpayUrl(data.saferpay_url);
             setOrderId(data.id);
           }

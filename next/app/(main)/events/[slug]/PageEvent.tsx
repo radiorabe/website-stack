@@ -79,7 +79,7 @@ export default function EventPage({ pageData }: Props) {
       >
         {event.shows.map((sh: ItemsEventsEventShows, index) => {
           let show = sh.event_shows_id as ItemsEventShows;
-          console.log("show", show);
+          // console.log("show", show);
           return (
             <Show
               key={"show" + index}

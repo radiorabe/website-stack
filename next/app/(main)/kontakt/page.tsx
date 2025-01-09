@@ -4,6 +4,7 @@ import { logError } from "@/lib/loging";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageContact from "./PageContact";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -23,7 +24,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_contact]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -31,7 +34,7 @@ async function getPageData() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPageContact = itemResponse.data.data as ItemsPageContact;
-    console.log("ItemsPageContact", item);
+    // console.log("ItemsPageContact", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -45,6 +48,7 @@ async function getPageData() {
 
 export default async function Page(props) {
   const data = await getPageData();
+  console.info("Rerender PageContact");
 
   return <PageContact pageData={data}></PageContact>;
 }

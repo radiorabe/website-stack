@@ -25,6 +25,7 @@ const collections = [
   "page_home",
   "page_internship",
   "page_programs",
+  "statements",
 ] as const;
 
 function createObject<T extends readonly string[]>(

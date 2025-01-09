@@ -40,7 +40,6 @@ export default function Statement(props) {
         <Button
           label={"Nächstes Statement"}
           onPress={() => {
-            console.log("aösdlklfj");
             setRandomIndex(Math.floor(Math.random() * props.statements.length));
           }}
         ></Button>

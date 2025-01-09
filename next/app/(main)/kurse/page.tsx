@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageClasses from "./PageClasses";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Kurse",
@@ -20,7 +21,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_classes]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -45,6 +48,7 @@ async function getPageData() {
 
 export default async function page(props) {
   const data = await getPageData();
+  console.info("Rerender PageClasses");
 
   return <PageClasses pageData={data}></PageClasses>;
 }

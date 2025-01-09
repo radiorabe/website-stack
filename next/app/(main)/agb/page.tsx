@@ -5,6 +5,7 @@ import { Api } from "../../../lib/api";
 import { ItemsPageAgb } from "../../../lib/api/data-contracts";
 import PageAgb from "./PageAgb";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "AGB und datenschutz",
@@ -20,7 +21,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_agb]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -40,8 +43,9 @@ async function getPageData() {
   }
 }
 
-export default async function Page(props) {
+export default async function AGBPage(props) {
   const data = await getPageData();
+  console.info("Rerender PageAGB");
 
   return <PageAgb pageData={data}></PageAgb>;
 }

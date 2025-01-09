@@ -40,7 +40,6 @@ const Ausgehtips = ({ partyTips }: Props) => {
         >
           {partyTips.map((item, index) => {
             let partyLocation = item.party_location as ItemsPartyLocation;
-            console.log("item.date_label", item);
             let dateText =
               item.date_label && item.date_label !== ""
                 ? item.date_label

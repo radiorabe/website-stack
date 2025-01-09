@@ -75,7 +75,7 @@ export const getPosts = async (filters, offset, limit) => {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    console.log("item", item);
+    // console.log("item", item);
 
     return item;
   } catch (error) {

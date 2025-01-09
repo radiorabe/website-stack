@@ -64,7 +64,7 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
                 }
               }
             } catch (e) {
-              console.log("error", e);
+              console.error("error", e);
             }
           } else if (data && oldData === data) {
             setTimeout(() => {

@@ -8,6 +8,7 @@ import {
 import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 import PageMember from "./PageMember";
+import Flows from "@/lib/api/Flows";
 
 async function getPageData() {
   try {
@@ -16,11 +17,14 @@ async function getPageData() {
         fields: ["*"],
       },
       {
-        // next: {
-        //   tags:
-        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        // },
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_member]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", infoResponse);
@@ -44,11 +48,14 @@ async function getStatements() {
         fields: ["*"],
       },
       {
-        // next: {
-        //   tags:
-        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        // },
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.statements]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", infoResponse);
@@ -70,11 +77,14 @@ async function getMemberProducts() {
         fields: ["*"],
       },
       {
-        // next: {
-        //   tags:
-        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        // },
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.member_product]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", infoResponse);
@@ -93,6 +103,7 @@ export default async function Page(props) {
   const data = await getPageData();
   const memberProducts = await getMemberProducts();
   const statements = await getStatements();
+  console.info("Rerender PageMember");
 
   return (
     <PageMember

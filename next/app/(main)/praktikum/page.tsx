@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageInternship from "./PageInternship";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Praktikum",
@@ -20,7 +21,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_internship]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -28,7 +31,7 @@ async function getPageData() {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPageInternship;
-    console.log("ItemsPageInternship", item);
+    // console.log("ItemsPageInternship", item);
 
     // load relational tiptap components
     if (item.content) {
@@ -45,6 +48,7 @@ async function getPageData() {
 
 export default async function page(props) {
   const data = await getPageData();
+  console.info("Rerender PageInternship");
 
   return <PageInternship pageData={data}></PageInternship>;
 }

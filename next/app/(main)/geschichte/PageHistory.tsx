@@ -27,7 +27,7 @@ export default function PageHistory({ pageData }: Props) {
   const data = pageData;
   let [isOpen, setIsOpen] = useState(false);
 
-  console.log("data", data.protocols);
+  // console.log("data", data.protocols);
   return (
     <View
       style={{

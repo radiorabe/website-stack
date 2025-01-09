@@ -20,7 +20,7 @@ const useProductFilters = () => {
 
   const setFilters = useCallback(
     (newFilters) => {
-      console.log("newFilters", newFilters);
+      // console.log("newFilters", newFilters);
       const currentParams = new URLSearchParams(searchParams.toString());
 
       Object.entries(newFilters).forEach(([key, value]) => {

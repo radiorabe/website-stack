@@ -5,6 +5,7 @@ import { logError } from "@/lib/loging";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageHistory from "./PageHistory";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Geschichte",
@@ -24,9 +25,10 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_history]
+              : undefined,
         },
-        // cache: "no-store",
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
@@ -48,5 +50,6 @@ async function getPageData() {
 
 export default async function HistoryPage(props) {
   const data = await getPageData();
+  console.info("Rerender PageHistory");
   return <PageHistory pageData={data}></PageHistory>;
 }

@@ -5,6 +5,7 @@ import { Show } from "@/lib/Types";
 import moment from "moment";
 import { notFound } from "next/navigation";
 import PageProgramm from "./PageProgramm";
+import Flows from "@/lib/api/Flows";
 
 export async function getLiveData() {
   try {
@@ -12,7 +13,7 @@ export async function getLiveData() {
       next: {
         revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
       },
-      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+      cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
@@ -61,17 +62,20 @@ async function getPageData() {
         ],
       },
       {
-        // next: {
-        //   tags:
-        //     process.env.NODE_ENV === "production" ? ["collection"] : undefined,
-        // },
-        cache: "no-store",
+        next: {
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_program]
+              : undefined,
+        },
+        cache:
+          process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
     // console.log("response", infoResponse);
     let item: ItemsPageProgram = infoResponse.data.data as ItemsPageProgram;
 
-    console.log("program data: ", item);
+    // console.log("program data: ", item);
 
     return item;
   } catch (error) {
@@ -82,8 +86,8 @@ async function getPageData() {
 
 export default async function ProgramPage({ params }) {
   let liveData = await getLiveData();
-
   let data = await getPageData();
+  console.info("Rerender PageProgram");
 
   return (
     <PageProgramm

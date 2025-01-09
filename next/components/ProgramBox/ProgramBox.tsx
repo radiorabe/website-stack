@@ -45,7 +45,7 @@ export async function getLiveData() {
         return { todayShows, currentShow, shows };
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error("error", error);
 
         return { todayShows: [], currentShow: null, shows: [] };
       });
@@ -71,7 +71,7 @@ export async function getPlaylistData(numbers) {
         return responseData.data;
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error("error", error);
         return [];
       });
   } catch (error) {

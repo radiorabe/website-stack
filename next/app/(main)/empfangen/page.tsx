@@ -6,6 +6,7 @@ import { logError } from "@/lib/loging";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageReceive from "./PageReceive";
+import Flows from "@/lib/api/Flows";
 
 export const metadata: Metadata = {
   title: "Empfangen",
@@ -21,7 +22,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_receive]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -44,6 +47,7 @@ async function getPageData() {
 
 export default async function ReceivePage(props) {
   const data = await getPageData();
+  console.info("Rerender PageReceive");
 
   return <PageReceive pageData={data}></PageReceive>;
 }
