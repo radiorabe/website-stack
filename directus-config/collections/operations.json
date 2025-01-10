@@ -34,6 +34,79 @@
     "_syncId": "880f617a-8687-42c2-b6a2-d748a8b81141"
   },
   {
+    "name": "important_update",
+    "key": "important_update",
+    "type": "condition",
+    "position_x": 55,
+    "position_y": 36,
+    "options": {
+      "filter": {
+        "_or": [
+          {
+            "$trigger": {
+              "payload": {
+                "first_name": {
+                  "_nnull": true
+                }
+              }
+            }
+          },
+          {
+            "$trigger": {
+              "payload": {
+                "last_name": {
+                  "_nnull": true
+                }
+              }
+            }
+          },
+          {
+            "$trigger": {
+              "payload": {
+                "avatar": {
+                  "_nnull": true
+                }
+              }
+            }
+          },
+          {
+            "$trigger": {
+              "payload": {
+                "email": {
+                  "_nnull": true
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resolve": "140e581d-2f39-4653-8ddc-a2472de73ae6",
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "9a9cf969-31dc-466d-8a51-e1d0f6df7edc"
+  },
+  {
+    "name": "is_directus_user",
+    "key": "is_directus_user",
+    "type": "condition",
+    "position_x": 37,
+    "position_y": 36,
+    "options": {
+      "filter": {
+        "$trigger": {
+          "collection": {
+            "_eq": "directus_users"
+          }
+        }
+      }
+    },
+    "resolve": "9a9cf969-31dc-466d-8a51-e1d0f6df7edc",
+    "reject": "0904c20b-417e-48da-bb89-8227c48c7d07",
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "49e8ee00-2691-4a1b-9bcc-123086c3e284"
+  },
+  {
     "name": "isPost",
     "key": "is_post",
     "type": "condition",
@@ -69,7 +142,7 @@
       }
     },
     "resolve": "c8df7c5f-2db8-40a1-8979-ba5c8a4eddc5",
-    "reject": "0904c20b-417e-48da-bb89-8227c48c7d07",
+    "reject": "49e8ee00-2691-4a1b-9bcc-123086c3e284",
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
     "_syncId": "f3a774b7-a626-480c-a0a4-34993cf7eda8"
   },
@@ -206,11 +279,25 @@
     "_syncId": "eed01029-7491-473d-92fe-325172193850"
   },
   {
+    "name": "revalidate_users",
+    "key": "revalidate_users",
+    "type": "request",
+    "position_x": 73,
+    "position_y": 36,
+    "options": {
+      "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection=directus_users"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
+    "_syncId": "140e581d-2f39-4653-8ddc-a2472de73ae6"
+  },
+  {
     "name": "Webhook / Request URL",
     "key": "Webhook__Request_URL",
     "type": "request",
     "position_x": 55,
-    "position_y": 36,
+    "position_y": 51,
     "options": {
       "url": "{{read_front_end_url.front_end_url}}/api/revalidate?collection={{$trigger.collection}}&keys={{$trigger.keys}}&key={{$trigger.key}}"
     },

@@ -82,7 +82,8 @@
         "page_home",
         "page_internship",
         "page_programs",
-        "statements"
+        "statements",
+        "directus_users"
       ]
     },
     "operation": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d",
