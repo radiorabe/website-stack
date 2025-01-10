@@ -19,6 +19,8 @@ async function getOrder(id) {
 
     return item;
   } catch (error) {
+    console.log("Bestellung Danke getOrder Error");
+
     logError(error);
     notFound();
   }

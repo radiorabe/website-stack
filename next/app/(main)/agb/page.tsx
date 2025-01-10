@@ -40,6 +40,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageAGB getPageData Error");
     logError(error);
 
     notFound();

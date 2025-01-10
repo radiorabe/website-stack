@@ -39,6 +39,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageMember getPageData Error");
     logError(error);
     notFound();
   }
@@ -68,6 +69,7 @@ async function getStatements() {
 
     return item;
   } catch (error) {
+    console.log("PageMember getStatements Error");
     logError(error);
     notFound();
   }
@@ -97,6 +99,7 @@ async function getMemberProducts() {
 
     return item;
   } catch (error) {
+    console.log("PageMember getMemberProducts Error");
     logError(error);
     notFound();
   }

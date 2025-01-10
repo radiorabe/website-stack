@@ -27,6 +27,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PagePrograms getPageData Error");
     logError(error);
     notFound();
   }
@@ -60,6 +61,7 @@ async function getSendungen() {
     // console.log("sendungen", sendungen);
     return sendungen;
   } catch (error) {
+    console.log("PagePrograms getSendungen Error");
     logError(error);
     notFound();
   }

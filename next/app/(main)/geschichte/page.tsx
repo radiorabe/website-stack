@@ -45,6 +45,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageHistory getPageData Error");
     logError(error);
 
     notFound();

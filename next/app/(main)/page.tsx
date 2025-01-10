@@ -48,6 +48,7 @@ async function getPosts() {
 
     return item;
   } catch (error) {
+    console.log("PageHome getPosts Error");
     logError(error);
 
     notFound();
@@ -108,6 +109,7 @@ async function getPartyTips() {
 
     return item;
   } catch (error) {
+    console.log("PageHome getPartyTips Error");
     logError(error);
 
     notFound();
@@ -143,6 +145,7 @@ async function checkEventWithPromobox() {
 
     return item && item.length ? item[0] : null;
   } catch (error) {
+    console.log("PageHome checkEventWithPromobox Error");
     logError(error);
   }
 }
@@ -169,6 +172,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageHome getPageData Error");
     logError(error);
 
     notFound();

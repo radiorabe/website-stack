@@ -2,29 +2,22 @@
 import { Text, View } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 
+import BreadCrump from "@/components/BreadCrumb";
 import Button from "@/components/Button";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
-import { Api } from "@/lib/api";
 import {
-  ItemsPageProgram,
-  ItemsPageProgramPrograms1,
-  ItemsPageProgramPrograms2,
-  ItemsPageProgramPrograms3,
-  ItemsPrograms,
+  ItemsPageProgram
 } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
+import useResponsive from "@/lib/useResponsisve";
 import moment from "moment";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Arrow from "./Arrow";
 import Calender from "./Calender";
-import { Show } from "@/lib/Types";
 import ProgramGroups from "./ProgramGroups";
-import BreadCrump from "@/components/BreadCrumb";
-import useResponsive from "@/lib/useResponsisve";
 
 export const metadata: Metadata = {
   title: "Programm",

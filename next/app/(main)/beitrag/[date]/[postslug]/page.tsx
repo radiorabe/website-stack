@@ -56,6 +56,7 @@ async function getPost(params) {
 
     return items[0];
   } catch (error) {
+    console.log("Beitrag getPost Error");
     logError(error);
 
     notFound();
@@ -99,6 +100,8 @@ async function getRelatedPosts(programSlug) {
 
     return items;
   } catch (error) {
+    console.log("Beitrag getRelatedPosts Error");
+
     logError(error);
 
     notFound();

@@ -98,6 +98,7 @@ async function getInfoBox(id, revalidateTag) {
     let item: ItemsInfoBox = itemResponse.data.data;
     return item;
   } catch (error) {
+    console.log("TipTapLoader getInfoBox Error");
     logError(error);
   }
 }
@@ -121,6 +122,7 @@ async function getImageBox(id, revalidateTag) {
     let item: ItemsImageBox = itemResponse.data.data;
     return item;
   } catch (error) {
+    console.log("TipTapLoader getImageBox Error");
     logError(error);
   }
 }
@@ -144,6 +146,7 @@ async function getQuote(id, revalidateTag) {
     let item: ItemsQuote = itemResponse.data.data;
     return item;
   } catch (error) {
+    console.log("TipTapLoader getQuote Error");
     logError(error);
   }
 }
@@ -167,6 +170,7 @@ async function getIframe(id, revalidateTag) {
     let item: ItemsIframe = itemResponse.data.data;
     return item;
   } catch (error) {
+    console.log("TipTapLoader getIframe Error");
     logError(error);
   }
 }
@@ -191,6 +195,7 @@ async function getAudioPlayerFiles(id, revalidateTag) {
 
     return item;
   } catch (error) {
+    console.log("TipTapLoader getAudioPlayerFiles Error");
     logError(error);
   }
 }
@@ -214,6 +219,7 @@ async function getNodes(id, readNodes, revalidateTag) {
     let item: ItemsPostEditorNodes = itemResponse.data.data;
     return item;
   } catch (error) {
+    console.log("TipTapLoader getNodes Error");
     logError(error);
   }
 }

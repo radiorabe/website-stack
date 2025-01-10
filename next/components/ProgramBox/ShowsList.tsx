@@ -1,13 +1,10 @@
 "use client";
 import Fonts from "@/lib/Fonts";
-import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
 import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
-import HoverText from "../HoverText";
-import { Show } from "@/lib/Types";
 import StyleSheet from "react-native-media-query";
-import { useState } from "react";
+import HoverText from "../HoverText";
 
 export interface Props {
   initialShows: any;

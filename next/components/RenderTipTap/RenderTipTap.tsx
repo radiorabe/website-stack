@@ -1,30 +1,16 @@
-import { Api } from "@/lib/api";
-import {
-  ItemsAudioPlayer,
-  ItemsIframe,
-  ItemsImageBox,
-  ItemsInfoBox,
-  ItemsPostEditorNodes,
-  ItemsQuote,
-} from "@/lib/api/data-contracts";
+import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import { Text } from "@/lib/server-react-native";
+import Metrics from "@/lib/Metrics";
 import {
-  TipTapMarkHandlers,
-  TipTapNodeHandlers,
-  TipTapRender,
-  TipTapRenderHandlers,
+  TipTapRender
 } from "@wokaylabs/tiptap-react-render";
 import React from "react";
-import InfoBox from "./InfoBox";
-import Quote from "./Quote";
-import { logError } from "@/lib/loging";
-import ImageBox from "./ImageBox";
-import Colors from "@/lib/Colors";
-import Link from "./Link";
-import Iframe from "./Iframe";
 import AudioFilePlayer from "../AudioFilePlayer";
-import Metrics from "@/lib/Metrics";
+import Iframe from "./Iframe";
+import ImageBox from "./ImageBox";
+import InfoBox from "./InfoBox";
+import Link from "./Link";
+import Quote from "./Quote";
 
 /**
  * this is an implementation of the renderer interface using html native tags, a similar renderer can be written for react-native or using any UI library

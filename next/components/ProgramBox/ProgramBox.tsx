@@ -45,11 +45,12 @@ export async function getLiveData() {
         return { todayShows, currentShow, shows };
       })
       .catch((error) => {
-        console.error("error", error);
+        console.log("Programbox getLiveData Error: ", error);
 
         return { todayShows: [], currentShow: null, shows: [] };
       });
   } catch (error) {
+    console.log("Programbox getLiveData Error");
     logError(error);
   }
 }
@@ -71,10 +72,12 @@ export async function getPlaylistData(numbers) {
         return responseData.data;
       })
       .catch((error) => {
-        console.error("error", error);
+        console.log("Programbox getPlaylistData Error: ", error);
         return [];
       });
   } catch (error) {
+    console.log("Programbox getPlaylistData Error");
+
     logError(error);
   }
 }

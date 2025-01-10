@@ -82,6 +82,7 @@ export const getPosts = async (filters, offset, limit) => {
 
     return item;
   } catch (error) {
+    console.log("Beiträge getPosts Error");
     logError(error);
     notFound();
   }

@@ -43,6 +43,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageInternship getPageData Error");
     logError(error);
 
     notFound();

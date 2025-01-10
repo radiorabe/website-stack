@@ -32,6 +32,7 @@ async function getContactData() {
 
     return item;
   } catch (error) {
+    console.log("Footer getContactData Error");
     logError(error);
 
     notFound();

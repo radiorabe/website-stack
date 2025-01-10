@@ -41,6 +41,7 @@ async function getPageData() {
     }
     return item;
   } catch (error) {
+    console.log("PageImpressum getPageData Error");
     logError(error);
 
     notFound();

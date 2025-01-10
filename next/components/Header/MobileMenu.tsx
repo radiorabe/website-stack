@@ -1,26 +1,16 @@
 "use client";
+import IconArrowDown from "@/assets/svg/IconArrowDown";
+import { useAudioPlayerContext } from "@/context/audio-player-context";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
-import { PressableState, Show } from "@/lib/Types";
-import useResponsive from "@/lib/useResponsisve";
-import moment from "moment";
-import { ReactElement, useEffect, useState } from "react";
-import StyleSheet from "react-native-media-query";
-import LinkComponent from "../LinkComponent";
-import Button from "../Button";
-import AudioRabePlayer from "./AudioRabePlayer";
+import { Text, View } from "@/lib/server-react-native";
 import dynamic from "next/dynamic";
-import { socialData } from "../Footer/BarIcons";
+import { useEffect, useState } from "react";
+import StyleSheet from "react-native-media-query";
 import ButtonText from "../ButtonText";
-import { useAudioPlayerContext } from "@/context/audio-player-context";
-import Pausebutton from "@/assets/svg/Pausebutton";
-import Playbutton from "@/assets/svg/Playbutton";
-import Loader from "react-spinners/BounceLoader";
+import LinkComponent from "../LinkComponent";
 import PlayButton from "./PlayButton";
-import IconArrowDown from "@/assets/svg/IconArrowDown";
 
 const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
   ssr: false,

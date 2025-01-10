@@ -46,6 +46,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageJoin getPageData Error");
     logError(error);
 
     notFound();

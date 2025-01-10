@@ -43,6 +43,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageClasses getPageData Error");
     logError(error);
 
     notFound();

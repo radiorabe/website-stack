@@ -26,6 +26,8 @@ async function getMemberProduct(id) {
 
     return item;
   } catch (error) {
+    console.log("Bestellung getMemberProduct Error");
+
     logError(error);
     notFound();
   }
@@ -58,6 +60,7 @@ async function getSendungen() {
 
     return items;
   } catch (error) {
+    console.log("Bestellung getSendungen Error");
     logError(error);
   }
 }

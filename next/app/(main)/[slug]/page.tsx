@@ -46,6 +46,8 @@ async function getSendung(slug) {
 
     return item;
   } catch (error) {
+    console.log("Program getSendung Error");
+
     logError(error);
 
     notFound();
@@ -85,6 +87,7 @@ export async function getNextShowForProgram(slug) {
         return { nowPlaying: false, nextShows: [] };
       });
   } catch (error) {
+    console.log("Program getNextShowForProgram Error");
     logError(error);
     return { nowPlaying: false, nextShows: [] };
   }
@@ -127,6 +130,7 @@ async function getPosts(slug) {
 
     return item;
   } catch (error) {
+    console.log("Program getPosts Error");
     logError(error);
 
     notFound();

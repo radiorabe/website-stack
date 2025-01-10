@@ -54,6 +54,7 @@ async function getEvent(slug) {
 
     return items[0];
   } catch (error) {
+    console.log("Event getEvent Error");
     logError(error);
 
     notFound();

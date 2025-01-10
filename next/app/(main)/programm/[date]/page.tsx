@@ -46,6 +46,7 @@ export async function getLiveData() {
         return { todayShows: [], currentShow: null, shows: [] };
       });
   } catch (error) {
+    console.log("PageProgramm getLiveData Error");
     logError(error);
   }
 }
@@ -79,6 +80,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageProgramm getPageData Error");
     logError(error);
     notFound();
   }
@@ -87,7 +89,7 @@ async function getPageData() {
 export default async function ProgramPage({ params }) {
   let liveData = await getLiveData();
   let data = await getPageData();
-  console.info("Rerender PageProgram");
+  console.info("Rerender PageProgramm");
 
   return (
     <PageProgramm

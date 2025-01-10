@@ -17,6 +17,7 @@ async function checkOrder([slug, id]) {
     let order: ItemsOrders = data.order;
     return order;
   } catch (error) {
+    console.log("Order checkOrder Error");
     logError(error);
     notFound();
   }

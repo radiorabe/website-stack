@@ -42,6 +42,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageReceive getPageData Error");
     logError(error);
 
     notFound();

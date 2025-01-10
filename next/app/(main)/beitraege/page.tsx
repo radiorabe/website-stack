@@ -32,6 +32,7 @@ async function getProgram(slug) {
 
     return item;
   } catch (error) {
+    console.log("Beiträge getProgram Error");
     logError(error);
   }
 }
@@ -60,6 +61,7 @@ async function getAuthor(id) {
 
     return item;
   } catch (error) {
+    console.log("Beiträge getAuthor Error");
     logError(error);
   }
 }

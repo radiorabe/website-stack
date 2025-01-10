@@ -23,6 +23,7 @@ async function getOrder(id) {
     let item: ItemsOrders = infoResponse.data.data;
     return item;
   } catch (error) {
+    console.log("Order getOrder Error");
     logError(error);
   }
 }
@@ -36,6 +37,7 @@ async function updateOrder(id, data) {
     let item: ItemsOrders = infoResponse.data.data;
     return item;
   } catch (error) {
+    console.log("Order updateOrder Error");
     logError(error);
   }
 }

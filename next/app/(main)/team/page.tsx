@@ -38,6 +38,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PagePrograms PageTeam Error");
     logError(error);
 
     notFound();

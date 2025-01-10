@@ -40,6 +40,7 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    console.log("PageContact getPageData Error");
     logError(error);
 
     notFound();
