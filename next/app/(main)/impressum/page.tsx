@@ -34,7 +34,10 @@ async function getPageData() {
 
     // load relational tiptap components
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_impressum
+      );
     }
     return item;
   } catch (error) {

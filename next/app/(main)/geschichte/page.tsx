@@ -37,7 +37,10 @@ async function getPageData() {
     let item: ItemsPageHistory = itemResponse.data.data as ItemsPageHistory;
     // console.log("History: ", item);
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_history
+      );
     }
 
     return item;

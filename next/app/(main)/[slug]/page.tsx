@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { logError } from "@/lib/loging";
 import { Show } from "@/lib/Types";
 import PageProgram from "./PageProgram";
+import Flows from "@/lib/api/Flows";
 
 async function getSendung(slug) {
   try {
@@ -26,7 +27,10 @@ async function getSendung(slug) {
       // { id: slug, fields: ["*,team.directus_users_id.*"] },
       {
         next: {
-          tags: process.env.NODE_ENV === "production" ? [slug] : undefined, // reload only when slug is revalidated
+          tags:
+            process.env.NODE_ENV === "production"
+              ? [slug, Flows.collections.directus_users]
+              : undefined, // reload only when slug is revalidated
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -108,7 +112,9 @@ async function getPosts(slug) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["all_posts"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.post]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

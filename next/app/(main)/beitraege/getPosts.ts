@@ -2,6 +2,7 @@
 
 import { Api } from "@/lib/api";
 import { ItemsPost } from "@/lib/api/data-contracts";
+import Flows from "@/lib/api/Flows";
 import { logError } from "@/lib/loging";
 import { notFound } from "next/navigation";
 
@@ -67,7 +68,9 @@ export const getPosts = async (filters, offset, limit) => {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.post]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

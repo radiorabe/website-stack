@@ -6,6 +6,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import PagePost from "./PagePost";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
+import Flows from "@/lib/api/Flows";
 
 async function getPost(params) {
   try {
@@ -50,7 +51,7 @@ async function getPost(params) {
     }
     // load relational tiptap components
     if (items[0].content) {
-      items[0].content = await loadTipTapContent(items[0].content);
+      items[0].content = await loadTipTapContent(items[0].content, slug);
     }
 
     return items[0];
@@ -61,7 +62,7 @@ async function getPost(params) {
   }
 }
 
-async function getRelatedPosts(slug) {
+async function getRelatedPosts(programSlug) {
   try {
     const itemResponse = await Api.randomizedItemsPost(
       {
@@ -70,7 +71,13 @@ async function getRelatedPosts(slug) {
         // @ts-ignore
         filter: JSON.stringify({
           program: {
-            _eq: slug,
+            _eq: programSlug,
+          },
+          status: {
+            _eq: "published",
+          },
+          date: {
+            _lte: "$NOW",
           },
         }),
         limit: 3,
@@ -78,7 +85,9 @@ async function getRelatedPosts(slug) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["all_posts"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.post]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

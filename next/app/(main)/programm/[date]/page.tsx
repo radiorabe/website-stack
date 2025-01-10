@@ -13,7 +13,7 @@ export async function getLiveData() {
       next: {
         revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
       },
-      cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
+      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {

@@ -9,7 +9,7 @@ import {
   ItemsPostEditorNodes,
 } from "@/lib/api/data-contracts";
 
-export const loadTipTapContent = async (docContent) => {
+export const loadTipTapContent = async (docContent, revalidateTag) => {
   //   var results: number[] = await Promise.all(arr.map(async (item): Promise<number> => {
   //     await callAsynchronousOperation(item);
   //     return item + 1;
@@ -28,32 +28,33 @@ export const loadTipTapContent = async (docContent) => {
       if (ApiMapper[contentNode.attrs.junction]) {
         let node = await getNodes(
           contentNode.attrs.id,
-          ApiMapper[contentNode.attrs.junction]
+          ApiMapper[contentNode.attrs.junction],
+          revalidateTag
         );
 
         if (contentNode.attrs.collection === "audio_player") {
-          let data = await getAudioPlayerFiles(node.item);
+          let data = await getAudioPlayerFiles(node.item, revalidateTag);
           contentNode.data = data;
           return contentNode;
         }
 
         if (contentNode.attrs.collection === "quote") {
-          let data = await getQuote(node.item);
+          let data = await getQuote(node.item, revalidateTag);
           contentNode.data = data;
           return contentNode;
         }
         if (contentNode.attrs.collection === "iframe") {
-          let data = await getIframe(node.item);
+          let data = await getIframe(node.item, revalidateTag);
           contentNode.data = data;
           return contentNode;
         }
         if (contentNode.attrs.collection === "info_box") {
-          let data = await getInfoBox(node.item);
+          let data = await getInfoBox(node.item, revalidateTag);
           contentNode.data = data;
           return contentNode;
         }
         if (contentNode.attrs.collection === "image_box") {
-          let data = await getImageBox(node.item);
+          let data = await getImageBox(node.item, revalidateTag);
           contentNode.data = data;
           return contentNode;
         }
@@ -78,7 +79,7 @@ export const loadTipTapContent = async (docContent) => {
   };
 };
 
-async function getInfoBox(id) {
+async function getInfoBox(id, revalidateTag) {
   try {
     const itemResponse = await Api.readSingleItemsInfoBox(
       {
@@ -88,7 +89,7 @@ async function getInfoBox(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -101,7 +102,7 @@ async function getInfoBox(id) {
   }
 }
 
-async function getImageBox(id) {
+async function getImageBox(id, revalidateTag) {
   try {
     const itemResponse = await Api.readSingleItemsImageBox(
       {
@@ -111,7 +112,7 @@ async function getImageBox(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -124,7 +125,7 @@ async function getImageBox(id) {
   }
 }
 
-async function getQuote(id) {
+async function getQuote(id, revalidateTag) {
   try {
     const itemResponse = await Api.readSingleItemsQuote(
       {
@@ -134,7 +135,7 @@ async function getQuote(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -147,7 +148,7 @@ async function getQuote(id) {
   }
 }
 
-async function getIframe(id) {
+async function getIframe(id, revalidateTag) {
   try {
     const itemResponse = await Api.readSingleItemsIframe(
       {
@@ -157,7 +158,7 @@ async function getIframe(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -170,7 +171,7 @@ async function getIframe(id) {
   }
 }
 
-async function getAudioPlayerFiles(id) {
+async function getAudioPlayerFiles(id, revalidateTag) {
   try {
     const itemResponse = await Api.readSingleItemsAudioPlayer(
       {
@@ -180,7 +181,7 @@ async function getAudioPlayerFiles(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -194,7 +195,7 @@ async function getAudioPlayerFiles(id) {
   }
 }
 
-async function getNodes(id, readNodes) {
+async function getNodes(id, readNodes, revalidateTag) {
   try {
     const itemResponse = await readNodes(
       {
@@ -204,7 +205,7 @@ async function getNodes(id, readNodes) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production" ? [revalidateTag] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

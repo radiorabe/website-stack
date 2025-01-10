@@ -32,7 +32,10 @@ async function getPageData() {
     // console.log("response", itemResponse);
     let item: ItemsPageAgb = itemResponse.data.data as ItemsPageAgb;
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_agb
+      );
     }
 
     return item;

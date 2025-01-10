@@ -9,6 +9,7 @@ import { logError } from "@/lib/loging";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageHome from "./PageHome";
+import Flows from "@/lib/api/Flows";
 
 async function getPosts() {
   try {
@@ -31,7 +32,9 @@ async function getPosts() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["page_home"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.post]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -89,7 +92,9 @@ async function getPartyTips() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.party_tips, Flows.collections.party_location]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -125,7 +130,9 @@ async function checkEventWithPromobox() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.events]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -149,7 +156,9 @@ async function getPageData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_home]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

@@ -38,7 +38,10 @@ async function getPageData() {
     // console.log("ItemsPageJoin", item);
     // load relational tiptap components
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_join
+      );
     }
 
     return item;

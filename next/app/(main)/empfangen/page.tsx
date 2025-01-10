@@ -34,7 +34,10 @@ async function getPageData() {
     let item: ItemsPageReceive = itemResponse.data.data as ItemsPageReceive;
     // load relational tiptap components
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_receive
+      );
     }
 
     return item;

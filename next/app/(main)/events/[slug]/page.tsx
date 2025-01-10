@@ -46,7 +46,10 @@ async function getEvent(slug) {
 
     // load relational tiptap components
     if (items[0].content) {
-      items[0].content = await loadTipTapContent(items[0].content);
+      items[0].content = await loadTipTapContent(
+        items[0].content,
+        Flows.collections.events
+      );
     }
 
     return items[0];

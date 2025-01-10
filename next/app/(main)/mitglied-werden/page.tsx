@@ -31,7 +31,10 @@ async function getPageData() {
     let item: ItemsPageMember = infoResponse.data.data as ItemsPageMember;
 
     if (item.content) {
-      item.content = await loadTipTapContent(item.content);
+      item.content = await loadTipTapContent(
+        item.content,
+        Flows.collections.page_member
+      );
     }
 
     return item;

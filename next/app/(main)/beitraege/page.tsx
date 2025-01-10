@@ -20,10 +20,7 @@ async function getProgram(slug) {
       },
       {
         next: {
-          tags:
-            process.env.NODE_ENV === "production"
-              ? [Flows.collections.posts, Flows.collections.post]
-              : undefined,
+          tags: process.env.NODE_ENV === "production" ? [slug] : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
@@ -49,7 +46,9 @@ async function getAuthor(id) {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.directus_users]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",

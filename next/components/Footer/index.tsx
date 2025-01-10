@@ -4,6 +4,7 @@ import { Api } from "@/lib/api";
 import { ItemsPageContact } from "@/lib/api/data-contracts";
 import { notFound } from "next/navigation";
 import { logError } from "@/lib/loging";
+import Flows from "@/lib/api/Flows";
 
 async function getContactData() {
   try {
@@ -15,7 +16,9 @@ async function getContactData() {
       {
         next: {
           tags:
-            process.env.NODE_ENV === "production" ? ["collection"] : undefined,
+            process.env.NODE_ENV === "production"
+              ? [Flows.collections.page_contact]
+              : undefined,
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
