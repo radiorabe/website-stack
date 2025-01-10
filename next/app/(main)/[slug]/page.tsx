@@ -38,9 +38,11 @@ async function getSendung(slug) {
     );
     // console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPrograms;
-    // console.log("item", item);
-    // console.log("team", item.team);
-    // console.log("posts", item.posts);
+    // console.log("Sendung", item);
+
+    if(item.status !== "published"){
+      notFound();
+    }
 
     return item;
   } catch (error) {
