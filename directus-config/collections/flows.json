@@ -84,7 +84,19 @@
         "page_programs",
         "statements",
         "directus_users",
-        "party_location"
+        "party_location",
+        "info_box",
+        "image_box",
+        "quote",
+        "iframe",
+        "audio_player",
+        "events_editor_nodes",
+        "page_internship_nodes",
+        "page_receive_nodes",
+        "post_editor_nodes",
+        "page_history_nodes",
+        "page_classes_nodes",
+        "page_join_nodes"
       ]
     },
     "operation": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d",
