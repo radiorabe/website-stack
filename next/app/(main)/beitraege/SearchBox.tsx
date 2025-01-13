@@ -32,16 +32,19 @@ export default function SearchBox({ programName, authorName }) {
   }, [searchTerm, author, program, setFilters]);
 
   return (
-    <div
+    <View
       style={{
-        display: "flex",
-        justifyContent: "space-between",
+        flexDirection: "row",
         width: "100%",
+        justifyContent: "space-between",
       }}
     >
-      <div
+      <View
         style={{
-          display: "flex",
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          marginTop: "-" + Metrics.baseMargin,
         }}
       >
         <Button
@@ -49,19 +52,30 @@ export default function SearchBox({ programName, authorName }) {
           label={"Alle Beiträge"}
           full
           textColor={Colors.white}
+          style={{
+            paddingRight: Metrics.doubleBaseMargin,
+            marginTop: Metrics.baseMargin,
+          }}
         />
         {author && (
-          <FilterLabel
+          <Button
+            // href={"/beitraege"}
             label={authorName}
-            style={{ paddingLeft: Metrics.doubleBaseMargin }}
             onPress={() => setAuthor("")}
+            style={{
+              paddingRight: Metrics.doubleBaseMargin,
+              marginTop: Metrics.baseMargin,
+            }}
           />
         )}
         {program && (
-          <FilterLabel
+          <Button
             label={programName}
-            style={{ paddingLeft: Metrics.doubleBaseMargin }}
             onPress={() => setProgram("")}
+            style={{
+              paddingRight: Metrics.doubleBaseMargin,
+              marginTop: Metrics.baseMargin,
+            }}
           />
         )}
         {/* {searchFilters.map((filter) => {
@@ -80,7 +94,7 @@ export default function SearchBox({ programName, authorName }) {
             />
           );
         })} */}
-      </div>
+      </View>
 
       <View
         style={[
@@ -88,11 +102,11 @@ export default function SearchBox({ programName, authorName }) {
             borderColor: Colors.black,
             borderRadius: 9,
             borderWidth: 1,
-            // alignSelf: "flex-start",
             flexDirection: "row",
             alignItems: "center",
             paddingVertical: 3,
             paddingHorizontal: Metrics.halfBaseMargin,
+            height: 38,
           },
         ]}
       >
@@ -120,6 +134,6 @@ export default function SearchBox({ programName, authorName }) {
         />
         <SearchIcon></SearchIcon>
       </View>
-    </div>
+    </View>
   );
 }

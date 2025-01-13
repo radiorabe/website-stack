@@ -21,6 +21,7 @@ export interface Props {
   textColor?: any;
   hoverTextColor?: any;
   full?: boolean;
+  multiLine?: boolean;
 }
 
 const Button = ({
@@ -38,10 +39,11 @@ const Button = ({
   textColor,
   hoverTextColor,
   full,
+  multiLine,
 }: Props) => {
   const button = (
     <Pressable
-      style={style}
+      style={[{ maxWidth: "100%" }, style]}
       onPress={() => {
         if (!disabled) {
           if (onPress) {
@@ -64,6 +66,7 @@ const Button = ({
                 alignSelf: "flex-start",
                 flexDirection: "row",
                 alignItems: "center",
+                maxWidth: "100%",
                 paddingVertical: large ? 13 : 8,
                 paddingHorizontal: large ? 15 : 11,
                 backgroundColor: backgroundColor
@@ -89,6 +92,7 @@ const Button = ({
               </View>
             )}
             <Text
+              numberOfLines={multiLine ? undefined : 1}
               style={[
                 {
                   ...Fonts.style.textLink,
@@ -99,6 +103,7 @@ const Button = ({
                   msUserSelect: "none",
                   color: textColor ? textColor : Colors.black,
                   textAlign: labelAlign ? labelAlign : undefined,
+                  maxWidth: "100%",
                 },
                 large && { ...Fonts.style.h2 },
                 hovered &&

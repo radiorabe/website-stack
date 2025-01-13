@@ -84,6 +84,7 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   button: {
+    maxWidth: "100%",
     marginTop: Metrics.baseMargin,
     "@media (max-width: 910px)": {
       marginTop: Metrics.tripleBaseMargin,

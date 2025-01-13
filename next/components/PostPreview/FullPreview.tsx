@@ -14,6 +14,7 @@ import Image from "next/image";
 import StyleSheet from "react-native-media-query";
 import Button from "../Button";
 import { blurhashToBase64 } from "blurhash-base64";
+import { backInOut } from "framer-motion";
 
 export interface Props {
   data: ItemsPost;
