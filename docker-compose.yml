@@ -1,5 +1,13 @@
 version: "3"
 services:
+  telegram-notifier:
+    image: lorcas/docker-telegram-notifier:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # for local instance
+    environment:
+      TELEGRAM_NOTIFIER_BOT_TOKEN: 7148634886:AAEyT5wkMCdWCESViNJ7p-OiQCOIF4t7J3M
+      TELEGRAM_NOTIFIER_CHAT_ID: -4746521148
+
   next:
     container_name: rabe-next
     build:

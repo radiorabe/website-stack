@@ -1,5 +1,5 @@
 module.exports = {
-  directusUrl: "http://localhost:1337", // dev local
+  directusUrl: "http://localhost: ", // dev local
   directusToken: "LpjqomxFZHWlj_-tEmS7CZ6zLwVHb52Y", // dev local
   dumpPath: "./directus-config",
   // Additional options...
