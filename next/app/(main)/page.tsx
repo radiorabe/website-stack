@@ -96,6 +96,7 @@ async function getPartyTips() {
             process.env.NODE_ENV === "production"
               ? [Flows.collections.party_tips, Flows.collections.party_location]
               : undefined,
+          revalidate: process.env.NODE_ENV === "production" ? 10800 : undefined, // every 3h in seconds
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
