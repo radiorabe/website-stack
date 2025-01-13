@@ -23,9 +23,42 @@ export default function Calender({
   return (
     <View style={{ overflow: "hidden" }}>
       {/* hide scrollbar with 25px  */}
-      <View style={{ width: "100%", overflow: "scroll", bottom: -25 }}>
-        <View style={{ paddingBottom: 25, flexDirection: "row" }}>
-          <View style={styles.buffer} dataSet={{ media: ids.buffer }}></View>
+      <View
+        style={{
+          width: "100%",
+          overflow: "scroll",
+          bottom: -25,
+        }}
+      >
+        <View
+          style={{
+            paddingBottom: 25,
+            flexDirection: "row",
+          }}
+        >
+          <View style={styles.buffer} dataSet={{ media: ids.buffer }}>
+            {prevWeekArrowLink && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  height: 94,
+                  justifyContent: "center",
+                }}
+              >
+                <Arrow
+                  color={Colors.lightGreen}
+                  hoverColor={Colors.green}
+                  href={prevWeekArrowLink}
+                  style={{
+                    transform: "rotate(180deg)",
+                    paddingRight: Metrics.baseMargin,
+                  }}
+                ></Arrow>
+              </View>
+            )}
+          </View>
           {[
             "Montag",
             "Dienstag",
@@ -132,47 +165,26 @@ export default function Calender({
             );
           })}
           {/* </View> */}
-          <View style={styles.buffer} dataSet={{ media: ids.buffer }}></View>
-
-          {prevWeekArrowLink && (
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                left: Metrics.doubleBaseMargin,
-                height: 94,
-                justifyContent: "center",
-              }}
-            >
-              <Arrow
-                color={Colors.lightGreen}
-                hoverColor={Colors.green}
-                href={prevWeekArrowLink}
+          <View style={styles.buffer} dataSet={{ media: ids.buffer }}>
+            {nextWeekArrowLink && (
+              <View
                 style={{
-                  transform: "rotate(180deg)",
-                  paddingLeft: Metrics.baseMargin,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: 94,
+                  justifyContent: "center",
                 }}
-              ></Arrow>
-            </View>
-          )}
-          {nextWeekArrowLink && (
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                right: Metrics.doubleBaseMargin,
-                height: 94,
-                justifyContent: "center",
-              }}
-            >
-              <Arrow
-                color={Colors.lightGreen}
-                hoverColor={Colors.green}
-                href={nextWeekArrowLink}
-                style={{ paddingLeft: Metrics.baseMargin }}
-              ></Arrow>
-            </View>
-          )}
+              >
+                <Arrow
+                  color={Colors.lightGreen}
+                  hoverColor={Colors.green}
+                  href={nextWeekArrowLink}
+                  style={{ paddingRight: Metrics.baseMargin }}
+                ></Arrow>
+              </View>
+            )}
+          </View>
         </View>
       </View>
     </View>
