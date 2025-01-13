@@ -63,7 +63,7 @@ async function getPost(params) {
   }
 }
 
-async function getRelatedPosts(programSlug) {
+async function getRelatedPosts(postSlug, programSlug) {
   try {
     const itemResponse = await Api.randomizedItemsPost(
       {
@@ -71,6 +71,9 @@ async function getRelatedPosts(programSlug) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         filter: JSON.stringify({
+          slug: {
+            _neq: postSlug,
+          },
           program: {
             _eq: programSlug,
           },
@@ -145,7 +148,7 @@ export async function generateMetadata(
 
 export default async function BeitragPage({ params }: Props) {
   const post = await getPost(params);
-  const morePosts = await getRelatedPosts(post.program.slug);
+  const morePosts = await getRelatedPosts(post.slug, post.program.slug);
 
   return <PagePost post={post} morePosts={morePosts}></PagePost>;
 }
