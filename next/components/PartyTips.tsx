@@ -31,7 +31,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
             marginBottom: Metrics.doubleBaseMargin,
           }}
         >
-          {"Ausgehtips"}
+          {"Ausgehtipps"}
         </Text>
         <View
           style={{
