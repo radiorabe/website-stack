@@ -2019,8 +2019,8 @@ type member_product {
   date_updated: Date
   date_updated_func: datetime_functions
   label: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
 }
 
 type member_product_aggregated {
@@ -4788,8 +4788,8 @@ input create_member_product_input {
   user_updated: create_directus_users_input
   date_updated: Date
   label: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
 }
 
 input create_orders_input {

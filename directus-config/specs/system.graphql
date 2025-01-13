@@ -1992,8 +1992,8 @@ type member_product {
   date_updated: Date
   date_updated_func: datetime_functions
   label: String
-  price: Float
-  name: String
+  price: Float!
+  name: String!
 }
 
 type member_product_mutated {

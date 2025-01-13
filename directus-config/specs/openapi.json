@@ -34604,11 +34604,11 @@
             "type": "string"
           },
           "price": {
-            "nullable": true,
+            "nullable": false,
             "type": "number"
           },
           "name": {
-            "nullable": true,
+            "nullable": false,
             "type": "string"
           }
         },
