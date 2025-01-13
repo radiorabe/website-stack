@@ -8,6 +8,8 @@ import PageProgram from "./PageProgram";
 import Flows from "@/lib/api/Flows";
 
 async function getSendung(slug) {
+  console.log("getSendung: ", slug);
+
   try {
     const itemResponse = await Api.readSingleItemsPrograms(
       // { id: slug, fields: ["*", "team.*", "team.*.directus_users_id.*"] },
@@ -36,11 +38,11 @@ async function getSendung(slug) {
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
       }
     );
-    // console.log("response", itemResponse);
+    console.log("response", itemResponse);
     let item = itemResponse.data.data as ItemsPrograms;
     // console.log("Sendung", item);
 
-    if(item.status !== "published"){
+    if (item.status !== "published") {
       notFound();
     }
 
