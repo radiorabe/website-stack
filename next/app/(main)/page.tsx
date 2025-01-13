@@ -82,7 +82,7 @@ async function getPartyTips() {
             },
             {
               date: {
-                _lte: "$NOW(+6 days)",
+                _lte: "$NOW(+8 days)",
               },
             },
           ],

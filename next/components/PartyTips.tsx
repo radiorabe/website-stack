@@ -43,10 +43,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
             let dateText =
               item.date_label && item.date_label !== ""
                 ? item.date_label
-                : moment(item.date).format("dd D.M") +
-                  ", ab " +
-                  moment(item.date).format("HH:mm") +
-                  " Uhr";
+                : moment(item.date).format("dd D.M");
             return (
               <View
                 key={"partyTips" + index}

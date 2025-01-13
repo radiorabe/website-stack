@@ -33,8 +33,7 @@ const ImageBox = ({ image, width, height, title, text, style }: Props) => {
       <Text
         style={{
           flexDirection: "column",
-          paddingHorizontal: Metrics.tripleBaseMargin,
-          paddingVertical: Metrics.doubleBaseMargin,
+          padding: Metrics.doubleBaseMargin,
         }}
       >
         {title && (
@@ -48,7 +47,11 @@ const ImageBox = ({ image, width, height, title, text, style }: Props) => {
           </Text>
         )}
 
-        {text && <Text style={{ ...Fonts.style.textSmall }}>{" " + text}</Text>}
+        {text && (
+          <Text style={{ ...Fonts.style.textSmall }}>
+            {title ? " " + text : text}
+          </Text>
+        )}
       </Text>
     </View>
   );
