@@ -280,6 +280,8 @@ const { ids, styles } = StyleSheet.create({
     color: "white",
     textAlign: "center",
     paddingHorizontal: Metrics.tripleBaseMargin,
+    width: "100%",
+    wordBreak: "break-word",
   },
   supportButton: {
     paddingVertical: Metrics.doubleBaseMargin,
