@@ -42,8 +42,13 @@ export default function BeitragPage({ post, morePosts }: Props) {
           style={styles.postInfoContainer}
         >
           <Button href={"/" + program.slug} label={program.name}></Button>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <View
               dataSet={{ media: ids.postAuthorText }}
               style={styles.postAuthorText}
             >
@@ -80,7 +85,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
               <Text dataSet={{ media: ids.hide }} style={styles.hide}>
                 {`${moment(post.date).format("D. MMMM YYYY")}`}
               </Text>
-            </Text>
+            </View>
           </View>
           <Text dataSet={{ media: ids.mobileDate }} style={styles.mobileDate}>
             {`${moment(post.date).format("D. MMMM YYYY")}`}
@@ -214,8 +219,8 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   postAuthorText: {
-    ...Fonts.style.text,
     paddingLeft: Metrics.doubleBaseMargin,
+    flexDirection: "row",
     "@media (max-width: 910px)": {
       paddingLeft: 0,
       paddingTop: Metrics.doubleBaseMargin,
@@ -245,6 +250,7 @@ const { ids, styles } = StyleSheet.create({
   sendungsInfo: { ...Fonts.style.text, color: "black" },
   image: { width: "100%", borderRadius: 9 },
   hide: {
+    ...Fonts.style.text,
     "@media (max-width: 910px)": {
       display: "none",
     },

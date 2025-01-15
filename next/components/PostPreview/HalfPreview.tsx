@@ -53,12 +53,13 @@ const HalfPreview = ({ data }: Props) => {
           <Button
             label={program.name}
             disabled={true}
-            url=""
+            href=""
+            // href={`/beitrag/${moment(data.date_published).format("DD-MM-YYYY")}/${data.slug}`}
             hoverTextColor={Colors.green}
           ></Button>
         </View>
         <Text style={styles.date} dataSet={{ media: ids.date }}>
-          {moment(data.date).format("D. MMMM")}
+          {moment(data.date_published).format("D. MMMM")}
         </Text>
       </View>
       <Text style={styles.title} dataSet={{ media: ids.title }}>

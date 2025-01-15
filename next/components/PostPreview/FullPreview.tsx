@@ -65,7 +65,8 @@ const FullPreview = ({ data }: Props) => {
           <Button
             label={program.name}
             disabled={true}
-            url=""
+            href=""
+            // href={`/beitrag/${moment(data.date_published).format("DD-MM-YYYY")}/${data.slug}`}
             textColor={Colors.white}
             hoverTextColor={Colors.green}
           ></Button>
@@ -95,7 +96,7 @@ const FullPreview = ({ data }: Props) => {
               color: Colors.white,
             }}
           >
-            {moment(data.date).format("D. MMMM")}
+            {moment(data.date_published).format("D. MMMM")}
           </Text>
           <Text
             style={[

@@ -43,7 +43,15 @@ export default function ShowsList({
           <View style={{ paddingTop: Metrics.halfBaseMargin }}>
             {initialShows &&
               initialShows.map((show, index) => {
-                let isCurrentshow = show.starts === currentShow.starts;
+                if (show === null) {
+                  return null;
+                }
+                let showDateString =
+                  show && show.starts && moment(show.starts).format("HH:mm");
+                let isCurrentshow =
+                  currentShow &&
+                  currentShow.starts &&
+                  show.starts === currentShow.starts;
                 return (
                   <View
                     style={styles.showContainer}
@@ -57,7 +65,7 @@ export default function ShowsList({
                         paddingRight: Metrics.doubleBaseMargin,
                       }}
                     >
-                      {moment(show.starts).format("HH:mm")}
+                      {showDateString}
                     </Text>
                     <HoverText
                       href={show.url}

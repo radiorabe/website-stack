@@ -1,13 +1,11 @@
 "use client";
 import { ItemsPost } from "@/lib/api/data-contracts";
 import { View } from "@/lib/server-react-native";
-import useResponsive from "@/lib/useResponsisve";
 import moment from "moment";
 import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 import FullPreview from "./FullPreview";
 import HalfPreview from "./HalfPreview";
-import Metrics from "@/lib/Metrics";
 
 export interface Props {
   posts: ItemsPost[];
@@ -17,8 +15,6 @@ const PostPreviewBox = ({ posts }: Props) => {
   if (!posts || posts.length === 0) {
     return null;
   }
-
-  const { isMobile } = useResponsive();
 
   return (
     <View style={styles.boxContainer} dataSet={{ media: ids.boxContainer }}>

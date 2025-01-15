@@ -1,5 +1,5 @@
 "use client";
-import { Linking, Pressable, Text } from "@/lib/server-react-native";
+import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
 import Link from "next/link";
 import StyleSheet from "react-native-media-query";
 

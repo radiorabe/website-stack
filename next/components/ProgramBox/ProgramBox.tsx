@@ -23,18 +23,25 @@ export async function getLiveData() {
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
-        let todayShows: Show[] = liveData.shows.previous.filter(
-          (item) => moment().startOf("day") < moment(item.ends)
-        );
+        let todayShows: Show[] = liveData.shows.previous.filter((item) => {
+          if (item && item.ends) {
+            return moment().startOf("day") < moment(item.ends);
+          } else {
+            return false;
+          }
+        });
 
         let currentShow: Show = liveData.shows.current;
         todayShows.push(currentShow);
 
-        let nextShowsToday = liveData.shows.next.filter(
-          (item) => moment().endOf("day") > moment(item.starts)
-        );
+        let nextShowsToday = liveData.shows.next.filter((item) => {
+          if (item && item.ends) {
+            return moment().endOf("day") > moment(item.starts);
+          } else {
+            return false;
+          }
+        });
         todayShows.push(...nextShowsToday);
-        // console.log("todayShows", todayShows);
 
         let shows = [
           ...liveData.shows.previous,
@@ -45,12 +52,12 @@ export async function getLiveData() {
         return { todayShows, currentShow, shows };
       })
       .catch((error) => {
-        console.log("Programbox getLiveData Error: ", error);
+        console.log("error", error);
 
         return { todayShows: [], currentShow: null, shows: [] };
       });
   } catch (error) {
-    console.log("Programbox getLiveData Error");
+    console.log("PageProgramm getLiveData Error");
     logError(error);
   }
 }

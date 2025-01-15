@@ -17,19 +17,24 @@ export async function getLiveData() {
     })
       .then((response: any) => response.json())
       .then((liveData: any) => {
-        // console.log("liveData", liveData);
-        // console.log("liveDataEnd");
-
-        let todayShows: Show[] = liveData.shows.previous.filter(
-          (item) => moment().startOf("day") < moment(item.ends)
-        );
+        let todayShows: Show[] = liveData.shows.previous.filter((item) => {
+          if (item && item.ends) {
+            return moment().startOf("day") < moment(item.ends);
+          } else {
+            return false;
+          }
+        });
 
         let currentShow: Show = liveData.shows.current;
         todayShows.push(currentShow);
 
-        let nextShowsToday = liveData.shows.next.filter(
-          (item) => moment().endOf("day") > moment(item.starts)
-        );
+        let nextShowsToday = liveData.shows.next.filter((item) => {
+          if (item && item.ends) {
+            return moment().endOf("day") > moment(item.starts);
+          } else {
+            return false;
+          }
+        });
         todayShows.push(...nextShowsToday);
 
         let shows = [
