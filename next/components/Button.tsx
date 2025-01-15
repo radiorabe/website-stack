@@ -100,19 +100,21 @@ const Button = ({
   );
 
   const buttonElement = (
-    <View style={styles.container} dataSet={{ media: ids.container }}>
-      {icon && (
-        <View style={{ width: large ? 32 : 18, height: large ? 32 : 18 }}>
-          {icon}
-        </View>
-      )}
-      <Text
-        numberOfLines={multiLine ? undefined : 1}
-        style={styles.text}
-        dataSet={{ media: ids.text }}
-      >
-        {label}
-      </Text>
+    <View style={style}>
+      <View style={styles.container} dataSet={{ media: ids.container }}>
+        {icon && (
+          <View style={{ width: large ? 32 : 18, height: large ? 32 : 18 }}>
+            {icon}
+          </View>
+        )}
+        <Text
+          numberOfLines={multiLine ? undefined : 1}
+          style={styles.text}
+          dataSet={{ media: ids.text }}
+        >
+          {label}
+        </Text>
+      </View>
     </View>
   );
 

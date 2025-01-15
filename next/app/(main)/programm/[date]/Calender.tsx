@@ -196,6 +196,7 @@ const { styles, ids } = StyleSheet.create({
     paddingBottom: Metrics.halfBaseMargin,
     maxWidth: `100%`,
     ":hover": {
+      transition: "0.2s",
       backgroundColor: Colors.lightGreen,
     },
   },
