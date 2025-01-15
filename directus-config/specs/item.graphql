@@ -3267,8 +3267,6 @@ type post {
   user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
   date_updated: Date
   date_updated_func: datetime_functions
-  date: Date
-  date_func: datetime_functions
   title: String!
   slug: String!
   program(filter: programs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): programs
@@ -3312,7 +3310,6 @@ type post_aggregated_count {
   date_created: Int
   user_updated: Int
   date_updated: Int
-  date: Int
   title: Int
   slug: Int
   program: Int
@@ -4325,7 +4322,6 @@ type version_post {
   date_created: Date
   user_updated: JSON
   date_updated: Date
-  date: Date
   title: String
   slug: String
   program: JSON
@@ -5120,7 +5116,6 @@ input create_post_input {
   date_created: Date
   user_updated: create_directus_users_input
   date_updated: Date
-  date: Date
   title: String!
   slug: String!
   program: create_programs_input
@@ -6161,8 +6156,6 @@ input post_filter {
   user_updated: directus_users_filter
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
-  date: date_filter_operators
-  date_func: datetime_function_filter_operators
   title: string_filter_operators
   slug: string_filter_operators
   program: programs_filter
@@ -6941,7 +6934,6 @@ input update_post_input {
   date_created: Date
   user_updated: update_directus_users_input
   date_updated: Date
-  date: Date
   title: String
   slug: String
   program: update_programs_input

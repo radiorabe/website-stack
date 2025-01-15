@@ -36435,11 +36435,6 @@
             "type": "string",
             "format": "timestamp"
           },
-          "date": {
-            "nullable": true,
-            "type": "string",
-            "format": "date-time"
-          },
           "title": {
             "nullable": false,
             "type": "string"
