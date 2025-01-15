@@ -600,9 +600,9 @@ type Subscription {
   directus_activity_mutated(event: EventEnum): directus_activity_mutated
   directus_permissions_mutated(event: EventEnum): directus_permissions_mutated
   directus_folders_mutated(event: EventEnum): directus_folders_mutated
+  directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_roles_mutated(event: EventEnum): directus_roles_mutated
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
-  directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
   directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   page_contact_contact_address_mutated(event: EventEnum): page_contact_contact_address_mutated

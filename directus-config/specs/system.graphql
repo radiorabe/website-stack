@@ -26,15 +26,15 @@ type Query {
   folders(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_folders!]!
   folders_by_id(id: ID!, version: String): directus_folders
   folders_aggregated(groupBy: [String], filter: directus_folders_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_folders_aggregated!]!
+  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users!]!
+  users_by_id(id: ID!, version: String): directus_users
+  users_aggregated(groupBy: [String], filter: directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_users_aggregated!]!
   roles(filter: directus_roles_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_roles!]!
   roles_by_id(id: ID!, version: String): directus_roles
   roles_aggregated(groupBy: [String], filter: directus_roles_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_roles_aggregated!]!
   presets(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_presets!]!
   presets_by_id(id: ID!, version: String): directus_presets
   presets_aggregated(groupBy: [String], filter: directus_presets_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_presets_aggregated!]!
-  users(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_users!]!
-  users_by_id(id: ID!, version: String): directus_users
-  users_aggregated(groupBy: [String], filter: directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_users_aggregated!]!
   revisions(filter: directus_revisions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_revisions!]!
   revisions_by_id(id: ID!, version: String): directus_revisions
   revisions_aggregated(groupBy: [String], filter: directus_revisions_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_revisions_aggregated!]!
@@ -118,12 +118,12 @@ type Mutation {
   create_permissions_item(data: create_directus_permissions_input!): directus_permissions
   create_folders_items(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_folders_input!]): [directus_folders!]!
   create_folders_item(data: create_directus_folders_input!): directus_folders
+  create_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_users_input!]): [directus_users!]!
+  create_users_item(data: create_directus_users_input!): directus_users
   create_roles_items(filter: directus_roles_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_roles_input!]): [directus_roles!]!
   create_roles_item(data: create_directus_roles_input!): directus_roles
   create_presets_items(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_presets_input!]): [directus_presets!]!
   create_presets_item(data: create_directus_presets_input!): directus_presets
-  create_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_users_input!]): [directus_users!]!
-  create_users_item(data: create_directus_users_input!): directus_users
   create_webhooks_items(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_webhooks_input!]): [directus_webhooks!]!
   create_webhooks_item(data: create_directus_webhooks_input!): directus_webhooks
   create_notifications_items(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_notifications_input!]): [directus_notifications!]!
@@ -156,15 +156,15 @@ type Mutation {
   update_folders_items(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_folders_input!): [directus_folders!]!
   update_folders_batch(filter: directus_folders_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_folders_input!]): [directus_folders!]!
   update_folders_item(id: ID!, data: update_directus_folders_input!): directus_folders
+  update_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_users_input!): [directus_users!]!
+  update_users_batch(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_users_input!]): [directus_users!]!
+  update_users_item(id: ID!, data: update_directus_users_input!): directus_users
   update_roles_items(filter: directus_roles_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_roles_input!): [directus_roles!]!
   update_roles_batch(filter: directus_roles_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_roles_input!]): [directus_roles!]!
   update_roles_item(id: ID!, data: update_directus_roles_input!): directus_roles
   update_presets_items(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_presets_input!): [directus_presets!]!
   update_presets_batch(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_presets_input!]): [directus_presets!]!
   update_presets_item(id: ID!, data: update_directus_presets_input!): directus_presets
-  update_users_items(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_users_input!): [directus_users!]!
-  update_users_batch(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_users_input!]): [directus_users!]!
-  update_users_item(id: ID!, data: update_directus_users_input!): directus_users
   update_webhooks_items(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_webhooks_input!): [directus_webhooks!]!
   update_webhooks_batch(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_webhooks_input!]): [directus_webhooks!]!
   update_webhooks_item(id: ID!, data: update_directus_webhooks_input!): directus_webhooks
@@ -209,12 +209,12 @@ type Mutation {
   delete_permissions_item(id: ID!): delete_one
   delete_folders_items(ids: [ID]!): delete_many
   delete_folders_item(id: ID!): delete_one
+  delete_users_items(ids: [ID]!): delete_many
+  delete_users_item(id: ID!): delete_one
   delete_roles_items(ids: [ID]!): delete_many
   delete_roles_item(id: ID!): delete_one
   delete_presets_items(ids: [ID]!): delete_many
   delete_presets_item(id: ID!): delete_one
-  delete_users_items(ids: [ID]!): delete_many
-  delete_users_item(id: ID!): delete_one
   delete_webhooks_items(ids: [ID]!): delete_many
   delete_webhooks_item(id: ID!): delete_one
   delete_notifications_items(ids: [ID]!): delete_many
@@ -247,9 +247,9 @@ type Subscription {
   directus_activity_mutated(event: EventEnum): directus_activity_mutated
   directus_permissions_mutated(event: EventEnum): directus_permissions_mutated
   directus_folders_mutated(event: EventEnum): directus_folders_mutated
+  directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_roles_mutated(event: EventEnum): directus_roles_mutated
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
-  directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
   directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   page_contact_contact_address_mutated(event: EventEnum): page_contact_contact_address_mutated

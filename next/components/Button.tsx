@@ -100,7 +100,7 @@ const Button = ({
   );
 
   const buttonElement = (
-    <View style={style}>
+    <View style={[{ maxWidth: "100%" }, style]}>
       <View style={styles.container} dataSet={{ media: ids.container }}>
         {icon && (
           <View style={{ width: large ? 32 : 18, height: large ? 32 : 18 }}>
@@ -118,22 +118,12 @@ const Button = ({
     </View>
   );
 
-  if (href) {
+  if (href || url || onPress) {
     return (
       <Link
         href={href}
         style={{ textDecoration: "none" }}
-        onClick={onPress}
-        passHref={true}
-      >
-        {buttonElement}
-      </Link>
-    );
-  } else {
-    return (
-      <Pressable
-        style={[{ maxWidth: "100%" }, style]}
-        onPress={() => {
+        onClick={() => {
           if (!disabled) {
             if (onPress) {
               onPress();
@@ -143,10 +133,13 @@ const Button = ({
             }
           }
         }}
+        passHref={true}
       >
         {buttonElement}
-      </Pressable>
+      </Link>
     );
+  } else {
+    return buttonElement;
   }
 };
 
