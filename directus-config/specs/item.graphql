@@ -115,6 +115,10 @@ type Query {
   statements_by_id(id: ID!, version: String): statements
   statements_aggregated(groupBy: [String], filter: statements_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [statements_aggregated!]!
   statements_by_version(version: String!, id: ID!): version_statements
+  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
+  post_by_id(id: ID!, version: String): post
+  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
+  post_by_version(version: String!, id: ID!): version_post
   iframe(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [iframe!]!
   iframe_by_id(id: ID!, version: String): iframe
   iframe_aggregated(groupBy: [String], filter: iframe_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [iframe_aggregated!]!
@@ -123,10 +127,6 @@ type Query {
   events_event_shows_by_id(id: ID!, version: String): events_event_shows
   events_event_shows_aggregated(groupBy: [String], filter: events_event_shows_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [events_event_shows_aggregated!]!
   events_event_shows_by_version(version: String!, id: ID!): version_events_event_shows
-  post(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post!]!
-  post_by_id(id: ID!, version: String): post
-  post_aggregated(groupBy: [String], filter: post_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_aggregated!]!
-  post_by_version(version: String!, id: ID!): version_post
   post_directus_users(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_directus_users!]!
   post_directus_users_by_id(id: ID!, version: String): post_directus_users
   post_directus_users_aggregated(groupBy: [String], filter: post_directus_users_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [post_directus_users_aggregated!]!
@@ -278,12 +278,12 @@ type Mutation {
   create_events_item(data: create_events_input!): events
   create_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_statements_input!]): [statements!]!
   create_statements_item(data: create_statements_input!): statements
+  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
+  create_post_item(data: create_post_input!): post
   create_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_iframe_input!]): [iframe!]!
   create_iframe_item(data: create_iframe_input!): iframe
   create_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_events_event_shows_input!]): [events_event_shows!]!
   create_events_event_shows_item(data: create_events_event_shows_input!): events_event_shows
-  create_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_input!]): [post!]!
-  create_post_item(data: create_post_input!): post
   create_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_directus_users_input!]): [post_directus_users!]!
   create_post_directus_users_item(data: create_post_directus_users_input!): post_directus_users
   create_post_editor_nodes_items(filter: post_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_post_editor_nodes_input!]): [post_editor_nodes!]!
@@ -412,15 +412,15 @@ type Mutation {
   update_statements_items(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_statements_input!): [statements!]!
   update_statements_batch(filter: statements_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_statements_input!]): [statements!]!
   update_statements_item(id: ID!, data: update_statements_input!): statements
+  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
+  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
+  update_post_item(id: ID!, data: update_post_input!): post
   update_iframe_items(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_iframe_input!): [iframe!]!
   update_iframe_batch(filter: iframe_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_iframe_input!]): [iframe!]!
   update_iframe_item(id: ID!, data: update_iframe_input!): iframe
   update_events_event_shows_items(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_events_event_shows_input!): [events_event_shows!]!
   update_events_event_shows_batch(filter: events_event_shows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_events_event_shows_input!]): [events_event_shows!]!
   update_events_event_shows_item(id: ID!, data: update_events_event_shows_input!): events_event_shows
-  update_post_items(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_input!): [post!]!
-  update_post_batch(filter: post_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_input!]): [post!]!
-  update_post_item(id: ID!, data: update_post_input!): post
   update_post_directus_users_items(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_post_directus_users_input!): [post_directus_users!]!
   update_post_directus_users_batch(filter: post_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_post_directus_users_input!]): [post_directus_users!]!
   update_post_directus_users_item(id: ID!, data: update_post_directus_users_input!): post_directus_users
@@ -542,12 +542,12 @@ type Mutation {
   delete_events_item(id: ID!): delete_one
   delete_statements_items(ids: [ID]!): delete_many
   delete_statements_item(id: ID!): delete_one
+  delete_post_items(ids: [ID]!): delete_many
+  delete_post_item(id: ID!): delete_one
   delete_iframe_items(ids: [ID]!): delete_many
   delete_iframe_item(id: ID!): delete_one
   delete_events_event_shows_items(ids: [ID]!): delete_many
   delete_events_event_shows_item(id: ID!): delete_one
-  delete_post_items(ids: [ID]!): delete_many
-  delete_post_item(id: ID!): delete_one
   delete_post_directus_users_items(ids: [ID]!): delete_many
   delete_post_directus_users_item(id: ID!): delete_one
   delete_post_editor_nodes_items(ids: [ID]!): delete_many
@@ -652,9 +652,9 @@ type Subscription {
   directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   events_mutated(event: EventEnum): events_mutated
   statements_mutated(event: EventEnum): statements_mutated
+  post_mutated(event: EventEnum): post_mutated
   iframe_mutated(event: EventEnum): iframe_mutated
   events_event_shows_mutated(event: EventEnum): events_event_shows_mutated
-  post_mutated(event: EventEnum): post_mutated
   post_directus_users_mutated(event: EventEnum): post_directus_users_mutated
   post_editor_nodes_mutated(event: EventEnum): post_editor_nodes_mutated
   event_shows_mutated(event: EventEnum): event_shows_mutated
@@ -3267,7 +3267,7 @@ type post {
   user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
   date_updated: Date
   date_updated_func: datetime_functions
-  date: Date!
+  date: Date
   date_func: datetime_functions
   title: String!
   slug: String!
@@ -3279,6 +3279,8 @@ type post {
 
   """Maximal zwei Sätze"""
   short_description: String
+  date_published: Date
+  date_published_func: datetime_functions
   audio_files(filter: post_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_files]
   audio_files_func: count_functions
   tags(filter: post_tags_1_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [post_tags_1]
@@ -3320,6 +3322,7 @@ type post_aggregated_count {
 
   """Maximal zwei Sätze"""
   short_description: Int
+  date_published: Int
   audio_files: Int
   tags: Int
   editor_nodes: Int
@@ -4332,6 +4335,7 @@ type version_post {
 
   """Maximal zwei Sätze"""
   short_description: String
+  date_published: Date
   audio_files: JSON
   tags: JSON
   editor_nodes: JSON
@@ -5116,7 +5120,7 @@ input create_post_input {
   date_created: Date
   user_updated: create_directus_users_input
   date_updated: Date
-  date: Date!
+  date: Date
   title: String!
   slug: String!
   program: create_programs_input
@@ -5126,6 +5130,7 @@ input create_post_input {
 
   """Maximal zwei Sätze"""
   short_description: String
+  date_published: Date
   audio_files: [create_post_files_input]
   tags: [create_post_tags_1_input]
   editor_nodes: [create_post_editor_nodes_input]
@@ -6166,6 +6171,8 @@ input post_filter {
   content_func: count_function_filter_operators
   preview_full_image: boolean_filter_operators
   short_description: string_filter_operators
+  date_published: date_filter_operators
+  date_published_func: datetime_function_filter_operators
   audio_files: post_files_filter
   audio_files_func: count_function_filter_operators
   tags: post_tags_1_filter
@@ -6944,6 +6951,7 @@ input update_post_input {
 
   """Maximal zwei Sätze"""
   short_description: String
+  date_published: Date
   audio_files: [update_post_files_input]
   tags: [update_post_tags_1_input]
   editor_nodes: [update_post_editor_nodes_input]

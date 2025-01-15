@@ -1,55 +1,36 @@
 {
   "collection": "post",
-  "field": "content",
-  "type": "json",
+  "field": "date_published",
+  "type": "timestamp",
   "meta": {
     "collection": "post",
     "conditions": null,
-    "display": "flexible-editor-display",
+    "display": null,
     "display_options": null,
-    "field": "content",
+    "field": "date_published",
     "group": null,
     "hidden": false,
-    "interface": "flexible-editor-interface",
+    "interface": "datetime",
     "note": null,
-    "options": {
-      "m2aField": "editor_nodes",
-      "tools": [
-        "h4",
-        "link",
-        "removeLink",
-        "autolink",
-        "hardBreak",
-        "undo",
-        "redo",
-        "fullscreen"
-      ]
-    },
+    "options": null,
     "readonly": false,
     "required": true,
-    "sort": 18,
-    "special": [
-      "cast-json"
-    ],
-    "translations": [
-      {
-        "language": "de-DE",
-        "translation": "Text"
-      }
-    ],
+    "sort": 9,
+    "special": null,
+    "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
-    "name": "content",
+    "name": "date_published",
     "table": "post",
-    "data_type": "json",
+    "data_type": "timestamp with time zone",
     "default_value": null,
     "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
-    "is_nullable": false,
+    "is_nullable": true,
     "is_unique": false,
     "is_indexed": false,
     "is_primary_key": false,

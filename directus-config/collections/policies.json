@@ -9,11 +9,11 @@
     "app_access": true,
     "roles": [
       {
-        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
+        "role": "_sync_default_admin_role",
         "sort": 1
       },
       {
-        "role": "_sync_default_admin_role",
+        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
         "sort": 1
       }
     ],
