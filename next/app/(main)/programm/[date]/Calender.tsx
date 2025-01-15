@@ -146,13 +146,11 @@ export default function Calender({
                           </Text>
                           <ButtonText
                             href={item.url}
-                            style={[
-                              {
-                                maxWidth: `100%`,
-                                ...Fonts.style.h4,
-                                color: Colors.darkGreen,
-                              },
-                            ]}
+                            style={{
+                              maxWidth: `100%`,
+                              ...Fonts.style.h4,
+                              color: Colors.darkGreen,
+                            }}
                           >
                             {item.name}
                           </ButtonText>

@@ -43,7 +43,7 @@ const ButtonText = ({
     return (
       <Link
         href={href}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", display: "flex" }}
         onClick={onPress}
         passHref={true}
       >

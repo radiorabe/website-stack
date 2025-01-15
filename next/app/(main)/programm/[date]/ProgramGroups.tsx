@@ -71,7 +71,6 @@ export default function ProgramGroups({ pageData }: Props) {
 }
 
 const { ids, styles } = StyleSheet.create({
-  container: {},
   groupTitle: {
     ...Fonts.style.h4,
     textAlign: "center",

@@ -5,9 +5,7 @@ import StyleSheet from "react-native-media-query";
 import BreadCrump from "@/components/BreadCrumb";
 import Button from "@/components/Button";
 import ProgramBox from "@/components/ProgramBox/ProgramBox";
-import {
-  ItemsPageProgram
-} from "@/lib/api/data-contracts";
+import { ItemsPageProgram } from "@/lib/api/data-contracts";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
