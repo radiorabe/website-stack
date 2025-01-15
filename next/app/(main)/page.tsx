@@ -42,7 +42,7 @@ async function getPosts() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    console.log("posts", item);
+    // console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
