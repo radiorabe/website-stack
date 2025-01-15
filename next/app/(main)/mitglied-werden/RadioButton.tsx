@@ -52,6 +52,7 @@ const { styles, ids } = StyleSheet.create({
     paddingHorizontal: Metrics.baseMargin,
 
     ":hover": {
+      transition: "0.2s",
       backgroundColor: Colors.hoverGreen,
     },
   },

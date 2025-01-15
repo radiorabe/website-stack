@@ -1,9 +1,8 @@
 "use client";
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
-import { Linking, Pressable, Text, View } from "@/lib/server-react-native";
+import { Pressable, Text, View } from "@/lib/server-react-native";
 import { PressableState } from "@/lib/Types";
-import Link from "next/link";
 import { ReactElement } from "react";
 
 export interface HoverableProps {

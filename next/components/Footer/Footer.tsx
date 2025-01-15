@@ -48,7 +48,10 @@ function Footer({ data }) {
             <ButtonText
               url={`mailto:${data.email}`}
               style={styles.textButton}
-              dataSet={{ media: ids.textButton }}
+              hoverStyle={{
+                opacity: 1,
+              }}
+              mobileStyle={{ opacity: 1 }}
             >
               {data.email}
             </ButtonText>
@@ -66,7 +69,10 @@ function Footer({ data }) {
             <ButtonText
               url={`tel:${data.studio_phone_number}`}
               style={styles.textButton}
-              dataSet={{ media: ids.textButton }}
+              hoverStyle={{
+                opacity: 1,
+              }}
+              mobileStyle={{ opacity: 1 }}
             >
               {data.studio_phone_number}
             </ButtonText>
@@ -81,7 +87,10 @@ function Footer({ data }) {
             <ButtonText
               url={`mailto:${data.studio_email}`}
               style={styles.textButton}
-              dataSet={{ media: ids.textButton }}
+              hoverStyle={{
+                opacity: 1,
+              }}
+              mobileStyle={{ opacity: 1 }}
             >
               {data.studio_email}
             </ButtonText>
@@ -145,11 +154,5 @@ const { ids, styles } = StyleSheet.create({
   },
   textButton: {
     opacity: 0.75,
-    "@media (max-width: 910px)": {
-      opacity: 1,
-    },
-    ":hover": {
-      opacity: 1,
-    },
   },
 });

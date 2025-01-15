@@ -1,18 +1,15 @@
 "use client";
 import { Linking, Pressable, Text } from "@/lib/server-react-native";
-import { PressableState } from "@/lib/Types";
 import Link from "next/link";
-import { ReactElement } from "react";
+import StyleSheet from "react-native-media-query";
 
 export interface Props {
   url?: string;
   disabled?: boolean;
   onPress?(): void;
   style?: any;
-  dataSet?: any;
   hoverStyle?: any;
-  pressStyle?: any;
-  focusStyle?: any;
+  mobileStyle?: any;
   href?: string;
   children?: any;
   numberOfLines?: number;
@@ -23,57 +20,64 @@ const ButtonText = ({
   disabled,
   onPress,
   style,
-  dataSet,
   hoverStyle,
-  pressStyle,
-  focusStyle,
+  mobileStyle,
   href,
   children,
   numberOfLines,
 }: Props) => {
-  const button = (
-    <Pressable
-      onPress={() => {
-        if (!disabled) {
-          if (onPress) {
-            onPress();
-          }
-          if (url) {
-            Linking.openURL(url);
-          }
-        }
-      }}
+  const { styles, ids } = getStyles(style, hoverStyle, mobileStyle);
+
+  const buttonElement = (
+    <Text
+      style={styles.buttonText}
+      dataSet={{ media: ids.buttonText }}
+      numberOfLines={numberOfLines}
+      ellipsizeMode="tail"
     >
-      {({ pressed, hovered, focused }: PressableState): ReactElement => {
-        return (
-          <Text
-            style={[
-              { textDecoration: "none" },
-              style,
-              hovered && hoverStyle,
-              pressed && pressStyle,
-              focused && focusStyle,
-            ]}
-            dataSet={dataSet}
-            numberOfLines={numberOfLines}
-            ellipsizeMode="tail"
-          >
-            {children}
-          </Text>
-        );
-      }}
-    </Pressable>
+      {children}
+    </Text>
   );
 
   if (href) {
     return (
-      <Link href={href} style={{ textDecoration: "none" }} passHref={true}>
-        {button}
+      <Link
+        href={href}
+        style={{ textDecoration: "none" }}
+        onClick={onPress}
+        passHref={true}
+      >
+        {buttonElement}
       </Link>
     );
+  } else {
+    return (
+      <Pressable
+        onPress={() => {
+          if (!disabled) {
+            if (onPress) {
+              onPress();
+            }
+            if (url) {
+              Linking.openURL(url);
+            }
+          }
+        }}
+      >
+        {buttonElement}
+      </Pressable>
+    );
   }
-
-  return button;
 };
 
 export default ButtonText;
+
+const getStyles = (style: any, hoverStyle: any, mobileStyle: any) =>
+  StyleSheet.create({
+    buttonText: {
+      textDecoration: "none",
+      ...style,
+      ":hover": { transition: "0.2s", ...hoverStyle },
+      "@media (max-width: 910px)": mobileStyle,
+    },
+  });

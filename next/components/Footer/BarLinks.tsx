@@ -30,7 +30,10 @@ export default ({}: HoverableProps) => {
               key={"Barlinks" + index}
               {...data}
               style={styles.hoverText}
-              dataSet={{ media: ids.hoverText }}
+              hoverStyle={{
+                opacity: 1,
+              }}
+              mobileStyle={{ opacity: 1 }}
             ></ButtonText>
           );
         })}
@@ -45,7 +48,10 @@ export default ({}: HoverableProps) => {
               key={"Barlinks2" + index}
               {...data}
               style={styles.hoverText}
-              dataSet={{ media: ids.hoverText }}
+              hoverStyle={{
+                opacity: 1,
+              }}
+              mobileStyle={{ opacity: 1 }}
             ></ButtonText>
           );
         })}
@@ -55,20 +61,6 @@ export default ({}: HoverableProps) => {
 };
 
 const { ids, styles } = StyleSheet.create({
-  // container: {
-  //   justifyContent: "center",
-  //   flexDirection: "row",
-  //   width: "100%",
-  //   flexWrap: "wrap",
-  //   // backgroundColor: "green",
-  // },
-  // halfContainer: {
-  //   marginTop: Metrics.doubleBaseMargin,
-  //   flexDirection: "row",
-  //   "@media (max-width: 910px)": {
-  //     marginTop: Metrics.quadBaseMargin,
-  //   },
-  // },
   container: {
     justifyContent: "center",
     width: "100%",
@@ -101,13 +93,5 @@ const { ids, styles } = StyleSheet.create({
     // backgroundColor: "red",
     marginLeft: Metrics.baseMargin,
     opacity: 0.75,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ":hover": {
-      opacity: 1,
-    },
-    "@media (max-width: 910px)": {
-      opacity: 1,
-    },
   },
 });

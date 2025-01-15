@@ -117,6 +117,7 @@ const { ids, styles } = StyleSheet.create({
       opacity: 1,
     },
     ":hover": {
+      transition: "0.2s",
       opacity: 1,
     },
   },

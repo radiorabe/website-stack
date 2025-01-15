@@ -115,18 +115,22 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
           >
             {buttonArray.map((item, index) => {
               return (
-                <ButtonText
+                <LinkComponent
                   key={"mobileMenuButton" + index}
                   href={item.href}
-                  style={{
-                    paddingTop: Metrics.quadBaseMargin,
-                    ...Fonts.style.h2,
-                    color: Colors.lightGreen,
-                    alignSelf: "center",
-                  }}
+                  onPress={closeMenu}
                 >
-                  {item.label}
-                </ButtonText>
+                  <Text
+                    style={{
+                      paddingTop: Metrics.quadBaseMargin,
+                      ...Fonts.style.h2,
+                      color: Colors.lightGreen,
+                      alignSelf: "center",
+                    }}
+                  >
+                    {item.label}
+                  </Text>
+                </LinkComponent>
               );
             })}
           </View>

@@ -219,7 +219,7 @@ function Header() {
                     >
                       <Text
                         style={styles.dropDownItem}
-                        dataSet={{ media: ids.rabeLogo }}
+                        dataSet={{ media: ids.dropDownItem }}
                       >
                         {item.label}
                       </Text>
@@ -349,6 +349,7 @@ const { ids, styles } = StyleSheet.create({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     ":hover": {
+      transition: "0.2s",
       color: Colors.green,
       borderColor: Colors.green,
     },
@@ -358,6 +359,11 @@ const { ids, styles } = StyleSheet.create({
     fontSize: 18,
     color: Colors.darkGreen,
     paddingVertical: Metrics.halfHalfBaseMargin,
+    ":hover": {
+      transition: "0.2s",
+      color: Colors.green,
+      borderColor: Colors.green,
+    },
   },
   rabeLogoBorder: {
     ...Fonts.style.navigation,
@@ -370,6 +376,7 @@ const { ids, styles } = StyleSheet.create({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     ":hover": {
+      transition: "0.2s",
       color: Colors.green,
       borderColor: Colors.green,
     },

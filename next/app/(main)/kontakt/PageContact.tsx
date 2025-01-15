@@ -323,6 +323,7 @@ const { styles, ids } = StyleSheet.create({
     borderLeftColor: Colors.white,
     alignItems: "center",
     ":hover": {
+      transition: "0.2s",
       opacity: 0.75,
     },
   },
