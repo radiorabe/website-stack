@@ -23,6 +23,8 @@ import moment from "moment";
 import Heart from "./Heart";
 import { blurhashToBase64 } from "blurhash-base64";
 import PromoBox from "@/components/PromoBox";
+import { useState } from "react";
+import useResponsive from "@/lib/useResponsisve";
 
 type Props = {
   program: ItemsPrograms;
@@ -44,6 +46,8 @@ export default function ProgramPage({
       : "";
 
   let promo_box = program.promo_box as ItemsPromoBox;
+  let { isMobile } = useResponsive();
+  let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
 
   return (
     <View style={styles.container}>
@@ -166,6 +170,35 @@ export default function ProgramPage({
             </View>
           </View>
         )}
+
+        <View
+          // dataSet={{media:ids.}}
+          style={{ flexDirection: "row" }}
+        >
+          <Button
+            onPress={() => {
+              let shareUrl = `${process.env.NEXT_PUBLIC_FE_URL}/${program.slug}`;
+              if (navigator.share && isMobile) {
+                // Web Share API is supported
+                navigator
+                  .share({
+                    title: "RaBe Sendung: " + program.name,
+                    url: shareUrl,
+                  })
+                  .then(() => {
+                    setShareButtonTitle("Geteilt");
+                  })
+                  .catch(console.error);
+              } else {
+                // Fallback
+                navigator.clipboard.writeText(shareUrl);
+                setShareButtonTitle("Link kopiert");
+              }
+            }}
+            icon={<IconShare color={Colors.darkGreen}></IconShare>}
+            label={shareButtonTitle}
+          ></Button>
+        </View>
       </View>
       {promo_box && (
         <View style={{ width: "90%" }}>
@@ -247,6 +280,8 @@ const { ids, styles } = StyleSheet.create({
     color: "white",
     textAlign: "center",
     paddingHorizontal: Metrics.tripleBaseMargin,
+    width: "100%",
+    wordBreak: "break-word",
   },
   supportButton: {
     paddingVertical: Metrics.doubleBaseMargin,
