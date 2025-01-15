@@ -35,7 +35,7 @@ const PostPreviewBox = ({ posts }: Props) => {
             dataSet={{ media: ids.outerContainer }}
           >
             <Link
-              href={`/beitrag/${moment(item.date).format("DD-MM-YYYY")}/${item.slug}`}
+              href={`/beitrag/${moment(item.date_published).format("DD-MM-YYYY")}/${item.slug}`}
               style={{
                 textDecoration: "none",
                 overflow: "hidden",

@@ -32,7 +32,7 @@ async function getPost(params) {
           slug: {
             _eq: slug,
           },
-          date: { _gte: date, _lte: nextDayDate },
+          date_published: { _gte: date, _lte: nextDayDate },
         }),
       },
       {
@@ -80,7 +80,7 @@ async function getRelatedPosts(postSlug, programSlug) {
           status: {
             _eq: "published",
           },
-          date: {
+          date_published: {
             _lte: "$NOW",
           },
         }),

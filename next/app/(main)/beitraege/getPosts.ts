@@ -21,7 +21,7 @@ export const getPosts = async (filters, offset, limit) => {
               },
             },
             {
-              date: {
+              date_published: {
                 _lte: "$NOW",
               },
             },
@@ -61,7 +61,7 @@ export const getPosts = async (filters, offset, limit) => {
             },
           ],
         }),
-        sort: ["-date"],
+        sort: ["-date_published"],
         limit: limit,
         offset: offset,
       },

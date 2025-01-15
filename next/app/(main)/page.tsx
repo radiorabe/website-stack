@@ -22,11 +22,11 @@ async function getPosts() {
           status: {
             _eq: "published",
           },
-          date: {
+          date_published: {
             _lte: "$NOW",
           },
         }),
-        sort: ["-date"],
+        sort: ["-date_published"],
         limit: 6,
       },
       {
@@ -42,7 +42,7 @@ async function getPosts() {
     );
     // console.log("response", itemResponse);
     let item: ItemsPost[] = itemResponse.data.data;
-    // console.log("posts", item);
+    console.log("posts", item);
     // console.log("team", item.team);
     // console.log("posts", item.posts);
 
@@ -77,7 +77,7 @@ async function getPartyTips() {
             },
             {
               date: {
-                _gte: "$NOW",
+                _gte: "$NOW(+2 hours)",
               },
             },
             {

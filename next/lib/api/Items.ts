@@ -3006,6 +3006,87 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       ...params,
     });
   /**
+ * @description List the post items.
+ *
+ * @tags Items, ItemsPost
+ * @name ReadItemsPost
+ * @summary List Items
+ * @request GET:/items/post
+ * @secure
+ * @response `200` `ReadItemsPostData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPost = (query: ReadItemsPostParams, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPostData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single post item by unique identifier.
+ *
+ * @tags Items, ItemsPost
+ * @name ReadSingleItemsPost
+ * @summary Retrieve an Item
+ * @request GET:/items/post/{id}
+ * @response `200` `ReadSingleItemsPostData` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPost = ({ id, ...query }: ReadSingleItemsPostParams, params: RequestParams = {}) =>
+    this.request<
+      ReadSingleItemsPostData,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/post/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
  * @description List the iframe items.
  *
  * @tags Items, ItemsIframe
@@ -3165,127 +3246,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/events_event_shows/${id}`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description List the post items.
- *
- * @tags Items, ItemsPost
- * @name ReadItemsPost
- * @summary List Items
- * @request GET:/items/post
- * @secure
- * @response `200` `ReadItemsPostData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readItemsPost = (query: ReadItemsPostParams, params: RequestParams = {}) =>
-    this.request<
-      ReadItemsPostData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/post`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Randomized post items.
- *
- * @tags Items, ItemsPost
- * @name randomizedItemsPost
- * @summary List Items
- * @request GET:/items/post
- * @secure
- * @response `200` `ReadItemsPostData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  randomizedItemsPost = (
-    query: ReadItemsPostParams,
-    params: RequestParams = {}
-  ) =>
-    this.request<
-      ReadItemsPostData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/randomized/post`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
- * @description Retrieve a single post item by unique identifier.
- *
- * @tags Items, ItemsPost
- * @name ReadSingleItemsPost
- * @summary Retrieve an Item
- * @request GET:/items/post/{id}
- * @response `200` `ReadSingleItemsPostData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- * @response `404` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  readSingleItemsPost = ({ id, ...query }: ReadSingleItemsPostParams, params: RequestParams = {}) =>
-    this.request<
-      ReadSingleItemsPostData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/items/post/${id}`,
       method: "GET",
       query: query,
       format: "json",

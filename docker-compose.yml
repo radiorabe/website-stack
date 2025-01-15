@@ -38,6 +38,7 @@ services:
       - ./directus/database:/directus/database
       - ./directus/uploads:/directus/uploads
       - ./directus/extensions:/directus/extensions
+      - ./directus/migrations:/directus/migrations
     env_file: .env
     restart: unless-stopped
     healthcheck:
