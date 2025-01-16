@@ -64,6 +64,7 @@ const FullPreview = ({ data }: Props) => {
           ></View>
           <Button
             label={program.name}
+            noButton={true}
             disabled={true}
             textColor={Colors.white}
             hoverTextColor={Colors.green}

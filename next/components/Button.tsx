@@ -12,6 +12,7 @@ export interface Props {
   labelAlign?: string;
   icon?: any;
   disabled?: boolean;
+  noButton?: boolean;
   onPress?(): void;
   style?: any;
   large?: boolean;
@@ -29,6 +30,7 @@ const Button = ({
   labelAlign,
   icon,
   disabled,
+  noButton,
   onPress,
   href,
   style,
@@ -118,7 +120,9 @@ const Button = ({
     </View>
   );
 
-  if (href || url || onPress) {
+  if (noButton) {
+    return buttonElement;
+  } else if (href) {
     return (
       <Link
         href={href}
@@ -128,9 +132,6 @@ const Button = ({
             if (onPress) {
               onPress();
             }
-            if (url) {
-              Linking.openURL(url);
-            }
           }
         }}
         passHref={true}
@@ -139,7 +140,22 @@ const Button = ({
       </Link>
     );
   } else {
-    return buttonElement;
+    return (
+      <Pressable
+        onPress={() => {
+          if (!disabled) {
+            if (onPress) {
+              onPress();
+            }
+            if (url) {
+              Linking.openURL(url);
+            }
+          }
+        }}
+      >
+        {buttonElement}
+      </Pressable>
+    );
   }
 };
 

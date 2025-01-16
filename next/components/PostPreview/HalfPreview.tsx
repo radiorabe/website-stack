@@ -52,6 +52,7 @@ const HalfPreview = ({ data }: Props) => {
         <View style={styles.button} dataSet={{ media: ids.button }}>
           <Button
             label={program.name}
+            noButton={true}
             disabled={true}
             hoverTextColor={Colors.green}
           ></Button>
