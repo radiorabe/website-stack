@@ -1422,7 +1422,8 @@
       "preview_full_image",
       "meta_data",
       "short_description",
-      "tags"
+      "tags",
+      "date_published"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
     "_syncId": "265994e9-0d2d-4571-b553-093f2299bffe"
@@ -1480,7 +1481,8 @@
       "preview_full_image",
       "meta_data",
       "short_description",
-      "tags"
+      "tags",
+      "date_published"
     ],
     "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
     "_syncId": "025f779c-1047-4000-86bc-c0932b68bad1"
