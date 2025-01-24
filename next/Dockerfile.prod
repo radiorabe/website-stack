@@ -68,3 +68,6 @@ ENV PORT=3000
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
+
+COPY healthcheck.mjs ./healthcheck.mjs
+HEALTHCHECK --interval=12s --timeout=12s --start-period=30s CMD node healthcheck.mjs
