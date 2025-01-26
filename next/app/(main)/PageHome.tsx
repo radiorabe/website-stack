@@ -25,7 +25,7 @@ export interface Props {
 }
 
 export default function HomePage({ pageData, posts, partyTips, event }: Props) {
-  let promo_box = pageData.promo_box as ItemsPromoBox;
+  let promo_box = pageData && pageData.promo_box as ItemsPromoBox;
 
   return (
     <View>

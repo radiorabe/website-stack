@@ -50,8 +50,9 @@ async function getPosts() {
   } catch (error) {
     console.log("PageHome getPosts Error");
     logError(error);
+    return [];
 
-    notFound();
+    // notFound();
   }
 }
 
@@ -112,8 +113,8 @@ async function getPartyTips() {
   } catch (error) {
     console.log("PageHome getPartyTips Error");
     logError(error);
-
-    notFound();
+    return [];
+    // notFound();
   }
 }
 
@@ -148,6 +149,7 @@ async function checkEventWithPromobox() {
   } catch (error) {
     console.log("PageHome checkEventWithPromobox Error");
     logError(error);
+    return null;
   }
 }
 
@@ -175,8 +177,7 @@ async function getPageData() {
   } catch (error) {
     console.log("PageHome getPageData Error");
     logError(error);
-
-    notFound();
+    return null;
   }
 }
 
