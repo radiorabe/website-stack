@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { View, Text } from "@/lib/server-react-native";
-import XMLParser from "react-xml-parser";
+import { XMLParser } from "fast-xml-parser";
+
 import { useAnimate } from "framer-motion";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
@@ -33,28 +34,16 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
         .then((data) => {
           if (data && oldData !== data) {
             try {
-              let songTickerData = new XMLParser().parseFromString(data);
-              let track = songTickerData.children.find((obj) => {
-                return obj.name === "track";
-              });
-              if (track) {
-                let show = track.children.find((obj) => {
-                  return obj.name === "show";
-                });
-                if (show && show.value) setShow(show.value);
-                let artist = track.children.find((obj) => {
-                  return obj.name === "artist";
-                });
-                if (artist && artist.value) setArtist(artist.value);
-                let title = track.children.find((obj) => {
-                  return obj.name === "title";
-                });
-                if (title && title.value) setTitle(title.value);
-                let endTime = track.children.find((obj) => {
-                  return obj.name === "endTime";
-                });
-                if (endTime && endTime.value) {
-                  let endTimeDate = new Date(endTime.value);
+              const parser = new XMLParser();
+              let songTickerData = parser.parse(data);
+              console.log("songTickerData", songTickerData);
+              if (songTickerData.ticker && songTickerData.ticker.track) {
+                let track = songTickerData.ticker.track;
+                setShow(track.show ? track.show : "");
+                setArtist(track.artist === "Radio Bern" ? "" : track.artist);
+                setTitle(track.title === "Livestream" ? "" : track.title);
+                if (track.endTime) {
+                  let endTimeDate = new Date(track.endTime);
                   let dateNow = new Date();
                   let newTimeDiff =
                     endTimeDate.getTime() - dateNow.getTime() + 1000;
@@ -166,15 +155,29 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
               >
                 {show + " "}
               </Text>
-              <Text
-                style={{
-                  whiteSpace: "nowrap",
-                  ...Fonts.style.navigationText,
-                  color: Colors.lightGreen,
-                }}
-              >
-                {artist + " - " + title + "    "}
-              </Text>
+              {artist && (
+                <Text
+                  style={{
+                    whiteSpace: "nowrap",
+                    ...Fonts.style.navigationText,
+                    color: Colors.lightGreen,
+                  }}
+                >
+                  {artist + " "}
+                </Text>
+              )}
+
+              {title && (
+                <Text
+                  style={{
+                    whiteSpace: "nowrap",
+                    ...Fonts.style.navigationText,
+                    color: Colors.lightGreen,
+                  }}
+                >
+                  {"- " + title + " "}
+                </Text>
+              )}
               <Text
                 style={{
                   whiteSpace: "nowrap",
@@ -184,15 +187,29 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
               >
                 {show + " "}
               </Text>
-              <Text
-                style={{
-                  whiteSpace: "nowrap",
-                  ...Fonts.style.navigationText,
-                  color: Colors.lightGreen,
-                }}
-              >
-                {artist + " - " + title + "    "}
-              </Text>
+              {artist && (
+                <Text
+                  style={{
+                    whiteSpace: "nowrap",
+                    ...Fonts.style.navigationText,
+                    color: Colors.lightGreen,
+                  }}
+                >
+                  {artist + " "}
+                </Text>
+              )}
+
+              {title && (
+                <Text
+                  style={{
+                    whiteSpace: "nowrap",
+                    ...Fonts.style.navigationText,
+                    color: Colors.lightGreen,
+                  }}
+                >
+                  {"- " + title + " "}
+                </Text>
+              )}
             </Text>
           </View>
         </View>
