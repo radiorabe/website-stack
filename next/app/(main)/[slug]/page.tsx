@@ -6,6 +6,7 @@ import { logError } from "@/lib/loging";
 import { Show } from "@/lib/Types";
 import PageProgram from "./PageProgram";
 import Flows from "@/lib/api/Flows";
+import fetchPonyfill from "fetch-ponyfill";
 
 async function getSendung(slug) {
   console.log("getSendung: ", slug);
@@ -58,12 +59,13 @@ async function getSendung(slug) {
 
 export async function getNextShowForProgram(slug) {
   try {
-    return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
-      next: {
-        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
-      },
-      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
-    })
+    return fetchPonyfill()
+      .fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
+        next: {
+          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+        },
+        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+      })
       .then((response: any) => response.json())
       .then((liveData: any) => {
         // console.log("liveData", liveData);

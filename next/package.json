@@ -15,6 +15,7 @@
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^4.5.1",
+    "fetch-ponyfill": "^7.1.0",
     "framer-motion": "^11.11.10",
     "google-maps-react-markers": "^2.0.11",
     "jsdom": "^24.1.1",

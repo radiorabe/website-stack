@@ -2,6 +2,7 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
+import fetchPonyfill from "fetch-ponyfill";
 import { NextResponse, NextRequest } from "next/server";
 
 // const SAFERPAY_CHECK_QUERY_PARAM = "saferpay_check";
@@ -180,7 +181,7 @@ export async function POST(request) {
       console.log("ENCODED_SAFERPAY_CREDENTIALS", ENCODED_SAFERPAY_CREDENTIALS);
       console.log("requestData", requestData);
 
-      const response = await fetch(initPaymentURL, {
+      const response = await fetchPonyfill().fetch(initPaymentURL, {
         method: "post",
         headers: {
           "Content-Type": "application/json; charset=utf-8",

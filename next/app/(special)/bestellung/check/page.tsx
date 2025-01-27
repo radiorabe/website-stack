@@ -7,10 +7,11 @@ import { notFound, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
 import { useEffect } from "react";
+import fetchPonyfill from "fetch-ponyfill";
 
 async function checkOrder([slug, id]) {
   try {
-    let response = await fetch(`${slug}?id=${id}`, {
+    let response = await fetchPonyfill().fetch(`${slug}?id=${id}`, {
       method: "GET",
     });
     let data = await response.json();
