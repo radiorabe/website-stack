@@ -10,9 +10,9 @@ import Flows from "@/lib/api/Flows";
 
 async function getPost(params) {
   try {
-    const date = moment(params.date, "DD-MM-YYYY");
+    const date = moment.utc(params.date, "DD-MM-YYYY");
     const slug = params.postslug;
-    const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d");
+    const nextDayDate = moment.utc(params.date, "DD-MM-YYYY").add(1, "d");
     console.info("Rerender Post: " + slug);
 
     const itemResponse = await Api.readItemsPost(

@@ -83,12 +83,12 @@ export default function BeitragPage({ post, morePosts }: Props) {
                 {" am "}
               </Text>
               <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-                {`${moment(post.date).format("D. MMMM YYYY")}`}
+                {`${moment(post.date_published).format("D. MMMM YYYY")}`}
               </Text>
             </View>
           </View>
           <Text dataSet={{ media: ids.mobileDate }} style={styles.mobileDate}>
-            {`${moment(post.date).format("D. MMMM YYYY")}`}
+            {`${moment(post.date_published).format("D. MMMM YYYY")}`}
           </Text>
         </View>
         <Text
