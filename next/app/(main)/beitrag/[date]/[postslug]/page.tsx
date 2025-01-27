@@ -7,8 +7,11 @@ import { notFound } from "next/navigation";
 import PagePost from "./PagePost";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import Flows from "@/lib/api/Flows";
+import { draftMode } from "next/headers";
 
 async function getPost(params) {
+  const { isEnabled } = draftMode();
+
   try {
     const date = moment.utc(params.date, "DD-MM-YYYY");
     const slug = params.postslug;
@@ -33,6 +36,13 @@ async function getPost(params) {
             _eq: slug,
           },
           date_published: { _gte: date, _lte: nextDayDate },
+          status: isEnabled
+            ? {
+                _nnull: true,
+              }
+            : {
+                _eq: "published",
+              },
         }),
       },
       {
