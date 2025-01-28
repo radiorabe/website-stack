@@ -12,17 +12,15 @@ import StyleSheet from "react-native-media-query";
 import Button from "../Button";
 import PlayList from "./PlayList";
 import ShowsList from "./ShowsList";
-import fetchPonyfill from "fetch-ponyfill";
 
 export async function getLiveData() {
   try {
-    return fetchPonyfill()
-      .fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
-        next: {
-          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
-        },
-        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
-      })
+    return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
+      next: {
+        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+      },
+      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+    })
       .then((response: any) => response.json())
       .then((liveData: any) => {
         let todayShows: Show[] = liveData.shows.previous.filter((item) => {
@@ -66,16 +64,15 @@ export async function getLiveData() {
 
 export async function getPlaylistData(numbers) {
   try {
-    return fetchPonyfill()
-      .fetch(
-        `https://archiv.rabe.ch/api/tracks?sort=-started_at&page[size]=${numbers}`,
-        {
-          next: {
-            revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
-          },
-          cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
-        }
-      )
+    return fetch(
+      `https://archiv.rabe.ch/api/tracks?sort=-started_at&page[size]=${numbers}`,
+      {
+        next: {
+          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+        },
+        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+      }
+    )
       .then((response: any) => response.json())
       .then((responseData: any) => {
         // console.log("playlistData", responseData.data);

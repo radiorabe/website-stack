@@ -6,17 +6,15 @@ import moment from "moment";
 import { notFound } from "next/navigation";
 import PageProgramm from "./PageProgramm";
 import Flows from "@/lib/api/Flows";
-import fetchPonyfill from "fetch-ponyfill";
 
 export async function getLiveData() {
   try {
-    return fetchPonyfill()
-      .fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
-        next: {
-          revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
-        },
-        cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
-      })
+    return fetch("https://songticker.rabe.ch/libretime/live-info-v2.json", {
+      next: {
+        revalidate: process.env.NODE_ENV === "production" ? 900 : undefined, // in seconds
+      },
+      cache: process.env.NODE_ENV === "production" ? undefined : "no-store",
+    })
       .then((response: any) => response.json())
       .then((liveData: any) => {
         let todayShows: Show[] = liveData.shows.previous.filter((item) => {

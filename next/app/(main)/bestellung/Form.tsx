@@ -10,7 +10,6 @@ import StyleSheet from "react-native-media-query";
 import Select from "react-select";
 import Button from "@/components/Button";
 import ButtonText from "@/components/ButtonText";
-import fetchPonyfill from "fetch-ponyfill";
 
 export default function Statement({ id, type, options, defaultValue }) {
   const [errors, setErrors] = useState([]);
@@ -99,11 +98,10 @@ export default function Statement({ id, type, options, defaultValue }) {
     if (newErrors.length === 0) {
       // console.log("fetch");
       setErrorMessage("");
-      fetchPonyfill()
-        .fetch("/api/order/init", {
-          method: "POST",
-          body: formData,
-        })
+      fetch("/api/order/init", {
+        method: "POST",
+        body: formData,
+      })
         .then((response) => {
           // console.log("respons", response);
           return response.json();

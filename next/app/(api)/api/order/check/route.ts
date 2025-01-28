@@ -2,7 +2,6 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import fetchPonyfill from "fetch-ponyfill";
 import { NextResponse, NextRequest } from "next/server";
 
 // const SAFERPAY_CHECK_QUERY_PARAM = "saferpay_check";
@@ -67,7 +66,7 @@ export async function GET(request) {
           Token: order.token,
         };
 
-        let response = await fetchPonyfill().fetch(
+        let response = await fetch(
           process.env.SAFERPAY_URL + "/Payment/v1/PaymentPage/Assert",
           {
             method: "post",
@@ -105,7 +104,7 @@ export async function GET(request) {
                 },
               };
 
-              response = await fetchPonyfill().fetch(
+              response = await fetch(
                 process.env.SAFERPAY_URL + "/Payment/v1/Transaction/Capture",
                 {
                   method: "post",

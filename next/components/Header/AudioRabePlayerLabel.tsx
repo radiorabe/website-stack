@@ -8,7 +8,6 @@ import { useAnimate } from "framer-motion";
 import Fonts from "@/lib/Fonts";
 import Colors from "@/lib/Colors";
 import Metrics from "@/lib/Metrics";
-import fetchPonyfill from "fetch-ponyfill";
 
 export interface HoverableProps {}
 
@@ -28,10 +27,9 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
 
   useEffect(() => {
     if (refetch) {
-      fetchPonyfill()
-        .fetch("https://songticker.rabe.ch/songticker/0.9.3/current.xml", {
-          cache: "no-store",
-        })
+      fetch("https://songticker.rabe.ch/songticker/0.9.3/current.xml", {
+        cache: "no-store",
+      })
         .then((res) => res.text())
         .then((data) => {
           if (data && oldData !== data) {
