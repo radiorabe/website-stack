@@ -1,4 +1,4 @@
-version: "3"
+
 services:
   telegram-notifier:
     image: lorcas/docker-telegram-notifier:latest
