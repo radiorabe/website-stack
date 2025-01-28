@@ -71,6 +71,7 @@ export const getPosts = async (filters, offset, limit) => {
             process.env.NODE_ENV === "production"
               ? [Flows.collections.post]
               : undefined,
+          revalidate: process.env.NODE_ENV === "production" ? 300 : undefined, // revalidate every 5min in seconds (for future date_pubulished)
         },
         cache:
           process.env.NODE_ENV === "production" ? "force-cache" : "no-store",
