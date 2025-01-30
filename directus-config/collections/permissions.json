@@ -373,18 +373,6 @@
     "_syncId": "770cf35a-5e30-48ae-8173-0e251ecf1420"
   },
   {
-    "collection": "directus_users",
-    "action": "read",
-    "permissions": null,
-    "validation": null,
-    "presets": null,
-    "fields": [
-      "*"
-    ],
-    "policy": "43231d02-9a9b-47d3-bb36-a0bb8012fa24",
-    "_syncId": "b255fa3a-11a0-4bbf-8d87-0ce543d008ce"
-  },
-  {
     "collection": "event_shows",
     "action": "read",
     "permissions": null,
@@ -4547,5 +4535,17 @@
     ],
     "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
     "_syncId": "50bae058-c657-4a49-bb34-38702d042f85"
+  },
+  {
+    "collection": "directus_users",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "d071c8bc-3632-4331-8af6-fc965fe8a550",
+    "_syncId": "14897e4c-ffb4-43be-95e3-afbe779aafa0"
   }
 ]

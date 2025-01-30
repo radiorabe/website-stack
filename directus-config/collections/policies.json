@@ -137,5 +137,21 @@
       }
     ],
     "_syncId": "7999253a-0983-441a-b38d-a33b1be4a846"
+  },
+  {
+    "name": "Can read Userdata",
+    "icon": "badge",
+    "description": "Can read Userdata",
+    "ip_access": null,
+    "enforce_tfa": false,
+    "admin_access": false,
+    "app_access": false,
+    "roles": [
+      {
+        "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
+        "sort": 3
+      }
+    ],
+    "_syncId": "d071c8bc-3632-4331-8af6-fc965fe8a550"
   }
 ]
