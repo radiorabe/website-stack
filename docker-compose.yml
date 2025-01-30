@@ -1,4 +1,4 @@
-version: "3"
+
 services:
   telegram-notifier:
     image: lorcas/docker-telegram-notifier:latest
@@ -20,6 +20,16 @@ services:
     depends_on:
       directus:
         condition: service_healthy
+
+  # cache: # check here: https://docs.directus.io/self-hosted/docker-guide.html#example-docker-compose
+  #   image: redis:6
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_interval: 5s
+  #     start_period: 30s
 
   directus:
     container_name: rabe-directus
