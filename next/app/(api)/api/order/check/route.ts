@@ -31,7 +31,6 @@ async function getOrder(id) {
 async function updateOrder(id, data) {
   try {
     const infoResponse = await Api.updateSingleItemsOrders({ id }, data, {
-      headers: { Authorization: "Bearer " + process.env.DIRECTUS_API_KEY },
       cache: "no-store",
     });
     let item: ItemsOrders = infoResponse.data.data;

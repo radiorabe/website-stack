@@ -31,7 +31,6 @@ async function getMemberProduct(id) {
 async function createOrder(data) {
   try {
     const infoResponse = await Api.createItemsOrders({}, data, {
-      headers: { Authorization: "Bearer " + process.env.DIRECTUS_API_KEY },
       cache: "no-store",
     });
     let item: ItemsOrders = infoResponse.data.data as ItemsOrders;
@@ -45,7 +44,6 @@ async function createOrder(data) {
 async function updateOrder(id, data) {
   try {
     const infoResponse = await Api.updateSingleItemsOrders({ id }, data, {
-      headers: { Authorization: "Bearer " + process.env.DIRECTUS_API_KEY },
       cache: "no-store",
     });
     let item: ItemsOrders = infoResponse.data.data;
