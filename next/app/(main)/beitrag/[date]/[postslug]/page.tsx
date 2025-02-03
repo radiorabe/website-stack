@@ -13,11 +13,10 @@ async function getPost(params) {
   const { isEnabled } = draftMode();
 
   try {
-    const date = moment.utc(params.date, "DD-MM-YYYY");
+    const date = moment(params.date, "DD-MM-YYYY").format();
     const slug = params.postslug;
-    const nextDayDate = moment.utc(params.date, "DD-MM-YYYY").add(1, "d");
+    const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d").format();
     console.info("Rerender Post: " + slug);
-
     const itemResponse = await Api.readItemsPost(
       {
         fields: [
