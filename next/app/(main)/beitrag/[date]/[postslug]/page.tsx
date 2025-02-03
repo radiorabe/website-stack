@@ -13,9 +13,12 @@ async function getPost(params) {
   const { isEnabled } = draftMode();
 
   try {
-    const date = moment(params.date, "DD-MM-YYYY").format();
+    const date = moment.utc(params.date, "DD-MM-YYYY").subtract(2, "h"); // subtract two hours because of the timediff to Switzerland
     const slug = params.postslug;
-    const nextDayDate = moment(params.date, "DD-MM-YYYY").add(1, "d").format();
+    const nextDayDate = moment
+      .utc(params.date, "DD-MM-YYYY")
+      .add(1, "d")
+      .subtract(2, "h");
     console.info("Rerender Post: " + slug);
     const itemResponse = await Api.readItemsPost(
       {
