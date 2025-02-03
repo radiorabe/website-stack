@@ -273,7 +273,8 @@ export default function Statement({ id, type, options, defaultValue }) {
                 <ButtonText
                   style={{ ...Fonts.style.textSmall, color: Colors.darkGreen }}
                   hoverStyle={{ color: Colors.green }}
-                  href={"/agb"}
+                  // href={"/agb"}
+                  url={process.env.NEXT_PUBLIC_FE_URL + "/agb"}
                 >
                   {" RaBe AGBs "}
                 </ButtonText>

@@ -33,7 +33,6 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
             style={{
               flexDirection: "row",
               paddingTop: Metrics.baseMargin,
-              justifyContent: "space-between",
             }}
           >
             <Pressable
@@ -41,6 +40,7 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                 flexDirection: "row",
                 paddingRight: Metrics.baseMargin,
                 alignItems: "center",
+                flex: 1,
               }}
               onPress={() => onChange(track)}
             >
@@ -50,7 +50,12 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                 focused,
               }: PressableState): ReactElement => {
                 return (
-                  <View style={{ flexDirection: "row" }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      flex: 1,
+                    }}
+                  >
                     <View
                       style={styles.buttonContainer}
                       dataSet={{ media: ids.buttonContainer }}
@@ -70,6 +75,8 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                       style={{
                         ...Fonts.style.text,
                         paddingLeft: Metrics.baseMargin,
+                        flex: 1,
+                        flexWrap: "wrap",
                       }}
                     >
                       {track.title}
@@ -114,8 +121,10 @@ const { ids, styles } = StyleSheet.create({
   buttonContainer: {
     width: Metrics.baseMargin,
     aspectRatio: 1,
+    justifyContent: "center",
     "@media (max-width: 910px)": {
       width: Metrics.doubleBaseMargin,
+      minWidth: 15,
     },
   },
 });

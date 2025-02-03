@@ -44,6 +44,7 @@ async function getSendungen() {
             _eq: "published",
           },
         }),
+        sort: ["name"],
       },
       {
         next: {

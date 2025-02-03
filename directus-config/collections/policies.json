@@ -9,11 +9,11 @@
     "app_access": true,
     "roles": [
       {
-        "role": "_sync_default_admin_role",
+        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
         "sort": 1
       },
       {
-        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
+        "role": "_sync_default_admin_role",
         "sort": 1
       }
     ],
@@ -125,7 +125,7 @@
   {
     "name": "All Collections (But orders)",
     "icon": "badge",
-    "description": "Can add,edit,update all collections. ",
+    "description": "Can add,edit,update all collections. Except orders and publishing programs.",
     "ip_access": null,
     "enforce_tfa": false,
     "admin_access": false,

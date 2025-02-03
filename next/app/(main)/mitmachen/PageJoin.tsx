@@ -15,7 +15,7 @@ export default function PageJoin({ pageData }) {
         <BreadCrump
           // style={{ marginBottom: Metrics.doubleBaseMargin }}
           label1={"Über Rabe"}
-          label2={"Deine Sendung"}
+          label2={"Mitmachen"}
         ></BreadCrump>
         {data.content && <RenderTipTap content={data.content}></RenderTipTap>}
       </View>

@@ -150,6 +150,9 @@ export default function BeitragPage({ post, morePosts }: Props) {
             icon={<IconShare color={Colors.darkGreen}></IconShare>}
             label={shareButtonTitle}
           ></Button>
+          {(morePosts! || morePosts.length === 0) && (
+            <View style={{ height: Metrics.doubleBaseMargin }}></View>
+          )}
         </View>
       </View>
 

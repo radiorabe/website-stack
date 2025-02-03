@@ -1358,6 +1358,44 @@
   },
   {
     "collection": "post",
+    "action": "delete",
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "user_created": {
+                "_eq": "$CURRENT_USER"
+              }
+            },
+            {
+              "authors": {
+                "directus_users_id": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            },
+            {
+              "program": {
+                "team": {
+                  "directus_users_id": {
+                    "_eq": "$CURRENT_USER"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": null,
+    "policy": "5e318f47-7fbf-4347-9e8f-013bdda76d6c",
+    "_syncId": "daf7c1a8-c99e-4d16-bf01-c0d644852c50"
+  },
+  {
+    "collection": "post",
     "action": "read",
     "permissions": {
       "_and": [
@@ -4387,7 +4425,18 @@
     "validation": null,
     "presets": null,
     "fields": [
-      "*"
+      "sort",
+      "user_created",
+      "date_created",
+      "user_updated",
+      "date_updated",
+      "name",
+      "slug",
+      "content",
+      "image",
+      "team",
+      "posts",
+      "promo_box"
     ],
     "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
     "_syncId": "b5ba3e70-8b8c-4b13-ae85-0e8bbed29730"

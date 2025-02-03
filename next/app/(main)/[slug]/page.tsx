@@ -31,7 +31,7 @@ async function getSendung(slug) {
         next: {
           tags:
             process.env.NODE_ENV === "production"
-              ? [slug, Flows.collections.directus_users]
+              ? [Flows.collections.programs, Flows.collections.directus_users]
               : undefined, // reload only when slug is revalidated
         },
         cache:

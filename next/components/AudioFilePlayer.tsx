@@ -228,6 +228,7 @@ const { ids, styles } = StyleSheet.create({
     aspectRatio: 1,
     "@media (max-width: 910px)": {
       width: Metrics.quadBaseMargin,
+      minWidth: 37,
     },
   },
   sliderContainer: {
@@ -236,6 +237,7 @@ const { ids, styles } = StyleSheet.create({
     paddingVertical: Metrics.halfHalfBaseMargin,
     justifyContent: "space-between",
     height: Metrics.tripleBaseMargin,
+    minHeight: 37,
     "@media (max-width: 910px)": {
       height: Metrics.quadBaseMargin,
     },

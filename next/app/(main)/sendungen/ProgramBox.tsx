@@ -9,28 +9,34 @@ import StyleSheet from "react-native-media-query";
 export default function ProgramBox(props) {
   return (
     <View style={styles.container} dataSet={{ media: ids.container }}>
-      <LinkComponent
-        style={styles.linkContainer}
-        dataSet={{ media: ids.linkContainer }}
-        href={"/" + props.slug}
-      >
+      <LinkComponent href={"/" + props.slug}>
         <View
-          style={styles.imageContainer}
-          dataSet={{ media: ids.imageContainer }}
+          style={styles.linkContainer}
+          dataSet={{ media: ids.linkContainer }}
         >
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=332&height=332&fit=cover`}
-            width={166}
-            height={166}
-            style={styles.image}
-            layout="responsive"
-            alt={props.name}
-            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <View
+            style={styles.imageContainer}
+            dataSet={{ media: ids.imageContainer }}
+          >
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BE_URL}/assets/${props.image}?width=332&height=332&fit=cover`}
+              width={166}
+              height={166}
+              style={styles.image}
+              layout="responsive"
+              alt={props.name}
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </View>
+          <Text
+            style={styles.titleContainer}
+            dataSet={{ media: ids.titleContainer }}
+          >
+            <Text style={styles.title} dataSet={{ media: ids.title }}>
+              {props.name}
+            </Text>
+          </Text>
         </View>
-        <Text style={styles.title} dataSet={{ media: ids.title }}>
-          {props.name}
-        </Text>
       </LinkComponent>
     </View>
   );
@@ -56,12 +62,14 @@ const { ids, styles } = StyleSheet.create({
   image: {
     borderRadius: 9,
   },
-  title: {
-    ...Fonts.style.h2,
-    maxWidth: "87%",
+  titleContainer: {
     paddingLeft: Metrics.doubleBaseMargin,
     "@media (max-width: 910px)": {
       paddingLeft: Metrics.tripleBaseMargin,
     },
+  },
+  title: {
+    ...Fonts.style.h2,
+    wordBreak: "break-word",
   },
 });

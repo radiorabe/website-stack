@@ -16,11 +16,13 @@ const Quote = ({ data }: HoverableProps) => {
         {"«" + data.text + "»"}
       </Text>
       <View style={styles.infoContainer} dataSet={{ media: ids.infoContainer }}>
-        <Text style={styles.author} dataSet={{ media: ids.author }}>
-          {data.author}
-        </Text>
-        <Text style={styles.info} dataSet={{ media: ids.info }}>
-          {" " + data.info}
+        <Text>
+          <Text style={styles.author} dataSet={{ media: ids.author }}>
+            {data.author}
+          </Text>
+          <Text style={styles.info} dataSet={{ media: ids.info }}>
+            {" " + data.info}
+          </Text>
         </Text>
       </View>
     </View>
