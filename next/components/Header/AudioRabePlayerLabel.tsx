@@ -36,17 +36,15 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
             try {
               const parser = new XMLParser();
               let songTickerData = parser.parse(data);
-              console.log("songTickerData", songTickerData);
               if (songTickerData.ticker && songTickerData.ticker.track) {
                 let track = songTickerData.ticker.track;
+
                 if (
                   track.artist === "Radio Bern" &&
                   track.title === "Livestream"
                 ) {
-                  setShow(
-                    "Jetzt auf Sendung: " + track.show ? track.show : "RaBe"
-                  );
-                  setArtist("");
+                  setShow(track.show);
+                  setArtist("Jetzt auf Sendung: ");
                   setTitle("");
                 } else {
                   setShow(track.show ? track.show : "");
