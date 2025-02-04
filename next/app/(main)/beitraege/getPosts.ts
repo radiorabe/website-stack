@@ -69,6 +69,17 @@ export const getPosts = async (filters, offset, limit) => {
                   },
                 },
                 {
+                  authors: {
+                    directus_users_id: {
+                      last_name: {
+                        _icontains: filters.searchTerm
+                          ? filters.searchTerm
+                          : undefined,
+                      },
+                    },
+                  },
+                },
+                {
                   program: {
                     name: {
                       _icontains: filters.searchTerm
