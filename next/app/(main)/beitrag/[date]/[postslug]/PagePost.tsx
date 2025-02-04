@@ -62,6 +62,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
                 if (user.last_name && user.last_name !== "") {
                   userName = userName + " " + user.last_name;
                 }
+                userName = userName.trim();
 
                 return (
                   <ButtonText
@@ -91,13 +92,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
             {`${moment(post.date_published).format("D. MMMM YYYY")}`}
           </Text>
         </View>
-        <Text
-          // dataSet={{media:ids.}}
-          style={{
-            ...Fonts.style.h1,
-            paddingBottom: Metrics.tripleBaseMargin,
-          }}
-        >
+        <Text dataSet={{ media: ids.postTitle }} style={styles.postTitle}>
           {post.title}
         </Text>
         {imagebox && (
@@ -211,6 +206,10 @@ const { ids, styles } = StyleSheet.create({
     "@media (max-width: 910px)": {
       width: "90%",
     },
+  },
+  postTitle: {
+    ...Fonts.style.h1,
+    paddingBottom: Metrics.tripleBaseMargin,
   },
   postInfoContainer: {
     flexDirection: "row",

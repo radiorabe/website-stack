@@ -34,7 +34,7 @@ const PostPreviewBox = ({ posts }: Props) => {
               href={`/beitrag/${moment(item.date_published).format("DD-MM-YYYY")}/${item.slug}`}
               style={{
                 textDecoration: "none",
-                overflow: "hidden",
+                // overflow: "hidden",
               }}
             >
               {item.preview_full_image ? (

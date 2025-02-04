@@ -35,7 +35,6 @@ export const style: Record<string, TextStyle> = {
     fontFamily: type.bold,
     fontSize: size.h1,
     lineHeight: 56.4,
-    // letterSpacing: 0,
     fontFeatureSettings: '"tnum" on',
     "@media (max-width: 910px)": {
       fontSize: 42,

@@ -11,7 +11,7 @@ import { useInView } from "react-intersection-observer";
 import Colors from "@/lib/Colors";
 import Loader from "react-spinners/ClipLoader";
 
-const NUMBER_OF_POSTS_TO_FETCH = 3;
+const NUMBER_OF_POSTS_TO_FETCH = 6;
 
 export default function PostList({ initialPosts, filters }) {
   const [offset, setOffset] = useState(NUMBER_OF_POSTS_TO_FETCH);
@@ -36,6 +36,13 @@ export default function PostList({ initialPosts, filters }) {
       loadMoreUsers();
     }
   }, [inView]);
+
+  useEffect(() => {
+    if (inView) {
+      setIsloading(true);
+      loadMoreUsers();
+    }
+  }, []);
 
   useEffect(() => {
     if (initialPosts !== posts) {
@@ -118,6 +125,32 @@ export default function PostList({ initialPosts, filters }) {
               ]}
             >
               {"Sendungen werden geladen"}
+            </Text>
+          </View>
+        )}
+        {allPostsFetched && (
+          <View
+            style={[
+              {
+                alignSelf: "flex-start",
+                flexDirection: "row",
+                alignItems: "center",
+                paddingVertical: 3,
+                paddingHorizontal: 6,
+                marginTop: Metrics.tripleBaseMargin,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                {
+                  ...Fonts.style.h4,
+                  flexShrink: 1,
+                  marginLeft: Metrics.halfHalfBaseMargin,
+                },
+              ]}
+            >
+              {"Mehr Beiträge haben wir nicht gefunden."}
             </Text>
           </View>
         )}

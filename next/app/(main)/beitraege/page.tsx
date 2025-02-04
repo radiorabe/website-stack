@@ -69,7 +69,7 @@ async function getAuthor(id) {
 export const metadata: Metadata = {
   title: "Beiträge",
 };
-const INITIAL_NUMBER_OF_POSTS = 3;
+const INITIAL_NUMBER_OF_POSTS = 6;
 
 export default async function BeitraegePage({ searchParams }) {
   // Extract filters from searchParams
