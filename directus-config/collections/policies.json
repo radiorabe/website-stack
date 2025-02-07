@@ -9,11 +9,11 @@
     "app_access": true,
     "roles": [
       {
-        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
+        "role": "_sync_default_admin_role",
         "sort": 1
       },
       {
-        "role": "_sync_default_admin_role",
+        "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
         "sort": 1
       }
     ],
@@ -101,6 +101,26 @@
       }
     ],
     "_syncId": "660a85b6-4c7f-4c7e-b106-4f50630f239e"
+  },
+  {
+    "name": "Read Config for Triggering Flow",
+    "icon": "badge",
+    "description": null,
+    "ip_access": null,
+    "enforce_tfa": false,
+    "admin_access": false,
+    "app_access": false,
+    "roles": [
+      {
+        "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "sort": 5
+      },
+      {
+        "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
+        "sort": 8
+      }
+    ],
+    "_syncId": "6d1d18cc-94f8-4d4d-90a8-baf1c643baf7"
   },
   {
     "name": "Can read/update Orders",
