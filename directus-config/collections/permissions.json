@@ -4437,18 +4437,7 @@
     "validation": null,
     "presets": null,
     "fields": [
-      "sort",
-      "user_created",
-      "date_created",
-      "user_updated",
-      "date_updated",
-      "name",
-      "slug",
-      "content",
-      "image",
-      "team",
-      "posts",
-      "promo_box"
+      "*"
     ],
     "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
     "_syncId": "b5ba3e70-8b8c-4b13-ae85-0e8bbed29730"
