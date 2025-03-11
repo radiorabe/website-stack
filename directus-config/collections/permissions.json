@@ -3410,6 +3410,18 @@
     "_syncId": "25862e1c-c132-4549-8cd1-e4bab5c08524"
   },
   {
+    "collection": "config",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "6d1d18cc-94f8-4d4d-90a8-baf1c643baf7",
+    "_syncId": "5373b145-19c3-434a-bc64-b1be348d4370"
+  },
+  {
     "collection": "orders",
     "action": "create",
     "permissions": null,
