@@ -49,7 +49,9 @@ export default function EventPage({ pageData }: Props) {
             fill
             alt={event.title}
             // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
+            onError={(event) => {
+              console.log("IMAGE ERROR ECONNRESET: ", event);
+            }}
           />
         </View>
         <Text style={styles.topTitle} dataSet={{ media: ids.topTitle }}>
@@ -117,8 +119,15 @@ const { ids, styles } = StyleSheet.create({
     ...Fonts.style.h1,
     color: Colors.white,
     paddingBottom: Metrics.doubleBaseMargin,
+    textAlign: "center",
+    paddingHorizontal: Metrics.tripleBaseMargin,
   },
-  topText: { ...Fonts.style.text, color: Colors.white },
+  topText: {
+    ...Fonts.style.text,
+    color: Colors.white,
+    textAlign: "center",
+    paddingHorizontal: Metrics.tripleBaseMargin,
+  },
   tipTapContainer: {
     width: "74vw",
     paddingTop: Metrics.tripleBaseMargin,

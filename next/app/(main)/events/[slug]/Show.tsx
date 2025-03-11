@@ -2,7 +2,7 @@
 import { ItemsEventShows, ItemsImageBox } from "@/lib/api/data-contracts";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { Text, View } from "@/lib/server-react-native";
+import { Linking, Text, View } from "@/lib/server-react-native";
 import ShowInfoText from "./ShowInfoText";
 import ImageBox from "@/components/RenderTipTap/ImageBox";
 import RenderTipTap from "@/components/RenderTipTap";
@@ -130,7 +130,9 @@ const Show = ({ show, eventColor }: Props) => {
       >
         <Button
           label={show.button_label ? show.button_label : "Tickets"}
-          href={show.button_url}
+          onPress={() => {
+            Linking.openURL(show.button_url);
+          }}
           icon={<TicketIcon color={Colors.white}></TicketIcon>}
           backgroundColor={eventColor}
           backgroundHoverColor={shadeColor(eventColor, 30)}
