@@ -49,6 +49,7 @@ export default function EventPage({ pageData }: Props) {
             fill
             alt={event.title}
             // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
           />
         </View>
         <Text style={styles.topTitle} dataSet={{ media: ids.topTitle }}>

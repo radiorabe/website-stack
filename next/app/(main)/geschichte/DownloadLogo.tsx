@@ -29,6 +29,7 @@ const DownLoadLogo = ({ url, style, label }: Props) => {
               style={{ borderRadius: 9, opacity: hovered ? 0.75 : 1 }}
               layout="responsive"
               alt={label}
+              onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
               // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             ></Image>
           );

@@ -68,6 +68,7 @@ const LogoBox = ({ backgroundColor, logos, title }: Props) => {
                       layout="responsive"
                       alt={"partner" + index}
                       // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
                     ></Image>
                   </View>
                 </Pressable>

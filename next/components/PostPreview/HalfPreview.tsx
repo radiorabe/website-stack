@@ -46,6 +46,7 @@ const HalfPreview = ({ data }: Props) => {
           placeholder="blur"
           blurDataURL={blurhashToBase64(imagebox.image.blurhash)}
           // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
         />
       </View>
       <View style={styles.metaContainer} dataSet={{ media: ids.metaContainer }}>

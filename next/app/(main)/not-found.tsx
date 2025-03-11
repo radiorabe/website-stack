@@ -24,6 +24,7 @@ export default function NotFound() {
           height={400}
           layout="responsive"
           alt={`Rabe`}
+          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
           // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </View>

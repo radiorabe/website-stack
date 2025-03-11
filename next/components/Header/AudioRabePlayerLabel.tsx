@@ -27,9 +27,10 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
 
   useEffect(() => {
     if (refetch) {
-      fetch("https://songticker.rabe.ch/songticker/0.9.3/current.xml", {
-        cache: "no-store",
-      })
+      try{
+        fetch("https://songticker.rabe.ch/songticker/0.9.3/current.xml", {
+          cache: "no-store",
+        })
         .then((res) => res.text())
         .then((data) => {
           if (data && oldData !== data) {
@@ -70,7 +71,12 @@ const AudioRabePlayerLabel = ({}: HoverableProps) => {
             }, 5000);
           }
         });
-      setRefetch(false);
+
+        setRefetch(false);
+      }catch (error) {
+        console.log("songticker error", error);
+      }
+
     }
   }, [refetch]);
 

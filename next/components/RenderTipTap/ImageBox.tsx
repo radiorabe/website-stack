@@ -29,6 +29,7 @@ const ImageBox = ({ image, width, height, title, text, style }: Props) => {
         placeholder="blur"
         blurDataURL={blurhashToBase64(image.blurhash)}
         // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
       />
       <Text
         style={{

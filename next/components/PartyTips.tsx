@@ -68,6 +68,7 @@ const Ausgehtips = ({ partyTips }: Props) => {
                       layout="responsive"
                       alt={partyLocation.address_line_1}
                       // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
                     />
                   </View>
                 )}

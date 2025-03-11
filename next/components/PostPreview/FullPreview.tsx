@@ -39,6 +39,7 @@ const FullPreview = ({ data }: Props) => {
           placeholder="blur"
           blurDataURL={blurhashToBase64(imagebox.image.blurhash)}
           alt={data.title}
+          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
         />
       </View>
       <View

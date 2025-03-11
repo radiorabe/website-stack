@@ -26,6 +26,7 @@ export default function ProgramBox(props) {
               layout="responsive"
               alt={props.name}
               // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
             />
           </View>
           <Text

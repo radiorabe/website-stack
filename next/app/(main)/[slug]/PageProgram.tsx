@@ -62,6 +62,7 @@ export default function ProgramPage({
           alt={program.name}
           placeholder="blur"
           blurDataURL={blurhashToBase64(program.image.blurhash)}
+          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
         />
         <View
           style={{

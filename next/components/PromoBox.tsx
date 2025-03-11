@@ -48,6 +48,7 @@ const PromoBox = ({
           layout={!isMobile ? undefined : "responsive"}
           fill={!isMobile}
           alt={title}
+          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
         />
       </View>
 
