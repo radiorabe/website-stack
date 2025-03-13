@@ -28,7 +28,7 @@
         }
       }
     },
-    "resolve": "3f49ec2e-50ea-48e1-8e84-a59ff8f0833e",
+    "resolve": "0e5b7d1b-724e-400b-8296-6b1f4b30cbc8",
     "reject": null,
     "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
     "_syncId": "880f617a-8687-42c2-b6a2-d748a8b81141"
@@ -147,16 +147,36 @@
     "_syncId": "f3a774b7-a626-480c-a0a4-34993cf7eda8"
   },
   {
-    "name": "Notification RaBe",
-    "key": "notification_rabe",
+    "name": "Send Support Email ",
+    "key": "mail_byx9u",
     "type": "mail",
-    "position_x": 55,
+    "position_x": 74,
     "position_y": 1,
     "options": {
-      "body": "Hallo {{read_order.first_name}} {{read_order.family_name}}\n\nDanke für deine Mitgliedschaft: {{read_order.name}}\n\nWir werden dich zeitnah informieren.\n\nDein Rabe Team",
+      "to": [
+        "{{read_order.email}}",
+        "rabe@rabe.ch"
+      ],
+      "subject": "Danke! {{read_order.name}} ",
+      "body": "1000 Dank für deinen Support!\n\nDeine Spende geht direkt an folgende Sendung:\n\n {{read_order.name}}  -  {{read_order.price}}.- CHF\n\nHast du noch Fragen? Wir stehen dir telefonisch unter 031 330 99 90 oder per Mail an rabe@rabe.ch zur Verfügung.\n\nLiebe Grüsse aus der Lorraine,\n\nDein RaBe-Team\n\n![](https://data.rabe.ch/assets/dd721564-4c23-41cd-94fd-cc57139d2b23)"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "2e6cc4f3-acf3-47a4-b737-429a7f1bce13"
+  },
+  {
+    "name": "Send Mitglieder Email ",
+    "key": "notification_rabe",
+    "type": "mail",
+    "position_x": 74,
+    "position_y": 17,
+    "options": {
+      "body": "Herzlich Willkommen in der RaBe-Familie! Wir krächzen: 1000 Dank für dein Vertrauen!\n\nIn den nächsten Tagen bekommst du per Post deinen Mitglieder-Ausweis, mit dem du viele Rabatte geniesst. Ausserdem wird dir monatlich unser Heft „StattRadio“ mit dem Programm und den Zugriffscode fürs RaBe-Archiv zugeschickt.\n\nHast du noch Fragen? Wir stehen dir telefonisch unter 031 330 99 90 oder per Mail an rabe@rabe.ch zur Verfügung.\n\nLiebe Grüsse aus der Lorraine,\n\nDein RaBe-Team\n\n![](https://data.rabe.ch/assets/dd721564-4c23-41cd-94fd-cc57139d2b23)",
       "subject": "Willkommen bei Rabe",
       "to": [
-        "{{read_order.email}}"
+        "{{read_order.email}}",
+        "rabe@rabe.ch"
       ]
     },
     "resolve": null,
@@ -291,6 +311,26 @@
     "reject": null,
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
     "_syncId": "140e581d-2f39-4653-8ddc-a2472de73ae6"
+  },
+  {
+    "name": "Support Sendung",
+    "key": "support_sendung",
+    "type": "condition",
+    "position_x": 56,
+    "position_y": 1,
+    "options": {
+      "filter": {
+        "read_order": {
+          "name": {
+            "_icontains": "Support"
+          }
+        }
+      }
+    },
+    "resolve": "2e6cc4f3-acf3-47a4-b737-429a7f1bce13",
+    "reject": "3f49ec2e-50ea-48e1-8e84-a59ff8f0833e",
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "0e5b7d1b-724e-400b-8296-6b1f4b30cbc8"
   },
   {
     "name": "Webhook / Request URL",
