@@ -150,7 +150,7 @@
     "name": "Send Support Email ",
     "key": "mail_byx9u",
     "type": "mail",
-    "position_x": 74,
+    "position_x": 73,
     "position_y": 1,
     "options": {
       "to": [
@@ -169,7 +169,7 @@
     "name": "Send Mitglieder Email ",
     "key": "notification_rabe",
     "type": "mail",
-    "position_x": 74,
+    "position_x": 73,
     "position_y": 17,
     "options": {
       "body": "Herzlich Willkommen in der RaBe-Familie! Wir krächzen: 1000 Dank für dein Vertrauen!\n\nIn den nächsten Tagen bekommst du per Post deinen Mitglieder-Ausweis, mit dem du viele Rabatte geniesst. Ausserdem wird dir monatlich unser Heft „StattRadio“ mit dem Programm und den Zugriffscode fürs RaBe-Archiv zugeschickt.\n\nHast du noch Fragen? Wir stehen dir telefonisch unter 031 330 99 90 oder per Mail an rabe@rabe.ch zur Verfügung.\n\nLiebe Grüsse aus der Lorraine,\n\nDein RaBe-Team\n\n![](https://data.rabe.ch/assets/dd721564-4c23-41cd-94fd-cc57139d2b23)",
@@ -316,7 +316,7 @@
     "name": "Support Sendung",
     "key": "support_sendung",
     "type": "condition",
-    "position_x": 56,
+    "position_x": 55,
     "position_y": 1,
     "options": {
       "filter": {
