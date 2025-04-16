@@ -4059,6 +4059,54 @@
     "_syncId": "6d0ed844-17bc-498c-be0f-288fe9bb101e"
   },
   {
+    "collection": "internships",
+    "action": "create",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "8d01e4ec-cfef-4116-b60e-1bc3f8a3fe77"
+  },
+  {
+    "collection": "internships",
+    "action": "delete",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "56bab8d4-6bd4-4c69-9519-f5b49339d662"
+  },
+  {
+    "collection": "internships",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "fd143944-4a1c-4142-9b87-3f298e150c02"
+  },
+  {
+    "collection": "internships",
+    "action": "update",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "7999253a-0983-441a-b38d-a33b1be4a846",
+    "_syncId": "3e35bc91-ac09-4c5a-a780-27be1552d295"
+  },
+  {
     "collection": "party_location",
     "action": "create",
     "permissions": null,
