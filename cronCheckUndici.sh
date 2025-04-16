@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 
 echo "check long requests"
 # check if some requests take longer than a minute
-docker logs rabe-directus --since 1m | -E " 1m | 2m | 3m | 4m | 5m " && sh logAndRestart.sh
+docker logs rabe-directus --since 1m | grep -E " 1m | 2m | 3m | 4m | 5m " && sh logAndRestart.sh
 
 echo "check health problems"
 # check if next has health problems
