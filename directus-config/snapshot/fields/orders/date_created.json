@@ -7,11 +7,11 @@
     "conditions": null,
     "display": "datetime",
     "display_options": {
-      "relative": true
+      "format": "short"
     },
     "field": "date_created",
     "group": null,
-    "hidden": true,
+    "hidden": false,
     "interface": "datetime",
     "note": null,
     "options": null,

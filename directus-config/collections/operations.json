@@ -147,39 +147,37 @@
     "_syncId": "f3a774b7-a626-480c-a0a4-34993cf7eda8"
   },
   {
-    "name": "Send Support Email ",
+    "name": "Send Support Sendung Email ",
     "key": "mail_byx9u",
     "type": "mail",
     "position_x": 73,
     "position_y": 1,
     "options": {
       "to": [
-        "{{read_order.email}}",
-        "rabe@rabe.ch"
+        "{{read_order.email}}"
       ],
       "subject": "Danke! {{read_order.name}} ",
       "body": "1000 Dank für deinen Support!\n\nDeine Spende geht direkt an folgende Sendung:\n\n {{read_order.name}}  -  {{read_order.price}}.- CHF\n\nHast du noch Fragen? Wir stehen dir telefonisch unter 031 330 99 90 oder per Mail an rabe@rabe.ch zur Verfügung.\n\nLiebe Grüsse aus der Lorraine,\n\nDein RaBe-Team\n\n![](https://data.rabe.ch/assets/dd721564-4c23-41cd-94fd-cc57139d2b23)"
     },
-    "resolve": null,
+    "resolve": "f1f02ea4-c10b-47c6-bf4b-e448cf7c8abe",
     "reject": null,
     "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
     "_syncId": "2e6cc4f3-acf3-47a4-b737-429a7f1bce13"
   },
   {
-    "name": "Send Mitglieder Email ",
+    "name": "Send Neue Mitgliedschaft Email ",
     "key": "notification_rabe",
     "type": "mail",
     "position_x": 73,
-    "position_y": 17,
+    "position_y": 16,
     "options": {
       "body": "Herzlich Willkommen in der RaBe-Familie! Wir krächzen: 1000 Dank für dein Vertrauen!\n\nIn den nächsten Tagen bekommst du per Post deinen Mitglieder-Ausweis, mit dem du viele Rabatte geniesst. Ausserdem wird dir monatlich unser Heft „StattRadio“ mit dem Programm und den Zugriffscode fürs RaBe-Archiv zugeschickt.\n\nHast du noch Fragen? Wir stehen dir telefonisch unter 031 330 99 90 oder per Mail an rabe@rabe.ch zur Verfügung.\n\nLiebe Grüsse aus der Lorraine,\n\nDein RaBe-Team\n\n![](https://data.rabe.ch/assets/dd721564-4c23-41cd-94fd-cc57139d2b23)",
       "subject": "Willkommen bei Rabe",
       "to": [
-        "{{read_order.email}}",
-        "rabe@rabe.ch"
+        "{{read_order.email}}"
       ]
     },
-    "resolve": null,
+    "resolve": "fb3a106c-de56-46ba-af43-af247bfa41ab",
     "reject": null,
     "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
     "_syncId": "3f49ec2e-50ea-48e1-8e84-a59ff8f0833e"
@@ -311,6 +309,42 @@
     "reject": null,
     "flow": "7c576e31-95e5-47bc-9cf8-28b1b488458b",
     "_syncId": "140e581d-2f39-4653-8ddc-a2472de73ae6"
+  },
+  {
+    "name": "Send Neue Mitgliedschaft @RABE",
+    "key": "send_neue_mitgliedschaft_rabe",
+    "type": "mail",
+    "position_x": 91,
+    "position_y": 16,
+    "options": {
+      "to": [
+        "rabe@rabe.ch"
+      ],
+      "subject": "Neue Mitgliedschaft",
+      "body": "## Neue  Mitgliedschaft\n\n### Bestellung Infos:\n**Type:** {{read_order.name}}\\\n**Status:** {{read_order.status}}\\\n**Betrag:** {{read_order.price}}.- CHF\\ \n[Bestellung auf data.rabe.ch ansehen](https://data.rabe.ch/admin/content/orders/{{read_order.id}})\n\n### Neues RaBe Mitglied:\n{{read_order.first_name}} {{read_order.family_name}}\\\n{{read_order.address}} \\\n{{read_order.plz}} {{read_order.city}}\\\n\\\n{{read_order.phone_number}}\\\n\\\n{{read_order.email}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "fb3a106c-de56-46ba-af43-af247bfa41ab"
+  },
+  {
+    "name": "Send Support Sendung @RABE",
+    "key": "send_support_sendung_rabe",
+    "type": "mail",
+    "position_x": 91,
+    "position_y": 1,
+    "options": {
+      "subject": "Support Sendung Betrag",
+      "body": "## Support Sendung\n\n### Bestellung Infos:\n**Type:** {{read_order.name}}\\\n**Status:** {{read_order.status}}\\\n**Betrag:** {{read_order.price}}.- CHF\\\n[Bestellung auf data.rabe.ch ansehen](https://data.rabe.ch/admin/content/orders/{{read_order.id}})\n\n### Bezahlt von:\n{{read_order.first_name}} {{read_order.family_name}}\\\n{{read_order.address}} \\\n{{read_order.plz}} {{read_order.city}}\\\n\\\n{{read_order.phone_number}}\\\n\\\n{{read_order.email}}",
+      "to": [
+        "rabe@rabe.ch"
+      ]
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5626945d-0f1c-4e72-a970-f4508c945ec9",
+    "_syncId": "f1f02ea4-c10b-47c6-bf4b-e448cf7c8abe"
   },
   {
     "name": "Support Sendung",
