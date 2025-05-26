@@ -77,7 +77,7 @@ export default function Home() {
 
       <Button
         label={"Jetzt hören"}
-        href="/"
+        url="https://stream.rabe.ch/"
         textColor={Colors.white}
         hoverTextColor={Colors.whiteTransparent}
         // style={{ paddingTop: Metrics.tripleBaseMargin }}
