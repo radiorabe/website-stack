@@ -1,19 +1,19 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  async redirects() {
-    return [
-      {
-        source: "/programm",
-        destination: "/programm/heute",
-        permanent: true,
-      },
-      {
-        source: "/umzug",
-        destination: "/events/rabe-zieht-um",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/programm",
+  //       destination: "/programm/heute",
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: "/umzug",
+  //       destination: "/events/rabe-zieht-um",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
