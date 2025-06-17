@@ -41,28 +41,33 @@ export default function BeitragPage({ post, morePosts }: Props) {
           dataSet={{ media: ids.postInfoContainer }}
           style={styles.postInfoContainer}
         >
-          <Button href={"/" + program.slug} label={program.name}></Button>
+          <View style={{ maxWidth: "100%" }}>
+            <Button href={"/" + program.slug} label={program.name}></Button>
+          </View>
+          <View style={{ width: Metrics.doubleBaseMargin }}></View>
+
           <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
+            dataSet={{ media: ids.postAuthorText }}
+            style={styles.postAuthorText}
           >
+            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+              {"Von "}
+            </Text>
             <View
-              dataSet={{ media: ids.postAuthorText }}
-              style={styles.postAuthorText}
+              dataSet={{ media: ids.postAuthorsBox }}
+              style={styles.postAuthorsBox}
             >
-              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-                {"Von "}
-              </Text>
               {post.authors.map((item: ItemsPostDirectusUsers, index) => {
                 let user: Users = item.directus_users_id as Users;
-                let userName = `${index ? "," : ""} ${user.first_name || ""}`;
+                let userName = user.first_name.trim() || "";
 
                 if (user.last_name && user.last_name !== "") {
-                  userName = userName + " " + user.last_name;
+                  userName = userName + " " + user.last_name.trim();
                 }
-                userName = userName.trim();
+
+                if (index < post.authors.length - 1) {
+                  userName = userName + ", ";
+                }
 
                 return (
                   <ButtonText
@@ -79,14 +84,13 @@ export default function BeitragPage({ post, morePosts }: Props) {
                   </ButtonText>
                 );
               })}
-
-              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-                {" am "}
-              </Text>
-              <Text dataSet={{ media: ids.hide }} style={styles.hide}>
-                {`${moment(post.date_published).format("D. MMMM YYYY")}`}
-              </Text>
             </View>
+            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+              {" am "}
+            </Text>
+            <Text dataSet={{ media: ids.hide }} style={styles.hide}>
+              {`${moment(post.date_published).format("D. MMMM YYYY")}`}
+            </Text>
           </View>
           <Text dataSet={{ media: ids.mobileDate }} style={styles.mobileDate}>
             {`${moment(post.date_published).format("D. MMMM YYYY")}`}
@@ -161,6 +165,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
               flexDirection: "row",
               justifyContent: "space-between",
               marginBottom: Metrics.doubleBaseMargin,
+              maxWidth: "100%",
             }}
           >
             <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
@@ -213,7 +218,7 @@ const { ids, styles } = StyleSheet.create({
   },
   postInfoContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    flexWrap: "wrap",
     paddingVertical: Metrics.tripleBaseMargin,
     "@media (max-width: 910px)": {
       flexDirection: "column",
@@ -221,12 +226,17 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   postAuthorText: {
-    paddingLeft: Metrics.doubleBaseMargin,
     flexDirection: "row",
+    paddingTop: Metrics.halfHalfBaseMargin,
     "@media (max-width: 910px)": {
-      paddingLeft: 0,
       paddingTop: Metrics.doubleBaseMargin,
+      flexDirection: "column",
+      paddingLeft: 0,
     },
+  },
+  postAuthorsBox: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 
   imageContainer: {
@@ -274,6 +284,7 @@ const { ids, styles } = StyleSheet.create({
   },
   h2Title: {
     ...Fonts.style.h2,
+    maxWidth: "100%",
   },
   buttonContainer: {
     "@media (max-width: 910px)": {
