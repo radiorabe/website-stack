@@ -17,3 +17,13 @@ Directus:
 Next:
 
     docker-compose up -d next
+
+
+# Maintenance Mode
+    In the .env file set NEXT_PUBLIC_MAINTENANCE_MODE true
+
+    stop docker directus instance
+    
+    redirect data.rabe.ch auf rabe.ch
+
+    disable healthcheck for next instance
