@@ -8,7 +8,6 @@ const collections = [
   "posts",
   "posts_directus_users_1",
   "programs",
-  "directus_users",
   "page_history",
   "page_history_protocol",
   "page_contact_files",
@@ -26,7 +25,10 @@ const collections = [
   "page_internship",
   "page_programs",
   "statements",
+  "directus_users",
   "party_location",
+  "classes",
+  "internships",
 ] as const;
 
 function createObject<T extends readonly string[]>(

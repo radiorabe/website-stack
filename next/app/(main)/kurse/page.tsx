@@ -22,7 +22,7 @@ async function getPageData() {
         next: {
           tags:
             process.env.NODE_ENV === "production"
-              ? [Flows.collections.page_classes]
+              ? [Flows.collections.page_classes, Flows.collections.classes]
               : undefined,
         },
         cache:

@@ -84,7 +84,9 @@
         "page_programs",
         "statements",
         "directus_users",
-        "party_location"
+        "party_location",
+        "classes",
+        "internships"
       ]
     },
     "operation": "0819c7ee-bfd0-4bf0-8521-f125d36d6b3d",
