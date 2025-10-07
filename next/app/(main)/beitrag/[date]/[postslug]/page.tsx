@@ -37,7 +37,11 @@ async function getPost(params) {
           slug: {
             _eq: slug,
           },
-          date_published: { _gte: date, _lte: nextDayDate },
+          date_published: isEnabled
+            ? {
+                _nnull: true,
+              }
+            : { _gte: date, _lte: nextDayDate },
           status: isEnabled
             ? {
                 _nnull: true,
