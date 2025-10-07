@@ -45,6 +45,7 @@ async function getSendungen() {
           },
         }),
         sort: ["name"],
+        limit: 1000,
       },
       {
         next: {
