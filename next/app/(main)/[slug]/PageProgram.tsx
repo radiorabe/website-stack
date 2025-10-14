@@ -23,8 +23,13 @@ import moment from "moment";
 import Heart from "./Heart";
 import { blurhashToBase64 } from "blurhash-base64";
 import PromoBox from "@/components/PromoBox";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useResponsive from "@/lib/useResponsisve";
+import Link from "next/link";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   program: ItemsPrograms;
@@ -48,9 +53,69 @@ export default function ProgramPage({
   let promo_box = program.promo_box as ItemsPromoBox;
   let { isMobile } = useResponsive();
   let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
+  const memberButtonRef = useRef<HTMLElement>(null);
+  const postRef = useRef<HTMLElement>(null);
+  if (postRef.current) {
+    console.log("element:", postRef.current.getBoundingClientRect());
+  }
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(memberButtonRef.current, {
+        scrollTrigger: {
+          trigger: memberButtonRef.current,
+          start: "0 top",
+
+          end: () =>
+            `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
+          scrub: true,
+          pin: true,
+          // markers: true, // Remove after debugging
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <View style={styles.container}>
+      <View
+        ref={memberButtonRef}
+        style={{
+          position: "absolute",
+          top: "75vh",
+          right: 0,
+          width: "100vw",
+          height: "90vh",
+          zIndex: 999,
+        }}
+      >
+        <View
+          // ref={memberButtonRef}
+          style={styles.memberButtonContainer}
+          dataSet={{ media: ids.memberButtonContainer }}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.darkGreen,
+            }}
+          >
+            <Link
+              href={"/mitglied-werden"}
+              style={{ textDecoration: "none", backgroundColor: "blue" }}
+              passHref={true}
+            >
+              <Text
+                style={styles.memberButton}
+                dataSet={{ media: ids.memberButton }}
+              >
+                {"Mitglied werden"}
+              </Text>
+            </Link>
+          </View>
+        </View>
+      </View>
       <View
         style={styles.imageContainer}
         dataSet={{ media: ids.imageContainer }}
@@ -62,7 +127,9 @@ export default function ProgramPage({
           alt={program.name}
           placeholder="blur"
           blurDataURL={blurhashToBase64(program.image.blurhash)}
-          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event)}}
+          onError={(event) => {
+            console.log("IMAGE ERROR ECONNRESET: ", event);
+          }}
         />
         <View
           style={{
@@ -215,43 +282,45 @@ export default function ProgramPage({
           ></PromoBox>
         </View>
       )}
-      {posts && posts.length > 0 && (
-        <View style={{ width: "90vw" }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginBottom: Metrics.doubleBaseMargin,
-            }}
-          >
-            <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
-              {"Letzte Beiträge von " + program.name}
-            </Text>
+      <View ref={postRef}>
+        {posts && posts.length > 0 && (
+          <View style={{ width: "90vw" }}>
             <View
-              style={styles.buttonContainer}
-              dataSet={{ media: ids.buttonContainer }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: Metrics.doubleBaseMargin,
+              }}
             >
-              <Button
-                href={{
-                  pathname: "/beitraege",
-                  query: { program: program.slug },
-                }}
-                label={"Alle Beiträge"}
-                full
-                textColor={Colors.white}
-              />
+              <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
+                {"Letzte Beiträge von " + program.name}
+              </Text>
+              <View
+                style={styles.buttonContainer}
+                dataSet={{ media: ids.buttonContainer }}
+              >
+                <Button
+                  href={{
+                    pathname: "/beitraege",
+                    query: { program: program.slug },
+                  }}
+                  label={"Alle Beiträge"}
+                  full
+                  textColor={Colors.white}
+                />
+              </View>
+            </View>
+
+            <View
+              style={{
+                marginBottom: Metrics.tripleBaseMargin,
+              }}
+            >
+              <PostPreviewBox posts={posts}></PostPreviewBox>
             </View>
           </View>
-
-          <View
-            style={{
-              marginBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            <PostPreviewBox posts={posts}></PostPreviewBox>
-          </View>
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 }
@@ -323,10 +392,32 @@ const { ids, styles } = StyleSheet.create({
   h2Title: {
     ...Fonts.style.h2,
   },
+
   buttonContainer: {
     "@media (max-width: 910px)": {
       display: "none",
     },
+  },
+  memberButtonContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    height: 20,
+    transform: [
+      { translateX: "50%" },
+      { translateX: -10 },
+      { rotate: "90deg" },
+      { translateX: "45vh" },
+    ],
+    alignItems: "center",
+    backgroundColor: "gray",
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  memberButton: {
+    ...Fonts.style.text,
+    color: Colors.white,
   },
   avatar: { borderRadius: 9 },
 });
