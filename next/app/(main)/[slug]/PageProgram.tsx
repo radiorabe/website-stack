@@ -99,11 +99,18 @@ export default function ProgramPage({
           <View
             style={{
               backgroundColor: Colors.darkGreen,
+              paddingVertical: Metrics.halfHalfBaseMargin,
+              paddingHorizontal: Metrics.halfBaseMargin,
+              borderBottomLeftRadius: 9,
+              borderBottomRightRadius: 9,
+              margin: 0,
             }}
           >
             <Link
               href={"/mitglied-werden"}
-              style={{ textDecoration: "none", backgroundColor: "blue" }}
+              style={{
+                textDecoration: "none",
+              }}
               passHref={true}
             >
               <Text
@@ -409,14 +416,14 @@ const { ids, styles } = StyleSheet.create({
       { rotate: "90deg" },
       { translateX: "45vh" },
     ],
-    alignItems: "center",
-    backgroundColor: "gray",
+    // alignItems: "center",
+    // backgroundColor: "gray",
     "@media (max-width: 910px)": {
       display: "none",
     },
   },
   memberButton: {
-    ...Fonts.style.text,
+    ...Fonts.style.textLink,
     color: Colors.white,
   },
   avatar: { borderRadius: 9 },
