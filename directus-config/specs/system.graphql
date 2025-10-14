@@ -329,6 +329,8 @@ type Subscription {
   page_contact_image_link_mutated(event: EventEnum): page_contact_image_link_mutated
   page_history_files_mutated(event: EventEnum): page_history_files_mutated
   page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
+  page_team_directus_users_3_mutated(event: EventEnum): page_team_directus_users_3_mutated
+  page_team_directus_users_4_mutated(event: EventEnum): page_team_directus_users_4_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -2519,6 +2521,10 @@ type page_team {
   members_management_func: count_functions
   members_staff(filter: page_team_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_team_directus_users]
   members_staff_func: count_functions
+  members_it(filter: page_team_directus_users_3_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_team_directus_users_3]
+  members_it_func: count_functions
+  members_rabe_info(filter: page_team_directus_users_4_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [page_team_directus_users_4]
+  members_rabe_info_func: count_functions
 }
 
 type page_team_directus_users {
@@ -2549,6 +2555,30 @@ type page_team_directus_users_2_mutated {
   key: ID!
   event: EventEnum
   data: page_team_directus_users_2
+}
+
+type page_team_directus_users_3 {
+  id: ID!
+  page_team_id(filter: page_team_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_team
+  directus_users_id(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+}
+
+type page_team_directus_users_3_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_team_directus_users_3
+}
+
+type page_team_directus_users_4 {
+  id: ID!
+  page_team_id(filter: page_team_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): page_team
+  directus_users_id(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+}
+
+type page_team_directus_users_4_mutated {
+  key: ID!
+  event: EventEnum
+  data: page_team_directus_users_4
 }
 
 type page_team_directus_users_mutated {
@@ -4310,6 +4340,22 @@ input page_team_directus_users_2_filter {
   _or: [page_team_directus_users_2_filter]
 }
 
+input page_team_directus_users_3_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_3_filter]
+  _or: [page_team_directus_users_3_filter]
+}
+
+input page_team_directus_users_4_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_4_filter]
+  _or: [page_team_directus_users_4_filter]
+}
+
 input page_team_directus_users_filter {
   id: number_filter_operators
   page_team_id: page_team_filter
@@ -4333,6 +4379,10 @@ input page_team_filter {
   members_management_func: count_function_filter_operators
   members_staff: page_team_directus_users_filter
   members_staff_func: count_function_filter_operators
+  members_it: page_team_directus_users_3_filter
+  members_it_func: count_function_filter_operators
+  members_rabe_info: page_team_directus_users_4_filter
+  members_rabe_info_func: count_function_filter_operators
   _and: [page_team_filter]
   _or: [page_team_filter]
 }

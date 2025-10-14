@@ -1,0 +1,29 @@
+{
+  "collection": "page_team",
+  "field": "members_it",
+  "type": "alias",
+  "meta": {
+    "collection": "page_team",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "members_it",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2m",
+    "note": null,
+    "options": {
+      "enableCreate": false
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 10,
+    "special": [
+      "m2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

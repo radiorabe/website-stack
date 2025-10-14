@@ -109,6 +109,10 @@ import {
   ReadItemsPageTeamDirectusUsers1Params,
   ReadItemsPageTeamDirectusUsers2Data,
   ReadItemsPageTeamDirectusUsers2Params,
+  ReadItemsPageTeamDirectusUsers3Data,
+  ReadItemsPageTeamDirectusUsers3Params,
+  ReadItemsPageTeamDirectusUsers4Data,
+  ReadItemsPageTeamDirectusUsers4Params,
   ReadItemsPageTeamDirectusUsersData,
   ReadItemsPageTeamDirectusUsersParams,
   ReadItemsPageTeamParams,
@@ -233,6 +237,10 @@ import {
   ReadSingleItemsPageTeamDirectusUsers1Params,
   ReadSingleItemsPageTeamDirectusUsers2Data,
   ReadSingleItemsPageTeamDirectusUsers2Params,
+  ReadSingleItemsPageTeamDirectusUsers3Data,
+  ReadSingleItemsPageTeamDirectusUsers3Params,
+  ReadSingleItemsPageTeamDirectusUsers4Data,
+  ReadSingleItemsPageTeamDirectusUsers4Params,
   ReadSingleItemsPageTeamDirectusUsersData,
   ReadSingleItemsPageTeamDirectusUsersParams,
   ReadSingleItemsPageTeamParams,
@@ -3419,46 +3427,6 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       format: "json",
       ...params,
     });
-/**
- * @description Randomized post items.
- *
- * @tags Items, ItemsPost
- * @name randomizedItemsPost
- * @summary List Items
- * @request GET:/items/post
- * @secure
- * @response `200` `ReadItemsPostData` Successful request
- * @response `401` `{
-    error?: {
-  \** @format int64 *\
-    code?: number,
-    message?: string,
-
-},
-
-}`
- */
-  randomizedItemsPost = (
-    query: ReadItemsPostParams,
-    params: RequestParams = {}
-  ) =>
-    this.request<
-      ReadItemsPostData,
-      {
-        error?: {
-          /** @format int64 */
-          code?: number;
-          message?: string;
-        };
-      }
-    >({
-      path: `/randomized/post`,
-      method: "GET",
-      query: query,
-      secure: true,
-      format: "json",
-      ...params,
-    });
   /**
  * @description List the event_shows items.
  *
@@ -5512,6 +5480,174 @@ export class Items<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
       }
     >({
       path: `/items/page_history_files_1/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_team_directus_users_3 items.
+ *
+ * @tags Items, ItemsPageTeamDirectusUsers3
+ * @name ReadItemsPageTeamDirectusUsers3
+ * @summary List Items
+ * @request GET:/items/page_team_directus_users_3
+ * @secure
+ * @response `200` `ReadItemsPageTeamDirectusUsers3Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageTeamDirectusUsers3 = (query: ReadItemsPageTeamDirectusUsers3Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageTeamDirectusUsers3Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_team_directus_users_3`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_team_directus_users_3 item by unique identifier.
+ *
+ * @tags Items, ItemsPageTeamDirectusUsers3
+ * @name ReadSingleItemsPageTeamDirectusUsers3
+ * @summary Retrieve an Item
+ * @request GET:/items/page_team_directus_users_3/{id}
+ * @response `200` `ReadSingleItemsPageTeamDirectusUsers3Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageTeamDirectusUsers3 = (
+    { id, ...query }: ReadSingleItemsPageTeamDirectusUsers3Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageTeamDirectusUsers3Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_team_directus_users_3/${id}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description List the page_team_directus_users_4 items.
+ *
+ * @tags Items, ItemsPageTeamDirectusUsers4
+ * @name ReadItemsPageTeamDirectusUsers4
+ * @summary List Items
+ * @request GET:/items/page_team_directus_users_4
+ * @secure
+ * @response `200` `ReadItemsPageTeamDirectusUsers4Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readItemsPageTeamDirectusUsers4 = (query: ReadItemsPageTeamDirectusUsers4Params, params: RequestParams = {}) =>
+    this.request<
+      ReadItemsPageTeamDirectusUsers4Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_team_directus_users_4`,
+      method: "GET",
+      query: query,
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+ * @description Retrieve a single page_team_directus_users_4 item by unique identifier.
+ *
+ * @tags Items, ItemsPageTeamDirectusUsers4
+ * @name ReadSingleItemsPageTeamDirectusUsers4
+ * @summary Retrieve an Item
+ * @request GET:/items/page_team_directus_users_4/{id}
+ * @response `200` `ReadSingleItemsPageTeamDirectusUsers4Data` Successful request
+ * @response `401` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ * @response `404` `{
+    error?: {
+  \** @format int64 *\
+    code?: number,
+    message?: string,
+
+},
+
+}`
+ */
+  readSingleItemsPageTeamDirectusUsers4 = (
+    { id, ...query }: ReadSingleItemsPageTeamDirectusUsers4Params,
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      ReadSingleItemsPageTeamDirectusUsers4Data,
+      {
+        error?: {
+          /** @format int64 */
+          code?: number;
+          message?: string;
+        };
+      }
+    >({
+      path: `/items/page_team_directus_users_4/${id}`,
       method: "GET",
       query: query,
       format: "json",
