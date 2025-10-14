@@ -19,6 +19,8 @@ async function getPageData() {
           "members_staff.directus_users_id.*",
           "members_management.directus_users_id.*",
           "members_program.directus_users_id.*",
+          "members_it.directus_users_id.*",
+          "members_rabe_info.directus_users_id.*",
         ],
       },
       {
@@ -33,7 +35,7 @@ async function getPageData() {
       }
     );
     let item: ItemsPageTeam = itemResponse.data.data as ItemsPageTeam;
-    // console.log("ItemsPageTeam", item);
+    console.log("ItemsPageTeam", item);
     // console.log("RerenderPageTeam", Flows.collections.page_team);
 
     return item;

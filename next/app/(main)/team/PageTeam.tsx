@@ -11,11 +11,13 @@ import { ItemsPageTeamDirectusUsers, Users } from "@/lib/api/data-contracts";
 
 export default function TeamPage({ pageData }) {
   const data = pageData;
-
+  console.log("teams data", data);
   let memberData = [
     { title: "RaBe Staff", members: data.members_staff },
     { title: "Vorstandsmitglieder", members: data.members_management },
     { title: "Programmkommissionsmitglieder", members: data.members_program },
+    { title: "RaBe IT", members: data.members_it },
+    { title: "Rabe Info", members: data.members_rabe_info },
   ];
 
   return (
