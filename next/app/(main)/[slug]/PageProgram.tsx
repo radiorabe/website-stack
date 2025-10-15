@@ -28,6 +28,7 @@ import useResponsive from "@/lib/useResponsisve";
 import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,24 +60,20 @@ export default function ProgramPage({
     console.log("element:", postRef.current.getBoundingClientRect());
   }
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(memberButtonRef.current, {
-        scrollTrigger: {
-          trigger: memberButtonRef.current,
-          start: "0 top",
+  useGSAP(() => {
+    gsap.to(memberButtonRef.current, {
+      scrollTrigger: {
+        trigger: memberButtonRef.current,
+        start: "0 top",
 
-          end: () =>
-            `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
-          scrub: true,
-          pin: true,
-          // markers: true, // Remove after debugging
-        },
-      });
+        end: () =>
+          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
+        scrub: true,
+        pin: true,
+        // markers: true, // Remove after debugging
+      },
     });
-
-    return () => ctx.revert();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
