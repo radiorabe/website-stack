@@ -92,7 +92,7 @@ export const getPosts = async (filters, offset, limit) => {
             },
           ],
         }),
-        sort: ["-date_published"],
+        sort: ["-date_published", "slug"],
         limit: limit,
         offset: offset,
       },
