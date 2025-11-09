@@ -11,12 +11,13 @@ import Select from "react-select";
 import Button from "@/components/Button";
 import ButtonText from "@/components/ButtonText";
 
-export default function Statement({ id, type, options, defaultValue }) {
+export default function Form({ id, type, options, defaultValue }) {
   const [errors, setErrors] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [saferpayUrl, setSaferpayUrl] = useState();
   const [programName, setProgramName] = useState("");
   const [orderId, setOrderId] = useState();
+  const [agbChecked, setAGBChecked] = useState(false);
   const [iFrameHeight, setIFrameHeight] = useState(0);
   // console.log("errors", errors);
   const router = useRouter();
@@ -44,36 +45,47 @@ export default function Statement({ id, type, options, defaultValue }) {
     };
   }, [handleIframeMessage]);
 
-  const inputs = [
-    {
+  const inputs = {
+    first_name: {
       label: "Vorname*",
       inputKey: "first_name",
       required: true,
       type: "string",
     },
-    {
-      label: "Nachname*",
+    family_name: {
+      label: "Name*",
       inputKey: "family_name",
       required: true,
       type: "string",
     },
-    { label: "E-Mail*", inputKey: "email", required: true, type: "email" },
-    { label: "Adresse*", inputKey: "address", required: true, type: "string" },
-    { label: "PLZ*", inputKey: "plz", required: true, type: "string" },
-    { label: "Ort*", inputKey: "city", required: true, type: "string" },
-    {
+    email: {
+      label: "E-Mail*",
+      inputKey: "email",
+      required: true,
+      type: "email",
+    },
+    address: {
+      label: "Adresse*",
+      inputKey: "address",
+      required: true,
+      type: "string",
+    },
+    zip: { label: "PLZ*", inputKey: "plz", required: true, type: "string" },
+    city: { label: "Ort*", inputKey: "city", required: true, type: "string" },
+    phone: {
       label: "Telefon",
       inputKey: "phone_number",
       required: false,
       type: "string",
     },
-  ];
+  };
 
   const handleSubmit = (formData) => {
     const data = Object.fromEntries(formData);
-    // console.log("data", data);
+    console.log("data", data);
     let newErrors = [];
-    inputs.forEach((obj) => {
+    // iterate over inputs
+    Object.values(inputs).forEach((obj) => {
       if (!data[obj.inputKey] && obj.required) {
         newErrors.push(obj.inputKey);
       }
@@ -98,6 +110,7 @@ export default function Statement({ id, type, options, defaultValue }) {
     if (newErrors.length === 0) {
       // console.log("fetch");
       setErrorMessage("");
+      console.log("done");
       fetch("/api/order/init", {
         method: "POST",
         body: formData,
@@ -120,6 +133,7 @@ export default function Statement({ id, type, options, defaultValue }) {
     }
   };
 
+  // console.log("agbCHecked", agbChecked);
   // console.log("saferpayUrl", saferpayUrl);
   // console.log("saferpayUrl", saferpayUrl);
   // console.log("iFrameHeight", iFrameHeight);
@@ -127,7 +141,8 @@ export default function Statement({ id, type, options, defaultValue }) {
   return (
     <View
       style={{
-        alignItems: "center",
+        // alignItems: "center",
+        // backgroundColor: Colors.gray,
         width: "100%",
       }}
     >
@@ -153,39 +168,60 @@ export default function Statement({ id, type, options, defaultValue }) {
           style={styles.formContainer}
           dataSet={{ media: ids.formContainer }}
         >
+          <Text
+            style={{
+              ...Fonts.style.h2,
+              marginBottom: Metrics.doubleBaseMargin,
+            }}
+          >
+            {options
+              ? "Danke supportest du eine unserer Sendungen"
+              : "Deine Angaben bitte ausfüllen"}
+          </Text>
           <form action={handleSubmit} style={{}}>
             {options && (
-              <>
+              <View
+                style={styles.programInputsContainer}
+                dataSet={{ media: ids.programInputsContainer }}
+              >
                 <View
                   style={{
-                    width: "100%",
-                    maxWidth: 400,
-                    paddingTop: Metrics.baseMargin,
-                    zIndex: 900,
+                    flex: 1,
+                    marginBottom: Metrics.baseMargin,
                   }}
                 >
-                  <Text
-                    style={{
-                      ...Fonts.style.text,
-                      paddingBottom: Metrics.halfBaseMargin,
-                    }}
-                  >
-                    {"Support Sendung:"}
-                  </Text>
                   <Select
                     name={"program"}
                     options={options}
                     defaultValue={defaultValue}
+                    placeholder={"Sendung wählen"}
                     styles={{
+                      valueContainer: (baseStyles) => ({
+                        ...baseStyles,
+                        fontFamily: Fonts.type.bold,
+                        fontSize: Fonts.size.text,
+                        padding: "12px 16px",
+                        paddingLeft: Metrics.halfBaseMargin,
+                      }),
+                      placeholder: (baseStyles) => ({
+                        ...baseStyles,
+                        fontFamily: Fonts.type.bold,
+                        color: errors.includes("program")
+                          ? "#FF686B"
+                          : Colors.black,
+                        // padding: "12px 16px",
+                        // paddingLeft: Metrics.halfBaseMargin,
+                      }),
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         borderRadius: 0,
                         alignSelf: "flex-end",
                         borderWidth: 1,
                         borderStyle: "solid",
+                        borderRadius: 8,
                         borderColor: errors.includes("program")
-                          ? "#f00"
-                          : "#ccc",
+                          ? "#FF686B"
+                          : "#000",
                       }),
                       option: (
                         styles,
@@ -193,6 +229,7 @@ export default function Statement({ id, type, options, defaultValue }) {
                       ) => ({
                         ...styles,
                         fontFamily: Fonts.type.regular,
+                        fontSize: Fonts.size.text,
                         letterSpacing: 0,
                         fontFeatureSettings: '"tnum" on',
                         backgroundColor: isDisabled
@@ -208,54 +245,168 @@ export default function Statement({ id, type, options, defaultValue }) {
                 </View>
                 <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "100%",
-                    maxWidth: 400,
-                    paddingTop: Metrics.baseMargin,
+                    width: Metrics.baseMargin,
+                  }}
+                ></View>
+                <View
+                  style={{
+                    flex: 1,
                   }}
                 >
-                  <Text
+                  <View
                     style={{
-                      ...Fonts.style.text,
-                      // marginBottom: Metrics.doubleBaseMargin,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      paddingLeft: Metrics.halfBaseMargin,
+                      borderWidth: 1,
+                      borderColor: errors.includes("amount")
+                        ? "#FF686B"
+                        : "#000",
+                      borderRadius: 8,
+                      borderStyle: "solid",
                     }}
                   >
-                    {"Betrag"}
-                  </Text>
-                  <input
-                    type={"number"}
-                    name={"amount"}
-                    min="5"
-                    step="5"
-                    style={{
-                      alignSelf: "flex-end",
-                      borderWidth: 1,
-                      borderColor: errors.includes("amount") ? "#f00" : "#ccc",
-                      borderStyle: "solid",
-                      padding: "12px 16px",
-                    }}
-                  ></input>
+                    <Text
+                      style={{
+                        ...Fonts.style.textLink,
+                        color: errors.includes("amount")
+                          ? "#f00"
+                          : Colors.green,
+                        // marginBottom: Metrics.doubleBaseMargin,
+                      }}
+                    >
+                      {"Betrag: "}
+                    </Text>
+                    <input
+                      type={"number"}
+                      name={"amount"}
+                      min="5"
+                      step="5"
+                      style={{
+                        alignSelf: "flex-end",
+                        borderRadius: 8,
+                        borderWidth: 0,
+                        padding: "16px 16px",
+                        paddingLeft: Metrics.halfBaseMargin,
+                        paddingRight: Metrics.halfBaseMargin,
+                        fontFamily: Fonts.type.regular,
+                        fontSize: Fonts.size.text,
+                        textAlign: "right",
+                        flex: 1,
+                      }}
+                    ></input>
+                  </View>
                 </View>
-              </>
+              </View>
             )}
 
-            {inputs.map((obj, index) => {
-              return (
-                <Input
-                  key={"input-" + index}
-                  error={errors.includes(obj.inputKey)}
-                  {...obj}
-                ></Input>
-              );
-            })}
             <View
-              style={{ paddingTop: Metrics.baseMargin, flexDirection: "row" }}
+              style={styles.inputContainer}
+              dataSet={{ media: ids.inputContainer }}
             >
-              <input type="checkbox" name="agb" id="agb" value="yes" />
+              <View style={{ flex: 1 }}>
+                <Input
+                  error={errors.includes(inputs.family_name.inputKey)}
+                  {...inputs.family_name}
+                ></Input>
+              </View>
+
+              <View
+                style={{
+                  width: Metrics.baseMargin,
+                }}
+              ></View>
+              <View style={{ flex: 1 }}>
+                <Input
+                  error={errors.includes(inputs.first_name.inputKey)}
+                  {...inputs.first_name}
+                ></Input>
+              </View>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Input
+                error={errors.includes(inputs.address.inputKey)}
+                {...inputs.address}
+              ></Input>
+            </View>
+            <View
+              style={styles.inputContainer}
+              dataSet={{ media: ids.inputContainer }}
+            >
+              <View style={{ flex: 1 }}>
+                <Input
+                  error={errors.includes(inputs.zip.inputKey)}
+                  {...inputs.zip}
+                ></Input>
+              </View>
+              <View style={{ width: Metrics.baseMargin }}></View>
+
+              <View style={{ flex: 1 }}>
+                <Input
+                  error={errors.includes(inputs.city.inputKey)}
+                  {...inputs.city}
+                ></Input>
+              </View>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Input
+                error={errors.includes(inputs.email.inputKey)}
+                {...inputs.email}
+              ></Input>
+            </View>
+            <View
+              style={{
+                // paddingTop: Metrics.baseMargin,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <span
+                onClick={() => {
+                  setAGBChecked(!agbChecked);
+                }}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  borderWidth: 1,
+                  borderColor: errors.includes("agb") ? "#FF686B" : "#000",
+                  borderStyle: "solid",
+                  width: Metrics.baseMargin,
+                  height: Metrics.baseMargin,
+                  borderRadius: 8,
+                }}
+              >
+                <input
+                  hidden
+                  type="checkbox"
+                  name="agb"
+                  id="agb"
+                  // value={agbChecked}
+                  checked={agbChecked}
+                  // onChange={() => {}}
+                  // type="hidden"
+                />
+                {agbChecked === true && (
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      width: Metrics.halfBaseMargin,
+                      height: Metrics.halfBaseMargin,
+                      borderRadius: 2,
+                      backgroundColor: Colors.green,
+                      // borderRadius: 9,
+                    }}
+                  ></span>
+                )}
+              </span>
+
               <label
-                for="agb"
+                htmlFor="agb"
                 style={{
                   display: "flex",
                   paddingLeft: Metrics.halfBaseMargin,
@@ -293,12 +444,13 @@ export default function Statement({ id, type, options, defaultValue }) {
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "flex-end",
-                paddingTop: Metrics.baseMargin,
+                justifyContent: "flex-start",
+                paddingTop: Metrics.tripleBaseMargin,
               }}
             >
               <button type="submit" style={{ all: "unset" }}>
-                <Button label={"Absenden"}></Button>
+                {/* <Button label={"Absenden"}></Button> */}
+                <Button full textColor={Colors.white} label={"Absenden"} />
                 <div>{errorMessage}</div>
               </button>
             </View>
@@ -311,18 +463,38 @@ export default function Statement({ id, type, options, defaultValue }) {
 
 const { styles, ids } = StyleSheet.create({
   formContainer: {
-    alignSelf: "center",
-    alignItems: "center",
-    width: "74vw",
+    // alignSelf: "center",
+    // alignItems: "center",
+    // width: "100%",
+    // "@media (max-width: 910px)": {
+    //   width: "90vw",
+    // },
+    // backgroundColor: Colors.red,
+  },
+  inputContainer: {
+    flexDirection: "row",
     "@media (max-width: 910px)": {
-      width: "90vw",
+      flexDirection: "column",
     },
   },
-  iFrameContainer: {
-    width: "74vw",
-    minWidth: 280,
+  programInputsContainer: {
+    width: "100%",
+    flexDirection: "row",
+    paddingTop: Metrics.baseMargin,
+    paddingBottom: Metrics.baseMargin,
+    zIndex: 900,
+
     "@media (max-width: 910px)": {
-      width: "90vw",
+      width: "100%",
+      flexDirection: "column",
     },
+  },
+
+  iFrameContainer: {
+    // width: "74vw",
+    // minWidth: 280,
+    // "@media (max-width: 910px)": {
+    //   width: "90vw",
+    // },
   },
 });
