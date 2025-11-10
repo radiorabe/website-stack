@@ -18,9 +18,15 @@ import { Text, View } from "@/lib/server-react-native";
 import moment from "moment";
 import StyleSheet from "react-native-media-query";
 import IconShare from "../../../../../assets/svg/IconShare";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useResponsive from "@/lib/useResponsisve";
 import PostPreviewBox from "@/components/PostPreview/PostPreviewBox";
+import Link from "next/link";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   post: ItemsPost;
@@ -34,8 +40,73 @@ export default function BeitragPage({ post, morePosts }: Props) {
 
   let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
 
+  const memberButtonRef = useRef<HTMLElement>(null);
+  const postRef = useRef<HTMLElement>(null);
+  if (postRef.current) {
+    console.log("element:", postRef.current.getBoundingClientRect());
+  }
+
+  useGSAP(() => {
+    gsap.to(memberButtonRef.current, {
+      scrollTrigger: {
+        trigger: memberButtonRef.current,
+        start: "0 top",
+
+        end: () =>
+          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
+        scrub: true,
+        pin: true,
+        // markers: true, // Remove after debugging
+      },
+    });
+  });
+
   return (
     <View dataSet={{ media: ids.container }} style={styles.container}>
+      <View
+        ref={memberButtonRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "100vw",
+          height: "95vh",
+          zIndex: 999,
+          // backgroundColor: "blue",
+        }}
+      >
+        <View
+          // ref={memberButtonRef}
+          style={styles.memberButtonContainer}
+          dataSet={{ media: ids.memberButtonContainer }}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.darkGreen,
+              paddingVertical: Metrics.halfHalfBaseMargin,
+              paddingHorizontal: Metrics.halfBaseMargin,
+              borderBottomLeftRadius: 9,
+              borderBottomRightRadius: 9,
+              margin: 0,
+            }}
+          >
+            <Link
+              href={"/mitglied-werden"}
+              style={{
+                textDecoration: "none",
+              }}
+              passHref={true}
+            >
+              <Text
+                style={styles.memberButton}
+                dataSet={{ media: ids.memberButton }}
+              >
+                {"Mitglied werden"}
+              </Text>
+            </Link>
+          </View>
+        </View>
+      </View>
       <View dataSet={{ media: ids.postContainer }} style={styles.postContainer}>
         <View
           dataSet={{ media: ids.postInfoContainer }}
@@ -154,48 +225,49 @@ export default function BeitragPage({ post, morePosts }: Props) {
           )}
         </View>
       </View>
-
-      {morePosts && morePosts.length > 0 && (
-        <View
-          style={styles.morePostsContainer}
-          dataSet={{ media: ids.morePostsContainer }}
-        >
+      <View ref={postRef}>
+        {morePosts && morePosts.length > 0 && (
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginBottom: Metrics.doubleBaseMargin,
-              maxWidth: "100%",
-            }}
+            style={styles.morePostsContainer}
+            dataSet={{ media: ids.morePostsContainer }}
           >
-            <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
-              {"Weitere Beiträge von " + program.name}
-            </Text>
             <View
-              style={styles.buttonContainer}
-              dataSet={{ media: ids.buttonContainer }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginBottom: Metrics.doubleBaseMargin,
+                maxWidth: "100%",
+              }}
             >
-              <Button
-                href={{
-                  pathname: "/beitraege",
-                  query: { program: program.slug },
-                }}
-                label={"Alle Beiträge"}
-                full
-                textColor={Colors.white}
-              />
+              <Text style={styles.h2Title} dataSet={{ media: ids.h2Title }}>
+                {"Weitere Beiträge von " + program.name}
+              </Text>
+              <View
+                style={styles.buttonContainer}
+                dataSet={{ media: ids.buttonContainer }}
+              >
+                <Button
+                  href={{
+                    pathname: "/beitraege",
+                    query: { program: program.slug },
+                  }}
+                  label={"Alle Beiträge"}
+                  full
+                  textColor={Colors.white}
+                />
+              </View>
+            </View>
+
+            <View
+              style={{
+                marginBottom: Metrics.tripleBaseMargin,
+              }}
+            >
+              <PostPreviewBox posts={morePosts}></PostPreviewBox>
             </View>
           </View>
-
-          <View
-            style={{
-              marginBottom: Metrics.tripleBaseMargin,
-            }}
-          >
-            <PostPreviewBox posts={morePosts}></PostPreviewBox>
-          </View>
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 }
@@ -290,5 +362,24 @@ const { ids, styles } = StyleSheet.create({
     "@media (max-width: 910px)": {
       display: "none",
     },
+  },
+  memberButtonContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    height: 20,
+    transform: [
+      { translateX: "50%" },
+      { translateX: -10 },
+      { rotate: "90deg" },
+      { translateX: "45vh" },
+    ],
+    "@media (max-width: 910px)": {
+      display: "none",
+    },
+  },
+  memberButton: {
+    ...Fonts.style.textLink,
+    color: Colors.white,
   },
 });
