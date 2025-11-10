@@ -19,6 +19,8 @@ export default function Form({ id, type, options, defaultValue }) {
   const [orderId, setOrderId] = useState();
   const [agbChecked, setAGBChecked] = useState(false);
   const [iFrameHeight, setIFrameHeight] = useState(0);
+  const [amount, setAmount] = useState(null);
+
   // console.log("errors", errors);
   const router = useRouter();
 
@@ -200,14 +202,15 @@ export default function Form({ id, type, options, defaultValue }) {
                         ...baseStyles,
                         fontFamily: Fonts.type.bold,
                         fontSize: Fonts.size.text,
-                        padding: "12px 16px",
                         paddingLeft: Metrics.halfBaseMargin,
+                        paddingTop: "0.55vw",
+                        paddingBottom: "0.55vw",
                       }),
                       placeholder: (baseStyles) => ({
                         ...baseStyles,
                         fontFamily: Fonts.type.bold,
                         color: errors.includes("program")
-                          ? "#FF686B"
+                          ? Colors.red
                           : Colors.black,
                         // padding: "12px 16px",
                         // paddingLeft: Metrics.halfBaseMargin,
@@ -220,7 +223,7 @@ export default function Form({ id, type, options, defaultValue }) {
                         borderStyle: "solid",
                         borderRadius: 8,
                         borderColor: errors.includes("program")
-                          ? "#FF686B"
+                          ? Colors.red
                           : "#000",
                       }),
                       option: (
@@ -258,10 +261,9 @@ export default function Form({ id, type, options, defaultValue }) {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      paddingLeft: Metrics.halfBaseMargin,
                       borderWidth: 1,
                       borderColor: errors.includes("amount")
-                        ? "#FF686B"
+                        ? Colors.red
                         : "#000",
                       borderRadius: 8,
                       borderStyle: "solid",
@@ -269,31 +271,42 @@ export default function Form({ id, type, options, defaultValue }) {
                   >
                     <Text
                       style={{
+                        visibility: amount !== null ? "hidden" : "visible",
+                        paddingLeft: Metrics.halfBaseMargin,
+
                         ...Fonts.style.textLink,
                         color: errors.includes("amount")
                           ? "#f00"
                           : Colors.green,
-                        // marginBottom: Metrics.doubleBaseMargin,
+                        paddingTop: Metrics.halfBaseMargin,
+                        paddingBottom: Metrics.halfBaseMargin,
                       }}
                     >
                       {"Betrag: "}
                     </Text>
+
                     <input
                       type={"number"}
                       name={"amount"}
                       min="5"
                       step="5"
+                      onChange={(val) => setAmount(val.target.value)}
                       style={{
-                        alignSelf: "flex-end",
-                        borderRadius: 8,
-                        borderWidth: 0,
-                        padding: "16px 16px",
+                        ...Fonts.style.TTtext,
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
                         paddingLeft: Metrics.halfBaseMargin,
                         paddingRight: Metrics.halfBaseMargin,
-                        fontFamily: Fonts.type.regular,
-                        fontSize: Fonts.size.text,
-                        textAlign: "right",
-                        flex: 1,
+                        paddingTop: Metrics.halfBaseMargin,
+                        paddingBottom: Metrics.halfBaseMargin,
+                        marginLeft: 0,
+                        backgroundColor: "transparent",
+                        borderColor: "transparent",
+                        borderRadius: 8,
+                        boxShadow: "none",
                       }}
                     ></input>
                   </View>
@@ -373,7 +386,7 @@ export default function Form({ id, type, options, defaultValue }) {
                   justifyContent: "center",
                   cursor: "pointer",
                   borderWidth: 1,
-                  borderColor: errors.includes("agb") ? "#FF686B" : "#000",
+                  borderColor: errors.includes("agb") ? Colors.red : "#000",
                   borderStyle: "solid",
                   width: Metrics.baseMargin,
                   height: Metrics.baseMargin,
