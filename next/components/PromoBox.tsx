@@ -48,7 +48,9 @@ const PromoBox = ({
           layout={!isMobile ? undefined : "responsive"}
           fill={!isMobile}
           alt={title}
-          onError={event => { console.log("IMAGE ERROR ECONNRESET: ", event);}}
+          onError={(event) => {
+            console.log("IMAGE ERROR ECONNRESET: ", event);
+          }}
         />
       </View>
 
@@ -92,7 +94,6 @@ const { ids, styles } = StyleSheet.create({
   container: {
     borderRadius: 9,
     padding: Metrics.doubleBaseMargin,
-    marginBottom: Metrics.tripleBaseMargin,
     flexDirection: "row",
     justifyContent: "space-between",
     "@media (max-width: 910px)": {

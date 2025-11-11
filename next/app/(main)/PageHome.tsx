@@ -25,7 +25,7 @@ export interface Props {
 }
 
 export default function HomePage({ pageData, posts, partyTips, event }: Props) {
-  let promo_box = pageData && pageData.promo_box as ItemsPromoBox;
+  let promo_box = pageData && (pageData.promo_box as ItemsPromoBox);
 
   return (
     <View>
@@ -37,15 +37,17 @@ export default function HomePage({ pageData, posts, partyTips, event }: Props) {
         }}
       >
         {event && (
-          <PromoBox
-            title={event.promo_title}
-            text={event.promo_text}
-            backgroundColor={event.color}
-            textColor={Colors.white}
-            imageId={event.title_image as string}
-            buttonLabel={event.promo_button_label}
-            buttonUrl={event.promo_button_url}
-          ></PromoBox>
+          <View style={{ paddingBottom: Metrics.tripleBaseMargin }}>
+            <PromoBox
+              title={event.promo_title}
+              text={event.promo_text}
+              backgroundColor={event.color}
+              textColor={Colors.white}
+              imageId={event.title_image as string}
+              buttonLabel={event.promo_button_label}
+              buttonUrl={event.promo_button_url}
+            ></PromoBox>
+          </View>
         )}
 
         <View
@@ -143,5 +145,6 @@ const { styles, ids } = StyleSheet.create({
   },
   promoBoxContainer: {
     paddingHorizontal: Metrics.tripleBaseMargin,
+    paddingBottom: Metrics.tripleBaseMargin,
   },
 });

@@ -53,7 +53,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
         start: "0 top",
 
         end: () =>
-          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
+          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y + memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
         scrub: true,
         pin: true,
         // markers: true, // Remove after debugging

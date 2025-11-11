@@ -67,7 +67,7 @@ export default function ProgramPage({
         start: "0 top",
 
         end: () =>
-          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y} bottom`,
+          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y + memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
         scrub: true,
         pin: true,
         // markers: true, // Remove after debugging
@@ -273,7 +273,7 @@ export default function ProgramPage({
         </View>
       </View>
       {promo_box && (
-        <View style={{ width: "90%" }}>
+        <View style={{ width: "90%", paddingTop: Metrics.tripleBaseMargin }}>
           <PromoBox
             title={promo_box.title}
             text={promo_box.text}
@@ -288,7 +288,7 @@ export default function ProgramPage({
       )}
       <View ref={postRef}>
         {posts && posts.length > 0 && (
-          <View style={{ width: "90vw" }}>
+          <View style={{ width: "90vw", paddingTop: Metrics.tripleBaseMargin }}>
             <View
               style={{
                 flexDirection: "row",
@@ -374,7 +374,7 @@ const { ids, styles } = StyleSheet.create({
   image: { width: "100%" },
   contentContainer: {
     width: "74vw",
-    paddingVertical: Metrics.tripleBaseMargin,
+    paddingTop: Metrics.tripleBaseMargin,
     "@media (max-width: 910px)": {
       width: "90vw",
     },
