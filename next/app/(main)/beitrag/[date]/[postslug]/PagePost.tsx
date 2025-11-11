@@ -73,10 +73,9 @@ export default function BeitragPage({ post, morePosts }: Props) {
           position: "absolute",
           top: 0,
           right: 0,
-          width: "100vw",
+          width: 200,
           height: "95vh",
           zIndex: 999,
-          // backgroundColor: "blue",
         }}
       >
         <View

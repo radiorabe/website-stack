@@ -83,7 +83,7 @@ export default function ProgramPage({
           position: "absolute",
           top: "75vh",
           right: 0,
-          width: "100vw",
+          width: 200,
           height: "90vh",
           zIndex: 999,
         }}

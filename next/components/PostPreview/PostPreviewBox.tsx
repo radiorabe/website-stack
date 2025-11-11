@@ -17,7 +17,7 @@ const PostPreviewBox = ({ posts }: Props) => {
   }
 
   return (
-    <View style={styles.boxContainer} dataSet={{ media: ids.boxContainer }}>
+    <View pointerEvents="box-none" style={styles.boxContainer} dataSet={{ media: ids.boxContainer }}>
       {posts.map((item, index) => {
         return (
           <View
