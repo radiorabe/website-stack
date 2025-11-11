@@ -40,31 +40,34 @@ export default function BeitragPage({ post, morePosts }: Props) {
 
   let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
 
+  const memberButtonContainerRef = useRef<HTMLElement>(null);
   const memberButtonRef = useRef<HTMLElement>(null);
-  const postRef = useRef<HTMLElement>(null);
-  if (postRef.current) {
-    console.log("element:", postRef.current.getBoundingClientRect());
-  }
+  const containerRef = useRef<HTMLElement>(null);
+  const shareButtonRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.to(memberButtonRef.current, {
+    gsap.to(memberButtonContainerRef.current, {
       scrollTrigger: {
-        trigger: memberButtonRef.current,
-        start: "0 top",
+        trigger: memberButtonContainerRef.current,
+        start: `${-containerRef.current.getBoundingClientRect().width * 0.05} top`, //  5vw offset
 
         end: () =>
-          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y + memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
+          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2 - containerRef.current.getBoundingClientRect().width * 0.03} bottom`,
         scrub: true,
         pin: true,
-        // markers: true, // Remove after debugging
+        markers: true, // Remove after debugging
       },
     });
   });
 
   return (
-    <View dataSet={{ media: ids.container }} style={styles.container}>
+    <View
+      ref={containerRef}
+      dataSet={{ media: ids.container }}
+      style={styles.container}
+    >
       <View
-        ref={memberButtonRef}
+        ref={memberButtonContainerRef}
         style={{
           position: "absolute",
           top: 0,
@@ -76,11 +79,11 @@ export default function BeitragPage({ post, morePosts }: Props) {
         }}
       >
         <View
-          // ref={memberButtonRef}
           style={styles.memberButtonContainer}
           dataSet={{ media: ids.memberButtonContainer }}
         >
           <View
+            ref={memberButtonRef}
             style={{
               backgroundColor: Colors.darkGreen,
               paddingVertical: Metrics.halfHalfBaseMargin,
@@ -194,6 +197,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
           </View>
         )}
         <View
+          ref={shareButtonRef}
           // dataSet={{media:ids.}}
           style={{ flexDirection: "row" }}
         >
@@ -225,7 +229,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
           )}
         </View>
       </View>
-      <View ref={postRef}>
+      <View>
         {morePosts && morePosts.length > 0 && (
           <View
             style={styles.morePostsContainer}

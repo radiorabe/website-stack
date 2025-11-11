@@ -54,31 +54,30 @@ export default function ProgramPage({
   let promo_box = program.promo_box as ItemsPromoBox;
   let { isMobile } = useResponsive();
   let [shareButtonTitle, setShareButtonTitle] = useState("Teilen");
+  const memberButtonContainerRef = useRef<HTMLElement>(null);
   const memberButtonRef = useRef<HTMLElement>(null);
-  const postRef = useRef<HTMLElement>(null);
-  if (postRef.current) {
-    console.log("element:", postRef.current.getBoundingClientRect());
-  }
+  const containerRef = useRef<HTMLElement>(null);
+  const shareButtonRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.to(memberButtonRef.current, {
+    gsap.to(memberButtonContainerRef.current, {
       scrollTrigger: {
-        trigger: memberButtonRef.current,
-        start: "0 top",
+        trigger: memberButtonContainerRef.current,
+        start: `${-containerRef.current.getBoundingClientRect().width * 0.05} top`,
 
         end: () =>
-          `${postRef.current.getBoundingClientRect().y - memberButtonRef.current.getBoundingClientRect().y + memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
+          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2 - containerRef.current.getBoundingClientRect().width * 0.05} bottom`,
         scrub: true,
         pin: true,
-        // markers: true, // Remove after debugging
+        markers: true, // Remove after debugging
       },
     });
   });
 
   return (
-    <View style={styles.container}>
+    <View ref={containerRef} style={styles.container}>
       <View
-        ref={memberButtonRef}
+        ref={memberButtonContainerRef}
         style={{
           position: "absolute",
           top: "75vh",
@@ -89,11 +88,11 @@ export default function ProgramPage({
         }}
       >
         <View
-          // ref={memberButtonRef}
           style={styles.memberButtonContainer}
           dataSet={{ media: ids.memberButtonContainer }}
         >
           <View
+            ref={memberButtonRef}
             style={{
               backgroundColor: Colors.darkGreen,
               paddingVertical: Metrics.halfHalfBaseMargin,
@@ -244,6 +243,7 @@ export default function ProgramPage({
         )}
 
         <View
+          ref={shareButtonRef}
           // dataSet={{media:ids.}}
           style={{ flexDirection: "row" }}
         >
@@ -286,7 +286,7 @@ export default function ProgramPage({
           ></PromoBox>
         </View>
       )}
-      <View ref={postRef}>
+      <View>
         {posts && posts.length > 0 && (
           <View style={{ width: "90vw", paddingTop: Metrics.tripleBaseMargin }}>
             <View
