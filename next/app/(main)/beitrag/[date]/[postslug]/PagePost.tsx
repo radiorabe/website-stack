@@ -67,6 +67,7 @@ export default function BeitragPage({ post, morePosts }: Props) {
       style={styles.container}
     >
       <View
+        pointerEvents="box-none"
         ref={memberButtonContainerRef}
         style={{
           position: "absolute",

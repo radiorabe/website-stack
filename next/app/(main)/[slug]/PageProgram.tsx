@@ -77,6 +77,7 @@ export default function ProgramPage({
   return (
     <View ref={containerRef} style={styles.container}>
       <View
+        pointerEvents="box-none"
         ref={memberButtonContainerRef}
         style={{
           position: "absolute",
