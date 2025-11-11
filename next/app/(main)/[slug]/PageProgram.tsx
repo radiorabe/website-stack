@@ -66,10 +66,10 @@ export default function ProgramPage({
         start: `${-containerRef.current.getBoundingClientRect().width * 0.05} top`,
 
         end: () =>
-          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2 - containerRef.current.getBoundingClientRect().width * 0.05} bottom`,
+          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
         scrub: true,
         pin: true,
-        markers: true, // Remove after debugging
+        // markers: true, // Remove after debugging
       },
     });
   });
@@ -286,9 +286,9 @@ export default function ProgramPage({
           ></PromoBox>
         </View>
       )}
-      <View>
+      <View style={{ paddingTop: Metrics.tripleBaseMargin }}>
         {posts && posts.length > 0 && (
-          <View style={{ width: "90vw", paddingTop: Metrics.tripleBaseMargin }}>
+          <View style={{ width: "90vw" }}>
             <View
               style={{
                 flexDirection: "row",

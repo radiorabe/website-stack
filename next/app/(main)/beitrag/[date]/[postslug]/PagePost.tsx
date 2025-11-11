@@ -52,10 +52,10 @@ export default function BeitragPage({ post, morePosts }: Props) {
         start: `${-containerRef.current.getBoundingClientRect().width * 0.05} top`, //  5vw offset
 
         end: () =>
-          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2 - containerRef.current.getBoundingClientRect().width * 0.03} bottom`,
+          `${shareButtonRef.current.getBoundingClientRect().y - memberButtonContainerRef.current.getBoundingClientRect().y + memberButtonContainerRef.current.getBoundingClientRect().height / 2 - memberButtonRef.current.getBoundingClientRect().height / 2} bottom`,
         scrub: true,
         pin: true,
-        markers: true, // Remove after debugging
+        // markers: true, // Remove after debugging
       },
     });
   });
@@ -229,12 +229,12 @@ export default function BeitragPage({ post, morePosts }: Props) {
           )}
         </View>
       </View>
-      <View>
+      <View
+        style={styles.morePostsContainer}
+        dataSet={{ media: ids.morePostsContainer }}
+      >
         {morePosts && morePosts.length > 0 && (
-          <View
-            style={styles.morePostsContainer}
-            dataSet={{ media: ids.morePostsContainer }}
-          >
+          <View style={{ width: "90vw" }}>
             <View
               style={{
                 flexDirection: "row",
@@ -352,7 +352,6 @@ const { ids, styles } = StyleSheet.create({
     },
   },
   morePostsContainer: {
-    width: "90vw",
     paddingTop: Metrics.quadBaseMargin,
     "@media (max-width: 910px)": {
       paddingTop: Metrics.octBaseMargin,
