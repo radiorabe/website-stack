@@ -136,15 +136,16 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await getPost(params);
-  // console.log("constent", post.content.content);
 
   let description = post.short_description;
 
-  if (!description) {
+  if (!description && post.content && post.content.content) {
     let paragraph = post.content.content.find(
       (item) => item.type === "paragraph"
     );
-    description = paragraph.content.find((item) => item.type === "text").text;
+    if (paragraph && paragraph.content) {
+      description = paragraph.content.find((item) => item.type === "text").text;
+    }
   }
 
   // optionally access and extend (rather than replace) parent metadata
