@@ -16,8 +16,8 @@ export default function TeamPage({ pageData }) {
     { title: "RaBe Staff", members: data.members_staff },
     { title: "Vorstandsmitglieder", members: data.members_management },
     { title: "Programmkommissionsmitglieder", members: data.members_program },
-    { title: "RaBe IT", members: data.members_it },
-    { title: "Rabe Info", members: data.members_rabe_info },
+    { title: "IT-Reaktion", members: data.members_it },
+    { title: "RaBe-Info", members: data.members_rabe_info },
   ];
 
   return (
