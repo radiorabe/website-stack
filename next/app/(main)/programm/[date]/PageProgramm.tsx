@@ -59,7 +59,7 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
 
   let currentWeekNumber = moment().week();
 
-  let nextWeekNumber = weekNumber + (1 % maxWeeksThisYear);
+  let nextWeekNumber = (weekNumber + 1) % maxWeeksThisYear;
   let nextYearNumber = weekNumber < maxWeeksThisYear ? year : year + 1;
 
   let prevWeekNumber =
