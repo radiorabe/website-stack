@@ -56,26 +56,37 @@ export default function ProgramPage({ liveData, pageData, params }: Props) {
       ? moment().endOf("week").year()
       : parseInt(yearString);
   let maxWeeksThisYear = moment(year + "-12-31").isoWeeksInYear();
+  let maxWeeksPrevYear = moment(year + "-12-31").isoWeeksInYear();
 
   let currentWeekNumber = moment().week();
 
   let nextWeekNumber = (weekNumber + 1) % maxWeeksThisYear;
-  let nextYearNumber = weekNumber < maxWeeksThisYear ? year : year + 1;
+  let nextYearNumber = weekNumber + 1 >= maxWeeksThisYear ? year + 1 : year;
 
   let prevWeekNumber =
-    weekNumber <= currentWeekNumber ? currentWeekNumber : weekNumber - 1;
+    weekNumber <= currentWeekNumber && year === currentYear
+      ? currentWeekNumber
+      : weekNumber === 1
+        ? maxWeeksPrevYear - 1
+        : weekNumber - 1;
   let prevYearNumber = weekNumber === 1 ? year - 1 : year;
 
-  let nextMonthWeekNumber = weekNumber + 4;
-  let nextMonthYearNumber = year;
+  let nextMonthWeekNumber = (weekNumber + 4) % maxWeeksThisYear;
+  let nextMonthYearNumber =
+    weekNumber + 4 >= maxWeeksThisYear ? year + 1 : year;
 
-  let prevMonthWeekNumber = weekNumber - 4;
-  let prevMonthYearNumber = year;
+  let prevMonthWeekNumber =
+    weekNumber - 4 < 1 ? maxWeeksPrevYear - 4 : weekNumber - 4;
+  let prevMonthYearNumber = weekNumber - 4 < 1 ? year - 1 : year;
 
   let hideNextMonthArrow = nextMonthWeekNumber > currentWeekNumber + 8; // not more than 8 weeks
-  let hidePrevMonthArrow = prevMonthWeekNumber < currentWeekNumber; // do not go back this week
+  let hidePrevMonthArrow =
+    prevMonthWeekNumber < currentWeekNumber &&
+    prevMonthYearNumber <= currentYear; // do not go back this week
   let hideNextWeekArrow = nextWeekNumber > currentWeekNumber + 8 || isMobile;
-  let hidePrevWeekArrow = prevWeekNumber < currentWeekNumber || isMobile;
+  let hidePrevWeekArrow =
+    (prevWeekNumber < currentWeekNumber && prevYearNumber <= currentYear) ||
+    isMobile;
 
   let nextWeekArrowLink = hideNextWeekArrow
     ? null
