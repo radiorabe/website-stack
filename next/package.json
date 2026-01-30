@@ -15,7 +15,7 @@
     "cross-fetch": "^4.0.0",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
-    "fast-xml-parser": "^4.5.1",
+    "fast-xml-parser": "^5.3.4",
     "framer-motion": "^11.11.10",
     "google-maps-react-markers": "^2.0.11",
     "gsap": "^3.13.0",
