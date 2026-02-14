@@ -19,5 +19,7 @@ top -b -n1 > "${folderName}/top.log"
 # restart 
 docker compose up -d --no-deps --build --force-recreate directus
 sleep 10
+docker compose stop next
+rm -rf next/.next
 docker compose up -d --no-deps --build --force-recreate next 
 docker system prune -f
