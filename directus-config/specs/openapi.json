@@ -3,7 +3,7 @@
   "info": {
     "title": "Dynamic API Specification",
     "description": "This is a dynamically generated API specification for all endpoints existing on the current project.",
-    "version": "11.2.1"
+    "version": "0e2dac75cc92c90ae18c941a04f08e19c04b85f5"
   },
   "servers": [
     {
@@ -861,12 +861,14 @@
               "schema": {
                 "properties": {
                   "format": {
-                    "description": "What file format to save the export to. One of csv, xml, json",
+                    "description": "What file format to save the export to. One of csv, csv_utf8, xml, json, yaml",
                     "type": "string",
                     "enum": [
                       "csv",
+                      "csv_utf8",
                       "xml",
-                      "json"
+                      "json",
+                      "yaml"
                     ]
                   },
                   "query": {
@@ -1689,703 +1691,6 @@
         ]
       }
     },
-    "/fields": {
-      "get": {
-        "summary": "List All Fields",
-        "description": "Returns a list of the fields available in the project.",
-        "operationId": "getFields",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Limit"
-          },
-          {
-            "$ref": "#/components/parameters/Sort"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Fields"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ]
-      }
-    },
-    "/fields/{collection}": {
-      "get": {
-        "summary": "List Fields in Collection",
-        "description": "Returns a list of the fields available in the given collection.",
-        "operationId": "getCollectionFields",
-        "parameters": [
-          {
-            "description": "Unique identifier of the collection the item resides in.",
-            "in": "path",
-            "name": "collection",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Sort"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Fields"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ]
-      },
-      "post": {
-        "summary": "Create Field in Collection",
-        "description": "Create a new field in a given collection.",
-        "operationId": "createField",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "field",
-                  "datatype",
-                  "type",
-                  "length"
-                ],
-                "type": "object",
-                "properties": {
-                  "field": {
-                    "description": "Unique name of the field. Field name is unique within the collection.",
-                    "example": "id",
-                    "type": "string"
-                  },
-                  "type": {
-                    "description": "Directus specific data type. Used to cast values in the API.",
-                    "example": "integer",
-                    "type": "string"
-                  },
-                  "schema": {
-                    "description": "The schema info.",
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "description": "The name of the field.",
-                        "example": "title",
-                        "type": "string"
-                      },
-                      "table": {
-                        "description": "The collection of the field.",
-                        "example": "posts",
-                        "type": "string"
-                      },
-                      "type": {
-                        "description": "The type of the field.",
-                        "example": "string",
-                        "type": "string"
-                      },
-                      "default_value": {
-                        "description": "The default value of the field.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "max_length": {
-                        "description": "The max length of the field.",
-                        "example": null,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "is_nullable": {
-                        "description": "If the field is nullable.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "is_primary_key": {
-                        "description": "If the field is primary key.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "has_auto_increment": {
-                        "description": "If the field has auto increment.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "foreign_key_column": {
-                        "description": "Related column from the foreign key constraint.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "foreign_key_table": {
-                        "description": "Related table from the foreign key constraint.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "comment": {
-                        "description": "Comment as saved in the database.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "schema": {
-                        "description": "Database schema (pg only).",
-                        "example": "public",
-                        "type": "string"
-                      },
-                      "foreign_key_schema": {
-                        "description": "Related schema from the foreign key constraint (pg only).",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      }
-                    }
-                  },
-                  "meta": {
-                    "description": "The meta info.",
-                    "type": "object",
-                    "nullable": true,
-                    "properties": {
-                      "id": {
-                        "description": "Unique identifier for the field in the `directus_fields` collection.",
-                        "example": 3,
-                        "type": "integer"
-                      },
-                      "collection": {
-                        "description": "Unique name of the collection this field is in.",
-                        "example": "posts",
-                        "type": "string"
-                      },
-                      "field": {
-                        "description": "Unique name of the field. Field name is unique within the collection.",
-                        "example": "title",
-                        "type": "string"
-                      },
-                      "special": {
-                        "description": "Transformation flag for field",
-                        "example": null,
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "nullable": true
-                      },
-                      "system-interface": {
-                        "description": "What interface is used in the admin app to edit the value for this field.",
-                        "example": "primary-key",
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "options": {
-                        "description": "Options for the interface that's used. This format is based on the individual interface.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "display": {
-                        "description": "What display is used in the admin app to display the value for this field.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "display_options": {
-                        "description": "Options for the display that's used. This format is based on the individual display.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "locked": {
-                        "description": "If the field can be altered by the end user. Directus system fields have this value set to `true`.",
-                        "example": true,
-                        "type": "boolean"
-                      },
-                      "readonly": {
-                        "description": "Prevents the user from editing the value in the field.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "hidden": {
-                        "description": "If this field should be hidden.",
-                        "example": true,
-                        "type": "boolean"
-                      },
-                      "sort": {
-                        "description": "Sort order of this field on the edit page of the admin app.",
-                        "example": 1,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "width": {
-                        "description": "Width of the field on the edit form.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true,
-                        "enum": [
-                          "half",
-                          "half-left",
-                          "half-right",
-                          "full",
-                          "fill",
-                          null
-                        ]
-                      },
-                      "group": {
-                        "description": "What field group this field is part of.",
-                        "example": null,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "translation": {
-                        "description": "Key value pair of `<language>: <translation>` that allows the user to change the displayed name of the field in the admin app.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "note": {
-                        "description": "A user provided note for the field. Will be rendered alongside the interface on the edit page.",
-                        "example": "",
-                        "type": "string",
-                        "nullable": true
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Fields"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Successful request"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ],
-        "parameters": [
-          {
-            "description": "Unique identifier of the collection the item resides in.",
-            "in": "path",
-            "name": "collection",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fields/{collection}/{id}": {
-      "get": {
-        "summary": "Retrieve a Field",
-        "description": "Retrieves the details of a single field in a given collection.",
-        "operationId": "getCollectionField",
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Fields"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ],
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "path",
-            "description": "Unique identifier of the collection the item resides in.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the field.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
-        ]
-      },
-      "patch": {
-        "summary": "Update a Field",
-        "description": "Update an existing field.",
-        "operationId": "updateField",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "field": {
-                    "description": "Unique name of the field. Field name is unique within the collection.",
-                    "example": "id",
-                    "type": "string"
-                  },
-                  "type": {
-                    "description": "Directus specific data type. Used to cast values in the API.",
-                    "example": "integer",
-                    "type": "string"
-                  },
-                  "schema": {
-                    "description": "The schema info.",
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "description": "The name of the field.",
-                        "example": "title",
-                        "type": "string"
-                      },
-                      "table": {
-                        "description": "The collection of the field.",
-                        "example": "posts",
-                        "type": "string"
-                      },
-                      "type": {
-                        "description": "The type of the field.",
-                        "example": "string",
-                        "type": "string"
-                      },
-                      "default_value": {
-                        "description": "The default value of the field.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "max_length": {
-                        "description": "The max length of the field.",
-                        "example": null,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "is_nullable": {
-                        "description": "If the field is nullable.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "is_primary_key": {
-                        "description": "If the field is primary key.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "has_auto_increment": {
-                        "description": "If the field has auto increment.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "foreign_key_column": {
-                        "description": "Related column from the foreign key constraint.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "foreign_key_table": {
-                        "description": "Related table from the foreign key constraint.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "comment": {
-                        "description": "Comment as saved in the database.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "schema": {
-                        "description": "Database schema (pg only).",
-                        "example": "public",
-                        "type": "string"
-                      },
-                      "foreign_key_schema": {
-                        "description": "Related schema from the foreign key constraint (pg only).",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      }
-                    }
-                  },
-                  "meta": {
-                    "description": "The meta info.",
-                    "type": "object",
-                    "nullable": true,
-                    "properties": {
-                      "id": {
-                        "description": "Unique identifier for the field in the `directus_fields` collection.",
-                        "example": 3,
-                        "type": "integer"
-                      },
-                      "collection": {
-                        "description": "Unique name of the collection this field is in.",
-                        "example": "posts",
-                        "type": "string"
-                      },
-                      "field": {
-                        "description": "Unique name of the field. Field name is unique within the collection.",
-                        "example": "title",
-                        "type": "string"
-                      },
-                      "special": {
-                        "description": "Transformation flag for field",
-                        "example": null,
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "nullable": true
-                      },
-                      "system-interface": {
-                        "description": "What interface is used in the admin app to edit the value for this field.",
-                        "example": "primary-key",
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "options": {
-                        "description": "Options for the interface that's used. This format is based on the individual interface.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "display": {
-                        "description": "What display is used in the admin app to display the value for this field.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "display_options": {
-                        "description": "Options for the display that's used. This format is based on the individual display.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "locked": {
-                        "description": "If the field can be altered by the end user. Directus system fields have this value set to `true`.",
-                        "example": true,
-                        "type": "boolean"
-                      },
-                      "readonly": {
-                        "description": "Prevents the user from editing the value in the field.",
-                        "example": false,
-                        "type": "boolean"
-                      },
-                      "hidden": {
-                        "description": "If this field should be hidden.",
-                        "example": true,
-                        "type": "boolean"
-                      },
-                      "sort": {
-                        "description": "Sort order of this field on the edit page of the admin app.",
-                        "example": 1,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "width": {
-                        "description": "Width of the field on the edit form.",
-                        "example": null,
-                        "type": "string",
-                        "nullable": true,
-                        "enum": [
-                          "half",
-                          "half-left",
-                          "half-right",
-                          "full",
-                          "fill",
-                          null
-                        ]
-                      },
-                      "group": {
-                        "description": "What field group this field is part of.",
-                        "example": null,
-                        "type": "integer",
-                        "nullable": true
-                      },
-                      "translation": {
-                        "description": "Key value pair of `<language>: <translation>` that allows the user to change the displayed name of the field in the admin app.",
-                        "example": null,
-                        "type": "object",
-                        "nullable": true
-                      },
-                      "note": {
-                        "description": "A user provided note for the field. Will be rendered alongside the interface on the edit page.",
-                        "example": "",
-                        "type": "string",
-                        "nullable": true
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Fields"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ],
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "path",
-            "description": "Unique identifier of the collection the item resides in.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the field.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a Field",
-        "description": "Delete an existing field.",
-        "operationId": "deleteField",
-        "responses": {
-          "200": {
-            "description": "Successful request"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Fields"
-        ],
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "path",
-            "description": "Unique identifier of the collection the item resides in.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the field.",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
-        ]
-      }
-    },
     "/collections": {
       "get": {
         "summary": "List Collections",
@@ -3133,6 +2438,703 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/UUId"
+          }
+        ]
+      }
+    },
+    "/fields": {
+      "get": {
+        "summary": "List All Fields",
+        "description": "Returns a list of the fields available in the project.",
+        "operationId": "getFields",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Fields"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ]
+      }
+    },
+    "/fields/{collection}": {
+      "get": {
+        "summary": "List Fields in Collection",
+        "description": "Returns a list of the fields available in the given collection.",
+        "operationId": "getCollectionFields",
+        "parameters": [
+          {
+            "description": "Unique identifier of the collection the item resides in.",
+            "in": "path",
+            "name": "collection",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Fields"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ]
+      },
+      "post": {
+        "summary": "Create Field in Collection",
+        "description": "Create a new field in a given collection.",
+        "operationId": "createField",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "field",
+                  "datatype",
+                  "type",
+                  "length"
+                ],
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "description": "Unique name of the field. Field name is unique within the collection.",
+                    "example": "id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Directus specific data type. Used to cast values in the API.",
+                    "example": "integer",
+                    "type": "string"
+                  },
+                  "schema": {
+                    "description": "The schema info.",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "description": "The name of the field.",
+                        "example": "title",
+                        "type": "string"
+                      },
+                      "table": {
+                        "description": "The collection of the field.",
+                        "example": "posts",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "The type of the field.",
+                        "example": "string",
+                        "type": "string"
+                      },
+                      "default_value": {
+                        "description": "The default value of the field.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "max_length": {
+                        "description": "The max length of the field.",
+                        "example": null,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "is_nullable": {
+                        "description": "If the field is nullable.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "is_primary_key": {
+                        "description": "If the field is primary key.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "has_auto_increment": {
+                        "description": "If the field has auto increment.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "foreign_key_column": {
+                        "description": "Related column from the foreign key constraint.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "foreign_key_table": {
+                        "description": "Related table from the foreign key constraint.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "comment": {
+                        "description": "Comment as saved in the database.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "schema": {
+                        "description": "Database schema (pg only).",
+                        "example": "public",
+                        "type": "string"
+                      },
+                      "foreign_key_schema": {
+                        "description": "Related schema from the foreign key constraint (pg only).",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "meta": {
+                    "description": "The meta info.",
+                    "type": "object",
+                    "nullable": true,
+                    "properties": {
+                      "id": {
+                        "description": "Unique identifier for the field in the `directus_fields` collection.",
+                        "example": 3,
+                        "type": "integer"
+                      },
+                      "collection": {
+                        "description": "Unique name of the collection this field is in.",
+                        "example": "posts",
+                        "type": "string"
+                      },
+                      "field": {
+                        "description": "Unique name of the field. Field name is unique within the collection.",
+                        "example": "title",
+                        "type": "string"
+                      },
+                      "special": {
+                        "description": "Transformation flag for field",
+                        "example": null,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true
+                      },
+                      "system-interface": {
+                        "description": "What interface is used in the admin app to edit the value for this field.",
+                        "example": "primary-key",
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "options": {
+                        "description": "Options for the interface that's used. This format is based on the individual interface.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "display": {
+                        "description": "What display is used in the admin app to display the value for this field.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "display_options": {
+                        "description": "Options for the display that's used. This format is based on the individual display.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "locked": {
+                        "description": "If the field can be altered by the end user. Directus system fields have this value set to `true`.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "readonly": {
+                        "description": "Prevents the user from editing the value in the field.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "hidden": {
+                        "description": "If this field should be hidden.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "sort": {
+                        "description": "Sort order of this field on the edit page of the admin app.",
+                        "example": 1,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "width": {
+                        "description": "Width of the field on the edit form.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true,
+                        "enum": [
+                          "half",
+                          "half-left",
+                          "half-right",
+                          "full",
+                          "fill",
+                          null
+                        ]
+                      },
+                      "group": {
+                        "description": "What field group this field is part of.",
+                        "example": null,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "translation": {
+                        "description": "Key value pair of `<language>: <translation>` that allows the user to change the displayed name of the field in the admin app.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "note": {
+                        "description": "A user provided note for the field. Will be rendered alongside the interface on the edit page.",
+                        "example": "",
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Fields"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ],
+        "parameters": [
+          {
+            "description": "Unique identifier of the collection the item resides in.",
+            "in": "path",
+            "name": "collection",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/fields/{collection}/{id}": {
+      "get": {
+        "summary": "Retrieve a Field",
+        "description": "Retrieves the details of a single field in a given collection.",
+        "operationId": "getCollectionField",
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Fields"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "Unique identifier of the collection the item resides in.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the field.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update a Field",
+        "description": "Update an existing field.",
+        "operationId": "updateField",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "description": "Unique name of the field. Field name is unique within the collection.",
+                    "example": "id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Directus specific data type. Used to cast values in the API.",
+                    "example": "integer",
+                    "type": "string"
+                  },
+                  "schema": {
+                    "description": "The schema info.",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "description": "The name of the field.",
+                        "example": "title",
+                        "type": "string"
+                      },
+                      "table": {
+                        "description": "The collection of the field.",
+                        "example": "posts",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "The type of the field.",
+                        "example": "string",
+                        "type": "string"
+                      },
+                      "default_value": {
+                        "description": "The default value of the field.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "max_length": {
+                        "description": "The max length of the field.",
+                        "example": null,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "is_nullable": {
+                        "description": "If the field is nullable.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "is_primary_key": {
+                        "description": "If the field is primary key.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "has_auto_increment": {
+                        "description": "If the field has auto increment.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "foreign_key_column": {
+                        "description": "Related column from the foreign key constraint.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "foreign_key_table": {
+                        "description": "Related table from the foreign key constraint.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "comment": {
+                        "description": "Comment as saved in the database.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "schema": {
+                        "description": "Database schema (pg only).",
+                        "example": "public",
+                        "type": "string"
+                      },
+                      "foreign_key_schema": {
+                        "description": "Related schema from the foreign key constraint (pg only).",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "meta": {
+                    "description": "The meta info.",
+                    "type": "object",
+                    "nullable": true,
+                    "properties": {
+                      "id": {
+                        "description": "Unique identifier for the field in the `directus_fields` collection.",
+                        "example": 3,
+                        "type": "integer"
+                      },
+                      "collection": {
+                        "description": "Unique name of the collection this field is in.",
+                        "example": "posts",
+                        "type": "string"
+                      },
+                      "field": {
+                        "description": "Unique name of the field. Field name is unique within the collection.",
+                        "example": "title",
+                        "type": "string"
+                      },
+                      "special": {
+                        "description": "Transformation flag for field",
+                        "example": null,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true
+                      },
+                      "system-interface": {
+                        "description": "What interface is used in the admin app to edit the value for this field.",
+                        "example": "primary-key",
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "options": {
+                        "description": "Options for the interface that's used. This format is based on the individual interface.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "display": {
+                        "description": "What display is used in the admin app to display the value for this field.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "display_options": {
+                        "description": "Options for the display that's used. This format is based on the individual display.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "locked": {
+                        "description": "If the field can be altered by the end user. Directus system fields have this value set to `true`.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "readonly": {
+                        "description": "Prevents the user from editing the value in the field.",
+                        "example": false,
+                        "type": "boolean"
+                      },
+                      "hidden": {
+                        "description": "If this field should be hidden.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "sort": {
+                        "description": "Sort order of this field on the edit page of the admin app.",
+                        "example": 1,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "width": {
+                        "description": "Width of the field on the edit form.",
+                        "example": null,
+                        "type": "string",
+                        "nullable": true,
+                        "enum": [
+                          "half",
+                          "half-left",
+                          "half-right",
+                          "full",
+                          "fill",
+                          null
+                        ]
+                      },
+                      "group": {
+                        "description": "What field group this field is part of.",
+                        "example": null,
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "translation": {
+                        "description": "Key value pair of `<language>: <translation>` that allows the user to change the displayed name of the field in the admin app.",
+                        "example": null,
+                        "type": "object",
+                        "nullable": true
+                      },
+                      "note": {
+                        "description": "A user provided note for the field. Will be rendered alongside the interface on the edit page.",
+                        "example": "",
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Fields"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "Unique identifier of the collection the item resides in.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the field.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a Field",
+        "description": "Delete an existing field.",
+        "operationId": "deleteField",
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Fields"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "Unique identifier of the collection the item resides in.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the field.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
           }
         ]
       }
@@ -4737,398 +4739,6 @@
         ]
       }
     },
-    "/webhooks": {
-      "get": {
-        "summary": "List Webhooks",
-        "description": "Get all webhooks.",
-        "operationId": "getWebhooks",
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Webhooks"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Webhooks"
-        ]
-      },
-      "post": {
-        "summary": "Create a Webhook",
-        "description": "Create a new webhook.",
-        "operationId": "createWebhook",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Fields"
-          },
-          {
-            "$ref": "#/components/parameters/Meta"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "name": {
-                    "description": "The name of the webhook.",
-                    "type": "string",
-                    "example": "create articles"
-                  },
-                  "method": {
-                    "description": "Method used in the webhook.",
-                    "type": "string",
-                    "example": "POST"
-                  },
-                  "url": {
-                    "description": "The url of the webhook.",
-                    "type": "string",
-                    "example": null
-                  },
-                  "status": {
-                    "description": "The status of the webhook.",
-                    "type": "string",
-                    "example": "active"
-                  },
-                  "data": {
-                    "description": "If yes, send the content of what was done",
-                    "type": "boolean",
-                    "example": true
-                  },
-                  "actions": {
-                    "description": "The actions that triggers this webhook.",
-                    "example": null
-                  },
-                  "system-collections": {
-                    "description": "The collections that triggers this webhook.",
-                    "example": null
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Roles"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Webhooks"
-        ]
-      },
-      "patch": {
-        "summary": "Update Multiple Webhooks",
-        "description": "Update multiple webhooks at the same time.",
-        "tags": [
-          "Webhooks"
-        ],
-        "operationId": "updateWebhooks",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Fields"
-          },
-          {
-            "$ref": "#/components/parameters/Limit"
-          },
-          {
-            "$ref": "#/components/parameters/Meta"
-          },
-          {
-            "$ref": "#/components/parameters/Offset"
-          },
-          {
-            "$ref": "#/components/parameters/Sort"
-          },
-          {
-            "$ref": "#/components/parameters/Filter"
-          },
-          {
-            "$ref": "#/components/parameters/Search"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "data": {
-                    "properties": {
-                      "name": {
-                        "description": "The name of the webhook.",
-                        "type": "string",
-                        "example": "create articles"
-                      },
-                      "method": {
-                        "description": "Method used in the webhook.",
-                        "type": "string",
-                        "example": "POST"
-                      },
-                      "url": {
-                        "description": "The url of the webhook.",
-                        "type": "string",
-                        "example": null
-                      },
-                      "status": {
-                        "description": "The status of the webhook.",
-                        "type": "string",
-                        "example": "active"
-                      },
-                      "data": {
-                        "description": "If yes, send the content of what was done",
-                        "type": "boolean",
-                        "example": true
-                      },
-                      "actions": {
-                        "description": "The actions that triggers this webhook.",
-                        "example": null
-                      },
-                      "system-collections": {
-                        "description": "The collections that triggers this webhook.",
-                        "example": null
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "keys": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Webhooks"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/x-metadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete Multiple Webhooks",
-        "description": "Delete multiple existing webhooks.",
-        "tags": [
-          "Webhooks"
-        ],
-        "operationId": "deleteWebhooks",
-        "responses": {
-          "200": {
-            "description": "Successful request"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          }
-        }
-      }
-    },
-    "/webhooks/{id}": {
-      "get": {
-        "summary": "Retrieve a Webhook",
-        "description": "Retrieve a single webhook by unique identifier.",
-        "operationId": "getWebhook",
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Webhooks"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Webhooks"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/UUId"
-          }
-        ]
-      },
-      "patch": {
-        "summary": "Update a Webhook",
-        "description": "Update an existing webhook",
-        "operationId": "updateWebhook",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/UUId"
-          },
-          {
-            "$ref": "#/components/parameters/Fields"
-          },
-          {
-            "$ref": "#/components/parameters/Meta"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "name": {
-                    "description": "The name of the webhook.",
-                    "type": "string",
-                    "example": "create articles"
-                  },
-                  "method": {
-                    "description": "Method used in the webhook.",
-                    "type": "string",
-                    "example": "POST"
-                  },
-                  "url": {
-                    "description": "The url of the webhook.",
-                    "type": "string",
-                    "example": null
-                  },
-                  "status": {
-                    "description": "The status of the webhook.",
-                    "type": "string",
-                    "example": "active"
-                  },
-                  "data": {
-                    "description": "If yes, send the content of what was done",
-                    "type": "boolean",
-                    "example": true
-                  },
-                  "actions": {
-                    "description": "The actions that triggers this webhook.",
-                    "example": null
-                  },
-                  "system-collections": {
-                    "description": "The collections that triggers this webhook.",
-                    "example": null
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Roles"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Webhooks"
-        ]
-      },
-      "delete": {
-        "summary": "Delete a Webhook",
-        "description": "Delete an existing webhook",
-        "operationId": "deleteWebhook",
-        "responses": {
-          "200": {
-            "description": "Successful request"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Webhooks"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/UUId"
-          }
-        ]
-      }
-    },
     "/items/page_contact_contact_address": {
       "post": {
         "summary": "Create an Item",
@@ -5171,6 +4781,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageContactContactAddress"
                       }
@@ -5307,6 +4918,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageContactContactAddress"
                       }
@@ -5791,93 +5403,6 @@
           {
             "$ref": "#/components/parameters/Id"
           }
-        ]
-      }
-    },
-    "/settings": {
-      "get": {
-        "summary": "Retrieve Settings",
-        "description": "List the settings.",
-        "operationId": "getSettings",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Limit"
-          },
-          {
-            "$ref": "#/components/parameters/Offset"
-          },
-          {
-            "$ref": "#/components/parameters/Meta"
-          },
-          {
-            "$ref": "#/components/parameters/Page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Settings"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Settings"
-        ]
-      },
-      "patch": {
-        "summary": "Update Settings",
-        "description": "Update the settings",
-        "operationId": "updateSetting",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Settings"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        },
-        "tags": [
-          "Settings"
         ]
       }
     },
@@ -6704,6 +6229,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsImageBox"
                       }
@@ -6840,6 +6366,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsImageBox"
                       }
@@ -7091,6 +6618,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPartyLocation"
                       }
@@ -7227,6 +6755,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPartyLocation"
                       }
@@ -7478,6 +7007,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageMemberStatements"
                       }
@@ -7614,6 +7144,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageMemberStatements"
                       }
@@ -7865,6 +7396,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsMemberProduct"
                       }
@@ -8001,6 +7533,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsMemberProduct"
                       }
@@ -9093,9 +8626,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsConfig"
-                      }
+                      "$ref": "#/components/schemas/ItemsConfig"
                     }
                   }
                 }
@@ -9154,9 +8685,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsConfig"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsConfig"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -9229,9 +8760,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsConfig"
-                      }
+                      "$ref": "#/components/schemas/ItemsConfig"
                     }
                   }
                 }
@@ -9875,6 +9404,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPrograms"
                       }
@@ -10011,6 +9541,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPrograms"
                       }
@@ -10262,6 +9793,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsProgramsDirectusUsers"
                       }
@@ -10398,6 +9930,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsProgramsDirectusUsers"
                       }
@@ -10649,9 +10182,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageContact"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageContact"
                     }
                   }
                 }
@@ -10710,9 +10241,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageContact"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageContact"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -10785,9 +10316,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageContact"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageContact"
                     }
                   }
                 }
@@ -11036,9 +10565,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPagePrograms"
-                      }
+                      "$ref": "#/components/schemas/ItemsPagePrograms"
                     }
                   }
                 }
@@ -11097,9 +10624,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPagePrograms"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPagePrograms"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -11172,9 +10699,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPagePrograms"
-                      }
+                      "$ref": "#/components/schemas/ItemsPagePrograms"
                     }
                   }
                 }
@@ -11423,9 +10948,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageAgb"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageAgb"
                     }
                   }
                 }
@@ -11484,9 +11007,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageAgb"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageAgb"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -11559,9 +11082,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageAgb"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageAgb"
                     }
                   }
                 }
@@ -11810,6 +11331,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsQuote"
                       }
@@ -11946,6 +11468,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsQuote"
                       }
@@ -12197,6 +11720,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsInfoBox"
                       }
@@ -12333,6 +11857,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsInfoBox"
                       }
@@ -12584,9 +12109,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageImpressum"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageImpressum"
                     }
                   }
                 }
@@ -12645,9 +12168,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageImpressum"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageImpressum"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -12720,9 +12243,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageImpressum"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageImpressum"
                     }
                   }
                 }
@@ -12971,9 +12492,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageTeam"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageTeam"
                     }
                   }
                 }
@@ -13032,9 +12551,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageTeam"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageTeam"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -13107,9 +12626,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageTeam"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageTeam"
                     }
                   }
                 }
@@ -13358,6 +12875,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms3"
                       }
@@ -13494,6 +13012,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms3"
                       }
@@ -13745,6 +13264,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers"
                       }
@@ -13881,6 +13401,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers"
                       }
@@ -14132,6 +13653,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms"
                       }
@@ -14268,6 +13790,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms"
                       }
@@ -14519,6 +14042,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers1"
                       }
@@ -14655,6 +14179,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers1"
                       }
@@ -14906,6 +14431,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers2"
                       }
@@ -15042,6 +14568,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers2"
                       }
@@ -15293,6 +14820,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms1"
                       }
@@ -15429,6 +14957,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms1"
                       }
@@ -15680,6 +15209,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPartyTips"
                       }
@@ -15816,6 +15346,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPartyTips"
                       }
@@ -16067,6 +15598,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms2"
                       }
@@ -16203,6 +15735,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageProgramPrograms2"
                       }
@@ -16454,9 +15987,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageProgram"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageProgram"
                     }
                   }
                 }
@@ -16515,9 +16046,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageProgram"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageProgram"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -16590,9 +16121,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageProgram"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageProgram"
                     }
                   }
                 }
@@ -16841,9 +16370,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageReceive"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageReceive"
                     }
                   }
                 }
@@ -16902,9 +16429,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageReceive"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageReceive"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -16977,9 +16504,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageReceive"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageReceive"
                     }
                   }
                 }
@@ -17228,9 +16753,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageHistory"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageHistory"
                     }
                   }
                 }
@@ -17289,9 +16812,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageHistory"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageHistory"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -17364,9 +16887,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageHistory"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageHistory"
                     }
                   }
                 }
@@ -17615,9 +17136,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageMember"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageMember"
                     }
                   }
                 }
@@ -17676,9 +17195,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageMember"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageMember"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -17751,9 +17270,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageMember"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageMember"
                     }
                   }
                 }
@@ -18002,6 +17519,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsContactAddress"
                       }
@@ -18138,6 +17656,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsContactAddress"
                       }
@@ -18389,6 +17908,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageReceiveNodes"
                       }
@@ -18525,6 +18045,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageReceiveNodes"
                       }
@@ -18776,6 +18297,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryNodes"
                       }
@@ -18912,6 +18434,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryNodes"
                       }
@@ -19163,6 +18686,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsOrders"
                       }
@@ -19299,6 +18823,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsOrders"
                       }
@@ -19550,6 +19075,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsDirectusSyncIDMap"
                       }
@@ -19686,6 +19212,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsDirectusSyncIDMap"
                       }
@@ -19937,6 +19464,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEvents"
                       }
@@ -20073,6 +19601,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEvents"
                       }
@@ -20324,6 +19853,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsStatements"
                       }
@@ -20460,6 +19990,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsStatements"
                       }
@@ -20711,6 +20242,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPost"
                       }
@@ -20847,6 +20379,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPost"
                       }
@@ -21098,6 +20631,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsIframe"
                       }
@@ -21234,6 +20768,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsIframe"
                       }
@@ -21485,6 +21020,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsEventShows"
                       }
@@ -21621,6 +21157,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsEventShows"
                       }
@@ -21872,6 +21409,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostDirectusUsers"
                       }
@@ -22008,6 +21546,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostDirectusUsers"
                       }
@@ -22259,6 +21798,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostEditorNodes"
                       }
@@ -22395,6 +21935,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostEditorNodes"
                       }
@@ -22646,6 +22187,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventShows"
                       }
@@ -22782,6 +22324,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventShows"
                       }
@@ -23033,6 +22576,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostFiles"
                       }
@@ -23169,6 +22713,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostFiles"
                       }
@@ -23420,6 +22965,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsEditorNodes"
                       }
@@ -23556,6 +23102,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsEditorNodes"
                       }
@@ -23807,6 +23354,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsTags"
                       }
@@ -23943,6 +23491,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsTags"
                       }
@@ -24194,6 +23743,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostTags1"
                       }
@@ -24330,6 +23880,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPostTags1"
                       }
@@ -24581,6 +24132,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsAudioPlayerFiles"
                       }
@@ -24717,6 +24269,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsAudioPlayerFiles"
                       }
@@ -24968,6 +24521,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsAudioPlayer"
                       }
@@ -25104,6 +24658,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsAudioPlayer"
                       }
@@ -25355,9 +24910,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageJoin"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageJoin"
                     }
                   }
                 }
@@ -25416,9 +24969,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageJoin"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageJoin"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -25491,9 +25044,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageJoin"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageJoin"
                     }
                   }
                 }
@@ -25742,6 +25293,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageJoinNodes"
                       }
@@ -25878,6 +25430,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageJoinNodes"
                       }
@@ -26129,6 +25682,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageInternshipNodes"
                       }
@@ -26265,6 +25819,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageInternshipNodes"
                       }
@@ -26516,6 +26071,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsInternships"
                       }
@@ -26652,6 +26208,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsInternships"
                       }
@@ -26903,6 +26460,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageInternshipInternships"
                       }
@@ -27039,6 +26597,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageInternshipInternships"
                       }
@@ -27290,9 +26849,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageInternship"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageInternship"
                     }
                   }
                 }
@@ -27351,9 +26908,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageInternship"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageInternship"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -27426,9 +26983,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageInternship"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageInternship"
                     }
                   }
                 }
@@ -27677,9 +27232,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageClasses"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageClasses"
                     }
                   }
                 }
@@ -27738,9 +27291,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageClasses"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageClasses"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -27813,9 +27366,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageClasses"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageClasses"
                     }
                   }
                 }
@@ -28064,6 +27615,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageClassesNodes"
                       }
@@ -28200,6 +27752,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageClassesNodes"
                       }
@@ -28451,6 +28004,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryImageLink"
                       }
@@ -28587,6 +28141,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryImageLink"
                       }
@@ -28838,6 +28393,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsClasses"
                       }
@@ -28974,6 +28530,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsClasses"
                       }
@@ -29225,6 +28782,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageClassesClasses"
                       }
@@ -29361,6 +28919,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageClassesClasses"
                       }
@@ -29612,9 +29171,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageHome"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageHome"
                     }
                   }
                 }
@@ -29673,9 +29230,9 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/ItemsPageHome"
-                      }
+                        "type": "object"
+                      },
+                      "$ref": "#/components/schemas/ItemsPageHome"
                     },
                     "meta": {
                       "$ref": "#/components/schemas/x-metadata"
@@ -29748,9 +29305,7 @@
                 "schema": {
                   "properties": {
                     "data": {
-                      "items": {
-                        "$ref": "#/components/schemas/ItemsPageHome"
-                      }
+                      "$ref": "#/components/schemas/ItemsPageHome"
                     }
                   }
                 }
@@ -29999,6 +29554,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsImageLink"
                       }
@@ -30135,6 +29691,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsImageLink"
                       }
@@ -30386,6 +29943,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPromoBox"
                       }
@@ -30522,6 +30080,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPromoBox"
                       }
@@ -30773,6 +30332,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsImageLink"
                       }
@@ -30909,6 +30469,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsEventsImageLink"
                       }
@@ -31160,6 +30721,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageContactImageLink"
                       }
@@ -31296,6 +30858,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageContactImageLink"
                       }
@@ -31547,6 +31110,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryFiles"
                       }
@@ -31683,6 +31247,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryFiles"
                       }
@@ -31934,6 +31499,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryFiles1"
                       }
@@ -32070,6 +31636,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageHistoryFiles1"
                       }
@@ -32321,6 +31888,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers3"
                       }
@@ -32457,6 +32025,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers3"
                       }
@@ -32708,6 +32277,7 @@
                   "type": "object",
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers4"
                       }
@@ -32844,6 +32414,7 @@
                 "schema": {
                   "properties": {
                     "data": {
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ItemsPageTeamDirectusUsers4"
                       }
@@ -33052,6 +32623,93 @@
           }
         ]
       }
+    },
+    "/settings": {
+      "get": {
+        "summary": "Retrieve Settings",
+        "description": "List the settings.",
+        "operationId": "getSettings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Settings"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      },
+      "patch": {
+        "summary": "Update Settings",
+        "description": "Update the settings",
+        "operationId": "updateSetting",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Settings"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
     }
   },
   "tags": [
@@ -33098,11 +32756,6 @@
       "x-collection": "directus_permissions"
     },
     {
-      "name": "Fields",
-      "description": "Fields are individual pieces of content within an item. They are mapped to columns in the database.",
-      "x-collection": "directus_fields"
-    },
-    {
       "name": "Collections",
       "description": "Collections are the individual collections of items, similar to tables in a database. Changes to collections will alter the schema of the database.",
       "x-collection": "directus_collections"
@@ -33111,6 +32764,11 @@
       "name": "Folders",
       "description": "Group files by virtual folders.",
       "x-collection": "directus_folders"
+    },
+    {
+      "name": "Fields",
+      "description": "Fields are individual pieces of content within an item. They are mapped to columns in the database.",
+      "x-collection": "directus_fields"
     },
     {
       "name": "Users",
@@ -33133,11 +32791,6 @@
       "x-collection": "directus_revisions"
     },
     {
-      "name": "Webhooks",
-      "description": "Webhooks.",
-      "x-collection": "directus_webhooks"
-    },
-    {
       "name": "ItemsPageContactContactAddress",
       "x-collection": "page_contact_contact_address"
     },
@@ -33145,11 +32798,6 @@
       "name": "Relations",
       "description": "What data is linked to what other data. Allows you to assign authors to articles, products to sales, and whatever other structures you can think of.",
       "x-collection": "directus_relations"
-    },
-    {
-      "name": "Settings",
-      "description": "Settings control the way the platform works and acts.",
-      "x-collection": "directus_settings"
     },
     {
       "name": "Flows",
@@ -33440,6 +33088,11 @@
     {
       "name": "ItemsPageTeamDirectusUsers4",
       "x-collection": "page_team_directus_users_4"
+    },
+    {
+      "name": "Settings",
+      "description": "Settings control the way the platform works and acts.",
+      "x-collection": "directus_settings"
     }
   ],
   "components": {
@@ -33975,6 +33628,10 @@
           "theme_dark_overrides": {
             "nullable": true
           },
+          "text_direction": {
+            "nullable": false,
+            "type": "string"
+          },
           "programs": {
             "nullable": true,
             "type": "array",
@@ -34135,12 +33792,6 @@
             "example": "328",
             "type": "string"
           },
-          "comment": {
-            "description": "User comment. This will store the comments that show up in the right sidebar of the item edit page in the admin app.",
-            "example": null,
-            "type": "string",
-            "nullable": true
-          },
           "origin": {
             "description": "Origin of the request when the action took place.",
             "example": "https://directus.io",
@@ -34215,95 +33866,6 @@
           }
         },
         "x-collection": "directus_permissions"
-      },
-      "Fields": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "nullable": false,
-            "type": "integer"
-          },
-          "collection": {
-            "description": "Unique name of the collection this field is in.",
-            "example": "about_us",
-            "type": "string"
-          },
-          "field": {
-            "description": "Unique name of the field. Field name is unique within the collection.",
-            "example": "id",
-            "type": "string"
-          },
-          "special": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "interface": {
-            "nullable": true,
-            "type": "string"
-          },
-          "options": {
-            "nullable": true
-          },
-          "display": {
-            "nullable": true,
-            "type": "string"
-          },
-          "display_options": {
-            "nullable": true
-          },
-          "readonly": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "hidden": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "sort": {
-            "nullable": true,
-            "type": "integer"
-          },
-          "width": {
-            "nullable": true,
-            "type": "string"
-          },
-          "translations": {
-            "nullable": true
-          },
-          "note": {
-            "nullable": true,
-            "type": "string"
-          },
-          "conditions": {
-            "nullable": true
-          },
-          "required": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "group": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "$ref": "#/components/schemas/Fields"
-              }
-            ]
-          },
-          "validation": {
-            "nullable": true
-          },
-          "validation_message": {
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "x-collection": "directus_fields"
       },
       "Collections": {
         "type": "object",
@@ -34396,6 +33958,99 @@
           }
         },
         "x-collection": "directus_collections"
+      },
+      "Fields": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "integer"
+          },
+          "collection": {
+            "description": "Unique name of the collection this field is in.",
+            "example": "about_us",
+            "type": "string"
+          },
+          "field": {
+            "description": "Unique name of the field. Field name is unique within the collection.",
+            "example": "id",
+            "type": "string"
+          },
+          "special": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interface": {
+            "nullable": true,
+            "type": "string"
+          },
+          "options": {
+            "nullable": true
+          },
+          "display": {
+            "nullable": true,
+            "type": "string"
+          },
+          "display_options": {
+            "nullable": true
+          },
+          "readonly": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "hidden": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "sort": {
+            "nullable": true,
+            "type": "integer"
+          },
+          "width": {
+            "nullable": true,
+            "type": "string"
+          },
+          "translations": {
+            "nullable": true
+          },
+          "note": {
+            "nullable": true,
+            "type": "string"
+          },
+          "conditions": {
+            "nullable": true
+          },
+          "required": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "group": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "$ref": "#/components/schemas/Fields"
+              }
+            ]
+          },
+          "validation": {
+            "nullable": true
+          },
+          "validation_message": {
+            "nullable": true,
+            "type": "string"
+          },
+          "searchable": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "x-collection": "directus_fields"
       },
       "Presets": {
         "type": "object",
@@ -34574,78 +34229,6 @@
         },
         "x-collection": "directus_revisions"
       },
-      "Webhooks": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The index of the webhook.",
-            "type": "integer",
-            "example": 1
-          },
-          "name": {
-            "description": "The name of the webhook.",
-            "type": "string",
-            "example": "create articles"
-          },
-          "method": {
-            "description": "Method used in the webhook.",
-            "type": "string",
-            "example": "POST"
-          },
-          "url": {
-            "description": "The url of the webhook.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "status": {
-            "description": "The status of the webhook.",
-            "type": "string",
-            "example": "inactive"
-          },
-          "data": {
-            "description": "If yes, send the content of what was done",
-            "type": "boolean",
-            "example": true
-          },
-          "actions": {
-            "description": "The actions that triggers this webhook.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": null,
-            "nullable": true
-          },
-          "collections": {
-            "nullable": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "headers": {
-            "nullable": true
-          },
-          "was_active_before_deprecation": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "migrated_flow": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "$ref": "#/components/schemas/Flows"
-              }
-            ]
-          }
-        },
-        "x-collection": "directus_webhooks"
-      },
       "ItemsPageContactContactAddress": {
         "type": "object",
         "properties": {
@@ -34734,278 +34317,6 @@
           }
         },
         "x-collection": "directus_relations"
-      },
-      "Settings": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Unique identifier for the setting.",
-            "type": "integer",
-            "example": 1
-          },
-          "project_name": {
-            "description": "The name of the project.",
-            "type": "string",
-            "example": "Directus"
-          },
-          "project_url": {
-            "description": "The url of the project.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "project_color": {
-            "description": "The brand color of the project.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "project_logo": {
-            "description": "The logo of the project.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "public_foreground": {
-            "description": "The foreground of the project.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "public_background": {
-            "description": "The background of the project.",
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            },
-            "example": null,
-            "nullable": true
-          },
-          "public_note": {
-            "description": "Note rendered on the public pages of the app.",
-            "type": "string",
-            "example": null,
-            "nullable": true
-          },
-          "auth_login_attempts": {
-            "description": "Allowed authentication login attempts before the user's status is set to blocked.",
-            "type": "integer",
-            "example": 25
-          },
-          "auth_password_policy": {
-            "description": "Authentication password policy.",
-            "type": "string",
-            "nullable": true
-          },
-          "storage_asset_transform": {
-            "description": "What transformations are allowed in the assets endpoint.",
-            "type": "string",
-            "enum": [
-              "all",
-              "none",
-              "presets"
-            ],
-            "example": "all",
-            "nullable": true
-          },
-          "storage_asset_presets": {
-            "description": "Array of allowed",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "description": "Key for the asset. Used in the assets endpoint.",
-                  "type": "string"
-                },
-                "fit": {
-                  "description": "Whether to crop the thumbnail to match the size, or maintain the aspect ratio.",
-                  "type": "string",
-                  "enum": [
-                    "cover",
-                    "contain",
-                    "inside",
-                    "outside"
-                  ]
-                },
-                "width": {
-                  "description": "Width of the thumbnail.",
-                  "type": "integer"
-                },
-                "height": {
-                  "description": "Height of the thumbnail.",
-                  "type": "integer"
-                },
-                "withoutEnlargement": {
-                  "description": "No image upscale",
-                  "type": "boolean"
-                },
-                "quality": {
-                  "description": "Quality of the compression used.",
-                  "type": "integer"
-                },
-                "format": {
-                  "description": "Reformat output image",
-                  "type": "string",
-                  "enum": [
-                    "",
-                    "jpeg",
-                    "png",
-                    "webp",
-                    "tiff",
-                    "avif"
-                  ]
-                },
-                "transforms": {
-                  "description": "Additional transformations to apply",
-                  "type": "array",
-                  "nullable": true,
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "method": {
-                        "description": "The Sharp method name",
-                        "type": "string"
-                      },
-                      "arguments": {
-                        "description": "A list of arguments to pass to the Sharp method",
-                        "type": "array",
-                        "nullable": true,
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "argument": {
-                              "description": "A JSON representation of the argument value",
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "example": null,
-            "nullable": true
-          },
-          "custom_css": {
-            "nullable": true,
-            "type": "string"
-          },
-          "storage_default_folder": {
-            "description": "Default folder to place files",
-            "type": "string",
-            "format": "uuid"
-          },
-          "basemaps": {
-            "nullable": true
-          },
-          "mapbox_key": {
-            "nullable": true,
-            "type": "string"
-          },
-          "module_bar": {
-            "nullable": true
-          },
-          "project_descriptor": {
-            "nullable": true,
-            "type": "string"
-          },
-          "default_language": {
-            "nullable": false,
-            "type": "string"
-          },
-          "custom_aspect_ratios": {
-            "nullable": true
-          },
-          "public_favicon": {
-            "nullable": true,
-            "description": "$t:field_options.directus_settings.project_favicon_note",
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "$ref": "#/components/schemas/Files"
-              }
-            ]
-          },
-          "default_appearance": {
-            "nullable": false,
-            "type": "string"
-          },
-          "default_theme_light": {
-            "nullable": true,
-            "type": "string"
-          },
-          "theme_light_overrides": {
-            "nullable": true
-          },
-          "default_theme_dark": {
-            "nullable": true,
-            "type": "string"
-          },
-          "theme_dark_overrides": {
-            "nullable": true
-          },
-          "report_error_url": {
-            "nullable": true,
-            "type": "string"
-          },
-          "report_bug_url": {
-            "nullable": true,
-            "type": "string"
-          },
-          "report_feature_url": {
-            "nullable": true,
-            "type": "string"
-          },
-          "public_registration": {
-            "nullable": false,
-            "description": "$t:fields.directus_settings.public_registration_note",
-            "type": "boolean"
-          },
-          "public_registration_verify_email": {
-            "nullable": false,
-            "description": "$t:fields.directus_settings.public_registration_verify_email_note",
-            "type": "boolean"
-          },
-          "public_registration_role": {
-            "nullable": true,
-            "description": "$t:fields.directus_settings.public_registration_role_note",
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "$ref": "#/components/schemas/Roles"
-              }
-            ]
-          },
-          "public_registration_email_filter": {
-            "nullable": true,
-            "description": "$t:fields.directus_settings.public_registration_email_filter_note"
-          },
-          "blurhasher_detail_level": {
-            "nullable": true,
-            "description": "This parameter determines the detail level in the BlurHash, affecting its complexity and length from high (detailed) to low (abstract).",
-            "type": "string"
-          },
-          "blurhasher_regenerate_on_restart": {
-            "nullable": true,
-            "description": "Enables regeneration of all BlurHashes for illustrations upon system restart.",
-            "type": "boolean"
-          }
-        },
-        "x-collection": "directus_settings"
       },
       "Flows": {
         "type": "object",
@@ -35394,7 +34705,11 @@
             "type": "string"
           }
         },
-        "x-collection": "member_product"
+        "x-collection": "member_product",
+        "required": [
+          "price",
+          "name"
+        ]
       },
       "Comments": {
         "type": "object",
@@ -35677,7 +34992,10 @@
             }
           }
         },
-        "x-collection": "programs"
+        "x-collection": "programs",
+        "required": [
+          "slug"
+        ]
       },
       "ItemsProgramsDirectusUsers": {
         "type": "object",
@@ -36830,7 +36148,10 @@
             "type": "string"
           }
         },
-        "x-collection": "page_receive_nodes"
+        "x-collection": "page_receive_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsPageHistoryNodes": {
         "type": "object",
@@ -36870,7 +36191,10 @@
             "type": "string"
           }
         },
-        "x-collection": "page_history_nodes"
+        "x-collection": "page_history_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsOrders": {
         "type": "object",
@@ -36960,7 +36284,18 @@
             "type": "string"
           }
         },
-        "x-collection": "orders"
+        "x-collection": "orders",
+        "required": [
+          "id",
+          "price",
+          "name",
+          "first_name",
+          "family_name",
+          "email",
+          "address",
+          "plz",
+          "city"
+        ]
       },
       "ItemsDirectusSyncIDMap": {
         "type": "object",
@@ -36987,7 +36322,12 @@
             "format": "timestamp"
           }
         },
-        "x-collection": "directus_sync_id_map"
+        "x-collection": "directus_sync_id_map",
+        "required": [
+          "table",
+          "sync_id",
+          "local_id"
+        ]
       },
       "ItemsEvents": {
         "type": "object",
@@ -37350,7 +36690,13 @@
             }
           }
         },
-        "x-collection": "post"
+        "x-collection": "post",
+        "required": [
+          "title",
+          "slug",
+          "program",
+          "content"
+        ]
       },
       "ItemsIframe": {
         "type": "object",
@@ -37477,7 +36823,10 @@
             "type": "string"
           }
         },
-        "x-collection": "post_editor_nodes"
+        "x-collection": "post_editor_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsEventShows": {
         "type": "object",
@@ -37667,7 +37016,10 @@
             "type": "string"
           }
         },
-        "x-collection": "events_editor_nodes"
+        "x-collection": "events_editor_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsTags": {
         "type": "object",
@@ -37875,7 +37227,10 @@
             "type": "string"
           }
         },
-        "x-collection": "page_join_nodes"
+        "x-collection": "page_join_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsPageInternshipNodes": {
         "type": "object",
@@ -37915,7 +37270,10 @@
             "type": "string"
           }
         },
-        "x-collection": "page_internship_nodes"
+        "x-collection": "page_internship_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsInternships": {
         "type": "object",
@@ -38231,7 +37589,10 @@
             "type": "string"
           }
         },
-        "x-collection": "page_classes_nodes"
+        "x-collection": "page_classes_nodes",
+        "required": [
+          "id"
+        ]
       },
       "ItemsPageHistoryImageLink": {
         "type": "object",
@@ -38501,7 +37862,11 @@
             "type": "string"
           }
         },
-        "x-collection": "promo_box"
+        "x-collection": "promo_box",
+        "required": [
+          "title",
+          "image"
+        ]
       },
       "ItemsEventsImageLink": {
         "type": "object",
@@ -38718,6 +38083,380 @@
           }
         },
         "x-collection": "page_team_directus_users_4"
+      },
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier for the setting.",
+            "type": "integer",
+            "example": 1
+          },
+          "project_name": {
+            "description": "The name of the project.",
+            "type": "string",
+            "example": "Directus"
+          },
+          "project_url": {
+            "description": "The url of the project.",
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "project_color": {
+            "description": "The brand color of the project.",
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "project_logo": {
+            "description": "The logo of the project.",
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "public_foreground": {
+            "description": "The foreground of the project.",
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "public_background": {
+            "description": "The background of the project.",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "example": null,
+            "nullable": true
+          },
+          "public_note": {
+            "description": "Note rendered on the public pages of the app.",
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "auth_login_attempts": {
+            "description": "Allowed authentication login attempts before the user's status is set to blocked.",
+            "type": "integer",
+            "example": 25
+          },
+          "auth_password_policy": {
+            "description": "Authentication password policy.",
+            "type": "string",
+            "nullable": true
+          },
+          "storage_asset_transform": {
+            "description": "What transformations are allowed in the assets endpoint.",
+            "type": "string",
+            "enum": [
+              "all",
+              "none",
+              "presets"
+            ],
+            "example": "all",
+            "nullable": true
+          },
+          "storage_asset_presets": {
+            "description": "Array of allowed",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Key for the asset. Used in the assets endpoint.",
+                  "type": "string"
+                },
+                "fit": {
+                  "description": "Whether to crop the thumbnail to match the size, or maintain the aspect ratio.",
+                  "type": "string",
+                  "enum": [
+                    "cover",
+                    "contain",
+                    "inside",
+                    "outside"
+                  ]
+                },
+                "width": {
+                  "description": "Width of the thumbnail.",
+                  "type": "integer"
+                },
+                "height": {
+                  "description": "Height of the thumbnail.",
+                  "type": "integer"
+                },
+                "withoutEnlargement": {
+                  "description": "No image upscale",
+                  "type": "boolean"
+                },
+                "quality": {
+                  "description": "Quality of the compression used.",
+                  "type": "integer"
+                },
+                "format": {
+                  "description": "Reformat output image",
+                  "type": "string",
+                  "enum": [
+                    "",
+                    "jpeg",
+                    "png",
+                    "webp",
+                    "tiff",
+                    "avif"
+                  ]
+                },
+                "transforms": {
+                  "description": "Additional transformations to apply",
+                  "type": "array",
+                  "nullable": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "method": {
+                        "description": "The Sharp method name",
+                        "type": "string"
+                      },
+                      "arguments": {
+                        "description": "A list of arguments to pass to the Sharp method",
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "argument": {
+                              "description": "A JSON representation of the argument value",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "example": null,
+            "nullable": true
+          },
+          "custom_css": {
+            "nullable": true,
+            "type": "string"
+          },
+          "storage_default_folder": {
+            "description": "Default folder to place files",
+            "type": "string",
+            "format": "uuid"
+          },
+          "basemaps": {
+            "nullable": true
+          },
+          "mapbox_key": {
+            "nullable": true,
+            "type": "string"
+          },
+          "module_bar": {
+            "nullable": true
+          },
+          "project_descriptor": {
+            "nullable": true,
+            "type": "string"
+          },
+          "default_language": {
+            "nullable": false,
+            "type": "string"
+          },
+          "custom_aspect_ratios": {
+            "nullable": true
+          },
+          "public_favicon": {
+            "nullable": true,
+            "description": "$t:field_options.directus_settings.project_favicon_note",
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "$ref": "#/components/schemas/Files"
+              }
+            ]
+          },
+          "default_appearance": {
+            "nullable": false,
+            "type": "string"
+          },
+          "default_theme_light": {
+            "nullable": true,
+            "type": "string"
+          },
+          "theme_light_overrides": {
+            "nullable": true
+          },
+          "default_theme_dark": {
+            "nullable": true,
+            "type": "string"
+          },
+          "theme_dark_overrides": {
+            "nullable": true
+          },
+          "report_error_url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "report_bug_url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "report_feature_url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "public_registration": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.public_registration_note",
+            "type": "boolean"
+          },
+          "public_registration_verify_email": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.public_registration_verify_email_note",
+            "type": "boolean"
+          },
+          "public_registration_role": {
+            "nullable": true,
+            "description": "$t:fields.directus_settings.public_registration_role_note",
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "$ref": "#/components/schemas/Roles"
+              }
+            ]
+          },
+          "public_registration_email_filter": {
+            "nullable": true,
+            "description": "$t:fields.directus_settings.public_registration_email_filter_note"
+          },
+          "blurhasher_detail_level": {
+            "nullable": true,
+            "description": "This parameter determines the detail level in the BlurHash, affecting its complexity and length from high (detailed) to low (abstract).",
+            "type": "string"
+          },
+          "blurhasher_regenerate_on_restart": {
+            "nullable": true,
+            "description": "Enables regeneration of all BlurHashes for illustrations upon system restart.",
+            "type": "boolean"
+          },
+          "visual_editor_urls": {
+            "nullable": true
+          },
+          "project_id": {
+            "nullable": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          "mcp_enabled": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.mcp_enabled_note",
+            "type": "boolean"
+          },
+          "mcp_allow_deletes": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.mcp_allow_deletes_note",
+            "type": "boolean"
+          },
+          "mcp_prompts_collection": {
+            "nullable": true,
+            "description": "$t:fields.directus_settings.mcp_prompts_collection_note",
+            "type": "string"
+          },
+          "mcp_system_prompt_enabled": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.mcp_system_prompt_enabled_note",
+            "type": "boolean"
+          },
+          "mcp_system_prompt": {
+            "nullable": true,
+            "description": "$t:fields.directus_settings.mcp_system_prompt_note",
+            "type": "string"
+          },
+          "project_owner": {
+            "nullable": true,
+            "type": "string"
+          },
+          "project_usage": {
+            "nullable": true,
+            "type": "string"
+          },
+          "org_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "product_updates": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "project_status": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_openai_api_key": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_anthropic_api_key": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_system_prompt": {
+            "nullable": true,
+            "description": "$t:fields.directus_settings.ai_system_prompt_note",
+            "type": "string"
+          },
+          "ai_google_api_key": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_openai_compatible_api_key": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_openai_compatible_base_url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_openai_compatible_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ai_openai_compatible_models": {
+            "nullable": true
+          },
+          "ai_openai_compatible_headers": {
+            "nullable": true
+          },
+          "ai_openai_allowed_models": {
+            "nullable": true
+          },
+          "ai_anthropic_allowed_models": {
+            "nullable": true
+          },
+          "ai_google_allowed_models": {
+            "nullable": true
+          },
+          "collaborative_editing_enabled": {
+            "nullable": false,
+            "description": "$t:fields.directus_settings.collaborative_editing_note",
+            "type": "boolean"
+          }
+        },
+        "x-collection": "directus_settings"
       }
     },
     "parameters": {
@@ -38840,13 +38579,14 @@
       },
       "Export": {
         "name": "export",
-        "description": "Saves the API response to a file. Accepts one of \"csv\", \"json\", \"xml\", \"yaml\".",
+        "description": "Saves the API response to a file. Accepts one of \"csv\", \"csv_utf8\", \"json\", \"xml\", \"yaml\".",
         "in": "query",
         "required": false,
         "schema": {
           "type": "string",
           "enum": [
             "csv",
+            "csv_utf8",
             "json",
             "xml",
             "yaml"

@@ -38,10 +38,6 @@ type Query {
   revisions(filter: directus_revisions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_revisions!]!
   revisions_by_id(id: ID!, version: String): directus_revisions
   revisions_aggregated(groupBy: [String], filter: directus_revisions_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_revisions_aggregated!]!
-  webhooks(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_webhooks!]!
-  webhooks_by_id(id: ID!, version: String): directus_webhooks
-  webhooks_aggregated(groupBy: [String], filter: directus_webhooks_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_webhooks_aggregated!]!
-  settings(version: String): directus_settings
   notifications(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_notifications!]!
   notifications_by_id(id: ID!, version: String): directus_notifications
   notifications_aggregated(groupBy: [String], filter: directus_notifications_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_notifications_aggregated!]!
@@ -78,6 +74,16 @@ type Query {
   files(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_files!]!
   files_by_id(id: ID!, version: String): directus_files
   files_aggregated(groupBy: [String], filter: directus_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_files_aggregated!]!
+  settings(version: String): directus_settings
+  deployments(filter: directus_deployments_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployments!]!
+  deployments_by_id(id: ID!, version: String): directus_deployments
+  deployments_aggregated(groupBy: [String], filter: directus_deployments_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_deployments_aggregated!]!
+  deployment_projects(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_projects!]!
+  deployment_projects_by_id(id: ID!, version: String): directus_deployment_projects
+  deployment_projects_aggregated(groupBy: [String], filter: directus_deployment_projects_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_deployment_projects_aggregated!]!
+  deployment_runs(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_runs!]!
+  deployment_runs_by_id(id: ID!, version: String): directus_deployment_runs
+  deployment_runs_aggregated(groupBy: [String], filter: directus_deployment_runs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_deployment_runs_aggregated!]!
 }
 
 type Mutation {
@@ -98,20 +104,18 @@ type Mutation {
   users_invite_accept(token: String!, password: String!): Boolean
   users_register(email: String!, password: String!, verification_url: String, first_name: String, last_name: String): Boolean
   users_register_verify(token: String!): Boolean
-  create_collections_item(data: create_directus_collections_input!): directus_collections
-  update_collections_item(collection: String!, data: update_directus_collections_input!): directus_collections
+  create_collections_item(data: write_directus_collections_input!, concurrentIndexCreation: Boolean = false): write_directus_collections
+  update_collections_item(collection: String!, data: write_directus_collections_input!): write_directus_collections
   delete_collections_item(collection: String!): delete_collection
-  create_fields_item(collection: String!, data: create_directus_fields_input!): directus_fields
-  update_fields_item(collection: String!, field: String!, data: update_directus_fields_input!): directus_fields
+  create_fields_item(collection: String!, data: write_directus_fields_input!, concurrentIndexCreation: Boolean = false): write_directus_fields
+  update_fields_item(collection: String!, field: String!, data: write_directus_fields_input!, concurrentIndexCreation: Boolean = false): write_directus_fields
+  update_fields_items(collection: String!, data: [write_directus_fields_input!], concurrentIndexCreation: Boolean = false): write_directus_fields
   delete_fields_item(collection: String!, field: String!): delete_field
-  create_relations_item(data: create_directus_relations_input!): directus_relations
-  update_relations_item(collection: String!, field: String!, data: update_directus_relations_input!): directus_relations
+  create_relations_item(data: write_directus_relations_input!): write_directus_relations
+  update_relations_item(collection: String!, field: String!, data: write_directus_relations_input!): write_directus_relations
   delete_relations_item(collection: String!, field: String!): delete_relation
   update_extensions_item(id: ID, data: update_directus_extensions_inputInput): directus_extensions
   update_users_me(data: update_directus_users_input): directus_users
-  create_comment(collection: String!, item: ID!, comment: String!): directus_activity
-  update_comment(id: ID!, comment: String!): directus_activity
-  delete_comment(id: ID!): delete_one
   import_file(url: String!, data: create_directus_files_input): directus_files
   users_invite(email: String!, role: String!, invite_url: String): Boolean
   create_permissions_items(filter: directus_permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_permissions_input!]): [directus_permissions!]!
@@ -124,8 +128,6 @@ type Mutation {
   create_roles_item(data: create_directus_roles_input!): directus_roles
   create_presets_items(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_presets_input!]): [directus_presets!]!
   create_presets_item(data: create_directus_presets_input!): directus_presets
-  create_webhooks_items(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_webhooks_input!]): [directus_webhooks!]!
-  create_webhooks_item(data: create_directus_webhooks_input!): directus_webhooks
   create_notifications_items(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_notifications_input!]): [directus_notifications!]!
   create_notifications_item(data: create_directus_notifications_input!): directus_notifications
   create_panels_items(filter: directus_panels_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_panels_input!]): [directus_panels!]!
@@ -150,6 +152,12 @@ type Mutation {
   create_versions_item(data: create_directus_versions_input!): directus_versions
   create_files_items(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_files_input!]): [directus_files!]!
   create_files_item(data: create_directus_files_input!): directus_files
+  create_deployments_items(filter: directus_deployments_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_deployments_input!]): [directus_deployments!]!
+  create_deployments_item(data: create_directus_deployments_input!): directus_deployments
+  create_deployment_projects_items(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_deployment_projects_input!]): [directus_deployment_projects!]!
+  create_deployment_projects_item(data: create_directus_deployment_projects_input!): directus_deployment_projects
+  create_deployment_runs_items(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_deployment_runs_input!]): [directus_deployment_runs!]!
+  create_deployment_runs_item(data: create_directus_deployment_runs_input!): directus_deployment_runs
   update_permissions_items(filter: directus_permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_permissions_input!): [directus_permissions!]!
   update_permissions_batch(filter: directus_permissions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_permissions_input!]): [directus_permissions!]!
   update_permissions_item(id: ID!, data: update_directus_permissions_input!): directus_permissions
@@ -165,10 +173,6 @@ type Mutation {
   update_presets_items(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_presets_input!): [directus_presets!]!
   update_presets_batch(filter: directus_presets_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_presets_input!]): [directus_presets!]!
   update_presets_item(id: ID!, data: update_directus_presets_input!): directus_presets
-  update_webhooks_items(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_webhooks_input!): [directus_webhooks!]!
-  update_webhooks_batch(filter: directus_webhooks_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_webhooks_input!]): [directus_webhooks!]!
-  update_webhooks_item(id: ID!, data: update_directus_webhooks_input!): directus_webhooks
-  update_settings(data: update_directus_settings_input!): directus_settings
   update_notifications_items(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_notifications_input!): [directus_notifications!]!
   update_notifications_batch(filter: directus_notifications_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_notifications_input!]): [directus_notifications!]!
   update_notifications_item(id: ID!, data: update_directus_notifications_input!): directus_notifications
@@ -205,6 +209,16 @@ type Mutation {
   update_files_items(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_files_input!): [directus_files!]!
   update_files_batch(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_files_input!]): [directus_files!]!
   update_files_item(id: ID!, data: update_directus_files_input!): directus_files
+  update_settings(data: update_directus_settings_input!): directus_settings
+  update_deployments_items(filter: directus_deployments_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_deployments_input!): [directus_deployments!]!
+  update_deployments_batch(filter: directus_deployments_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_deployments_input!]): [directus_deployments!]!
+  update_deployments_item(id: ID!, data: update_directus_deployments_input!): directus_deployments
+  update_deployment_projects_items(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_deployment_projects_input!): [directus_deployment_projects!]!
+  update_deployment_projects_batch(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_deployment_projects_input!]): [directus_deployment_projects!]!
+  update_deployment_projects_item(id: ID!, data: update_directus_deployment_projects_input!): directus_deployment_projects
+  update_deployment_runs_items(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_deployment_runs_input!): [directus_deployment_runs!]!
+  update_deployment_runs_batch(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_deployment_runs_input!]): [directus_deployment_runs!]!
+  update_deployment_runs_item(id: ID!, data: update_directus_deployment_runs_input!): directus_deployment_runs
   delete_permissions_items(ids: [ID]!): delete_many
   delete_permissions_item(id: ID!): delete_one
   delete_folders_items(ids: [ID]!): delete_many
@@ -215,8 +229,6 @@ type Mutation {
   delete_roles_item(id: ID!): delete_one
   delete_presets_items(ids: [ID]!): delete_many
   delete_presets_item(id: ID!): delete_one
-  delete_webhooks_items(ids: [ID]!): delete_many
-  delete_webhooks_item(id: ID!): delete_one
   delete_notifications_items(ids: [ID]!): delete_many
   delete_notifications_item(id: ID!): delete_one
   delete_panels_items(ids: [ID]!): delete_many
@@ -241,6 +253,12 @@ type Mutation {
   delete_versions_item(id: ID!): delete_one
   delete_files_items(ids: [ID]!): delete_many
   delete_files_item(id: ID!): delete_one
+  delete_deployments_items(ids: [ID]!): delete_many
+  delete_deployments_item(id: ID!): delete_one
+  delete_deployment_projects_items(ids: [ID]!): delete_many
+  delete_deployment_projects_item(id: ID!): delete_one
+  delete_deployment_runs_items(ids: [ID]!): delete_many
+  delete_deployment_runs_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -251,9 +269,7 @@ type Subscription {
   directus_roles_mutated(event: EventEnum): directus_roles_mutated
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
-  directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   page_contact_contact_address_mutated(event: EventEnum): page_contact_contact_address_mutated
-  directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_notifications_mutated(event: EventEnum): directus_notifications_mutated
   directus_panels_mutated(event: EventEnum): directus_panels_mutated
   directus_shares_mutated(event: EventEnum): directus_shares_mutated
@@ -331,6 +347,10 @@ type Subscription {
   page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
   page_team_directus_users_3_mutated(event: EventEnum): page_team_directus_users_3_mutated
   page_team_directus_users_4_mutated(event: EventEnum): page_team_directus_users_4_mutated
+  directus_settings_mutated(event: EventEnum): directus_settings_mutated
+  directus_deployments_mutated(event: EventEnum): directus_deployments_mutated
+  directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
+  directus_deployment_runs_mutated(event: EventEnum): directus_deployment_runs_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -603,7 +623,6 @@ type directus_activity {
   user_agent: String
   collection: String!
   item: String!
-  comment: String
   origin: String
   revisions(filter: directus_revisions_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_revisions]
   revisions_func: count_functions
@@ -631,7 +650,6 @@ type directus_activity_aggregated_count {
   user_agent: Int
   collection: Int
   item: Int
-  comment: Int
   origin: Int
   revisions: Int
 }
@@ -754,6 +772,109 @@ type directus_dashboards_mutated {
   data: directus_dashboards
 }
 
+type directus_deployment_projects {
+  id: ID!
+  deployment(filter: directus_deployments_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_deployments
+  external_id: String!
+  name: String!
+  date_created: Date
+  date_created_func: datetime_functions
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  runs(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_runs]
+  runs_func: count_functions
+}
+
+type directus_deployment_projects_aggregated {
+  group: JSON
+  countAll: Int
+  count: directus_deployment_projects_aggregated_count
+  countDistinct: directus_deployment_projects_aggregated_count
+}
+
+type directus_deployment_projects_aggregated_count {
+  id: Int
+  deployment: Int
+  external_id: Int
+  name: Int
+  date_created: Int
+  user_created: Int
+  runs: Int
+}
+
+type directus_deployment_projects_mutated {
+  key: ID!
+  event: EventEnum
+  data: directus_deployment_projects
+}
+
+type directus_deployment_runs {
+  id: ID!
+  project(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_deployment_projects
+  external_id: String!
+  target: String!
+  date_created: Date
+  date_created_func: datetime_functions
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+}
+
+type directus_deployment_runs_aggregated {
+  group: JSON
+  countAll: Int
+  count: directus_deployment_runs_aggregated_count
+  countDistinct: directus_deployment_runs_aggregated_count
+}
+
+type directus_deployment_runs_aggregated_count {
+  id: Int
+  project: Int
+  external_id: Int
+  target: Int
+  date_created: Int
+  user_created: Int
+}
+
+type directus_deployment_runs_mutated {
+  key: ID!
+  event: EventEnum
+  data: directus_deployment_runs
+}
+
+type directus_deployments {
+  id: ID!
+  provider: String!
+  credentials: String
+  options: JSON
+  options_func: count_functions
+  date_created: Date
+  date_created_func: datetime_functions
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  projects(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_projects]
+  projects_func: count_functions
+}
+
+type directus_deployments_aggregated {
+  group: JSON
+  countAll: Int
+  count: directus_deployments_aggregated_count
+  countDistinct: directus_deployments_aggregated_count
+}
+
+type directus_deployments_aggregated_count {
+  id: Int
+  provider: Int
+  credentials: Int
+  options: Int
+  date_created: Int
+  user_created: Int
+  projects: Int
+}
+
+type directus_deployments_mutated {
+  key: ID!
+  event: EventEnum
+  data: directus_deployments
+}
+
 type directus_extensions {
   bundle: String
   name: String!
@@ -798,6 +919,7 @@ type directus_fields_meta {
   group: String
   validation: JSON
   validation_message: String
+  searchable: Boolean!
 }
 
 type directus_fields_schema {
@@ -1495,6 +1617,51 @@ type directus_settings {
   Enables regeneration of all BlurHashes for illustrations upon system restart.
   """
   blurhasher_regenerate_on_restart: Boolean
+  visual_editor_urls: JSON
+  visual_editor_urls_func: count_functions
+  project_id: ID
+
+  """$t:fields.directus_settings.mcp_enabled_note"""
+  mcp_enabled: Boolean!
+
+  """$t:fields.directus_settings.mcp_allow_deletes_note"""
+  mcp_allow_deletes: Boolean!
+
+  """$t:fields.directus_settings.mcp_prompts_collection_note"""
+  mcp_prompts_collection: String
+
+  """$t:fields.directus_settings.mcp_system_prompt_enabled_note"""
+  mcp_system_prompt_enabled: Boolean
+
+  """$t:fields.directus_settings.mcp_system_prompt_note"""
+  mcp_system_prompt: String
+  project_owner: String
+  project_usage: String
+  org_name: String
+  product_updates: Boolean
+  project_status: String
+  ai_openai_api_key: String
+  ai_anthropic_api_key: String
+
+  """$t:fields.directus_settings.ai_system_prompt_note"""
+  ai_system_prompt: String
+  ai_google_api_key: String
+  ai_openai_compatible_api_key: String
+  ai_openai_compatible_base_url: String
+  ai_openai_compatible_name: String
+  ai_openai_compatible_models: JSON
+  ai_openai_compatible_models_func: count_functions
+  ai_openai_compatible_headers: JSON
+  ai_openai_compatible_headers_func: count_functions
+  ai_openai_allowed_models: JSON
+  ai_openai_allowed_models_func: count_functions
+  ai_anthropic_allowed_models: JSON
+  ai_anthropic_allowed_models_func: count_functions
+  ai_google_allowed_models: JSON
+  ai_google_allowed_models_func: count_functions
+
+  """$t:fields.directus_settings.collaborative_editing_note"""
+  collaborative_editing_enabled: Boolean!
 }
 
 type directus_settings_mutated {
@@ -1652,6 +1819,7 @@ type directus_users {
   theme_light_overrides_func: count_functions
   theme_dark_overrides: JSON
   theme_dark_overrides_func: count_functions
+  text_direction: String
   programs(filter: programs_directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [programs_directus_users]
   programs_func: count_functions
   policies(filter: directus_access_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_access]
@@ -1692,6 +1860,7 @@ type directus_users_aggregated_count {
   theme_light: Int
   theme_light_overrides: Int
   theme_dark_overrides: Int
+  text_direction: Int
   programs: Int
   policies: Int
 }
@@ -1744,58 +1913,6 @@ type directus_versions_mutated {
   key: ID!
   event: EventEnum
   data: directus_versions
-}
-
-type directus_webhooks {
-  id: ID!
-  name: String!
-  method: String
-  url: String!
-  status: String
-  data: Boolean
-  actions: [String]!
-  collections: [String]!
-  headers: JSON
-  headers_func: count_functions
-  was_active_before_deprecation: Boolean!
-  migrated_flow(filter: directus_flows_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_flows
-}
-
-type directus_webhooks_aggregated {
-  group: JSON
-  countAll: Int
-  count: directus_webhooks_aggregated_count
-  countDistinct: directus_webhooks_aggregated_count
-  avg: directus_webhooks_aggregated_fields
-  sum: directus_webhooks_aggregated_fields
-  avgDistinct: directus_webhooks_aggregated_fields
-  sumDistinct: directus_webhooks_aggregated_fields
-  min: directus_webhooks_aggregated_fields
-  max: directus_webhooks_aggregated_fields
-}
-
-type directus_webhooks_aggregated_count {
-  id: Int
-  name: Int
-  method: Int
-  url: Int
-  status: Int
-  data: Int
-  actions: Int
-  collections: Int
-  headers: Int
-  was_active_before_deprecation: Int
-  migrated_flow: Int
-}
-
-type directus_webhooks_aggregated_fields {
-  id: Float
-}
-
-type directus_webhooks_mutated {
-  key: ID!
-  event: EventEnum
-  data: directus_webhooks
 }
 
 type event_shows {
@@ -2883,6 +3000,122 @@ type users_me_tfa_generate_data {
   otpauth_url: String
 }
 
+type write_directus_collections {
+  collection: String
+  meta: write_directus_collections_meta
+  schema: write_directus_collections_schema
+}
+
+type write_directus_collections_meta {
+  collection: String
+  icon: String
+  note: String
+  display_template: String
+  hidden: Boolean
+  singleton: Boolean
+  translations: JSON
+  archive_field: String
+  archive_app_filter: Boolean
+  archive_value: String
+  unarchive_value: String
+  sort_field: String
+  accountability: String
+  color: String
+  item_duplication_fields: JSON
+  sort: Int
+  group: String
+  collapse: String
+  preview_url: String
+  versioning: Boolean
+}
+
+type write_directus_collections_schema {
+  name: String
+  comment: String
+}
+
+type write_directus_fields {
+  collection: String
+  field: String
+  type: String
+  meta: write_directus_fields_meta
+  schema: write_directus_fields_schema
+}
+
+type write_directus_fields_meta {
+  id: Int
+  collection: String
+  field: String
+  special: [String]
+  interface: String
+  options: JSON
+  display: String
+  display_options: JSON
+  readonly: Boolean
+  hidden: Boolean
+  sort: Int
+  width: String
+  translations: JSON
+  note: String
+  conditions: JSON
+  required: Boolean
+  group: String
+  validation: JSON
+  validation_message: String
+  searchable: Boolean
+}
+
+type write_directus_fields_schema {
+  name: String
+  table: String
+  data_type: String
+  default_value: String
+  max_length: Int
+  numeric_precision: Int
+  numeric_scale: Int
+  is_generated: Boolean
+  generation_expression: String
+  is_indexed: Boolean
+  is_nullable: Boolean
+  is_unique: Boolean
+  is_primary_key: Boolean
+  has_auto_increment: Boolean
+  foreign_key_column: String
+  foreign_key_table: String
+  comment: String
+}
+
+type write_directus_relations {
+  collection: String
+  field: String
+  related_collection: String
+  schema: write_directus_relations_schema
+  meta: write_directus_relations_meta
+}
+
+type write_directus_relations_meta {
+  id: Int
+  many_collection: String
+  many_field: String
+  one_collection: String
+  one_field: String
+  one_collection_field: String
+  one_allowed_collections: [String]
+  junction_field: String
+  sort_field: String
+  one_deselect_action: String
+}
+
+type write_directus_relations_schema {
+  table: String!
+  column: String!
+  foreign_key_table: String!
+  foreign_key_column: String!
+  constraint_name: String
+  on_update: String!
+  on_delete: String!
+}
+
 input audio_player_files_filter {
   id: number_filter_operators
   audio_player_id: audio_player_filter
@@ -2891,9 +3124,20 @@ input audio_player_files_filter {
   _or: [audio_player_files_filter]
 }
 
+""""""
+input audio_player_files_quantifier_filter {
+  id: number_filter_operators
+  audio_player_id: audio_player_filter
+  directus_files_id: directus_files_filter
+  _and: [audio_player_files_filter]
+  _or: [audio_player_files_filter]
+  _some: audio_player_files_filter
+  _none: audio_player_files_filter
+}
+
 input audio_player_filter {
   id: number_filter_operators
-  files: audio_player_files_filter
+  files: audio_player_files_quantifier_filter
   files_func: count_function_filter_operators
   _and: [audio_player_filter]
   _or: [audio_player_filter]
@@ -2969,21 +3213,6 @@ input create_directus_access_input {
   sort: Int
 }
 
-input create_directus_collections_fields_input {
-  collection: String
-  field: String
-  type: String
-  meta: directus_fields_meta_input
-  schema: directus_fields_schema_input
-}
-
-input create_directus_collections_input {
-  collection: String
-  meta: directus_collections_meta_input
-  schema: directus_collections_schema_input
-  fields: [create_directus_collections_fields_input!]
-}
-
 input create_directus_comments_input {
   id: ID
   collection: String!
@@ -3006,12 +3235,33 @@ input create_directus_dashboards_input {
   panels: [create_directus_panels_input]
 }
 
-input create_directus_fields_input {
-  collection: String
-  field: String
-  type: String
-  meta: directus_fields_meta_input
-  schema: directus_fields_schema_input
+input create_directus_deployment_projects_input {
+  id: ID
+  deployment: create_directus_deployments_input
+  external_id: String!
+  name: String!
+  date_created: Date
+  user_created: create_directus_users_input
+  runs: [create_directus_deployment_runs_input]
+}
+
+input create_directus_deployment_runs_input {
+  id: ID
+  project: create_directus_deployment_projects_input
+  external_id: String!
+  target: String!
+  date_created: Date
+  user_created: create_directus_users_input
+}
+
+input create_directus_deployments_input {
+  id: ID
+  provider: String!
+  credentials: String
+  options: JSON
+  date_created: Date
+  user_created: create_directus_users_input
+  projects: [create_directus_deployment_projects_input]
 }
 
 input create_directus_files_input {
@@ -3156,14 +3406,6 @@ input create_directus_presets_input {
   color: String
 }
 
-input create_directus_relations_input {
-  collection: String
-  field: String
-  related_collection: String
-  schema: directus_relations_schema_input
-  meta: directus_relations_meta_input
-}
-
 input create_directus_roles_input {
   id: ID
   name: String!
@@ -3232,6 +3474,7 @@ input create_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
+  text_direction: String
   programs: [create_programs_directus_users_input]
   policies: [create_directus_access_input]
 }
@@ -3248,20 +3491,6 @@ input create_directus_versions_input {
   user_created: create_directus_users_input
   user_updated: create_directus_users_input
   delta: JSON
-}
-
-input create_directus_webhooks_input {
-  id: ID
-  name: String!
-  method: String
-  url: String!
-  status: String
-  data: Boolean
-  actions: [String]!
-  collections: [String]!
-  headers: JSON
-  was_active_before_deprecation: Boolean!
-  migrated_flow: create_directus_flows_input
 }
 
 input create_image_box_input {
@@ -3396,13 +3625,26 @@ input datetime_function_filter_operators {
 }
 
 input directus_access_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   role: directus_roles_filter
   user: directus_users_filter
   policy: directus_policies_filter
   sort: number_filter_operators
   _and: [directus_access_filter]
   _or: [directus_access_filter]
+}
+
+""""""
+input directus_access_quantifier_filter {
+  id: id_filter_operators
+  role: directus_roles_filter
+  user: directus_users_filter
+  policy: directus_policies_filter
+  sort: number_filter_operators
+  _and: [directus_access_filter]
+  _or: [directus_access_filter]
+  _some: directus_access_filter
+  _none: directus_access_filter
 }
 
 input directus_activity_filter {
@@ -3415,44 +3657,15 @@ input directus_activity_filter {
   user_agent: string_filter_operators
   collection: string_filter_operators
   item: string_filter_operators
-  comment: string_filter_operators
   origin: string_filter_operators
-  revisions: directus_revisions_filter
+  revisions: directus_revisions_quantifier_filter
   revisions_func: count_function_filter_operators
   _and: [directus_activity_filter]
   _or: [directus_activity_filter]
 }
 
-input directus_collections_meta_input {
-  collection: String!
-  icon: String
-  note: String
-  display_template: String
-  hidden: Boolean!
-  singleton: Boolean!
-  translations: JSON
-  archive_field: String
-  archive_app_filter: Boolean!
-  archive_value: String
-  unarchive_value: String
-  sort_field: String
-  accountability: String
-  color: String
-  item_duplication_fields: JSON
-  sort: Int
-  group: String
-  collapse: String!
-  preview_url: String
-  versioning: Boolean!
-}
-
-input directus_collections_schema_input {
-  name: String
-  comment: String
-}
-
 input directus_comments_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   collection: string_filter_operators
   item: string_filter_operators
   comment: string_filter_operators
@@ -3467,7 +3680,7 @@ input directus_comments_filter {
 }
 
 input directus_dashboards_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   icon: string_filter_operators
   note: string_filter_operators
@@ -3475,56 +3688,87 @@ input directus_dashboards_filter {
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
   color: string_filter_operators
-  panels: directus_panels_filter
+  panels: directus_panels_quantifier_filter
   panels_func: count_function_filter_operators
   _and: [directus_dashboards_filter]
   _or: [directus_dashboards_filter]
 }
 
-input directus_fields_meta_input {
-  id: Int!
-  collection: String!
-  field: String!
-  special: [String]
-  interface: String
-  options: JSON
-  display: String
-  display_options: JSON
-  readonly: Boolean!
-  hidden: Boolean!
-  sort: Int
-  width: String
-  translations: JSON
-  note: String
-  conditions: JSON
-  required: Boolean
-  group: String
-  validation: JSON
-  validation_message: String
+input directus_deployment_projects_filter {
+  id: id_filter_operators
+  deployment: directus_deployments_filter
+  external_id: string_filter_operators
+  name: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  runs: directus_deployment_runs_quantifier_filter
+  runs_func: count_function_filter_operators
+  _and: [directus_deployment_projects_filter]
+  _or: [directus_deployment_projects_filter]
 }
 
-input directus_fields_schema_input {
-  name: String
-  table: String
-  data_type: String
-  default_value: String
-  max_length: Int
-  numeric_precision: Int
-  numeric_scale: Int
-  is_generated: Boolean
-  generation_expression: String
-  is_indexed: Boolean
-  is_nullable: Boolean
-  is_unique: Boolean
-  is_primary_key: Boolean
-  has_auto_increment: Boolean
-  foreign_key_column: String
-  foreign_key_table: String
-  comment: String
+""""""
+input directus_deployment_projects_quantifier_filter {
+  id: id_filter_operators
+  deployment: directus_deployments_filter
+  external_id: string_filter_operators
+  name: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  runs: directus_deployment_runs_quantifier_filter
+  runs_func: count_function_filter_operators
+  _and: [directus_deployment_projects_filter]
+  _or: [directus_deployment_projects_filter]
+  _some: directus_deployment_projects_filter
+  _none: directus_deployment_projects_filter
+}
+
+input directus_deployment_runs_filter {
+  id: id_filter_operators
+  project: directus_deployment_projects_filter
+  external_id: string_filter_operators
+  target: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  _and: [directus_deployment_runs_filter]
+  _or: [directus_deployment_runs_filter]
+}
+
+""""""
+input directus_deployment_runs_quantifier_filter {
+  id: id_filter_operators
+  project: directus_deployment_projects_filter
+  external_id: string_filter_operators
+  target: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  _and: [directus_deployment_runs_filter]
+  _or: [directus_deployment_runs_filter]
+  _some: directus_deployment_runs_filter
+  _none: directus_deployment_runs_filter
+}
+
+input directus_deployments_filter {
+  id: id_filter_operators
+  provider: string_filter_operators
+  credentials: string_filter_operators
+  options: string_filter_operators
+  options_func: count_function_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  projects: directus_deployment_projects_quantifier_filter
+  projects_func: count_function_filter_operators
+  _and: [directus_deployments_filter]
+  _or: [directus_deployments_filter]
 }
 
 input directus_files_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   storage: string_filter_operators
   filename_disk: string_filter_operators
   filename_download: string_filter_operators
@@ -3562,7 +3806,7 @@ input directus_files_filter {
 }
 
 input directus_flows_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   icon: string_filter_operators
   color: string_filter_operators
@@ -3576,14 +3820,14 @@ input directus_flows_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
-  operations: directus_operations_filter
+  operations: directus_operations_quantifier_filter
   operations_func: count_function_filter_operators
   _and: [directus_flows_filter]
   _or: [directus_flows_filter]
 }
 
 input directus_folders_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   parent: directus_folders_filter
   _and: [directus_folders_filter]
@@ -3606,7 +3850,7 @@ input directus_notifications_filter {
 }
 
 input directus_operations_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   key: string_filter_operators
   type: string_filter_operators
@@ -3624,8 +3868,30 @@ input directus_operations_filter {
   _or: [directus_operations_filter]
 }
 
+""""""
+input directus_operations_quantifier_filter {
+  id: id_filter_operators
+  name: string_filter_operators
+  key: string_filter_operators
+  type: string_filter_operators
+  position_x: number_filter_operators
+  position_y: number_filter_operators
+  options: string_filter_operators
+  options_func: count_function_filter_operators
+  resolve: directus_operations_filter
+  reject: directus_operations_filter
+  flow: directus_flows_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  _and: [directus_operations_filter]
+  _or: [directus_operations_filter]
+  _some: directus_operations_filter
+  _none: directus_operations_filter
+}
+
 input directus_panels_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   dashboard: directus_dashboards_filter
   name: string_filter_operators
   icon: string_filter_operators
@@ -3646,6 +3912,31 @@ input directus_panels_filter {
   _or: [directus_panels_filter]
 }
 
+""""""
+input directus_panels_quantifier_filter {
+  id: id_filter_operators
+  dashboard: directus_dashboards_filter
+  name: string_filter_operators
+  icon: string_filter_operators
+  color: string_filter_operators
+  show_header: boolean_filter_operators
+  note: string_filter_operators
+  type: string_filter_operators
+  position_x: number_filter_operators
+  position_y: number_filter_operators
+  width: number_filter_operators
+  height: number_filter_operators
+  options: string_filter_operators
+  options_func: count_function_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_created: directus_users_filter
+  _and: [directus_panels_filter]
+  _or: [directus_panels_filter]
+  _some: directus_panels_filter
+  _none: directus_panels_filter
+}
+
 input directus_permissions_filter {
   id: number_filter_operators
   collection: string_filter_operators
@@ -3662,8 +3953,27 @@ input directus_permissions_filter {
   _or: [directus_permissions_filter]
 }
 
+""""""
+input directus_permissions_quantifier_filter {
+  id: number_filter_operators
+  collection: string_filter_operators
+  action: string_filter_operators
+  permissions: string_filter_operators
+  permissions_func: count_function_filter_operators
+  validation: string_filter_operators
+  validation_func: count_function_filter_operators
+  presets: string_filter_operators
+  presets_func: count_function_filter_operators
+  fields: string_filter_operators
+  policy: directus_policies_filter
+  _and: [directus_permissions_filter]
+  _or: [directus_permissions_filter]
+  _some: directus_permissions_filter
+  _none: directus_permissions_filter
+}
+
 input directus_policies_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   icon: string_filter_operators
   description: string_filter_operators
@@ -3671,11 +3981,11 @@ input directus_policies_filter {
   enforce_tfa: boolean_filter_operators
   admin_access: boolean_filter_operators
   app_access: boolean_filter_operators
-  permissions: directus_permissions_filter
+  permissions: directus_permissions_quantifier_filter
   permissions_func: count_function_filter_operators
-  users: directus_access_filter
+  users: directus_access_quantifier_filter
   users_func: count_function_filter_operators
-  roles: directus_access_filter
+  roles: directus_access_quantifier_filter
   roles_func: count_function_filter_operators
   _and: [directus_policies_filter]
   _or: [directus_policies_filter]
@@ -3702,29 +4012,6 @@ input directus_presets_filter {
   _or: [directus_presets_filter]
 }
 
-input directus_relations_meta_input {
-  id: Int
-  many_collection: String
-  many_field: String
-  one_collection: String
-  one_field: String
-  one_collection_field: String
-  one_allowed_collections: [String]
-  junction_field: String
-  sort_field: String
-  one_deselect_action: String
-}
-
-input directus_relations_schema_input {
-  table: String!
-  column: String!
-  foreign_key_table: String!
-  foreign_key_column: String!
-  constraint_name: String
-  on_update: String!
-  on_delete: String!
-}
-
 input directus_revisions_filter {
   id: number_filter_operators
   activity: directus_activity_filter
@@ -3740,24 +4027,61 @@ input directus_revisions_filter {
   _or: [directus_revisions_filter]
 }
 
+""""""
+input directus_revisions_quantifier_filter {
+  id: number_filter_operators
+  activity: directus_activity_filter
+  collection: string_filter_operators
+  item: string_filter_operators
+  data: string_filter_operators
+  data_func: count_function_filter_operators
+  delta: string_filter_operators
+  delta_func: count_function_filter_operators
+  parent: directus_revisions_filter
+  version: directus_versions_filter
+  _and: [directus_revisions_filter]
+  _or: [directus_revisions_filter]
+  _some: directus_revisions_filter
+  _none: directus_revisions_filter
+}
+
 input directus_roles_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   icon: string_filter_operators
   description: string_filter_operators
   parent: directus_roles_filter
-  children: directus_roles_filter
+  children: directus_roles_quantifier_filter
   children_func: count_function_filter_operators
-  policies: directus_access_filter
+  policies: directus_access_quantifier_filter
   policies_func: count_function_filter_operators
-  users: directus_users_filter
+  users: directus_users_quantifier_filter
   users_func: count_function_filter_operators
   _and: [directus_roles_filter]
   _or: [directus_roles_filter]
 }
 
+""""""
+input directus_roles_quantifier_filter {
+  id: id_filter_operators
+  name: string_filter_operators
+  icon: string_filter_operators
+  description: string_filter_operators
+  parent: directus_roles_filter
+  children: directus_roles_quantifier_filter
+  children_func: count_function_filter_operators
+  policies: directus_access_quantifier_filter
+  policies_func: count_function_filter_operators
+  users: directus_users_quantifier_filter
+  users_func: count_function_filter_operators
+  _and: [directus_roles_filter]
+  _or: [directus_roles_filter]
+  _some: directus_roles_filter
+  _none: directus_roles_filter
+}
+
 input directus_shares_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   name: string_filter_operators
   collection: string_filter_operators
   item: string_filter_operators
@@ -3777,7 +4101,7 @@ input directus_shares_filter {
 }
 
 input directus_translations_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   language: string_filter_operators
   key: string_filter_operators
   value: string_filter_operators
@@ -3786,7 +4110,7 @@ input directus_translations_filter {
 }
 
 input directus_users_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   first_name: string_filter_operators
   last_name: string_filter_operators
   email: string_filter_operators
@@ -3817,16 +4141,61 @@ input directus_users_filter {
   theme_light_overrides_func: count_function_filter_operators
   theme_dark_overrides: string_filter_operators
   theme_dark_overrides_func: count_function_filter_operators
-  programs: programs_directus_users_filter
+  text_direction: string_filter_operators
+  programs: programs_directus_users_quantifier_filter
   programs_func: count_function_filter_operators
-  policies: directus_access_filter
+  policies: directus_access_quantifier_filter
   policies_func: count_function_filter_operators
   _and: [directus_users_filter]
   _or: [directus_users_filter]
 }
 
+""""""
+input directus_users_quantifier_filter {
+  id: id_filter_operators
+  first_name: string_filter_operators
+  last_name: string_filter_operators
+  email: string_filter_operators
+  password: hash_filter_operators
+  location: string_filter_operators
+  title: string_filter_operators
+  description: string_filter_operators
+  tags: string_filter_operators
+  tags_func: count_function_filter_operators
+  avatar: directus_files_filter
+  language: string_filter_operators
+  tfa_secret: hash_filter_operators
+  status: string_filter_operators
+  role: directus_roles_filter
+  token: hash_filter_operators
+  last_access: date_filter_operators
+  last_access_func: datetime_function_filter_operators
+  last_page: string_filter_operators
+  provider: string_filter_operators
+  external_identifier: string_filter_operators
+  auth_data: string_filter_operators
+  auth_data_func: count_function_filter_operators
+  email_notifications: boolean_filter_operators
+  appearance: string_filter_operators
+  theme_dark: string_filter_operators
+  theme_light: string_filter_operators
+  theme_light_overrides: string_filter_operators
+  theme_light_overrides_func: count_function_filter_operators
+  theme_dark_overrides: string_filter_operators
+  theme_dark_overrides_func: count_function_filter_operators
+  text_direction: string_filter_operators
+  programs: programs_directus_users_quantifier_filter
+  programs_func: count_function_filter_operators
+  policies: directus_access_quantifier_filter
+  policies_func: count_function_filter_operators
+  _and: [directus_users_filter]
+  _or: [directus_users_filter]
+  _some: directus_users_filter
+  _none: directus_users_filter
+}
+
 input directus_versions_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   key: string_filter_operators
   name: string_filter_operators
   collection: string_filter_operators
@@ -3842,23 +4211,6 @@ input directus_versions_filter {
   delta_func: count_function_filter_operators
   _and: [directus_versions_filter]
   _or: [directus_versions_filter]
-}
-
-input directus_webhooks_filter {
-  id: number_filter_operators
-  name: string_filter_operators
-  method: string_filter_operators
-  url: string_filter_operators
-  status: string_filter_operators
-  data: boolean_filter_operators
-  actions: string_filter_operators
-  collections: string_filter_operators
-  headers: string_filter_operators
-  headers_func: count_function_filter_operators
-  was_active_before_deprecation: boolean_filter_operators
-  migrated_flow: directus_flows_filter
-  _and: [directus_webhooks_filter]
-  _or: [directus_webhooks_filter]
 }
 
 input event_shows_filter {
@@ -3890,11 +4242,27 @@ input event_shows_filter {
 }
 
 input events_editor_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   events_id: events_filter
   collection: string_filter_operators
   _and: [events_editor_nodes_filter]
   _or: [events_editor_nodes_filter]
+  item__iframe: iframe_filter
+  item__image_box: image_box_filter
+  item__quote: quote_filter
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
+}
+
+""""""
+input events_editor_nodes_quantifier_filter {
+  id: id_filter_operators
+  events_id: events_filter
+  collection: string_filter_operators
+  _and: [events_editor_nodes_filter]
+  _or: [events_editor_nodes_filter]
+  _some: events_editor_nodes_filter
+  _none: events_editor_nodes_filter
   item__iframe: iframe_filter
   item__image_box: image_box_filter
   item__quote: quote_filter
@@ -3909,6 +4277,18 @@ input events_event_shows_filter {
   sort: big_int_filter_operators
   _and: [events_event_shows_filter]
   _or: [events_event_shows_filter]
+}
+
+""""""
+input events_event_shows_quantifier_filter {
+  id: number_filter_operators
+  events_id: events_filter
+  event_shows_id: event_shows_filter
+  sort: big_int_filter_operators
+  _and: [events_event_shows_filter]
+  _or: [events_event_shows_filter]
+  _some: events_event_shows_filter
+  _none: events_event_shows_filter
 }
 
 input events_filter {
@@ -3933,11 +4313,11 @@ input events_filter {
   promo_button_url: string_filter_operators
   promo_status: string_filter_operators
   partner_title: string_filter_operators
-  shows: events_event_shows_filter
+  shows: events_event_shows_quantifier_filter
   shows_func: count_function_filter_operators
-  editor_nodes: events_editor_nodes_filter
+  editor_nodes: events_editor_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
-  partner_logos: events_image_link_filter
+  partner_logos: events_image_link_quantifier_filter
   partner_logos_func: count_function_filter_operators
   _and: [events_filter]
   _or: [events_filter]
@@ -3952,6 +4332,18 @@ input events_image_link_filter {
   _or: [events_image_link_filter]
 }
 
+""""""
+input events_image_link_quantifier_filter {
+  id: number_filter_operators
+  events_id: events_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [events_image_link_filter]
+  _or: [events_image_link_filter]
+  _some: events_image_link_filter
+  _none: events_image_link_filter
+}
+
 input geometry_filter_operators {
   _eq: GraphQLGeoJSON
   _neq: GraphQLGeoJSON
@@ -3964,6 +4356,28 @@ input geometry_filter_operators {
 }
 
 input hash_filter_operators {
+  _null: Boolean
+  _nnull: Boolean
+  _empty: Boolean
+  _nempty: Boolean
+}
+
+input id_filter_operators {
+  _eq: ID
+  _neq: ID
+  _contains: ID
+  _icontains: ID
+  _ncontains: ID
+  _starts_with: ID
+  _nstarts_with: ID
+  _istarts_with: ID
+  _nistarts_with: ID
+  _ends_with: ID
+  _nends_with: ID
+  _iends_with: ID
+  _niends_with: ID
+  _in: [ID]
+  _nin: [ID]
   _null: Boolean
   _nnull: Boolean
   _empty: Boolean
@@ -4050,6 +4464,18 @@ input page_classes_classes_filter {
   _or: [page_classes_classes_filter]
 }
 
+""""""
+input page_classes_classes_quantifier_filter {
+  id: number_filter_operators
+  page_classes_id: page_classes_filter
+  classes_id: classes_filter
+  sort: big_int_filter_operators
+  _and: [page_classes_classes_filter]
+  _or: [page_classes_classes_filter]
+  _some: page_classes_classes_filter
+  _none: page_classes_classes_filter
+}
+
 input page_classes_filter {
   id: number_filter_operators
   user_created: directus_users_filter
@@ -4060,20 +4486,32 @@ input page_classes_filter {
   date_updated_func: datetime_function_filter_operators
   content: string_filter_operators
   content_func: count_function_filter_operators
-  editor_nodes: page_classes_nodes_filter
+  editor_nodes: page_classes_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
-  classes: page_classes_classes_filter
+  classes: page_classes_classes_quantifier_filter
   classes_func: count_function_filter_operators
   _and: [page_classes_filter]
   _or: [page_classes_filter]
 }
 
 input page_classes_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   page_classes_id: page_classes_filter
   collection: string_filter_operators
   _and: [page_classes_nodes_filter]
   _or: [page_classes_nodes_filter]
+  item__image_box: image_box_filter
+}
+
+""""""
+input page_classes_nodes_quantifier_filter {
+  id: id_filter_operators
+  page_classes_id: page_classes_filter
+  collection: string_filter_operators
+  _and: [page_classes_nodes_filter]
+  _or: [page_classes_nodes_filter]
+  _some: page_classes_nodes_filter
+  _none: page_classes_nodes_filter
   item__image_box: image_box_filter
 }
 
@@ -4083,6 +4521,17 @@ input page_contact_contact_address_filter {
   contact_address_id: contact_address_filter
   _and: [page_contact_contact_address_filter]
   _or: [page_contact_contact_address_filter]
+}
+
+""""""
+input page_contact_contact_address_quantifier_filter {
+  id: number_filter_operators
+  page_contact_id: page_contact_filter
+  contact_address_id: contact_address_filter
+  _and: [page_contact_contact_address_filter]
+  _or: [page_contact_contact_address_filter]
+  _some: page_contact_contact_address_filter
+  _none: page_contact_contact_address_filter
 }
 
 input page_contact_filter {
@@ -4115,9 +4564,9 @@ input page_contact_filter {
   ombuds_postfach: string_filter_operators
   ombuds_postfach_2: string_filter_operators
   location: geometry_filter_operators
-  partner_logos: page_contact_image_link_filter
+  partner_logos: page_contact_image_link_quantifier_filter
   partner_logos_func: count_function_filter_operators
-  contact_addresses: page_contact_contact_address_filter
+  contact_addresses: page_contact_contact_address_quantifier_filter
   contact_addresses_func: count_function_filter_operators
   _and: [page_contact_filter]
   _or: [page_contact_filter]
@@ -4132,6 +4581,18 @@ input page_contact_image_link_filter {
   _or: [page_contact_image_link_filter]
 }
 
+""""""
+input page_contact_image_link_quantifier_filter {
+  id: number_filter_operators
+  page_contact_id: page_contact_filter
+  image_link_id: image_link_filter
+  sort: big_int_filter_operators
+  _and: [page_contact_image_link_filter]
+  _or: [page_contact_image_link_filter]
+  _some: page_contact_image_link_filter
+  _none: page_contact_image_link_filter
+}
+
 input page_history_files_1_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
@@ -4141,6 +4602,18 @@ input page_history_files_1_filter {
   _or: [page_history_files_1_filter]
 }
 
+""""""
+input page_history_files_1_quantifier_filter {
+  id: number_filter_operators
+  page_history_id: page_history_filter
+  directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
+  _and: [page_history_files_1_filter]
+  _or: [page_history_files_1_filter]
+  _some: page_history_files_1_filter
+  _none: page_history_files_1_filter
+}
+
 input page_history_files_filter {
   id: number_filter_operators
   page_history_id: page_history_filter
@@ -4148,6 +4621,18 @@ input page_history_files_filter {
   sort: big_int_filter_operators
   _and: [page_history_files_filter]
   _or: [page_history_files_filter]
+}
+
+""""""
+input page_history_files_quantifier_filter {
+  id: number_filter_operators
+  page_history_id: page_history_filter
+  directus_files_id: directus_files_filter
+  sort: big_int_filter_operators
+  _and: [page_history_files_filter]
+  _or: [page_history_files_filter]
+  _some: page_history_files_filter
+  _none: page_history_files_filter
 }
 
 input page_history_filter {
@@ -4162,22 +4647,34 @@ input page_history_filter {
   content_func: count_function_filter_operators
   vision: directus_files_filter
   statutes: directus_files_filter
-  protocols: page_history_files_1_filter
+  protocols: page_history_files_1_quantifier_filter
   protocols_func: count_function_filter_operators
-  editor_nodes: page_history_nodes_filter
+  editor_nodes: page_history_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
-  logos: page_history_files_filter
+  logos: page_history_files_quantifier_filter
   logos_func: count_function_filter_operators
   _and: [page_history_filter]
   _or: [page_history_filter]
 }
 
 input page_history_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   page_history_id: page_history_filter
   collection: string_filter_operators
   _and: [page_history_nodes_filter]
   _or: [page_history_nodes_filter]
+  item__image_box: image_box_filter
+}
+
+""""""
+input page_history_nodes_quantifier_filter {
+  id: id_filter_operators
+  page_history_id: page_history_filter
+  collection: string_filter_operators
+  _and: [page_history_nodes_filter]
+  _or: [page_history_nodes_filter]
+  _some: page_history_nodes_filter
+  _none: page_history_nodes_filter
   item__image_box: image_box_filter
 }
 
@@ -4194,9 +4691,9 @@ input page_internship_filter {
   info_text_func: count_function_filter_operators
   content: string_filter_operators
   content_func: count_function_filter_operators
-  editor_nodes: page_internship_nodes_filter
+  editor_nodes: page_internship_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
-  internships: page_internship_internships_filter
+  internships: page_internship_internships_quantifier_filter
   internships_func: count_function_filter_operators
   _and: [page_internship_filter]
   _or: [page_internship_filter]
@@ -4211,12 +4708,36 @@ input page_internship_internships_filter {
   _or: [page_internship_internships_filter]
 }
 
+""""""
+input page_internship_internships_quantifier_filter {
+  id: number_filter_operators
+  page_internship_id: page_internship_filter
+  internships_id: internships_filter
+  sort: big_int_filter_operators
+  _and: [page_internship_internships_filter]
+  _or: [page_internship_internships_filter]
+  _some: page_internship_internships_filter
+  _none: page_internship_internships_filter
+}
+
 input page_internship_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   page_internship_id: page_internship_filter
   collection: string_filter_operators
   _and: [page_internship_nodes_filter]
   _or: [page_internship_nodes_filter]
+  item__image_box: image_box_filter
+}
+
+""""""
+input page_internship_nodes_quantifier_filter {
+  id: id_filter_operators
+  page_internship_id: page_internship_filter
+  collection: string_filter_operators
+  _and: [page_internship_nodes_filter]
+  _or: [page_internship_nodes_filter]
+  _some: page_internship_nodes_filter
+  _none: page_internship_nodes_filter
   item__image_box: image_box_filter
 }
 
@@ -4230,18 +4751,31 @@ input page_join_filter {
   date_updated_func: datetime_function_filter_operators
   content: string_filter_operators
   content_func: count_function_filter_operators
-  editor_nodes: page_join_nodes_filter
+  editor_nodes: page_join_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
   _and: [page_join_filter]
   _or: [page_join_filter]
 }
 
 input page_join_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   page_join_id: page_join_filter
   collection: string_filter_operators
   _and: [page_join_nodes_filter]
   _or: [page_join_nodes_filter]
+  item__info_box: info_box_filter
+  item__audio_player: audio_player_filter
+}
+
+""""""
+input page_join_nodes_quantifier_filter {
+  id: id_filter_operators
+  page_join_id: page_join_filter
+  collection: string_filter_operators
+  _and: [page_join_nodes_filter]
+  _or: [page_join_nodes_filter]
+  _some: page_join_nodes_filter
+  _none: page_join_nodes_filter
   item__info_box: info_box_filter
   item__audio_player: audio_player_filter
 }
@@ -4265,11 +4799,11 @@ input page_program_filter {
   programs_group_1_title: string_filter_operators
   programs_group_2_title: string_filter_operators
   programs_group_3_title: string_filter_operators
-  programs_group_1: page_program_programs_2_filter
+  programs_group_1: page_program_programs_2_quantifier_filter
   programs_group_1_func: count_function_filter_operators
-  programs_group_2: page_program_programs_1_filter
+  programs_group_2: page_program_programs_1_quantifier_filter
   programs_group_2_func: count_function_filter_operators
-  programs_group_3: page_program_programs_3_filter
+  programs_group_3: page_program_programs_3_quantifier_filter
   programs_group_3_func: count_function_filter_operators
   _and: [page_program_filter]
   _or: [page_program_filter]
@@ -4283,6 +4817,17 @@ input page_program_programs_1_filter {
   _or: [page_program_programs_1_filter]
 }
 
+""""""
+input page_program_programs_1_quantifier_filter {
+  id: number_filter_operators
+  page_program_id: page_program_filter
+  programs_slug: programs_filter
+  _and: [page_program_programs_1_filter]
+  _or: [page_program_programs_1_filter]
+  _some: page_program_programs_1_filter
+  _none: page_program_programs_1_filter
+}
+
 input page_program_programs_2_filter {
   id: number_filter_operators
   page_program_id: page_program_filter
@@ -4291,12 +4836,34 @@ input page_program_programs_2_filter {
   _or: [page_program_programs_2_filter]
 }
 
+""""""
+input page_program_programs_2_quantifier_filter {
+  id: number_filter_operators
+  page_program_id: page_program_filter
+  programs_slug: programs_filter
+  _and: [page_program_programs_2_filter]
+  _or: [page_program_programs_2_filter]
+  _some: page_program_programs_2_filter
+  _none: page_program_programs_2_filter
+}
+
 input page_program_programs_3_filter {
   id: number_filter_operators
   page_program_id: page_program_filter
   programs_slug: programs_filter
   _and: [page_program_programs_3_filter]
   _or: [page_program_programs_3_filter]
+}
+
+""""""
+input page_program_programs_3_quantifier_filter {
+  id: number_filter_operators
+  page_program_id: page_program_filter
+  programs_slug: programs_filter
+  _and: [page_program_programs_3_filter]
+  _or: [page_program_programs_3_filter]
+  _some: page_program_programs_3_filter
+  _none: page_program_programs_3_filter
 }
 
 input page_receive_filter {
@@ -4309,18 +4876,30 @@ input page_receive_filter {
   date_updated_func: datetime_function_filter_operators
   content: string_filter_operators
   content_func: count_function_filter_operators
-  editor_nodes: page_receive_nodes_filter
+  editor_nodes: page_receive_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
   _and: [page_receive_filter]
   _or: [page_receive_filter]
 }
 
 input page_receive_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   page_receive_id: page_receive_filter
   collection: string_filter_operators
   _and: [page_receive_nodes_filter]
   _or: [page_receive_nodes_filter]
+  item__info_box: info_box_filter
+}
+
+""""""
+input page_receive_nodes_quantifier_filter {
+  id: id_filter_operators
+  page_receive_id: page_receive_filter
+  collection: string_filter_operators
+  _and: [page_receive_nodes_filter]
+  _or: [page_receive_nodes_filter]
+  _some: page_receive_nodes_filter
+  _none: page_receive_nodes_filter
   item__info_box: info_box_filter
 }
 
@@ -4332,12 +4911,34 @@ input page_team_directus_users_1_filter {
   _or: [page_team_directus_users_1_filter]
 }
 
+""""""
+input page_team_directus_users_1_quantifier_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_1_filter]
+  _or: [page_team_directus_users_1_filter]
+  _some: page_team_directus_users_1_filter
+  _none: page_team_directus_users_1_filter
+}
+
 input page_team_directus_users_2_filter {
   id: number_filter_operators
   page_team_id: page_team_filter
   directus_users_id: directus_users_filter
   _and: [page_team_directus_users_2_filter]
   _or: [page_team_directus_users_2_filter]
+}
+
+""""""
+input page_team_directus_users_2_quantifier_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_2_filter]
+  _or: [page_team_directus_users_2_filter]
+  _some: page_team_directus_users_2_filter
+  _none: page_team_directus_users_2_filter
 }
 
 input page_team_directus_users_3_filter {
@@ -4348,6 +4949,17 @@ input page_team_directus_users_3_filter {
   _or: [page_team_directus_users_3_filter]
 }
 
+""""""
+input page_team_directus_users_3_quantifier_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_3_filter]
+  _or: [page_team_directus_users_3_filter]
+  _some: page_team_directus_users_3_filter
+  _none: page_team_directus_users_3_filter
+}
+
 input page_team_directus_users_4_filter {
   id: number_filter_operators
   page_team_id: page_team_filter
@@ -4356,12 +4968,34 @@ input page_team_directus_users_4_filter {
   _or: [page_team_directus_users_4_filter]
 }
 
+""""""
+input page_team_directus_users_4_quantifier_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_4_filter]
+  _or: [page_team_directus_users_4_filter]
+  _some: page_team_directus_users_4_filter
+  _none: page_team_directus_users_4_filter
+}
+
 input page_team_directus_users_filter {
   id: number_filter_operators
   page_team_id: page_team_filter
   directus_users_id: directus_users_filter
   _and: [page_team_directus_users_filter]
   _or: [page_team_directus_users_filter]
+}
+
+""""""
+input page_team_directus_users_quantifier_filter {
+  id: number_filter_operators
+  page_team_id: page_team_filter
+  directus_users_id: directus_users_filter
+  _and: [page_team_directus_users_filter]
+  _or: [page_team_directus_users_filter]
+  _some: page_team_directus_users_filter
+  _none: page_team_directus_users_filter
 }
 
 input page_team_filter {
@@ -4373,15 +5007,15 @@ input page_team_filter {
   date_updated: date_filter_operators
   date_updated_func: datetime_function_filter_operators
   text: string_filter_operators
-  members_program: page_team_directus_users_2_filter
+  members_program: page_team_directus_users_2_quantifier_filter
   members_program_func: count_function_filter_operators
-  members_management: page_team_directus_users_1_filter
+  members_management: page_team_directus_users_1_quantifier_filter
   members_management_func: count_function_filter_operators
-  members_staff: page_team_directus_users_filter
+  members_staff: page_team_directus_users_quantifier_filter
   members_staff_func: count_function_filter_operators
-  members_it: page_team_directus_users_3_filter
+  members_it: page_team_directus_users_3_quantifier_filter
   members_it_func: count_function_filter_operators
-  members_rabe_info: page_team_directus_users_4_filter
+  members_rabe_info: page_team_directus_users_4_quantifier_filter
   members_rabe_info_func: count_function_filter_operators
   _and: [page_team_filter]
   _or: [page_team_filter]
@@ -4405,12 +5039,36 @@ input post_directus_users_filter {
   _or: [post_directus_users_filter]
 }
 
+""""""
+input post_directus_users_quantifier_filter {
+  id: number_filter_operators
+  post_id: post_filter
+  directus_users_id: directus_users_filter
+  _and: [post_directus_users_filter]
+  _or: [post_directus_users_filter]
+  _some: post_directus_users_filter
+  _none: post_directus_users_filter
+}
+
 input post_editor_nodes_filter {
-  id: string_filter_operators
+  id: id_filter_operators
   post_id: post_filter
   collection: string_filter_operators
   _and: [post_editor_nodes_filter]
   _or: [post_editor_nodes_filter]
+  item__info_box: info_box_filter
+  item__quote: quote_filter
+}
+
+""""""
+input post_editor_nodes_quantifier_filter {
+  id: id_filter_operators
+  post_id: post_filter
+  collection: string_filter_operators
+  _and: [post_editor_nodes_filter]
+  _or: [post_editor_nodes_filter]
+  _some: post_editor_nodes_filter
+  _none: post_editor_nodes_filter
   item__info_box: info_box_filter
   item__quote: quote_filter
 }
@@ -4422,6 +5080,18 @@ input post_files_filter {
   sort: number_filter_operators
   _and: [post_files_filter]
   _or: [post_files_filter]
+}
+
+""""""
+input post_files_quantifier_filter {
+  id: number_filter_operators
+  post_id: post_filter
+  directus_files_id: directus_files_filter
+  sort: number_filter_operators
+  _and: [post_files_filter]
+  _or: [post_files_filter]
+  _some: post_files_filter
+  _none: post_files_filter
 }
 
 input post_filter {
@@ -4444,16 +5114,51 @@ input post_filter {
   short_description: string_filter_operators
   date_published: date_filter_operators
   date_published_func: datetime_function_filter_operators
-  audio_files: post_files_filter
+  audio_files: post_files_quantifier_filter
   audio_files_func: count_function_filter_operators
-  tags: post_tags_1_filter
+  tags: post_tags_1_quantifier_filter
   tags_func: count_function_filter_operators
-  editor_nodes: post_editor_nodes_filter
+  editor_nodes: post_editor_nodes_quantifier_filter
   editor_nodes_func: count_function_filter_operators
-  authors: post_directus_users_filter
+  authors: post_directus_users_quantifier_filter
   authors_func: count_function_filter_operators
   _and: [post_filter]
   _or: [post_filter]
+}
+
+""""""
+input post_quantifier_filter {
+  id: number_filter_operators
+  status: string_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  slug: string_filter_operators
+  program: programs_filter
+  imagebox: image_box_filter
+  content: string_filter_operators
+  content_func: count_function_filter_operators
+  preview_full_image: boolean_filter_operators
+  short_description: string_filter_operators
+  date_published: date_filter_operators
+  date_published_func: datetime_function_filter_operators
+  audio_files: post_files_quantifier_filter
+  audio_files_func: count_function_filter_operators
+  tags: post_tags_1_quantifier_filter
+  tags_func: count_function_filter_operators
+  editor_nodes: post_editor_nodes_quantifier_filter
+  editor_nodes_func: count_function_filter_operators
+  authors: post_directus_users_quantifier_filter
+  authors_func: count_function_filter_operators
+  _and: [post_filter]
+  _or: [post_filter]
+  _some: post_filter
+  _none: post_filter
 }
 
 input post_tags_1_filter {
@@ -4464,12 +5169,34 @@ input post_tags_1_filter {
   _or: [post_tags_1_filter]
 }
 
+""""""
+input post_tags_1_quantifier_filter {
+  id: number_filter_operators
+  post_id: post_filter
+  tags_id: tags_filter
+  _and: [post_tags_1_filter]
+  _or: [post_tags_1_filter]
+  _some: post_tags_1_filter
+  _none: post_tags_1_filter
+}
+
 input programs_directus_users_filter {
   id: number_filter_operators
   programs_slug: programs_filter
   directus_users_id: directus_users_filter
   _and: [programs_directus_users_filter]
   _or: [programs_directus_users_filter]
+}
+
+""""""
+input programs_directus_users_quantifier_filter {
+  id: number_filter_operators
+  programs_slug: programs_filter
+  directus_users_id: directus_users_filter
+  _and: [programs_directus_users_filter]
+  _or: [programs_directus_users_filter]
+  _some: programs_directus_users_filter
+  _none: programs_directus_users_filter
 }
 
 input programs_filter {
@@ -4487,9 +5214,9 @@ input programs_filter {
   content: string_filter_operators
   content_func: count_function_filter_operators
   promo_box: promo_box_filter
-  team: programs_directus_users_filter
+  team: programs_directus_users_quantifier_filter
   team_func: count_function_filter_operators
-  posts: post_filter
+  posts: post_quantifier_filter
   posts_func: count_function_filter_operators
   _and: [programs_filter]
   _or: [programs_filter]
@@ -4575,10 +5302,6 @@ input update_directus_access_input {
   sort: Int
 }
 
-input update_directus_collections_input {
-  meta: directus_collections_meta_input
-}
-
 input update_directus_comments_input {
   id: ID
   collection: String
@@ -4601,20 +5324,41 @@ input update_directus_dashboards_input {
   panels: [update_directus_panels_input]
 }
 
+input update_directus_deployment_projects_input {
+  id: ID
+  deployment: update_directus_deployments_input
+  external_id: String
+  name: String
+  date_created: Date
+  user_created: update_directus_users_input
+  runs: [update_directus_deployment_runs_input]
+}
+
+input update_directus_deployment_runs_input {
+  id: ID
+  project: update_directus_deployment_projects_input
+  external_id: String
+  target: String
+  date_created: Date
+  user_created: update_directus_users_input
+}
+
+input update_directus_deployments_input {
+  id: ID
+  provider: String
+  credentials: String
+  options: JSON
+  date_created: Date
+  user_created: update_directus_users_input
+  projects: [update_directus_deployment_projects_input]
+}
+
 input update_directus_extensions_input_metaInput {
   enabled: Boolean
 }
 
 input update_directus_extensions_inputInput {
   meta: update_directus_extensions_input_metaInput
-}
-
-input update_directus_fields_input {
-  collection: String
-  field: String
-  type: String
-  meta: directus_fields_meta_input
-  schema: directus_fields_schema_input
 }
 
 input update_directus_files_input {
@@ -4759,14 +5503,6 @@ input update_directus_presets_input {
   color: String
 }
 
-input update_directus_relations_input {
-  collection: String
-  field: String
-  related_collection: String
-  schema: directus_relations_schema_input
-  meta: directus_relations_meta_input
-}
-
 input update_directus_roles_input {
   id: ID
   name: String
@@ -4830,6 +5566,45 @@ input update_directus_settings_input {
   Enables regeneration of all BlurHashes for illustrations upon system restart.
   """
   blurhasher_regenerate_on_restart: Boolean
+  visual_editor_urls: JSON
+  project_id: ID
+
+  """$t:fields.directus_settings.mcp_enabled_note"""
+  mcp_enabled: Boolean
+
+  """$t:fields.directus_settings.mcp_allow_deletes_note"""
+  mcp_allow_deletes: Boolean
+
+  """$t:fields.directus_settings.mcp_prompts_collection_note"""
+  mcp_prompts_collection: String
+
+  """$t:fields.directus_settings.mcp_system_prompt_enabled_note"""
+  mcp_system_prompt_enabled: Boolean
+
+  """$t:fields.directus_settings.mcp_system_prompt_note"""
+  mcp_system_prompt: String
+  project_owner: String
+  project_usage: String
+  org_name: String
+  product_updates: Boolean
+  project_status: String
+  ai_openai_api_key: String
+  ai_anthropic_api_key: String
+
+  """$t:fields.directus_settings.ai_system_prompt_note"""
+  ai_system_prompt: String
+  ai_google_api_key: String
+  ai_openai_compatible_api_key: String
+  ai_openai_compatible_base_url: String
+  ai_openai_compatible_name: String
+  ai_openai_compatible_models: JSON
+  ai_openai_compatible_headers: JSON
+  ai_openai_allowed_models: JSON
+  ai_anthropic_allowed_models: JSON
+  ai_google_allowed_models: JSON
+
+  """$t:fields.directus_settings.collaborative_editing_note"""
+  collaborative_editing_enabled: Boolean
 }
 
 input update_directus_shares_input {
@@ -4889,6 +5664,7 @@ input update_directus_users_input {
   theme_light: String
   theme_light_overrides: JSON
   theme_dark_overrides: JSON
+  text_direction: String
   programs: [update_programs_directus_users_input]
   policies: [update_directus_access_input]
 }
@@ -4905,20 +5681,6 @@ input update_directus_versions_input {
   user_created: update_directus_users_input
   user_updated: update_directus_users_input
   delta: JSON
-}
-
-input update_directus_webhooks_input {
-  id: ID
-  name: String
-  method: String
-  url: String
-  status: String
-  data: Boolean
-  actions: [String]
-  collections: [String]
-  headers: JSON
-  was_active_before_deprecation: Boolean
-  migrated_flow: update_directus_flows_input
 }
 
 input update_image_box_input {
@@ -5016,4 +5778,114 @@ input update_promo_box_input {
 input update_tags_input {
   id: ID
   value: String
+}
+
+input write_directus_collections_input {
+  meta: write_directus_collections_meta_input
+  fields: [write_directus_fields_input!]
+}
+
+input write_directus_collections_meta_input {
+  collection: String
+  icon: String
+  note: String
+  display_template: String
+  hidden: Boolean
+  singleton: Boolean
+  translations: JSON
+  archive_field: String
+  archive_app_filter: Boolean
+  archive_value: String
+  unarchive_value: String
+  sort_field: String
+  accountability: String
+  color: String
+  item_duplication_fields: JSON
+  sort: Int
+  group: String
+  collapse: String
+  preview_url: String
+  versioning: Boolean
+}
+
+input write_directus_fields_input {
+  collection: String
+  field: String
+  type: String
+  meta: write_directus_fields_meta_input
+  schema: write_directus_fields_schema_input
+}
+
+input write_directus_fields_meta_input {
+  id: Int
+  collection: String
+  field: String
+  special: [String]
+  interface: String
+  options: JSON
+  display: String
+  display_options: JSON
+  readonly: Boolean
+  hidden: Boolean
+  sort: Int
+  width: String
+  translations: JSON
+  note: String
+  conditions: JSON
+  required: Boolean
+  group: String
+  validation: JSON
+  validation_message: String
+  searchable: Boolean
+}
+
+input write_directus_fields_schema_input {
+  name: String
+  table: String
+  data_type: String
+  default_value: String
+  max_length: Int
+  numeric_precision: Int
+  numeric_scale: Int
+  is_generated: Boolean
+  generation_expression: String
+  is_indexed: Boolean
+  is_nullable: Boolean
+  is_unique: Boolean
+  is_primary_key: Boolean
+  has_auto_increment: Boolean
+  foreign_key_column: String
+  foreign_key_table: String
+  comment: String
+}
+
+input write_directus_relations_input {
+  collection: String
+  field: String
+  related_collection: String
+  schema: write_directus_relations_schema_input
+  meta: write_directus_relations_meta_input
+}
+
+input write_directus_relations_meta_input {
+  id: Int
+  many_collection: String
+  many_field: String
+  one_collection: String
+  one_field: String
+  one_collection_field: String
+  one_allowed_collections: [String]
+  junction_field: String
+  sort_field: String
+  one_deselect_action: String
+}
+
+input write_directus_relations_schema_input {
+  table: String!
+  column: String!
+  foreign_key_table: String!
+  foreign_key_column: String!
+  constraint_name: String
+  on_update: String!
+  on_delete: String!
 }
