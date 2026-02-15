@@ -12,3 +12,6 @@ docker inspect --format='{{json .State.Health.Status}}' rabe-directus | grep unh
 echo "check undici problem"
 # check if next has some undici problems -> if yes restart both docker containers
 docker logs rabe-next --since 1m | grep ECONNRESET && sh logAndRestart.sh
+
+# delete directus-health-file as it is versioned and after 10000 versions the health check will fail 
+exo storage purge -f sos://rabe/directus-prod/directus-health-file

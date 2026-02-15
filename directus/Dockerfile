@@ -10,4 +10,4 @@ COPY healthcheck.mjs ./healthcheck.mjs
 
 RUN pnpm install directus-extension-blurhasher
 
-HEALTHCHECK --interval=12s --timeout=12s --start-period=30s CMD node healthcheck.mjs
+HEALTHCHECK --interval=30s --timeout=12s --start-period=30s CMD node healthcheck.mjs
