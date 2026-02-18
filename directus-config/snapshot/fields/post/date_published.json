@@ -12,7 +12,9 @@
     "hidden": false,
     "interface": "datetime",
     "note": null,
-    "options": null,
+    "options": {
+      "use24": false
+    },
     "readonly": false,
     "required": true,
     "searchable": true,
