@@ -6,8 +6,9 @@ echo "check long requests"
 docker logs rabe-directus --since 1m | grep -E " 1m | 2m | 3m | 4m | 5m " && sh logAndRestart.sh
 
 echo "check health problems"
-# check if next has health problems
+# check if containers has health problems
 docker inspect --format='{{json .State.Health.Status}}' rabe-directus | grep unhealthy && sh logAndRestart.sh
+docker inspect --format='{{json .State.Health.Status}}' rabe-next | grep unhealthy && sh logAndRestart.sh
 
 echo "check undici problem"
 # check if next has some undici problems -> if yes restart both docker containers
