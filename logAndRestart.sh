@@ -21,5 +21,7 @@ docker compose up -d --no-deps --build --force-recreate directus
 sleep 10
 docker compose stop next
 rm -rf next/.next
-docker compose up -d --no-deps --build --force-recreate next 
+docker compose rm -f next
+docker compose build --no-cache next 
+docker compose up -d --no-deps next
 docker system prune -f
