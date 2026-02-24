@@ -25,7 +25,7 @@ const HoverText = ({
 }: HoverableProps) => {
   const pressable = (
     <Pressable style={{}}>
-      {({ pressed, hovered, focused }: PressableState): ReactElement => {
+      {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
         return (
           <Text
             style={[

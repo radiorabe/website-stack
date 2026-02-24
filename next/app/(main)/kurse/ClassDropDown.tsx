@@ -24,7 +24,7 @@ const ClassDropDown = ({ classItem }: Props) => {
         style={{ marginBottom: isOpen ? Metrics.doubleBaseMargin : 0 }}
         onPress={() => setIsOpen(!isOpen)}
       >
-        {({ pressed, hovered, focused }: PressableState): ReactElement => {
+        {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
           return (
             <View
               style={{

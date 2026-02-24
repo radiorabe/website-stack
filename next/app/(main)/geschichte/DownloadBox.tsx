@@ -26,7 +26,7 @@ const DownloadBox = ({ label, url }: Props) => {
         Linking.openURL(url);
       }}
     >
-      {({ pressed, hovered, focused }: PressableState): ReactElement => {
+      {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
         return (
           <>
             <Text

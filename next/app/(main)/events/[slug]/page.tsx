@@ -61,7 +61,8 @@ async function getEvent(slug) {
   }
 }
 
-export default async function EventPage({ params }) {
+export default async function EventPage(props) {
+  const params = await props.params;
   const data = await getEvent(params.slug);
   console.log("Rerender PageEvent");
 

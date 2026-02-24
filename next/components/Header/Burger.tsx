@@ -32,7 +32,7 @@ const Burger = ({ onPress, menuOpen }: Props) => {
           }
         }}
       >
-        {({ pressed, hovered, focused }: PressableState): ReactElement => {
+        {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
           return (
             <View>
               {menuOpen ? (

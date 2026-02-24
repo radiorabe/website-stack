@@ -22,7 +22,7 @@ const AudioRabePlayerLabel = dynamic(() => import("./AudioRabePlayerLabel"), {
 export interface HoverableProps {}
 
 const AudioRabePlayer = ({}: HoverableProps) => {
-  let track = {
+  const track = {
     title: "Rabe Stream",
     src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
     author: "Trinix ft Rushawn",
@@ -56,7 +56,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
 
   const onCanplay = () => {
     // console.log("onCanplay");
-    audioRef.current?.play();
+    // audioRef.current?.play();
     setPlayerState("canplay");
   };
 
@@ -114,9 +114,9 @@ const AudioRabePlayer = ({}: HoverableProps) => {
     }
   };
 
-  let thisTrackLoading =
+  const thisTrackLoading =
     track.src === currentTrack.src && playerState === "loading";
-  let thisTrackPlaying =
+  const thisTrackPlaying =
     track.src === currentTrack.src && playerState === "playing";
 
   return (

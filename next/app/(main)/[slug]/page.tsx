@@ -139,7 +139,8 @@ async function getPosts(slug) {
   }
 }
 
-export default async function ProgramPage({ params }) {
+export default async function ProgramPage(props) {
+  const params = await props.params;
   const sendung = await getSendung(params.slug);
   const posts = await getPosts(params.slug);
   const { nowPlaying, nextShows } = await getNextShowForProgram(sendung.slug);

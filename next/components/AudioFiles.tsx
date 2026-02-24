@@ -48,7 +48,7 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                 pressed,
                 hovered,
                 focused,
-              }: PressableState): ReactElement => {
+              }: PressableState): ReactElement<any> => {
                 return (
                   <View
                     style={{
@@ -99,7 +99,7 @@ const AudioFiles = ({ tracks, onChange, currentTrack }: Props) => {
                   pressed,
                   hovered,
                   focused,
-                }: PressableState): ReactElement => {
+                }: PressableState): ReactElement<any> => {
                   return (
                     <IconDownload
                       color={hovered ? Colors.green : Colors.darkGreen}

@@ -15,7 +15,6 @@ import {
 //     { display: "flex", flexDirection: "column" },
 //     style
 //   );
-
 //   if (newStyle.paddingVertical) {
 //     newStyle.paddingTop = newStyle.paddingTop
 //       ? newStyle.paddingTop
@@ -24,7 +23,6 @@ import {
 //       ? newStyle.paddingBottom
 //       : newStyle.paddingVertical;
 //   }
-
 //   if (newStyle.paddingHorizontal) {
 //     newStyle.paddingLeft = newStyle.paddingLeft
 //       ? newStyle.paddingLeft
@@ -33,7 +31,6 @@ import {
 //       ? newStyle.paddingRight
 //       : newStyle.paddingHorizontal;
 //   }
-
 //   return (
 //     <div
 //       {...otherProps}
@@ -44,10 +41,9 @@ import {
 //     </div>
 //   );
 // }
-
 // const View = ({ style, children, ...otherProps }) =>
 //   <div style={Object.assign({ marginRight: "1.5em" }, style)} {...otherProps}>
 //       {children}
 //   </div>;
-
-export { Text, Pressable, View, TextStyle, Linking, StyleSheet };
+export { Text, Pressable, View, Linking, StyleSheet };
+export type { TextStyle };

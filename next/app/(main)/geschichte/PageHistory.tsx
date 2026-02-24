@@ -70,7 +70,7 @@ export default function PageHistory({ pageData }: Props) {
                 pressed,
                 hovered,
                 focused,
-              }: PressableState): ReactElement => {
+              }: PressableState): ReactElement<any> => {
                 return (
                   <View
                     style={{

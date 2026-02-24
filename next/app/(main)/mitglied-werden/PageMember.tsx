@@ -1,11 +1,14 @@
 "use client";
 import RenderTipTap from "@/components/RenderTipTap";
+import StarterKit from "@tiptap/starter-kit";
+
 import Metrics from "@/lib/Metrics";
-import { View } from "@/lib/server-react-native";
+import { View, Text } from "@/lib/server-react-native";
 import StyleSheet from "react-native-media-query";
 import Statement from "./Statement";
 import SupportProduct from "./SupportProduct";
 import YearlyProduct from "./YearlyProducts";
+import { renderToReactElement } from "@tiptap/static-renderer/pm/react";
 
 export default function PageMember({ pageData, memberProducts, statements }) {
   const data = pageData;
@@ -38,11 +41,11 @@ export default function PageMember({ pageData, memberProducts, statements }) {
             <SupportProduct></SupportProduct>
           </View>
         </View>
-        <View
+        <Text
           style={{ paddingTop: Metrics.doubleBaseMargin, textAlign: "center" }}
         >
           {"*Studierende / RentnerInnen (AHV, IV), Besitzende einer Kulturlegi"}
-        </View>
+        </Text>
         <View
           style={styles.contentContainer}
           dataSet={{ media: ids.contentContainer }}

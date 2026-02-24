@@ -9,7 +9,7 @@ export const config = {
   ],
 };
 
-export function middleware(req) {
+export function proxy(req) {
   const url = req.nextUrl.clone();
   const { pathname } = url;
 

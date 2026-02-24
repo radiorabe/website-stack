@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 // https://tiptap.dev/guide/output
 /**
  * There are two types of things which render.

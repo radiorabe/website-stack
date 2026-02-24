@@ -14,8 +14,11 @@ module.exports = {
       },
     ];
   },
+
   images: {
     dangerouslyAllowSVG: true,
+    dangerouslyAllowLocalIP: true,
+
     remotePatterns: [
       {
         protocol: process.env.IMAGES_PROTOCOL,
@@ -25,27 +28,9 @@ module.exports = {
       },
     ],
   },
-  experimental: {
-    turbo: {
-      resolveAlias: {
-        "react-native": "react-native-web",
-      },
-      resolveExtensions: [
-        ".web.js",
-        ".web.jsx",
-        ".web.ts",
-        ".web.tsx",
-        ".mdx",
-        ".tsx",
-        ".ts",
-        ".jsx",
-        ".js",
-        ".mjs",
-        ".json",
-      ],
-    },
-  },
+
   output: "standalone",
+
   eslint: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -53,6 +38,7 @@ module.exports = {
     // !! WARN !!
     ignoreDuringBuilds: true,
   },
+
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -60,6 +46,7 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+
   webpack(config) {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
@@ -79,5 +66,25 @@ module.exports = {
       ...(config.resolve?.extensions ?? []),
     ];
     return config;
+  },
+
+  turbopack: {
+    resolveAlias: {
+      "react-native": "react-native-web",
+    },
+
+    resolveExtensions: [
+      ".web.js",
+      ".web.jsx",
+      ".web.ts",
+      ".web.tsx",
+      ".mdx",
+      ".tsx",
+      ".ts",
+      ".jsx",
+      ".js",
+      ".mjs",
+      ".json",
+    ],
   },
 };

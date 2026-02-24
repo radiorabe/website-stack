@@ -6,7 +6,7 @@ import { logError } from "@/lib/loging";
 import { notFound, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
-import { useEffect } from "react";
+import { useEffect, use } from "react";
 
 async function checkOrder([slug, id]) {
   try {
@@ -23,7 +23,8 @@ async function checkOrder([slug, id]) {
   }
 }
 
-export default function CheckPage({ searchParams }) {
+export default function CheckPage(props) {
+  const searchParams = use(props.searchParams);
   // console.log("searchParams", searchParams);
 
   if (!searchParams.id || searchParams.id === "") {

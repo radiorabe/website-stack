@@ -1,9 +1,7 @@
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import {
-  TipTapRender
-} from "@wokaylabs/tiptap-react-render";
+import { TipTapRender } from "@abidmiah128/tiptap-react-render";
 import React from "react";
 import AudioFilePlayer from "../AudioFilePlayer";
 import Iframe from "./Iframe";
@@ -79,7 +77,7 @@ const markHandlers = (topProps) => {
       // console.log("linkj props", props.children.props.node.type);
       // console.log("linkj topProps", topProps);
 
-      let label =
+      const label =
         props.children.props.node.type === "text"
           ? props.children.props.node.text
           : props.children;
@@ -158,13 +156,13 @@ const nodeHandlers = (topProps) => {
       if (!props.node.data) {
         console.error(
           "TipTap missing relational data for: ",
-          props.node.attrs.collection
+          props.node.attrs.collection,
         );
         return;
       }
 
       if (props.node.attrs.collection === "audio_player") {
-        let audioPlayer = props.node.data;
+        const audioPlayer = props.node.data;
         return (
           <div
             style={{
@@ -177,20 +175,20 @@ const nodeHandlers = (topProps) => {
         );
       }
       if (props.node.attrs.collection === "quote") {
-        let quote = props.node.data;
+        const quote = props.node.data;
         return <Quote data={quote}></Quote>;
       }
       if (props.node.attrs.collection === "iframe") {
-        let iframe = props.node.data;
+        const iframe = props.node.data;
 
         return <Iframe data={iframe.code}></Iframe>;
       }
       if (props.node.attrs.collection === "info_box") {
-        let infoBoxData = props.node.data;
+        const infoBoxData = props.node.data;
         return <InfoBox data={infoBoxData}></InfoBox>;
       }
       if (props.node.attrs.collection === "image_box") {
-        let imageBoxData = props.node.data;
+        const imageBoxData = props.node.data;
         return (
           <ImageBox
             image={imageBoxData.image}
@@ -204,7 +202,7 @@ const nodeHandlers = (topProps) => {
       }
       console.error(
         "TipTap missing relational component for: ",
-        props.node.attrs.collection
+        props.node.attrs.collection,
       );
     },
   };

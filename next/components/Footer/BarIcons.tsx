@@ -48,7 +48,7 @@ export default function BarIcon({}: Props) {
                   pressed,
                   hovered,
                   focused,
-                }: PressableState): ReactElement => {
+                }: PressableState): ReactElement<any> => {
                   return (
                     <iconData.icon color={Colors.lightGreen}></iconData.icon>
                   );
@@ -71,7 +71,7 @@ export default function BarIcon({}: Props) {
                   pressed,
                   hovered,
                   focused,
-                }: PressableState): ReactElement => {
+                }: PressableState): ReactElement<any> => {
                   return (
                     <iconData.icon color={Colors.lightGreen}></iconData.icon>
                   );

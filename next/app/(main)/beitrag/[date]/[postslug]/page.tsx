@@ -10,7 +10,7 @@ import Flows from "@/lib/api/Flows";
 import { draftMode } from "next/headers";
 
 async function getPost(params) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
 
   try {
     const date = moment.utc(params.date, "DD-MM-YYYY").subtract(2, "h"); // subtract two hours because of the timediff to Switzerland
@@ -131,10 +131,8 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const post = await getPost(params);
 
   let description = post.short_description;
@@ -163,7 +161,8 @@ export async function generateMetadata(
   };
 }
 
-export default async function BeitragPage({ params }: Props) {
+export default async function BeitragPage(props: Props) {
+  const params = await props.params;
   const post = await getPost(params);
   const morePosts = await getRelatedPosts(post.slug, post.program.slug);
 

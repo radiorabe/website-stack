@@ -91,7 +91,8 @@ async function getPageData() {
   }
 }
 
-export default async function ProgramPage({ params }) {
+export default async function ProgramPage(props) {
+  const params = await props.params;
   let liveData = await getLiveData();
   let data = await getPageData();
   console.info("Rerender PageProgramm");

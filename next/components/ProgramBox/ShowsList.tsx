@@ -46,9 +46,9 @@ export default function ShowsList({
                 if (show === null) {
                   return null;
                 }
-                let showDateString =
+                const showDateString =
                   show && show.starts && moment(show.starts).format("HH:mm");
-                let isCurrentshow =
+                const isCurrentshow =
                   currentShow &&
                   currentShow.starts &&
                   show.starts === currentShow.starts;

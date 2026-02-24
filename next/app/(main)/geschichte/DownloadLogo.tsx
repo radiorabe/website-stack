@@ -20,7 +20,7 @@ const DownLoadLogo = ({ url, style, label }: Props) => {
           Linking.openURL(url + "?download");
         }}
       >
-        {({ pressed, hovered, focused }: PressableState): ReactElement => {
+        {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
           return (
             <Image
               src={url + "?width=500&height=500&fit=cover"}

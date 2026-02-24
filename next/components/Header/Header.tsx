@@ -24,16 +24,16 @@ import MobileMenu from "./MobileMenu";
 function Header() {
   const router = useRouter();
 
-  let { isMobile } = useResponsive();
+  const { isMobile } = useResponsive();
 
-  let [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const dropDownRef = useRef("dropdown");
   const menuRef = useRef("menu");
   useClickOutside([dropDownRef, menuRef], () => {
     setShowDropdown(false);
   });
 
-  let [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const dropDownArray = [
     {
@@ -80,7 +80,7 @@ function Header() {
             router.push("/");
           }}
         >
-          {({ pressed, hovered }: PressableState): ReactElement => {
+          {({ pressed, hovered }: PressableState): ReactElement<any> => {
             return (
               <>
                 <View
@@ -161,7 +161,7 @@ function Header() {
                 pressed,
                 hovered,
                 focused,
-              }: PressableState): ReactElement => {
+              }: PressableState): ReactElement<any> => {
                 return (
                   <View style={[styles.navItem]}>
                     <View
@@ -277,7 +277,7 @@ function Header() {
                 pressed,
                 hovered,
                 focused,
-              }: PressableState): ReactElement => {
+              }: PressableState): ReactElement<any> => {
                 return (
                   <View>
                     {showMenu ? (
@@ -402,9 +402,9 @@ const { ids, styles } = StyleSheet.create({
   },
   navBarMediumContainer: {
     display: "none",
-    "@media (min-width: 911px) and (max-width:1799px)": {
-      display: "flex",
-    },
+    // "@media (min-width: 911px) and (max-width:1799px)": {
+    //   display: "flex",
+    // },
   },
   navBarLargeContainer: {
     display: "none",

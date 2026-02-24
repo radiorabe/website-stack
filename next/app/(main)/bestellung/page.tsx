@@ -67,7 +67,8 @@ async function getSendungen() {
   }
 }
 
-export default async function BestellungPage({ searchParams }) {
+export default async function BestellungPage(props) {
+  const searchParams = await props.searchParams;
   console.info("Rerender PageOrder: ");
 
   if ((!searchParams.id || searchParams.id === "") && !searchParams.slug) {

@@ -28,7 +28,7 @@ export async function GET(request: Request) {
       return new Response("Invalid id", { status: 401 });
     }
 
-    draftMode().enable();
+    (await draftMode()).enable();
 
     return new Response(null, {
       status: 307,
@@ -43,11 +43,11 @@ export async function GET(request: Request) {
 }
 
 // Stop Draft Mode
-export function POST(req: Request) {
+export async function POST(req: Request) {
   const referrer = req.headers.get("Referer");
   if (!referrer) {
     return new Response("Missing Referer", { status: 400 });
   }
-  draftMode().disable();
+  (await draftMode()).disable();
   return Response.redirect(referrer, 303);
 }

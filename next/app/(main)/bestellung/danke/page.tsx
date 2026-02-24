@@ -26,7 +26,8 @@ async function getOrder(id) {
   }
 }
 
-export default async function DankePage({ searchParams }) {
+export default async function DankePage(props) {
+  const searchParams = await props.searchParams;
   // console.log("searchParams", searchParams);
 
   // console.log("id", searchParams.id);

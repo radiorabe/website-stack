@@ -107,7 +107,7 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
                 audioRef.current?.pause();
               }}
             >
-              {({ pressed, hovered }: PressableState): ReactElement => {
+              {({ pressed, hovered }: PressableState): ReactElement<any> => {
                 let newColor = pressed
                   ? Colors.lightGreen
                   : hovered
@@ -129,7 +129,7 @@ const AudioFilePlayer = ({ audioFiles }: HoverableProps) => {
                 }
               }}
             >
-              {({ pressed, hovered }: PressableState): ReactElement => {
+              {({ pressed, hovered }: PressableState): ReactElement<any> => {
                 let newColor = pressed
                   ? Colors.lightGreen
                   : hovered

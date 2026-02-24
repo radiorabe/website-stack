@@ -26,7 +26,7 @@ const PlayButton = ({ state, onPress }: Props) => {
     >
       {state === "playing" && (
         <Pressable style={{}} onPress={onPress}>
-          {({ pressed, hovered }: PressableState): ReactElement => {
+          {({ pressed, hovered }: PressableState): ReactElement<any> => {
             let newColor = pressed
               ? Colors.darkGreen
               : hovered
@@ -38,7 +38,7 @@ const PlayButton = ({ state, onPress }: Props) => {
       )}
       {state === "paused" && (
         <Pressable style={{}} onPress={onPress}>
-          {({ pressed, hovered }: PressableState): ReactElement => {
+          {({ pressed, hovered }: PressableState): ReactElement<any> => {
             let newColor = pressed
               ? Colors.darkGreen
               : hovered

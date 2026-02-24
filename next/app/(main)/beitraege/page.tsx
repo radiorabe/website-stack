@@ -71,7 +71,8 @@ export const metadata: Metadata = {
 };
 const INITIAL_NUMBER_OF_POSTS = 6;
 
-export default async function BeitraegePage({ searchParams }) {
+export default async function BeitraegePage(props) {
+  const searchParams = await props.searchParams;
   // Extract filters from searchParams
   const filters = {
     searchTerm: searchParams.searchTerm || "",

@@ -14,7 +14,7 @@ const SvgComponent = ({ color, hoverColor, href, style }) => {
       }}
       onPress={() => router.push(href, { scroll: false })}
     >
-      {({ pressed, hovered, focused }: PressableState): ReactElement => {
+      {({ pressed, hovered, focused }: PressableState): ReactElement<any> => {
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="26">
             <path
