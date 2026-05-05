@@ -1,7 +1,7 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound, useSearchParams } from "next/navigation";
+import { notFound } from "next/navigation";
 
 import Metrics from "@/lib/Metrics";
 

@@ -2,10 +2,8 @@ import { logError } from "@/lib/loging";
 import Metrics from "@/lib/Metrics";
 import { View } from "@/lib/server-react-native";
 import { Metadata } from "next";
-import StyleSheet from "react-native-media-query";
 import { Api, UserApi } from "../../../lib/api";
 import { ItemsPrograms, Users } from "../../../lib/api/data-contracts";
-import Fonts from "../../../lib/Fonts";
 import { getPosts } from "./getPosts";
 import PostList from "./PostList";
 import SearchBox from "./SearchBox";
@@ -111,24 +109,3 @@ export default async function BeitraegePage(props) {
     </View>
   );
 }
-
-const { styles } = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flexGrow: 1,
-    justifyContent: "center",
-  },
-  link: {
-    color: "blue",
-  },
-  textContainer: {
-    alignItems: "center",
-    marginTop: 16,
-  },
-  text: {
-    ...Fonts.style.text,
-    alignItems: "center",
-    fontSize: 24,
-    marginBottom: 24,
-  },
-});
