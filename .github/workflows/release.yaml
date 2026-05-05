@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release-next-container:
+    uses: radiorabe/actions/.github/workflows/release-container.yaml@v0.37.0
+    with:
+      image: 'ghcr.io/radiorabe/website-stack/next'
+      name: 'next'
+      display-name: 'RaBe Nextjs Website'
+      tags: 'rabe web nextjs alpine'
+      # the alpine base image used for the nextjs frontend does not have a
+      # keyless cosign signature, so we disable verifying the image.
+      cosign-verify: false
+      context: './next/'
+      dockerfile: './next/Dockerfile.prod'
+      push-default-branch: true
+      build-args: |
+        IMAGES_HOSTNAME=data.rabe.ch
