@@ -58,6 +58,7 @@ const AudioRabePlayer = ({}: HoverableProps) => {
     // console.log("onCanplay");
     // audioRef.current?.play();
     setPlayerState("canplay");
+    audioRef.current?.play();
   };
 
   const onLoadStart = () => {
