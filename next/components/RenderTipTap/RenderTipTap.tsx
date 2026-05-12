@@ -1,7 +1,7 @@
 import Colors from "@/lib/Colors";
 import Fonts from "@/lib/Fonts";
 import Metrics from "@/lib/Metrics";
-import { TipTapRender } from "@abidmiah128/tiptap-react-render";
+import { TipTapRender } from "./TipTapRender";
 import React from "react";
 import AudioFilePlayer from "../AudioFilePlayer";
 import Iframe from "./Iframe";

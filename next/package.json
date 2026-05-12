@@ -9,7 +9,6 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@abidmiah128/tiptap-react-render": "^0.0.4",
     "@gsap/react": "^2.1.2",
     "blurhash-base64": "^0.0.3",
     "cross-fetch": "^4.0.0",
