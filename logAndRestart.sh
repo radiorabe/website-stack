@@ -1,5 +1,6 @@
 #!/bin/bash
 source .env
+cd "$(dirname "$0")"
 
 folderName="logs/$(date +%F)"
 directus_log_file="${folderName}/directus.log"
