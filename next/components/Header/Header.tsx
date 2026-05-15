@@ -402,9 +402,9 @@ const { ids, styles } = StyleSheet.create({
   },
   navBarMediumContainer: {
     display: "none",
-    // "@media (min-width: 911px) and (max-width:1799px)": {
-    //   display: "flex",
-    // },
+    "@media (min-width: 911px) and (max-width:1799px)": {
+      display: "flex",
+    },
   },
   navBarLargeContainer: {
     display: "none",
