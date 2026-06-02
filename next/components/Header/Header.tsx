@@ -68,6 +68,10 @@ function Header() {
       href: "/empfangen",
       label: "Empfangen",
     },
+    {
+      href: "/merch-shop",
+      label: "Merch Shop",
+    },
   ];
 
   return (
