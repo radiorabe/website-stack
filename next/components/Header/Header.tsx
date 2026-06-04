@@ -69,7 +69,7 @@ function Header() {
       label: "Empfangen",
     },
     {
-      href: "/merch-shop",
+      href: "https://rabe-merch.payrexx.com/",
       label: "Merch Shop",
     },
   ];
