@@ -71,6 +71,7 @@ function Header() {
     {
       href: "https://rabe-merch.payrexx.com/",
       label: "Merch Shop",
+      openTab: true,
     },
   ];
 
@@ -219,7 +220,11 @@ function Header() {
                     <LinkComponent
                       key={"dropdownItem" + index}
                       href={item.href}
-                      onPress={() => setShowDropdown(!showDropdown)}
+                      onPress={
+                        item.openTab
+                          ? () => window.open(item.href, "_blank")
+                          : () => setShowDropdown(!showDropdown)
+                      }
                     >
                       <Text
                         style={styles.dropDownItem}
