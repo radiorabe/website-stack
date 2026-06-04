@@ -220,11 +220,9 @@ function Header() {
                     <LinkComponent
                       key={"dropdownItem" + index}
                       href={item.href}
-                      onPress={
-                        item.openTab
-                          ? () => window.open(item.href, "_blank")
-                          : () => setShowDropdown(!showDropdown)
-                      }
+                      rel={item.openTab ? "noopener noreferrer" : undefined}
+                      target={item.openTab ? "_blank" : undefined}
+                      onPress={() => setShowDropdown(!showDropdown)}
                     >
                       <Text
                         style={styles.dropDownItem}

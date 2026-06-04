@@ -9,6 +9,8 @@ const LinkComponent = (props) => {
       href={props.href}
       style={{ textDecoration: "none" }}
       onClick={props.onPress}
+      rel={props.rel}
+      target={props.target}
     >
       <View style={props.style} dataSet={props.dataSet}>
         {props.children}

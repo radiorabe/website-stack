@@ -123,11 +123,9 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
                 <LinkComponent
                   key={"mobileMenuButton" + index}
                   href={item.href}
-                  onPress={
-                    item.openTab
-                      ? () => window.open(item.href, "_blank")
-                      : () => closeMenu()
-                  }
+                  rel={item.openTab ? "noopener noreferrer" : undefined}
+                  target={item.openTab ? "_blank" : undefined}
+                  onPress={closeMenu}
                 >
                   <Text
                     style={{
