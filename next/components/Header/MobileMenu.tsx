@@ -53,20 +53,25 @@ const buttonArray = [
     href: "/empfangen",
     label: "Empfangen",
   },
+  {
+    href: "https://rabe-merch.payrexx.com/",
+    label: "Merch Shop",
+    openTab: true,
+  },
 ];
 
 export default function MobileMenu({ showMenu, closeMenu }: Props) {
-  let [showDropdown, setShowDropdown] = useState(false);
-  let track = {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const track = {
     title: "Rabe Stream",
     src: "https://stream.rabe.ch/livestream/rabe-hd.mp3",
     author: "Trinix ft Rushawn",
   };
   const { currentTrack, setCurrentTrack, playerState, audioRef } =
     useAudioPlayerContext();
-  let thisTrackSet = track.src === currentTrack.src;
-  let thisTrackLoading = thisTrackSet && playerState === "loading";
-  let thisTrackPlaying = thisTrackSet && playerState === "playing";
+  const thisTrackSet = track.src === currentTrack.src;
+  const thisTrackLoading = thisTrackSet && playerState === "loading";
+  const thisTrackPlaying = thisTrackSet && playerState === "playing";
 
   useEffect(() => {
     if (showMenu) {
@@ -118,7 +123,11 @@ export default function MobileMenu({ showMenu, closeMenu }: Props) {
                 <LinkComponent
                   key={"mobileMenuButton" + index}
                   href={item.href}
-                  onPress={closeMenu}
+                  onPress={
+                    item.openTab
+                      ? () => window.open(item.href, "_blank")
+                      : () => closeMenu()
+                  }
                 >
                   <Text
                     style={{
