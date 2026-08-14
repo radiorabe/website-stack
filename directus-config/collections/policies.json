@@ -22,17 +22,6 @@
     "_syncId": "_sync_default_admin_policy"
   },
   {
-    "name": "App Access Minimum",
-    "icon": "badge",
-    "description": "App Access Minimum",
-    "ip_access": null,
-    "enforce_tfa": false,
-    "admin_access": false,
-    "app_access": true,
-    "roles": [],
-    "_syncId": "_sync_default_public_policy"
-  },
-  {
     "name": "App access default",
     "icon": "badge",
     "description": null,
@@ -88,7 +77,7 @@
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
         "user": null,
-        "sort": 4
+        "sort": 8
       }
     ],
     "_syncId": "5e318f47-7fbf-4347-9e8f-013bdda76d6c"
@@ -127,7 +116,7 @@
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
         "user": null,
-        "sort": 8
+        "sort": 9
       }
     ],
     "_syncId": "6d1d18cc-94f8-4d4d-90a8-baf1c643baf7"

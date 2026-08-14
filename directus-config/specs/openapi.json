@@ -3,7 +3,7 @@
   "info": {
     "title": "Dynamic API Specification",
     "description": "This is a dynamically generated API specification for all endpoints existing on the current project.",
-    "version": "c5f3b827c774db1c8ec965ef93a851cf6d5ae956"
+    "version": "e526abda70f49d85a447d05c274d34ad27b7c67b"
   },
   "servers": [
     {
@@ -270,7 +270,7 @@
         ],
         "operationId": "passwordRequest",
         "summary": "Request a Password Reset",
-        "description": "Request a reset password email to be send.",
+        "description": "Request that a password reset email be sent. This does not apply to users authenticated through external providers (OAuth, SAML, LDAP, etc.).",
         "requestBody": {
           "content": {
             "application/json": {
@@ -33896,7 +33896,8 @@
             "type": "boolean"
           },
           "translations": {
-            "nullable": true
+            "nullable": true,
+            "description": "$t:field_options.directus_collections.collection_naming_translations_note"
           },
           "archive_field": {
             "nullable": true,

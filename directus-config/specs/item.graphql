@@ -704,10 +704,10 @@ type Subscription {
   page_history_files_1_mutated(event: EventEnum): page_history_files_1_mutated
   page_team_directus_users_3_mutated(event: EventEnum): page_team_directus_users_3_mutated
   page_team_directus_users_4_mutated(event: EventEnum): page_team_directus_users_4_mutated
-  directus_settings_mutated(event: EventEnum): directus_settings_mutated
-  directus_deployments_mutated(event: EventEnum): directus_deployments_mutated
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   directus_deployment_runs_mutated(event: EventEnum): directus_deployment_runs_mutated
+  directus_settings_mutated(event: EventEnum): directus_settings_mutated
+  directus_deployments_mutated(event: EventEnum): directus_deployments_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1071,6 +1071,9 @@ type directus_deployment_projects {
   date_created: Date
   date_created_func: datetime_functions
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  url: String
+  framework: String
+  deployable: Boolean
   runs(filter: directus_deployment_runs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_runs]
   runs_func: count_functions
 }
@@ -1089,6 +1092,12 @@ type directus_deployment_runs {
   date_created: Date
   date_created_func: datetime_functions
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  status: String
+  url: String
+  started_at: Date
+  started_at_func: datetime_functions
+  completed_at: Date
+  completed_at_func: datetime_functions
 }
 
 type directus_deployment_runs_mutated {
@@ -1106,6 +1115,11 @@ type directus_deployments {
   date_created: Date
   date_created_func: datetime_functions
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  webhook_ids: JSON
+  webhook_ids_func: count_functions
+  webhook_secret: String
+  last_synced_at: Date
+  last_synced_at_func: datetime_functions
   projects(filter: directus_deployment_projects_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_deployment_projects]
   projects_func: count_functions
 }
@@ -5515,6 +5529,9 @@ input directus_deployment_projects_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  url: string_filter_operators
+  framework: string_filter_operators
+  deployable: boolean_filter_operators
   runs: directus_deployment_runs_quantifier_filter
   runs_func: count_function_filter_operators
   _and: [directus_deployment_projects_filter]
@@ -5530,6 +5547,9 @@ input directus_deployment_projects_quantifier_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  url: string_filter_operators
+  framework: string_filter_operators
+  deployable: boolean_filter_operators
   runs: directus_deployment_runs_quantifier_filter
   runs_func: count_function_filter_operators
   _and: [directus_deployment_projects_filter]
@@ -5546,6 +5566,12 @@ input directus_deployment_runs_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  status: string_filter_operators
+  url: string_filter_operators
+  started_at: date_filter_operators
+  started_at_func: datetime_function_filter_operators
+  completed_at: date_filter_operators
+  completed_at_func: datetime_function_filter_operators
   _and: [directus_deployment_runs_filter]
   _or: [directus_deployment_runs_filter]
 }
@@ -5559,6 +5585,12 @@ input directus_deployment_runs_quantifier_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  status: string_filter_operators
+  url: string_filter_operators
+  started_at: date_filter_operators
+  started_at_func: datetime_function_filter_operators
+  completed_at: date_filter_operators
+  completed_at_func: datetime_function_filter_operators
   _and: [directus_deployment_runs_filter]
   _or: [directus_deployment_runs_filter]
   _some: directus_deployment_runs_filter
@@ -5574,6 +5606,11 @@ input directus_deployments_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  webhook_ids: string_filter_operators
+  webhook_ids_func: count_function_filter_operators
+  webhook_secret: string_filter_operators
+  last_synced_at: date_filter_operators
+  last_synced_at_func: datetime_function_filter_operators
   projects: directus_deployment_projects_quantifier_filter
   projects_func: count_function_filter_operators
   _and: [directus_deployments_filter]
