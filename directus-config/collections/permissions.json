@@ -288,26 +288,30 @@
     "collection": "directus_users",
     "action": "update",
     "permissions": {
-      "id": {
-        "_eq": "$CURRENT_USER"
-      }
+      "_and": [
+        {
+          "id": {
+            "_eq": "$CURRENT_USER"
+          }
+        }
+      ]
     },
     "validation": null,
     "presets": null,
     "fields": [
       "first_name",
       "last_name",
+      "avatar",
       "location",
       "title",
       "description",
-      "avatar",
       "language",
+      "tfa_secret",
       "appearance",
       "theme_light",
-      "theme_dark",
       "theme_light_overrides",
-      "theme_dark_overrides",
-      "tfa_secret"
+      "theme_dark",
+      "theme_dark_overrides"
     ],
     "policy": "2a715d4a-df78-48f0-b07c-54262af49999",
     "_syncId": "7f0638d4-7514-479b-99a8-c9d821c8faac"

@@ -10,10 +10,12 @@
     "roles": [
       {
         "role": "_sync_default_admin_role",
+        "user": null,
         "sort": 1
       },
       {
         "role": "15af77a5-1b5a-457f-a28b-8fba79152719",
+        "user": null,
         "sort": 1
       }
     ],
@@ -41,10 +43,12 @@
     "roles": [
       {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "user": null,
         "sort": 1
       },
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
+        "user": null,
         "sort": 7
       }
     ],
@@ -61,10 +65,12 @@
     "roles": [
       {
         "role": null,
+        "user": null,
         "sort": 1
       },
       {
         "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
+        "user": null,
         "sort": 2
       }
     ],
@@ -81,6 +87,7 @@
     "roles": [
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
+        "user": null,
         "sort": 4
       }
     ],
@@ -97,6 +104,7 @@
     "roles": [
       {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "user": null,
         "sort": 3
       }
     ],
@@ -113,10 +121,12 @@
     "roles": [
       {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "user": null,
         "sort": 5
       },
       {
         "role": "2b6a9643-1e12-43ab-88f7-037579f22e91",
+        "user": null,
         "sort": 8
       }
     ],
@@ -133,10 +143,12 @@
     "roles": [
       {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "user": null,
         "sort": 4
       },
       {
         "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
+        "user": null,
         "sort": null
       }
     ],
@@ -153,6 +165,7 @@
     "roles": [
       {
         "role": "123b3d68-bb70-4bb6-a2a4-878cafccb852",
+        "user": null,
         "sort": 2
       }
     ],
@@ -169,6 +182,7 @@
     "roles": [
       {
         "role": "996ea03c-3b92-41b1-933a-9e196a314f38",
+        "user": null,
         "sort": 3
       }
     ],
