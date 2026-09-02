@@ -20,6 +20,12 @@ RUN \
 
 # Rebuild the source code only when needed
 FROM base AS builder
+
+# defaults for use during the container build phase on CI/CD
+ARG IMAGES_PROTOCOL=https
+ARG IMAGES_HOSTNAME=**
+ARG IMAGES_PORT=433
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
