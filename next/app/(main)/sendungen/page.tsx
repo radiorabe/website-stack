@@ -1,6 +1,6 @@
 import { Api } from "@/lib/api";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import { ItemsPagePrograms } from "../../../lib/api/data-contracts";
 import PagePrograms from "./PagePrograms";
 import Flows from "@/lib/api/Flows";
@@ -27,9 +27,10 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PagePrograms getPageData Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 
@@ -63,9 +64,10 @@ async function getSendungen() {
     // console.log("sendungen", sendungen);
     return sendungen;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PagePrograms getSendungen Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 

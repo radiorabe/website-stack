@@ -3,7 +3,7 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound, useSearchParams } from "next/navigation";
+import { unstable_rethrow, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
 import { useEffect, use } from "react";
@@ -17,9 +17,10 @@ async function checkOrder([slug, id]) {
     let order: ItemsOrders = data.order;
     return order;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Order checkOrder Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 

@@ -4,7 +4,7 @@ import { Api } from "@/lib/api";
 import { ItemsPost } from "@/lib/api/data-contracts";
 import Flows from "@/lib/api/Flows";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 
 export const getPosts = async (filters, offset, limit) => {
   try {
@@ -114,8 +114,9 @@ export const getPosts = async (filters, offset, limit) => {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Beiträge getPosts Error");
     logError(error);
-    notFound();
+    throw error;
   }
 };

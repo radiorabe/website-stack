@@ -1,7 +1,7 @@
 import { Api } from "@/lib/api";
 import { ItemsEvents } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { notFound, unstable_rethrow } from "next/navigation";
 import PageEvent from "./PageEvent";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import Flows from "@/lib/api/Flows";
@@ -54,10 +54,11 @@ async function getEvent(slug) {
 
     return items[0];
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Event getEvent Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

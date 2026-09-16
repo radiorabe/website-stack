@@ -1,7 +1,7 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct, ItemsOrders } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 
 import Metrics from "@/lib/Metrics";
 
@@ -19,10 +19,11 @@ async function getOrder(id) {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Bestellung Danke getOrder Error");
 
     logError(error);
-    notFound();
+    throw error;
   }
 }
 

@@ -2,7 +2,7 @@ import { Api } from "@/lib/api";
 import { ItemsPageClasses } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import PageClasses from "./PageClasses";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import Flows from "@/lib/api/Flows";
@@ -43,10 +43,11 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageClasses getPageData Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

@@ -1,7 +1,7 @@
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import { logError } from "@/lib/loging";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import { Api } from "../../../lib/api";
 import { ItemsPageImpressum } from "../../../lib/api/data-contracts";
 import PageImpressum from "./PageImpressum";
@@ -41,10 +41,11 @@ async function getPageData() {
     }
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageImpressum getPageData Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

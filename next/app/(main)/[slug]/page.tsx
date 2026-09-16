@@ -1,6 +1,6 @@
 import { Api } from "@/lib/api";
 import { ItemsPost, ItemsPrograms } from "@/lib/api/data-contracts";
-import { notFound } from "next/navigation";
+import { notFound, unstable_rethrow } from "next/navigation";
 
 import { logError } from "@/lib/loging";
 import { Show } from "@/lib/Types";
@@ -48,11 +48,12 @@ async function getSendung(slug) {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Program getSendung Error");
 
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 
@@ -132,10 +133,11 @@ async function getPosts(slug) {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Program getPosts Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

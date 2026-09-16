@@ -2,7 +2,7 @@ import { Api } from "@/lib/api";
 import { ItemsPageTeam } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import PageTeam from "./PageTeam";
 import Flows from "@/lib/api/Flows";
 
@@ -40,10 +40,11 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PagePrograms PageTeam Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

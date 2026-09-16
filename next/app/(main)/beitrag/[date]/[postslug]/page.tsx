@@ -3,7 +3,7 @@ import { ItemsPost } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import moment from "moment";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, unstable_rethrow } from "next/navigation";
 import PagePost from "./PagePost";
 import { loadTipTapContent } from "@/components/RenderTipTap/TipTapContentLoader";
 import Flows from "@/lib/api/Flows";
@@ -72,10 +72,11 @@ async function getPost(params) {
 
     return items[0];
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Beitrag getPost Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 
@@ -119,11 +120,12 @@ async function getRelatedPosts(postSlug, programSlug) {
 
     return items;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Beitrag getRelatedPosts Error");
 
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

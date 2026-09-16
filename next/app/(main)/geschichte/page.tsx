@@ -3,7 +3,7 @@ import { Api } from "@/lib/api";
 import { ItemsPageHistory } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import PageHistory from "./PageHistory";
 import Flows from "@/lib/api/Flows";
 
@@ -45,10 +45,11 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageHistory getPageData Error");
     logError(error);
 
-    notFound();
+    throw error;
   }
 }
 

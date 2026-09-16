@@ -6,7 +6,7 @@ import {
   ItemsStatements,
 } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import PageMember from "./PageMember";
 import Flows from "@/lib/api/Flows";
 
@@ -39,9 +39,10 @@ async function getPageData() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageMember getPageData Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 
@@ -69,9 +70,10 @@ async function getStatements() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageMember getStatements Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 
@@ -99,9 +101,10 @@ async function getMemberProducts() {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("PageMember getMemberProducts Error");
     logError(error);
-    notFound();
+    throw error;
   }
 }
 

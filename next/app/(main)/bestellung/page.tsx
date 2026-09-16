@@ -1,7 +1,7 @@
 import { Api } from "@/lib/api";
 import { ItemsMemberProduct } from "@/lib/api/data-contracts";
 import { logError } from "@/lib/loging";
-import { notFound } from "next/navigation";
+import { unstable_rethrow } from "next/navigation";
 import PageOrder from "./PageOrder";
 import Flows from "@/lib/api/Flows";
 
@@ -26,10 +26,11 @@ async function getMemberProduct(id) {
 
     return item;
   } catch (error) {
+    unstable_rethrow(error);
     console.log("Bestellung getMemberProduct Error");
 
     logError(error);
-    notFound();
+    throw error;
   }
 }
 
